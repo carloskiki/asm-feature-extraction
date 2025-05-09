@@ -1,6 +1,48 @@
 # Extract human readable information by querying an LLM
 
-## Relabeling of jumps and constants
+Give the LLM information such as the target, abi, etc.
+
+## Interopability
+
+This will be generic over:
+1. the llm you use.
+2. the feature extraction methods (if we have multiple).
+
+## Classification Methods
+
+### List features
+
+### Three (or N) ranks of features
+
+General Class: _______
+Confidence Level: _______
+Reasoning: ____
+
+... same for sub class & library & function
+
+Examples:
+- Cryptogrpahic
+- Hash Function
+- Sha256
+
+- IO
+- Socket connection
+- TCP handshake
+
+- IO
+- Internal communication
+- I2C ...
+
+
+## Flow
+
+1. Parse CLI args
+2. Load the data 
+3. Format & tokenize data
+4. Train model & keep best
+5. Inference
+
+## Preprocessing we could do
 ### Jumps
 If it jumps within the function we could either:
 - Use a line number like CLAP
@@ -26,31 +68,3 @@ Things to try:
 
 #### Unlike clap 
 - No custom embeddings
-
-## Classification
-
-Could have multiple ranks of features:
-- General Class
-- Sub Class
-- Close to exact match
-
-Examples:
-- Cryptogrpahic
-- Hash Function
-- Sha256
-
-- IO
-- Socket connection
-- TCP handshake
-
-- IO
-- Internal communication
-- I2C ...
-
-## Flow
-
-1. Parse CLI args
-2. Load the data 
-3. Format & tokenize data
-4. Train model & keep best
-5. Inference
