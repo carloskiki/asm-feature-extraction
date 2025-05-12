@@ -13,12 +13,7 @@ The output must match exactly the following `JSON` schema:
 
 ```json
 {format}
-```
-
-### Output ###
-
-```json
-"""
+```"""
 
 class Arguments:
     model: str # Name of the model to use. First check our model dictionary and default to using the name as a HuggingFace model
