@@ -22,7 +22,7 @@ def main():
 
     model_inputs = tokenizer([query], return_tensors="pt").to("cuda")
 
-    tokenized_output = model.generate(**model_inputs, new_tokens=20)
+    tokenized_output = model.generate(**model_inputs, max_new_tokens=20)
     output = tokenizer.batch_decode(tokenized_output)[0]
     print(output)
 
