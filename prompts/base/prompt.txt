@@ -1,0 +1,1 @@
+Extract the main features out of the provided assembly function.

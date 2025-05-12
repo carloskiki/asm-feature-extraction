@@ -1,0 +1,4 @@
+{ // Maps the effective address or range of effective addresses to a key feature. Examples:
+    "0x084": "Check if the initialization routine has been run, and run it if it was not", 
+    "0x100-0x118": "Chaining of XOR operations commonly used in hashing functions"
+}
