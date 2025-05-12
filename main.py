@@ -1,19 +1,13 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-# PROMPT = """
-# Determine the genera class (examples: Cryptographic, C Runtime, Networking) of the function that this assembly routine belongs to.
-# 
-# ```assembly
-# {assembly}
-# ```
-# 
-# Function Class:
-# """
-
 PROMPT = """
-Here is a function in assembly. We explain its main features.
+Determine the general class (examples: Cryptographic, C Runtime, Networking, Simple arithmetic) of the function that this assembly routine belongs to.
 
+```assembly
+{assembly}
 ```
+
+Function Class:
 """
 
 def main():
@@ -24,7 +18,7 @@ def main():
     with open("simple.s", "r") as file:
         content = file.read()
 
-    query = PROMPT + content + "\n```"
+    query = PROMPT.format(assembly=content)
 
     model_inputs = tokenizer([query], return_tensors="pt").to("cuda")
 
