@@ -15,7 +15,7 @@ def main():
 
     model_inputs = tokenizer([query], return_tensors="pt").to("cuda")
 
-    tokenized_output = model.generate(**model_inputs, max_new_tokens=200, temperature=0.5)
+    tokenized_output = model.generate(**model_inputs, max_new_tokens=2000, temperature=0.5)
     output = tokenizer.batch_decode(tokenized_output)[0]
 
     print(output)
