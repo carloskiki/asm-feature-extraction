@@ -1,13 +1,14 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 PROMPT = """
-Determine the general class (examples: Cryptographic, C Runtime, Networking, Simple arithmetic) of the function that this assembly routine belongs to.
+Here is a function in assembly:
 
 ```assembly
 {assembly}
 ```
 
-Function Class: """
+Here are its main features:
+"""
 
 def main():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-Coder-0.5B-Instruct", torch_dtype="auto", device_map="auto").to("cuda")
