@@ -25,7 +25,80 @@
   },
   "disassembled_at": "2021-04-09T22:44:15.361078",
   "functions_count": 9462,
-  "strings": [], // List of strings contained in the binray
+  "strings": [], // List of strings contained in the binary (presumably obtained by running `strings` on the binary)
   "seg": [] // The segments contained in the binary
 }
 ```
+
+## `blocks` field
+A list of blocks, where each block is:
+```json
+{
+  "addr_start": 134513128,
+  "addr_end": 134513153,
+  "name": "loc_80481E8", // loc_<hex> where hex is equal to addr_start
+  "addr_f": 134513128, // start of the function that contains this block
+  "calls": [
+    134514720,
+    134513153,
+    134513158
+  ],
+  "ins": [] // Instructions for the block
+}
+```
+
+### `ins` element
+
+```json
+{
+  "ea": 134513132, // Effective Address
+  "mne": "CALL", // Mnemonic
+  "oprs": [ // Operands
+    "sub_8048820"
+  ],
+  "oprs_tp": [ // Operands "tp"
+    7
+  ],
+  "dr": [], // No idead
+  "cr": [ // Outgoing address (matches here but not sure in general)
+    134514720
+  ]
+}
+```
+
+## `comments` field
+
+```json
+{
+  "author": "ida",
+  "category": 3,
+  "content": "status",
+  "blk": 134514001,
+  "address": 134514001,
+  "created_at": "2021-04-09T22:44:17.810120"
+}
+```
+
+## `functions` field
+
+```json
+{
+  "name": "sub_80B3F27",
+  "description": "",
+  "addr_start": 134954791,
+  "addr_end": 134954946,
+  "calls": [],
+  "tags": [],
+  "bbs_len": 15 // The number of blocks that this function contain
+}
+```
+
+It seems like the blocks are ordered by function e.g:
+```
+  ___f0___ _f1__ ___f2___
+[ b0 b1 b2 b3 b4 b5 b6 b7 ]
+```
+
+## `functions_src` field
+
+Array of function sources, empty for our case
