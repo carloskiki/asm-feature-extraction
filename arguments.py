@@ -11,9 +11,13 @@ BASE_PROMPT = """### Assembly Code ###
 ### Output Format ###
 The output must match exactly the following `JSON` schema:
 
+```json
 {format}
+```
 
 ### Output ###
+
+```json
 """
 
 class Arguments:
