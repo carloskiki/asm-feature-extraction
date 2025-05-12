@@ -26,7 +26,8 @@
   "disassembled_at": "2021-04-09T22:44:15.361078",
   "functions_count": 9462,
   "strings": [], // List of strings contained in the binary (presumably obtained by running `strings` on the binary)
-  "seg": [] // The segments contained in the binary
+  "seg": [], // The segments contained in the binary
+  "sha256": "8d51289b5a4a59a57774c7522db700d76130c02d1929eddc638f77ec14f56dd0"
 }
 ```
 
@@ -59,7 +60,7 @@ A list of blocks, where each block is:
   "oprs_tp": [ // Operands "tp"
     7
   ],
-  "dr": [], // No idead
+  "dr": [], // Data referenced addresses
   "cr": [ // Outgoing address (matches here but not sure in general)
     134514720
   ]
@@ -102,3 +103,15 @@ It seems like the blocks are ordered by function e.g:
 ## `functions_src` field
 
 Array of function sources, empty for our case
+
+# `.merged.asm.json` file
+
+The structure is the same as te `.asm.json` file. The function names are
+human readable and likely come from debug symbols.
+
+# `.unstrip.asm.json` file
+
+Same as `.asm.json`, but contains much more comments & contains function names.
+I suspect that the merged version is the merge between `unstrip` and the regular file, where
+the function name from the `unstrip` file is used for the dissassembled output of the regular
+file.

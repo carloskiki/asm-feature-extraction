@@ -1,6 +1,9 @@
 # Extract human readable information by querying an LLM
 
-Give the LLM information such as the target, abi, etc.
+
+## Pipeline
+
+Data -> Query -> Structured JSON
 
 ## Interopability
 
@@ -21,6 +24,7 @@ Reasoning: ____
 ... same for sub class & library & function
 
 Examples:
+
 - Cryptogrpahic
 - Hash Function
 - Sha256
