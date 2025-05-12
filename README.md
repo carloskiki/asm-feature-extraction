@@ -53,18 +53,12 @@ We probably still want to handle that case, so we could use a token like `<UNK>`
 ### Constants
 We need to feed the constant literal, but keep it as small as possible. Prefix it as `0x` but also remove leading zeros while possible.
 
-## Questions for Steven
-Things to try:
+## Things to try:
+
 - CLAP
-- Custom training on our dataset
+- uptraining on our dataset
 
 - Do the same as clap in terms of data processing & setup (but for firmware instead of Ubuntu binaries).
-- Do we rebase the jump addresses like in CLAP?
 
 - Should we use a process similar to CLAP? (0-shot won't be very good)
     - We simply use 0-shot reasoning for the db?
-
-
-
-#### Unlike clap 
-- No custom embeddings
