@@ -33,8 +33,8 @@ class Arguments:
         self = arguments
     
     def format_prompt(self) -> str:
-        with open(f"prompts/{self.prompt}/prompt.txt", "r") as prompt_file:
-            prompt = prompt_file.read()
+        with open(f"prompts/{self.prompt}/instructions.txt", "r") as instructions_file:
+            instructions = instructions_file.read()
         
         with open(f"prompts/{self.prompt}/format.jsonc", "r") as format_file:
             format = format_file.read()
@@ -42,4 +42,4 @@ class Arguments:
         with open(self.assembly, "r") as assembly_file:
             assembly = assembly_file.read()
 
-        return BASE_PROMPT.format(prompt=prompt, format=format, assembly=assembly)
+        return BASE_PROMPT.format(instructions=instructions, format=format, assembly=assembly)
