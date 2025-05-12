@@ -7,8 +7,7 @@ Determine the general class (examples: Cryptographic, C Runtime, Networking, Sim
 {assembly}
 ```
 
-Function Class:
-"""
+Function Class: """
 
 def main():
     model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-Coder-0.5B-Instruct", torch_dtype="auto", device_map="auto").to("cuda")
