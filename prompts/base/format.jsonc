@@ -1,8 +1,5 @@
 { // Maps the effective address or range of effective addresses to a key feature.
     "0xADDR": "EXPLANATION", 
     // OR
-    "0xADDR-0xADDR": "EXPLANATION",
-
-    // FOR EXAMPLE:
-    "0x11453200-0x11453240": "Chain of XOR operations, commonly found in hashing functions."
+    "0xADDR-0xADDR": "EXPLANATION"
 }
