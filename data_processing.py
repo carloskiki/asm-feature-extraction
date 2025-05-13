@@ -44,7 +44,7 @@ def process(contents: str) -> Generator[Function, None, None]:
     data = json.loads(contents)
 
     print(len(data["blocks"]))
-    print(sum([f[b"bbs_len"] for f in data["functions"]]))
+    print(sum([f["bbs_len"] for f in data["functions"]]))
 
     index: int = 0
     for function in data["functions"]:
