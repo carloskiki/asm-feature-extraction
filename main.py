@@ -22,4 +22,12 @@ def main():
 
 
 if __name__ == "__main__":
-    context = Context()
+    import gzip
+    from data_processing import process
+    with gzip.open("~/project/lib-data/sqlite3-powerpc-linux-gnu-gcc-g-O3.bin.merged.asm.json.gz", "rb") as file:
+        
+        sum = 0
+        for index, function in enumerate(process(file.read())):
+            sum += index % len(function.blocks)
+
+        print(sum)
