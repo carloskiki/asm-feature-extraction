@@ -1,4 +1,3 @@
-from data_processing import process
 from context import Context
 
 
@@ -23,10 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import gzip
-
-    with gzip.open(
-        "../lib-data/sqlite3-powerpc-linux-gnu-gcc-g-O3.bin.merged.asm.json.gz", "rb"
-    ) as file:
-        for index, function in enumerate(process(file.read())):
-            pass
+    context = Context()
