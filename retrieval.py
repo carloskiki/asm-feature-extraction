@@ -1,5 +1,4 @@
 from typing import Optional
-from context import Context
 import random
 import sys
 
@@ -54,7 +53,3 @@ class Retrieval:
         parser.add_argument(
             "data-path", type=str, dest="data_path", default="../lib-data"
         )
-
-
-def run(context: Context):
-    pass
