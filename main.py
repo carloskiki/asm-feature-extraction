@@ -1,9 +1,22 @@
 from data_processing import process
+from context import Context
 
 def main():
-    functions = process("C:/Users/cgagnon/ghidra-plugin/feature-extractor/data/openssl-gcc32-g-O0.bin.merged.asm.json")
-    print(next(x for i,x in enumerate(functions) if i==150))
+    context = Context()
 
+    with open(context.command.assembly, "r") as assembly_file:
+        assembly = assembly_file.read()
+
+    query = context.prompt(assembly)
+    model = context.model()
+    tokenizer = context.tokenizer()
+
+    model_inputs = query.token([query], return_tensors="pt").to("cuda")
+
+    tokenized_output = model.generate(**model_inputs, max_new_tokens=2000, temperature=0.5)
+    output = tokenizer.batch_decode(tokenized_output)[0]
+
+    print(output)
 
 if __name__ == "__main__":
     main()
