@@ -40,9 +40,8 @@ class Function:
     def __str__(self):
         return f"{self.name}:\n" + '\n'.join(str(b) for b in self.blocks)
 
-def process(file: str) -> Generator[Function, None, None]:
-    with open(file, "r") as file:
-        data = json.loads(file.read())
+def process(contents: str) -> Generator[Function, None, None]:
+    data = json.loads(contents)
 
     index: int = 0
     for function in data["functions"]:
