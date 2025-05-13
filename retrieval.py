@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, Iterator
 import random
 import sys
 from data_processing import Function, function_count, process
 import gzip
 import itertools
+import glob
 
 BINARIES = {
     "busybox": "busybox_unstripped",
@@ -54,12 +55,8 @@ class Retrieval:
         parser.add_argument(
             "--src-optimization", type=Optional[int], choices=range(4), default=None
         )
-        parser.add_argument(
-            "--src-function"
-        )
-        parser.add_argument(
-            "data-path", type=str
-        )
+        parser.add_argument("--src-function")
+        parser.add_argument("data-path", type=str)
 
     def data_file(self) -> str:
         rng = random.Random(self.seed)
@@ -73,7 +70,18 @@ class Retrieval:
 
         return f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{self.src_optimization}.bin.merged.asm.json.gz"
 
-    
+    def all_files(self) -> Iterator[str]:
+        if self.src_binary is None:
+            self.src_binary = "*"
+        if self.src_platform is None:
+            self.src_platform = "*"
+        if self.src_optimization is None:
+            self.src_optimization = "*"
+
+        return glob.iglob(
+            f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{self.src_optimization}.bin.merged.asm.json.gz"
+        )
+
     def source_function(self) -> Function:
         rng = random.Random(self.seed)
 
