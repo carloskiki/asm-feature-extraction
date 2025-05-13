@@ -43,8 +43,8 @@ class Function:
 def process(contents: str) -> Generator[Function, None, None]:
     data = json.loads(contents)
 
-    print(len(data["blocks"]))
-    print(sum([f["bbs_len"] for f in data["functions"]]))
+    data["functions"].sort(key=lambda x : x['addr_start'])
+    data["blocks"].sort(key=lambda x : x['addr_f'])
 
     index: int = 0
     for function in data["functions"]:
@@ -53,7 +53,7 @@ def process(contents: str) -> Generator[Function, None, None]:
         end = function["addr_end"]
         blocks = []
 
-        for _ in range(function["bbs_len"]):
+        while index < len(data["blocks"]) and data["blocks"][index]["addr_f"] == start:
             block = data["blocks"][index]
             label = block["name"]
             instructions = []
@@ -67,5 +67,8 @@ def process(contents: str) -> Generator[Function, None, None]:
             blocks.append(Block(label, instructions))
 
             index += 1
+        
+        if len(blocks) == 0:
+            print(name)
         
         yield Function(name, start, end, blocks)
