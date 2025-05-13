@@ -1,7 +1,6 @@
 from data_processing import process
 from context import Context
 
-import pickle
 
 def main():
     context = Context()
@@ -15,7 +14,9 @@ def main():
 
     model_inputs = query.token([query], return_tensors="pt").to("cuda")
 
-    tokenized_output = model.generate(**model_inputs, max_new_tokens=2000, temperature=0.5)
+    tokenized_output = model.generate(
+        **model_inputs, max_new_tokens=2000, temperature=0.5
+    )
     output = tokenizer.batch_decode(tokenized_output)[0]
 
     print(output)
@@ -23,6 +24,9 @@ def main():
 
 if __name__ == "__main__":
     import gzip
-    with gzip.open("../lib-data/sqlite3-powerpc-linux-gnu-gcc-g-O3.bin.merged.asm.json.gz", "rb") as file:
+
+    with gzip.open(
+        "../lib-data/sqlite3-powerpc-linux-gnu-gcc-g-O3.bin.merged.asm.json.gz", "rb"
+    ) as file:
         for index, function in enumerate(process(file.read())):
             pass
