@@ -40,7 +40,7 @@ class Function:
     def __str__(self):
         return f"{self.name}:\n" + '\n'.join(str(b) for b in self.blocks)
 
-def process(contents: str) -> Generator[Function, None, None]:
+def process(contents: bytes) -> Generator[Function, None, None]:
     data = json.loads(contents)
 
     data["functions"].sort(key=lambda x : x['addr_start'])
@@ -73,3 +73,7 @@ def process(contents: str) -> Generator[Function, None, None]:
             continue
         
         yield Function(name, start, end, blocks)
+
+def function_count(contents: bytes) -> int:
+    data = json.loads(contents)
+    return len(data["functions"])
