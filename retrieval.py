@@ -51,5 +51,5 @@ class Retrieval:
             "--src-optimization", type=Optional[int], choices=range(4), default=None
         )
         parser.add_argument(
-            "data-path", type=str, dest="data_path", default="../lib-data"
+            "data-path", type=str, default="../lib-data"
         )
