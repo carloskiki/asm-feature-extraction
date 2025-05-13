@@ -37,13 +37,13 @@ class Context:
         Retrieval.command(subparsers)
 
         arguments = parser.parse_args()
-        match arguments.subcommand:
-            case "query":
-                command = Query()
-            case "retrieval":
-                command = Retrieval()
-            case _:
-                command = None
+        sc = arguments.subcommand
+        if sc == "query":
+            command = Query()
+        elif sc == "retrieval":
+            command = Retrieval()
+        else:
+            command = None
         
         for name, value in arguments.__dict__.items():
             if command != None and name != "subcommand":
