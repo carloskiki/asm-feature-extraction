@@ -1,6 +1,8 @@
 from data_processing import process
 from context import Context
 
+import pickle
+
 def main():
     context = Context()
 
@@ -18,5 +20,6 @@ def main():
 
     print(output)
 
+
 if __name__ == "__main__":
-    main()
+    context = Context()

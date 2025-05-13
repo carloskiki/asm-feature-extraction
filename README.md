@@ -1,5 +1,13 @@
 # Extract human readable information by querying an LLM
 
+## Binary Corp Issues
+
+- The data does not contain the address of each instruction, and it is not split into blocks (so we don't know where jmp instructions lead to).
+
+- For the lack of addresses, we could use relative addresses with 0 as the first instruction, but we would need to know size of each instruction
+    (arm has a standard 8 bytes instruction size, but I know x86_64 is variable length, and I don't know about others).
+- There is nothing we can do for the lack of labels, because even if the jump instruction is something like `jmp loc_8EA3`,
+    We don't have the address of the instruction so we can't match the HEX value to an address.
 
 ## Pipeline
 

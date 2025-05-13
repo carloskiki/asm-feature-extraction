@@ -12,7 +12,7 @@ class Instruction:
         self.operands = operands
 
     def __str__(self):
-        return f"    0x{self.address:X} {self.mnemonic} " + ' '.join(self.operands)
+        return f"    0x{self.address:X} {self.mnemonic} " + ', '.join(self.operands)
 
 class Block:
     label: str
