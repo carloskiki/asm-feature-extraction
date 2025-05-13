@@ -2,7 +2,7 @@ import argparse
 from query import Query
 from retrieval import Retrieval
 from typing import Union
-# from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {
     "codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"
