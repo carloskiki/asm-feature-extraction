@@ -30,12 +30,12 @@ class Context:
         """
 
         with open(
-            f"prompts/{self.get_prompt}/instructions.txt", "r", encoding="utf-8"
+            f"prompts/{self.prompt}/instructions.txt", "r", encoding="utf-8"
         ) as instructions_file:
             instructions = instructions_file.read()
 
         with open(
-            f"prompts/{self.get_prompt}/format.jsonc", "r", encoding="utf-8"
+            f"prompts/{self.prompt}/format.jsonc", "r", encoding="utf-8"
         ) as format_file:
             json_format = format_file.read()
 
