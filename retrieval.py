@@ -76,10 +76,12 @@ class Retrieval:
         if self.src_platform is None:
             self.src_platform = "*"
         if self.src_optimization is None:
-            self.src_optimization = "*"
+            optimization_str = '*'
+        else:
+            optimization_str = str(self.src_optimization)
 
         return glob.iglob(
-            f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{self.src_optimization}.bin.merged.asm.json.gz"
+            f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{optimization_str}.bin.merged.asm.json.gz"
         )
 
     def source_function(self) -> Function:
