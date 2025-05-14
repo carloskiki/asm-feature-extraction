@@ -1,8 +1,5 @@
-import argparse
-from query import Query
-from retrieval import Retrieval
-from typing import Union
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from dataclasses import dataclass
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 
@@ -22,38 +19,10 @@ The output must match exactly the following `JSON` schema:
 ```"""
 
 
+@dataclass
 class Context:
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
-    command: Union[Query, Retrieval, None]
-
-    def __init__(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument(
-           "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
-        )
-        parser.add_argument("-p", "--prompt", type=str, default="base")
-        subparsers = parser.add_subparsers(
-            description="the action to be performed", dest="subcommand", required=True
-        )
-        Query.command(subparsers)
-        Retrieval.command(subparsers)
-
-        arguments = parser.parse_args()
-        sc = arguments.subcommand
-        if sc == "query":
-            command = Query()
-        elif sc == "retrieval":
-            command = Retrieval()
-        else:
-            command = None
-
-        for name, value in arguments.__dict__.items():
-            print(name, value)
-            if command is not None and name != "subcommand":
-                setattr(command, name, value)
-
-        self.command = command
 
     def get_prompt(self, assembly: str) -> str:
         """

@@ -1,16 +1,17 @@
 from context import Context
 from query import Query
 from retrieval import Retrieval
+from arguments import arguments
 
 
 
-def retrieval(context: Context, command: Retrieval):
-    model = context.get_model()
-    tokenizer = context.get_tokenizer()
+def retrieval(command: Retrieval):
+    model = command.get_model()
+    tokenizer = command.get_tokenizer()
     pool = command.generate_pool()
 
-    queries = list(context.get_prompt(str(f)) for f, _ in pool)
-    targets = list(context.get_prompt(str(f)) for f, _ in pool)
+    queries = list(command.get_prompt(str(f)) for f, _ in pool)
+    targets = list(command.get_prompt(str(f)) for f, _ in pool)
     query_tokens = tokenizer(queries, padding=True, return_tensors='pt').to('cuda')
     target_tokens = tokenizer(targets, padding=True, return_tensors='pt').to('cuda')
 
@@ -19,12 +20,12 @@ def retrieval(context: Context, command: Retrieval):
     print("done")
     
 def main():
-    context = Context()
+    args = arguments()
 
-    if isinstance(context.command, Query):
+    if isinstance(args, Query):
         pass
-    elif isinstance(context.command, Retrieval):
-        retrieval(context, context.command)
+    elif isinstance(args, Retrieval):
+        retrieval(args)
     else:
         raise ValueError("Unreachable branch")
 

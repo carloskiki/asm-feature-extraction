@@ -1,4 +1,8 @@
-class Query:
+from dataclasses import dataclass
+import context
+
+@dataclass
+class Query(context.Context):
     assembly: str  # File containing the assembly to analyze
 
     @staticmethod

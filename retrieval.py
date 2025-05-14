@@ -6,8 +6,10 @@ import random
 import sys
 import gzip
 import itertools
+from dataclasses import dataclass
 from typing import Optional, Generator
 from data_processing import Function, function_count, process
+import context
 
 BINARIES = {
     "busybox": "busybox_unstripped",
@@ -55,7 +57,8 @@ class FileId:
         return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
 
 
-class Retrieval:
+@dataclass
+class Retrieval(context.Context):
     """
     CLI command to evaluate function retrieval
     """
@@ -71,12 +74,12 @@ class Retrieval:
     ]  # Run for a specific optimization, run on all optimizations if None
     src_function: Optional[str]
     data_path: str
-    target_platform: Optional[str]
-    target_optimization: Optional[str]
-    same_binary: bool # Keep the same binary for the target pool
-    same_platform: bool # keep the 
-    same_optimization: bool
-    from_pool: bool
+    # target_platform: Optional[str]
+    # target_optimization: Optional[str]
+    # same_binary: bool # Keep the same binary for the target pool
+    # same_platform: bool # keep the
+    # same_optimization: bool
+    # from_pool: bool
 
     @staticmethod
     def command(subparsers):
