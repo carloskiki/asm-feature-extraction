@@ -88,7 +88,7 @@ class Retrieval:
             "retrieval",
             description="Find the most similar assembly function from a set",
         )
-        parser.add_argument("--pool-size", type=int, default=10)
+        parser.add_argument("--pool-size", type=int, default=100)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--src-binary", type=str, choices=BINARIES.keys())
         parser.add_argument(
@@ -132,11 +132,11 @@ class Retrieval:
         """
 
         if self.src_binary is None:
-            binary = [BINARIES.keys()]
+            binary = BINARIES.keys()
         else:
             binary = [self.src_binary]
         if self.src_platform is None:
-            platform = [PLATFORMS.keys()]
+            platform = PLATFORMS.keys()
         else:
             platform = [self.src_platform]
         if self.src_optimization is None:
@@ -147,7 +147,9 @@ class Retrieval:
         for b in binary:
             for p in platform:
                 for o in optimization:
-                    yield FileId().from_values(self.data_path, b, p, o)
+                    file = FileId()
+                    file.from_values(self.data_path, b, p, o)
+                    yield file
 
     def source_function(self) -> Function:
         """
@@ -165,12 +167,13 @@ class Retrieval:
             return next(itertools.islice(functions, index, None))
         return next(f for f in process(data) if f.name == self.src_function)
 
-    def pool(self) -> list[(Function, FileId)]:
+    def generate_pool(self) -> list[(Function, FileId)]:
         """
         Get the pool of targets
         """
 
         files = list(self.data_files())
+        print(files)
         functions_per_file = self.pool_size // len(files)
         last_file_function_count = self.pool_size - (len(files) - 1) * functions_per_file
 
@@ -201,7 +204,7 @@ class Retrieval:
         # Fill in the first samplesize elements:
         try:
             for _ in range(sample_size):
-                results.append(iterator.next())
+                results.append(next(iterator))
         except StopIteration as exc:
             raise exc
         random.shuffle(results)  # Randomize their positions

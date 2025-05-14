@@ -10,7 +10,8 @@ def main():
         pass
     elif isinstance(context.command, Retrieval):
         command = context.command
-        [print(c) for c in command.all_files()]
+        pool = command.generate_pool()
+        print(pool)
     else:
         raise ValueError("Unreachable branch")
 
