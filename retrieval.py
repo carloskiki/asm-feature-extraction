@@ -110,12 +110,12 @@ class Retrieval:
 
         file.data_path = self.data_path
         if self.src_binary is None:
-            file.binary = rng.choice(BINARIES.keys())
+            file.binary = rng.choice(list(BINARIES.keys()))
         else:
             file.binary = self.src_binary
 
         if self.src_platform is None:
-            file.platform = rng.choice(PLATFORMS.keys())
+            file.platform = rng.choice(list(PLATFORMS.keys()))
         else:
             file.platform = self.src_platform
 
