@@ -6,8 +6,7 @@ import random
 import sys
 import gzip
 import itertools
-import glob
-from typing import Optional, Iterator
+from typing import Optional, Generator
 from data_processing import Function, function_count, process
 
 BINARIES = {
@@ -28,6 +27,33 @@ PLATFORMS = {
     "powerpc": "powerpc-linux-gnu-gcc",
 }
 
+class FileId:
+    """
+    A specific file in the dataset.
+    """
+
+    data_path: str
+    binary: str
+    platform: str
+    optimization: str
+
+    def from_values(self, data_path, binary, platform, optimization):
+        """
+        Create the FileId from the provided values
+        """
+
+        self.data_path = data_path
+        self.binary = binary
+        self.platform = platform
+        self.optimization = optimization
+
+    def path(self):
+        """
+        Return the file corresponding to the Id
+        """
+
+        return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
+
 
 class Retrieval:
     """
@@ -45,6 +71,12 @@ class Retrieval:
     ]  # Run for a specific optimization, run on all optimizations if None
     src_function: Optional[str]
     data_path: str
+    target_platform: Optional[str]
+    target_optimization: Optional[str]
+    same_binary: bool # Keep the same binary for the target pool
+    same_platform: bool # keep the 
+    same_optimization: bool
+    from_pool: bool
 
     @staticmethod
     def command(subparsers):
@@ -68,51 +100,54 @@ class Retrieval:
         parser.add_argument("--src-function")
         parser.add_argument("data_path", type=str)
 
-    def data_file(self) -> str:
+    def data_file(self) -> FileId:
         """
         Get the file selected with the CLI arguments, using random values for the unspecified parameters
         """
 
         rng = random.Random(self.seed)
+        file = FileId()
 
+        file.data_path = self.data_path
         if self.src_binary is None:
-            binary = rng.choice(BINARIES.keys())
+            file.binary = rng.choice(BINARIES.keys())
         else:
-            binary = self.src_binary
+            file.binary = self.src_binary
 
         if self.src_platform is None:
-            platform = rng.choice(PLATFORMS.keys())
+            file.platform = rng.choice(PLATFORMS.keys())
         else:
-            platform = self.src_platform
+            file.platform = self.src_platform
 
         if self.src_optimization is None:
-            optimization = rng.randrange(4)
+            file.optimization = rng.randrange(4)
         else:
-            optimization = self.src_optimization
+            file.optimization = self.src_optimization
 
-        return f"{self.data_path}/{BINARIES[binary]}-{PLATFORMS[platform]}-g-O{optimization}.bin.merged.asm.json.gz"
+        return file
 
-    def all_files(self) -> Iterator[str]:
+    def data_files(self) -> Generator[FileId, None, None]:
         """
         return all files that match the selected parameters
         """
 
         if self.src_binary is None:
-            binary = "*"
+            binary = [BINARIES.keys()]
         else:
-            binary = BINARIES[self.src_binary]
+            binary = [self.src_binary]
         if self.src_platform is None:
-            platform = "*"
+            platform = [PLATFORMS.keys()]
         else:
-            platform = BINARIES[self.src_platform]
+            platform = [self.src_platform]
         if self.src_optimization is None:
-            optimization = "*"
+            optimization = range(4)
         else:
-            optimization = str(self.src_optimization)
+            optimization = self.src_optimization
 
-        return glob.iglob(
-            f"{self.data_path}/{binary}-{platform}-g-O{optimization}.bin.merged.asm.json.gz"
-        )
+        for b in binary:
+            for p in platform:
+                for o in optimization:
+                    yield FileId().from_values(self.data_path, b, p, o)
 
     def source_function(self) -> Function:
         """
@@ -129,3 +164,49 @@ class Retrieval:
             index = rng.randrange(function_count(data))
             return next(itertools.islice(functions, index, None))
         return next(f for f in process(data) if f.name == self.src_function)
+
+    def pool(self) -> list[(Function, FileId)]:
+        """
+        Get the pool of targets
+        """
+
+        files = list(self.data_files())
+        functions_per_file = self.pool_size // len(files)
+        last_file_function_count = self.pool_size - (len(files) - 1) * functions_per_file
+
+        pairs = []
+        for index, file in enumerate(files):
+            if index == len(files) - 1:
+                sample_size = last_file_function_count
+            else:
+                sample_size = functions_per_file
+
+            with gzip.open(file.path(), "rb") as file_data:
+                functions = process(file_data.read())
+
+            for sample in self.iter_sample(functions, sample_size):
+                sample: Function = sample
+                pairs.append((sample, file))
+            
+        return pairs
+
+
+    def iter_sample(self, iterator, sample_size):
+        """
+        Sample from an iterator
+        """
+
+        rng = random.Random(self.seed)
+        results = []
+        # Fill in the first samplesize elements:
+        try:
+            for _ in range(sample_size):
+                results.append(iterator.next())
+        except StopIteration as exc:
+            raise exc
+        random.shuffle(results)  # Randomize their positions
+        for i, v in enumerate(iterator, sample_size):
+            r = rng.randint(0, i)
+            if r < sample_size:
+                results[r] = v  # at a decreasing rate, replace random items
+        return results

@@ -13,6 +13,10 @@
 
 Data -> Query -> Structured JSON
 
+### Retrieval
+
+Generate new pool for all sources, OR generate one pool and run on all elements in the pool.
+
 ## Interopability
 
 This will be generic over:
