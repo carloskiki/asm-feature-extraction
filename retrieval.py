@@ -207,7 +207,7 @@ class Retrieval:
                 results.append(next(iterator))
         except StopIteration as exc:
             raise exc
-        random.shuffle(results)  # Randomize their positions
+        rng.shuffle(results)  # Randomize their positions
         for i, v in enumerate(iterator, sample_size):
             r = rng.randint(0, i)
             if r < sample_size:
