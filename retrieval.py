@@ -6,6 +6,7 @@ import random
 import sys
 import gzip
 import itertools
+from tqdm import tqdm
 from dataclasses import dataclass
 from typing import Optional, Generator
 from data_processing import Function, function_count, process
@@ -176,12 +177,11 @@ class Retrieval(context.Context):
         """
 
         files = list(self.data_files())
-        print(files)
         functions_per_file = self.pool_size // len(files)
         last_file_function_count = self.pool_size - (len(files) - 1) * functions_per_file
 
         pairs = []
-        for index, file in enumerate(files):
+        for index, file in enumerate(tqdm(files, desc="Reading dataset")):
             if index == len(files) - 1:
                 sample_size = last_file_function_count
             else:

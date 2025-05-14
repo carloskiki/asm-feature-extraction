@@ -45,8 +45,8 @@ class Context:
 
     def get_model(self):
         return AutoModelForCausalLM.from_pretrained(
-            MODELS[self.model], torch_dtype="auto", device_map="auto"
+            MODELS[self.model], torch_dtype="auto", device_map="auto", trust_remote_code=True
         ).to("cuda")
 
     def get_tokenizer(self):
-        return AutoTokenizer.from_pretrained(MODELS[self.model])
+        return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)

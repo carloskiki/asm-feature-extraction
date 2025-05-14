@@ -93,7 +93,6 @@ def process(contents: bytes) -> Generator[Function, None, None]:
             index += 1
 
         if len(blocks) == 0:
-            print("Warning:", name, "has 0 blocks... skipping")
             continue
 
         yield Function(name, start, end, blocks)
