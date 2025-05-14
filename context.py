@@ -30,7 +30,7 @@ class Context:
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument(
-            "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
+           "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
         )
         parser.add_argument("-p", "--prompt", type=str, default="base")
         subparsers = parser.add_subparsers(
@@ -49,6 +49,7 @@ class Context:
             command = None
 
         for name, value in arguments.__dict__.items():
+            print(name, value)
             if command is not None and name != "subcommand":
                 setattr(command, name, value)
 
