@@ -66,7 +66,7 @@ class Retrieval:
             "--src-optimization", type=Optional[int], choices=range(4), default=None
         )
         parser.add_argument("--src-function")
-        parser.add_argument("data-path", type=str)
+        parser.add_argument("data_path", type=str)
 
     def data_file(self) -> str:
         """
