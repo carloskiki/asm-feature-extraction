@@ -34,3 +34,17 @@ if __name__ == "__main__":
 # output = tokenizer.batch_decode(tokenized_output)[0]
 
 # print(output)
+
+def retrieval(context: Context, command: Retrieval):
+    model = context.model()
+    tokenizer = context.tokenizer()
+    pool = command.generate_pool()
+
+    queries = list(context.prompt(str(f)) for f, _ in pool)
+    targets = list(context.prompt(str(f)) for f, _ in pool)
+    query_tokens = tokenizer(queries, padding=True, return_tensors='pt').to('cuda')
+    target_tokens = tokenizer(targets, padding=True, return_tensors='pt').to('cuda')
+
+    model.generate(query_tokens, max_new_tokens=512).to('cuda')
+
+    print("done")
