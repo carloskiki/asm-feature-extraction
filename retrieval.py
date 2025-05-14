@@ -1,10 +1,14 @@
-from typing import Optional, Iterator
+"""
+Retrieval CLI utilities
+"""
+
 import random
 import sys
-from data_processing import Function, function_count, process
 import gzip
 import itertools
 import glob
+from typing import Optional, Iterator
+from data_processing import Function, function_count, process
 
 BINARIES = {
     "busybox": "busybox_unstripped",
@@ -26,6 +30,10 @@ PLATFORMS = {
 
 
 class Retrieval:
+    """
+    CLI command to evaluate function retrieval
+    """
+
     pool_size: int
     seed: int  # Seed for selection of targets, choosed randomly if not set
     src_binary: Optional[str]  # Run for a specific binary, run on all binaries if None
@@ -40,15 +48,17 @@ class Retrieval:
 
     @staticmethod
     def command(subparsers):
+        """
+        Configure the CLI
+        """
+
         parser = subparsers.add_parser(
             "retrieval",
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=10)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
-        parser.add_argument(
-            "--src-binary", type=str, choices=BINARIES.keys()
-        )
+        parser.add_argument("--src-binary", type=str, choices=BINARIES.keys())
         parser.add_argument(
             "--src-platform", type=Optional[str], choices=PLATFORMS.keys(), default=None
         )
@@ -59,24 +69,40 @@ class Retrieval:
         parser.add_argument("data-path", type=str)
 
     def data_file(self) -> str:
+        """
+        Get the file selected with the CLI arguments, using random values for the unspecified parameters
+        """
+
         rng = random.Random(self.seed)
 
         if self.src_binary is None:
-            self.src_binary = rng.choice(BINARIES.keys())
-        if self.src_platform is None:
-            self.src_platform = rng.choice(PLATFORMS.keys())
-        if self.src_optimization is None:
-            self.src_optimization = rng.randrange(4)
+            binary = rng.choice(BINARIES.keys())
+        else:
+            binary = self.src_binary
 
-        return f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{self.src_optimization}.bin.merged.asm.json.gz"
+        if self.src_platform is None:
+            platform = rng.choice(PLATFORMS.keys())
+        else:
+            platform = self.src_platform
+
+        if self.src_optimization is None:
+            optimization = rng.randrange(4)
+        else:
+            optimization = self.src_optimization
+
+        return f"{self.data_path}/{BINARIES[binary]}-{PLATFORMS[platform]}-g-O{optimization}.bin.merged.asm.json.gz"
 
     def all_files(self) -> Iterator[str]:
+        """
+        return all files that match the selected parameters
+        """
+
         if self.src_binary is None:
             self.src_binary = "*"
         if self.src_platform is None:
             self.src_platform = "*"
         if self.src_optimization is None:
-            optimization_str = '*'
+            optimization_str = "*"
         else:
             optimization_str = str(self.src_optimization)
 
@@ -85,6 +111,10 @@ class Retrieval:
         )
 
     def source_function(self) -> Function:
+        """
+        Return the function selected with the CLI using random values for the unspecified parameters
+        """
+
         rng = random.Random(self.seed)
 
         with gzip.open(self.data_file()) as file:

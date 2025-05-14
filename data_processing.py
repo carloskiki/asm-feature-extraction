@@ -1,7 +1,16 @@
+"""
+Data processing
+"""
+
 from typing import Generator
 import json
 
+
 class Instruction:
+    """
+    Single assembly instruction.
+    """
+
     address: int
     mnemonic: str
     operands: list[str]
@@ -12,20 +21,30 @@ class Instruction:
         self.operands = operands
 
     def __str__(self):
-        return f"    0x{self.address:X} {self.mnemonic} " + ', '.join(self.operands)
+        return f"    0x{self.address:X} {self.mnemonic} " + ", ".join(self.operands)
+
 
 class Block:
+    """
+    A labeled block of assembly instructions.
+    """
+
     label: str
     instructions: list[Instruction]
 
     def __init__(self, label: str, instructions: list[Instruction]):
         self.label = label
         self.instructions = instructions
-    
+
     def __str__(self):
-        return f"{self.label}:\n" + '\n'.join(str(i) for i in self.instructions)
+        return f"{self.label}:\n" + "\n".join(str(i) for i in self.instructions)
+
 
 class Function:
+    """
+    A function compiled to assembly i.e., a list of blocks.
+    """
+
     name: str
     start: int
     end: int
@@ -38,13 +57,18 @@ class Function:
         self.blocks = blocks
 
     def __str__(self):
-        return f"{self.name}:\n" + '\n'.join(str(b) for b in self.blocks)
+        return f"{self.name}:\n" + "\n".join(str(b) for b in self.blocks)
+
 
 def process(contents: bytes) -> Generator[Function, None, None]:
+    """
+    Process the contents of a `.merged.asm.json` file.
+    """
+
     data = json.loads(contents)
 
-    data["functions"].sort(key=lambda x : x['addr_start'])
-    data["blocks"].sort(key=lambda x : x['addr_f'])
+    data["functions"].sort(key=lambda x: x["addr_start"])
+    data["blocks"].sort(key=lambda x: x["addr_f"])
 
     index: int = 0
     for function in data["functions"]:
@@ -67,13 +91,18 @@ def process(contents: bytes) -> Generator[Function, None, None]:
             blocks.append(Block(label, instructions))
 
             index += 1
-        
+
         if len(blocks) == 0:
             print("Warning:", name, "has 0 blocks... skipping")
             continue
-        
+
         yield Function(name, start, end, blocks)
 
+
 def function_count(contents: bytes) -> int:
+    """
+    Count the number of functions in a `merged.asm.json` file
+    """
+
     data = json.loads(contents)
     return len(data["functions"])
