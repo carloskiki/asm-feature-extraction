@@ -1,5 +1,6 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from dataclasses import dataclass
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 
@@ -45,7 +46,7 @@ class Context:
 
     def get_model(self):
         return AutoModelForCausalLM.from_pretrained(
-            MODELS[self.model], torch_dtype="auto", device_map="auto"
+            MODELS[self.model], torch_dtype=torch.float16, device_map="auto"
         ).to("cuda")
 
     def get_tokenizer(self):

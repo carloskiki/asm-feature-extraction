@@ -16,7 +16,7 @@ def retrieval(command: Retrieval):
     target_tokens = tokenizer(targets, padding=True, truncation=True, return_tensors='pt').to('cuda')
     print(query_tokens)
 
-    model.generate(query_tokens['input_ids'], max_new_tokens=512).to('cuda')
+    model.generate(**query_tokens['input_ids'], max_new_tokens=512).to('cuda')
 
     print("done")
     
