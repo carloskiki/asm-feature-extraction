@@ -10,7 +10,7 @@ def main():
         pass
     elif isinstance(context.command, Retrieval):
         command = context.command
-        print(command.all_files())
+        [print(c) for c in command.all_files()]
     else:
         raise ValueError("Unreachable branch")
 
