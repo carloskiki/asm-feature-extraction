@@ -111,7 +111,7 @@ class Retrieval:
             optimization = str(self.src_optimization)
 
         return glob.iglob(
-            f"{self.data_path}/{BINARIES[binary]}-{PLATFORMS[platform]}-g-O{optimization}.bin.merged.asm.json.gz"
+            f"{self.data_path}/{binary}-{platform}-g-O{optimization}.bin.merged.asm.json.gz"
         )
 
     def source_function(self) -> Function:
