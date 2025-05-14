@@ -1,5 +1,6 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from dataclasses import dataclass
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 
