@@ -12,10 +12,11 @@ def retrieval(command: Retrieval):
 
     queries = list(command.get_prompt(str(f)) for f, _ in pool)
     targets = list(command.get_prompt(str(f)) for f, _ in pool)
-    query_tokens = tokenizer(queries, padding=True, return_tensors='pt').to('cuda')
-    target_tokens = tokenizer(targets, padding=True, return_tensors='pt').to('cuda')
+    query_tokens = tokenizer(queries, padding=True, truncation=True, return_tensors='pt').to('cuda')
+    target_tokens = tokenizer(targets, padding=True, truncation=True, return_tensors='pt').to('cuda')
+    print(query_tokens)
 
-    model.generate(query_tokens, max_new_tokens=512).to('cuda')
+    model.generate(query_tokens['input_ids'], max_new_tokens=512).to('cuda')
 
     print("done")
     
