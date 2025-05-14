@@ -47,7 +47,7 @@ class Retrieval:
         parser.add_argument("--pool-size", type=int, default=10)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument(
-            "--src-binary", type=Optional[int], choices=BINARIES.keys(), default=None
+            "--src-binary", type=Optional[str], choices=BINARIES.keys(), default=None
         )
         parser.add_argument(
             "--src-platform", type=Optional[str], choices=PLATFORMS.keys(), default=None
