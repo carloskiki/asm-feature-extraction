@@ -98,16 +98,20 @@ class Retrieval:
         """
 
         if self.src_binary is None:
-            self.src_binary = "*"
-        if self.src_platform is None:
-            self.src_platform = "*"
-        if self.src_optimization is None:
-            optimization_str = "*"
+            binary = "*"
         else:
-            optimization_str = str(self.src_optimization)
+            binary = BINARIES[self.src_binary]
+        if self.src_platform is None:
+            platform = "*"
+        else:
+            platform = BINARIES[self.src_platform]
+        if self.src_optimization is None:
+            optimization = "*"
+        else:
+            optimization = str(self.src_optimization)
 
         return glob.iglob(
-            f"{self.data_path}/{BINARIES[self.src_binary]}-{PLATFORMS[self.src_platform]}-g-O{optimization_str}.bin.merged.asm.json.gz"
+            f"{self.data_path}/{BINARIES[binary]}-{PLATFORMS[platform]}-g-O{optimization}.bin.merged.asm.json.gz"
         )
 
     def source_function(self) -> Function:
