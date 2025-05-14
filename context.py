@@ -46,7 +46,7 @@ class Context:
             command = None
         
         for name, value in arguments.__dict__.items():
-            if command != None and name != "subcommand":
+            if command is not None and name != "subcommand":
                 setattr(command, name, value)
         
         self.command = command

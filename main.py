@@ -10,12 +10,12 @@ def main():
         pass
     elif isinstance(context.command, Retrieval):
         command = context.command
-
+        print(command.all_files())
     else:
         raise ValueError("Unreachable branch")
 
 if __name__ == "__main__":
-    context = Context()
+    main()
 
 
 # with open(context.command.assembly, "r") as assembly_file:
