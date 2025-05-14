@@ -35,7 +35,7 @@ class FileId:
     data_path: str
     binary: str
     platform: str
-    optimization: str
+    optimization: int
 
     def from_values(self, data_path, binary, platform, optimization):
         """
@@ -142,7 +142,7 @@ class Retrieval:
         if self.src_optimization is None:
             optimization = range(4)
         else:
-            optimization = self.src_optimization
+            optimization = [self.src_optimization]
 
         for b in binary:
             for p in platform:
@@ -158,7 +158,7 @@ class Retrieval:
 
         rng = random.Random(self.seed)
 
-        with gzip.open(self.data_file()) as file:
+        with gzip.open(self.data_file().path()) as file:
             data = file.read()
 
         functions = process(data)
@@ -167,7 +167,7 @@ class Retrieval:
             return next(itertools.islice(functions, index, None))
         return next(f for f in process(data) if f.name == self.src_function)
 
-    def generate_pool(self) -> list[(Function, FileId)]:
+    def generate_pool(self) -> list[tuple[Function, FileId]]:
         """
         Get the pool of targets
         """
