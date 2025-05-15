@@ -13,10 +13,10 @@ def retrieval(command: Retrieval):
     targets = list(command.get_prompt(str(f)) for f, _ in pool)
 
     print(torch.cuda.memory_reserved())
-    query_tokens = tokenizer(queries[0], return_tensors='pt').to('cuda')
+    query_tokens = tokenizer(queries[0], return_tensors='pt', max_length=32768, truncation=True, padding=True).to('cuda')
     # target_tokens = tokenizer(targets, padding=True, truncation=True, return_tensors='pt').to('cuda')
     print(torch.cuda.memory_reserved())
-    model.generate(**query_tokens, max_new_tokens=512)
+    output = model.generate(**query_tokens, max_new_tokens=512).to('cuda')
     
     print(torch.cuda.memory_reserved())
 
