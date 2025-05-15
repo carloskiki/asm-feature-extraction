@@ -158,22 +158,6 @@ class Retrieval(context.Context):
                     file.from_values(self.data_path, b, p, o)
                     yield file
 
-    def source_function(self) -> Function:
-        """
-        Return the function selected with the CLI using random values for the unspecified parameters
-        """
-
-        rng = random.Random(self.seed)
-
-        with gzip.open(self.data_file().path()) as file:
-            data = file.read()
-
-        functions = process(data)
-        if self.src_function is None:
-            index = rng.randrange(function_count(data))
-            return next(itertools.islice(functions, index, None))
-        return next(f for f in process(data) if f.name == self.src_function)
-
     def generate_pool(self) -> list[tuple[Function, FileId]]:
         """
         Get the pool of targets
@@ -191,6 +175,9 @@ class Retrieval(context.Context):
                 sample_size = last_file_function_count
             else:
                 sample_size = functions_per_file
+            
+            if sample_size == 0:
+                continue
 
             with gzip.open(file.path(), "rb") as file_data:
                 functions = process(file_data.read())
@@ -222,124 +209,123 @@ class Retrieval(context.Context):
         return results
 
 
-# def calculate_mrr(scores:np.ndarray, relevance:np.ndarray):
-#     """
-#     Calculate the Mean Reciprocal Rank (MRR) for a batch of data where each row contains relevance scores.
-#
-#     Args:
-#     scores (np.ndarray): An array of shape (query_batch, values_batch) where the relevant item for each query is at the diagonal position (i, i).
-#     relevance (np.ndarray): skip ith element if the ith masking is zero.
-#
-#     Returns:
-#     float: The Mean Reciprocal Rank (MRR).
-#     """
-#     query_batch = scores.shape[0]
-#
-#     # Initialize a list to store ranks
-#     ranks = []
-#
-#     for i in range(query_batch):
-#
-#         # Get the relevance scores for the i-th row
-#         relevance_scores = scores[i]
-#         relevant_score = relevance_scores[relevance[i]]
-#
-#         # Calculate the rank of the relevant score within the row
-#         rank = (relevance_scores > relevant_score).sum().item() + 1
-#
-#         # Append the rank to the list
-#         ranks.append(rank)
-#
-#     # Convert ranks to an array
-#     ranks = np.array(ranks)
-#
-#     # Calculate the reciprocal ranks
-#     reciprocal_ranks = 1 / ranks
-#
-#     # Compute the Mean Reciprocal Rank (MRR)
-#     mrr = reciprocal_ranks.mean()
-#
-#     return float(mrr)
-#
-# def find_common_elements(*lists):
-#     lists = lists[0]
-#     # Find intersection of all lists
-#     common_elements = set(lists[0])
-#     for lst in lists[1:]:
-#         common_elements &= set(lst)
-#     return list(common_elements)
-#
-#
-# def recall_at_k(scores: np.ndarray, relevance:np.ndarray, k: int) -> float:
-#     """
-#     Compute the recall@k for a scores matrix.
-#
-#     Parameters:
-#     - scores: np.ndarray of shape (query_batch_size, values_batch_size)
-#     - relevance: np.ndarray of shape (query_batch_size)
-#     - k: int, the number of top items to consider
-#
-#     Returns:
-#     - float, the average recall@k
-#     """
-#     # Get the batch size
-#     query_batch = scores.shape[0]
-#
-#     # Get the indices of the top-k scores for each query
-#     top_k_indices = np.argsort(-scores, axis=1)[:, :k]
-#
-#     # Initialize the recall@k counter
-#     recall_at_k_count = 0
-#
-#     # Check if the relevant item (diagonal element) is among the top-k items
-#     for i in range(query_batch):
-#         if relevance[i] in top_k_indices[i]:
-#             recall_at_k_count += 1
-#
-#     # Compute the average recall@k
-#     recall_at_k = recall_at_k_count / query_batch
-#
-#     return recall_at_k
-#
-#
-# def test_retrieval(query_embs, value_embs):
-#     scores = []
-#     for i in query_embs:
-#         scores.append(F.cosine_similarity(i.unsqueeze(0), value_embs, dim=1).numpy())
-#     scores = np.array(scores)
-#
-#     ## this takes too much memory for large pool size like 10k
-#     # scores = F.cosine_similarity(query_embs.unsqueeze(1), value_embs.unsqueeze(0), dim=2).numpy()
-#     relevance = np.arange(query_embs.size(0))
-#     return compute_retrieval_metrics(scores, relevance)
-#
-# def compute_retrieval_metrics(scores, relevance):
-#     pool_size = scores.shape[1]
-#     if relevance is None:
-#         relevance = np.arange(scores.shape[0])
-#     mrr = calculate_mrr(scores, relevance)
-#     recall_at_1 = recall_at_k(scores, relevance, 1)
-#     recall_at_10 = recall_at_k(scores, relevance, 10)
-#     return {
-#         'mrr':mrr,
-#         'recall_at_1':recall_at_1,
-#         'recall_at_10':recall_at_10,
-#         'pool_size': pool_size
-#     }
+def calculate_mrr(scores:np.ndarray, relevance:np.ndarray) -> float:
+    """
+    Calculate the Mean Reciprocal Rank (MRR) for a batch of data where each row contains relevance scores.
+
+    Args:
+    scores (np.ndarray): An array of shape (query_batch, values_batch) where the relevant item for each query is at the diagonal position (i, i).
+    relevance (np.ndarray): skip ith element if the ith masking is zero.
+
+    Returns:
+    float: The Mean Reciprocal Rank (MRR).
+    """
+    query_batch = scores.shape[0]
+
+    # Initialize a list to store ranks
+    ranks = []
+
+    for i in range(query_batch):
+
+        # Get the relevance scores for the i-th row
+        relevance_scores = scores[i]
+        relevant_score = relevance_scores[relevance[i]]
+
+        # Calculate the rank of the relevant score within the row
+        rank = (relevance_scores > relevant_score).sum().item() + 1
+
+        # Append the rank to the list
+        ranks.append(rank)
+
+    # Convert ranks to an array
+    ranks = np.array(ranks)
+
+    # Calculate the reciprocal ranks
+    reciprocal_ranks = 1 / ranks
+
+    # Compute the Mean Reciprocal Rank (MRR)
+    mrr = reciprocal_ranks.mean()
+
+    return float(mrr)
+
+def recall_at_k(scores: np.ndarray, relevance:np.ndarray, k: int) -> float:
+    """
+    Compute the recall@k for a scores matrix.
+
+    Parameters:
+    - scores: np.ndarray of shape (query_batch_size, values_batch_size)
+    - relevance: np.ndarray of shape (query_batch_size)
+    - k: int, the number of top items to consider
+
+    Returns:
+    - float, the average recall@k
+    """
+    # Get the batch size
+    query_batch = scores.shape[0]
+
+    # Get the indices of the top-k scores for each query
+    top_k_indices = np.argsort(-scores, axis=1)[:, :k]
+
+    # Initialize the recall@k counter
+    recall_at_k_count = 0
+
+    # Check if the relevant item (diagonal element) is among the top-k items
+    for i in range(query_batch):
+        if relevance[i] in top_k_indices[i]:
+            recall_at_k_count += 1
+
+    # Compute the average recall@k
+    recall_at_k = recall_at_k_count / query_batch
+
+    return recall_at_k
+
+
+def test_retrieval(query_embs, value_embs):
+    """
+    Tests the retrieval of each query against the pool of candidates (values).
+
+    # Arguments
+    query_embs: 2D Tensor containing an embedding for each candidate.
+    value_embs: 2D Tensor containing an embedding for each candidate.
+    """
+
+    scores = []
+    for i in query_embs:
+        scores.append(F.cosine_similarity(i.unsqueeze(0), value_embs, dim=1).numpy())
+    scores = np.array(scores)
+
+    ## this takes too much memory for large pool size like 10k
+    # scores = F.cosine_similarity(query_embs.unsqueeze(1), value_embs.unsqueeze(0), dim=2).numpy()
+    relevance = np.arange(query_embs.size(0))
+    return compute_retrieval_metrics(scores, relevance)
+
+def compute_retrieval_metrics(scores, relevance):
+    if relevance is None:
+        relevance = np.arange(scores.shape[0])
+    mrr = calculate_mrr(scores, relevance)
+    recall_at_1 = recall_at_k(scores, relevance, 1)
+    recall_at_10 = recall_at_k(scores, relevance, 10)
+    return {
+        'mrr':mrr,
+        'recall_at_1':recall_at_1,
+        'recall_at_10':recall_at_10,
+    }
 
 
 def retrieval(command: Retrieval):
-    # model = command.get_model()
-    # tokenizer = command.get_tokenizer()
+    model = command.get_model()
+    tokenizer = command.get_tokenizer()
     pool = command.generate_pool()
 
     queries = list(command.get_prompt(str(f)) for f, _ in pool)
-    # targets = list(command.get_prompt(str(f)) for f, _ in pool)
-    print("Max query len:", max([len(q) for q in queries]))
+    targets = list(command.get_prompt(str(f)) for f, _ in pool)
 
-    # query_tokens = tokenizer(queries[0], return_tensors='pt', truncation=True, padding=True).to('cuda')
-    # # target_tokens = tokenizer(targets, padding=True, truncation=True, return_tensors='pt').to('cuda')
-    # output = model.generate(**query_tokens, max_new_tokens=512).to('cuda')
+    for i in range(0, command.pool_size, command.batch_size):
+        query_tokens = tokenizer(queries[i:i+command.batch_size],  truncation=True, padding=True, return_tensors='pt').to('cuda')
+        target_tokens = tokenizer(targets[i:i+command.batch_size], padding=True, truncation=True, return_tensors='pt').to('cuda')
+        query_output = model.generate(**query_tokens, max_new_tokens=512).to('cuda')[:, query_tokens['input_ids'].shape[1]:]
+        target_output = model.generate(**target_tokens, max_new_tokens=512).to('cuda')[:, target_tokens['input_ids'].shape[1]:]
+        print(target_output)
 
     # print(torch.cuda.memory_reserved())
 
