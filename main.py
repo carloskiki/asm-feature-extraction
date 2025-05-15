@@ -28,11 +28,14 @@ def main():
     model = context.get_model()
     
     message = "this is a message"
-    tokens = tokenizer([message], padding=True, truncation=True, return_tensors="pt").to('cuda')
+    tokens = tokenizer(message, padding='max_length', max_length=4096, return_tensors="pt").to('cuda')
     del tokens['attention_mask']
-    output_tokens = model(**tokens, max_new_tokens=512)
-    output = tokenizer.decode(output_tokens)
-
+    print(tokens['input_ids'].size())
+    
+    output_tokens = model.generate(**tokens, max_new_tokens=512)
+    print(output_tokens)
+    output = tokenizer.batch_decode(output_tokens)[0]
+    print(output)
 
 if __name__ == "__main__":
     main()
