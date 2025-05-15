@@ -44,6 +44,10 @@ class Context:
         )
 
     def get_model(self):
+        """
+        Return the model
+        """
+
         return AutoModelForCausalLM.from_pretrained(
             MODELS[self.model], torch_dtype="auto", device_map="auto", trust_remote_code=True
         )

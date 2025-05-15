@@ -1,19 +1,16 @@
-import numpy as np
-import torch
-from context import Context
 from query import Query
 from retrieval import Retrieval, retrieval
 from arguments import arguments
 
 def query(command: Query):
-    with open(command.assembly, "r") as assembly_file:
+    with open(command.assembly, "r", encoding="utf-8") as assembly_file:
         assembly = assembly_file.read()
 
-    query = command.get_prompt(assembly)
+    prompt = command.get_prompt(assembly)
     model = command.get_model()
     tokenizer = command.get_tokenizer()
 
-    model_inputs = tokenizer([query], return_tensors="pt").to("cuda")
+    model_inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
 
     tokenized_output = model.generate(
         **model_inputs, max_new_tokens=2000, temperature=0.5
@@ -25,7 +22,7 @@ def query(command: Query):
 def main():
     args = arguments()
     if isinstance(args, Retrieval):
-        print(args.pool_optimization)
+        retrieval(args)
     else:
         pass
 

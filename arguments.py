@@ -17,10 +17,10 @@ def arguments() -> Union[Query, Retrieval]:
 
     args = parser.parse_args()
     subcommand = args.subcommand
-    del args.subcommand
+    delattr(args, "subcommand")
     if subcommand == 'query':
         return Query(**vars(args))
     if subcommand == 'retrieval':
         return Retrieval(**vars(args))
-    else:
-        raise ValueError("no subcommand provided")
+
+    raise ValueError("no subcommand provided")

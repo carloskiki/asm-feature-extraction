@@ -2,17 +2,15 @@
 Retrieval CLI utilities
 """
 
+from dataclasses import dataclass
+from typing import Optional, Generator
 import random
 import sys
 import gzip
-import itertools
 import numpy as np
-import torch
 import torch.nn.functional as F
 from tqdm import tqdm
-from dataclasses import dataclass
-from typing import Optional, Generator
-from data_processing import Function, function_count, process
+from data_processing import Function, process
 import context
 
 BINARIES = {
@@ -175,7 +173,7 @@ class Retrieval(context.Context):
                 sample_size = last_file_function_count
             else:
                 sample_size = functions_per_file
-            
+
             if sample_size == 0:
                 continue
 
@@ -208,8 +206,7 @@ class Retrieval(context.Context):
                 results[r] = v  # at a decreasing rate, replace random items
         return results
 
-
-def calculate_mrr(scores:np.ndarray, relevance:np.ndarray) -> float:
+def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
     """
     Calculate the Mean Reciprocal Rank (MRR) for a batch of data where each row contains relevance scores.
 
@@ -226,7 +223,6 @@ def calculate_mrr(scores:np.ndarray, relevance:np.ndarray) -> float:
     ranks = []
 
     for i in range(query_batch):
-
         # Get the relevance scores for the i-th row
         relevance_scores = scores[i]
         relevant_score = relevance_scores[relevance[i]]
@@ -248,7 +244,8 @@ def calculate_mrr(scores:np.ndarray, relevance:np.ndarray) -> float:
 
     return float(mrr)
 
-def recall_at_k(scores: np.ndarray, relevance:np.ndarray, k: int) -> float:
+
+def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     """
     Compute the recall@k for a scores matrix.
 
@@ -275,9 +272,7 @@ def recall_at_k(scores: np.ndarray, relevance:np.ndarray, k: int) -> float:
             recall_at_k_count += 1
 
     # Compute the average recall@k
-    recall_at_k = recall_at_k_count / query_batch
-
-    return recall_at_k
+    return recall_at_k_count / query_batch
 
 
 def test_retrieval(query_embs, value_embs):
@@ -299,6 +294,7 @@ def test_retrieval(query_embs, value_embs):
     relevance = np.arange(query_embs.size(0))
     return compute_retrieval_metrics(scores, relevance)
 
+
 def compute_retrieval_metrics(scores, relevance):
     if relevance is None:
         relevance = np.arange(scores.shape[0])
@@ -306,9 +302,9 @@ def compute_retrieval_metrics(scores, relevance):
     recall_at_1 = recall_at_k(scores, relevance, 1)
     recall_at_10 = recall_at_k(scores, relevance, 10)
     return {
-        'mrr':mrr,
-        'recall_at_1':recall_at_1,
-        'recall_at_10':recall_at_10,
+        "mrr": mrr,
+        "recall_at_1": recall_at_1,
+        "recall_at_10": recall_at_10,
     }
 
 
@@ -320,13 +316,32 @@ def retrieval(command: Retrieval):
     queries = list(command.get_prompt(str(f)) for f, _ in pool)
     targets = list(command.get_prompt(str(f)) for f, _ in pool)
 
-    for i in range(0, command.pool_size, command.batch_size):
-        query_tokens = tokenizer(queries[i:i+command.batch_size],  truncation=True, padding=True, return_tensors='pt').to('cuda')
-        target_tokens = tokenizer(targets[i:i+command.batch_size], padding=True, truncation=True, return_tensors='pt').to('cuda')
-        query_output = model.generate(**query_tokens, max_new_tokens=512).to('cuda')[:, query_tokens['input_ids'].shape[1]:]
-        target_output = model.generate(**target_tokens, max_new_tokens=512).to('cuda')[:, target_tokens['input_ids'].shape[1]:]
-        print(target_output)
+    query_embeddings = []
+    target_embeddings = []
 
-    # print(torch.cuda.memory_reserved())
+    for i in range(0, command.pool_size, command.batch_size):
+        query_tokens = tokenizer(
+            queries[i : i + command.batch_size],
+            truncation=True,
+            padding=True,
+            padding_side="left",
+            return_tensors="pt",
+        ).to("cuda")
+        target_tokens = tokenizer(
+            targets[i : i + command.batch_size],
+            padding=True,
+            truncation=True,
+            padding_side="left",
+            return_tensors="pt",
+        ).to("cuda")
+        query_outputs = model.generate(**query_tokens, max_new_tokens=512).to("cuda")[
+            :, query_tokens["input_ids"].shape[1] :
+        ]
+        target_outputs = model.generate(**target_tokens, max_new_tokens=512).to("cuda")[
+            :, target_tokens["input_ids"].shape[1] :
+        ]
+        query_embeddings.append(query_outputs)
+        target_embeddings.append(target_outputs)
+    # query_embs = torch.cat(query_embeddings, dim=0).view(-1, query_embeddings[0].size(-1))
 
     print("done")
