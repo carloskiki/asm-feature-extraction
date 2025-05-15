@@ -8,6 +8,7 @@ import random
 import sys
 import gzip
 import numpy as np
+import torch
 import torch.nn.functional as F
 from tqdm import tqdm
 from data_processing import Function, process
@@ -342,6 +343,9 @@ def retrieval(command: Retrieval):
         ]
         query_embeddings.append(query_outputs)
         target_embeddings.append(target_outputs)
-    # query_embs = torch.cat(query_embeddings, dim=0).view(-1, query_embeddings[0].size(-1))
+    query_embs = torch.cat(query_embeddings, dim=0).view(-1, query_embeddings[0].size(-1))
+    target_embs = torch.cat(target_embeddings, dim=0).view(-1, target_embeddings[0].size(-1))
+    metrics = test_retrieval(query_embs, target_embs)
+    print(metrics)
 
     print("done")
