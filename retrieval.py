@@ -338,9 +338,16 @@ def retrieval(command: Retrieval):
         query_outputs = model.generate(**query_tokens, max_new_tokens=512).to("cuda")[
             :, query_tokens["input_ids"].shape[1] :
         ]
-        target_outputs = model.generate(**target_tokens, max_new_tokens=512).to("cuda")[
-            :, target_tokens["input_ids"].shape[1] :
-        ]
+        query_outputs = model.generate(
+            **query_tokens,
+            max_new_tokens=512,
+            min_new_tokens=512  # Setting a lower bound for new token generation
+        ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
+        target_outputs = model.generate(
+            **target_tokens,
+            max_new_tokens=512,
+            min_new_tokens=512  # Setting a lower bound for new token generation
+        ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
         query_embeddings.append(query_outputs)
         target_embeddings.append(target_outputs)
     query_embs = torch.cat(query_embeddings, dim=0).view(-1, query_embeddings[0].size(-1))

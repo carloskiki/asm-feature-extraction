@@ -21,8 +21,10 @@ def query(command: Query):
     
 def main():
     args = arguments()
+
     if isinstance(args, Retrieval):
-        retrieval(args)
+        print(args)
+        # retrieval(args)
     else:
         pass
 
