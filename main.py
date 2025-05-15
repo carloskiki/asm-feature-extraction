@@ -23,8 +23,7 @@ def main():
     args = arguments()
 
     if isinstance(args, Retrieval):
-        print(args)
-        # retrieval(args)
+        retrieval(args)
     else:
         pass
 
