@@ -10,7 +10,7 @@ import gzip
 import numpy as np
 import torch
 import torch.nn.functional as F
-from tqdm import tqdm
+from tqdm import tqdm, trange
 from data_processing import Function, process
 import context
 
@@ -320,7 +320,7 @@ def retrieval(command: Retrieval):
     query_embeddings = []
     target_embeddings = []
 
-    for i in range(0, command.pool_size, command.batch_size):
+    for i in trange(0, command.pool_size, command.batch_size, desc="Running Batches"):
         query_tokens = tokenizer(
             queries[i : i + command.batch_size],
             truncation=True,
