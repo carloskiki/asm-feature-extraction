@@ -317,8 +317,8 @@ def retrieval(command: Retrieval):
     queries = list(command.get_prompt(str(f)) for f, _ in pool)
     targets = list(command.get_prompt(str(f)) for f, _ in pool)
 
-    query_embeddings = []
-    target_embeddings = []
+    query_vectors = []
+    target_vectors = []
 
     for i in trange(0, command.pool_size, command.batch_size, desc="Running Batches"):
         query_tokens = tokenizer(
@@ -348,11 +348,11 @@ def retrieval(command: Retrieval):
             max_new_tokens=512,
             min_new_tokens=512  # Setting a lower bound for new token generation
         ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
-        query_embeddings.append(query_outputs)
-        target_embeddings.append(target_outputs)
-    query_embs = torch.cat(query_embeddings, dim=0).view(-1, query_embeddings[0].size(-1))
-    target_embs = torch.cat(target_embeddings, dim=0).view(-1, target_embeddings[0].size(-1))
-    metrics = test_retrieval(query_embs, target_embs)
+        query_vectors.append(query_outputs)
+        target_vectors.append(target_outputs)
+    query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).float()
+    target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).float()
+    metrics = test_retrieval(query_vectors, target_vectors)
     print(metrics)
 
     print("done")
