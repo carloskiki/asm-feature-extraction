@@ -350,8 +350,8 @@ def retrieval(command: Retrieval):
         ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
         query_vectors.append(query_outputs)
         target_vectors.append(target_outputs)
-    query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).float()
-    target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).float()
+    query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
+    target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
     metrics = test_retrieval(query_vectors, target_vectors)
     print(metrics)
 
