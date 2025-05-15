@@ -23,14 +23,16 @@ def query(command: Query):
     print(output)
     
 def main():
-    args = arguments()
+    context = Context("codeqwen", "base")
+    tokenizer = context.get_tokenizer()
+    model = context.get_model()
+    
+    message = "this is a message"
+    tokens = tokenizer([message], padding=True, truncation=True).to('cuda')
+    del tokens['attention_mask']
+    output_tokens = model(**tokens, max_new_tokens=512)
+    output = tokenizer.decode(output_tokens)
 
-    if isinstance(args, Query):
-        query(args)
-    elif isinstance(args, Retrieval):
-        retrieval(args)
-    else:
-        raise ValueError("Unreachable branch")
 
 if __name__ == "__main__":
     main()

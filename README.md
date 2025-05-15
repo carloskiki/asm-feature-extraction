@@ -1,6 +1,14 @@
 # Extract human readable information by querying an LLM
 
-## Binary Corp Issues
+## Datasets
+
+### Libraries
+
+- Some functions have 0 blocks, so we skip them.
+- Some functions are too long for the context window of most llms (e.g., 100k tokens), we could truncate them or skip them or sliding window.
+- Can you generate when overflowing the context len?
+
+### Binary Corp Issues
 
 - The data does not contain the address of each instruction, and it is not split into blocks (so we don't know where jmp instructions lead to).
 
