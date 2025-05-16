@@ -243,13 +243,11 @@ class Retrieval(context.Context):
             ]
             query_outputs = model.generate(
                 **query_tokens,
-                max_new_tokens=512,
-                min_new_tokens=512  # Setting a lower bound for new token generation
+                max_new_tokens=2048,
             ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
             target_outputs = model.generate(
                 **target_tokens,
-                max_new_tokens=512,
-                min_new_tokens=512  # Setting a lower bound for new token generation
+                max_new_tokens=2048,
             ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
@@ -273,12 +271,12 @@ class Retrieval(context.Context):
                         file.write("\n")
                         index += 1
 
-        query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
-        target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
-        metrics = test_retrieval(query_vectors, target_vectors)
-        print(metrics)
+        # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
+        # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
+        # metrics = test_retrieval(query_vectors, target_vectors)
+        # print(metrics)
 
-        print("done")
+        # print("done")
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
