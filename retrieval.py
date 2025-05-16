@@ -221,15 +221,18 @@ class Retrieval(context.Context):
         target_vectors = []
         
         for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches"):
+            query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
+            target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
+
             query_tokens = tokenizer(
-                queries[i : i + self.batch_size],
+                query_chat,
                 truncation=True,
                 padding=True,
                 padding_side="left",
                 return_tensors="pt",
             ).to("cuda")
             target_tokens = tokenizer(
-                targets[i : i + self.batch_size],
+                target_chat,
                 padding=True,
                 truncation=True,
                 padding_side="left",

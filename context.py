@@ -3,13 +3,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 
-BASE_PROMPT = """### Assembly Code ###
-```assembly
-{assembly}
-```
-### Instructions ###
-{instructions}
+BASE_PROMPT = """{instructions}
 
+### Template ###
 ```json
 {format}
 ```
@@ -21,7 +17,7 @@ class Context:
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
 
-    def get_prompt(self, assembly: str) -> str:
+    def get_prompt(self, assembly: str):
         """
         Returns the prompt without the assembly code included
         """
@@ -36,9 +32,18 @@ class Context:
         ) as format_file:
             json_format = format_file.read()
 
-        return BASE_PROMPT.format(
-            instructions=instructions, format=json_format, assembly=assembly
-        )
+        return [
+            {
+                "role": "system",
+                "content": BASE_PROMPT.format(
+                    instructions=instructions, format=json_format
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"```assembly\n{assembly}\n"
+            }
+        ]
 
     def get_model(self):
         """
@@ -46,7 +51,10 @@ class Context:
         """
 
         return AutoModelForCausalLM.from_pretrained(
-            MODELS[self.model], torch_dtype="auto", device_map="auto", trust_remote_code=True
+            MODELS[self.model],
+            torch_dtype="auto",
+            device_map="auto",
+            trust_remote_code=True,
         )
 
     def get_tokenizer(self):

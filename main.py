@@ -10,7 +10,7 @@ def query(command: Query):
     model = command.get_model()
     tokenizer = command.get_tokenizer()
 
-    model_inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
+    model_inputs = tokenizer.apply_chat_template(prompt, add_generation_prompt=True, return_tensors="pt").to("cuda")
 
     tokenized_output = model.generate(
         **model_inputs, max_new_tokens=2000, temperature=0.5
