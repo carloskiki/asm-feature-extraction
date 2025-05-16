@@ -1,5 +1,5 @@
 from query import Query
-from retrieval import Retrieval, retrieval
+from retrieval import Retrieval
 from arguments import arguments
 
 def query(command: Query):
@@ -23,7 +23,7 @@ def main():
     args = arguments()
 
     if isinstance(args, Retrieval):
-        retrieval(args)
+        args()
     else:
         pass
 
