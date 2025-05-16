@@ -7,16 +7,13 @@ BASE_PROMPT = """### Assembly Code ###
 ```assembly
 {assembly}
 ```
-
 ### Instructions ###
 {instructions}
 
-### Output Format ###
-The output must match exactly the following `JSON` schema:
-
 ```json
 {format}
-```"""
+```
+"""
 
 
 @dataclass

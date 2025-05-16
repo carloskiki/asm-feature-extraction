@@ -1,1 +1,6 @@
-Extract the main features out of the provided assembly function.
+Extract the main features out of the provided assembly function. Answer only in the JSON format following the template schema provided. Explain
+what groups of instruction achieve in the source assembly succinctly, using the least amount of words possible. Provide
+the address or range of addresses for the feature you describe as keys to the JSON table. You can add as many entries in the table as needed,
+making sure that all features are explained in a single entry. Minimize the overlap between features and address ranges, by making sure
+that every new entry in the table adds to the knowledge base, such that no features are repeated for a same address range. All your explanations must
+point out to some feature that the assembly code contains. Examples: XOR chain, Prime verification routine, Call software interrupt, etc.
