@@ -252,8 +252,21 @@ class Retrieval(context.Context):
             target_vectors.append(target_outputs)
 
         if self.save is not None:
-            for batch in query_vectors:
-                print(batch)
+            with open(self.save, "w", encoding="utf-8") as file:
+                index = 0
+                for batch in query_vectors:
+                    outputs = tokenizer.batch_decode(batch)
+                    for output in outputs:
+                        function, file_id = pool[index]
+                        file.write("############\n")
+                        file.write(f"Binary: {file_id.binary}\n")
+                        file.write(f"Platform: {file_id.platform}\n")
+                        file.write(f"Optimization: {file_id.optimization}\n")
+                        file.write("```assembly\n")
+                        file.write(str(function))
+                        file.write("\n```\n")
+                        file.write("Output:")
+                        file.write(output)
 
         query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
