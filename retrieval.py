@@ -79,6 +79,7 @@ class Retrieval(context.Context):
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str
+    save: Optional[str]
 
     # target_platform: Optional[str]
     # target_optimization: Optional[str]
@@ -104,6 +105,7 @@ class Retrieval(context.Context):
         parser.add_argument("--pool-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=2048)
+        parser.add_argument("--save", type=str)
         parser.add_argument("data_path", type=str)
 
     def data_file(self) -> FileId:
@@ -207,6 +209,60 @@ class Retrieval(context.Context):
                 results[r] = v  # at a decreasing rate, replace random items
         return results
 
+    def __call__(self):
+        model = self.get_model()
+        tokenizer = self.get_tokenizer()
+        pool = self.generate_pool()
+
+        queries = list(self.get_prompt(str(f)) for f, _ in pool)
+        targets = list(self.get_prompt(str(f)) for f, _ in pool)
+
+        query_vectors = []
+        target_vectors = []
+        
+        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches"):
+            query_tokens = tokenizer(
+                queries[i : i + self.batch_size],
+                truncation=True,
+                padding=True,
+                padding_side="left",
+                return_tensors="pt",
+            ).to("cuda")
+            target_tokens = tokenizer(
+                targets[i : i + self.batch_size],
+                padding=True,
+                truncation=True,
+                padding_side="left",
+                return_tensors="pt",
+            ).to("cuda")
+            query_outputs = model.generate(**query_tokens, max_new_tokens=512).to("cuda")[
+                :, query_tokens["input_ids"].shape[1] :
+            ]
+            query_outputs = model.generate(
+                **query_tokens,
+                max_new_tokens=512,
+                min_new_tokens=512  # Setting a lower bound for new token generation
+            ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
+            target_outputs = model.generate(
+                **target_tokens,
+                max_new_tokens=512,
+                min_new_tokens=512  # Setting a lower bound for new token generation
+            ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
+            query_vectors.append(query_outputs)
+            target_vectors.append(target_outputs)
+
+        if self.save is not None:
+            for batch in query_vectors:
+                print(batch)
+
+        query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
+        target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
+        metrics = test_retrieval(query_vectors, target_vectors)
+        print(metrics)
+
+        print("done")
+
+
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
     """
     Calculate the Mean Reciprocal Rank (MRR) for a batch of data where each row contains relevance scores.
@@ -307,52 +363,3 @@ def compute_retrieval_metrics(scores, relevance):
         "recall_at_1": recall_at_1,
         "recall_at_10": recall_at_10,
     }
-
-
-def retrieval(command: Retrieval):
-    model = command.get_model()
-    tokenizer = command.get_tokenizer()
-    pool = command.generate_pool()
-
-    queries = list(command.get_prompt(str(f)) for f, _ in pool)
-    targets = list(command.get_prompt(str(f)) for f, _ in pool)
-
-    query_vectors = []
-    target_vectors = []
-
-    for i in trange(0, command.pool_size, command.batch_size, desc="Running Batches"):
-        query_tokens = tokenizer(
-            queries[i : i + command.batch_size],
-            truncation=True,
-            padding=True,
-            padding_side="left",
-            return_tensors="pt",
-        ).to("cuda")
-        target_tokens = tokenizer(
-            targets[i : i + command.batch_size],
-            padding=True,
-            truncation=True,
-            padding_side="left",
-            return_tensors="pt",
-        ).to("cuda")
-        query_outputs = model.generate(**query_tokens, max_new_tokens=512).to("cuda")[
-            :, query_tokens["input_ids"].shape[1] :
-        ]
-        query_outputs = model.generate(
-            **query_tokens,
-            max_new_tokens=512,
-            min_new_tokens=512  # Setting a lower bound for new token generation
-        ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
-        target_outputs = model.generate(
-            **target_tokens,
-            max_new_tokens=512,
-            min_new_tokens=512  # Setting a lower bound for new token generation
-        ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
-        query_vectors.append(query_outputs)
-        target_vectors.append(target_outputs)
-    query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
-    target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
-    metrics = test_retrieval(query_vectors, target_vectors)
-    print(metrics)
-
-    print("done")
