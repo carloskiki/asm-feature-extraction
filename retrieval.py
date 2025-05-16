@@ -267,6 +267,8 @@ class Retrieval(context.Context):
                         file.write("\n```\n")
                         file.write("Output:")
                         file.write(output)
+                        file.write("\n")
+                        index += 1
 
         query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
