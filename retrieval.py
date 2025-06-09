@@ -7,12 +7,14 @@ from typing import Optional, Generator
 import random
 import sys
 import gzip
+import pickle
 import numpy as np
 import torch
 import torch.nn.functional as F
 from tqdm import tqdm, trange
 from data_processing import Function, process
 import context
+import jaccard
 
 BINARIES = {
     "busybox": "busybox_unstripped",
@@ -79,7 +81,8 @@ class Retrieval(context.Context):
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str
-    save: Optional[str]
+    save_output: Optional[str]
+    save_pool: Optional[str]
 
     # target_platform: Optional[str]
     # target_optimization: Optional[str]
@@ -105,7 +108,8 @@ class Retrieval(context.Context):
         parser.add_argument("--pool-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=2048)
-        parser.add_argument("--save", type=str)
+        parser.add_argument("--save-output", type=str)
+        parser.add_argument("--save-pool", type=str)
         parser.add_argument("data_path", type=str)
 
     def data_file(self) -> FileId:
@@ -208,11 +212,19 @@ class Retrieval(context.Context):
             if r < sample_size:
                 results[r] = v  # at a decreasing rate, replace random items
         return results
+    
+    def cache(self, pool: list[tuple[Function, FileId]]):
+        if self.save_pool is None:
+            return
+        
+        with open("{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl", "wb") as file:
+            file.write(pickle.dumps(pool))
 
     def __call__(self):
         model = self.get_model()
         tokenizer = self.get_tokenizer()
         pool = self.generate_pool()
+        self.cache(pool)
 
         queries = list(self.get_prompt(str(f)) for f, _ in pool)
         targets = list(self.get_prompt(str(f)) for f, _ in pool)
@@ -238,9 +250,6 @@ class Retrieval(context.Context):
                 padding_side="left",
                 return_tensors="pt",
             ).to("cuda")
-            query_outputs = model.generate(**query_tokens, max_new_tokens=512).to("cuda")[
-                :, query_tokens["input_ids"].shape[1] :
-            ]
             query_outputs = model.generate(
                 **query_tokens,
                 max_new_tokens=2048,
@@ -252,8 +261,8 @@ class Retrieval(context.Context):
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
 
-        if self.save is not None:
-            with open(self.save, "w", encoding="utf-8") as file:
+        if self.save_output is not None:
+            with open(self.save_output, "w", encoding="utf-8") as file:
                 index = 0
                 for batch in query_vectors:
                     outputs = tokenizer.batch_decode(batch)
@@ -348,23 +357,25 @@ def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     return recall_at_k_count / query_batch
 
 
-def test_retrieval(query_embs, value_embs):
+def test_retrieval(query_tokens, target_tokens, vocab_size):
     """
     Tests the retrieval of each query against the pool of candidates (values).
 
     # Arguments
-    query_embs: 2D Tensor containing an embedding for each candidate.
-    value_embs: 2D Tensor containing an embedding for each candidate.
+    query_tokens: 2D Tensor containing an embedding for each candidate.
+    target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    scores = []
-    for i in query_embs:
-        scores.append(F.cosine_similarity(i.unsqueeze(0), value_embs, dim=1).numpy())
+    scores: list[list[float]] = []
+    for index, query in enumerate(query_tokens):
+        scores.append([])
+        for target in target_tokens:
+            scores[index].append(jaccard.similarity(query, target, vocab_size))
     scores = np.array(scores)
 
     ## this takes too much memory for large pool size like 10k
     # scores = F.cosine_similarity(query_embs.unsqueeze(1), value_embs.unsqueeze(0), dim=2).numpy()
-    relevance = np.arange(query_embs.size(0))
+    relevance = np.arange(query_tokens.size(0))
     return compute_retrieval_metrics(scores, relevance)
 
 

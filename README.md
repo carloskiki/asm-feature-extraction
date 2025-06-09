@@ -1,12 +1,22 @@
 # Extract human readable information by querying an LLM
 
+## Assumptions
+
+- There is no bad actor trying to mangle or obfuscate the generated assembly.
+- Assembly will be similar except for the presence of dbg symbols &| the optimization level &| the architecture used.
+
+## Questions
+
+- If not only one word, then how the hell do I compare them with Jaccard
+- Pairwise comparisons?
+
 ## Datasets
 
 ### Libraries
 
 - Some functions have 0 blocks, so we skip them.
 - Some functions are too long for the context window of most llms (e.g., 100k tokens), we could truncate them or skip them or sliding window.
-- Can you generate when overflowing the context len?
+- Can you generate when overflowing the context len? NO
 
 ### Binary Corp Issues
 
@@ -26,6 +36,11 @@ Either generate sources from pool, or generate pool for each source.
 ### Retrieval
 
 Generate new pool for all sources, OR generate one pool and run on all elements in the pool.
+
+
+## Papers
+
+- [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
 
 # Data Schema
 
@@ -144,3 +159,4 @@ Same as `.asm.json`, but contains much more comments & contains function names.
 I suspect that the merged version is the merge between `unstrip` and the regular file, where
 the function name from the `unstrip` file is used for the dissassembled output of the regular
 file.
+
