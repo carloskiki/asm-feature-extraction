@@ -9,6 +9,7 @@ def arguments() -> Union[Query, Retrieval]:
         "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
     )
     parser.add_argument("-p", "--prompt", type=str, default="base")
+    parser.add_argument("--gpu-count", type=int, default=1)
     subparsers = parser.add_subparsers(
         description="the action to be performed", dest="subcommand", required=True
     )

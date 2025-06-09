@@ -220,6 +220,25 @@ class Retrieval(context.Context):
         with open("{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl", "wb") as file:
             file.write(pickle.dumps(pool))
 
+    def run_on_gpu(self, queries, targets):
+        model = self.get_model()
+        tokenizer = self.get_tokenizer()
+
+        query_vectors = []
+        target_vectors = []
+
+        for i in trange(0, len(queries), self.batch_size, desc="Running Batches"):
+            query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
+            target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
+
+            query_tokens = tokenizer(
+                query_chat,
+                truncation=True,
+                padding=True,
+                padding_side="left",
+                return_tensors="pt",
+            ).cuda("cuda")
+
     def __call__(self):
         model = self.get_model()
         tokenizer = self.get_tokenizer()
@@ -250,10 +269,16 @@ class Retrieval(context.Context):
                 padding_side="left",
                 return_tensors="pt",
             ).to("cuda")
-            query_outputs = model.generate(
+            print("before")
+            tmp_outputs = model.generate(
                 **query_tokens,
                 max_new_tokens=2048,
-            ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
+            )
+            print("testing stuff")
+            query_outputs = tmp_outputs.to("cuda")[:, query_tokens["input_ids"].shape[1]:]
+            print("how long between these twoo")
+            print(query_outputs)
+
             target_outputs = model.generate(
                 **target_tokens,
                 max_new_tokens=2048,

@@ -16,6 +16,7 @@ BASE_PROMPT = """{instructions}
 class Context:
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
+    gpu_count: int # Number of GPUs to use
 
     def get_prompt(self, assembly: str):
         """
