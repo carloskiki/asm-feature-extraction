@@ -2,8 +2,30 @@
 Data processing
 """
 
-from typing import Generator
+from typing import Generator, Optional
+import gzip
+import random
 import json
+from torch.utils.data import Dataset
+from tqdm import tqdm
+
+BINARIES = {
+    "busybox": "busybox_unstripped",
+    "coreutils": "coreutils",
+    "curl": "curl",
+    "image-magick": "magick",
+    "openssl": "openssl",
+    "putty": "puttygen",
+    "sqlite3": "sqlite3",
+}
+
+PLATFORMS = {
+    "arm": "arm-linux-gnueabihf-gcc",
+    "gcc32": "gcc32",
+    "gcc": "gcc",
+    "mips": "mips-linux-gnu-gcc",
+    "powerpc": "powerpc-linux-gnu-gcc",
+}
 
 
 class Instruction:
@@ -60,6 +82,34 @@ class Function:
         return f"{self.name}:\n" + "\n".join(str(b) for b in self.blocks)
 
 
+class FileId:
+    """
+    A specific file in the dataset.
+    """
+
+    data_path: str
+    binary: str
+    platform: str
+    optimization: int
+
+    def from_values(self, data_path, binary, platform, optimization):
+        """
+        Create the FileId from the provided values
+        """
+
+        self.data_path = data_path
+        self.binary = binary
+        self.platform = platform
+        self.optimization = optimization
+
+    def path(self):
+        """
+        Return the file corresponding to the Id
+        """
+
+        return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
+
+
 def process(contents: bytes) -> Generator[Function, None, None]:
     """
     Process the contents of a `.merged.asm.json` file.
@@ -105,3 +155,75 @@ def function_count(contents: bytes) -> int:
 
     data = json.loads(contents)
     return len(data["functions"])
+
+
+class LibDataset(Dataset):
+    data: list[tuple[Function, FileId]]
+
+    def __init__(
+        self,
+        path: str,
+        binary: Optional[str],
+        optimization: Optional[str],
+        platform: Optional[str],
+        pool_size: int,
+        seed: int,
+    ):
+        def data_files() -> Generator[FileId, None, None]:
+            """
+            return all files that match the selected parameters
+            """
+            for b in BINARIES.keys() if binary is None else [binary]:
+                for p in PLATFORMS.keys() if platform is None else [platform]:
+                    for o in range(4) if optimization is None else [optimization]:
+                        file = FileId()
+                        file.from_values(path, b, p, o)
+                        yield file
+
+        def iter_sample(iterator, sample_size):
+            """
+            Sample from an iterator
+            """
+
+            rng = random.Random(seed)
+            results = []
+            # Fill in the first samplesize elements:
+            try:
+                for _ in range(sample_size):
+                    results.append(next(iterator))
+            except StopIteration as exc:
+                raise exc
+            rng.shuffle(results)  # Randomize their positions
+            for i, v in enumerate(iterator, sample_size):
+                r = rng.randint(0, i)
+                if r < sample_size:
+                    results[r] = v  # at a decreasing rate, replace random items
+            return results
+
+
+        files = list(data_files())
+        functions_per_file = pool_size // len(files)
+        last_file_function_count = pool_size - (len(files) - 1) * functions_per_file
+
+        pairs = []
+        for index, file in enumerate(tqdm(files, desc="Reading dataset")):
+            if index == len(files) - 1:
+                sample_size = last_file_function_count
+            else:
+                sample_size = functions_per_file
+
+            if sample_size == 0:
+                continue
+
+            with gzip.open(file.path(), "rb") as file_data:
+                functions = process(file_data.read())
+
+            for sample in iter_sample(functions, sample_size):
+                sample: Function = sample
+                pairs.append((sample, file))
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        return self.data[idx]

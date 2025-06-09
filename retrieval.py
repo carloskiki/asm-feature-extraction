@@ -11,57 +11,11 @@ import pickle
 import numpy as np
 import torch
 import torch.nn.functional as F
+from accelerate import Accelerator
 from tqdm import tqdm, trange
-from data_processing import Function, process
+from data_processing import Function, process, BINARIES, PLATFORMS
 import context
 import jaccard
-
-BINARIES = {
-    "busybox": "busybox_unstripped",
-    "coreutils": "coreutils",
-    "curl": "curl",
-    "image-magick": "magick",
-    "openssl": "openssl",
-    "putty": "puttygen",
-    "sqlite3": "sqlite3",
-}
-
-PLATFORMS = {
-    "arm": "arm-linux-gnueabihf-gcc",
-    "gcc32": "gcc32",
-    "gcc": "gcc",
-    "mips": "mips-linux-gnu-gcc",
-    "powerpc": "powerpc-linux-gnu-gcc",
-}
-
-
-class FileId:
-    """
-    A specific file in the dataset.
-    """
-
-    data_path: str
-    binary: str
-    platform: str
-    optimization: int
-
-    def from_values(self, data_path, binary, platform, optimization):
-        """
-        Create the FileId from the provided values
-        """
-
-        self.data_path = data_path
-        self.binary = binary
-        self.platform = platform
-        self.optimization = optimization
-
-    def path(self):
-        """
-        Return the file corresponding to the Id
-        """
-
-        return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
-
 
 @dataclass
 class Retrieval(context.Context):
@@ -112,56 +66,31 @@ class Retrieval(context.Context):
         parser.add_argument("--save-pool", type=str)
         parser.add_argument("data_path", type=str)
 
-    def data_file(self) -> FileId:
-        """
-        Get the file selected with the CLI arguments, using random values for the unspecified parameters
-        """
+    # def data_file(self) -> FileId:
+    #     """
+    #     Get the file selected with the CLI arguments, using random values for the unspecified parameters
+    #     """
 
-        rng = random.Random(self.seed)
-        file = FileId()
+    #     rng = random.Random(self.seed)
+    #     file = FileId()
 
-        file.data_path = self.data_path
-        if self.pool_binary is None:
-            file.binary = rng.choice(list(BINARIES.keys()))
-        else:
-            file.binary = self.pool_binary
+    #     file.data_path = self.data_path
+    #     if self.pool_binary is None:
+    #         file.binary = rng.choice(list(BINARIES.keys()))
+    #     else:
+    #         file.binary = self.pool_binary
 
-        if self.pool_platform is None:
-            file.platform = rng.choice(list(PLATFORMS.keys()))
-        else:
-            file.platform = self.pool_platform
+    #     if self.pool_platform is None:
+    #         file.platform = rng.choice(list(PLATFORMS.keys()))
+    #     else:
+    #         file.platform = self.pool_platform
 
-        if self.pool_optimization is None:
-            file.optimization = rng.randrange(4)
-        else:
-            file.optimization = self.pool_optimization
+    #     if self.pool_optimization is None:
+    #         file.optimization = rng.randrange(4)
+    #     else:
+    #         file.optimization = self.pool_optimization
 
-        return file
-
-    def data_files(self) -> Generator[FileId, None, None]:
-        """
-        return all files that match the selected parameters
-        """
-
-        if self.pool_binary is None:
-            binary = BINARIES.keys()
-        else:
-            binary = [self.pool_binary]
-        if self.pool_platform is None:
-            platform = PLATFORMS.keys()
-        else:
-            platform = [self.pool_platform]
-        if self.pool_optimization is None:
-            optimization = range(4)
-        else:
-            optimization = [self.pool_optimization]
-
-        for b in binary:
-            for p in platform:
-                for o in optimization:
-                    file = FileId()
-                    file.from_values(self.data_path, b, p, o)
-                    yield file
+    #     return file
 
     def generate_pool(self) -> list[tuple[Function, FileId]]:
         """
@@ -220,27 +149,11 @@ class Retrieval(context.Context):
         with open("{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl", "wb") as file:
             file.write(pickle.dumps(pool))
 
-    def run_on_gpu(self, queries, targets):
-        model = self.get_model()
-        tokenizer = self.get_tokenizer()
-
-        query_vectors = []
-        target_vectors = []
-
-        for i in trange(0, len(queries), self.batch_size, desc="Running Batches"):
-            query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
-            target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
-
-            query_tokens = tokenizer(
-                query_chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-            ).to("cuda")
-
     def __call__(self):
-        model = self.get_model()
+        accelerator = Accelerator()
+
+        model = accelerator.prepare(self.get_model())
+
         tokenizer = self.get_tokenizer()
         pool = self.generate_pool()
         self.cache(pool)
@@ -261,14 +174,14 @@ class Retrieval(context.Context):
                 padding=True,
                 padding_side="left",
                 return_tensors="pt",
-            ).to("cuda")
+            )
             target_tokens = tokenizer(
                 target_chat,
                 padding=True,
                 truncation=True,
                 padding_side="left",
                 return_tensors="pt",
-            ).to("cuda")
+            )
             query_outputs = model.generate(
                 **query_tokens,
                 max_new_tokens=2048,

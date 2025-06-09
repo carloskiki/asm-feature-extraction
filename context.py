@@ -11,7 +11,6 @@ BASE_PROMPT = """{instructions}
 ```
 """
 
-
 @dataclass
 class Context:
     model: str  # Name of the model to use.
@@ -54,7 +53,6 @@ class Context:
         return AutoModelForCausalLM.from_pretrained(
             MODELS[self.model],
             torch_dtype="auto",
-            device_map="auto",
             trust_remote_code=True,
         )
 
