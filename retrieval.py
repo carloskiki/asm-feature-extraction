@@ -237,7 +237,7 @@ class Retrieval(context.Context):
                 padding=True,
                 padding_side="left",
                 return_tensors="pt",
-            ).cuda("cuda")
+            ).to("cuda")
 
     def __call__(self):
         model = self.get_model()
@@ -269,16 +269,10 @@ class Retrieval(context.Context):
                 padding_side="left",
                 return_tensors="pt",
             ).to("cuda")
-            print("before")
-            tmp_outputs = model.generate(
+            query_outputs = model.generate(
                 **query_tokens,
                 max_new_tokens=2048,
-            )
-            print("testing stuff")
-            query_outputs = tmp_outputs.to("cuda")[:, query_tokens["input_ids"].shape[1]:]
-            print("how long between these twoo")
-            print(query_outputs)
-
+            ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
             target_outputs = model.generate(
                 **target_tokens,
                 max_new_tokens=2048,
