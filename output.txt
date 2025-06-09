@@ -1,0 +1,205 @@
+############
+Binary: busybox
+Platform: powerpc
+Optimization: 3
+```assembly
+lzo1x_1_compress:
+loc_100A7E50:
+    0x100A7E50 STWU r1, back_chain(r1)
+    0x100A7E54 CMPLWI cr7, r4, 0xD
+    0x100A7E58 MFLR r0, lr
+    0x100A7E5C STW r28, 0x20+var_10(r1)
+    0x100A7E60 STW r29, 0x20+var_C(r1)
+    0x100A7E64 STW r30, 0x20+var_8(r1)
+    0x100A7E68 STW r31, 0x20+var_4(r1)
+    0x100A7E6C STW r0, 0x20+sender_lr(r1)
+    0x100A7E70 MR r30, r4
+    0x100A7E74 MR r31, r3
+    0x100A7E78 MR r29, r5
+    0x100A7E7C MR r28, r6
+    0x100A7E80 BGT cr7, loc_100A7EE0
+loc_100A7E84:
+    0x100A7E84 CMPWI cr7, r4, 0
+    0x100A7E88 BNE cr7, loc_100A8070
+loc_100A7E8C:
+    0x100A7E8C MR r9, r5
+loc_100A7E90:
+    0x100A7E90 LI r10, 0
+    0x100A7E94 LI r8, 0x11
+    0x100A7E98 STB r8, 0(r9)
+    0x100A7E9C STB r10, 1(r9)
+    0x100A7EA0 STB r10, 2(r9)
+    0x100A7EA4 ADDI r5, r9, 3
+    0x100A7EA8 SUBF r5, r29, r5
+    0x100A7EAC LI r3, 0
+    0x100A7EB0 STW r5, 0(r28)
+    0x100A7EB4 LWZ r0, 0x20+sender_lr(r1)
+    0x100A7EB8 LWZ r28, 0x20+var_10(r1)
+    0x100A7EBC LWZ r29, 0x20+var_C(r1)
+    0x100A7EC0 LWZ r30, 0x20+var_8(r1)
+    0x100A7EC4 MTLR lr, r0
+    0x100A7EC8 LWZ r31, 0x20+var_4(r1)
+    0x100A7ECC ADDI r1, r1, 0x20
+    0x100A7ED0 BLR lr
+loc_100A7EE0:
+    0x100A7EE0 BL sub_100A79A0
+    0x100A7EE4 LWZ r6, 0(r28)
+    0x100A7EE8 CMPWI cr0, r3, 0
+    0x100A7EEC ADD r9, r29, r6
+    0x100A7EF0 BEQ- cr0, loc_100A7E90
+loc_100A7EF4:
+    0x100A7EF4 CMPLW cr7, r29, r9
+    0x100A7EF8 SUBF r30, r3, r30
+    0x100A7EFC ADD r31, r31, r30
+    0x100A7F00 BEQ cr7, loc_100A8064
+loc_100A7F04:
+    0x100A7F04 CMPLWI cr7, r3, 3
+    0x100A7F08 BGT cr7, loc_100A7FD0
+loc_100A7F0C:
+    0x100A7F0C LBZ r10, -2(r9)
+    0x100A7F10 OR r10, r3, r10
+    0x100A7F14 STB r10, -2(r9)
+loc_100A7F18:
+    0x100A7F18 ADDI r10, r9, 4
+    0x100A7F1C SUBFC r10, r10, r31
+    0x100A7F20 ADDI r10, r31, 4
+    0x100A7F24 SUBFE r6, r6, r6
+    0x100A7F28 SUBFC r10, r10, r9
+    0x100A7F2C SUBFE r10, r10, r10
+    0x100A7F30 SUBFIC r8, r3, 9
+    0x100A7F34 ADDI r10, r10, 1
+    0x100A7F38 ADDI r5, r6, 1
+    0x100A7F3C SUBFE r8, r8, r8
+    0x100A7F40 OR r6, r5, r10
+    0x100A7F44 NEG r10, r8
+    0x100A7F48 AND r10, r10, r6
+    0x100A7F4C CLRLWI r10, r10, 24
+    0x100A7F50 CMPWI cr7, r10, 0
+    0x100A7F54 BEQ cr7, loc_100A8040
+loc_100A7F58:
+    0x100A7F58 OR r10, r9, r31
+    0x100A7F5C ANDI. r8, r10, 3
+    0x100A7F60 BNE cr0, loc_100A8040
+loc_100A7F64:
+    0x100A7F64 ADDI r10, r3, -4
+    0x100A7F68 ADDI r5, r31, -4
+    0x100A7F6C SRWI r10, r10, 2
+    0x100A7F70 ADDI r6, r9, -4
+    0x100A7F74 ADDI r10, r10, 1
+    0x100A7F78 MTCTR ctr, r10
+    0x100A7F7C SLWI r8, r10, 2
+loc_100A7F80:
+    0x100A7F80 LWZU r10, 4(r5)
+    0x100A7F84 STWU r10, 4(r6)
+    0x100A7F88 BDNZ cr0, loc_100A7F80
+loc_100A7F8C:
+    0x100A7F8C CMPLW cr7, r3, r8
+    0x100A7F90 ADD r6, r9, r8
+    0x100A7F94 SUBF r10, r8, r3
+    0x100A7F98 ADD r5, r31, r8
+    0x100A7F9C BEQ cr7, loc_100A7FC8
+loc_100A7FA0:
+    0x100A7FA0 CMPWI cr7, r10, 1
+    0x100A7FA4 LBZX r4, r31, r8
+    0x100A7FA8 STBX r4, r9, r8
+    0x100A7FAC BEQ cr7, loc_100A7FC8
+loc_100A7FB0:
+    0x100A7FB0 CMPLWI cr7, r10, 2
+    0x100A7FB4 LBZ r10, 1(r5)
+    0x100A7FB8 STB r10, 1(r6)
+    0x100A7FBC BEQ cr7, loc_100A7FC8
+loc_100A7FC0:
+    0x100A7FC0 LBZ r10, 2(r5)
+    0x100A7FC4 STB r10, 2(r6)
+loc_100A7FC8:
+    0x100A7FC8 ADD r9, r9, r3
+    0x100A7FCC B loc_100A7E90
+loc_100A7FD0:
+    0x100A7FD0 CMPLWI cr7, r3, 0x12
+    0x100A7FD4 BGT cr7, loc_100A7FF0
+loc_100A7FD8:
+    0x100A7FD8 ADDI r10, r3, -3
+    0x100A7FDC ADDI r9, r9, 1
+    0x100A7FE0 STBX r10, r29, r6
+    0x100A7FE4 B loc_100A7F18
+loc_100A7FF0:
+    0x100A7FF0 ADDI r8, r3, -0x12
+    0x100A7FF4 ADDI r10, r9, 1
+    0x100A7FF8 CMPLWI cr7, r8, 0xFF
+    0x100A7FFC LI r9, 0
+    0x100A8000 STBX r9, r29, r6
+    0x100A8004 BLE cr7, loc_100A8034
+loc_100A8008:
+    0x100A8008 B loc_100A8020
+loc_100A8020:
+    0x100A8020 ADDI r8, r8, -0xFF
+    0x100A8024 ADDI r10, r10, 1
+    0x100A8028 CMPLWI cr7, r8, 0xFF
+    0x100A802C STB r9, -1(r10)
+    0x100A8030 BGT cr7, loc_100A8020
+loc_100A8034:
+    0x100A8034 ADDI r9, r10, 1
+    0x100A8038 STB r8, 0(r10)
+    0x100A803C B loc_100A7F18
+loc_100A8040:
+    0x100A8040 MTCTR ctr, r3
+    0x100A8044 ADDI r10, r9, -1
+    0x100A8048 ADDI r31, r31, -1
+    0x100A804C NOP 
+loc_100A8050:
+    0x100A8050 LBZU r8, 1(r31)
+    0x100A8054 STBU r8, 1(r10)
+    0x100A8058 BDNZ cr0, loc_100A8050
+loc_100A805C:
+    0x100A805C ADD r9, r9, r3
+    0x100A8060 B loc_100A7E90
+loc_100A8064:
+    0x100A8064 CMPLWI cr7, r3, 0xEE
+    0x100A8068 BGT cr7, loc_100A7FF0
+loc_100A806C:
+    0x100A806C MR r30, r3
+loc_100A8070:
+    0x100A8070 ADDI r10, r30, 0x11
+    0x100A8074 ADDI r9, r29, 1
+    0x100A8078 STB r10, 0(r29)
+    0x100A807C MR r3, r30
+    0x100A8080 B loc_100A7F18
+```
+Output:{
+    "0x100A7E50": "Lzo1x_1_compress",
+    "0x100A7E84": "Lzo1x_1_compress"
+}<|im_end|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|>
+############
+Binary: busybox
+Platform: powerpc
+Optimization: 3
+```assembly
+next_arg:
+loc_1011A390:
+    0x1011A390 LWZ r9, 4(r3)
+    0x1011A394 CMPWI cr7, r9, 0
+    0x1011A398 BEQ cr7, loc_1011A3A4
+loc_1011A39C:
+    0x1011A39C ADDI r3, r3, 4
+    0x1011A3A0 BLR lr
+loc_1011A3A4:
+    0x1011A3A4 STWU r1, back_chain(r1)
+    0x1011A3A8 LIS r3, aCommandLineIsN@ha
+    0x1011A3AC MFLR r0, lr
+    0x1011A3B0 ADDI r3, r3, aCommandLineIsN@l
+    0x1011A3B4 STW r0, 0x10+sender_lr(r1)
+    0x1011A3B8 CRCLR 4*cr1+eq
+    0x1011A3BC BL sub_100EB8D0
+```
+Output:{
+    "0x1011A390": "Load from stack",
+    "0x1011A394": "Compare with zero",
+    "0x1011A398": "Branch on equality",
+    "0x1011A39C": "Add 4 to stack pointer",
+    "0x1011A3A4": "Store value to back chain",
+    "0x1011A3A8": "Load command line string into register",
+    "0x1011A3AC": "Load command line string into register",
+    "0x1011A3B0": "Add command line string to sender's LR",
+    "0x1011A3B4": "Clear equality flag",
+    "0x1011A3B8": "Branch on negative number"
+}<|im_end|>
