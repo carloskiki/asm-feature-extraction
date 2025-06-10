@@ -73,7 +73,7 @@ class Retrieval(context.Context):
             file.write(pickle.dumps(data))
 
     def __call__(self):
-        accelerator = Accelerator()
+        # accelerator = Accelerator()
 
         model = self.get_model()
         tokenizer = self.get_tokenizer()
@@ -82,7 +82,7 @@ class Retrieval(context.Context):
         self.cache(dataset.data)
         loader = DataLoader(dataset, batch_size=self.batch_size, )
 
-        model, loader = accelerator.prepare(model, loader)
+        # model, loader = accelerator.prepare(model, loader)
 
         queries = list(self.get_prompt(str(f)) for f, _ in loader)
         targets = list(self.get_prompt(str(f)) for f, _ in loader)
@@ -90,7 +90,7 @@ class Retrieval(context.Context):
         query_vectors = []
         target_vectors = []
         
-        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches", disable=not accelerator.is_local_main_process):
+        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches"):
             query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
             target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
 
