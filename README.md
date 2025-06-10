@@ -9,6 +9,8 @@
 
 - If not only one word, then how the hell do I compare them with Jaccard
 - Pairwise comparisons?
+- Instead of asking the LLM for "Addr: feature", we should ask for "Step: feature" or "Line: feature", bc two samples
+  could be the same but have different addresses in code.
 
 ## Datasets
 

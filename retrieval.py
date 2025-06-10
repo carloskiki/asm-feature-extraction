@@ -3,17 +3,16 @@ Retrieval CLI utilities
 """
 
 from dataclasses import dataclass
-from typing import Optional, Generator
+from typing import Optional
 import random
 import sys
 import gzip
 import pickle
 import numpy as np
-import torch
-import torch.nn.functional as F
+from torch.utils.data import DataLoader
 from accelerate import Accelerator
 from tqdm import tqdm, trange
-from data_processing import Function, process, BINARIES, PLATFORMS
+from data_processing import Function, process, BINARIES, PLATFORMS, LibDataset, FileId
 import context
 import jaccard
 
@@ -142,24 +141,27 @@ class Retrieval(context.Context):
                 results[r] = v  # at a decreasing rate, replace random items
         return results
     
-    def cache(self, pool: list[tuple[Function, FileId]]):
+    def cache(self, data: list[tuple[Function, FileId]]):
         if self.save_pool is None:
             return
         
         with open("{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl", "wb") as file:
-            file.write(pickle.dumps(pool))
+            file.write(pickle.dumps(data))
 
     def __call__(self):
         accelerator = Accelerator()
 
-        model = accelerator.prepare(self.get_model())
-
+        model = self.get_model()
         tokenizer = self.get_tokenizer()
-        pool = self.generate_pool()
-        self.cache(pool)
 
-        queries = list(self.get_prompt(str(f)) for f, _ in pool)
-        targets = list(self.get_prompt(str(f)) for f, _ in pool)
+        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed)
+        self.cache(dataset.data)
+        loader = DataLoader(dataset, batch_size=self.batch_size, )
+
+        model, loader = accelerator.prepare(model, loader)
+
+        queries = list(self.get_prompt(str(f)) for f, _ in loader)
+        targets = list(self.get_prompt(str(f)) for f, _ in loader)
 
         query_vectors = []
         target_vectors = []
@@ -199,7 +201,7 @@ class Retrieval(context.Context):
                 for batch in query_vectors:
                     outputs = tokenizer.batch_decode(batch)
                     for output in outputs:
-                        function, file_id = pool[index]
+                        function, file_id = dataset[index]
                         file.write("############\n")
                         file.write(f"Binary: {file_id.binary}\n")
                         file.write(f"Platform: {file_id.platform}\n")
