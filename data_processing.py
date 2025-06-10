@@ -225,6 +225,7 @@ class LibDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx: int):
+        print("called get one")
         f, _ = self.data[idx]
         prompt = self.context.get_prompt(str(f))
         chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
@@ -237,6 +238,7 @@ class LibDataset(Dataset):
         )
 
     def __getitems__(self, idxs: list[int]):
+        print("called get many")
         prompts = []
         for idx in idxs:
             f, _ = self.data[idx]
