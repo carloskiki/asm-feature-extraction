@@ -10,7 +10,7 @@ import gzip
 import pickle
 import numpy as np
 from torch.utils.data import DataLoader
-from accelerate import Accelerator
+from accelerate import Accelerator, data_loader
 from tqdm import tqdm, trange
 from data_processing import Function, process, BINARIES, PLATFORMS, LibDataset, FileId
 import context
@@ -83,7 +83,7 @@ class Retrieval(context.Context):
         self.cache(dataset.data)
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
-        loader = accelerator.prepare_data_loader(loader)
+        loader = data_loader.prepare_data_loader(loader, split_batches=True)
 
         query_vectors = []
         target_vectors = []
