@@ -80,12 +80,12 @@ class Retrieval(context.Context):
 
         dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed)
         self.cache(dataset.data)
-        loader = DataLoader(dataset, batch_size=self.batch_size, )
+        # loader = DataLoader(dataset, batch_size=self.batch_size, )
 
         # model, loader = accelerator.prepare(model, loader)
 
-        queries = list(self.get_prompt(str(f)) for f, _ in loader)
-        targets = list(self.get_prompt(str(f)) for f, _ in loader)
+        queries = list(self.get_prompt(str(f)) for f, _ in dataset)
+        targets = list(self.get_prompt(str(f)) for f, _ in dataset)
 
         query_vectors = []
         target_vectors = []
