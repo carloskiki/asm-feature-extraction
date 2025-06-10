@@ -80,7 +80,7 @@ class Retrieval(context.Context):
 
         dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
         self.cache(dataset.data)
-        loader = DataLoader(dataset, batch_size=self.batch_size)
+        loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
         model, loader = accelerator.prepare(model, loader)
 
@@ -88,18 +88,19 @@ class Retrieval(context.Context):
         target_vectors = []
 
         for batch in loader:
-            query_outputs = model.generate(
-                **batch,
-                max_new_tokens=2048,
-            )[:, batch["input_ids"].shape[1]:]
-            target_outputs = model.generate(
-                **batch,
-                max_new_tokens=2048,
-            )[:, batch["input_ids"].shape[1]:]
-            query_vectors.append(query_outputs)
-            target_vectors.append(target_outputs)
+            accelerator.print("got batch")
+        #     query_outputs = model.generate(
+        #         **batch,
+        #         max_new_tokens=2048,
+        #     )[:, batch["input_ids"].shape[1]:]
+        #     target_outputs = model.generate(
+        #         **batch,
+        #         max_new_tokens=2048,
+        #     )[:, batch["input_ids"].shape[1]:]
+        #     query_vectors.append(query_outputs)
+        #     target_vectors.append(target_outputs)
 
-        if self.save_output is not None:
+        if accelerator.is_main_process and self.save_output is not None:
             with open(self.save_output, "w", encoding="utf-8") as file:
                 index = 0
                 for batch in query_vectors:

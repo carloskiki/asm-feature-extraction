@@ -238,15 +238,13 @@ class LibDataset(Dataset):
         f, _ = self.data[idx]
         prompt = self.context.get_prompt(str(f))
         chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
-        tokenized = self.tokenizer(
+        return self.tokenizer(
             chat,
             truncation=True,
             padding=True,
             padding_side="left",
             return_tensors="pt",
         )
-
-        return tokenized.data
 
     def __getitems__(self, idxs: list[int]) -> list[Tensor]:
         prompts = []
@@ -255,11 +253,10 @@ class LibDataset(Dataset):
             prompts.append(self.context.get_prompt(str(f)))
         
         chat = self.tokenizer.apply_chat_template(prompts, tokenize=False, add_generation_prompt=True)
-        tokenized = self.tokenizer(
+        return self.tokenizer(
                 chat,
                 truncation=True,
                 padding=True,
                 padding_side="left",
                 return_tensors="pt",
             )
-        return tokenized.data
