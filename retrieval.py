@@ -8,6 +8,7 @@ import random
 import sys
 import pickle
 import numpy as np
+from tqdm import tqdm
 from torch.utils.data import DataLoader
 from accelerate import Accelerator, data_loader
 from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
@@ -87,7 +88,7 @@ class Retrieval(context.Context):
         query_vectors = []
         target_vectors = []
 
-        for batch in loader:
+        for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
             query_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
