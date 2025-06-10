@@ -224,7 +224,10 @@ class LibDataset(IterableDataset):
     def __len__(self) -> int:
         return len(self.data)
 
-    def __iter__(self) -> BatchEncoding:
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> BatchEncoding:
         f, _ = self.data[self.index]
         prompt = self.context.get_prompt(str(f))
         chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
