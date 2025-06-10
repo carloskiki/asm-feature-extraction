@@ -10,7 +10,7 @@ import pickle
 import numpy as np
 from torch.utils.data import DataLoader
 from accelerate import Accelerator, data_loader
-from data_processing import Function, BINARIES, PLATFORMS, LibDataset, DummyDataset, FileId
+from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
 import context
 import jaccard
 
@@ -77,33 +77,27 @@ class Retrieval(context.Context):
         model = self.get_model()
         tokenizer = self.get_tokenizer()
 
-        if accelerator.is_local_main_process:
-            dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
-            self.cache(dataset.data)
-        else:
-            dataset = DummyDataset()
+        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
+        self.cache(dataset.data)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
-        loader = data_loader.prepare_data_loader(loader, split_batches=True)
+        loader = data_loader.prepare_data_loader(loader)
 
         query_vectors = []
         target_vectors = []
 
         for batch in loader:
-            pass
-        #     query_outputs = model.generate(
-        #         **batch,
-        #         max_new_tokens=2048,
-        #     )[:, batch["input_ids"].shape[1]:]
-        #     target_outputs = model.generate(
-        #         **batch,
-        #         max_new_tokens=2048,
-        #     )[:, batch["input_ids"].shape[1]:]
-        #     query_vectors.append(query_outputs)
-        #     target_vectors.append(target_outputs)
-
-        print("done")
+            query_outputs = model.generate(
+                **batch,
+                max_new_tokens=2048,
+            )[:, batch["input_ids"].shape[1]:]
+            target_outputs = model.generate(
+                **batch,
+                max_new_tokens=2048,
+            )[:, batch["input_ids"].shape[1]:]
+            query_vectors.append(query_outputs)
+            target_vectors.append(target_outputs)
 
         if accelerator.is_main_process and self.save_output is not None:
             with open(self.save_output, "w", encoding="utf-8") as file:

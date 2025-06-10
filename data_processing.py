@@ -7,9 +7,9 @@ from dataclasses import dataclass
 import gzip
 import random
 import json
-from torch.utils.data import IterableDataset
+from torch.utils.data import Dataset
 from tqdm import tqdm
-from transformers import PreTrainedTokenizer, BatchEncoding
+from transformers import PreTrainedTokenizer
 from context import Context
 
 BINARIES = {
@@ -151,7 +151,7 @@ def function_count(contents: bytes) -> int:
     return len(data["functions"])
 
 
-class LibDataset(IterableDataset):
+class LibDataset(Dataset):
     data: list[tuple[Function, FileId]]
     index: int
     tokenizer: PreTrainedTokenizer
@@ -224,25 +224,6 @@ class LibDataset(IterableDataset):
     def __len__(self) -> int:
         return len(self.data)
 
-    def __iter__(self):
-        return self
-
-    def __next__(self) -> BatchEncoding:
-        if self.index >= len(self):
-            raise StopIteration
-        f, _ = self.data[self.index]
-        prompt = self.context.get_prompt(str(f))
-        chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
-        self.index += 1
-        return self.tokenizer(
-            chat,
-            truncation=True,
-            padding=True,
-            padding_side="left",
-            return_tensors="pt",
-        )
-
-
     def __getitem__(self, idx: int):
         f, _ = self.data[idx]
         prompt = self.context.get_prompt(str(f))
@@ -269,13 +250,3 @@ class LibDataset(IterableDataset):
                 padding_side="left",
                 return_tensors="pt",
             )
-
-class DummyDataset(IterableDataset):
-    def __init__(self):
-        pass
-
-    def __iter__(self):
-        pass
-
-    def __getitem__(self, index):
-        pass
