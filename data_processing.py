@@ -3,13 +3,13 @@ Data processing
 """
 
 from typing import Generator, Optional
+from dataclasses import dataclass
 import gzip
 import random
 import json
-from torch import Tensor
-from torch.utils.data import Dataset
+from torch.utils.data import IterableDataset
 from tqdm import tqdm
-from transformers import PreTrainedTokenizer
+from transformers import PreTrainedTokenizer, BatchEncoding
 from context import Context
 
 BINARIES = {
@@ -85,6 +85,7 @@ class Function:
         return f"{self.name}:\n" + "\n".join(str(b) for b in self.blocks)
 
 
+@dataclass
 class FileId:
     """
     A specific file in the dataset.
@@ -94,16 +95,6 @@ class FileId:
     binary: str
     platform: str
     optimization: int
-
-    def from_values(self, data_path, binary, platform, optimization):
-        """
-        Create the FileId from the provided values
-        """
-
-        self.data_path = data_path
-        self.binary = binary
-        self.platform = platform
-        self.optimization = optimization
 
     def path(self):
         """
@@ -160,8 +151,9 @@ def function_count(contents: bytes) -> int:
     return len(data["functions"])
 
 
-class LibDataset(Dataset):
+class LibDataset(IterableDataset):
     data: list[tuple[Function, FileId]]
+    index: int
     tokenizer: PreTrainedTokenizer
     context: Context
 
@@ -173,7 +165,7 @@ class LibDataset(Dataset):
         platform: Optional[str],
         pool_size: int,
         seed: int,
-        context: Context
+        context: Context,
     ):
         def data_files() -> Generator[FileId, None, None]:
             """
@@ -182,9 +174,7 @@ class LibDataset(Dataset):
             for b in BINARIES.keys() if binary is None else [binary]:
                 for p in PLATFORMS.keys() if platform is None else [platform]:
                     for o in range(4) if optimization is None else [optimization]:
-                        file = FileId()
-                        file.from_values(path, b, p, o)
-                        yield file
+                        yield FileId(path, b, p, o)
 
         def iter_sample(iterator, sample_size):
             """
@@ -205,7 +195,6 @@ class LibDataset(Dataset):
                 if r < sample_size:
                     results[r] = v  # at a decreasing rate, replace random items
             return results
-
 
         files = list(data_files())
         functions_per_file = pool_size // len(files)
@@ -228,13 +217,28 @@ class LibDataset(Dataset):
                 sample: Function = sample
                 pairs.append((sample, file))
         self.data = pairs
+        self.index = 0
         self.tokenizer = context.get_tokenizer()
         self.context = context
 
     def __len__(self) -> int:
         return len(self.data)
 
-    def __getitem__(self, idx: int) -> Tensor:
+    def __iter__(self) -> BatchEncoding:
+        f, _ = self.data[self.index]
+        prompt = self.context.get_prompt(str(f))
+        chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
+        self.index += 1
+        return self.tokenizer(
+            chat,
+            truncation=True,
+            padding=True,
+            padding_side="left",
+            return_tensors="pt",
+        )
+
+
+    def __getitem__(self, idx: int):
         f, _ = self.data[idx]
         prompt = self.context.get_prompt(str(f))
         chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
@@ -246,7 +250,7 @@ class LibDataset(Dataset):
             return_tensors="pt",
         )
 
-    def __getitems__(self, idxs: list[int]) -> list[Tensor]:
+    def __getitems__(self, idxs: list[int]):
         prompts = []
         for idx in idxs:
             f, _ = self.data[idx]

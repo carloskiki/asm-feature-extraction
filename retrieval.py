@@ -75,6 +75,7 @@ class Retrieval(context.Context):
     def __call__(self):
         accelerator = Accelerator()
 
+        # No need to prepare the model, because we only do inference
         model = self.get_model()
         tokenizer = self.get_tokenizer()
 
@@ -82,7 +83,7 @@ class Retrieval(context.Context):
         self.cache(dataset.data)
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
-        model, loader = accelerator.prepare(model, loader)
+        loader = accelerator.prepare_data_loader(loader)
 
         query_vectors = []
         target_vectors = []
