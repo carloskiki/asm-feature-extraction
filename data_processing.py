@@ -6,8 +6,11 @@ from typing import Generator, Optional
 import gzip
 import random
 import json
+from torch import Tensor
 from torch.utils.data import Dataset
 from tqdm import tqdm
+from transformers import PreTrainedTokenizer
+from context import Context
 
 BINARIES = {
     "busybox": "busybox_unstripped",
@@ -159,6 +162,8 @@ def function_count(contents: bytes) -> int:
 
 class LibDataset(Dataset):
     data: list[tuple[Function, FileId]]
+    tokenizer: PreTrainedTokenizer
+    context: Context
 
     def __init__(
         self,
@@ -168,6 +173,7 @@ class LibDataset(Dataset):
         platform: Optional[str],
         pool_size: int,
         seed: int,
+        context: Context
     ):
         def data_files() -> Generator[FileId, None, None]:
             """
@@ -222,9 +228,38 @@ class LibDataset(Dataset):
                 sample: Function = sample
                 pairs.append((sample, file))
         self.data = pairs
+        self.tokenizer = context.get_tokenizer()
+        self.context = context
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.data)
 
-    def __getitem__(self, idx):
-        return self.data[idx]
+    def __getitem__(self, idx: int) -> Tensor:
+        f, _ = self.data[idx]
+        prompt = self.context.get_prompt(str(f))
+        chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
+        tokenized = self.tokenizer(
+            chat,
+            truncation=True,
+            padding=True,
+            padding_side="left",
+            return_tensors="pt",
+        )
+
+        return tokenized
+
+    def __getitems__(self, idxs: list[int]) -> list[Tensor]:
+        prompts = []
+        for idx in idxs:
+            f, _ = self.data[idx]
+            prompts.append(self.context.get_prompt(str(f)))
+        
+        chat = self.tokenizer.apply_chat_template(prompts, tokenize=False, add_generation_prompt=True)
+        tokenized = self.tokenizer(
+                chat,
+                truncation=True,
+                padding=True,
+                padding_side="left",
+                return_tensors="pt",
+            )
+        return tokenized

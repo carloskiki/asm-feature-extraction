@@ -13,11 +13,15 @@ BASE_PROMPT = """{instructions}
 
 @dataclass
 class Context:
+    """
+    LLM Context.
+
+    Contains which prompt and model to use.
+    """
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
-    gpu_count: int # Number of GPUs to use
 
-    def get_prompt(self, assembly: str):
+    def get_prompt(self, assembly: str) -> list[dict[str, str]]:
         """
         Returns the prompt without the assembly code included
         """
@@ -57,4 +61,7 @@ class Context:
         )
 
     def get_tokenizer(self):
+        """
+        Return the tokenizer
+        """
         return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)

@@ -73,49 +73,29 @@ class Retrieval(context.Context):
             file.write(pickle.dumps(data))
 
     def __call__(self):
-        # accelerator = Accelerator()
+        accelerator = Accelerator()
 
         model = self.get_model()
         tokenizer = self.get_tokenizer()
 
-        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed)
+        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
         self.cache(dataset.data)
-        # loader = DataLoader(dataset, batch_size=self.batch_size, )
+        loader = DataLoader(dataset, batch_size=self.batch_size)
 
-        # model, loader = accelerator.prepare(model, loader)
-
-        queries = list(self.get_prompt(str(f)) for f, _ in dataset)
-        targets = list(self.get_prompt(str(f)) for f, _ in dataset)
+        model, loader = accelerator.prepare(model, loader)
 
         query_vectors = []
         target_vectors = []
-        
-        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches"):
-            query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
-            target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
 
-            query_tokens = tokenizer(
-                query_chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-            )
-            target_tokens = tokenizer(
-                target_chat,
-                padding=True,
-                truncation=True,
-                padding_side="left",
-                return_tensors="pt",
-            )
+        for batch in loader:
             query_outputs = model.generate(
-                **query_tokens,
+                **batch,
                 max_new_tokens=2048,
-            ).to("cuda")[:, query_tokens["input_ids"].shape[1]:]
+            ).to("cuda")[:, batch["input_ids"].shape[1]:]
             target_outputs = model.generate(
-                **target_tokens,
+                **batch,
                 max_new_tokens=2048,
-            ).to("cuda")[:, target_tokens["input_ids"].shape[1]:]
+            ).to("cuda")[:, batch["input_ids"].shape[1]:]
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
 
