@@ -75,7 +75,7 @@ class Retrieval(context.Context):
         accelerator = Accelerator()
 
         # No need to prepare the model, because we only do inference
-        model = accelerator.prepare(self.get_model())
+        model = self.get_model()
         tokenizer = self.get_tokenizer()
 
         dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
@@ -84,19 +84,19 @@ class Retrieval(context.Context):
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
-        loader = data_loader.prepare_data_loader(loader)
+        loader = accelerator.prepare_data_loader(loader, device_placement=True)
 
         query_vectors = []
         target_vectors = []
 
         for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
             print("getting query_outputs")
-            query_outputs = model(
+            query_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
             )[:, batch["input_ids"].shape[1]:]
             print("did query")
-            target_outputs = model(
+            target_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
             )[:, batch["input_ids"].shape[1]:]

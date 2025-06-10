@@ -49,14 +49,22 @@ class Context:
             }
         ]
 
-    def get_model(self):
+    def get_model(self, accelerator):
         """
         Return the model
         """
+        if accelerator is not None:
+            return AutoModelForCausalLM.from_pretrained(
+                MODELS[self.model],
+                torch_dtype="auto",
+                device_map={"": accelerator.process_index},
+                trust_remote_code=True,
+            )
 
         return AutoModelForCausalLM.from_pretrained(
             MODELS[self.model],
             torch_dtype="auto",
+            device_map="auto",
             trust_remote_code=True,
         )
 
