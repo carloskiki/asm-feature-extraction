@@ -104,8 +104,15 @@ class Retrieval(context.Context):
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
 
-        if accelerator.is_main_process and self.save_output is not None:
-            with open(self.save_output, "w", encoding="utf-8") as file:
+        if self.save_output is not None:
+            # Clear out and or create the file for all processes to write to it later
+            if accelerator.is_local_main_process:
+                with open(self.save_output, "w", encoding="utf-8") as file:
+                    pass
+            
+            accelerator.wait_for_everyone()
+
+            with open(self.save_output, "a", encoding="utf-8") as file:
                 index = 0
                 for batch in query_vectors:
                     outputs = tokenizer.batch_decode(batch)
