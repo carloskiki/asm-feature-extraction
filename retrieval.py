@@ -65,82 +65,6 @@ class Retrieval(context.Context):
         parser.add_argument("--save-pool", type=str)
         parser.add_argument("data_path", type=str)
 
-    # def data_file(self) -> FileId:
-    #     """
-    #     Get the file selected with the CLI arguments, using random values for the unspecified parameters
-    #     """
-
-    #     rng = random.Random(self.seed)
-    #     file = FileId()
-
-    #     file.data_path = self.data_path
-    #     if self.pool_binary is None:
-    #         file.binary = rng.choice(list(BINARIES.keys()))
-    #     else:
-    #         file.binary = self.pool_binary
-
-    #     if self.pool_platform is None:
-    #         file.platform = rng.choice(list(PLATFORMS.keys()))
-    #     else:
-    #         file.platform = self.pool_platform
-
-    #     if self.pool_optimization is None:
-    #         file.optimization = rng.randrange(4)
-    #     else:
-    #         file.optimization = self.pool_optimization
-
-    #     return file
-
-    def generate_pool(self) -> list[tuple[Function, FileId]]:
-        """
-        Get the pool of targets
-        """
-
-        files = list(self.data_files())
-        functions_per_file = self.pool_size // len(files)
-        last_file_function_count = (
-            self.pool_size - (len(files) - 1) * functions_per_file
-        )
-
-        pairs = []
-        for index, file in enumerate(tqdm(files, desc="Reading dataset")):
-            if index == len(files) - 1:
-                sample_size = last_file_function_count
-            else:
-                sample_size = functions_per_file
-
-            if sample_size == 0:
-                continue
-
-            with gzip.open(file.path(), "rb") as file_data:
-                functions = process(file_data.read())
-
-            for sample in self.iter_sample(functions, sample_size):
-                sample: Function = sample
-                pairs.append((sample, file))
-
-        return pairs
-
-    def iter_sample(self, iterator, sample_size):
-        """
-        Sample from an iterator
-        """
-
-        rng = random.Random(self.seed)
-        results = []
-        # Fill in the first samplesize elements:
-        try:
-            for _ in range(sample_size):
-                results.append(next(iterator))
-        except StopIteration as exc:
-            raise exc
-        rng.shuffle(results)  # Randomize their positions
-        for i, v in enumerate(iterator, sample_size):
-            r = rng.randint(0, i)
-            if r < sample_size:
-                results[r] = v  # at a decreasing rate, replace random items
-        return results
-    
     def cache(self, data: list[tuple[Function, FileId]]):
         if self.save_pool is None:
             return
@@ -166,7 +90,7 @@ class Retrieval(context.Context):
         query_vectors = []
         target_vectors = []
         
-        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches"):
+        for i in trange(0, self.pool_size, self.batch_size, desc="Running Batches", disable=not accelerator.is_local_main_process):
             query_chat = tokenizer.apply_chat_template(queries[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
             target_chat = tokenizer.apply_chat_template(targets[i: i + self.batch_size], tokenize=False, add_generation_prompt=True)
 
