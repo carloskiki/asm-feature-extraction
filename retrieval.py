@@ -79,10 +79,10 @@ class Retrieval(context.Context):
 
         if accelerator.is_local_main_process:
             dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
+            self.cache(dataset.data)
         else:
             dataset = DummyDataset()
 
-        self.cache(dataset.data)
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
         loader = data_loader.prepare_data_loader(loader, split_batches=True)
