@@ -10,7 +10,7 @@ import pickle
 import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from accelerate import Accelerator, data_loader
+from accelerate import Accelerator
 from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
 import context
 import jaccard
