@@ -89,7 +89,7 @@ class Retrieval(context.Context):
         target_vectors = []
 
         for batch in loader:
-            print("got batch", batch)
+            pass
         #     query_outputs = model.generate(
         #         **batch,
         #         max_new_tokens=2048,
@@ -100,6 +100,8 @@ class Retrieval(context.Context):
         #     )[:, batch["input_ids"].shape[1]:]
         #     query_vectors.append(query_outputs)
         #     target_vectors.append(target_outputs)
+
+        print("done")
 
         if accelerator.is_main_process and self.save_output is not None:
             with open(self.save_output, "w", encoding="utf-8") as file:
