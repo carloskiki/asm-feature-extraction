@@ -1,4 +1,3 @@
-{ // Maps the effective address or range of effective addresses to a key feature.
-    "0x1234ABC0-1234ABCC": "<EXPLANATION>"
-    // ...
-}
+[ // List of features contained in the function
+    "<EXPLANATION>"
+]
