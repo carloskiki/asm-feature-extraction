@@ -269,3 +269,13 @@ class LibDataset(IterableDataset):
                 padding_side="left",
                 return_tensors="pt",
             )
+
+class DummyDataset(IterableDataset):
+    def __init__(self):
+        pass
+
+    def __iter__(self):
+        pass
+
+    def __getitem__(self, index):
+        pass

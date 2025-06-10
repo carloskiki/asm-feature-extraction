@@ -6,13 +6,11 @@ from dataclasses import dataclass
 from typing import Optional
 import random
 import sys
-import gzip
 import pickle
 import numpy as np
 from torch.utils.data import DataLoader
 from accelerate import Accelerator, data_loader
-from tqdm import tqdm, trange
-from data_processing import Function, process, BINARIES, PLATFORMS, LibDataset, FileId
+from data_processing import Function, BINARIES, PLATFORMS, LibDataset, DummyDataset, FileId
 import context
 import jaccard
 
@@ -79,7 +77,11 @@ class Retrieval(context.Context):
         model = self.get_model()
         tokenizer = self.get_tokenizer()
 
-        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
+        if accelerator.is_local_main_process:
+            dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
+        else:
+            dataset = DummyDataset()
+
         self.cache(dataset.data)
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
