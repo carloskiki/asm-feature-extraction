@@ -221,6 +221,7 @@ class LibDataset(Dataset):
             for sample in iter_sample(functions, sample_size):
                 sample: Function = sample
                 pairs.append((sample, file))
+        self.data = pairs
 
     def __len__(self):
         return len(self.data)
