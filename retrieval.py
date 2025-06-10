@@ -110,7 +110,7 @@ class Retrieval(context.Context):
                 for batch in query_vectors:
                     outputs = tokenizer.batch_decode(batch)
                     for output in outputs:
-                        function, file_id = dataset[index]
+                        function, file_id = dataset.data[index]
                         file.write("############\n")
                         file.write(f"Binary: {file_id.binary}\n")
                         file.write(f"Platform: {file_id.platform}\n")
