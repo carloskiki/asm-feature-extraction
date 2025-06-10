@@ -229,7 +229,7 @@ class LibDataset(IterableDataset):
 
     def __next__(self) -> BatchEncoding:
         if self.index >= len(self):
-            return None
+            raise StopIteration
         f, _ = self.data[self.index]
         prompt = self.context.get_prompt(str(f))
         chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
