@@ -88,7 +88,7 @@ class Retrieval(context.Context):
         target_vectors = []
 
         for batch in loader:
-            accelerator.print("got batch")
+            print("got batch", batch)
         #     query_outputs = model.generate(
         #         **batch,
         #         max_new_tokens=2048,
