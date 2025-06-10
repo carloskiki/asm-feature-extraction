@@ -228,7 +228,7 @@ class LibDataset(IterableDataset):
         return self
 
     def __next__(self) -> BatchEncoding:
-        if self.index > len(self):
+        if self.index >= len(self):
             return None
         f, _ = self.data[self.index]
         prompt = self.context.get_prompt(str(f))
