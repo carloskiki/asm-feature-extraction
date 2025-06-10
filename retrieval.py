@@ -75,7 +75,7 @@ class Retrieval(context.Context):
         accelerator = Accelerator()
 
         # No need to prepare the model, because we only do inference
-        model = self.get_model()
+        model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
 
         dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
