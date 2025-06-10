@@ -89,10 +89,12 @@ class Retrieval(context.Context):
         target_vectors = []
 
         for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
+            print("getting query_outputs")
             query_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
             )[:, batch["input_ids"].shape[1]:]
+            print("did query")
             target_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,

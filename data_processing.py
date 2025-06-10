@@ -244,7 +244,9 @@ class LibDataset(Dataset):
             f, _ = self.data[idx]
             prompts.append(self.context.get_prompt(str(f)))
         
+        print("prompts: ", prompts)
         chat = self.tokenizer.apply_chat_template(prompts, tokenize=False, add_generation_prompt=True)
+        print("chat: ", chat)
         return self.tokenizer(
                 chat,
                 truncation=True,
