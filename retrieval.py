@@ -91,11 +91,11 @@ class Retrieval(context.Context):
             query_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
-            ).to("cuda")[:, batch["input_ids"].shape[1]:]
+            )[:, batch["input_ids"].shape[1]:]
             target_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
-            ).to("cuda")[:, batch["input_ids"].shape[1]:]
+            )[:, batch["input_ids"].shape[1]:]
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
 

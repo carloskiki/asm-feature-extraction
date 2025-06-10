@@ -246,7 +246,7 @@ class LibDataset(Dataset):
             return_tensors="pt",
         )
 
-        return tokenized
+        return tokenized.data
 
     def __getitems__(self, idxs: list[int]) -> list[Tensor]:
         prompts = []
@@ -262,4 +262,4 @@ class LibDataset(Dataset):
                 padding_side="left",
                 return_tensors="pt",
             )
-        return tokenized
+        return tokenized.data
