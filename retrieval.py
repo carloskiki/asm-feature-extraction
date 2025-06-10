@@ -79,7 +79,8 @@ class Retrieval(context.Context):
         tokenizer = self.get_tokenizer()
 
         dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
-        self.cache(dataset.data)
+        if accelerator.is_local_main_process:
+            self.cache(dataset.data)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
 
