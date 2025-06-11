@@ -1,9 +1,11 @@
+import os
+from pathlib import Path
 from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 
-BASE_PROMPT = """{instructions}
+SYSTEM_PROMPT = """{instructions}
 
 ### Template ###
 ```json
@@ -36,18 +38,41 @@ class Context:
         ) as format_file:
             json_format = format_file.read()
 
-        return [
+        prompt = [
             {
                 "role": "system",
-                "content": BASE_PROMPT.format(
+                "content": SYSTEM_PROMPT.format(
                     instructions=instructions, format=json_format
                 ),
             },
-            {
-                "role": "user",
-                "content": f"```assembly\n{assembly}\n"
-            }
         ]
+
+        examples = Path(f"prompts/{self.prompt}/examples.txt")
+        if examples.is_file():
+            with open(examples, "r" , encoding="utf-8") as file:
+                examples_string = file.read()
+                if "\n" in examples_string:
+                    examples_string = examples_string.replace("\r", "")
+                else:
+                    examples_string = examples_string.replace("\r", "\n")
+
+                for example in examples_string.split(3*"\n"):
+                    example_assembly, output = example.split(2*"\n")
+                    prompt.append({
+                        "role": "user",
+                        "content": f"```assembly\n{example_assembly}\n```"
+                    })
+                    prompt.append({
+                        "role": "assistant",
+                        "content": output,
+                    })
+
+        prompt.append({
+            "role": "user",
+            "content": "```assembly\n{assembly}\n```"
+        })
+        return prompt
+        
 
     def get_model(self, accelerator):
         """
