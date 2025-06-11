@@ -15,6 +15,7 @@ from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
 import context
 import jaccard
 
+MAX_NEW_TOKENS = 1024
 
 @dataclass
 class Retrieval(context.Context):
@@ -100,19 +101,13 @@ class Retrieval(context.Context):
         loader = accelerator.prepare_data_loader(loader, device_placement=True)
 
         query_vectors = []
-        target_vectors = []
 
         for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
             query_outputs = model.generate(
                 **batch,
-                max_new_tokens=2048,
-            )[:, batch["input_ids"].shape[1] :]
-            target_outputs = model.generate(
-                **batch,
-                max_new_tokens=2048,
+                max_new_tokens=MAX_NEW_TOKENS,
             )[:, batch["input_ids"].shape[1] :]
             query_vectors.append(query_outputs)
-            target_vectors.append(target_outputs)
 
         if self.save_output is not None:
             # Clear out and or create the file for all processes to write to it later

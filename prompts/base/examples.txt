@@ -82,3 +82,29 @@ loc_6B4AE:
     B loc_6B46E
 loc_6B4B6:
     BL sub_13BFF4
+
+=====
+
+3, gcc
+
+######
+init_6:
+loc_5D3CA0:
+    SUB rsp, 8
+    CALL sub_5237C0
+    ADD rsp, 8
+    MOV rdi, rax
+    JMP loc_5831F0
+loc_5831F0:
+    MOV qword ptr [rdi], 0
+    MOV qword ptr [rdi+0A0h], 0
+    MOV rcx, rdi
+    LEA rdi, [rdi+8]
+    XOR eax, eax
+    AND rdi, 0FFFFFFFFFFFFFFF8h
+    SUB rcx, rdi
+    ADD ecx, 0A8h
+    SHR ecx, 3
+    REP 
+    MOV eax, 1
+    RETN 
