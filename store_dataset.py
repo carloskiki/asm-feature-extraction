@@ -1,7 +1,11 @@
-import context
+"""
+Store the whole dataset in a pickle file.
+"""
+
 from dataclasses import dataclass
-from data_processing import LibDataset
 import pickle
+import context
+from data_processing import LibDataset
 
 @dataclass
 class StoreDataset(context.Context):
