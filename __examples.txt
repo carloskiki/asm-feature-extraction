@@ -108,3 +108,26 @@ loc_5831F0:
     REP 
     MOV eax, 1
     RETN 
+
+
+=====
+
+0, powerpc
+
+######
+ENGINE_set_ctrl_function:
+loc_1015A290:
+    STWU r1, back_chain(r1)
+    STW r31, 0x20+var_4(r1)
+    MR r31, r1
+    STW r3, 0xC(r31)
+    STW r4, 8(r31)
+    LWZ r9, 0xC(r31)
+    LWZ r10, 8(r31)
+    STW r10, 0x38(r9)
+    LI r9, 1
+    MR r3, r9
+    ADDI r11, r31, 0x20
+    LWZ r31, -4(r11)
+    MR r1, r11
+    BLR lr
