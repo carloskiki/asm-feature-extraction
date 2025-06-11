@@ -166,6 +166,7 @@ class LibDataset(Dataset):
         pool_size: int,
         seed: int,
         context: Context,
+        main_process: bool
     ):
         def data_files() -> Generator[FileId, None, None]:
             """
@@ -201,7 +202,7 @@ class LibDataset(Dataset):
         last_file_function_count = pool_size - (len(files) - 1) * functions_per_file
 
         pairs = []
-        for index, file in enumerate(tqdm(files, desc="Reading dataset")):
+        for index, file in enumerate(tqdm(files, desc="Reading dataset", disable=not main_process)):
             if index == len(files) - 1:
                 sample_size = last_file_function_count
             else:

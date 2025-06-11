@@ -15,6 +15,7 @@ from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
 import context
 import jaccard
 
+
 @dataclass
 class Retrieval(context.Context):
     """
@@ -67,8 +68,11 @@ class Retrieval(context.Context):
     def cache(self, data: list[tuple[Function, FileId]]):
         if self.save_pool is None:
             return
-        
-        with open("{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl", "wb") as file:
+
+        with open(
+            "{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl",
+            "wb",
+        ) as file:
             file.write(pickle.dumps(data))
 
     def __call__(self):
@@ -78,7 +82,16 @@ class Retrieval(context.Context):
         model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
 
-        dataset = LibDataset(self.data_path, self.pool_binary, self.pool_optimization, self.pool_platform, self.pool_size, self.seed, self)
+        dataset = LibDataset(
+            self.data_path,
+            self.pool_binary,
+            self.pool_optimization,
+            self.pool_platform,
+            self.pool_size,
+            self.seed,
+            self,
+            accelerator.is_local_main_process,
+        )
         if accelerator.is_local_main_process:
             self.cache(dataset.data)
 
@@ -93,11 +106,11 @@ class Retrieval(context.Context):
             query_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
-            )[:, batch["input_ids"].shape[1]:]
+            )[:, batch["input_ids"].shape[1] :]
             target_outputs = model.generate(
                 **batch,
                 max_new_tokens=2048,
-            )[:, batch["input_ids"].shape[1]:]
+            )[:, batch["input_ids"].shape[1] :]
             query_vectors.append(query_outputs)
             target_vectors.append(target_outputs)
 
@@ -106,7 +119,7 @@ class Retrieval(context.Context):
             if accelerator.is_local_main_process:
                 with open(self.save_output, "w", encoding="utf-8") as file:
                     pass
-            
+
             accelerator.wait_for_everyone()
 
             with open(self.save_output, "a", encoding="utf-8") as file:
