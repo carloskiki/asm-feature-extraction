@@ -22,6 +22,7 @@ def query(command: Query):
 def main():
     import pickle
     with open("full-dataset.pickle", "rb") as file:
+        print("reading file")
         obj = pickle.load(file)
         print("length: ", len(obj))
 
