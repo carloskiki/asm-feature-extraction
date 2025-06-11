@@ -20,7 +20,12 @@ def query(command: Query):
     print(output)
     
 def main():
-    arguments()()
+    import pickle
+    with open("full-dataset.pickle", "rb") as file:
+        obj = pickle.load(file)
+        print("length: ", len(obj))
+
+    # arguments()()
 
 if __name__ == "__main__":
     main()
