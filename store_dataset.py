@@ -27,10 +27,9 @@ class StoreDataset(context.Context):
 
     
     def __call__(self):
-        dataset = LibDataset(self.data_path, context=self, main_process=True)
-        function_count = len(dataset.data)
-        with open(self.output_file, "wb") as file:
-            bytes_written = pickle.dump(dataset.data, file)
-        
-        print(f"Wrote {bytes_written:_} bytes to {self.output_file}.")
-        print(f"In total, {function_count} assembly functions were processed.")
+        dataset = LibDataset(self.data_path, context=self, main_process=True, pool_size=200, binary="openssl")
+        with open(self.output_file, "w", encoding="utf-8") as file:
+            for function, file_id in dataset.data:
+                file.write(f"{file_id.optimization}, {file_id.platform}\n\n######\n")
+                file.write(str(function))
+                file.write("\n\n=====\n\n")
