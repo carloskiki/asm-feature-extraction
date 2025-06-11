@@ -1,7 +1,7 @@
 from typing import Union
 from retrieval import Retrieval
 from query import Query
-from store_dataset import StoreDataset
+from bogus import Bogus
 import argparse
 
 def arguments() -> Union[Query, Retrieval]:
@@ -15,7 +15,7 @@ def arguments() -> Union[Query, Retrieval]:
     )
     Query.command(subparsers)
     Retrieval.command(subparsers)
-    StoreDataset.command(subparsers)
+    Bogus.command(subparsers)
 
     args = parser.parse_args()
     subcommand = args.subcommand
@@ -24,7 +24,7 @@ def arguments() -> Union[Query, Retrieval]:
         return Query(**vars(args))
     if subcommand == 'retrieval':
         return Retrieval(**vars(args))
-    if subcommand == 'store-dataset':
-        return StoreDataset(**vars(args))
+    if subcommand == 'bogus':
+        return Bogus(**vars(args))
 
     raise ValueError("no subcommand provided")

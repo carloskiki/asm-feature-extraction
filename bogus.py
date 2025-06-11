@@ -1,5 +1,5 @@
 """
-Store the whole dataset in a pickle file.
+Doesn't do much, just to play around & try stuff
 """
 
 from dataclasses import dataclass
@@ -7,7 +7,7 @@ import context
 from data_processing import LibDataset
 
 @dataclass
-class StoreDataset(context.Context):
+class Bogus(context.Context):
     data_path: str
     output_file: str
 
@@ -18,8 +18,8 @@ class StoreDataset(context.Context):
         """
 
         parser = subparsers.add_parser(
-            "store-dataset",
-            description="Store the whole dataset in a pickle file",
+            "bogus",
+            description="",
         )
         parser.add_argument("data_path", type=str)
         parser.add_argument("output_file", type=str)
