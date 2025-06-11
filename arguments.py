@@ -15,6 +15,7 @@ def arguments() -> Union[Query, Retrieval]:
     )
     Query.command(subparsers)
     Retrieval.command(subparsers)
+    StoreDataset.command(subparsers)
 
     args = parser.parse_args()
     subcommand = args.subcommand
