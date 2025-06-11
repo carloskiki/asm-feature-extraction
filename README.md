@@ -43,6 +43,7 @@ Generate new pool for all sources, OR generate one pool and run on all elements 
 ## Papers
 
 - [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
+- [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
 
 # Data Schema
 

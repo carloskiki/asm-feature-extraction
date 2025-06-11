@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import gzip
 import random
 import json
+from itertools import islice
 from torch.utils.data import Dataset
 from tqdm import tqdm
 from transformers import PreTrainedTokenizer
@@ -153,20 +154,19 @@ def function_count(contents: bytes) -> int:
 
 class LibDataset(Dataset):
     data: list[tuple[Function, FileId]]
-    index: int
     tokenizer: PreTrainedTokenizer
     context: Context
 
     def __init__(
         self,
         path: str,
-        binary: Optional[str],
-        optimization: Optional[str],
-        platform: Optional[str],
-        pool_size: int,
-        seed: int,
         context: Context,
-        main_process: bool
+        main_process: bool,
+        pool_size: Optional[int] = None, # Take the whole dataset if not specified
+        seed: Optional[int] = None, # Don't randomize order if not specified
+        binary: Optional[str] = None,
+        optimization: Optional[str] = None,
+        platform: Optional[str] = None,
     ):
         def data_files() -> Generator[FileId, None, None]:
             """
@@ -198,27 +198,25 @@ class LibDataset(Dataset):
             return results
 
         files = list(data_files())
-        functions_per_file = pool_size // len(files)
-        last_file_function_count = pool_size - (len(files) - 1) * functions_per_file
-
         pairs = []
         for index, file in enumerate(tqdm(files, desc="Reading dataset", disable=not main_process)):
-            if index == len(files) - 1:
-                sample_size = last_file_function_count
+            if pool_size is None:
+                sample_size = None
+            elif index == len(files) - 1:
+                sample_size =  pool_size - (len(files) - 1) * (pool_size // len(files))
             else:
-                sample_size = functions_per_file
+                sample_size = pool_size // len(files)
 
             if sample_size == 0:
                 continue
 
             with gzip.open(file.path(), "rb") as file_data:
-                functions = process(file_data.read())
+                functions = islice(process(file_data.read()), sample_size)
 
-            for sample in iter_sample(functions, sample_size):
+            for sample in functions if seed is None else iter_sample(functions, sample_size):
                 sample: Function = sample
                 pairs.append((sample, file))
         self.data = pairs
-        self.index = 0
         self.tokenizer = context.get_tokenizer()
         self.context = context
 
