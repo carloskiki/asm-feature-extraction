@@ -99,7 +99,7 @@ class Retrieval(context.Context):
             self.cache(dataset.data)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
-        loader = accelerator.prepare_data_loader(loader, device_placement=True)
+        loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()
 
@@ -122,7 +122,7 @@ class Retrieval(context.Context):
                 padding_side="left",
                 return_tensors="pt",
                 max_length=MAX_LENGTH,
-            )
+            ).to(accelerator.device)
 
             query_outputs = model.generate(
                 **token_batch,
