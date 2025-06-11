@@ -1,76 +1,0 @@
-2025-06-10 18:35:15.085994: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2025-06-10 18:35:15.147665: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2025-06-10 18:35:15.955948: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2025-06-10 18:35:15.983109: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
-2025-06-10 18:35:16.017979: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-/opt/conda/lib/python3.9/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
-  from pandas.core.computation.check import NUMEXPR_INSTALLED
-2025-06-10 18:35:16.861029: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
-/opt/conda/lib/python3.9/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
-  from pandas.core.computation.check import NUMEXPR_INSTALLED
-Reading dataset:   0%|          | 0/20 [00:00<?, ?it/s]Reading dataset:   0%|          | 0/20 [00:00<?, ?it/s]Reading dataset: 100%|██████████| 20/20 [00:00<00:00, 25.74it/s]Reading dataset: 100%|██████████| 20/20 [00:00<00:00, 25.73it/s]
-Reading dataset: 100%|██████████| 20/20 [00:00<00:00, 25.88it/s]Reading dataset: 100%|██████████| 20/20 [00:00<00:00, 25.87it/s]
-called get many
-prompts:  [[{'role': 'system', 'content': 'You are a helpful assembly feature extraction assistant. Extract the main features out of the user provided assembly function.\nAnswer only in the JSON format following the template. Explain what groups of instruction achieve in the source assembly\nsuccinctly, using the least amount of words possible. Provide the address or range of addresses for the feature you describe\nas keys to the JSON table. You can add as many entries in the table as needed, making sure that all features are explained\nin a single entry. Minimize the overlap between features and address ranges, by making sure that every new entry in the\ntable adds to the knowledge base, such that no features are repeated for a same address range.\n\n### Template ###\n```json\n{ // Maps the effective address or range of effective addresses to a key feature.\n    "0x1234ABC0-1234ABCC": "<EXPLANATION>"\n    // ...\n}\n\n```\n'}, {'role': 'user', 'content': '```assembly\nset_busy_status:\nloc_1003CC30:\n    0x1003CC30 STWU r1, back_chain(r1)\n    0x1003CC34 ADDI r1, r1, 0x10\n    0x1003CC38 BLR lr\n'}]]
-chat:  ['<|im_start|>system\nYou are a helpful assembly feature extraction assistant. Extract the main features out of the user provided assembly function.\nAnswer only in the JSON format following the template. Explain what groups of instruction achieve in the source assembly\nsuccinctly, using the least amount of words possible. Provide the address or range of addresses for the feature you describe\nas keys to the JSON table. You can add as many entries in the table as needed, making sure that all features are explained\nin a single entry. Minimize the overlap between features and address ranges, by making sure that every new entry in the\ntable adds to the knowledge base, such that no features are repeated for a same address range.\n\n### Template ###\n```json\n{ // Maps the effective address or range of effective addresses to a key feature.\n    "0x1234ABC0-1234ABCC": "<EXPLANATION>"\n    // ...\n}\n\n```\n<|im_end|>\n<|im_start|>user\n```assembly\nset_busy_status:\nloc_1003CC30:\n    0x1003CC30 STWU r1, back_chain(r1)\n    0x1003CC34 ADDI r1, r1, 0x10\n    0x1003CC38 BLR lr\n<|im_end|>\n<|im_start|>assistant\n']
-  0%|          | 0/1 [00:00<?, ?it/s]called get many
-prompts:  [[{'role': 'system', 'content': 'You are a helpful assembly feature extraction assistant. Extract the main features out of the user provided assembly function.\nAnswer only in the JSON format following the template. Explain what groups of instruction achieve in the source assembly\nsuccinctly, using the least amount of words possible. Provide the address or range of addresses for the feature you describe\nas keys to the JSON table. You can add as many entries in the table as needed, making sure that all features are explained\nin a single entry. Minimize the overlap between features and address ranges, by making sure that every new entry in the\ntable adds to the knowledge base, such that no features are repeated for a same address range.\n\n### Template ###\n```json\n{ // Maps the effective address or range of effective addresses to a key feature.\n    "0x1234ABC0-1234ABCC": "<EXPLANATION>"\n    // ...\n}\n\n```\n'}, {'role': 'user', 'content': '```assembly\n__imp___xstat:\nloc_100608D4:\n    0x100608D4 .EXTERN \n'}]]
-getting query_outputs
-chat:  ['<|im_start|>system\nYou are a helpful assembly feature extraction assistant. Extract the main features out of the user provided assembly function.\nAnswer only in the JSON format following the template. Explain what groups of instruction achieve in the source assembly\nsuccinctly, using the least amount of words possible. Provide the address or range of addresses for the feature you describe\nas keys to the JSON table. You can add as many entries in the table as needed, making sure that all features are explained\nin a single entry. Minimize the overlap between features and address ranges, by making sure that every new entry in the\ntable adds to the knowledge base, such that no features are repeated for a same address range.\n\n### Template ###\n```json\n{ // Maps the effective address or range of effective addresses to a key feature.\n    "0x1234ABC0-1234ABCC": "<EXPLANATION>"\n    // ...\n}\n\n```\n<|im_end|>\n<|im_start|>user\n```assembly\n__imp___xstat:\nloc_100608D4:\n    0x100608D4 .EXTERN \n<|im_end|>\n<|im_start|>assistant\n']
-getting query_outputs
-  0%|          | 0/1 [00:00<?, ?it/s]
-Traceback (most recent call last):
-  File "/home/jovyan/project/feature-extractor/main.py", line 31, in <module>
-    main()
-  File "/home/jovyan/project/feature-extractor/main.py", line 26, in main
-    args()
-  File "/home/jovyan/project/feature-extractor/retrieval.py", line 94, in __call__
-    query_outputs = model(
-  File "/opt/conda/lib/python3.9/site-packages/transformers/utils/generic.py", line 451, in __getitem__
-    return self.to_tuple()[k]
-TypeError: tuple indices must be integers or slices, not tuple
-Traceback (most recent call last):
-  File "/home/jovyan/project/feature-extractor/main.py", line 31, in <module>
-    main()
-  File "/home/jovyan/project/feature-extractor/main.py", line 26, in main
-    args()
-  File "/home/jovyan/project/feature-extractor/retrieval.py", line 94, in __call__
-    query_outputs = model(
-  File "/opt/conda/lib/python3.9/site-packages/transformers/utils/generic.py", line 451, in __getitem__
-    return self.to_tuple()[k]
-TypeError: tuple indices must be integers or slices, not tuple
-[2025-06-10 18:35:25,426] torch.distributed.elastic.multiprocessing.api: [WARNING] Sending process 9257 closing signal SIGTERM
-[2025-06-10 18:35:25,541] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 0 (pid: 9256) of binary: /opt/conda/bin/python3.9
-Traceback (most recent call last):
-  File "/opt/conda/bin/accelerate", line 8, in <module>
-    sys.exit(main())
-  File "/opt/conda/lib/python3.9/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
-    args.func(args)
-  File "/opt/conda/lib/python3.9/site-packages/accelerate/commands/launch.py", line 1189, in launch_command
-    multi_gpu_launcher(args)
-  File "/opt/conda/lib/python3.9/site-packages/accelerate/commands/launch.py", line 815, in multi_gpu_launcher
-    distrib_run.run(args)
-  File "/opt/conda/lib/python3.9/site-packages/torch/distributed/run.py", line 803, in run
-    elastic_launch(
-  File "/opt/conda/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 135, in __call__
-    return launch_agent(self._config, self._entrypoint, list(args))
-  File "/opt/conda/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 268, in launch_agent
-    raise ChildFailedError(
-torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
-============================================================
-main.py FAILED
-------------------------------------------------------------
-Failures:
-  <NO_OTHER_FAILURES>
-------------------------------------------------------------
-Root Cause (first observed failure):
-[0]:
-  time      : 2025-06-10_18:35:25
-  host      : jupyter-carloskiki
-  rank      : 0 (local_rank: 0)
-  exitcode  : 1 (pid: 9256)
-  error_file: <N/A>
-  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
-============================================================

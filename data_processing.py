@@ -13,6 +13,8 @@ from tqdm import tqdm
 from transformers import PreTrainedTokenizer
 from context import Context
 
+MAX_LENGTH = 8192
+
 BINARIES = {
     "busybox": "busybox_unstripped",
     "coreutils": "coreutils",
@@ -241,7 +243,7 @@ class LibDataset(Dataset):
             padding=True,
             padding_side="left",
             return_tensors="pt",
-            max_length=16384,
+            max_length=MAX_LENGTH,
         )
 
     def __getitems__(self, idxs: list[int]):
@@ -259,5 +261,5 @@ class LibDataset(Dataset):
             padding=True,
             padding_side="left",
             return_tensors="pt",
-            max_length=16384,
+            max_length=MAX_LENGTH,
         )
