@@ -235,6 +235,7 @@ class LibDataset(Dataset):
             padding=True,
             padding_side="left",
             return_tensors="pt",
+            max_length=24576
         )
 
     def __getitems__(self, idxs: list[int]):
@@ -250,4 +251,5 @@ class LibDataset(Dataset):
                 padding=True,
                 padding_side="left",
                 return_tensors="pt",
+                max_length=24576
             )
