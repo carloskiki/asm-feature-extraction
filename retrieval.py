@@ -16,6 +16,8 @@ import context
 import jaccard
 
 MAX_NEW_TOKENS = 1024
+MAX_LENGTH = 16384
+
 
 @dataclass
 class Retrieval(context.Context):
@@ -97,14 +99,33 @@ class Retrieval(context.Context):
             self.cache(dataset.data)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
-
         loader = accelerator.prepare_data_loader(loader, device_placement=True)
 
+        tokenizer = self.get_tokenizer()
+
         query_vectors = []
+        batches = []
 
         for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
+            prompts = []
+            batches.append(batch)
+            for f, _ in batch:
+                prompts.append(self.get_prompt(str(f)))
+
+            chat = tokenizer.apply_chat_template(
+                prompts, tokenize=False, add_generation_prompt=True
+            )
+            token_batch = tokenizer(
+                chat,
+                truncation=True,
+                padding=True,
+                padding_side="left",
+                return_tensors="pt",
+                max_length=MAX_LENGTH,
+            )
+
             query_outputs = model.generate(
-                **batch,
+                **token_batch,
                 max_new_tokens=MAX_NEW_TOKENS,
             )[:, batch["input_ids"].shape[1] :]
             query_vectors.append(query_outputs)
@@ -118,11 +139,9 @@ class Retrieval(context.Context):
             accelerator.wait_for_everyone()
 
             with open(self.save_output, "a", encoding="utf-8") as file:
-                index = 0
-                for batch in query_vectors:
-                    outputs = tokenizer.batch_decode(batch)
-                    for output in outputs:
-                        function, file_id = dataset.data[index]
+                for outputs, batch in zip(query_vectors, batches):
+                    outputs = tokenizer.batch_decode(outputs)
+                    for output, function, file_id in zip(outputs, batch):
                         file.write("############\n")
                         file.write(f"Binary: {file_id.binary}\n")
                         file.write(f"Platform: {file_id.platform}\n")
@@ -133,7 +152,6 @@ class Retrieval(context.Context):
                         file.write("Output:")
                         file.write(output)
                         file.write("\n")
-                        index += 1
 
         # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
