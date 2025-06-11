@@ -23,7 +23,7 @@ class StoreDataset(context.Context):
             description="Store the whole dataset in a pickle file",
         )
         parser.add_argument("data_path", type=str)
-        parser.add_argument("output_path", type=str)
+        parser.add_argument("output_file", type=str)
 
     
     def __call__(self):
