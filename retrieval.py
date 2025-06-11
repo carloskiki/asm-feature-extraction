@@ -141,7 +141,7 @@ class Retrieval(context.Context):
             with open(self.save_output, "a", encoding="utf-8") as file:
                 for outputs, batch in zip(query_vectors, batches):
                     outputs = tokenizer.batch_decode(outputs)
-                    for output, function, file_id in zip(outputs, batch):
+                    for output, (function, file_id) in zip(outputs, batch):
                         file.write("############\n")
                         file.write(f"Binary: {file_id.binary}\n")
                         file.write(f"Platform: {file_id.platform}\n")
