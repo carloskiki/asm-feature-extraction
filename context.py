@@ -16,16 +16,14 @@ SYSTEM_PROMPT = """{instructions}
 @dataclass
 class Context:
     """
-    LLM Context.
-
-    Contains which prompt and model to use.
+    Which prompt and model to use.
     """
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
 
     def get_prompt(self, assembly: str) -> list[dict[str, str]]:
         """
-        Returns the prompt without the assembly code included
+        Returns the prompt to be formatted in the chat template
         """
 
         with open(
@@ -69,7 +67,7 @@ class Context:
 
         prompt.append({
             "role": "user",
-            "content": "```assembly\n{assembly}\n```"
+            "content": f"```assembly\n{assembly}\n```"
         })
         return prompt
         
