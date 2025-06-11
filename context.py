@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
