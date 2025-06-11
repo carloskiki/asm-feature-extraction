@@ -14,7 +14,11 @@
 
 ## Datasets
 
+
+
 ### Libraries
+
+Contains 383_658 assembly functions
 
 - Some functions have 0 blocks, so we skip them.
 - Some functions are too long for the context window of most llms (e.g., 100k tokens), we could truncate them or skip them or sliding window.
