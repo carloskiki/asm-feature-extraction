@@ -20,12 +20,7 @@ def query(command: Query):
     print(output)
     
 def main():
-    args = arguments()
-
-    if isinstance(args, Retrieval):
-        args()
-    else:
-        pass
+    arguments()()
 
 if __name__ == "__main__":
     main()
