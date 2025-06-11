@@ -162,8 +162,8 @@ class LibDataset(Dataset):
         path: str,
         context: Context,
         main_process: bool,
-        pool_size: Optional[int] = None, # Take the whole dataset if not specified
-        seed: Optional[int] = None, # Don't randomize order if not specified
+        pool_size: Optional[int] = None,  # Take the whole dataset if not specified
+        seed: Optional[int] = None,  # Don't randomize order if not specified
         binary: Optional[str] = None,
         optimization: Optional[str] = None,
         platform: Optional[str] = None,
@@ -199,11 +199,13 @@ class LibDataset(Dataset):
 
         files = list(data_files())
         pairs = []
-        for index, file in enumerate(tqdm(files, desc="Reading dataset", disable=not main_process)):
+        for index, file in enumerate(
+            tqdm(files, desc="Reading dataset", disable=not main_process)
+        ):
             if pool_size is None:
                 sample_size = None
             elif index == len(files) - 1:
-                sample_size =  pool_size - (len(files) - 1) * (pool_size // len(files))
+                sample_size = pool_size - (len(files) - 1) * (pool_size // len(files))
             else:
                 sample_size = pool_size // len(files)
 
@@ -211,9 +213,13 @@ class LibDataset(Dataset):
                 continue
 
             with gzip.open(file.path(), "rb") as file_data:
-                functions = islice(process(file_data.read()), sample_size)
+                functions = process(file_data.read())
 
-            for sample in functions if seed is None else iter_sample(functions, sample_size):
+            for sample in (
+                islice(functions, sample_size)
+                if seed is None
+                else iter_sample(functions, sample_size)
+            ):
                 sample: Function = sample
                 pairs.append((sample, file))
         self.data = pairs
@@ -226,14 +232,16 @@ class LibDataset(Dataset):
     def __getitem__(self, idx: int):
         f, _ = self.data[idx]
         prompt = self.context.get_prompt(str(f))
-        chat = self.tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
+        chat = self.tokenizer.apply_chat_template(
+            prompt, tokenize=False, add_generation_prompt=True
+        )
         return self.tokenizer(
             chat,
             truncation=True,
             padding=True,
             padding_side="left",
             return_tensors="pt",
-            max_length=16384
+            max_length=16384,
         )
 
     def __getitems__(self, idxs: list[int]):
@@ -241,13 +249,15 @@ class LibDataset(Dataset):
         for idx in idxs:
             f, _ = self.data[idx]
             prompts.append(self.context.get_prompt(str(f)))
-        
-        chat = self.tokenizer.apply_chat_template(prompts, tokenize=False, add_generation_prompt=True)
+
+        chat = self.tokenizer.apply_chat_template(
+            prompts, tokenize=False, add_generation_prompt=True
+        )
         return self.tokenizer(
-                chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-                max_length=16384
-            )
+            chat,
+            truncation=True,
+            padding=True,
+            padding_side="left",
+            return_tensors="pt",
+            max_length=16384,
+        )
