@@ -232,34 +232,7 @@ class LibDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx: int) -> tuple[Function, FileId]:
-        f, _ = self.data[idx]
-        prompt = self.context.get_prompt(str(f))
-        chat = self.tokenizer.apply_chat_template(
-            prompt, tokenize=False, add_generation_prompt=True
-        )
-        return self.tokenizer(
-            chat,
-            truncation=True,
-            padding=True,
-            padding_side="left",
-            return_tensors="pt",
-            max_length=MAX_LENGTH,
-        )
+        return self.data[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
-        prompts = []
-        for idx in idxs:
-            f, _ = self.data[idx]
-            prompts.append(self.context.get_prompt(str(f)))
-
-        chat = self.tokenizer.apply_chat_template(
-            prompts, tokenize=False, add_generation_prompt=True
-        )
-        return self.tokenizer(
-            chat,
-            truncation=True,
-            padding=True,
-            padding_side="left",
-            return_tensors="pt",
-            max_length=MAX_LENGTH,
-        )
+        return [self.data[i] for i in idxs]
