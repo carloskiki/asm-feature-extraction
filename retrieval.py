@@ -85,13 +85,13 @@ class Retrieval(context.Context):
 
         dataset = LibDataset(
             self.data_path,
+            self,
+            accelerator.is_local_main_process,
+            self.pool_size,
+            self.seed,
             self.pool_binary,
             self.pool_optimization,
             self.pool_platform,
-            self.pool_size,
-            self.seed,
-            self,
-            accelerator.is_local_main_process,
         )
         if accelerator.is_local_main_process:
             self.cache(dataset.data)
