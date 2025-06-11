@@ -106,7 +106,7 @@ class Retrieval(context.Context):
         query_vectors = []
         batches = []
 
-        for batch in tqdm(loader, disable=not accelerator.is_local_main_process):
+        for batch in tqdm(loader, desc="Running Batches", disable=not accelerator.is_local_main_process):
             prompts = []
             batches.append(batch)
             for f, _ in batch:
