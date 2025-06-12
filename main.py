@@ -1,5 +1,7 @@
+import argparse
 from query import Query
-from arguments import arguments
+from bogus import Bogus
+from retrieval import Retrieval
 
 def query(command: Query):
     with open(command.assembly, "r", encoding="utf-8") as assembly_file:
@@ -19,8 +21,29 @@ def query(command: Query):
     print(output)
     
 def main():
-    arguments()()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
+    )
+    parser.add_argument("-p", "--prompt", type=str, default="base")
+    subparsers = parser.add_subparsers(
+        description="the action to be performed", dest="subcommand", required=True
+    )
+    Query.command(subparsers)
+    Retrieval.command(subparsers)
+    Bogus.command(subparsers)
+
+    args = parser.parse_args()
+    subcommand = args.subcommand
+    delattr(args, "subcommand")
+    if subcommand == 'query':
+        return Query(**vars(args))
+    if subcommand == 'retrieval':
+        return Retrieval(**vars(args))
+    if subcommand == 'bogus':
+        return Bogus(**vars(args))
+
+    raise ValueError("no subcommand provided")
 
 if __name__ == "__main__":
     main()
-

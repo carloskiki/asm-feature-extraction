@@ -71,7 +71,7 @@ class Context:
         return prompt
         
 
-    def get_model(self, accelerator):
+    def get_model(self, accelerator = None):
         """
         Return the model
         """
