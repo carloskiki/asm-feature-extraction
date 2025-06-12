@@ -26,7 +26,7 @@ class Bogus(context.Context):
 
     
     def __call__(self):
-        dataset = LibDataset(self.data_path, context=self, main_process=True, pool_size=200, binary="openssl", seed=40332319787)
+        dataset = LibDataset(self.data_path, main_process=True, pool_size=200, binary="openssl", seed=40332319787)
         print(dataset.data[199])
         with open(self.output_file, "w", encoding="utf-8") as file:
             for function, file_id in dataset.data:

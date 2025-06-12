@@ -10,8 +10,6 @@ import json
 from itertools import islice
 from torch.utils.data import Dataset
 from tqdm import tqdm
-from transformers import PreTrainedTokenizer
-from context import Context
 
 MAX_LENGTH = 8192
 
@@ -50,7 +48,6 @@ class Instruction:
 
     def __str__(self):
         return f"    {self.mnemonic} " + ", ".join(self.operands)
-
 
 class Block:
     """
@@ -155,14 +152,13 @@ def function_count(contents: bytes) -> int:
 
 
 class LibDataset(Dataset):
-    data: list[tuple[Function, FileId]]
-    tokenizer: PreTrainedTokenizer
-    context: Context
+    data: list[tuple[FileId, list[Function]]]
+    flattened = list[Function]
+    main_process: bool
 
     def __init__(
         self,
         path: str,
-        context: Context,
         main_process: bool,
         pool_size: Optional[int] = None,  # Take the whole dataset if not specified
         seed: Optional[int] = None,  # Don't randomize order if not specified
@@ -217,22 +213,61 @@ class LibDataset(Dataset):
             with gzip.open(file.path(), "rb") as file_data:
                 functions = process(file_data.read())
 
+            functions_list = []
             for sample in (
                 islice(functions, sample_size)
                 if seed is None
                 else iter_sample(functions, sample_size)
             ):
                 sample: Function = sample
-                pairs.append((sample, file))
+                functions_list.append(sample)
+            pairs.append(file, functions_list)
+
         self.data = pairs
-        self.tokenizer = context.get_tokenizer()
-        self.context = context
+        self.flattened = [f for _, fns in pairs for f in fns]
+        self.flattened.sort()
+        self.main_process = main_process
 
     def __len__(self) -> int:
-        return len(self.data)
+        return len(self.flattened)
 
     def __getitem__(self, idx: int) -> tuple[Function, FileId]:
-        return self.data[idx]
+        return self.flattened[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
-        return [self.data[i] for i in idxs]
+        return [self.flattened[i] for i in idxs]
+
+
+class TargetDataset(Dataset):
+    flattened: list[Function]
+
+    def __init__(self, queries: LibDataset, optimization_diff: Optional[int], platform_diff: Optional[int]):
+
+        flattened = []
+
+        for file, selected_fns in tqdm(queries.data, disable=not queries.main_process, desc="Reading target dataset"):
+            fn_name_set = set([f.name for f in selected_fns])
+
+            if optimization_diff is not None:
+                file.optimization = optimization_diff
+            if platform_diff is not None:
+                file.platform = platform_diff
+            
+            with gzip.open(file.path(), "rb") as file_data:
+                target_functions = process(file_data.read())
+
+                for fn in target_functions:
+                    if fn.name in fn_name_set:
+                        flattened.append(fn)
+        
+        flattened.sort()
+        self.flattened = flattened
+
+    def __len__(self) -> int:
+        return len(self.flattened)
+
+    def __getitem__(self, idx: int) -> tuple[Function, FileId]:
+        return self.flattened[idx]
+
+    def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
+        return [self.flattened[i] for i in idxs]

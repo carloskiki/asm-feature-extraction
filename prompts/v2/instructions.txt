@@ -1,0 +1,127 @@
+You are given the disassembled assembly code of a single function. Your goal is to analyze it and emit a set of discrete tokens (lowercase, hyphen-separated) that capture its semantic, structural, and behavioral features, in a way that is robust to compiler optimizations or syntax variations. Follow these steps:
+
+1. Lift & Normalize:
+   - Lift the assembly to an intermediate representation (IR) or an abstract form.
+   - Canonicalize registers/temporaries to generic placeholders.
+   - Normalize memory references (e.g., represent loads/stores uniformly, mask out non-essential offsets).
+   - Mask or bucket generic immediates; but if an immediate matches a known “magic” pattern (e.g., common algorithm constants), keep its exact value.
+
+2. Infer Function Signature:
+   - Determine the number and conceptual role of parameters (e.g., buffer pointer, length, initial state).
+   - Infer return type or output location (e.g., returns a 32-bit integer, writes to output buffer).
+   - Emit tokens like:
+     - `signature-<param1>-<param2>-...` (e.g., `signature-bufptr-length`, `signature-src-dst-length`, etc.)
+     - `return-int32`, `return-void`, etc.
+     - `pure-function` or `has-side-effects` based on whether it writes outside local state.
+
+3. Memory-Access Pattern:
+   - Detect whether it reads a sequential buffer, random-access data, or uses sliding window patterns.
+   - Emit tokens like:
+     - `sequential-buffer-read`
+     - `random-access-memory`
+     - `sliding-window`
+     - `writes-output-buffer`
+     - `reads-global-state`, `writes-global-state`
+     - `pure-read-only` (if only reads input, no writes except local)
+
+4. Control-Flow & Loop Structure:
+   - Identify loops and nesting depth; abstract loops without relying on exact jump offsets.
+   - Detect bitwise inner loops (e.g., eight-iteration bit loop) vs. byte-wise loops vs. vectorized chunk loops.
+   - Recognize switch-case/jump-table patterns.
+   - Emit tokens like:
+     - `loop-detected`, `nested-loop-depth-2`, etc.
+     - `byte-wise-iteration`
+     - `bitwise-inner-loop`
+     - `unrolled-loop`
+     - `vectorized-loop`
+     - `switch-case-detected`
+     - `state-machine-pattern` (if a small FSM structure is evident)
+
+5. Data-Flow & State Update Semantics:
+   - Abstract the key state variables (e.g., accumulator, index, pointer).
+   - Identify linear vs. nonlinear transforms, e.g., GF(2) linear update, XOR-based reduction, arithmetic reduction, etc.
+   - If a specific transform can be symbolically summarized (e.g., “acc = f(acc, input_byte)”), record that pattern.
+   - Emit tokens like:
+     - `accumulator-state`
+     - `linear-update`
+     - `nonlinear-update`
+     - `conditional-transform` (e.g., conditional shift/xor)
+     - `stateless-chunk-processing` or `stateful-reduction`
+
+6. Constant & Literal Features:
+   - Extract all immediates that remain after normalization; for each, decide if it’s a “significant constant” (e.g., algorithm polynomial, table size, mask values).
+   - Emit tokens like:
+     - `constant-0x1fff`, `constant-0xedb88320`, etc., for values deemed significant.
+     - `table-size-256`, if a lookup table length can be inferred.
+     - `table-hash-<hex>` if you can reconstruct a small lookup table and hash its contents.
+     - `magic-constant-detected` for known patterns.
+
+7. Implementation-Style Indicators:
+   - Detect presence (in IR or assembly) of hardware instructions serving particular roles (e.g., a CRC hardware opcode, AES instructions).
+   - Detect runtime table-building loops vs. static data references.
+   - Detect SIMD/vector instructions vs. scalar code.
+   - Emit tokens like:
+     - `impl-hardware-acceleration`
+     - `impl-table-based`
+     - `impl-bitwise`
+     - `impl-simd`
+     - `impl-unrolled`
+     - `impl-runtime-table-build`
+     - `impl-static-table`
+     - `impl-hybrid`
+
+8. Behavioral / Dynamic-Test Signatures (if a sandbox or symbolic testing is available):
+   - For pure transformations (e.g., checksum, hash, encryption), run small representative inputs to observe output patterns.
+   - Check invariants (e.g., linearity: output(x⊕y) = output(x)⊕output(y) for GF(2) linear functions).
+   - Emit tokens like:
+     - `test-zero-length-handling`
+     - `test-linearity-holds`
+     - `test-sample-match-reference`
+     - `behavior-deterministic`
+   - If dynamic testing is not feasible, skip but note with `no-dynamic-test`.
+
+9. Edge-Case & Error Handling:
+   - Detect checks for null pointers, length bounds, overflow handling.
+   - Emit tokens like:
+     - `handles-null-input`
+     - `bounds-check-present`
+     - `overflow-check`
+     - `error-path-detected`
+
+10. Call-Graph & API Context:
+   - Record calls to external/library functions (e.g., `call-memcpy`, `call-malloc`, `call-zlib-inflate`).
+   - Emit tokens like:
+     - `calls-malloc`
+     - `calls-external-crypto`
+     - `calls-standard-lib`
+     - `no-external-calls`
+   - Use context tokens to refine matching (but treat as lower-weight than semantic core tokens).
+
+11. Semantic Tagging / High-Level Role (if inferable):
+   - If symbolic or context analysis suggests a high-level role (e.g., “checksum”, “hash”, “encryption”, “compression”, “parsing”), emit a generic role token:
+     - `role-checksum`, `role-hash`, `role-encryption`, `role-decompression`, etc.
+   - If unsure, omit or emit `role-unknown`.
+
+12. Assemble Token Set:
+   - Combine all emitted tokens into a deduplicated set.
+   - Always include generic tokens like `arch-<architecture>` or `abi-<convention>` only if relevant to matching; otherwise omit architecture-specific details if aiming for cross-ISA matching (or abstract them via generic tokens like `uses-32bit-regs`).
+   - Output the token set in a machine-readable format, e.g. JSON array:
+     ```
+     ["signature-bufptr-length", "return-int32", "sequential-buffer-read", "loop-detected", "linear-update", "constant-0xedb88320", "impl-bitwise", "pure-function", ...]
+     ```
+
+13. Matching Guidance:
+   - Core semantic tokens (e.g., specific constants, linear-update, accumulator-state, table-hash) are mandatory for a strong match.
+   - Implementation-style tokens (`impl-...`) explain differences but do not negate a match if core tokens overlap.
+   - Compute Jaccard similarity on the token sets: require high overlap on core subsets; allow differences in style tokens.
+
+Remember:
+- Keep tokens concise and human-readable.
+- Only emit tokens when confidently inferred.
+- Avoid encoding compiler-specific artifacts (e.g., exact register names, specific instruction sequences) as tokens.
+- Focus on semantic invariants: what the function does, its data/state transformations, and key constants or structures it uses.
+
+**Final Output**: After analysis, return a JSON array tokens, for example:
+```json
+["signature-src-dst-length", "return-int32", "sequential-buffer-read", "loop-detected", "accumulator-state", "linear-update", "constant-0x04c11db7", "flag-input-reflection-enabled", "flag-output-reflection-enabled", "impl-table-based", "pure-function", "test-zero-length-handling", "role-checksum"]
+```

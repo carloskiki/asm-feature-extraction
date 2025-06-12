@@ -3,14 +3,8 @@ from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
-
-SYSTEM_PROMPT = """{instructions}
-
-### Template ###
-```json
-{format}
-```
-"""
+MAX_NEW_TOKENS = 1024
+MAX_LENGTH = 16384
 
 @dataclass
 class Context:
@@ -30,17 +24,10 @@ class Context:
         ) as instructions_file:
             instructions = instructions_file.read()
 
-        with open(
-            f"prompts/{self.prompt}/format.jsonc", "r", encoding="utf-8"
-        ) as format_file:
-            json_format = format_file.read()
-
         prompt = [
             {
                 "role": "system",
-                "content": SYSTEM_PROMPT.format(
-                    instructions=instructions, format=json_format
-                ),
+                "content": instructions,
             },
         ]
 

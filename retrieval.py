@@ -6,32 +6,32 @@ from dataclasses import dataclass
 from typing import Optional
 import random
 import sys
-import pickle
 import numpy as np
 from tqdm import tqdm
+from torch import Tensor
 from torch.utils.data import DataLoader
+from torchmetrics.functional.classification import multiclass_jaccard_index
 from accelerate import Accelerator
-from data_processing import Function, BINARIES, PLATFORMS, LibDataset, FileId
-import context
-import jaccard
-
-MAX_NEW_TOKENS = 1024
-MAX_LENGTH = 16384
+from data_processing import (
+    BINARIES,
+    PLATFORMS,
+    LibDataset,
+    TargetDataset,
+)
+from context import Context, MAX_LENGTH, MAX_NEW_TOKENS
 
 
 @dataclass
-class Retrieval(context.Context):
+class Retrieval(Context):
     """
     CLI command to evaluate function retrieval
     """
 
-    pool_size: int
+    pool_size: Optional[int]
     seed: int  # Seed for selection of targets, choosed randomly if not set
-    pool_binary: Optional[str]  # Run for a specific binary, run on all binaries if None
-    pool_platform: Optional[
-        str
-    ]  # Run for a specific platform, run on all platforms if None
-    pool_optimization: Optional[
+    binary: Optional[str]  # Run for a specific binary, run on all binaries if None
+    platform: Optional[str]  # Run for a specific platform, run on all platforms if None
+    optimization: Optional[
         int
     ]  # Run for a specific optimization, run on all optimizations if None
     batch_size: int  # Number of batches processed at once
@@ -40,12 +40,8 @@ class Retrieval(context.Context):
     save_output: Optional[str]
     save_pool: Optional[str]
 
-    # target_platform: Optional[str]
-    # target_optimization: Optional[str]
-    # same_binary: bool # Keep the same binary for the target pool
-    # same_platform: bool # keep the
-    # same_optimization: bool
-    # from_pool: bool
+    target_platform: Optional[str]
+    target_optimization: Optional[int]
 
     @staticmethod
     def command(subparsers):
@@ -57,26 +53,18 @@ class Retrieval(context.Context):
             "retrieval",
             description="Find the most similar assembly function from a set",
         )
-        parser.add_argument("--pool-size", type=int, default=1000)
+        parser.add_argument("--pool-size", type=int, default=None)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
-        parser.add_argument("--pool-binary", type=str, choices=BINARIES.keys())
-        parser.add_argument("--pool-platform", type=str, choices=PLATFORMS.keys())
-        parser.add_argument("--pool-optimization", type=int, choices=range(4))
+        parser.add_argument("--binary", type=str, choices=BINARIES.keys())
+        parser.add_argument("--platform", type=str, choices=PLATFORMS.keys())
+        parser.add_argument("--optimization", type=int, choices=range(4))
+        parser.add_argument("--target-platform", type=str, choices=PLATFORMS.keys())
+        parser.add_argument("--target-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=2048)
         parser.add_argument("--save-output", type=str)
         parser.add_argument("--save-pool", type=str)
         parser.add_argument("data_path", type=str)
-
-    def cache(self, data: list[tuple[Function, FileId]]):
-        if self.save_pool is None:
-            return
-
-        with open(
-            "{self.cache_pool}/{self.binary}-{self.platform}-{self.opt}-{self.seed}.pkl",
-            "wb",
-        ) as file:
-            file.write(pickle.dumps(data))
 
     def __call__(self):
         accelerator = Accelerator()
@@ -87,30 +75,38 @@ class Retrieval(context.Context):
 
         dataset = LibDataset(
             self.data_path,
-            self,
             accelerator.is_local_main_process,
             self.pool_size,
             self.seed,
-            self.pool_binary,
-            self.pool_optimization,
-            self.pool_platform,
+            self.binary,
+            self.optimization,
+            self.platform,
         )
-        if accelerator.is_local_main_process:
-            self.cache(dataset.data)
+        pool_dataset = TargetDataset(
+            dataset, self.target_optimization, self.target_platform
+        )
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
+        pool_loader = DataLoader(
+            pool_dataset, batch_size=self.batch_size, collate_fn=lambda x: x
+        )
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
+        pool_loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()
 
-        query_vectors = []
-        batches = []
+        query_decoded = []
+        targets_decoded = []
+        functions = []
 
-        for batch in tqdm(loader, desc="Running Batches", disable=not accelerator.is_local_main_process):
-            prompts = []
-            batches.append(batch)
-            for f, _ in batch:
-                prompts.append(self.get_prompt(str(f)))
+        for batch in tqdm(
+            loader,
+            desc="Query batches",
+            disable=not accelerator.is_local_main_process,
+        ):
+            # Tokenize the prompts for the batch
+            prompts = [self.get_prompt(str(f)) for f in batch]
+            functions.extend(batch)
 
             chat = tokenizer.apply_chat_template(
                 prompts, tokenize=False, add_generation_prompt=True
@@ -124,11 +120,43 @@ class Retrieval(context.Context):
                 max_length=MAX_LENGTH,
             ).to(accelerator.device)
 
+            # Pass the tokens to LLM
             query_outputs = model.generate(
                 **token_batch,
                 max_new_tokens=MAX_NEW_TOKENS,
             )[:, token_batch["input_ids"].shape[1] :].cpu()
-            query_vectors.append(query_outputs)
+            decoded = tokenizer.batch_decode(query_outputs)
+
+        for pool_batch in tqdm(
+            pool_loader,
+            desc="Target Batches",
+            disable=not accelerator.is_local_main_process,
+        ):
+            # Tokenize the prompts for the batch
+            prompts = [self.get_prompt(str(f)) for f in pool_batch]
+            functions.extend(pool_batch)
+
+            chat = tokenizer.apply_chat_template(
+                prompts, tokenize=False, add_generation_prompt=True
+            )
+            token_batch = tokenizer(
+                chat,
+                truncation=True,
+                padding=True,
+                padding_side="left",
+                return_tensors="pt",
+                max_length=MAX_LENGTH,
+            ).to(accelerator.device)
+
+            # Pass the tokens to LLM
+            target_outputs = model.generate(
+                **token_batch,
+                max_new_tokens=MAX_NEW_TOKENS,
+            )[:, token_batch["input_ids"].shape[1] :].cpu()
+            decoded = tokenizer.batch_decode(target_outputs)
+
+            # Add all outputs to targets_decoded
+            targets_decoded.extend(decoded)
 
         if self.save_output is not None:
             # Clear out and or create the file for all processes to write to it later
@@ -243,7 +271,7 @@ def test_retrieval(query_tokens, target_tokens, vocab_size):
     for index, query in enumerate(query_tokens):
         scores.append([])
         for target in target_tokens:
-            scores[index].append(jaccard.similarity(query, target, vocab_size))
+            scores[index].append(jaccard_similarity(query, target, vocab_size))
     scores = np.array(scores)
 
     ## this takes too much memory for large pool size like 10k
@@ -263,3 +291,11 @@ def compute_retrieval_metrics(scores, relevance):
         "recall_at_1": recall_at_1,
         "recall_at_10": recall_at_10,
     }
+
+
+def jaccard_similarity(query: Tensor, potential_target: Tensor, vocab_size: int):
+    """
+    Run Jaccard Similarity over the generated tokens of an LLM query
+    """
+
+    multiclass_jaccard_index(query, potential_target, vocab_size)

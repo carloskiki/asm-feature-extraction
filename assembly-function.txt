@@ -1,21 +1,3 @@
-0, arm
-
-######
-sk_X509_dup:
-loc_144490:
-    PUSH {R7,LR}
-    SUB SP, SP, #8
-    ADD R7, SP, #0
-    STR R0, [R7,#8+var_4]
-    LDR R0, [R7,#8+var_4]
-    BL sub_172DD0
-    MOV R3, R0
-    MOV R0, R3
-    ADDS R7, #8
-    MOV SP, R7
-    POP {R7,PC}
-
-=====
 
 2, arm
 
@@ -80,52 +62,3 @@ loc_6B4AE:
     B loc_6B46E
 loc_6B4B6:
     BL sub_13BFF4
-
-=====
-
-3, gcc
-
-######
-init_6:
-loc_5D3CA0:
-    SUB rsp, 8
-    CALL sub_5237C0
-    ADD rsp, 8
-    MOV rdi, rax
-    JMP loc_5831F0
-loc_5831F0:
-    MOV qword ptr [rdi], 0
-    MOV qword ptr [rdi+0A0h], 0
-    MOV rcx, rdi
-    LEA rdi, [rdi+8]
-    XOR eax, eax
-    AND rdi, 0FFFFFFFFFFFFFFF8h
-    SUB rcx, rdi
-    ADD ecx, 0A8h
-    SHR ecx, 3
-    REP 
-    MOV eax, 1
-    RETN 
-
-
-=====
-
-0, powerpc
-
-######
-ENGINE_set_ctrl_function:
-loc_1015A290:
-    STWU r1, back_chain(r1)
-    STW r31, 0x20+var_4(r1)
-    MR r31, r1
-    STW r3, 0xC(r31)
-    STW r4, 8(r31)
-    LWZ r9, 0xC(r31)
-    LWZ r10, 8(r31)
-    STW r10, 0x38(r9)
-    LI r9, 1
-    MR r3, r9
-    ADDI r11, r31, 0x20
-    LWZ r31, -4(r11)
-    MR r1, r11
-    BLR lr
