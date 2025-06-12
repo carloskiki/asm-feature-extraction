@@ -12,7 +12,7 @@ class Bogus(context.Context):
     output_file: str
 
     @staticmethod
-    def command(subparsers):
+    def arguments(subparsers):
         """
         Configure the CLI
         """

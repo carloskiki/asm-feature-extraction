@@ -6,7 +6,7 @@ class Query(context.Context):
     assembly: str  # File containing the assembly to analyze
 
     @staticmethod
-    def command(subparsers):
+    def arguments(subparsers):
         parser = subparsers.add_parser(
             "query", description="Query an LLM for the features of an assembly function"
         )

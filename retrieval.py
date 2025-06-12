@@ -44,7 +44,7 @@ class Retrieval(Context):
     target_optimization: Optional[int]
 
     @staticmethod
-    def command(subparsers):
+    def arguments(subparsers):
         """
         Configure the CLI
         """

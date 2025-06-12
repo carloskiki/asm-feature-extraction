@@ -28,7 +28,7 @@ class BatchQuery(Context):
     out_file: Optional[str]
 
     @staticmethod
-    def command(subparsers):
+    def arguments(subparsers):
         """
         Configure the CLI
         """
