@@ -22,7 +22,7 @@ def main():
     )
 
     for command in COMMANDS.values():
-        command.command(subparsers)
+        command.arguments(subparsers)
 
     args = parser.parse_args()
     subcommand = args.subcommand
