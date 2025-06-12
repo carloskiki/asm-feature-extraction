@@ -102,17 +102,18 @@ class BatchQuery(Context):
             with open(self.out_file, "w", encoding="utf-8") as file:
                 pass
 
-            accelerator.wait_for_everyone()
+        accelerator.wait_for_everyone()
 
-            with open(self.out_file, "a", encoding="utf-8") as file:
-                for output, fn in zip(query_decoded, functions):
-                    file.write("############\n")
-                    file.write("```assembly\n")
-                    file.write(str(fn))
-                    file.write("\n```\n")
-                    file.write("Output:")
-                    file.write(output)
-                    file.write("\n")
+        print(f"Writing results to {self.out_file}")
+        with open(self.out_file, "a", encoding="utf-8") as file:
+            for output, fn in zip(query_decoded, functions):
+                file.write("############\n")
+                file.write("```assembly\n")
+                file.write(str(fn))
+                file.write("\n```\n")
+                file.write("Output:")
+                file.write(output)
+                file.write("\n")
 
         # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
