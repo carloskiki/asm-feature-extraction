@@ -11,8 +11,6 @@ from itertools import islice
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
-MAX_LENGTH = 8192
-
 BINARIES = {
     "busybox": "busybox_unstripped",
     "coreutils": "coreutils",
@@ -225,7 +223,7 @@ class LibDataset(Dataset):
 
         self.data = pairs
         self.flattened = [f for _, fns in pairs for f in fns]
-        self.flattened.sort()
+        self.flattened.sort(key=lambda fn: fn.name)
         self.main_process = main_process
 
     def __len__(self) -> int:
@@ -260,7 +258,7 @@ class TargetDataset(Dataset):
                     if fn.name in fn_name_set:
                         flattened.append(fn)
         
-        flattened.sort()
+        flattened.sort(key=lambda fn: fn.name)
         self.flattened = flattened
 
     def __len__(self) -> int:
