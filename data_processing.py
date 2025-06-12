@@ -221,7 +221,7 @@ class LibDataset(Dataset):
             ):
                 sample: Function = sample
                 functions_list.append(sample)
-            pairs.append(file, functions_list)
+            pairs.append((file, functions_list))
 
         self.data = pairs
         self.flattened = [f for _, fns in pairs for f in fns]
