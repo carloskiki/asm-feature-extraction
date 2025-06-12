@@ -158,28 +158,10 @@ class Retrieval(Context):
             # Add all outputs to targets_decoded
             targets_decoded.extend(decoded)
 
-        if self.save_output is not None:
-            # Clear out and or create the file for all processes to write to it later
-            if accelerator.is_local_main_process:
-                with open(self.save_output, "w", encoding="utf-8") as file:
-                    pass
+        accelerator.wait_for_everyone()
 
-            accelerator.wait_for_everyone()
-
-            with open(self.save_output, "a", encoding="utf-8") as file:
-                for outputs, batch in zip(query_vectors, batches):
-                    outputs = tokenizer.batch_decode(outputs)
-                    for output, (function, file_id) in zip(outputs, batch):
-                        file.write("############\n")
-                        file.write(f"Binary: {file_id.binary}\n")
-                        file.write(f"Platform: {file_id.platform}\n")
-                        file.write(f"Optimization: {file_id.optimization}\n")
-                        file.write("```assembly\n")
-                        file.write(str(function))
-                        file.write("\n```\n")
-                        file.write("Output:")
-                        file.write(output)
-                        file.write("\n")
+        if not accelerator.is_main_process:
+            return
 
         # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
