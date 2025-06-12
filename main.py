@@ -16,7 +16,7 @@ def main():
     parser.add_argument(
         "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
     )
-    parser.add_argument("-p", "--prompt", type=str, default="base")
+    parser.add_argument("-p", "--prompt", type=str, default="v2")
     subparsers = parser.add_subparsers(
         description="the action to be performed", dest="subcommand", required=True
     )
