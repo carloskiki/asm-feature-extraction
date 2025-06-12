@@ -61,7 +61,7 @@ class BatchQuery(Context):
             self.optimization,
             self.platform,
         )
-        loader = DataLoader(dataset, batch_size=self.size, collate_fn=lambda x: x)
+        loader = DataLoader(dataset, batch_size=1, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()
