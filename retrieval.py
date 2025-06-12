@@ -127,7 +127,7 @@ class Retrieval(context.Context):
             query_outputs = model.generate(
                 **token_batch,
                 max_new_tokens=MAX_NEW_TOKENS,
-            )[:, token_batch["input_ids"].shape[1] :]
+            )[:, token_batch["input_ids"].shape[1] :].cpu()
             query_vectors.append(query_outputs)
 
         if self.save_output is not None:
