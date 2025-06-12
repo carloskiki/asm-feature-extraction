@@ -8,7 +8,7 @@ COMMANDS = {
     'query': Query,
     'retrieval': Retrieval,
     'bogus': Bogus,
-    'BatchQuery': BatchQuery
+    'batch-query': BatchQuery
 }
 
 def main():
