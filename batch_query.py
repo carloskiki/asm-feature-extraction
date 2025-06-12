@@ -15,7 +15,6 @@ class BatchQuery(Context):
     """
     Run queries from the dataset in batch for output analysis
     """
-
     size: Optional[int]
     seed: int  # Seed for selection of targets, choosed randomly if not set
     binary: Optional[str]  # Run for a specific binary, run on all binaries if None
@@ -34,7 +33,7 @@ class BatchQuery(Context):
         """
 
         parser = subparsers.add_parser(
-            "retrieval",
+            "batch-query",
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--size", type=int, default=None)
