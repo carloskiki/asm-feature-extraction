@@ -17,6 +17,7 @@ class BatchQuery(Context):
     Run queries from the dataset in batch for output analysis
     """
     size: Optional[int]
+    batch_size: int
     seed: int  # Seed for selection of targets, choosed randomly if not set
     binary: Optional[str]  # Run for a specific binary, run on all binaries if None
     platform: Optional[str]  # Run for a specific platform, run on all platforms if None
@@ -38,6 +39,7 @@ class BatchQuery(Context):
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--size", type=int, default=None)
+        parser.add_argument("--batch-size", type=int, default=1)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=str, choices=PLATFORMS.keys())
@@ -62,7 +64,7 @@ class BatchQuery(Context):
             self.optimization,
             self.platform,
         )
-        loader = DataLoader(dataset, batch_size=1, collate_fn=lambda x: x)
+        loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()

@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {"codeqwen": "Qwen/Qwen2.5-Coder-0.5B-Instruct"}
 MAX_NEW_TOKENS = 1024
-MAX_LENGTH = 16384
+MAX_LENGTH = 24576
 
 @dataclass
 class Context:
