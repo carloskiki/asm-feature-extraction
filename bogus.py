@@ -28,7 +28,6 @@ class Bogus(context.Context):
     def __call__(self):
         dataset = LibDataset(self.data_path, main_process=True, pool_size=16, binary="openssl", optimization=2, seed=40332319787)
         pool_dataset = TargetDataset(dataset, optimization_diff=1, platform_diff=None)
-
-        print([f.name for f in dataset.flattened])
         
-        print("wrote to file")
+        print([f.name for f in dataset.flattened])
+        print([f.name for f in pool_dataset.flattened])
