@@ -89,7 +89,7 @@ class BatchQuery(Context):
                 token_batch = tokenizer(
                     chat,
                     truncation=True,
-                    padding=True,
+                    padding=self.batch_size > 1,
                     padding_side="left",
                     return_tensors="pt",
                     max_length=MAX_LENGTH,
