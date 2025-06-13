@@ -4,7 +4,7 @@ Doesn't do much, just to play around & try stuff
 
 from dataclasses import dataclass
 import context
-from data_processing import LibDataset
+from data_processing import LibDataset, TargetDataset
 
 @dataclass
 class Bogus(context.Context):
@@ -26,12 +26,9 @@ class Bogus(context.Context):
 
     
     def __call__(self):
-        dataset = LibDataset(self.data_path, main_process=True, pool_size=200, binary="openssl", seed=40332319787)
-        print(dataset.data[199])
-        with open(self.output_file, "w", encoding="utf-8") as file:
-            for function, file_id in dataset.data:
-                file.write(f"{file_id.optimization}, {file_id.platform}\n\n######\n")
-                file.write(str(function))
-                file.write("\n\n=====\n\n")
+        dataset = LibDataset(self.data_path, main_process=True, pool_size=16, binary="openssl", optimization=2, seed=40332319787)
+        pool_dataset = TargetDataset(dataset, optimization_diff=1, platform_diff=None)
+
+        print([f.name for f in dataset.flattened])
         
         print("wrote to file")

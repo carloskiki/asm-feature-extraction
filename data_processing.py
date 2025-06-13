@@ -151,7 +151,7 @@ def function_count(contents: bytes) -> int:
 
 class LibDataset(Dataset):
     data: list[tuple[FileId, list[Function]]]
-    flattened = list[Function]
+    flattened: list[Function]
     main_process: bool
 
     def __init__(
