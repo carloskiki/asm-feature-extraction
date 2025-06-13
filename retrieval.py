@@ -42,6 +42,7 @@ class Retrieval(Context):
 
     target_platform: Optional[str]
     target_optimization: Optional[int]
+    save_outliers: Optional[str]
 
     @staticmethod
     def arguments(subparsers):
@@ -64,6 +65,7 @@ class Retrieval(Context):
         parser.add_argument("--context-size", type=int, default=2048)
         parser.add_argument("--save-output", type=str)
         parser.add_argument("--save-pool", type=str)
+        parser.add_argument("--save-outliers", type=str)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -91,13 +93,12 @@ class Retrieval(Context):
             pool_dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
-        pool_loader = accelerator.prepare_data_loader(loader, device_placement=False)
+        pool_loader = accelerator.prepare_data_loader(pool_loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()
 
         query_decoded = []
         targets_decoded = []
-        functions = []
 
         for batch in tqdm(
             loader,
@@ -106,7 +107,6 @@ class Retrieval(Context):
         ):
             # Tokenize the prompts for the batch
             prompts = [self.get_prompt(str(f)) for f in batch]
-            functions.extend(batch)
 
             chat = tokenizer.apply_chat_template(
                 prompts, tokenize=False, add_generation_prompt=True
@@ -127,6 +127,9 @@ class Retrieval(Context):
             )[:, token_batch["input_ids"].shape[1] :].cpu()
             decoded = tokenizer.batch_decode(query_outputs)
 
+            # Add all outputs to query_decoded
+            query_decoded.extend(decoded)
+
         for pool_batch in tqdm(
             pool_loader,
             desc="Target Batches",
@@ -134,7 +137,6 @@ class Retrieval(Context):
         ):
             # Tokenize the prompts for the batch
             prompts = [self.get_prompt(str(f)) for f in pool_batch]
-            functions.extend(pool_batch)
 
             chat = tokenizer.apply_chat_template(
                 prompts, tokenize=False, add_generation_prompt=True
@@ -159,9 +161,6 @@ class Retrieval(Context):
             targets_decoded.extend(decoded)
 
         accelerator.wait_for_everyone()
-
-        if not accelerator.is_main_process:
-            return
 
         # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
         # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()

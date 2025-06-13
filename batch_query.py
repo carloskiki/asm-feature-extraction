@@ -6,6 +6,7 @@ import sys
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import torch
 
 from data_processing import LibDataset, BINARIES, PLATFORMS
 from context import Context, MAX_NEW_TOKENS, MAX_LENGTH
@@ -69,33 +70,39 @@ class BatchQuery(Context):
         query_decoded = []
         functions = []
 
-        for batch in tqdm(
-            loader,
-            desc="Query batches",
-            disable=not accelerator.is_local_main_process,
-        ):
-            # Tokenize the prompts for the batch
-            prompts = [self.get_prompt(str(f)) for f in batch]
-            functions.extend(batch)
+        clear_cache_counter = 0
+        with torch.no_grad():
+            for batch in tqdm(
+                loader,
+                desc="Query batches",
+                disable=not accelerator.is_local_main_process,
+            ):
+                # Tokenize the prompts for the batch
+                prompts = [self.get_prompt(str(f)) for f in batch]
+                functions.extend(batch)
 
-            chat = tokenizer.apply_chat_template(
-                prompts, tokenize=False, add_generation_prompt=True
-            )
-            token_batch = tokenizer(
-                chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-                max_length=MAX_LENGTH,
-            ).to(accelerator.device)
+                chat = tokenizer.apply_chat_template(
+                    prompts, tokenize=False, add_generation_prompt=True
+                )
+                token_batch = tokenizer(
+                    chat,
+                    truncation=True,
+                    padding=True,
+                    padding_side="left",
+                    return_tensors="pt",
+                    max_length=MAX_LENGTH,
+                ).to(accelerator.device)
 
-            # Pass the tokens to LLM
-            query_outputs = model.generate(
-                **token_batch,
-                max_new_tokens=MAX_NEW_TOKENS,
-            )[:, token_batch["input_ids"].shape[1] :].cpu()
-            query_decoded.extend(tokenizer.batch_decode(query_outputs))
+                # Pass the tokens to LLM
+                query_outputs = model.generate(
+                    **token_batch,
+                    max_new_tokens=MAX_NEW_TOKENS,
+                )[:, token_batch["input_ids"].shape[1] :].cpu()
+                query_decoded.extend(tokenizer.batch_decode(query_outputs))
+
+                if clear_cache_counter == 64:
+                    torch.cuda.empty_cache()
+                    clear_cache_counter = 0
 
         # Clear out and or create the file for all processes to write to it later
         if accelerator.is_local_main_process:
