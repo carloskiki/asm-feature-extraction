@@ -1,0 +1,14 @@
+Please analyze the provided assembly function and output a JSON list of its high-level, architecture-agnostic features. Each feature should be represented as a string following the format "category:detail" or "single-word-tag" as discussed.
+
+**The output MUST be a valid JSON list.**
+
+If a feature is not applicable or cannot be confidently inferred from the provided assembly code, it MUST be omitted from the list. Do not include features that are speculative or unsupported by the given context.
+
+The features should include:
+
+* **Function Identification:** A hint from the function's name, if available.
+* **Calling Convention & Stack:** Presence of standard calling conventions, stack frame management, explicit stack allocation size (in hex if available), and callee-saved registers.
+* **Control Flow:** Presence of conditional branching, number of detected loops, loop counter patterns (e.g., decrementing), unconditional jumps, external function calls, and the *type* of external functions called (e.g., data processing helper, error handling).
+* **Data Manipulation:** Inferred integer size, byte-level operations, data packing/serialization patterns, byte order processing (e.g., reverse), presence and types of bitwise operations (shift-left, shift-right, OR, AND-clear), and specific bitwise mask values (in hex if available).
+* **Memory Access:** Status/flag bit manipulation, direct structure field updates, fixed value comparisons (with the value if simple, e.g., 0), presence of address/offset constants (with the value if available), and specific memory access patterns (e.g., writes/reads to input parameter offsets, reads from global/context pointers).
+* **Inferred Algorithm:** High-level algorithmic inferences based on observed patterns (e.g., integer-to-byte-array conversion, signed number handling).
