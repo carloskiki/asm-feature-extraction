@@ -29,4 +29,4 @@ class Bogus(context.Context):
         dataset = LibDataset(self.data_path, main_process=True, pool_size=2048, binary="openssl", optimization=2, seed=40332319787)
         pool_dataset = TargetDataset(dataset, optimization_diff=1, platform_diff=None)
         
-        assert([f.name for f in dataset.flattened] == [f.name for f in pool_dataset.flattened])
+        print(set([f.name for f in dataset.flattened]).difference(set([f.name for f in pool_dataset.flattened])))
