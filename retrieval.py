@@ -8,6 +8,7 @@ import random
 import sys
 import numpy as np
 from tqdm import tqdm
+import torch
 from torch import Tensor
 from torch.utils.data import DataLoader
 from torchmetrics.functional.classification import multiclass_jaccard_index
@@ -97,68 +98,70 @@ class Retrieval(Context):
 
         tokenizer = self.get_tokenizer()
 
+        error_outputs = []
         query_decoded = []
         targets_decoded = []
 
-        for batch in tqdm(
-            loader,
-            desc="Query batches",
-            disable=not accelerator.is_local_main_process,
-        ):
-            # Tokenize the prompts for the batch
-            prompts = [self.get_prompt(str(f)) for f in batch]
+        with torch.no_grad():
+            for batch in tqdm(
+                loader,
+                desc="Query batches",
+                disable=not accelerator.is_local_main_process,
+            ):
+                # Tokenize the prompts for the batch
+                prompts = [self.get_prompt(str(f)) for f in batch]
 
-            chat = tokenizer.apply_chat_template(
-                prompts, tokenize=False, add_generation_prompt=True
-            )
-            token_batch = tokenizer(
-                chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-                max_length=MAX_LENGTH,
-            ).to(accelerator.device)
+                chat = tokenizer.apply_chat_template(
+                    prompts, tokenize=False, add_generation_prompt=True
+                )
+                token_batch = tokenizer(
+                    chat,
+                    truncation=True,
+                    padding=True,
+                    padding_side="left",
+                    return_tensors="pt",
+                    max_length=MAX_LENGTH,
+                ).to(accelerator.device)
 
-            # Pass the tokens to LLM
-            query_outputs = model.generate(
-                **token_batch,
-                max_new_tokens=MAX_NEW_TOKENS,
-            )[:, token_batch["input_ids"].shape[1] :].cpu()
-            decoded = tokenizer.batch_decode(query_outputs)
+                # Pass the tokens to LLM
+                query_outputs = model.generate(
+                    **token_batch,
+                    max_new_tokens=MAX_NEW_TOKENS,
+                )[:, token_batch["input_ids"].shape[1] :].cpu()
+                decoded = tokenizer.batch_decode(query_outputs)
 
-            # Add all outputs to query_decoded
-            query_decoded.extend(decoded)
+                # Add all outputs to query_decoded
+                query_decoded.extend(decoded)
 
-        for pool_batch in tqdm(
-            pool_loader,
-            desc="Target Batches",
-            disable=not accelerator.is_local_main_process,
-        ):
-            # Tokenize the prompts for the batch
-            prompts = [self.get_prompt(str(f)) for f in pool_batch]
+            for pool_batch in tqdm(
+                pool_loader,
+                desc="Target Batches",
+                disable=not accelerator.is_local_main_process,
+            ):
+                # Tokenize the prompts for the batch
+                prompts = [self.get_prompt(str(f)) for f in pool_batch]
 
-            chat = tokenizer.apply_chat_template(
-                prompts, tokenize=False, add_generation_prompt=True
-            )
-            token_batch = tokenizer(
-                chat,
-                truncation=True,
-                padding=True,
-                padding_side="left",
-                return_tensors="pt",
-                max_length=MAX_LENGTH,
-            ).to(accelerator.device)
+                chat = tokenizer.apply_chat_template(
+                    prompts, tokenize=False, add_generation_prompt=True
+                )
+                token_batch = tokenizer(
+                    chat,
+                    truncation=True,
+                    padding=True,
+                    padding_side="left",
+                    return_tensors="pt",
+                    max_length=MAX_LENGTH,
+                ).to(accelerator.device)
 
-            # Pass the tokens to LLM
-            target_outputs = model.generate(
-                **token_batch,
-                max_new_tokens=MAX_NEW_TOKENS,
-            )[:, token_batch["input_ids"].shape[1] :].cpu()
-            decoded = tokenizer.batch_decode(target_outputs)
+                # Pass the tokens to LLM
+                target_outputs = model.generate(
+                    **token_batch,
+                    max_new_tokens=MAX_NEW_TOKENS,
+                )[:, token_batch["input_ids"].shape[1] :].cpu()
+                decoded = tokenizer.batch_decode(target_outputs)
 
-            # Add all outputs to targets_decoded
-            targets_decoded.extend(decoded)
+                # Add all outputs to targets_decoded
+                targets_decoded.extend(decoded)
 
         accelerator.wait_for_everyone()
 

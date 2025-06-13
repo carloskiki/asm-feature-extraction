@@ -11,6 +11,8 @@ import torch
 from data_processing import LibDataset, BINARIES, PLATFORMS
 from context import Context, MAX_NEW_TOKENS, MAX_LENGTH
 
+MAX_QUERY_LEN = 100_000
+
 @dataclass
 class BatchQuery(Context):
     """
@@ -80,7 +82,7 @@ class BatchQuery(Context):
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
-                prompts = [self.get_prompt(str(f)) for f in batch]
+                prompts = [self.get_prompt(str(f)[:MAX_QUERY_LEN]) for f in batch]
                 functions.extend(batch)
 
                 chat = tokenizer.apply_chat_template(

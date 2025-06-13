@@ -1,0 +1,31 @@
+```assembly
+sk_X509_dup:
+loc_144490:
+    PUSH {R7,LR}
+    SUB SP, SP, #8
+    ADD R7, SP, #0
+    STR R0, [R7,#8+var_4]
+    LDR R0, [R7,#8+var_4]
+    BL sub_172DD0
+    MOV R3, R0
+    MOV R0, R3
+    ADDS R7, #8
+    MOV SP, R7
+    POP {R7,PC}
+```
+
+```json
+[
+  "function-name-hint:sk_X509_dup",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x8",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "unconditional-jumps-present",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_172DD0)",
+  "memory-write-to-input-parameter-offset:4",
+  "memory-read-from-input-parameter-offset:4"
+]
+```
