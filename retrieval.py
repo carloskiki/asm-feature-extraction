@@ -159,8 +159,6 @@ class Retrieval(Context):
                 # Add all outputs to targets_decoded
                 targets_decoded.extend(decoded)
 
-        accelerator.wait_for_everyone()
-
         query_words = [word_tokenize(q) for q in query_decoded]
         target_words = [word_tokenize(t) for t in targets_decoded]
 
