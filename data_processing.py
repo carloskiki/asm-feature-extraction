@@ -254,7 +254,7 @@ class TargetDataset(Dataset):
                         self.functions.append(fn)
         
         self.functions.sort(key=lambda fn: fn.name)
-        queries.functions[:] = [x for x in queries.functions if x not in fn_name_set]
+        queries.functions[:] = [x for x in queries.functions if x.name not in fn_name_set]
 
     def __len__(self) -> int:
         return len(self.functions)
