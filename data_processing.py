@@ -3,7 +3,6 @@ Data processing
 """
 
 from typing import Generator, Optional
-from string import punctuation, whitespace
 from dataclasses import dataclass
 import gzip
 import random
@@ -260,8 +259,8 @@ class TargetDataset(Dataset):
     def __len__(self) -> int:
         return len(self.functions)
 
-    def __getitem__(self, idx: int) -> tuple[Function, FileId]:
+    def __getitem__(self, idx: int) -> Function:
         return self.functions[idx]
 
-    def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
+    def __getitems__(self, idxs: list[int]) -> list[Function]:
         return [self.functions[i] for i in idxs]

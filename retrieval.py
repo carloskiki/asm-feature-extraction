@@ -3,15 +3,14 @@ Retrieval CLI utilities
 """
 
 from dataclasses import dataclass
+from string import punctuation
 from typing import Optional
 import random
 import sys
 import numpy as np
 from tqdm import tqdm
 import torch
-from torch import Tensor
 from torch.utils.data import DataLoader
-from torchmetrics.functional.classification import multiclass_jaccard_index
 from accelerate import Accelerator
 from data_processing import (
     BINARIES,
@@ -164,12 +163,10 @@ class Retrieval(Context):
 
         accelerator.wait_for_everyone()
 
-        # query_vectors = torch.cat(query_vectors, dim=0).view(-1, query_vectors[0].size(-1)).cpu().float()
-        # target_vectors = torch.cat(target_vectors, dim=0).view(-1, target_vectors[0].size(-1)).cpu().float()
-        # metrics = test_retrieval(query_vectors, target_vectors)
-        # print(metrics)
+        metrics = test_retrieval(query_decoded, targets_decoded)
+        print(metrics)
 
-        # print("done")
+        print("done")
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
@@ -241,7 +238,7 @@ def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     return recall_at_k_count / query_batch
 
 
-def test_retrieval(query_tokens, target_tokens, vocab_size):
+def test_retrieval(queries: list[str], targets: list[str]):
     """
     Tests the retrieval of each query against the pool of candidates (values).
 
@@ -250,16 +247,20 @@ def test_retrieval(query_tokens, target_tokens, vocab_size):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
+    queries[:] = [word_tokenize(q) for q in queries]
+    targets[:] = [word_tokenize(t) for t in targets]
+
+
     scores: list[list[float]] = []
-    for index, query in enumerate(query_tokens):
+    for index, query in enumerate(queries):
         scores.append([])
-        for target in target_tokens:
-            scores[index].append(jaccard_similarity(query, target, vocab_size))
+        for target in targets:
+            scores[index].append(jaccard_index(query, target))
     scores = np.array(scores)
 
     ## this takes too much memory for large pool size like 10k
     # scores = F.cosine_similarity(query_embs.unsqueeze(1), value_embs.unsqueeze(0), dim=2).numpy()
-    relevance = np.arange(query_tokens.size(0))
+    relevance = np.arange(len(queries))
     return compute_retrieval_metrics(scores, relevance)
 
 
@@ -276,9 +277,17 @@ def compute_retrieval_metrics(scores, relevance):
     }
 
 
-def jaccard_similarity(query: Tensor, potential_target: Tensor, vocab_size: int):
+def jaccard_index(query: list[str], potential_target: list[str]):
+    set1 = set(query)
+    set2 = set(potential_target)
+    intersection = set1 & set2
+    union = set1 | set2
+    return len(intersection) / len(union) if union else 1.0  # Return 1.0 if both sets are empty
+
+def word_tokenize(s: str) -> list[str]:
     """
-    Run Jaccard Similarity over the generated tokens of an LLM query
+    Tokenize the query into words that can be compared more easily
     """
 
-    multiclass_jaccard_index(query, potential_target, vocab_size)
+    words = s.split()
+    return [word.strip(punctuation) for word in words]
