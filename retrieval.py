@@ -41,6 +41,7 @@ class Retrieval(Context):
     target_platform: Optional[str]
     target_optimization: Optional[int]
     save_outliers: Optional[str]
+    save_metrics: Optional[str]
 
     @staticmethod
     def arguments(subparsers):
@@ -62,6 +63,7 @@ class Retrieval(Context):
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-outliers", type=str)
+        parser.add_argument("--save-metrics", type=str)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -159,10 +161,29 @@ class Retrieval(Context):
 
         accelerator.wait_for_everyone()
 
-        metrics = test_retrieval(query_decoded, targets_decoded)
-        print(metrics)
+        query_words = [word_tokenize(q) for q in query_decoded]
+        target_words = [word_tokenize(t) for t in targets_decoded]
 
-        print("done")
+        full_target_words = accelerator.gather_for_metrics(target_words)
+        print(full_target_words)
+
+        # scores: list[list[float]] = []
+        # for index, query in tqdm(enumerate(query_words), desc="Scoring results", disable=not accelerator.is_main_process):
+        #     scores.append([])
+        #     for target in target_words:
+        #         scores[index].append(jaccard_index(query, target))
+        # scores = np.array(scores)
+
+        # # Assemble all scores together for main process
+        # accelerator.gather_for_metrics(scores)
+
+        # # Split by process ID
+
+        # if accelerator.is_main_process:
+        #     metrics = test_retrieval(query_decoded, targets_decoded, accelerator.is_main_process)
+        #     print(metrics)
+        #     # TODO: Save metrics to file
+        #     print("done")
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
@@ -234,7 +255,7 @@ def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     return recall_at_k_count / query_batch
 
 
-def test_retrieval(queries: list[str], targets: list[str]):
+def test_retrieval(scores: list[], main_process: bool):
     """
     Tests the retrieval of each query against the pool of candidates (values).
 
@@ -243,19 +264,6 @@ def test_retrieval(queries: list[str], targets: list[str]):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    queries[:] = [word_tokenize(q) for q in queries]
-    targets[:] = [word_tokenize(t) for t in targets]
-
-
-    scores: list[list[float]] = []
-    for index, query in enumerate(queries):
-        scores.append([])
-        for target in targets:
-            scores[index].append(jaccard_index(query, target))
-    scores = np.array(scores)
-
-    ## this takes too much memory for large pool size like 10k
-    # scores = F.cosine_similarity(query_embs.unsqueeze(1), value_embs.unsqueeze(0), dim=2).numpy()
     relevance = np.arange(len(queries))
     return compute_retrieval_metrics(scores, relevance)
 
@@ -273,7 +281,7 @@ def compute_retrieval_metrics(scores, relevance):
     }
 
 
-def jaccard_index(query: list[str], potential_target: list[str]):
+def jaccard_index(query: list[str], potential_target: list[str]) -> float:
     set1 = set(query)
     set2 = set(potential_target)
     intersection = set1 & set2

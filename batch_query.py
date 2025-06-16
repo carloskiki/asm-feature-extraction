@@ -13,7 +13,7 @@ from data_processing import LibDataset, BINARIES, PLATFORMS
 from context import Context, MAX_NEW_TOKENS
 
 MAX_LENGTH = 8192
-CLEAR_CACHE_PERIOD = 8
+CLEAR_CACHE_PERIOD = 32
 
 @dataclass
 class BatchQuery(Context):
@@ -117,6 +117,8 @@ class BatchQuery(Context):
                 pass
 
         accelerator.wait_for_everyone()
+
+        # TODO: share for metrics instead of writing to file
 
         print(f"Writing results to {self.out_file}")
         with open(self.out_file, "a", encoding="utf-8") as file:
