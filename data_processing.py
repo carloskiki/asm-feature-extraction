@@ -4,6 +4,7 @@ Data processing
 
 from typing import Generator, Optional
 from dataclasses import dataclass
+import copy
 import gzip
 import random
 import json
@@ -46,6 +47,7 @@ class Instruction:
 
     def __str__(self):
         return f"    {self.mnemonic} " + ", ".join(self.operands)
+
 
 class Block:
     """
@@ -100,8 +102,27 @@ class FileId:
         """
 
         return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
+    
+    def __eq__(self, value) -> bool:
+        if not isinstance(value, FileId):
+            return NotImplemented
+        return (
+            self.data_path == value.data_path and
+            self.binary == value.binary and
+            self.platform == value.platform and
+            self.optimization == value.optimization
+        )
+    
+    def __lt__(self, other) -> bool:
+        if not isinstance(other, FileId):
+            return NotImplemented
+        return (
+            (self.data_path, self.binary, self.platform, self.optimization)
+            < (other.data_path, other.binary, other.platform, other.optimization)
+        )
 
 
+# TODO: Return array instead ...
 def process(contents: bytes) -> Generator[Function, None, None]:
     """
     Process the contents of a `.merged.asm.json` file.
@@ -150,8 +171,10 @@ def function_count(contents: bytes) -> int:
 
 
 class LibDataset(Dataset):
-    files: list[FileId] # There may be the possibility that a file here is not used (if using TargetDataset), but whatever...
-    functions: list[Function]
+    files: list[
+        FileId
+    ]  # There may be the possibility that a file here is not used (if using TargetDataset), but whatever...
+    functions: list[tuple[Function, FileId]]
     main_process: bool
 
     def __init__(
@@ -201,7 +224,9 @@ class LibDataset(Dataset):
             if pool_size is None:
                 sample_size = None
             elif index == len(self.files) - 1:
-                sample_size = pool_size - (len(self.files) - 1) * (pool_size // len(self.files))
+                sample_size = pool_size - (len(self.files) - 1) * (
+                    pool_size // len(self.files)
+                )
             else:
                 sample_size = pool_size // len(self.files)
 
@@ -216,9 +241,8 @@ class LibDataset(Dataset):
                 if seed is None
                 else iter_sample(functions, sample_size)
             ):
-                self.functions.append(sample)
+                self.functions.append((sample, file))
 
-        self.functions.sort(key=lambda fn: fn.name)
         self.main_process = main_process
 
     def __len__(self) -> int:
@@ -230,31 +254,46 @@ class LibDataset(Dataset):
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
         return [self.functions[i] for i in idxs]
 
+# TODO: Pairs dataset instead ...
 
 class TargetDataset(Dataset):
-    functions: list[Function]
+    functions: list[tuple[Function, FileId]]
 
-    def __init__(self, queries: LibDataset, optimization_diff: Optional[int], platform_diff: Optional[int]):
-        fn_name_set = set([f.name for f in queries.functions])
+    def __init__(
+        self,
+        queries: LibDataset,
+        optimization_diff: Optional[int],
+        platform_diff: Optional[int],
+    ):
+        fn_set = set([(f.name, id) for f, id in queries.functions])
         self.functions = []
 
-        for file in tqdm(queries.files, disable=not queries.main_process, desc="Reading target dataset"):
-
+        for file in tqdm(
+            queries.files,
+            disable=not queries.main_process,
+            desc="Reading target dataset",
+        ):
+            new_file = copy.copy(file)
             if optimization_diff is not None:
-                file.optimization = optimization_diff
+                new_file.optimization = optimization_diff
             if platform_diff is not None:
-                file.platform = platform_diff
-            
+                new_file.platform = platform_diff
+
             with gzip.open(file.path(), "rb") as file_data:
                 target_functions = process(file_data.read())
 
                 for fn in target_functions:
-                    if fn.name in fn_name_set:
-                        fn_name_set.remove(fn.name)
-                        self.functions.append(fn)
+                    if (fn.name, file) in fn_set:
+                        fn_set.remove((fn.name, file))
+                        self.functions.append((fn, new_file))
 
-        self.functions.sort(key=lambda fn: fn.name)
-        queries.functions[:] = [x for x in queries.functions if x.name not in fn_name_set]
+        # Sort so that both datasets are queried in the same order
+        queries.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
+        self.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
+
+        queries.functions[:] = [
+            x for x in queries.functions if x.name not in fn_set
+        ]
 
     def __len__(self) -> int:
         return len(self.functions)
