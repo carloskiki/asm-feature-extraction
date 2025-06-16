@@ -238,7 +238,7 @@ class TargetDataset(Dataset):
         fn_name_set = set([f.name for f in queries.functions])
         self.functions = []
 
-        for file in tqdm(queries.data, disable=not queries.main_process, desc="Reading target dataset"):
+        for file in tqdm(queries.files, disable=not queries.main_process, desc="Reading target dataset"):
 
             if optimization_diff is not None:
                 file.optimization = optimization_diff
@@ -259,8 +259,8 @@ class TargetDataset(Dataset):
     def __len__(self) -> int:
         return len(self.functions)
 
-    def __getitem__(self, idx: int) -> Function:
+    def __getitem__(self, idx: int) -> tuple[Function, FileId]:
         return self.functions[idx]
 
-    def __getitems__(self, idxs: list[int]) -> list[Function]:
+    def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
         return [self.functions[i] for i in idxs]
