@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from argparse import ArgumentParser
 import json
 import context
-from data_processing import LibDataset, TargetDataset
+from data_processing import LibDataset
 
 @dataclass
 class Bogus(context.Context):
