@@ -2,6 +2,7 @@ import random
 from typing import Optional
 from dataclasses import dataclass
 import sys
+import gc
 
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
@@ -12,6 +13,7 @@ from data_processing import LibDataset, BINARIES, PLATFORMS
 from context import Context, MAX_NEW_TOKENS
 
 MAX_LENGTH = 8192
+CLEAR_CACHE_PERIOD = 8
 
 @dataclass
 class BatchQuery(Context):
@@ -104,8 +106,9 @@ class BatchQuery(Context):
                 )[:, token_batch["input_ids"].shape[1] :].cpu()
                 query_decoded.extend(tokenizer.batch_decode(query_outputs))
 
-                if clear_cache_counter == 64:
+                if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
+                    gc.collect()
                     clear_cache_counter = 0
 
         # Clear out and or create the file for all processes to write to it later
