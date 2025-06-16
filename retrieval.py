@@ -166,7 +166,8 @@ class Retrieval(Context):
 
         full_target_words = accelerator.gather_for_metrics(target_words)
 
-        assert(full_target_words[accelerator.process_index] == target_words)
+        slice_start = accelerator.process_index * 2
+        assert(full_target_words[slice_start:slice_start + 2] == target_words)
         print(full_target_words)
 
         # scores: list[list[float]] = []
