@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from string import punctuation
 from typing import Optional
 import random
+import json
 import sys
 import numpy as np
 from tqdm import tqdm
@@ -162,29 +163,26 @@ class Retrieval(Context):
         query_words = [word_tokenize(q) for q in query_decoded]
         target_words = [word_tokenize(t) for t in targets_decoded]
 
-        full_target_words = accelerator.gather_for_metrics(target_words)
+        all_targets = accelerator.gather_for_metrics(target_words)
 
-        slice_start = accelerator.process_index * self.batch_size
-        assert(full_target_words[slice_start:][:self.batch_size] == target_words)
-        print(full_target_words)
+        scores: list[list[float]] = []
+        for index, query in tqdm(enumerate(query_words), desc="Scoring results", disable=not accelerator.is_main_process):
+            scores.append([])
+            for target in all_targets:
+                scores[index].append(jaccard_index(query, target))
 
-        # scores: list[list[float]] = []
-        # for index, query in tqdm(enumerate(query_words), desc="Scoring results", disable=not accelerator.is_main_process):
-        #     scores.append([])
-        #     for target in target_words:
-        #         scores[index].append(jaccard_index(query, target))
-        # scores = np.array(scores)
+        # Assemble all scores together for main process
+        all_scores = accelerator.gather_for_metrics(scores)
 
-        # # Assemble all scores together for main process
-        # accelerator.gather_for_metrics(scores)
+        if accelerator.is_main_process:
+            metrics = test_retrieval(all_scores)
+            print(metrics)
 
-        # # Split by process ID
+            if self.save_metrics is not None:
+                with open(self.save_metrics, "w", encoding="utf-8") as file:
+                    json.dump(metrics, file)
 
-        # if accelerator.is_main_process:
-        #     metrics = test_retrieval(query_decoded, targets_decoded, accelerator.is_main_process)
-        #     print(metrics)
-        #     # TODO: Save metrics to file
-        #     print("done")
+            print("done")
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
@@ -256,7 +254,7 @@ def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     return recall_at_k_count / query_batch
 
 
-def test_retrieval(scores: list[list[float]], main_process: bool):
+def test_retrieval(scores: list[list[float]]):
     """
     Tests the retrieval of each query against the pool of candidates (values).
 
@@ -265,8 +263,7 @@ def test_retrieval(scores: list[list[float]], main_process: bool):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    # TODO: figure this out relevance = np.arange(len(queries))
-    return compute_retrieval_metrics(scores, None)
+    return compute_retrieval_metrics(np.array(scores), None)
 
 
 def compute_retrieval_metrics(scores, relevance):
