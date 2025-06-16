@@ -8,6 +8,7 @@ from typing import Optional
 import random
 import json
 import sys
+import gc
 import numpy as np
 from tqdm import tqdm
 import torch
@@ -21,6 +22,7 @@ from data_processing import (
 )
 from context import Context, MAX_NEW_TOKENS
 
+CLEAR_CACHE_PERIOD = 32
 
 @dataclass
 class Retrieval(Context):
@@ -99,6 +101,8 @@ class Retrieval(Context):
         query_decoded = []
         targets_decoded = []
 
+
+        clear_cache_counter = 0
         with torch.no_grad():
             for batch in tqdm(
                 loader,
@@ -130,6 +134,11 @@ class Retrieval(Context):
                 # Add all outputs to query_decoded
                 query_decoded.extend(decoded)
 
+                if clear_cache_counter == CLEAR_CACHE_PERIOD:
+                    torch.cuda.empty_cache()
+                    gc.collect()
+                    clear_cache_counter = 0
+
             for pool_batch in tqdm(
                 pool_loader,
                 desc="Target Batches",
@@ -160,6 +169,11 @@ class Retrieval(Context):
                 # Add all outputs to targets_decoded
                 targets_decoded.extend(decoded)
 
+                if clear_cache_counter == CLEAR_CACHE_PERIOD:
+                    torch.cuda.empty_cache()
+                    gc.collect()
+                    clear_cache_counter = 0
+
         query_words = [word_tokenize(q) for q in query_decoded]
         target_words = [word_tokenize(t) for t in targets_decoded]
 
@@ -182,6 +196,7 @@ class Retrieval(Context):
                 with open(self.save_metrics, "w", encoding="utf-8") as file:
                     json.dump(metrics, file)
 
+            # TODO: Save metrics to file
             print("done")
 
 
@@ -263,6 +278,7 @@ def test_retrieval(scores: list[list[float]]):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
+    # TODO: figure this out relevance = np.arange(len(queries))
     return compute_retrieval_metrics(np.array(scores), None)
 
 
