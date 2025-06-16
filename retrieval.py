@@ -18,7 +18,7 @@ from data_processing import (
     LibDataset,
     TargetDataset,
 )
-from context import Context, MAX_LENGTH, MAX_NEW_TOKENS
+from context import Context, MAX_NEW_TOKENS
 
 
 @dataclass
@@ -37,8 +37,6 @@ class Retrieval(Context):
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str
-    save_output: Optional[str]
-    save_pool: Optional[str]
 
     target_platform: Optional[str]
     target_optimization: Optional[int]
@@ -62,9 +60,7 @@ class Retrieval(Context):
         parser.add_argument("--target-platform", type=str, choices=PLATFORMS.keys())
         parser.add_argument("--target-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
-        parser.add_argument("--context-size", type=int, default=2048)
-        parser.add_argument("--save-output", type=str)
-        parser.add_argument("--save-pool", type=str)
+        parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-outliers", type=str)
         parser.add_argument("data_path", type=str)
 
@@ -118,7 +114,7 @@ class Retrieval(Context):
                     padding=True,
                     padding_side="left",
                     return_tensors="pt",
-                    max_length=MAX_LENGTH,
+                    max_length=self.context_size,
                 ).to(accelerator.device)
 
                 # Pass the tokens to LLM
@@ -148,7 +144,7 @@ class Retrieval(Context):
                     padding=True,
                     padding_side="left",
                     return_tensors="pt",
-                    max_length=MAX_LENGTH,
+                    max_length=self.context_size,
                 ).to(accelerator.device)
 
                 # Pass the tokens to LLM
