@@ -255,7 +255,7 @@ def recall_at_k(scores: np.ndarray, relevance: np.ndarray, k: int) -> float:
     return recall_at_k_count / query_batch
 
 
-def test_retrieval(scores: list[], main_process: bool):
+def test_retrieval(scores: list[list[float]], main_process: bool):
     """
     Tests the retrieval of each query against the pool of candidates (values).
 
@@ -264,7 +264,7 @@ def test_retrieval(scores: list[], main_process: bool):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    relevance = np.arange(len(queries))
+    # TODO: figure this out relevance = np.arange(len(queries))
     return compute_retrieval_metrics(scores, relevance)
 
 
