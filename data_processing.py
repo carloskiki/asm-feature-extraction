@@ -3,6 +3,7 @@ Data processing
 """
 
 from typing import Generator, Optional
+from string import punctuation, whitespace
 from dataclasses import dataclass
 import gzip
 import random
@@ -150,8 +151,8 @@ def function_count(contents: bytes) -> int:
 
 
 class LibDataset(Dataset):
-    data: list[tuple[FileId, list[Function]]]
-    flattened: list[Function]
+    files: list[FileId] # There may be the possibility that a file here is not used (if using TargetDataset), but whatever...
+    functions: list[Function]
     main_process: bool
 
     def __init__(
@@ -193,17 +194,17 @@ class LibDataset(Dataset):
                     results[r] = v  # at a decreasing rate, replace random items
             return results
 
-        files = list(data_files())
-        pairs = []
+        self.files = list(data_files())
+        self.functions = []
         for index, file in enumerate(
-            tqdm(files, desc="Reading dataset", disable=not main_process)
+            tqdm(self.files, desc="Reading dataset", disable=not main_process)
         ):
             if pool_size is None:
                 sample_size = None
-            elif index == len(files) - 1:
-                sample_size = pool_size - (len(files) - 1) * (pool_size // len(files))
+            elif index == len(self.files) - 1:
+                sample_size = pool_size - (len(self.files) - 1) * (pool_size // len(self.files))
             else:
-                sample_size = pool_size // len(files)
+                sample_size = pool_size // len(self.files)
 
             if sample_size == 0:
                 continue
@@ -211,40 +212,34 @@ class LibDataset(Dataset):
             with gzip.open(file.path(), "rb") as file_data:
                 functions = process(file_data.read())
 
-            functions_list = []
             for sample in (
                 islice(functions, sample_size)
                 if seed is None
                 else iter_sample(functions, sample_size)
             ):
-                sample: Function = sample
-                functions_list.append(sample)
-            pairs.append((file, functions_list))
+                self.functions.append(sample)
 
-        self.data = pairs
-        self.flattened = [f for _, fns in pairs for f in fns]
-        self.flattened.sort(key=lambda fn: fn.name)
+        self.functions.sort(key=lambda fn: fn.name)
         self.main_process = main_process
 
     def __len__(self) -> int:
-        return len(self.flattened)
+        return len(self.functions)
 
     def __getitem__(self, idx: int) -> tuple[Function, FileId]:
-        return self.flattened[idx]
+        return self.functions[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
-        return [self.flattened[i] for i in idxs]
+        return [self.functions[i] for i in idxs]
 
 
 class TargetDataset(Dataset):
-    flattened: list[Function]
+    functions: list[Function]
 
     def __init__(self, queries: LibDataset, optimization_diff: Optional[int], platform_diff: Optional[int]):
+        fn_name_set = set([f.name for f in queries.functions])
+        self.functions = []
 
-        flattened = []
-
-        for file, selected_fns in tqdm(queries.data, disable=not queries.main_process, desc="Reading target dataset"):
-            fn_name_set = set([f.name for f in selected_fns])
+        for file in tqdm(queries.data, disable=not queries.main_process, desc="Reading target dataset"):
 
             if optimization_diff is not None:
                 file.optimization = optimization_diff
@@ -256,16 +251,17 @@ class TargetDataset(Dataset):
 
                 for fn in target_functions:
                     if fn.name in fn_name_set:
-                        flattened.append(fn)
+                        fn_name_set.remove(fn.name)
+                        self.functions.append(fn)
         
-        flattened.sort(key=lambda fn: fn.name)
-        self.flattened = flattened
+        self.functions.sort(key=lambda fn: fn.name)
+        queries.functions[:] = [x for x in queries.funtions if x not in fn_name_set]
 
     def __len__(self) -> int:
-        return len(self.flattened)
+        return len(self.functions)
 
     def __getitem__(self, idx: int) -> tuple[Function, FileId]:
-        return self.flattened[idx]
+        return self.functions[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
-        return [self.flattened[i] for i in idxs]
+        return [self.functions[i] for i in idxs]

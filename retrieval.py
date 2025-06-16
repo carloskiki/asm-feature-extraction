@@ -98,7 +98,6 @@ class Retrieval(Context):
 
         tokenizer = self.get_tokenizer()
 
-        error_outputs = []
         query_decoded = []
         targets_decoded = []
 
