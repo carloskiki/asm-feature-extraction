@@ -165,6 +165,8 @@ class Retrieval(Context):
         target_words = [word_tokenize(t) for t in targets_decoded]
 
         full_target_words = accelerator.gather_for_metrics(target_words)
+
+        assert(full_target_words[accelerator.process_index] == target_words)
         print(full_target_words)
 
         # scores: list[list[float]] = []
@@ -265,7 +267,7 @@ def test_retrieval(scores: list[list[float]], main_process: bool):
     """
 
     # TODO: figure this out relevance = np.arange(len(queries))
-    return compute_retrieval_metrics(scores, relevance)
+    return compute_retrieval_metrics(scores, None)
 
 
 def compute_retrieval_metrics(scores, relevance):

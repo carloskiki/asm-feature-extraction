@@ -252,7 +252,7 @@ class TargetDataset(Dataset):
                     if fn.name in fn_name_set:
                         fn_name_set.remove(fn.name)
                         self.functions.append(fn)
-        
+
         self.functions.sort(key=lambda fn: fn.name)
         queries.functions[:] = [x for x in queries.functions if x.name not in fn_name_set]
 
