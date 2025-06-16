@@ -9,7 +9,9 @@ from tqdm import tqdm
 import torch
 
 from data_processing import LibDataset, BINARIES, PLATFORMS
-from context import Context, MAX_NEW_TOKENS, MAX_LENGTH
+from context import Context, MAX_NEW_TOKENS
+
+MAX_LENGTH = 8192
 
 @dataclass
 class BatchQuery(Context):
