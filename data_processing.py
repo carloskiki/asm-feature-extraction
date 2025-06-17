@@ -5,7 +5,6 @@ Data processing
 from typing import Optional
 from bisect import bisect_left
 from dataclasses import dataclass
-import copy
 import gzip
 import random
 import json
@@ -315,51 +314,4 @@ class PairsDataset(Dataset):
     def __getitems__(
         self, idxs: list[int]
     ) -> list[tuple[Function, Function]]:
-        return [self.functions[i] for i in idxs]
-
-
-class TargetDataset(Dataset):
-    functions: list[tuple[Function, FileId]]
-
-    def __init__(
-        self,
-        queries: LibDataset,
-        optimization_diff: Optional[int],
-        platform_diff: Optional[int],
-    ):
-        fn_set = set([(f.name, id) for f, id in queries.functions])
-        self.functions = []
-
-        for file in tqdm(
-            queries.files,
-            disable=not queries.main_process,
-            desc="Reading target dataset",
-        ):
-            new_file = copy.copy(file)
-            if optimization_diff is not None:
-                new_file.optimization = optimization_diff
-            if platform_diff is not None:
-                new_file.platform = platform_diff
-
-            with gzip.open(file.path(), "rb") as file_data:
-                target_functions = process(file_data.read())
-
-                for fn in target_functions:
-                    if (fn.name, file) in fn_set:
-                        fn_set.remove((fn.name, file))
-                        self.functions.append((fn, new_file))
-
-        # Sort so that both datasets are queried in the same order
-        queries.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
-        self.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
-
-        queries.functions[:] = [x for x in queries.functions if x.name not in fn_set]
-
-    def __len__(self) -> int:
-        return len(self.functions)
-
-    def __getitem__(self, idx: int) -> tuple[Function, FileId]:
-        return self.functions[idx]
-
-    def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
         return [self.functions[i] for i in idxs]
