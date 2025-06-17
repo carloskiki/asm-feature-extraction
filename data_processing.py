@@ -2,13 +2,13 @@
 Data processing
 """
 
-from typing import Generator, Optional
+from typing import Optional
+from bisect import bisect_left
 from dataclasses import dataclass
 import copy
 import gzip
 import random
 import json
-from itertools import islice
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
@@ -102,27 +102,28 @@ class FileId:
         """
 
         return f"{self.data_path}/{BINARIES[self.binary]}-{PLATFORMS[self.platform]}-g-O{self.optimization}.bin.merged.asm.json.gz"
-    
+
     def __eq__(self, value) -> bool:
         if not isinstance(value, FileId):
             return NotImplemented
         return (
-            self.data_path == value.data_path and
-            self.binary == value.binary and
-            self.platform == value.platform and
-            self.optimization == value.optimization
+            self.data_path == value.data_path
+            and self.binary == value.binary
+            and self.platform == value.platform
+            and self.optimization == value.optimization
         )
-    
+
     def __lt__(self, other) -> bool:
         if not isinstance(other, FileId):
             return NotImplemented
-        return (
-            (self.data_path, self.binary, self.platform, self.optimization)
-            < (other.data_path, other.binary, other.platform, other.optimization)
+        return (self.data_path, self.binary, self.platform, self.optimization) < (
+            other.data_path,
+            other.binary,
+            other.platform,
+            other.optimization,
         )
 
 
-# TODO: Return array instead ...
 def process(contents: bytes) -> list[Function]:
     """
     Process the contents of a `.merged.asm.json` file.
@@ -160,17 +161,8 @@ def process(contents: bytes) -> list[Function]:
             continue
 
         collected.append(Function(name, start, end, blocks))
-    
+
     return collected
-
-
-def function_count(contents: bytes) -> int:
-    """
-    Count the number of functions in a `merged.asm.json` file
-    """
-
-    data = json.loads(contents)
-    return len(data["functions"])
 
 
 class LibDataset(Dataset):
@@ -190,36 +182,13 @@ class LibDataset(Dataset):
         optimization: Optional[str] = None,
         platform: Optional[str] = None,
     ):
-        def data_files() -> Generator[FileId, None, None]:
-            """
-            return all files that match the selected parameters
-            """
-            for b in BINARIES.keys() if binary is None else [binary]:
-                for p in PLATFORMS.keys() if platform is None else [platform]:
-                    for o in range(4) if optimization is None else [optimization]:
-                        yield FileId(path, b, p, o)
+        self.files = []
 
-        def iter_sample(iterator, sample_size):
-            """
-            Sample from an iterator
-            """
+        for b in BINARIES.keys() if binary is None else [binary]:
+            for p in PLATFORMS.keys() if platform is None else [platform]:
+                for o in range(4) if optimization is None else [optimization]:
+                    self.files.append(FileId(path, b, p, o))
 
-            rng = random.Random(seed)
-            results = []
-            # Fill in the first samplesize elements:
-            try:
-                for _ in range(sample_size):
-                    results.append(next(iterator))
-            except StopIteration as exc:
-                raise exc
-            rng.shuffle(results)  # Randomize their positions
-            for i, v in enumerate(iterator, sample_size):
-                r = rng.randint(0, i)
-                if r < sample_size:
-                    results[r] = v  # at a decreasing rate, replace random items
-            return results
-
-        self.files = list(data_files())
         self.functions = []
         for index, file in enumerate(
             tqdm(self.files, desc="Reading dataset", disable=not main_process)
@@ -239,12 +208,12 @@ class LibDataset(Dataset):
             with gzip.open(file.path(), "rb") as file_data:
                 functions = process(file_data.read())
 
-            for sample in (
-                islice(functions, sample_size)
-                if seed is None
-                else iter_sample(functions, sample_size)
-            ):
-                self.functions.append((sample, file))
+            if seed is None:
+                functions = functions[:sample_size]
+            else:
+                functions = random.sample(functions, sample_size)
+
+            self.functions.extend([(f, file) for f in functions])
 
         self.main_process = main_process
 
@@ -257,7 +226,97 @@ class LibDataset(Dataset):
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, FileId]]:
         return [self.functions[i] for i in idxs]
 
-# TODO: Pairs dataset instead ...
+
+class PairsDataset(Dataset):
+    files: list[tuple[FileId, FileId]]
+    functions: list[tuple[Function, Function]]
+
+    def __init__(
+        self,
+        path: str,
+        main_process: bool,
+        pool_size: Optional[int] = None,  # Take the whole dataset if not specified
+        seed: Optional[int] = None,  # Don't randomize order if not specified
+        binary: Optional[str] = None,
+        optimization: Optional[str] = None,
+        platform: Optional[str] = None,
+        optimization_diff: Optional[int] = None,
+        platform_diff: Optional[str] = None,
+    ):
+
+        if (
+            optimization_diff is not None
+            and (optimization is None or optimization == optimization_diff)
+        ) or (
+            platform_diff is not None
+            and (platform is None or platform == platform_diff)
+        ):
+            raise ValueError("Conflict between query and target sets")
+
+        self.files: list[tuple[FileId, FileId]] = []
+        for b in BINARIES.keys() if binary is None else [binary]:
+            for p in PLATFORMS.keys() if platform is None else [platform]:
+                p_diff = p if platform_diff is None else platform_diff
+                for o in range(4) if optimization is None else [optimization]:
+                    o_diff = o if optimization_diff is None else optimization_diff
+                    self.files.append(FileId(path, b, p, o), FileId(path, b, p_diff, o_diff))
+
+        self.functions = []
+        for index, (query, target) in enumerate(
+            tqdm(self.files, desc="Reading dataset", disable=not main_process)
+        ):
+            if pool_size is None:
+                sample_size = None
+            elif index == len(self.files) - 1:
+                sample_size = pool_size - (len(self.files) - 1) * (
+                    pool_size // len(self.files)
+                )
+            else:
+                sample_size = pool_size // len(self.files)
+
+            if sample_size == 0:
+                continue
+
+            with gzip.open(query.path(), "rb") as file_data:
+                query_functions = process(file_data.read())
+
+            with gzip.open(target.path(), "rb") as file_data:
+                target_functions = process(file_data.read())
+
+            random.seed(seed)
+            random.shuffle(query_functions)
+            target_functions.sort(key=lambda x: x.name)
+
+            function_pairs = []
+
+            for query_function in query_functions:
+                if len(function_pairs) == sample_size:
+                    break
+
+                target_index = bisect_left(target_functions, query_function.name, key=lambda f: f.name)
+
+                # No match, continue
+                if target_functions[target_index].name != query_function.name:
+                    continue
+
+                function_pairs.append(query_function, target_functions[target_index])
+
+
+            self.functions.extend(function_pairs)
+
+        self.main_process = main_process
+
+    def __len__(self) -> int:
+        return len(self.functions)
+
+    def __getitem__(self, idx: int) -> tuple[tuple[Function, Function]]:
+        return self.functions[idx]
+
+    def __getitems__(
+        self, idxs: list[int]
+    ) -> list[tuple[Function, Function]]:
+        return [self.functions[i] for i in idxs]
+
 
 class TargetDataset(Dataset):
     functions: list[tuple[Function, FileId]]
@@ -294,9 +353,7 @@ class TargetDataset(Dataset):
         queries.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
         self.functions.sort(key=lambda tup: (tup[0].name, tup[1]))
 
-        queries.functions[:] = [
-            x for x in queries.functions if x.name not in fn_set
-        ]
+        queries.functions[:] = [x for x in queries.functions if x.name not in fn_set]
 
     def __len__(self) -> int:
         return len(self.functions)
