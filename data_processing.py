@@ -292,7 +292,7 @@ class PairsDataset(Dataset):
                 if len(function_pairs) == sample_size:
                     break
 
-                target_index = bisect_left(target_functions, query_function.name, key=lambda f: f.name)
+                target_index = bisect_left([f.name for f in target_functions], query_function.name)
 
                 # No match, continue
                 if target_functions[target_index].name != query_function.name:
