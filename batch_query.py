@@ -111,22 +111,19 @@ class BatchQuery(Context):
                     gc.collect()
                     clear_cache_counter = 0
 
+        all_queries = accelerator.gather_for_metrics(zip(functions, query_decoded))
+
         # Clear out and or create the file for all processes to write to it later
         if accelerator.is_local_main_process:
             with open(self.out_file, "w", encoding="utf-8") as file:
                 pass
 
-        accelerator.wait_for_everyone()
-
-        # TODO: share for metrics instead of writing to file
-
-        print(f"Writing results to {self.out_file}")
-        with open(self.out_file, "a", encoding="utf-8") as file:
-            for output, fn in zip(query_decoded, functions):
-                file.write("############\n")
-                file.write("```assembly\n")
-                file.write(str(fn))
-                file.write("\n```\n")
-                file.write("Output:")
-                file.write(output)
-                file.write("\n")
+            with open(self.out_file, "a", encoding="utf-8") as file:
+                for fn, output in tqdm(all_queries, desc=f"Writing results to {self.out_file}"):
+                    file.write("############\n")
+                    file.write("```assembly\n")
+                    file.write(str(fn))
+                    file.write("\n```\n")
+                    file.write("Output:")
+                    file.write(output)
+                    file.write("\n")

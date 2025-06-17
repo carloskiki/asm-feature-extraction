@@ -262,7 +262,6 @@ def test_retrieval(scores: list[list[float]]):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    # TODO: figure this out relevance = np.arange(len(queries))
     return compute_retrieval_metrics(np.array(scores), None)
 
 

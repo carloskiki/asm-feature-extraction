@@ -15,7 +15,7 @@
 ## Datasets
 ### Libraries
 
-Contains 383_658 assembly functions
+Contains  assembly functions
 
 - Some functions have 0 blocks, so we skip them.
 - Some functions are too long for the context window of most llms (e.g., 100k tokens), we could truncate them or skip them or sliding window.
@@ -44,6 +44,14 @@ Generate new pool for all sources, OR generate one pool and run on all elements 
 
 - [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
 - [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
+- [BinAug: Enhancing Binary Similarity Analysis with Low-Cost Input Repairing](https://dl.acm.org/doi/pdf/10.1145/3597503.3623328)
+- [CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision](https://dl.acm.org/doi/pdf/10.1145/3650212.3652145)
+- [jTrans: jump-aware transformer for binary code similarity detection](https://dl.acm.org/doi/pdf/10.1145/3533767.3534367)
+- [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization](https://ieeexplore.ieee.org/document/8835340)
+
+### Bad 
+
+- [CrossDeep: A Hybrid Approach For Cross Version Binary Code Similarity Detection](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10892660)
 
 # Data Schema
 
