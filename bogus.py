@@ -29,10 +29,12 @@ class Bogus(context.Context):
     def __call__(self):
         # Side quest: extract and check for size outliers
 
-        dataset = LibDataset("lib-data", main_process=True, pool_size=None, seed=None)
+        dataset = LibDataset("lib-data", main_process=True, pool_size=None, seed=None, binary="image-magick")
         outliers = []
 
-        for function in tqdm(dataset.functions, desc="Checking for size outliers"):
+        for function, file_id in tqdm(
+            dataset.functions, desc="Checking for size outliers"
+        ):
             tokenizer = self.get_tokenizer()
 
             tokens = tokenizer(
@@ -41,9 +43,15 @@ class Bogus(context.Context):
             )
 
             if len(tokens["input_ids"]) > self.threshold:
-                outliers.append((function, len(tokens["input_ids"])))
+                outliers.append(((function, file_id), len(tokens["input_ids"])))
 
         print(len(outliers))
 
         with open("outliers.txt", "w", encoding="utf-8") as file:
-            json.dump([{f.name: token_len} for f, token_len in outliers], file)
+            json.dump(
+                [
+                    {f.name: [token_len, id.platform, id.optimization]}
+                    for (f, id), token_len in outliers
+                ],
+                file,
+            )
