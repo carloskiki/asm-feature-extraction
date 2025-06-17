@@ -258,7 +258,7 @@ class PairsDataset(Dataset):
                 p_diff = p if platform_diff is None else platform_diff
                 for o in range(4) if optimization is None else [optimization]:
                     o_diff = o if optimization_diff is None else optimization_diff
-                    self.files.append(FileId(path, b, p, o), FileId(path, b, p_diff, o_diff))
+                    self.files.append((FileId(path, b, p, o), FileId(path, b, p_diff, o_diff)))
 
         self.functions = []
         for index, (query, target) in enumerate(
