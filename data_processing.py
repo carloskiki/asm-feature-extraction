@@ -242,7 +242,6 @@ class PairsDataset(Dataset):
         optimization_diff: Optional[int] = None,
         platform_diff: Optional[str] = None,
     ):
-
         if (
             optimization_diff is not None
             and (optimization is None or optimization == optimization_diff)
@@ -258,7 +257,9 @@ class PairsDataset(Dataset):
                 p_diff = p if platform_diff is None else platform_diff
                 for o in range(4) if optimization is None else [optimization]:
                     o_diff = o if optimization_diff is None else optimization_diff
-                    self.files.append((FileId(path, b, p, o), FileId(path, b, p_diff, o_diff)))
+                    self.files.append(
+                        (FileId(path, b, p, o), FileId(path, b, p_diff, o_diff))
+                    )
 
         self.functions = []
         for index, (query, target) in enumerate(
@@ -292,14 +293,18 @@ class PairsDataset(Dataset):
                 if len(function_pairs) == sample_size:
                     break
 
-                target_index = bisect_left([f.name for f in target_functions], query_function.name)
+                target_index = bisect_left(
+                    [f.name for f in target_functions], query_function.name
+                )
 
                 # No match, continue
-                if target_functions[target_index].name != query_function.name:
+                if (
+                    target_index == len(target_functions)
+                    or target_functions[target_index].name != query_function.name
+                ):
                     continue
 
                 function_pairs.append((query_function, target_functions[target_index]))
-
 
             self.functions.extend(function_pairs)
 
@@ -311,7 +316,5 @@ class PairsDataset(Dataset):
     def __getitem__(self, idx: int) -> tuple[tuple[Function, Function]]:
         return self.functions[idx]
 
-    def __getitems__(
-        self, idxs: list[int]
-    ) -> list[tuple[Function, Function]]:
+    def __getitems__(self, idxs: list[int]) -> list[tuple[Function, Function]]:
         return [self.functions[i] for i in idxs]

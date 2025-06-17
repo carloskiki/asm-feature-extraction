@@ -100,7 +100,7 @@ class Retrieval(Context):
         with torch.no_grad():
             for batch in tqdm(
                 loader,
-                desc="Query batches",
+                desc="Generating",
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
