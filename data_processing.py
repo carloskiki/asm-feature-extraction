@@ -123,7 +123,7 @@ class FileId:
 
 
 # TODO: Return array instead ...
-def process(contents: bytes) -> Generator[Function, None, None]:
+def process(contents: bytes) -> list[Function]:
     """
     Process the contents of a `.merged.asm.json` file.
     """
@@ -133,6 +133,7 @@ def process(contents: bytes) -> Generator[Function, None, None]:
     data["functions"].sort(key=lambda x: x["addr_start"])
     data["blocks"].sort(key=lambda x: x["addr_f"])
 
+    collected = []
     index: int = 0
     for function in data["functions"]:
         name = function["name"]
@@ -158,7 +159,9 @@ def process(contents: bytes) -> Generator[Function, None, None]:
         if len(blocks) == 0:
             continue
 
-        yield Function(name, start, end, blocks)
+        collected.append(Function(name, start, end, blocks))
+    
+    return collected
 
 
 def function_count(contents: bytes) -> int:

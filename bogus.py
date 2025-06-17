@@ -46,8 +46,8 @@ class Bogus(context.Context):
                 return_tensors="pt",
             )
 
-            if len(tokens["input_ids"]) > self.threshold:
-                outliers.append(((function, file_id), len(tokens["input_ids"])))
+            if tokens["input_ids"].shape[1] > self.threshold:
+                outliers.append(((function, file_id), tokens["input_ids"].shape[1]))
 
         print(len(outliers))
 
