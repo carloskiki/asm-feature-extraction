@@ -17,12 +17,12 @@ from accelerate import Accelerator
 from data_processing import (
     BINARIES,
     PLATFORMS,
-    LibDataset,
-    TargetDataset,
+    PairsDataset,
 )
 from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
+
 
 @dataclass
 class Retrieval(Context):
@@ -76,7 +76,7 @@ class Retrieval(Context):
         model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
 
-        dataset = LibDataset(
+        dataset = PairsDataset(
             self.data_path,
             accelerator.is_local_main_process,
             self.pool_size,
@@ -84,23 +84,17 @@ class Retrieval(Context):
             self.binary,
             self.optimization,
             self.platform,
-        )
-        pool_dataset = TargetDataset(
-            dataset, self.target_optimization, self.target_platform
+            self.target_optimization,
+            self.target_platform,
         )
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
-        pool_loader = DataLoader(
-            pool_dataset, batch_size=self.batch_size, collate_fn=lambda x: x
-        )
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
-        pool_loader = accelerator.prepare_data_loader(pool_loader, device_placement=False)
 
         tokenizer = self.get_tokenizer()
 
         query_decoded = []
-        targets_decoded = []
-
+        target_decoded = []
 
         clear_cache_counter = 0
         with torch.no_grad():
@@ -110,13 +104,20 @@ class Retrieval(Context):
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
-                prompts = [self.get_prompt(str(f)) for f in batch]
+                prompt_pairs = [
+                    (self.get_prompt(str(qf)), self.get_prompt(str(tf)))
+                    for qf, tf in batch
+                ]
 
-                chat = tokenizer.apply_chat_template(
-                    prompts, tokenize=False, add_generation_prompt=True
+                query_chat = tokenizer.apply_chat_template(
+                    [qp for qp, _ in prompt_pairs], tokenize=False, add_generation_prompt=True
                 )
-                token_batch = tokenizer(
-                    chat,
+                target_chat = tokenizer.apply_chat_template(
+                    [tp for _, tp in prompt_pairs], tokenize=False, add_generation_prompt=True
+                )
+
+                query_token_batch = tokenizer(
+                    query_chat,
                     truncation=True,
                     padding=True,
                     padding_side="left",
@@ -126,32 +127,14 @@ class Retrieval(Context):
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
-                    **token_batch,
+                    **query_token_batch,
                     max_new_tokens=MAX_NEW_TOKENS,
-                )[:, token_batch["input_ids"].shape[1] :].cpu()
-                decoded = tokenizer.batch_decode(query_outputs)
-
+                )[:, query_token_batch["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
-                query_decoded.extend(decoded)
+                query_decoded.extend(tokenizer.batch_decode(query_outputs))
 
-                if clear_cache_counter == CLEAR_CACHE_PERIOD:
-                    torch.cuda.empty_cache()
-                    gc.collect()
-                    clear_cache_counter = 0
-
-            for pool_batch in tqdm(
-                pool_loader,
-                desc="Target Batches",
-                disable=not accelerator.is_local_main_process,
-            ):
-                # Tokenize the prompts for the batch
-                prompts = [self.get_prompt(str(f)) for f in pool_batch]
-
-                chat = tokenizer.apply_chat_template(
-                    prompts, tokenize=False, add_generation_prompt=True
-                )
-                token_batch = tokenizer(
-                    chat,
+                target_token_batch = tokenizer(
+                    target_chat,
                     truncation=True,
                     padding=True,
                     padding_side="left",
@@ -161,13 +144,11 @@ class Retrieval(Context):
 
                 # Pass the tokens to LLM
                 target_outputs = model.generate(
-                    **token_batch,
+                    **target_token_batch,
                     max_new_tokens=MAX_NEW_TOKENS,
-                )[:, token_batch["input_ids"].shape[1] :].cpu()
-                decoded = tokenizer.batch_decode(target_outputs)
-
-                # Add all outputs to targets_decoded
-                targets_decoded.extend(decoded)
+                )[:, target_token_batch["input_ids"].shape[1] :].cpu()
+                # Add all outputs to query_decoded
+                target_decoded.extend(tokenizer.batch_decode(target_outputs))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
@@ -175,12 +156,16 @@ class Retrieval(Context):
                     clear_cache_counter = 0
 
         query_words = [word_tokenize(q) for q in query_decoded]
-        target_words = [word_tokenize(t) for t in targets_decoded]
+        target_words = [word_tokenize(t) for t in target_decoded]
 
         all_targets = accelerator.gather_for_metrics(target_words)
 
         scores: list[list[float]] = []
-        for index, query in tqdm(enumerate(query_words), desc="Scoring results", disable=not accelerator.is_main_process):
+        for index, query in tqdm(
+            enumerate(query_words),
+            desc="Scoring results",
+            disable=not accelerator.is_main_process,
+        ):
             scores.append([])
             for target in all_targets:
                 scores[index].append(jaccard_index(query, target))
@@ -196,7 +181,6 @@ class Retrieval(Context):
                 with open(self.save_metrics, "w", encoding="utf-8") as file:
                     json.dump(metrics, file)
 
-            # TODO: Save metrics to file
             print("done")
 
 
@@ -300,7 +284,10 @@ def jaccard_index(query: list[str], potential_target: list[str]) -> float:
     set2 = set(potential_target)
     intersection = set1 & set2
     union = set1 | set2
-    return len(intersection) / len(union) if union else 1.0  # Return 1.0 if both sets are empty
+    return (
+        len(intersection) / len(union) if union else 1.0
+    )  # Return 1.0 if both sets are empty
+
 
 def word_tokenize(s: str) -> list[str]:
     """
