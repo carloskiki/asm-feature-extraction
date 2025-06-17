@@ -24,7 +24,7 @@ class Bogus(context.Context):
             "bogus",
             description="",
         )
-        parser.add_argument("--threshold", type=int, default=100_000)
+        parser.add_argument("--threshold", type=int, default=200_000)
 
     def __call__(self):
         # Side quest: extract and check for size outliers
@@ -35,10 +35,14 @@ class Bogus(context.Context):
         for function, file_id in tqdm(
             dataset.functions, desc="Checking for size outliers"
         ):
+            fn_str = str(function)
+            if len(fn_str) < self.threshold:
+                continue
+
             tokenizer = self.get_tokenizer()
 
             tokens = tokenizer(
-                str(function),
+                fn_str,
                 return_tensors="pt",
             )
 
