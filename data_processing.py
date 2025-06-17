@@ -298,7 +298,7 @@ class PairsDataset(Dataset):
                 if target_functions[target_index].name != query_function.name:
                     continue
 
-                function_pairs.append(query_function, target_functions[target_index])
+                function_pairs.append((query_function, target_functions[target_index]))
 
 
             self.functions.extend(function_pairs)
