@@ -27,35 +27,16 @@ class Bogus(context.Context):
         parser.add_argument("--threshold", type=int, default=200_000)
 
     def __call__(self):
-        # Side quest: extract and check for size outliers
+        # Side quest: How many tokens does the prompt use?
 
-        dataset = LibDataset("lib-data", main_process=True, pool_size=None, seed=None, binary="image-magick")
-        outliers = []
+        prompt = self.get_prompt("")
+        tokenizer = self.get_tokenizer()
 
-        for function, file_id in tqdm(
-            dataset.functions, desc="Checking for size outliers"
-        ):
-            fn_str = str(function)
-            if len(fn_str) < self.threshold:
-                continue
+        chat = tokenizer.apply_chat_template(
+            prompt, tokenize=False, add_generation_prompt=True
+        )
+        tokens = tokenizer(
+            chat,
+        )
 
-            tokenizer = self.get_tokenizer()
-
-            tokens = tokenizer(
-                fn_str,
-                return_tensors="pt",
-            )
-
-            if tokens["input_ids"].shape[1] > self.threshold:
-                outliers.append(((function, file_id), tokens["input_ids"].shape[1]))
-
-        print(len(outliers))
-
-        with open("outliers.txt", "w", encoding="utf-8") as file:
-            json.dump(
-                [
-                    {f.name: [token_len, id.platform, id.optimization]}
-                    for (f, id), token_len in outliers
-                ],
-                file,
-            )
+        print("The prompt uses ", len(tokens['input_ids']), " tokens")

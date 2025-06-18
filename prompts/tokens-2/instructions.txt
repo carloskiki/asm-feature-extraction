@@ -1,0 +1,29 @@
+Please analyze the provided assembly function and output a JSON list of its high-level, architecture-agnostic features. Each feature should be represented as a string following the format "category:detail" or "single-word-tag".
+
+Additionally, please infer the function's signature and include these signature-related features in the same JSON list. The signature features should also follow the "category:detail" format where applicable.
+
+**The output MUST be a valid JSON list.**
+
+If a feature (either general or signature-related) is not applicable or cannot be confidently inferred from the provided assembly code, it MUST be omitted from the list. Do not include features that are speculative or unsupported by the given context.
+
+The features to include are:
+
+* **Function Identification:** A hint from the function's name, if available.
+
+* **Function Signature Inference:**
+    * `return-type:<inferred_type>`: (e.g., `void`, `integer`, `pointer`, `float`, `structure`).
+    * `argument-count:<number_of_arguments>`: The total number of arguments.
+    * `argN-type:<inferred_type>`: For each argument (0-indexed, e.g., `arg0-type:pointer`, `arg1-type:integer`, `arg2-type:float`).
+    * `calling-convention-hint:<inferred_characteristic>`: High-level characteristics observed (e.g., `callee-saves-registers`, `registers-for-args`, `stack-for-args`, `return-via-register`).
+    * `stack-arg-use:<true/false>`: Indicates if any arguments appear to be passed on the stack.
+
+* **Calling Convention & Stack:** Presence of standard calling conventions, stack frame management, explicit stack allocation size (in hex if available), and callee-saved registers.
+
+* **Control Flow:** Presence of conditional branching, number of detected loops, loop counter patterns (e.g., decrementing), unconditional jumps, external function calls, and the *type* of external functions called (e.g., `data-processing-helper`, `error-or-alternative-path`, `unspecified-helper`).
+
+* **Data Manipulation:** Inferred integer size, byte-level operations, data packing/serialization patterns, byte order processing (e.g., reverse), presence and types of bitwise operations (shift-left, shift-right, OR, AND-clear, XOR), and specific bitwise mask values (in hex if available).
+
+* **Memory Access:** Status/flag bit manipulation, direct structure field updates, fixed value comparisons (with the value if simple, e.g., `0`), presence of address/offset constants (with the value if available).
+    * **Magic Number Usage:** `magic-number:<value>`: Any distinctive constant value used in comparisons, calculations, or memory offsets that might represent a format signature, protocol identifier, or a specific mathematical constant. Examples include `magic-number:0xDEADBEEF`, `magic-number:0x42` (ASCII '*'), `magic-number:0x1A` (EOF/Ctrl+Z).
+
+* **Inferred Algorithm:** High-level algorithmic inferences based on observed patterns (e.g., `integer-to-byte-array-conversion`, `signed-number-handling`, `object-lookup-and-initialization`, `resource-management`, `cryptographic-manipulation`, `operating-system-interaction`, `networking-protocol-handling`, `data-compression-decompression`, `string-manipulation`, `mathematical-computation`, `checksum-validation`).
