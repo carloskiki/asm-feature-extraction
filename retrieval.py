@@ -3,8 +3,11 @@ Retrieval CLI utilities
 """
 
 from dataclasses import dataclass
+from datetime import datetime
 from string import punctuation
 from typing import Optional
+from argparse import ArgumentParser
+from pathlib import Path
 import random
 import json
 import sys
@@ -44,7 +47,7 @@ class Retrieval(Context):
     target_platform: Optional[str]
     target_optimization: Optional[int]
     save_outliers: Optional[str]
-    save_metrics: Optional[str]
+    save_metrics: bool
 
     @staticmethod
     def arguments(subparsers):
@@ -52,7 +55,7 @@ class Retrieval(Context):
         Configure the CLI
         """
 
-        parser = subparsers.add_parser(
+        parser: ArgumentParser = subparsers.add_parser(
             "retrieval",
             description="Find the most similar assembly function from a set",
         )
@@ -66,7 +69,7 @@ class Retrieval(Context):
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-outliers", type=str)
-        parser.add_argument("--save-metrics", type=str)
+        parser.add_argument("--save-metrics", action='store_true')
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -177,9 +180,26 @@ class Retrieval(Context):
             metrics = test_retrieval(all_scores)
             print(metrics)
 
-            if self.save_metrics is not None:
-                with open(self.save_metrics, "w", encoding="utf-8") as file:
-                    json.dump(metrics, file)
+            if self.save_metrics:
+                parameters = {
+                    "binary": self.binary or "all",
+                    "platform": self.platform or "all",
+                    "target-platform": self.target_platform or "same",
+                    "optimization": "all" if self.optimization is None else self.optimization,
+                    "target-optimization": "same" if self.target_optimization is None else self.target_optimization,
+                    "pool-size": self.pool_size,
+                    "examples": self.examples,
+                    "prompt": self.prompt,
+                    "model": self.model,
+                }
+                data = {
+                    "parameters": parameters,
+                    "results": metrics,
+                }
+                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
+
+                with open(Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8") as file:
+                    json.dump(data, file)
 
             print("done")
 
