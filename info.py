@@ -1,13 +1,12 @@
 """
-Doesn't do much, just to play around & try stuff
+Get info about the Model and prompt used
 """
 
 from dataclasses import dataclass
-from argparse import ArgumentParser
 import context
 
 @dataclass
-class Bogus(context.Context):
+class Info(context.Context):
     threshold: int
 
     @staticmethod
@@ -16,11 +15,10 @@ class Bogus(context.Context):
         Configure the CLI
         """
 
-        parser: ArgumentParser = subparsers.add_parser(
-            "bogus",
-            description="",
+        subparsers.add_parser(
+            "info",
+            description="Information about the model and prompt used"
         )
-        parser.add_argument("--threshold", type=int, default=200_000)
 
     def __call__(self):
         # Side quest: How many tokens does the prompt use?
@@ -34,5 +32,8 @@ class Bogus(context.Context):
         tokens = tokenizer(
             chat,
         )
+        token_count = len(tokens['input_ids'])
 
-        print("The prompt uses ", len(tokens['input_ids']), " tokens")
+        print(f"MODEL: {self.model}")
+        print(f"    Configuration: {self.get_model().config}")
+        print(f"PROMPT: {self.prompt} - uses {token_count} for an empty query with the model selected.")

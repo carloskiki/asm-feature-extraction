@@ -3,12 +3,14 @@ from query import Query
 from bogus import Bogus
 from retrieval import Retrieval
 from batch_query import BatchQuery
+from info import Info
 
 COMMANDS = {
     'query': Query,
     'retrieval': Retrieval,
     'bogus': Bogus,
-    'batch-query': BatchQuery
+    'batch-query': BatchQuery,
+    'info': Info
 }
 
 def main():
