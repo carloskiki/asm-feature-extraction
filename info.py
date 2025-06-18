@@ -7,8 +7,6 @@ import context
 
 @dataclass
 class Info(context.Context):
-    threshold: int
-
     @staticmethod
     def arguments(subparsers):
         """
