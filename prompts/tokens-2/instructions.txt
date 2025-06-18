@@ -8,8 +8,6 @@ If a feature (either general or signature-related) is not applicable or cannot b
 
 The features to include are:
 
-* **Function Identification:** A hint from the function's name, if available.
-
 * **Function Signature Inference:**
     * `return-type:<inferred_type>`: (e.g., `void`, `integer`, `pointer`, `float`, `structure`).
     * `argument-count:<number_of_arguments>`: The total number of arguments.

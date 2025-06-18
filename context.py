@@ -12,6 +12,7 @@ class Context:
     """
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
+    examples: int # Number of examples to give the model before query (AKA the number of "shot"s e.g., 3-shot)
 
     def get_prompt(self, assembly: str) -> list[dict[str, str]]:
         """
@@ -30,25 +31,35 @@ class Context:
             },
         ]
 
-        examples = Path(f"prompts/{self.prompt}/examples.txt")
-        if examples.is_file():
-            with open(examples, "r" , encoding="utf-8") as file:
-                examples_string = file.read()
-                if "\n" in examples_string:
-                    examples_string = examples_string.replace("\r", "")
-                else:
-                    examples_string = examples_string.replace("\r", "\n")
+        examples_file = Path(f"prompts/{self.prompt}/examples.txt")
+        if self.examples > 0:
+            if not examples_file.is_file():
+                print(f"WARNING: requested {self.examples}-shot to be used, but the prompt chosen does not provide any examples.")
+                print("         defaulting to 0-shot.")
+            else:
+                with open(examples_file, "r" , encoding="utf-8") as file:
+                    example_string = file.read()
+                    if "\n" in example_string:
+                        example_string = example_string.replace("\r", "")
+                    else:
+                        example_string = example_string.replace("\r", "\n")
 
-                for example in examples_string.split(3*"\n"):
-                    example_assembly, output = example.split(2*"\n")
-                    prompt.append({
-                        "role": "user",
-                        "content": f"```assembly\n{example_assembly}\n```"
-                    })
-                    prompt.append({
-                        "role": "assistant",
-                        "content": output,
-                    })
+                    examples = example_string.split(3*"\n")
+                    if len(examples) < self.examples:
+                        print(f"WARNING: requested {self.examples}-shot to be used, but the prompt chosen only provides {len(examples)} examples.")
+                        print(f"         defaulting to {len(examples)}-shot.")
+
+                    
+                    for example in examples[:self.examples]:
+                        example_assembly, output = example.split(2*"\n")
+                        prompt.append({
+                            "role": "user",
+                            "content": f"```assembly\n{example_assembly}\n```"
+                        })
+                        prompt.append({
+                            "role": "assistant",
+                            "content": output,
+                        })
 
         prompt.append({
             "role": "user",

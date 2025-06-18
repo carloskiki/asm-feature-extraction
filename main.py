@@ -1,9 +1,15 @@
+"""
+Main.
+"""
+
 import argparse
+import os
 from query import Query
 from bogus import Bogus
 from retrieval import Retrieval
 from batch_query import BatchQuery
 from info import Info
+from context import MODELS
 
 COMMANDS = {
     'query': Query,
@@ -14,11 +20,16 @@ COMMANDS = {
 }
 
 def main():
+    """
+    Main again.
+    """
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-m", "--model", choices=["codeqwen"], type=str, default="codeqwen"
+        "-m", "--model", choices=MODELS.keys(), type=str, default="codeqwen"
     )
-    parser.add_argument("-p", "--prompt", type=str, default="gemini")
+    parser.add_argument("-p", "--prompt", choices=os.listdir("prompts"), type=str, default="tokens")
+    parser.add_argument("-e", "--examples", type=int, default=0)
     subparsers = parser.add_subparsers(
         description="the action to be performed", dest="subcommand", required=True
     )
