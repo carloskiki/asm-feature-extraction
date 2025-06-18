@@ -1,0 +1,1 @@
+[{"ConvertImageCommand": [1309497, "mips", 0]}, {"MogrifyImageCommand": [1380209, "mips", 0]}, {"ConvertImageCommand": [1047182, "powerpc", 0]}, {"MogrifyImageCommand": [1096034, "powerpc", 0]}]
