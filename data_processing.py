@@ -81,7 +81,7 @@ class Function:
         self.blocks = blocks
 
     def __str__(self):
-        return f"{self.name}:\n" + "\n".join(str(b) for b in self.blocks)
+        return "\n".join(str(b) for b in self.blocks)
 
 
 @dataclass
