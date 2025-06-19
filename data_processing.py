@@ -297,10 +297,12 @@ class PairsDataset(Dataset):
                     [f.name for f in target_functions], query_function.name
                 )
 
-                # No match, continue
+                # No match, or if the function is very small (e.g., external functions)
                 if (
                     target_index == len(target_functions)
                     or target_functions[target_index].name != query_function.name
+                    # Random heuristic for small functions.
+                    or len(target_functions[target_index].blocks) + len(query_function.blocks) < 4
                 ):
                     continue
 
