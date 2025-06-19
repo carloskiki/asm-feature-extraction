@@ -196,3 +196,7 @@ I suspect that the merged version is the merge between `unstrip` and the regular
 the function name from the `unstrip` file is used for the dissassembled output of the regular
 file.
 
+
+# Misc
+
+Computer name: vsi-wpch-frame
