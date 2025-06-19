@@ -178,7 +178,7 @@ class LibDataset(Dataset):
         pool_size: Optional[int] = None,  # Take the whole dataset if not specified
         seed: Optional[int] = None,  # Don't randomize order if not specified
         binary: Optional[str] = None,
-        optimization: Optional[str] = None,
+        optimization: Optional[int] = None,
         platform: Optional[str] = None,
     ):
         self.files = []
@@ -237,7 +237,7 @@ class PairsDataset(Dataset):
         pool_size: Optional[int] = None,  # Take the whole dataset if not specified
         seed: Optional[int] = None,  # Don't randomize order if not specified
         binary: Optional[str] = None,
-        optimization: Optional[str] = None,
+        optimization: Optional[int] = None,
         platform: Optional[str] = None,
         optimization_diff: Optional[int] = None,
         platform_diff: Optional[str] = None,
@@ -313,7 +313,7 @@ class PairsDataset(Dataset):
     def __len__(self) -> int:
         return len(self.functions)
 
-    def __getitem__(self, idx: int) -> tuple[tuple[Function, Function]]:
+    def __getitem__(self, idx: int) -> tuple[Function, Function]:
         return self.functions[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, Function]]:

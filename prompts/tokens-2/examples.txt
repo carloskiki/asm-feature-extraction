@@ -1,0 +1,60 @@
+```assembly
+PACKET_get_net_4_0:
+loc_AE188:
+    PUSH {R7,LR}
+    SUB SP, SP, #8
+    ADD R7, SP, #0
+    STR R0, [R7,#8+var_4]
+    STR R1, [R7,#8+var_8]
+    LDR R1, [R7,#8+var_8]
+    LDR R0, [R7,#8+var_4]
+    BL sub_AE11C
+    MOV R3, R0
+    CMP R3, #0
+    BNE loc_AE1A4
+loc_AE1A0:
+    MOVS R3, #0
+    B loc_AE1AE
+loc_AE1A4:
+    MOVS R1, #4
+    LDR R0, [R7,#8+var_4]
+    BL sub_ADF88
+    MOVS R3, #1
+loc_AE1AE:
+    MOV R0, R3
+    ADDS R7, #8
+    MOV SP, R7
+    POP {R7,PC}
+```
+
+```json
+[
+  "return-type:integer",
+  "argument-count:2",
+  "arg0-type:pointer",
+  "arg1-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x8",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-return-value",
+  "unconditional-jumps-present",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_AE11C)",
+  "external-call-type:unspecified-helper (sub_ADF88)",
+  "integer-size-hint:32-bit",
+  "fixed-value-comparison:0",
+  "fixed-value-assignment:0",
+  "fixed-value-assignment:1",
+  "fixed-value-assignment:4",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "inferred-algorithm:networking-protocol-handling",
+  "inferred-algorithm:conditional-data-retrieval-or-processing"
+]
+```
