@@ -5,12 +5,16 @@
 
 ## Background
 
-Binary code similarity detection become more important as the modularity and rate of production of software grows.
-Software is almost never written from scratch, and is becoming increasingly reliant on external libraries.
-For reverse engineers, reducing the amount of repetitive assembly functions to analyze is important, as it allows them to focus on the custom made parts of a
-    binary.
+Binary code similarity detection becomes more important as the modularity and rate of production of software grows.
+Modern software is almost never written from scratch, and is becoming increasingly reliant on external libraries.
+For reverse engineers, reducing the amount of repetitive assembly functions to analyze is important,
+    as it allows them to be more efficient and focus on the custom parts of a binary.
+If a vulnerability is found in a library, it is important to be able to quickly identify if an unknown or proprietary binary
+    is using the vulnerable library, so that it can be mitigated.
+Another aspect of BCSD is license compliance, which is important both for corporations and open source projects.
 
 - Plagiarism Detection
+## Related Work
 
 ## Methodology
 

@@ -42,12 +42,12 @@ class Retrieval(Context):
     ]  # Run for a specific optimization, run on all optimizations if None
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
-    data_path: str
+    data_path: str # Path containing the dataset
 
-    target_platform: Optional[str]
-    target_optimization: Optional[int]
-    save_outliers: Optional[str]
-    save_metrics: bool
+    target_platform: Optional[str] # Run for a specific target platform, run on the same platform as the query if None
+    target_optimization: Optional[int] # Run for a specific target optimization, run on the same optimization as the query if None
+    save_metrics: bool # Save results to a file
+    save_examples: bool # Save best examples to a file
 
     @staticmethod
     def arguments(subparsers):
@@ -68,8 +68,8 @@ class Retrieval(Context):
         parser.add_argument("--target-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
-        parser.add_argument("--save-outliers", type=str)
         parser.add_argument("--save-metrics", action='store_true')
+        parser.add_argument("--save-examples", action='store_true')
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -180,6 +180,9 @@ class Retrieval(Context):
             metrics = test_retrieval(all_scores)
             print(metrics)
 
+        
+
+            print("Saving results...")
             if self.save_metrics:
                 parameters = {
                     "binary": self.binary or "all",

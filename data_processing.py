@@ -81,7 +81,7 @@ class Function:
         self.blocks = blocks
 
     def __str__(self):
-        return f"{self.name}:\n" + "\n".join(str(b) for b in self.blocks)
+        return "\n".join(str(b) for b in self.blocks)
 
 
 @dataclass
@@ -178,7 +178,7 @@ class LibDataset(Dataset):
         pool_size: Optional[int] = None,  # Take the whole dataset if not specified
         seed: Optional[int] = None,  # Don't randomize order if not specified
         binary: Optional[str] = None,
-        optimization: Optional[str] = None,
+        optimization: Optional[int] = None,
         platform: Optional[str] = None,
     ):
         self.files = []
@@ -237,7 +237,7 @@ class PairsDataset(Dataset):
         pool_size: Optional[int] = None,  # Take the whole dataset if not specified
         seed: Optional[int] = None,  # Don't randomize order if not specified
         binary: Optional[str] = None,
-        optimization: Optional[str] = None,
+        optimization: Optional[int] = None,
         platform: Optional[str] = None,
         optimization_diff: Optional[int] = None,
         platform_diff: Optional[str] = None,
@@ -297,10 +297,12 @@ class PairsDataset(Dataset):
                     [f.name for f in target_functions], query_function.name
                 )
 
-                # No match, continue
+                # No match, or if the function is very small (e.g., external functions)
                 if (
                     target_index == len(target_functions)
                     or target_functions[target_index].name != query_function.name
+                    # Random heuristic for small functions.
+                    or len(target_functions[target_index].blocks) + len(query_function.blocks) < 4
                 ):
                     continue
 
@@ -313,7 +315,7 @@ class PairsDataset(Dataset):
     def __len__(self) -> int:
         return len(self.functions)
 
-    def __getitem__(self, idx: int) -> tuple[tuple[Function, Function]]:
+    def __getitem__(self, idx: int) -> tuple[Function, Function]:
         return self.functions[idx]
 
     def __getitems__(self, idxs: list[int]) -> list[tuple[Function, Function]]:

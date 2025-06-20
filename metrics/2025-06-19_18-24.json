@@ -1,0 +1,1 @@
+{"parameters": {"binary": "all", "platform": "all", "target-platform": "same", "optimization": 0, "target-optimization": 1, "pool-size": 1000, "examples": 1, "prompt": "tokens-2", "model": "codeqwen"}, "results": {"mrr": 0.08335916575124713, "recall_at_1": 0.028769841269841268, "recall_at_10": 0.0873015873015873}}

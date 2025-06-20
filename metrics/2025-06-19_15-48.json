@@ -1,0 +1,1 @@
+{"parameters": {"binary": "putty", "platform": "arm", "target-platform": "same", "optimization": 0, "target-optimization": 3, "pool-size": 128, "examples": 1, "prompt": "tokens-2", "model": "codeqwen"}, "results": {"mrr": 0.16095734376914295, "recall_at_1": 0.0703125, "recall_at_10": 0.25}}
