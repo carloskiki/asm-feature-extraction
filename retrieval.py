@@ -43,12 +43,16 @@ class Retrieval(Context):
     ]  # Run for a specific optimization, run on all optimizations if None
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
-    data_path: str # Path containing the dataset
+    data_path: str  # Path containing the dataset
 
-    target_platform: Optional[str] # Run for a specific target platform, run on the same platform as the query if None
-    target_optimization: Optional[int] # Run for a specific target optimization, run on the same optimization as the query if None
-    save_metrics: bool # Save results to a file
-    save_examples: bool # Save best examples to a file
+    target_platform: Optional[
+        str
+    ]  # Run for a specific target platform, run on the same platform as the query if None
+    target_optimization: Optional[
+        int
+    ]  # Run for a specific target optimization, run on the same optimization as the query if None
+    save_metrics: bool  # Save results to a file
+    save_examples: Optional[str]  # Save best examples to a file
 
     @staticmethod
     def arguments(subparsers):
@@ -69,8 +73,8 @@ class Retrieval(Context):
         parser.add_argument("--target-optimization", type=int, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
-        parser.add_argument("--save-metrics", action='store_true')
-        parser.add_argument("--save-examples", action='store_true')
+        parser.add_argument("--save-metrics", action="store_true")
+        parser.add_argument("--save-examples", type=str)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -114,10 +118,14 @@ class Retrieval(Context):
                 ]
 
                 query_chat = tokenizer.apply_chat_template(
-                    [qp for qp, _ in prompt_pairs], tokenize=False, add_generation_prompt=True
+                    [qp for qp, _ in prompt_pairs],
+                    tokenize=False,
+                    add_generation_prompt=True,
                 )
                 target_chat = tokenizer.apply_chat_template(
-                    [tp for _, tp in prompt_pairs], tokenize=False, add_generation_prompt=True
+                    [tp for _, tp in prompt_pairs],
+                    tokenize=False,
+                    add_generation_prompt=True,
                 )
 
                 query_token_batch = tokenizer(
@@ -177,35 +185,62 @@ class Retrieval(Context):
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
 
-        if accelerator.is_main_process:
-            metrics = test_retrieval(all_scores)
-            print(metrics)
+        if not accelerator.is_main_process:
+            return
 
-        
+        metrics = test_retrieval(all_scores)
+        print(metrics)
 
-            print("Saving results...")
-            if self.save_metrics:
-                parameters = {
-                    "binary": self.binary or "all",
-                    "platform": self.platform or "all",
-                    "target-platform": self.target_platform or "same",
-                    "optimization": "all" if self.optimization is None else self.optimization,
-                    "target-optimization": "same" if self.target_optimization is None else self.target_optimization,
-                    "pool-size": self.pool_size,
-                    "examples": self.examples,
-                    "prompt": self.prompt,
-                    "model": self.model,
-                }
-                data = {
-                    "parameters": parameters,
-                    "results": metrics,
-                }
-                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
+        if self.save_examples:
+            # Check if Recal@1 && high similarity => Save example.
+            for index, query_score in enumerate(len(scores)):
+                max_score = max(query_score)
+                if (
+                    index == query_score.index(max_score)
+                    and max_score > 0.9
+                    and index < len(query_decoded)
+                ):
+                    (query_fn, target_fn) = loader[index / self.batch_size][index % self.batch_size]
+                    with open(self.save_examples, "w", encoding="utf-8") as file:
+                        file.write(f"##### {query_fn.name} \n")
+                        file.write("```assembly QUERY\n")
+                        file.write(str(query_fn))
+                        file.write("\n```\n")
+                        file.write(query_decoded[index])
+                        file.write("```assembly TARGET\n")
+                        file.write(str(target_fn))
+                        file.write("\n```\n")
+                        file.write(target_decoded[index])
 
-                with open(Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8") as file:
-                    json.dump(data, file)
+        print("Saving results...")
+        if self.save_metrics:
+            parameters = {
+                "binary": self.binary or "all",
+                "platform": self.platform or "all",
+                "target-platform": self.target_platform or "same",
+                "optimization": "all"
+                if self.optimization is None
+                else self.optimization,
+                "target-optimization": "same"
+                if self.target_optimization is None
+                else self.target_optimization,
+                "pool-size": self.pool_size,
+                "examples": self.examples,
+                "prompt": self.prompt,
+                "model": self.model,
+            }
+            data = {
+                "parameters": parameters,
+                "results": metrics,
+            }
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
-            print("done")
+            with open(
+                Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
+            ) as file:
+                json.dump(data, file)
+
+        print("done")
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
@@ -296,10 +331,10 @@ def compute_retrieval_metrics(scores, relevance):
     recall_at_1 = recall_at_k(scores, relevance, 1)
     recall_at_10 = recall_at_k(scores, relevance, 10)
 
-    max_similarity_mean = sum([max(col) for col in scores]) / len(scores)
-    min_similarity_mean = sum([min(col) for col in scores]) / len(scores)
-    mean_similarity_mean = sum([mean(col) for col in scores]) / len(scores)
-    median_similarity_mean = sum([median(col) for col in scores]) / len(scores)
+    max_similarity_mean = sum(max(col) for col in scores) / len(scores)
+    min_similarity_mean = sum(min(col) for col in scores) / len(scores)
+    mean_similarity_mean = sum(mean(col) for col in scores) / len(scores)
+    median_similarity_mean = sum(median(col) for col in scores) / len(scores)
 
     return {
         "mrr": mrr,
@@ -309,8 +344,8 @@ def compute_retrieval_metrics(scores, relevance):
             "max": max_similarity_mean,
             "median": median_similarity_mean,
             "mean": mean_similarity_mean,
-            "min": min_similarity_mean
-        }
+            "min": min_similarity_mean,
+        },
     }
 
 
