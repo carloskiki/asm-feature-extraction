@@ -291,10 +291,14 @@ def compute_retrieval_metrics(scores, relevance):
     mrr = calculate_mrr(scores, relevance)
     recall_at_1 = recall_at_k(scores, relevance, 1)
     recall_at_10 = recall_at_k(scores, relevance, 10)
+
+    best_similarity_mean = sum([max(col) for col in scores]) / len(scores)
+
     return {
         "mrr": mrr,
         "recall_at_1": recall_at_1,
         "recall_at_10": recall_at_10,
+        "best_similarity_mean": best_similarity_mean
     }
 
 

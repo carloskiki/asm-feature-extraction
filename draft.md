@@ -10,6 +10,7 @@ Software is almost never written from scratch, and is becoming increasingly reli
 For reverse engineers, reducing the amount of repetitive assembly functions to analyze is important, as it allows them to focus on the custom made parts of a
     binary.
 
+- Plagiarism Detection
 
 ## Methodology
 
