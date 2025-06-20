@@ -193,7 +193,7 @@ class Retrieval(Context):
 
         if self.save_examples:
             # Check if Recal@1 && high similarity => Save example.
-            for index, query_score in enumerate(len(scores)):
+            for index, query_score in enumerate(scores):
                 max_score = max(query_score)
                 if (
                     index == query_score.index(max_score)
