@@ -197,9 +197,10 @@ class Retrieval(Context):
                 max_score = max(query_score)
                 if (
                     index == query_score.index(max_score)
-                    and max_score > 0.9
+                    and max_score > 0.5
                     and index < len(query_decoded)
                 ):
+                    print("Found a good example. Saving ...")
                     (query_fn, target_fn) = loader[index / self.batch_size][index % self.batch_size]
                     with open(self.save_examples, "w", encoding="utf-8") as file:
                         file.write(f"##### {query_fn.name} \n")
