@@ -3,7 +3,7 @@
 - [ ] Add references to the binaries in dataset.
 
 
-## Background
+## Intro / Background
 
 Binary code similarity detection becomes more important as the modularity and rate of production of software grows.
 Modern software is almost never written from scratch, and is becoming increasingly reliant on external libraries.
@@ -29,9 +29,13 @@ Dynamic analysis consists of analyzing the features of a binary or code fragment
 This methods is costly, but completely sidesteps the syntactic aspects of binary and solely focuses on the semantics. [2]
 As such, this method works very well for cross-architecture, cross-optimization and cross-obfuscation analysis.
 
-### Machine Learning
+### Machine Learning Methods
 
-Machine learning approaches 
+The surge in interest and applications for machine learning in recent years has also affected BCSD.
+The first successful methods used with natural language processing (NLP) to achieve their results.
+[ref] 
+
+Machine learning approaches
 
 ## Methodology
 
@@ -43,7 +47,6 @@ For each binary and platform, binary objects were generated for each optimizatio
 Stripped all debug symbols except for function names, so as to be able to match functions across binaries.
 In total, yeilds 140 different binaries to analyze.
 The binaries were dissassembled using IDA Pro, yielding 383_658 assembly routines.
-
 
 # Refs
 

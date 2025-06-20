@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from string import punctuation
 from typing import Optional
+from statistics import median, mean
 from argparse import ArgumentParser
 from pathlib import Path
 import random
@@ -295,13 +296,21 @@ def compute_retrieval_metrics(scores, relevance):
     recall_at_1 = recall_at_k(scores, relevance, 1)
     recall_at_10 = recall_at_k(scores, relevance, 10)
 
-    best_similarity_mean = sum([max(col) for col in scores]) / len(scores)
+    max_similarity_mean = sum([max(col) for col in scores]) / len(scores)
+    min_similarity_mean = sum([min(col) for col in scores]) / len(scores)
+    mean_similarity_mean = sum([mean(col) for col in scores]) / len(scores)
+    median_similarity_mean = sum([median(col) for col in scores]) / len(scores)
 
     return {
         "mrr": mrr,
         "recall_at_1": recall_at_1,
         "recall_at_10": recall_at_10,
-        "best_similarity_mean": best_similarity_mean
+        "similarity_mean": {
+            "max": max_similarity_mean,
+            "median": median_similarity_mean,
+            "mean": mean_similarity_mean,
+            "min": min_similarity_mean
+        }
     }
 
 
