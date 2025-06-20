@@ -42,6 +42,7 @@ Generate new pool for all sources, OR generate one pool and run on all elements 
 
 ## Papers
 
+
 ### Meta Analysis
 
 - [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
@@ -52,15 +53,26 @@ Generate new pool for all sources, OR generate one pool and run on all elements 
 
 ### Deep Learning Based
 
-- [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
-- [BinAug: Enhancing Binary Similarity Analysis with Low-Cost Input Repairing](https://dl.acm.org/doi/pdf/10.1145/3597503.3623328)
-- [CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision](https://dl.acm.org/doi/pdf/10.1145/3650212.3652145)
-- [jTrans: jump-aware transformer for binary code similarity detection](https://dl.acm.org/doi/pdf/10.1145/3533767.3534367)
+NLP:
+
 - [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization](https://ieeexplore.ieee.org/document/8835340)
+
+Jump aware transformer architecture:
+
+- [jTrans: jump-aware transformer for binary code similarity detection](https://dl.acm.org/doi/pdf/10.1145/3533767.3534367)
+
+Builds on jTrans:
+
+- [CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision](https://dl.acm.org/doi/pdf/10.1145/3650212.3652145)
+
+Transformer based architecture:
+
+- [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
 
 ### Dynamic Analysis
 
 - [Binary Function Clustering Using Semantic Hashes](https://ieeexplore.ieee.org/document/6406693)
+- [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
 
 ### Java Bytecode similarity
 
@@ -73,6 +85,10 @@ Oldest first
 ### IR Based Similarity
 
 - [Detecting Clones Across Microsoft .NET Programming Languages](https://ieeexplore.ieee.org/document/6385136)
+
+### Input reparing
+
+- [BinAug: Enhancing Binary Similarity Analysis with Low-Cost Input Repairing](https://dl.acm.org/doi/pdf/10.1145/3597503.3623328)
 
 ### Bad 
 
