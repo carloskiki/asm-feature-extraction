@@ -57,3 +57,41 @@ loc_AE1AE:
   "inferred-algorithm:conditional-data-retrieval-or-processing"
 ]
 ```
+
+
+```assembly
+loc_5CA3BB:
+    PUSH rbp
+    MOV rbp, rsp
+    SUB rsp, 10h
+    MOV [rbp+var_8], rdi
+    MOV rax, [rbp+var_8]
+    MOV rdi, rax
+    CALL sub_59356B
+    LEAVE 
+    RETN 
+```
+
+```json
+[
+  "return-type:pointer",
+  "argument-count:1",
+  "arg0-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x10",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_59356B)",
+  "integer-size-hint:64-bit",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "inferred-algorithm:function-wrapper-or-trampoline",
+  "inferred-algorithm:argument-forwarding"
+]
+```
