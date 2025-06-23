@@ -109,7 +109,7 @@ class Retrieval(Context):
                     self.binary,
                     optimization,
                     query_platform,
-                    optimization,
+                    None,
                     target_platform
                 )
                 scores = self.generate_scores(accelerator, dataset)
@@ -151,7 +151,7 @@ class Retrieval(Context):
                     query_optimization,
                     platform,
                     target_optimization,
-                    platform
+                    None
                 )
                 scores = self.generate_scores(accelerator, dataset)
 
