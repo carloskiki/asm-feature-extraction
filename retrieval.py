@@ -20,7 +20,6 @@ from torch.utils.data import DataLoader
 from accelerate import Accelerator
 from data_processing import (
     BINARIES,
-    PLATFORMS,
     PairsDataset,
 )
 from context import Context, MAX_NEW_TOKENS
@@ -32,8 +31,8 @@ def platform_parser(s):
     if ':' in s and ',' in s:
         try:
             return [tuple(p.split(':', 1)) for p in s.split(',')]
-        except ValueError:
-            raise ArgumentTypeError("Malformed key:value pair.")
+        except ValueError as e:
+            raise ArgumentTypeError("Malformed key:value pair.") from e
     else:
         # Just treat it as a plain string
         return s
@@ -52,8 +51,8 @@ def optimization_parser(s):
             k, v = p.split(':', 1)
             pairs.append((int(k), int(v)))
         return pairs
-    except Exception:
-        raise ArgumentTypeError("Expected an int or comma-separated int:int pairs")
+    except Exception as e:
+        raise ArgumentTypeError("Expected an int or comma-separated int:int pairs") from e
 
 @dataclass
 class Retrieval(Context):
@@ -175,8 +174,7 @@ class Retrieval(Context):
                     }
 
                     metrics.append(data)
-
-                print(metrics[-1])
+                    print(metrics[-1])
 
         print("Saving results...")
         if self.save_metrics:
