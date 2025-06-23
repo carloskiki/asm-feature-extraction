@@ -95,3 +95,88 @@ loc_5CA3BB:
   "inferred-algorithm:argument-forwarding"
 ]
 ```
+
+
+```assembly
+loc_62BF98:
+    BEQZ $a0, locret_62C024
+    NOP 
+loc_62BFA0:
+    LW $v0, 8($a0)
+    BEQZ $v0, locret_62C024
+    LUI $gp, 0x7B
+loc_62BFAC:
+    ADDIU $sp, -0x20
+    LA $gp, unk_7AC870
+    MOVE $a1, $zero
+    SW $ra, 0x20+var_4($sp)
+    SW $s0, 0x20+var_8($sp)
+    MOVE $s0, $a0
+    SW $gp, 0x20+var_10($sp)
+    LA $t9, sub_571268
+    JALR $ra, $t9
+    MOVE $a0, $v0
+    LUI $a1, 0x63
+    LW $gp, 0x20+var_10($sp)
+    LW $a0, 8($s0)
+    LA $a1, sub_62B9D4
+    LA $t9, sub_571190
+    JALR $ra, $t9
+    MOVE $a2, $a0
+    LUI $a1, 0x63
+    LW $gp, 0x20+var_10($sp)
+    LW $a0, 8($s0)
+    LA $t9, sub_5710E8
+    JALR $ra, $t9
+    LA $a1, sub_62BAA0
+    LW $gp, 0x20+var_10($sp)
+    LW $a0, 8($s0)
+    LW $ra, 0x20+var_4($sp)
+    LW $s0, 0x20+var_8($sp)
+    LA $t9, sub_570964
+    JR $t9
+    ADDIU $sp, 0x20
+loc_62C024:
+    JR $ra
+    NOP 
+```
+
+```json
+[
+  "return-type:void",
+  "argument-count:1",
+  "arg0-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x20",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-input",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_571268)",
+  "external-call-type:unspecified-helper (sub_571190)",
+  "external-call-type:unspecified-helper (sub_5710E8)",
+  "external-call-type:unspecified-helper (sub_570964)",
+  "integer-size-hint:32-bit",
+  "memory-read-from-input-parameter-offset:8",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "fixed-value-comparison:0",
+  "fixed-value-assignment:0",
+  "address-or-offset-constant:0x7B",
+  "address-or-offset-constant:0x63",
+  "address-or-offset-constant:unk_7AC870",
+  "address-or-offset-constant:sub_571268",
+  "address-or-offset-constant:sub_62B9D4",
+  "address-or-offset-constant:sub_571190",
+  "address-or-offset-constant:sub_62BAA0",
+  "address-or-offset-constant:sub_5710E8",
+  "address-or-offset-constant:sub_570964",
+  "inferred-algorithm:conditional-execution-or-dispatch",
+  "inferred-algorithm:callback-or-handler-registration",
+  "inferred-algorithm:module-initialization-or-configuration"
+]
+```
