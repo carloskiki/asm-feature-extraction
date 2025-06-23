@@ -198,7 +198,7 @@ class Retrieval(Context):
                 if (
                     index == query_score.index(max_score)
                     # and max_score > 0.4
-                    and index < len(query_decoded)
+                    # and index < len(query_decoded)
                 ):
                     print("Found a good example. Saving ...")
                     (query_fn, target_fn) = loader.dataset[index]
