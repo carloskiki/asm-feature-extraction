@@ -415,4 +415,5 @@ def parse_json(s: str) -> list[str]:
         return json.loads(s)
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
+        print(s)
         return []
