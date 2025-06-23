@@ -233,8 +233,8 @@ class PairsDataset(Dataset):
         self,
         path: str,
         main_process: bool,
-        pool_size: Optional[int] = None,  # Take the whole dataset if not specified
-        seed: Optional[int] = None,  # Don't randomize order if not specified
+        pool_size: Optional[int] = None,  # Take the whole dataset if None
+        seed: Optional[int] = None,  # Don't randomize order if None
         binary: Optional[str] = None,
         optimization: Optional[int] = None,
         platform: Optional[str] = None,

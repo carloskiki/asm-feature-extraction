@@ -5,9 +5,9 @@ Retrieval CLI utilities
 from dataclasses import dataclass
 from datetime import datetime
 from string import punctuation
-from typing import Optional
+from typing import Optional, Union
 from statistics import median, mean
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 from pathlib import Path
 import random
 import json
@@ -27,6 +27,33 @@ from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
+def platform_parser(s):
+    # If input looks like key:value,key:value,...
+    if ':' in s and ',' in s:
+        try:
+            return [tuple(p.split(':', 1)) for p in s.split(',')]
+        except ValueError:
+            raise ArgumentTypeError("Malformed key:value pair.")
+    else:
+        # Just treat it as a plain string
+        return s
+
+def optimization_parser(s):
+    # Try to parse as a single int
+    try:
+        return int(s)
+    except ValueError:
+        pass  # Not a single int
+
+    # Try to parse as list of int:int pairs
+    try:
+        pairs = []
+        for p in s.split(','):
+            k, v = p.split(':', 1)
+            pairs.append((int(k), int(v)))
+        return pairs
+    except Exception:
+        raise ArgumentTypeError("Expected an int or comma-separated int:int pairs")
 
 @dataclass
 class Retrieval(Context):
@@ -37,20 +64,12 @@ class Retrieval(Context):
     pool_size: Optional[int]
     seed: int  # Seed for selection of targets, choosed randomly if not set
     binary: Optional[str]  # Run for a specific binary, run on all binaries if None
-    platform: Optional[str]  # Run for a specific platform, run on all platforms if None
-    optimization: Optional[
-        int
-    ]  # Run for a specific optimization, run on all optimizations if None
+    platform: Union[str, list[tuple[str, str]], None]  # Run for a specific platform, or run on all pairs, or run on all platforms if None
+    optimization: Union[int, list[tuple[int, int]], None]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str  # Path containing the dataset
 
-    target_platform: Optional[
-        str
-    ]  # Run for a specific target platform, run on the same platform as the query if None
-    target_optimization: Optional[
-        int
-    ]  # Run for a specific target optimization, run on the same optimization as the query if None
     save_metrics: bool  # Save results to a file
     save_examples: Optional[str]  # Save best examples to a file
 
@@ -67,39 +86,117 @@ class Retrieval(Context):
         parser.add_argument("--pool-size", type=int, default=None)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
-        parser.add_argument("--platform", type=str, choices=PLATFORMS.keys())
-        parser.add_argument("--optimization", type=int, choices=range(4))
-        parser.add_argument("--target-platform", type=str, choices=PLATFORMS.keys())
-        parser.add_argument("--target-optimization", type=int, choices=range(4))
+        parser.add_argument("--platform", type=platform_parser, choices=PLATFORMS.keys())
+        parser.add_argument("--optimization", type=optimization_parser, choices=range(4))
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-metrics", action="store_true")
-        parser.add_argument("--save-examples", type=str)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
         accelerator = Accelerator()
 
+        metrics = []
+
+        if isinstance(self.platform, list):
+            optimization = None if isinstance(self.optimization, list)  else self.optimization
+
+            for query_platform, target_platform in self.platform:
+                dataset = PairsDataset(
+                    self.data_path,
+                    accelerator.is_local_main_process,
+                    self.pool_size,
+                    self.seed,
+                    self.binary,
+                    optimization,
+                    query_platform,
+                    optimization,
+                    target_platform
+                )
+                scores = self.generate_scores(accelerator, dataset)
+
+                if accelerator.is_main_process:
+                    raw_metrics = test_retrieval(scores)
+                    parameters = {
+                        "binary": self.binary or "all",
+                        "platform": query_platform,
+                        "target-platform": target_platform,
+                        "optimization": "all"
+                        if self.optimization is None or isinstance(self.optimization, list)
+                        else self.optimization,
+                        "pool-size": self.pool_size,
+                        "examples": self.examples,
+                        "prompt": self.prompt,
+                        "model": self.model,
+                    }
+                    data = {
+                        "parameters": parameters,
+                        "results": raw_metrics,
+                    }
+
+                    metrics.append(data)
+
+                print(metrics[-1])
+            
+        
+        if isinstance(self.optimization, list):
+            platform = None if isinstance(self.platform, list)  else self.platform
+
+            for query_optimization, target_optimization in self.optimization:
+                dataset = PairsDataset(
+                    self.data_path,
+                    accelerator.is_local_main_process,
+                    self.pool_size,
+                    self.seed,
+                    self.binary,
+                    query_optimization,
+                    platform,
+                    target_optimization,
+                    platform
+                )
+                scores = self.generate_scores(accelerator, dataset)
+
+                if accelerator.is_main_process:
+                    raw_metrics = test_retrieval(scores)
+                    parameters = {
+                        "binary": self.binary or "all",
+                        "optimization": query_optimization,
+                        "target-optimization": target_optimization,
+                        "platform": "all"
+                        if self.platform is None or isinstance(self.platform, list)
+                        else self.platform,
+                        "pool-size": self.pool_size,
+                        "examples": self.examples,
+                        "prompt": self.prompt,
+                        "model": self.model,
+                    }
+                    data = {
+                        "parameters": parameters,
+                        "results": raw_metrics,
+                    }
+
+                    metrics.append(data)
+
+                print(metrics[-1])
+
+        print("Saving results...")
+        if self.save_metrics:
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+
+            with open(
+                Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
+            ) as file:
+                json.dump(metrics, file)
+
+        print("done")
+
+    def generate_scores(self, accelerator: Accelerator, dataset: PairsDataset) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
 
-        dataset = PairsDataset(
-            self.data_path,
-            accelerator.is_local_main_process,
-            self.pool_size,
-            self.seed,
-            self.binary,
-            self.optimization,
-            self.platform,
-            self.target_optimization,
-            self.target_platform,
-        )
-
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
-
-        tokenizer = self.get_tokenizer()
 
         query_decoded = []
         target_decoded = []
@@ -166,6 +263,7 @@ class Retrieval(Context):
                     torch.cuda.empty_cache()
                     gc.collect()
                     clear_cache_counter = 0
+        
 
         query_words = [word_tokenize(q) for q in query_decoded]
         target_words = [word_tokenize(t) for t in target_decoded]
@@ -185,63 +283,8 @@ class Retrieval(Context):
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
 
-        if not accelerator.is_main_process:
-            return
-
-        metrics = test_retrieval(all_scores)
-        print(metrics)
-
-        if self.save_examples:
-            # Check if Recal@1 && high similarity => Save example.
-            for index, query_score in enumerate(scores):
-                max_score = max(query_score)
-                if (
-                    index == query_score.index(max_score)
-                    # and max_score > 0.4
-                    # and index < len(query_decoded)
-                ):
-                    print("Found a good example. Saving ...")
-                    (query_fn, target_fn) = loader.dataset[index]
-                    with open(self.save_examples, "w", encoding="utf-8") as file:
-                        file.write(f"##### {query_fn.name} \n")
-                        file.write("```assembly QUERY\n")
-                        file.write(str(query_fn))
-                        file.write("\n```\n")
-                        file.write(query_decoded[index])
-                        file.write("```assembly TARGET\n")
-                        file.write(str(target_fn))
-                        file.write("\n```\n")
-                        file.write(target_decoded[index])
-
-        print("Saving results...")
-        if self.save_metrics:
-            parameters = {
-                "binary": self.binary or "all",
-                "platform": self.platform or "all",
-                "target-platform": self.target_platform or "same",
-                "optimization": "all"
-                if self.optimization is None
-                else self.optimization,
-                "target-optimization": "same"
-                if self.target_optimization is None
-                else self.target_optimization,
-                "pool-size": self.pool_size,
-                "examples": self.examples,
-                "prompt": self.prompt,
-                "model": self.model,
-            }
-            data = {
-                "parameters": parameters,
-                "results": metrics,
-            }
-            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-
-            with open(
-                Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
-            ) as file:
-                json.dump(data, file)
-
-        print("done")
+        
+        return all_scores
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
