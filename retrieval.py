@@ -4,7 +4,6 @@ Retrieval CLI utilities
 
 from dataclasses import dataclass
 from datetime import datetime
-from string import punctuation
 from typing import Optional, Union
 from statistics import median, mean
 from argparse import ArgumentParser, ArgumentTypeError

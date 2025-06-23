@@ -26,7 +26,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-m", "--model", choices=MODELS.keys(), type=str, default="codeqwen"
+        "-m", "--model", choices=MODELS.keys(), type=str, default="qwen-2.5-0.5"
     )
     parser.add_argument("-p", "--prompt", choices=os.listdir("prompts"), type=str, default="tokens-2")
     parser.add_argument("-e", "--examples", type=int, default=0)
