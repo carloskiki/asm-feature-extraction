@@ -209,7 +209,7 @@ class LibDataset(Dataset):
             if seed is None:
                 functions = functions[:sample_size]
             else:
-                functions = random.sample(functions, sample_size)
+                functions = random.sample(functions, sample_size or len(functions))
 
             self.functions.extend([(f, file) for f in functions])
 
