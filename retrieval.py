@@ -176,6 +176,9 @@ class Retrieval(Context):
                     metrics.append(data)
                     print(metrics[-1])
 
+        if not accelerator.is_main_process:
+            return
+        
         print("Saving results...")
         if self.save_metrics:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
