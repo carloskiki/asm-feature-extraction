@@ -201,7 +201,7 @@ class Retrieval(Context):
                     and index < len(query_decoded)
                 ):
                     print("Found a good example. Saving ...")
-                    (query_fn, target_fn) = loader[index / self.batch_size][index % self.batch_size]
+                    (query_fn, target_fn) = loader.dataset[index / self.batch_size][index % self.batch_size]
                     with open(self.save_examples, "w", encoding="utf-8") as file:
                         file.write(f"##### {query_fn.name} \n")
                         file.write("```assembly QUERY\n")
