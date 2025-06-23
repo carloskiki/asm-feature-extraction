@@ -83,7 +83,7 @@ class BatchQuery(Context):
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
-                prompts = [self.get_prompt(str(f)) for f in batch]
+                prompts = [self.get_prompt(str(f)) for f, _ in batch]
                 functions.extend(batch)
 
                 chat = tokenizer.apply_chat_template(
@@ -113,12 +113,12 @@ class BatchQuery(Context):
         all_queries = accelerator.gather_for_metrics(zip(functions, query_decoded))
 
         # Clear out and or create the file for all processes to write to it later
-        if accelerator.is_local_main_process:
+        if accelerator.is_main_process:
             with open(self.out_file, "w", encoding="utf-8") as file:
                 pass
 
             with open(self.out_file, "a", encoding="utf-8") as file:
-                for fn, output in tqdm(all_queries, desc=f"Writing results to {self.out_file}"):
+                for (fn, _file_id), output in tqdm(all_queries, desc=f"Writing results to {self.out_file}"):
                     file.write("############\n")
                     file.write("```assembly\n")
                     file.write(str(fn))
