@@ -28,7 +28,7 @@ def main():
     parser.add_argument(
         "-m", "--model", choices=MODELS.keys(), type=str, default="codeqwen"
     )
-    parser.add_argument("-p", "--prompt", choices=os.listdir("prompts"), type=str, default="tokens")
+    parser.add_argument("-p", "--prompt", choices=os.listdir("prompts"), type=str, default="tokens-2")
     parser.add_argument("-e", "--examples", type=int, default=0)
     subparsers = parser.add_subparsers(
         description="the action to be performed", dest="subcommand", required=True
