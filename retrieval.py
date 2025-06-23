@@ -197,7 +197,7 @@ class Retrieval(Context):
                 max_score = max(query_score)
                 if (
                     index == query_score.index(max_score)
-                    and max_score > 0.5
+                    # and max_score > 0.4
                     and index < len(query_decoded)
                 ):
                     print("Found a good example. Saving ...")
