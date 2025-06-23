@@ -265,8 +265,8 @@ class Retrieval(Context):
                     clear_cache_counter = 0
         
 
-        query_words = [word_tokenize(q) for q in query_decoded]
-        target_words = [word_tokenize(t) for t in target_decoded]
+        query_words = [parse_json(q) for q in query_decoded]
+        target_words = [parse_json(t) for t in target_decoded]
 
         all_targets = accelerator.gather_for_metrics(target_words)
 
@@ -402,10 +402,18 @@ def jaccard_index(query: list[str], potential_target: list[str]) -> float:
     )  # Return 1.0 if both sets are empty
 
 
-def word_tokenize(s: str) -> list[str]:
+def parse_json(s: str) -> list[str]:
     """
     Tokenize the query into words that can be compared more easily
     """
 
-    words = s.split()
-    return [word.strip(punctuation) for word in words]
+    s = s.strip()  # Remove surrounding whitespace
+    s = s.removeprefix("```json")
+    s = s.removesuffix("```")
+    s = s.strip()  # Remove any remaining whitespace or newlines
+
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        print("found invalid json... Skipping")
+        return []
