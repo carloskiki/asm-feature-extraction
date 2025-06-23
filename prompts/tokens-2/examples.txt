@@ -1,5 +1,4 @@
 ```assembly
-PACKET_get_net_4_0:
 loc_AE188:
     PUSH {R7,LR}
     SUB SP, SP, #8
