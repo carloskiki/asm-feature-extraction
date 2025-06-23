@@ -71,7 +71,6 @@ class Retrieval(Context):
     data_path: str  # Path containing the dataset
 
     save_metrics: bool  # Save results to a file
-    save_examples: Optional[str]  # Save best examples to a file
 
     @staticmethod
     def arguments(subparsers):
