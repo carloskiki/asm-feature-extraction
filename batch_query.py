@@ -12,7 +12,6 @@ import torch
 from data_processing import LibDataset, BINARIES, PLATFORMS
 from context import Context, MAX_NEW_TOKENS
 
-MAX_LENGTH = 8192
 CLEAR_CACHE_PERIOD = 32
 
 @dataclass
@@ -48,7 +47,7 @@ class BatchQuery(Context):
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=str, choices=PLATFORMS.keys())
         parser.add_argument("--optimization", type=int, choices=range(4))
-        parser.add_argument("--context-size", type=int, default=2048)
+        parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("data_path", type=str)
         parser.add_argument("out_file", type=str)
 
@@ -96,7 +95,7 @@ class BatchQuery(Context):
                     padding=self.batch_size > 1,
                     padding_side="left",
                     return_tensors="pt",
-                    max_length=MAX_LENGTH,
+                    max_length=self.context_size,
                 ).to(accelerator.device)
 
                 # Pass the tokens to LLM
