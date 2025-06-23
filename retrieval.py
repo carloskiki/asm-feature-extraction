@@ -134,8 +134,8 @@ class Retrieval(Context):
                     }
 
                     metrics.append(data)
+                    print(metrics[-1])
 
-                print(metrics[-1])
             
         
         if isinstance(self.optimization, list):
@@ -281,7 +281,6 @@ class Retrieval(Context):
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
-
         
         return all_scores
 
