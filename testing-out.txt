@@ -1,0 +1,236 @@
+############
+```assembly
+loc_3A47C:
+    PUSH {R4-R6,LR}
+    MOV R5, R0
+    MOV R6, R1
+    MOV R2, R1
+    MOV R1, R0
+    MOV R0, #0xC609C
+    BL sub_3A098
+    MOV R4, R0
+    MOV R2, R6
+    MOV R1, R5
+    MOV R0, #0xC5D5C
+    BL sub_3A098
+    ADD R0, R4
+    CMP R0, #2
+    ITE 
+    MOVEQ R0, #2
+    MOVNE R0, #0
+    POP {R4-R6,PC}
+```
+Output:```json
+[
+  "return-type:integer",
+  "argument-count:2",
+  "arg0-type:pointer",
+  "arg1-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x8",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-output",
+  "unconditional-jumps-present",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_3A098)",
+  "external-call-type:unspecified-helper (sub_3A098)",
+  "integer-size-hint:32-bit",
+  "memory-read-from-output-parameter-offset:8",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "fixed-value-comparison:0",
+  "fixed-value-assignment:0",
+  "address-or-offset-constant:0x7B",
+  "address-or-offset-constant:0x63",
+  "address-or-offset-constant:unk_7AC870",
+  "address-or-offset-constant:sub_3A098",
+  "address-or-offset-constant:sub_3A098",
+  "address-or-offset-constant:sub_571268",
+  "address-or-offset-constant:sub_571190",
+  "address-or-offset-constant:sub_5710E8",
+  "address-or-offset-constant:sub_570964",
+  "inferred-algorithm:conditional-execution-or-dispatch",
+  "inferred-algorithm:callback-or-handler-registration",
+  "inferred-algorithm:module-initialization-or-configuration"
+]
+```
+############
+```assembly
+loc_8CD74:
+    CBZ R0, loc_8CD94
+loc_8CD76:
+    PUSH {R4-R6,LR}
+    MOV R5, R1
+    MOV R4, R0
+    MOVS R6, #0
+loc_8CD7E:
+    MOV R2, R6
+    MOV R1, R5
+    LDR R0, [R4,#4]
+    BLX fnmatch
+    CBZ R0, loc_8CD98
+loc_8CD8A:
+    LDR R4, [R4]
+    CMP R4, #0
+    BNE loc_8CD7E
+loc_8CD90:
+    MOVS R0, #0
+    POP {R4-R6,PC}
+loc_8CD94:
+    MOVS R0, #0
+    BX LR
+loc_8CD98:
+    MOV R0, R4
+    POP {R4-R6,PC}
+```
+Output:```json
+[
+  "return-type:void",
+  "argument-count:2",
+  "arg0-type:pointer",
+  "arg1-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x10",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-output",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (fnmatch)",
+  "external-call-type:unspecified-helper (sub_8CD98)",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "fixed-value-comparison:0",
+  "fixed-value-assignment:0",
+  "address-or-offset-constant:0x7B",
+  "address-or-offset-constant:0x63",
+  "address-or-offset-constant:unk_7AC870",
+  "address-or-offset-constant:sub_8CD98",
+  "address-or-offset-constant:sub_8CD96",
+  "address-or-offset-constant:sub_8CD94",
+  "address-or-offset-constant:sub_8CD98",
+  "inferred-algorithm:conditional-execution-or-dispatch",
+  "inferred-algorithm:callback-or-handler-registration",
+  "inferred-algorithm:module-initialization-or-configuration"
+]
+```
+############
+```assembly
+loc_2346C:
+    PUSH {R3-R5,LR}
+    MOV R5, R0
+    MOV R4, R1
+    MOV R0, R1
+    BLX strlen
+    MOV R2, R0
+    MOV R1, R4
+    MOV R0, R5
+    BL sub_2343C
+    POP {R3-R5,PC}
+```
+Output:```json
+[
+  "return-type:void",
+  "argument-count:2",
+  "arg0-type:pointer",
+  "arg1-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x8",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-input",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (strlen)",
+  "external-call-type:unspecified-helper (sub_2343C)",
+  "address-or-offset-constant:0x7B",
+  "address-or-offset-constant:0x63",
+  "address-or-offset-constant:unk_7AC870",
+  "address-or-offset-constant:sub_2343C",
+  "address-or-offset-constant:sub_2346C"
+]
+```
+############
+```assembly
+loc_4DF80:
+    PUSH {R3-R7,LR}
+    LDR R4, [SP,#0x18+n]
+    ADDS R6, R4, #4
+    LDR R4, [R0]
+    ADDS R4, #3
+    ADDS R7, R6, R4
+    BIC.W R7, R7, #3
+    CMP R7, R1
+    BGT loc_4DFBA
+loc_4DF94:
+    MOV R1, R3
+    MOV R5, R0
+    BIC.W R4, R4, #3
+    ADD R0, R4
+    STRH R2, [R0,#2]
+    STRH R6, [R5,R4]
+    LDR R2, [SP,#0x18+n]
+    ADDS R0, #4
+    BLX memcpy
+    LDR R3, [R5]
+    ADDS R3, #3
+    ADD R6, R3
+    BIC.W R6, R6, #3
+    STR R6, [R5]
+    MOVS R0, #0
+    POP {R3-R7,PC}
+loc_4DFBA:
+    MOV.W R0, #0xFFFFFFFF
+    POP {R3-R7,PC}
+```
+Output:```json
+[
+  "return-type:integer",
+  "argument-count:1",
+  "arg0-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x18",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "conditional-branching-on-output",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (memcpy)",
+  "integer-size-hint:32-bit",
+  "memory-read-from-output-parameter-offset:8",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "fixed-value-comparison:0",
+  "fixed-value-assignment:0",
+  "address-or-offset-constant:0x18",
+  "address-or-offset-constant:0x18+n",
+  "address-or-offset-constant:memcpy",
+  "address-or-offset-constant:sub_571268",
+  "address-or-offset-constant:sub_62B9D4",
+  "address-or-offset-constant:sub_571190",
+  "address-or-offset-constant:sub_62BAA0",
+  "address-or-offset-constant:sub_5710E8",
+  "address-or-offset-constant:sub_570964",
+  "inferred-algorithm:conditional-execution-or-dispatch",
+  "inferred-algorithm:callback-or-handler-registration",
+  "inferred-algorithm:module-initialization-or-configuration"
+]
+```

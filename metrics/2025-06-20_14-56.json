@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "binary": "curl",
+    "platform": "arm",
+    "target-platform": "same",
+    "optimization": 1,
+    "target-optimization": 2,
+    "pool-size": 100,
+    "examples": 1,
+    "prompt": "tokens-2",
+    "model": "codeqwen"
+  },
+  "results": {
+    "mrr": 0.18504202587789867,
+    "recall_at_1": 0.0625,
+    "recall_at_10": 0.2767857142857143,
+    "similarity_mean": {
+      "max": 0.7906145743243826,
+      "median": 0.6371327259680947,
+      "mean": 0.5752855505956112,
+      "min": 0.0003272378663003663
+    }
+  }
+}

@@ -239,7 +239,7 @@ class Retrieval(Context):
                     max_new_tokens=MAX_NEW_TOKENS,
                 )[:, query_token_batch["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
-                query_decoded.extend(tokenizer.batch_decode(query_outputs))
+                query_decoded.extend(tokenizer.batch_decode(query_outputs, skip_special_tokens=True))
 
                 target_token_batch = tokenizer(
                     target_chat,
@@ -256,7 +256,7 @@ class Retrieval(Context):
                     max_new_tokens=MAX_NEW_TOKENS,
                 )[:, target_token_batch["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
-                target_decoded.extend(tokenizer.batch_decode(target_outputs))
+                target_decoded.extend(tokenizer.batch_decode(target_outputs, skip_special_tokens=True))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()

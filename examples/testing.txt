@@ -1,0 +1,76 @@
+##### add2list 
+```assembly QUERY
+loc_1DDDC:
+    PUSH {R4,LR}
+    MOV R4, R0
+    LDR R0, [R0]
+    BL sub_285B8
+    CBZ R0, loc_1DDEE
+loc_1DDE8:
+    STR R0, [R4]
+    MOVS R0, #0
+    POP {R4,PC}
+loc_1DDEE:
+    MOVS R0, #0xE
+    POP {R4,PC}
+```
+```json
+[
+  "return-type:pointer",
+  "argument-count:1",
+  "arg0-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x4",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_285B8)",
+  "integer-size-hint:64-bit",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "inferred-algorithm:function-wrapper-or-trampoline",
+  "inferred-algorithm:argument-forwarding"
+]
+```<|im_end|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|>```assembly TARGET
+loc_1FBD0:
+    PUSH {R4,LR}
+    MOV R4, R0
+    LDR R0, [R0]
+    BL sub_29814
+    CBZ R0, loc_1FBE2
+loc_1FBDC:
+    STR R0, [R4]
+    MOVS R0, #0
+    POP {R4,PC}
+loc_1FBE2:
+    MOVS R0, #0xE
+    POP {R4,PC}
+```
+```json
+[
+  "return-type:pointer",
+  "argument-count:1",
+  "arg0-type:pointer",
+  "calling-convention-hint:callee-saves-registers",
+  "calling-convention-hint:registers-for-args",
+  "calling-convention-hint:return-via-register",
+  "stack-arg-use:false",
+  "standard-calling-convention-used",
+  "stack-frame-management-present",
+  "explicit-stack-allocation-size:0x4",
+  "callee-saves-registers-present",
+  "standard-function-return",
+  "external-function-calls-present",
+  "external-call-type:unspecified-helper (sub_29814)",
+  "integer-size-hint:32-bit",
+  "memory-write-to-stack-offset",
+  "memory-read-from-stack-offset",
+  "inferred-algorithm:function-wrapper-or-trampoline",
+  "inferred-algorithm:argument-forwarding"
+]
+```<|im_end|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|><|endoftext|>

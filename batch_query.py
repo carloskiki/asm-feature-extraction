@@ -103,7 +103,7 @@ class BatchQuery(Context):
                     **token_batch,
                     max_new_tokens=MAX_NEW_TOKENS,
                 )[:, token_batch["input_ids"].shape[1] :].cpu()
-                query_decoded.extend(tokenizer.batch_decode(query_outputs))
+                query_decoded.extend(tokenizer.batch_decode(query_outputs, skip_special_tokens=True))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
@@ -119,6 +119,7 @@ class BatchQuery(Context):
 
             with open(self.out_file, "a", encoding="utf-8") as file:
                 for (fn, _file_id), output in tqdm(all_queries, desc=f"Writing results to {self.out_file}"):
+                    output = output.strip()
                     file.write("############\n")
                     file.write("```assembly\n")
                     file.write(str(fn))

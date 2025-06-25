@@ -1,1 +1,18 @@
-{"parameters": {"binary": "all", "platform": "arm", "target-platform": "gcc", "optimization": "all", "target-optimization": "same", "pool-size": 1000, "examples": 1, "prompt": "tokens-2", "model": "codeqwen"}, "results": {"mrr": 0.08978708834229536, "recall_at_1": 0.021825396825396824, "recall_at_10": 0.07242063492063493}}
+{
+  "parameters": {
+    "binary": "all",
+    "platform": "arm",
+    "target-platform": "gcc",
+    "optimization": "all",
+    "target-optimization": "same",
+    "pool-size": 1000,
+    "examples": 1,
+    "prompt": "tokens-2",
+    "model": "codeqwen"
+  },
+  "results": {
+    "mrr": 0.08978708834229536,
+    "recall_at_1": 0.021825396825396824,
+    "recall_at_10": 0.07242063492063493
+  }
+}
