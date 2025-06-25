@@ -412,7 +412,12 @@ def parse_json(s: str) -> list[str]:
     s = s.strip()  # Remove any remaining whitespace or newlines
 
     try:
-        return json.loads(s)
+        parsed = json.loads(s)
+        if not isinstance(parsed, list):
+            print("does not decode to a list.")
+            print(s)
+            return []
+        return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
         print(s)
