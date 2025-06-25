@@ -1,0 +1,105 @@
+```assembly
+loc_46CED0:
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    SUB rsp, 8
+    MOV eax, [rdi+5B8h]
+    TEST eax, eax
+    JNZ loc_46CF00
+loc_46CEE3:
+    MOV dword ptr [rbx+5B8h], 0
+    MOV eax, 2
+loc_46CEF2:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+loc_46CF00:
+    MOV rbp, rsi
+    CALL sub_482620
+    TEST eax, eax
+    JZ loc_46CEE3
+loc_46CF0C:
+    MOV edx, 2
+    MOV esi, 23h
+    MOV rdi, rbp
+    CALL sub_4493F0
+    TEST eax, eax
+    JZ loc_46CF35
+loc_46CF22:
+    XOR esi, esi
+    MOV edx, 2
+    MOV rdi, rbp
+    CALL sub_4493F0
+    TEST eax, eax
+    JNZ loc_46CF58
+loc_46CF35:
+    MOV r8d, 3B3h
+    MOV ecx, offset aSslStatemExten_2
+    MOV edx, 44h
+    MOV esi, 1CCh
+    MOV edi, 14h
+    CALL sub_4DAA40
+    XOR eax, eax
+    JMP loc_46CEF2
+loc_46CF58:
+    MOV eax, 1
+    JMP loc_46CEF2
+```
+
+```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Arithmetic",
+        "Bitwise",
+        "Comparison",
+        "DataMovement",
+        "ConditionalBranching",
+        "UnconditionalJump",
+        "FunctionCall",
+        "Return",
+        "MemoryAccess",
+        "StackManipulation"
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 4,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+  "inferred_algorithm": "Generic Control/Data Flow"
+}
+```
