@@ -259,6 +259,7 @@ class Retrieval(Context):
         query_words = [parse_json(q) for q in query_decoded]
         target_words = [parse_json(t) for t in target_decoded]
         if [] in target_words:
+            print("Query for thing:")
             print(tokenizer.batch_decode(target_tokens, skip_special_tokens=True))
 
         all_targets = accelerator.gather_for_metrics(target_words)
