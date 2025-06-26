@@ -458,5 +458,6 @@ def parse_json(s: str):
         return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
+        global bs_count
         bs_count += 1
         return []
