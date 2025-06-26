@@ -25,6 +25,7 @@ from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
+bs_count = 0
 
 def platform_parser(s):
     # If input looks like key:value,key:value,...
@@ -197,6 +198,7 @@ class Retrieval(Context):
             ) as file:
                 json.dump(metrics, file)
 
+        print(f"bullshit count: {bs_count}")
         print("done")
 
     def generate_scores(
@@ -456,5 +458,5 @@ def parse_json(s: str):
         return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
-        print(s)
+        bs_count += 1
         return []
