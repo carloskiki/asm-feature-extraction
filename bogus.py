@@ -30,5 +30,5 @@ class Bogus(context.Context):
             for (func, _) in dataset:
                 file.write("#####\n")
                 file.write(func.name + "\n")
-                file.write(func)
+                file.write(str(func))
                 file.write("\n\n")
