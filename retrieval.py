@@ -100,6 +100,7 @@ class Retrieval(Context):
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
         accelerator = Accelerator()
 
         metrics = []
@@ -183,19 +184,17 @@ class Retrieval(Context):
                     }
 
                     metrics.append(data)
+
+                    if self.save_metrics:
+                        save_metrics(metrics, timestamp)
+
                     print(metrics[-1])
 
         if not accelerator.is_main_process:
             return
 
-        print("Saving results...")
         if self.save_metrics:
-            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-
-            with open(
-                Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
-            ) as file:
-                json.dump(metrics, file)
+            save_metrics(metrics, timestamp)
 
         print("done")
 
@@ -306,6 +305,12 @@ class Retrieval(Context):
             return_tensors="pt",
         )
 
+
+def save_metrics(metrics, timestamp):
+    with open(
+        Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
+    ) as file:
+        json.dump(metrics, file)
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
     """
