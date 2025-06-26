@@ -25,8 +25,6 @@ from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
-bs_count = 0
-
 def platform_parser(s):
     # If input looks like key:value,key:value,...
     if ":" in s and "," in s:
@@ -198,7 +196,6 @@ class Retrieval(Context):
             ) as file:
                 json.dump(metrics, file)
 
-        print(f"bullshit count: {bs_count}")
         print("done")
 
     def generate_scores(
@@ -261,6 +258,7 @@ class Retrieval(Context):
         target_words = [parse_json(t) for t in target_decoded]
 
         all_targets = accelerator.gather_for_metrics(target_words)
+        print("fumble count:", all_targets.count([]))
 
         scores: list[list[float]] = []
         for index, query in tqdm(
@@ -458,6 +456,4 @@ def parse_json(s: str):
         return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
-        global bs_count
-        bs_count += 1
         return []
