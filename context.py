@@ -107,7 +107,8 @@ class Context:
     def empty_prompt_size(self) -> int:
         prompt = self.get_prompt("")
         tokenizer = self.get_tokenizer()
-
-        return len(tokenizer.apply_chat_template(
+        tokens = tokenizer.apply_chat_template(
             prompt, tokenize=True, add_generation_prompt=True
-        )['input_ids'])
+        )
+
+        return len(tokens)
