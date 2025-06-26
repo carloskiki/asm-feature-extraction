@@ -19,16 +19,7 @@ class Info(context.Context):
         )
 
     def __call__(self):
-        prompt = self.get_prompt("")
-        tokenizer = self.get_tokenizer()
-
-        chat = tokenizer.apply_chat_template(
-            prompt, tokenize=False, add_generation_prompt=True
-        )
-        tokens = tokenizer(
-            chat,
-        )
-        token_count = len(tokens['input_ids'])
+        token_count = self.empty_prompt_size()
 
         print(f"MODEL: {self.model}")
         print(f"Configuration: {self.get_model().config}")

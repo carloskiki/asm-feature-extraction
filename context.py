@@ -66,7 +66,7 @@ class Context:
                         prompt.append(
                             {
                                 "role": "user",
-                                "content": f"```assembly\n{example_assembly}\n```",
+                                "content": example_assembly,
                             }
                         )
                         prompt.append(
@@ -103,3 +103,11 @@ class Context:
         Return the tokenizer
         """
         return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
+
+    def empty_prompt_size(self) -> int:
+        prompt = self.get_prompt("")
+        tokenizer = self.get_tokenizer()
+
+        return len(tokenizer.apply_chat_template(
+            prompt, tokenize=True, add_generation_prompt=True
+        )['input_ids'])

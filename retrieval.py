@@ -25,6 +25,7 @@ from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
+
 def platform_parser(s):
     # If input looks like key:value,key:value,...
     if ":" in s and "," in s:
@@ -204,6 +205,7 @@ class Retrieval(Context):
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
+        empty_prompt_size = self.empty_prompt_size()
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
@@ -219,21 +221,18 @@ class Retrieval(Context):
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
-                (queries, targets) = zip(
-                    *(
-                        (self.get_prompt(str(qf)), self.get_prompt(str(tf)))
-                        for qf, tf in batch
-                    )
-                )
+                (queries, targets) = zip(*batch)
 
-                query_tokens = self.tokenize_prompts(list(queries), tokenizer).to(accelerator.device)
-                target_tokens = self.tokenize_prompts(list(targets), tokenizer).to(accelerator.device)
+                query_tokens = self.tokenize_prompts(
+                    [str(q) for q in queries], empty_prompt_size, tokenizer
+                ).to(accelerator.device)
+                target_tokens = self.tokenize_prompts(
+                    [str(t) for t in targets], empty_prompt_size, tokenizer
+                ).to(accelerator.device)
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
-                    **query_tokens,
-                    max_new_tokens=MAX_NEW_TOKENS,
-                    temperature=0.5
+                    **query_tokens, max_new_tokens=MAX_NEW_TOKENS, temperature=0.5
                 )[:, query_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
                 query_decoded.extend(
@@ -242,9 +241,7 @@ class Retrieval(Context):
 
                 # Pass the tokens to LLM
                 target_outputs = model.generate(
-                    **target_tokens,
-                    max_new_tokens=MAX_NEW_TOKENS,
-                    temperature=0.5
+                    **target_tokens, max_new_tokens=MAX_NEW_TOKENS, temperature=0.5
                 )[:, target_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to target_decoded
                 target_decoded.extend(
@@ -260,7 +257,11 @@ class Retrieval(Context):
         target_words = [parse_json(t) for t in target_decoded]
         if [] in target_words:
             print("Query for thing:")
-            print(tokenizer.batch_decode(target_tokens["input_ids"].cpu(), skip_special_tokens=True))
+            print(
+                tokenizer.batch_decode(
+                    target_tokens["input_ids"].cpu(), skip_special_tokens=True
+                )
+            )
 
         all_targets = accelerator.gather_for_metrics(target_words)
 
@@ -281,34 +282,33 @@ class Retrieval(Context):
         torch.cuda.empty_cache()
         return all_scores
 
-    def tokenize_prompts(self, fns: list[str], tokenizer):
-        chat = tokenizer.apply_chat_template(
-            fns,
-            tokenize=False,
-            add_generation_prompt=True,
-        )
-
-        final_ids = []
+    def tokenize_prompts(self, fns: list[str], empty_prompt_size: int, tokenizer):
+        size_for_query = self.context_size - empty_prompt_size
         batch = tokenizer(
-            chat,
+            fns,
             truncation=True,
             padding=False,
-            max_length=self.context_size,
+            max_length=size_for_query,
         )
-        for ids in batch["input_ids"]:
-            if len(ids) < self.context_size:
-                final_ids.append(ids)
+        for idx, ids in enumerate(batch["input_ids"]):
+            if len(ids) < size_for_query:
                 continue
 
             # -- decode -> cut at last '\n' -> re-encode --
             decoded = tokenizer.decode(ids, skip_special_tokens=True)
-            trimmed_text = decoded[:-3].rsplit("\n", 1)[0]  # everything up to LAST newline
-            new_ids = tokenizer(trimmed_text + "\n```")["input_ids"]
-            final_ids.append(new_ids)
+            trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
+            fns[idx] = trimmed_text
 
-        return tokenizer.pad(
-            {"input_ids": final_ids},
-            padding="longest",
+        chat = tokenizer.apply_chat_template(
+            [self.get_prompt(f) for f in fns],
+            tokenize=False,
+            add_generation_prompt=True,
+        )
+
+        tokenizer(
+            chat,
+            truncation=False,
+            padding=True,
             padding_side="left",
             return_tensors="pt",
         )
