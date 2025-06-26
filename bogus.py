@@ -8,7 +8,6 @@ import context
 
 @dataclass
 class Bogus(context.Context):
-    threshold: int
 
     @staticmethod
     def arguments(subparsers):
@@ -20,19 +19,6 @@ class Bogus(context.Context):
             "bogus",
             description="",
         )
-        parser.add_argument("--threshold", type=int, default=200_000)
 
     def __call__(self):
-        # Side quest: How many tokens does the prompt use?
-
-        prompt = self.get_prompt("")
-        tokenizer = self.get_tokenizer()
-
-        chat = tokenizer.apply_chat_template(
-            prompt, tokenize=False, add_generation_prompt=True
-        )
-        tokens = tokenizer(
-            chat,
-        )
-
-        print("The prompt uses ", len(tokens['input_ids']), " tokens")
+        pass

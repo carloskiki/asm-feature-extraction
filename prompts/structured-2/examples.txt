@@ -1,0 +1,129 @@
+```assembly
+loc_4054D0:
+    PUSH r12
+    PUSH rbp
+    MOV rbp, rdi
+    PUSH rbx
+    MOV rdi, rsi
+    MOV r12, rsi
+    CALL _strlen
+    MOV rbx, rax
+    SAR eax, 18h
+    LEA rdi, [rbp+4]
+    MOV [rbp+0], al
+    MOV eax, ebx
+    MOV [rbp+3], bl
+    SAR eax, 10h
+    MOVSXD rdx, ebx
+    MOV rsi, r12
+    MOV [rbp+1], al
+    MOV eax, ebx
+    SAR eax, 8
+    MOV [rbp+2], al
+    CALL _memcpy
+    LEA eax, [rbx+4]
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+```
+
+```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "DataMovement",
+        "Bitwise",
+        "MemoryAccess"
+      ],
+      "loop_indicators": false,
+      "number_of_distinct_subroutine_call_targets": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x18",
+        "0x4",
+        "0x0",
+        "0x3",
+        "0x10",
+        "0x1",
+        "0x8",
+        "0x2"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 8
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": false,
+      "likely_performs_block_memory_operations": true
+    }
+  },
+  "inferred_algorithm": "Data Transformation and Copying"
+}
+```
+
+
+```assembly
+loc_423080:
+    JMP loc_423060
+loc_423060:
+    PUSH rbx
+    MOV rbx, rdi
+    CALL sub_422CC0
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+
+```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 1,
+      "input_parameter_types": [
+        "Pointer"
+      ],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "DataMovement",
+        "SubroutineCall",
+        "UnconditionalJump"
+      ],
+      "loop_indicators": false,
+      "number_of_distinct_subroutine_call_targets": 2,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": false,
+      "likely_performs_block_memory_operations": false
+    }
+  },
+  "inferred_algorithm": "Function Chaining/Redirection"
+}
+```
+
+```json
+```

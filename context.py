@@ -9,7 +9,7 @@ MODELS = {
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
     "gemma-3-4": "google/gemma-3-4b-it",
 }
-MAX_NEW_TOKENS = 1024
+MAX_NEW_TOKENS = 512
 
 
 @dataclass
