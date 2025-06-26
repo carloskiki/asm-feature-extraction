@@ -110,5 +110,6 @@ class Context:
         tokens = tokenizer.apply_chat_template(
             prompt, tokenize=True, add_generation_prompt=True
         )
+        print(tokens)
 
         return len(tokens)
