@@ -455,4 +455,5 @@ def parse_json(s: str):
         return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
+        print(s)
         return []
