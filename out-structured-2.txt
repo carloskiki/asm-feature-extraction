@@ -16,6 +16,7 @@ Output:```json
   "constantsAndMagicNumbers": [],
   "sideEffects": false,
   "interactions": false,
+  "inferredAlgorithm": "CRC32 Calculation"
 }
 ```
 ############
