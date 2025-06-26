@@ -275,8 +275,9 @@ class Retrieval(Context):
             disable=not accelerator.is_main_process,
         ):
             scores.append([])
+            query = flatten_to_strings(query)
             for target in all_targets:
-                scores[index].append(jaccard_index(query, target))
+                scores[index].append(jaccard_index(query, flatten_to_strings(target)))
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
@@ -401,7 +402,21 @@ def jaccard_index(query: list[str], potential_target: list[str]) -> float:
     )  # Return 1.0 if both sets are empty
 
 
-def parse_json(s: str) -> list[str]:
+def flatten_to_strings(obj, parent_key='', sep='.'):
+    result = []
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            new_key = f"{parent_key}{sep}{k}"
+            result.extend(flatten_to_strings(v, new_key, sep))
+    elif isinstance(obj, list):
+        for item in obj:
+            result.extend(flatten_to_strings(item, parent_key, sep))
+    else:
+        result.append(f"{parent_key}{sep}{obj}")
+    return result
+
+
+def parse_json(s: str):
     """
     Tokenize the query into words that can be compared more easily
     """
@@ -413,10 +428,6 @@ def parse_json(s: str) -> list[str]:
 
     try:
         parsed = json.loads(s)
-        if not isinstance(parsed, list):
-            print("does not decode to a list.")
-            print(s)
-            return []
         return parsed
     except json.JSONDecodeError:
         print("found invalid json... Skipping")
