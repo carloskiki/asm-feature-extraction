@@ -227,8 +227,8 @@ class Retrieval(Context):
                     )
                 )
 
-                query_tokens = self.tokenize_prompts(list(queries), tokenizer)
-                target_tokens = self.tokenize_prompts(list(targets), tokenizer)
+                query_tokens = self.tokenize_prompts(list(queries), tokenizer).to(accelerator.device)
+                target_tokens = self.tokenize_prompts(list(targets), tokenizer).to(accelerator.device)
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
