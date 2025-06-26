@@ -288,9 +288,8 @@ class Retrieval(Context):
         batch = tokenizer(
             chat,
             truncation=True,
-            truncation_side="right"
+            truncation_side="right",
             padding=False,
-            return_overflowing_tokens=True,
             max_length=self.context_size,
         )
         for ids in batch["input_ids"]:
@@ -301,12 +300,12 @@ class Retrieval(Context):
             # -- decode -> cut at last '\n' -> re-encode --
             decoded = tokenizer.decode(ids, skip_special_tokens=True)
             trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
-            new_ids = tokenizer(trimmed_text, add_special_tokens=True)["input_ids"]
+            new_ids = tokenizer(trimmed_text)["input_ids"]
             final_ids.append(new_ids)
 
         return tokenizer.pad(
             {"input_ids": final_ids},
-            padding=True,
+            padding="longest",
             padding_side="left",
             return_tensors="pt",
         )
