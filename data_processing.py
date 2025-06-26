@@ -302,8 +302,6 @@ class PairsDataset(Dataset):
                     or target_functions[target_index].name != query_function.name
                     # Random heuristic for small functions.
                     or len(str(query_function)) < 50
-                    # Random heuristic for large functions.
-                    or len(str(query_function)) > 10_000
                 ):
                     continue
 
