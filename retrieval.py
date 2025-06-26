@@ -25,16 +25,18 @@ from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
+
 def platform_parser(s):
     # If input looks like key:value,key:value,...
-    if ':' in s and ',' in s:
+    if ":" in s and "," in s:
         try:
-            return [tuple(p.split(':', 1)) for p in s.split(',')]
+            return [tuple(p.split(":", 1)) for p in s.split(",")]
         except ValueError as e:
             raise ArgumentTypeError("Malformed key:value pair.") from e
     else:
         # Just treat it as a plain string
         return s
+
 
 def optimization_parser(s):
     # Try to parse as a single int
@@ -46,12 +48,15 @@ def optimization_parser(s):
     # Try to parse as list of int:int pairs
     try:
         pairs = []
-        for p in s.split(','):
-            k, v = p.split(':', 1)
+        for p in s.split(","):
+            k, v = p.split(":", 1)
             pairs.append((int(k), int(v)))
         return pairs
     except Exception as e:
-        raise ArgumentTypeError("Expected an int or comma-separated int:int pairs") from e
+        raise ArgumentTypeError(
+            "Expected an int or comma-separated int:int pairs"
+        ) from e
+
 
 @dataclass
 class Retrieval(Context):
@@ -62,8 +67,12 @@ class Retrieval(Context):
     pool_size: Optional[int]
     seed: int  # Seed for selection of targets, choosed randomly if not set
     binary: Optional[str]  # Run for a specific binary, run on all binaries if None
-    platform: Union[str, list[tuple[str, str]], None]  # Run for a specific platform, or run on all pairs, or run on all platforms if None
-    optimization: Union[int, list[tuple[int, int]], None]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
+    platform: Union[
+        str, list[tuple[str, str]], None
+    ]  # Run for a specific platform, or run on all pairs, or run on all platforms if None
+    optimization: Union[
+        int, list[tuple[int, int]], None
+    ]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str  # Path containing the dataset
@@ -96,7 +105,9 @@ class Retrieval(Context):
         metrics = []
 
         if isinstance(self.platform, list):
-            optimization = None if isinstance(self.optimization, list)  else self.optimization
+            optimization = (
+                None if isinstance(self.optimization, list) else self.optimization
+            )
 
             for query_platform, target_platform in self.platform:
                 dataset = PairsDataset(
@@ -108,7 +119,7 @@ class Retrieval(Context):
                     optimization,
                     query_platform,
                     None,
-                    target_platform
+                    target_platform,
                 )
                 scores = self.generate_scores(accelerator, dataset)
 
@@ -119,7 +130,8 @@ class Retrieval(Context):
                         "platform": query_platform,
                         "target-platform": target_platform,
                         "optimization": "all"
-                        if self.optimization is None or isinstance(self.optimization, list)
+                        if self.optimization is None
+                        or isinstance(self.optimization, list)
                         else self.optimization,
                         "pool-size": self.pool_size,
                         "examples": self.examples,
@@ -134,10 +146,8 @@ class Retrieval(Context):
                     metrics.append(data)
                     print(metrics[-1])
 
-            
-        
         if isinstance(self.optimization, list):
-            platform = None if isinstance(self.platform, list)  else self.platform
+            platform = None if isinstance(self.platform, list) else self.platform
 
             for query_optimization, target_optimization in self.optimization:
                 dataset = PairsDataset(
@@ -149,7 +159,7 @@ class Retrieval(Context):
                     query_optimization,
                     platform,
                     target_optimization,
-                    None
+                    None,
                 )
                 scores = self.generate_scores(accelerator, dataset)
 
@@ -177,7 +187,7 @@ class Retrieval(Context):
 
         if not accelerator.is_main_process:
             return
-        
+
         print("Saving results...")
         if self.save_metrics:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
@@ -189,7 +199,9 @@ class Retrieval(Context):
 
         print("done")
 
-    def generate_scores(self, accelerator: Accelerator, dataset: PairsDataset) -> tuple[list[str], list[str]]:
+    def generate_scores(
+        self, accelerator: Accelerator, dataset: PairsDataset
+    ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
         tokenizer = self.get_tokenizer()
@@ -208,55 +220,35 @@ class Retrieval(Context):
                 disable=not accelerator.is_local_main_process,
             ):
                 # Tokenize the prompts for the batch
-                prompt_pairs = [
-                    (self.get_prompt(str(qf)), self.get_prompt(str(tf)))
-                    for qf, tf in batch
-                ]
-
-                query_chat = tokenizer.apply_chat_template(
-                    [qp for qp, _ in prompt_pairs],
-                    tokenize=False,
-                    add_generation_prompt=True,
-                )
-                target_chat = tokenizer.apply_chat_template(
-                    [tp for _, tp in prompt_pairs],
-                    tokenize=False,
-                    add_generation_prompt=True,
+                (queries, targets) = zip(
+                    *(
+                        (self.get_prompt(str(qf)), self.get_prompt(str(tf)))
+                        for qf, tf in batch
+                    )
                 )
 
-                query_token_batch = tokenizer(
-                    query_chat,
-                    truncation=True,
-                    padding=True,
-                    padding_side="left",
-                    return_tensors="pt",
-                    max_length=self.context_size,
-                ).to(accelerator.device)
+                query_tokens = self.tokenize_prompts(list(queries), tokenizer)
+                target_tokens = self.tokenize_prompts(list(targets), tokenizer)
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
-                    **query_token_batch,
+                    **query_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
-                )[:, query_token_batch["input_ids"].shape[1] :].cpu()
+                )[:, query_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
-                query_decoded.extend(tokenizer.batch_decode(query_outputs, skip_special_tokens=True))
-
-                target_token_batch = tokenizer(
-                    target_chat,
-                    truncation=True,
-                    padding=True,
-                    padding_side="left",
-                    return_tensors="pt",
-                    max_length=self.context_size,
-                ).to(accelerator.device)
+                query_decoded.extend(
+                    tokenizer.batch_decode(query_outputs, skip_special_tokens=True)
+                )
 
                 # Pass the tokens to LLM
                 target_outputs = model.generate(
-                    **target_token_batch,
+                    **target_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
-                )[:, target_token_batch["input_ids"].shape[1] :].cpu()
-                # Add all outputs to query_decoded
-                target_decoded.extend(tokenizer.batch_decode(target_outputs, skip_special_tokens=True))
+                )[:, target_tokens["input_ids"].shape[1] :].cpu()
+                # Add all outputs to target_decoded
+                target_decoded.extend(
+                    tokenizer.batch_decode(target_outputs, skip_special_tokens=True)
+                )
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
@@ -281,9 +273,42 @@ class Retrieval(Context):
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
-        
+
         torch.cuda.empty_cache()
         return all_scores
+
+    def tokenize_prompts(self, fns: list[str], tokenizer):
+        chat = tokenizer.apply_chat_template(
+            fns,
+            tokenize=False,
+            add_generation_prompt=True,
+        )
+
+        final_ids = []
+        batch = tokenizer(
+            chat,
+            truncation=True,
+            padding=False,
+            return_overflowing_tokens=True,
+            max_length=self.context_size,
+        )
+        for enc in batch.encodings:
+            if not bool(enc.overflowing_tokens):
+                final_ids.append(enc.ids)
+                continue
+
+            # -- decode -> cut at last '\n' -> re-encode --
+            decoded = tokenizer.decode(enc.ids, skip_special_tokens=True)
+            trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
+            new_ids = tokenizer(trimmed_text, add_special_tokens=True)["input_ids"]
+            final_ids.append(new_ids)
+
+        return tokenizer.pad(
+            {"input_ids": final_ids},
+            padding=True,
+            padding_side="left",
+            return_tensors="pt",
+        )
 
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
@@ -402,7 +427,7 @@ def jaccard_index(query: list[str], potential_target: list[str]) -> float:
     )  # Return 1.0 if both sets are empty
 
 
-def flatten_to_strings(obj, parent_key='', sep='.'):
+def flatten_to_strings(obj, parent_key="", sep="."):
     result = []
     if isinstance(obj, dict):
         for k, v in obj.items():
