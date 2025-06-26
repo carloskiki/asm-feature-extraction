@@ -294,7 +294,7 @@ class Retrieval(Context):
         )
         for ids in batch["input_ids"]:
             if len(ids) < self.context_size:
-                final_ids.append(ids.ids)
+                final_ids.append(ids)
                 continue
 
             # -- decode -> cut at last '\n' -> re-encode --
