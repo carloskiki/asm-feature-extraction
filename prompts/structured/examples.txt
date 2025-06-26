@@ -61,10 +61,9 @@ loc_46CF58:
     },
     "core_logic_and_operations": {
       "dominant_operation_categories": [
-        "ConditionalBranching",
+        "Branching",
         "DataMovement",
         "FunctionCall",
-        "Arithmetic",
       ],
       "loop_indicators": false,
       "number_of_call_instructions": 4,
@@ -143,15 +142,9 @@ loc_10077DA4:
     },
     "core_logic_and_operations": {
       "dominant_operation_categories": [
-        "Arithmetic",
-        "Comparison",
-        "DataMovement",
-        "ConditionalBranching",
-        "UnconditionalJump",
-        "FunctionCall",
-        "Return",
+        "Branching",
         "MemoryAccess",
-        "StackManipulation"
+        "FunctionCall",
       ],
       "loop_indicators": false,
       "number_of_call_instructions": 1,
@@ -164,14 +157,11 @@ loc_10077DA4:
       "presence_of_notable_integer_constants": [
         "0x60",
         "0x3",
-        "0x6",
         "0x10",
         "0xDF0",
         "0x42",
         "0x218",
         "0x14",
-        "0x0",
-        "0x1"
       ],
       "presence_of_notable_floating_point_constants": [],
       "count_of_distinct_immediate_values": 10
@@ -287,7 +277,6 @@ loc_6B4B6:
     "constants_and_magic_numbers": {
       "presence_of_notable_integer_constants": [
         "0x60",
-        "0x3",
         "0x6",
         "0x209F8C",
         "0x14",
@@ -299,8 +288,6 @@ loc_6B4B6:
         "0x8",
         "0xFFFFFFFF",
         "0x100",
-        "0x0",
-        "0x1"
       ],
       "presence_of_notable_floating_point_constants": [],
       "count_of_distinct_immediate_values": 15

@@ -262,7 +262,6 @@ class Retrieval(Context):
                     torch.cuda.empty_cache()
                     gc.collect()
                     clear_cache_counter = 0
-        
 
         query_words = [parse_json(q) for q in query_decoded]
         target_words = [parse_json(t) for t in target_decoded]
@@ -282,6 +281,7 @@ class Retrieval(Context):
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
         
+        torch.cuda.empty_cache()
         return all_scores
 
 

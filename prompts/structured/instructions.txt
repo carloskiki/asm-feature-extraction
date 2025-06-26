@@ -22,7 +22,7 @@ For the provided assembly routine, extract the following features and infer the 
 
 **II. Core Logic & Operations**
 * **Dominant Operation Categories (Array of Strings):** Identify the primary types of operations performed by observing instruction mnemonics and their common effects.
-    * *Categories:* `"Arithmetic"` (add, subtract, multiply, divide, increment, decrement), `"Bitwise"` (AND, OR, XOR, NOT, shifts, rotates), `"Comparison"` (set flags based on operand relationship), `"DataMovement"` (copying data between registers/memory), `"ConditionalBranching"` (transfer control based on flags/conditions), `"UnconditionalJump"` (unconditional transfer of control), `"FunctionCall"` (transfer control to a subroutine), `"Return"` (transfer control back to caller), `"MemoryAccess"` (reading/writing to memory locations), `"StackManipulation"` (pushing/popping values, adjusting stack pointer).
+    * *Categories:* `"Arithmetic"` (add, subtract, multiply, divide, increment, decrement), `"Bitwise"` (AND, OR, XOR, NOT, shifts, rotates), `"DataMovement"` (copying data between registers/memory), `"Branching"` (transfer control based on flags/conditions), `"FunctionCall"` (transfer control to a subroutine), `"MemoryAccess"` (reading/writing to memory locations).
 * **Loop Indicators (Boolean):** `true` if common patterns indicating loops are observed (e.g., a conditional branch instruction targeting an earlier instruction's address, or a recognized architectural loop instruction). `false` otherwise. (Heuristic)
 * **Number of Call Instructions (Integer):** Count of all instructions that transfer control to a subroutine.
 * **Number of Distinct Call Targets (Integer):** Count of unique target addresses/offsets of subroutine call instructions.

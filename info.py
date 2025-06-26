@@ -19,8 +19,6 @@ class Info(context.Context):
         )
 
     def __call__(self):
-        # Side quest: How many tokens does the prompt use?
-
         prompt = self.get_prompt("")
         tokenizer = self.get_tokenizer()
 
@@ -33,5 +31,5 @@ class Info(context.Context):
         token_count = len(tokens['input_ids'])
 
         print(f"MODEL: {self.model}")
-        print(f"    Configuration: {self.get_model().config}")
+        print(f"Configuration: {self.get_model().config}")
         print(f"PROMPT: {self.prompt} - uses {token_count} for an empty query with the model selected.")
