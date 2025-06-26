@@ -288,6 +288,7 @@ class Retrieval(Context):
         batch = tokenizer(
             chat,
             truncation=True,
+            truncation_side="right"
             padding=False,
             return_overflowing_tokens=True,
             max_length=self.context_size,
