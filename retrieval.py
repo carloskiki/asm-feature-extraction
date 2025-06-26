@@ -292,13 +292,13 @@ class Retrieval(Context):
             return_overflowing_tokens=True,
             max_length=self.context_size,
         )
-        for enc in batch.encodings:
-            if not bool(enc.overflowing_tokens):
-                final_ids.append(enc.ids)
+        for ids in batch["input_ids"]:
+            if len(ids) < self.context_size:
+                final_ids.append(ids.ids)
                 continue
 
             # -- decode -> cut at last '\n' -> re-encode --
-            decoded = tokenizer.decode(enc.ids, skip_special_tokens=True)
+            decoded = tokenizer.decode(ids, skip_special_tokens=True)
             trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
             new_ids = tokenizer(trimmed_text, add_special_tokens=True)["input_ids"]
             final_ids.append(new_ids)
