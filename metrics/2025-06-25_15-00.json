@@ -1,0 +1,4 @@
+[
+    {"parameters": {"binary": "busybox", "optimization": 0, "target-optimization": 1, "platform": "arm", "pool-size": 8, "examples": 3, "prompt": "tokens-2", "model": "qwen-2.5-0.5"}, "results": {"mrr": 0.5770833333333333, "recall_at_1": 0.125, "recall_at_10": 1.0, "similarity_mean": {"max": 0.4041945723195723, "median": 0.32753354469480117, "mean": 0.3232455765774138, "min": 0.22986121147885855}}},
+    {"parameters": {"binary": "busybox", "optimization": 0, "target-optimization": 2, "platform": "arm", "pool-size": 8, "examples": 3, "prompt": "tokens-2", "model": "qwen-2.5-0.5"}, "results": {"mrr": 0.665625, "recall_at_1": 0.5, "recall_at_10": 1.0, "similarity_mean": {"max": 0.736271950482184, "median": 0.3092144748439583, "mean": 0.33326982760461804, "min": 0.0}}}
+]

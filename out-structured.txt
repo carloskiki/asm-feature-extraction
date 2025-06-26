@@ -1,0 +1,1717 @@
+############
+```assembly
+loc_11370:
+    ADR R12, 0x11378
+    ADD R12, R12, #0x3A000
+    LDR PC, [R12,#(rename_ptr - 0x4B378)]!
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 0,
+      "input_parameter_types": [],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  }
+}
+```
+############
+```assembly
+loc_4C884:
+    IMPORT 
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 0,
+      "input_parameter_types": [],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": false
+    }
+  },
+}
+```
+############
+```assembly
+loc_419010:
+
+loc_419360:
+    MOV rax, [rdx]
+    CMP dword ptr [rax], 2
+    JZ loc_419400
+loc_41936C:
+    XOR eax, eax
+    TEST esi, esi
+    JLE locret_4193F8
+loc_419376:
+    CMP byte ptr [rdi], 4
+    JZ loc_419380
+loc_41937B:
+    RETN 
+loc_419380:
+    SUB esi, 1
+    TEST sil, 1
+    JZ loc_4193A8
+loc_419389:
+    MOV qword ptr [rdx+8], 0
+    MOV qword ptr [rdx+10h], 0
+    MOV qword ptr [rdx+18h], 0
+    RETN 
+loc_4193A8:
+    PUSH r12
+    LEA r12, [rdi+1]
+    PUSH rbp
+    PUSH rbx
+    SAR esi, 1
+    MOV rbx, rdx
+    MOV ebp, esi
+    MOV rdi, r12
+    SUB rsp, 10h
+    CALL sub_410CC0
+    MOVSXD rdi, ebp
+    MOV [rbx+8], rax
+    MOV esi, ebp
+    ADD rdi, r12
+    CALL sub_410CC0
+    CMP byte ptr [rbx+20h], 0
+    MOV [rbx+10h], rax
+    MOV qword ptr [rbx+18h], 0
+    JZ loc_419408
+loc_4193E6:
+    MOV eax, 1
+loc_4193EB:
+    ADD rsp, 10h
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_4193F8:
+    REP 
+loc_419400:
+    JMP sub_419010
+loc_419408:
+    MOV rdi, rbx
+    CALL sub_418E20
+    TEST eax, eax
+    MOV [rsp+28h+var_1C], eax
+    JNZ loc_4193E6
+loc_419418:
+    MOV rdi, [rbx+8]
+    CALL sub_4108A0
+    MOV rdi, [rbx+10h]
+    MOV qword ptr [rbx+8], 0
+    CALL sub_4108A0
+    MOV qword ptr [rbx+10h], 0
+    MOV eax, [rsp+28h+var_1C]
+    JMP loc_4193EB
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 1,
+      "input_parameter_types": [
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 3,
+      "number_of_distinct_call_targets": 2,
+      "number_of_conditional_jump_instructions": 4,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 2
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_456BF4:
+    .EXTERN 
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 0,
+      "input_parameter_types": [],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": false
+    }
+  },
+}
+```
+############
+```assembly
+loc_275A8:
+    PUSH.W {R4-R11,LR}
+    SUB SP, SP, #0x54
+    MOV R4, #0x4C188
+    LDR R7, [SP,#0x78+arg_0]
+    MOV R6, R0
+    LDR R0, [R4]
+    CMP R7, #0
+    STR R4, [SP,#0x78+var_74]
+    STR R0, [SP,#0x78+var_2C]
+    BLE loc_27666
+loc_275C4:
+    MOV R4, R3
+    LDR R3, [R6,#0x14]
+    MOV R10, R7
+    CMP R7, R3
+    IT 
+    MOVGE R10, R3
+    CMP R3, #0x40
+    ITTT 
+    MOVLE R11, R1
+    MOVLE R9, R2
+    MOVLE R5, #0
+    BGT loc_2764C
+loc_275DC:
+    LSRS R2, R5, #0x18
+    LSRS R3, R5, #0x10
+    STRB.W R5, [SP,#0x78+var_6D]
+    STRB.W R2, [SP,#0x78+var_70]
+    STRB.W R3, [SP,#0x78+var_6F]
+    LSRS R3, R5, #8
+    LDR R2, [R6]
+    ADDS R5, #1
+    STRB.W R3, [SP,#0x78+var_6E]
+    BLX R2
+    LDR R3, [R6,#8]
+    MOV R2, R9
+    MOV R1, R11
+    MOV R8, R0
+    BLX R3
+    MOV R0, R8
+    LDR R3, [R6,#8]
+    MOVS R2, #4
+    ADD R1, SP, #0x78+var_70
+    BLX R3
+    MOV R0, R8
+    ADD R1, SP, #0x78+var_6C
+    LDR R3, [R6,#0xC]
+    BLX R3
+    CMP.W R10, #0
+    ITT 
+    ADDGT.W R1, SP, #0x78+var_6D
+    ADDGT.W R0, R4, R10
+    BLE loc_27676
+loc_27624:
+    LDRB R2, [R4]
+    LDRB.W R3, [R1,#1]!
+    EORS R3, R2
+    STRB.W R3, [R4],#1
+    CMP R4, R0
+    BNE loc_27624
+loc_27634:
+    SUB.W R7, R7, R10
+    MOV R4, R0
+    CMP R7, #0
+    BLE loc_27666
+loc_2763E:
+    LDR R3, [R6,#0x14]
+    CMP R3, R7
+    MOV R10, R3
+    IT 
+    MOVGE R10, R7
+    CMP R3, #0x40
+    BLE loc_275DC
+loc_2764C:
+    MOVW R1, #0x95C4
+    MOVW R0, #0x95D0
+    MOVT.W R1, #3
+    MOVT.W R0, #3
+    LDR R3, =aOaepMask
+    MOVW R2, #0x3BA
+    BLX __assert_fail
+loc_27666:
+    LDR R3, [SP,#0x78+var_74]
+    LDR R2, [SP,#0x78+var_2C]
+    LDR R3, [R3]
+    CMP R2, R3
+    BNE loc_2767C
+loc_27670:
+    ADD SP, SP, #0x54
+    POP.W {R4-R11,PC}
+loc_27676:
+    ADD.W R0, R4, R10
+    B loc_27634
+loc_2767C:
+    BLX __stack_chk_fail
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 4,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x4C188",
+        "0x78+arg_0",
+        "0x14",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_80557C0:
+    PUSH ebp
+    PUSH edi
+    PUSH esi
+    PUSH ebx
+    SUB esp, 0Ch
+    MOV esi, [esp+1Ch+arg_0]
+    MOV [esp+1Ch+var_18], edx
+    MOV [esp+1Ch+var_14], ecx
+    XOR eax, [esi+1000h]
+    LEA ebx, [esi+0C00h]
+    LEA edx, [esi+400h]
+    LEA ebp, [esi+800h]
+    MOV edi, ebx
+    MOV [esp+1Ch+var_1C], edi
+    MOV ebx, eax
+    MOV ecx, eax
+    SHR ebx, 10h
+    SHR ecx, 18h
+    MOVZX ebx, bl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [edx+ebx*4]
+    MOVZX ebx, ah
+    MOV edx, [esp+1Ch+var_18]
+    XOR ecx, [ebp+ebx*4+0]
+    XOR edx, [esi+1004h]
+    MOVZX ebx, al
+    ADD ecx, [edi+ebx*4]
+    LEA edi, [esi+400h]
+    XOR eax, [esi+1008h]
+    MOV ebx, edx
+    XOR ebx, ecx
+    MOV edx, ebx
+    MOV ecx, ebx
+    SHR edx, 10h
+    SHR ecx, 18h
+    MOVZX edx, dl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [edi+edx*4]
+    MOV edi, [esp+1Ch+var_1C]
+    MOVZX edx, bh
+    XOR ecx, [ebp+edx*4+0]
+    MOVZX edx, bl
+    XOR ebx, [esi+100Ch]
+    ADD ecx, [edi+edx*4]
+    MOV edx, ecx
+    LEA ecx, [esi+400h]
+    XOR edx, eax
+    MOV eax, edx
+    MOV [esp+1Ch+var_1C], edx
+    SHR edx, 18h
+    SHR eax, 10h
+    MOV edx, [esi+edx*4]
+    MOVZX eax, al
+    ADD edx, [ecx+eax*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOV ecx, edi
+    MOVZX eax, ah
+    XOR edx, [ebp+eax*4+0]
+    MOVZX eax, byte ptr [esp+1Ch+var_1C]
+    ADD edx, [edi+eax*4]
+    LEA edi, [esi+400h]
+    MOV eax, edx
+    MOV edx, ebx
+    XOR edx, eax
+    MOV ebx, edx
+    MOV eax, edx
+    SHR ebx, 10h
+    SHR eax, 18h
+    MOVZX ebx, bl
+    MOV eax, [esi+eax*4]
+    ADD eax, [edi+ebx*4]
+    MOVZX ebx, dh
+    MOV edi, ecx
+    XOR eax, [ebp+ebx*4+0]
+    MOVZX ebx, dl
+    ADD eax, [ecx+ebx*4]
+    MOV ecx, [esp+1Ch+var_1C]
+    XOR ecx, [esi+1010h]
+    XOR eax, ecx
+    MOV ecx, eax
+    MOV [esp+1Ch+var_1C], eax
+    MOV ebx, eax
+    SHR ecx, 10h
+    LEA eax, [esi+400h]
+    SHR ebx, 18h
+    MOVZX ecx, cl
+    MOV ebx, [esi+ebx*4]
+    ADD ebx, [eax+ecx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    XOR edx, [esi+1014h]
+    MOVZX ecx, ah
+    MOV eax, edi
+    XOR ebx, [ebp+ecx*4+0]
+    MOVZX ecx, byte ptr [esp+1Ch+var_1C]
+    ADD ebx, [edi+ecx*4]
+    LEA edi, [esi+400h]
+    XOR ebx, edx
+    MOV edx, ebx
+    MOV ecx, ebx
+    SHR edx, 10h
+    SHR ecx, 18h
+    MOVZX edx, dl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [edi+edx*4]
+    MOVZX edx, bh
+    MOV edi, eax
+    XOR ecx, [ebp+edx*4+0]
+    MOVZX edx, bl
+    XOR ebx, [esi+101Ch]
+    ADD ecx, [eax+edx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    XOR eax, [esi+1018h]
+    MOV edx, ecx
+    LEA ecx, [esi+400h]
+    XOR edx, eax
+    MOV eax, edx
+    MOV [esp+1Ch+var_1C], edx
+    SHR edx, 18h
+    SHR eax, 10h
+    MOV edx, [esi+edx*4]
+    MOVZX eax, al
+    ADD edx, [ecx+eax*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOV ecx, edi
+    MOVZX eax, ah
+    XOR edx, [ebp+eax*4+0]
+    MOVZX eax, byte ptr [esp+1Ch+var_1C]
+    ADD edx, [edi+eax*4]
+    LEA edi, [esi+400h]
+    MOV eax, edx
+    XOR eax, ebx
+    MOV ebx, eax
+    MOV edx, eax
+    SHR eax, 18h
+    SHR ebx, 10h
+    MOV eax, [esi+eax*4]
+    MOVZX ebx, bl
+    ADD eax, [edi+ebx*4]
+    MOVZX ebx, dh
+    MOV edi, ecx
+    XOR eax, [ebp+ebx*4+0]
+    MOVZX ebx, dl
+    ADD eax, [ecx+ebx*4]
+    MOV ecx, [esp+1Ch+var_1C]
+    XOR ecx, [esi+1020h]
+    XOR eax, ecx
+    MOV ecx, eax
+    MOV [esp+1Ch+var_1C], eax
+    MOV ebx, eax
+    SHR ecx, 10h
+    LEA eax, [esi+400h]
+    SHR ebx, 18h
+    MOVZX ecx, cl
+    MOV ebx, [esi+ebx*4]
+    XOR edx, [esi+1024h]
+    ADD ebx, [eax+ecx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOVZX ecx, ah
+    MOV eax, edi
+    XOR ebx, [ebp+ecx*4+0]
+    MOVZX ecx, byte ptr [esp+1Ch+var_1C]
+    ADD ebx, [edi+ecx*4]
+    LEA edi, [esi+400h]
+    XOR ebx, edx
+    MOV edx, ebx
+    MOV ecx, ebx
+    SHR edx, 10h
+    SHR ecx, 18h
+    MOVZX edx, dl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [edi+edx*4]
+    MOVZX edx, bh
+    MOV edi, eax
+    XOR ecx, [ebp+edx*4+0]
+    MOVZX edx, bl
+    XOR ebx, [esi+102Ch]
+    ADD ecx, [eax+edx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    XOR eax, [esi+1028h]
+    MOV edx, ecx
+    LEA ecx, [esi+400h]
+    XOR edx, eax
+    MOV eax, edx
+    MOV [esp+1Ch+var_1C], edx
+    SHR edx, 18h
+    SHR eax, 10h
+    MOV edx, [esi+edx*4]
+    MOVZX eax, al
+    ADD edx, [ecx+eax*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOV ecx, edi
+    MOVZX eax, ah
+    XOR edx, [ebp+eax*4+0]
+    MOVZX eax, byte ptr [esp+1Ch+var_1C]
+    ADD edx, [edi+eax*4]
+    LEA edi, [esi+400h]
+    MOV eax, edx
+    MOV edx, ebx
+    XOR edx, eax
+    MOV ebx, edx
+    MOV eax, edx
+    SHR ebx, 10h
+    SHR eax, 18h
+    MOVZX ebx, bl
+    MOV eax, [esi+eax*4]
+    ADD eax, [edi+ebx*4]
+    MOVZX ebx, dh
+    MOV edi, ecx
+    XOR eax, [ebp+ebx*4+0]
+    MOVZX ebx, dl
+    ADD eax, [ecx+ebx*4]
+    MOV ebx, eax
+    MOV eax, [esp+1Ch+var_1C]
+    XOR eax, [esi+1030h]
+    XOR eax, ebx
+    MOV ebx, eax
+    MOV [esp+1Ch+var_1C], eax
+    MOV ecx, eax
+    SHR ebx, 10h
+    LEA eax, [esi+400h]
+    SHR ecx, 18h
+    MOVZX ebx, bl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [eax+ebx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOVZX ebx, ah
+    MOV eax, edi
+    XOR ecx, [ebp+ebx*4+0]
+    MOVZX ebx, byte ptr [esp+1Ch+var_1C]
+    XOR edx, [esi+1034h]
+    ADD ecx, [edi+ebx*4]
+    LEA edi, [esi+400h]
+    XOR ecx, edx
+    MOV ebx, ecx
+    MOV edx, ecx
+    SHR ebx, 10h
+    SHR edx, 18h
+    MOVZX ebx, bl
+    MOV edx, [esi+edx*4]
+    ADD edx, [edi+ebx*4]
+    MOVZX ebx, ch
+    MOV edi, eax
+    XOR edx, [ebp+ebx*4+0]
+    MOVZX ebx, cl
+    ADD edx, [eax+ebx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    XOR eax, [esi+1038h]
+    XOR eax, edx
+    MOV ebx, eax
+    MOV [esp+1Ch+var_1C], eax
+    MOV edx, eax
+    SHR ebx, 10h
+    LEA eax, [esi+400h]
+    SHR edx, 18h
+    MOVZX ebx, bl
+    MOV edx, [esi+edx*4]
+    ADD edx, [eax+ebx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    MOVZX ebx, ah
+    MOV eax, edi
+    XOR edx, [ebp+ebx*4+0]
+    MOVZX ebx, byte ptr [esp+1Ch+var_1C]
+    ADD edx, [edi+ebx*4]
+    LEA edi, [esi+400h]
+    MOV ebx, edx
+    MOV edx, [esi+103Ch]
+    XOR edx, ecx
+    XOR edx, ebx
+    MOV ebx, edx
+    MOV ecx, edx
+    SHR ebx, 10h
+    SHR ecx, 18h
+    MOVZX ebx, bl
+    MOV ecx, [esi+ecx*4]
+    ADD ecx, [edi+ebx*4]
+    MOVZX ebx, dh
+    XOR ecx, [ebp+ebx*4+0]
+    MOVZX ebx, dl
+    XOR edx, [esi+1044h]
+    ADD ecx, [eax+ebx*4]
+    MOV eax, [esp+1Ch+var_1C]
+    XOR eax, [esi+1040h]
+    MOV esi, [esp+1Ch+var_14]
+    MOV [esi], edx
+    XOR eax, ecx
+    MOV [esi+4], eax
+    ADD esp, 0Ch
+    POP ebx
+    POP esi
+    POP edi
+    POP ebp
+    RETN 
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 3,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+        "MemoryAllocationDeallocation"
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 3,
+      "number_of_distinct_call_targets": 2,
+      "number_of_conditional_jump_instructions": 3,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+  "inferred_algorithm": "CRC32 Calculation"
+}
+```
+############
+```assembly
+loc_41A698:
+    ADDIU $sp, -0x28
+    MOVE $a2, $a0
+    SW $s0, 0x1C+var_s0($sp)
+    MOVE $s0, $a1
+    SW $ra, 0x1C+var_s8($sp)
+    SW $s1, 0x1C+var_s4($sp)
+    MOVE $s1, $a0
+    LWL $a1, 4($a1)
+    LWL $a0, 0($s0)
+    LWR $a1, 7($s0)
+    JAL sub_4187A0
+    LWR $a0, 3($s0)
+    ADDIU $a2, $s1, 0x88
+    LWL $a1, 0xC($s0)
+    LWL $a0, 8($s0)
+    LWR $a1, 0xF($s0)
+    JAL sub_4187A0
+    LWR $a0, 0xB($s0)
+    ADDIU $a2, $s1, 0x110
+    LWL $a1, 0x14($s0)
+    LWL $a0, 0x10($s0)
+    LW $ra, 0x1C+var_s8($sp)
+    LW $s1, 0x1C+var_s4($sp)
+    LWR $a1, 0x17($s0)
+    LWR $a0, 0x13($s0)
+    LW $s0, 0x1C+var_s0($sp)
+    J sub_4187A0
+    ADDIU $sp, 0x28
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 4,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_415E4C:
+    LW $v0, 0($a0)
+    SLL $v0, 5
+    ADDIU $v0, -1
+    BLTZ $v0, locret_415EA8
+    SRA $v1, $v0, 5
+loc_415E60:
+    ADDIU $v1, 1
+    SLL $v1, 2
+    ADDU $v1, $a0, $v1
+    LW $v1, 0($v1)
+    BLTZ $v1, locret_415EA8
+    LI $a1, 0xFFFFFFFF
+loc_415E78:
+    B loc_415EA0
+    ADDIU $v0, -1
+loc_415E80:
+    ADDIU $v1, 1
+    SLL $v1, 2
+    ADDU $v1, $a0, $v1
+    LW $v1, 0($v1)
+    SRLV $v1, $v0
+    BNEZ $v1, locret_415EA8
+    NOP 
+loc_415E9C:
+    ADDIU $v0, -1
+loc_415EA0:
+    BNE $v0, $a1, loc_415E80
+    SRA $v1, $v0, 5
+loc_415EA8:
+    JR $ra
+    ADDIU $v0, 1
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 4,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_80694E0:
+
+loc_8069500:
+    JMP sub_80694E0
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 0,
+      "input_parameter_types": [],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_8058DE0:
+    PUSH ebp
+    PUSH edi
+    PUSH esi
+    PUSH ebx
+    SUB esp, 28h
+    MOV esi, [esp+38h+arg_0]
+    PUSH src
+    CALL sub_8057B60
+    MOVZX ebx, byte ptr [esi]
+    ADD esp, 10h
+    MOV edi, eax
+    TEST bl, bl
+    JZ loc_8058E90
+loc_8058E06:
+    CALL ___ctype_b_loc
+    MOV edx, eax
+    JMP loc_8058E6C
+loc_8058E10:
+    MOV [esp+2Ch+var_20], edx
+    SUB esp, 4
+    ADD esi, 1
+    PUSH 0
+    PUSH off_808F160
+    PUSH edi
+    CALL sub_8058900
+    MOV ebp, eax
+    MOVSX eax, byte ptr [esi-1]
+    SUB eax, 30h
+    MOV [esp+3Ch+var_3C], eax
+    CALL sub_8058DB0
+    MOV [esp+3Ch+var_3C], edi
+    MOV ebx, eax
+    CALL sub_8057BA0
+    POP eax
+    POP edx
+    PUSH ebx
+    PUSH ebp
+    CALL sub_8058B90
+    MOV [esp+3Ch+var_3C], ebp
+    MOV edi, eax
+    CALL sub_8057BA0
+    MOV [esp+3Ch+var_3C], ebx
+    CALL sub_8057BA0
+    MOVZX ebx, byte ptr [esi]
+    ADD esp, 10h
+    MOV edx, [esp+2Ch+var_20]
+    TEST bl, bl
+    JZ loc_8058E90
+loc_8058E6C:
+    MOV eax, [edx]
+    TEST byte ptr [eax+ebx*2+1], 8
+    JNZ loc_8058E10
+loc_8058E75:
+    SUB esp, 0Ch
+    PUSH edi
+    CALL sub_8057BA0
+    ADD esp, 10h
+    XOR eax, eax
+    ADD esp, 1Ch
+    POP ebx
+    POP esi
+    POP edi
+    POP ebp
+    RETN 
+loc_8058E90:
+    ADD esp, 1Ch
+    MOV eax, edi
+    POP ebx
+    POP esi
+    POP edi
+    POP ebp
+    RETN 
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 1,
+      "input_parameter_types": ["Integer"],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_100302B0:
+    STWU r1, back_chain(r1)
+    LI r5, 0
+    MFLR r0, lr
+    STW r29, 0x20+var_C(r1)
+    MR r29, r4
+    LIS r4, aName@ha
+    STW r31, 0x20+var_4(r1)
+    ADDI r4, r4, aName@l
+    MR r31, r3
+    MR r3, r29
+    STW r0, 0x20+sender_lr(r1)
+    STW r28, 0x20+var_10(r1)
+    STW r30, 0x20+var_8(r1)
+    CRCLR 4*cr1+eq
+    BL sub_1000AFB0
+    MR r4, r3
+    MR r30, r3
+    MR r3, r31
+    BL sub_10030110
+    MR. r28, r3
+    BEQ cr0, loc_10030340
+loc_10030304:
+    BL sub_1002EB00
+    MR r31, r3
+    MR r3, r30
+    BL sub_1000BB40
+    MR r3, r28
+    BL sub_1000BB40
+    MR r3, r31
+loc_10030320:
+    LWZ r0, 0x20+sender_lr(r1)
+    LWZ r28, 0x20+var_10(r1)
+    LWZ r29, 0x20+var_C(r1)
+    LWZ r30, 0x20+var_8(r1)
+    MTLR lr, r0
+    LWZ r31, 0x20+var_4(r1)
+    ADDI r1, r1, 0x20
+    BLR lr
+loc_10030340:
+    MR r3, r30
+    BL sub_1000BB40
+    MR r4, r29
+    MR r3, r31
+    BL sub_10030110
+    MR. r30, r3
+    BEQ cr0, loc_100303C0
+loc_1003035C:
+    LBZ r9, 0(r30)
+    CMPWI cr7, r9, 0
+    BEQ cr7, loc_100303C0
+loc_10030368:
+    LIS r3, aServer@ha
+    MR r4, r30
+    LI r5, 0
+    ADDI r3, r3, aServer@l
+    CRCLR 4*cr1+eq
+    BL sub_1000AFB0
+    MR r29, r3
+    BL sub_1002EB00
+    MR r31, r3
+    MR r3, r29
+    BL sub_1000BB40
+    MR r3, r30
+    BL sub_1000BB40
+    LWZ r0, 0x20+sender_lr(r1)
+    MR r3, r31
+    LWZ r28, 0x20+var_10(r1)
+    LWZ r29, 0x20+var_C(r1)
+    LWZ r30, 0x20+var_8(r1)
+    MTLR lr, r0
+    LWZ r31, 0x20+var_4(r1)
+    ADDI r1, r1, 0x20
+    BLR lr
+loc_100303C0:
+    MR r3, r30
+    BL sub_1000BB40
+    LI r3, 0
+    B loc_10030320
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 2,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 6,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_1002E7E0:
+    STWU r1, back_chain(r1)
+    LI r4, 1
+    MFLR r0, lr
+    STW r31, 0x20+var_4(r1)
+    STW r0, 0x20+sender_lr(r1)
+    STW r30, 0x20+var_8(r1)
+    MR r31, r3
+    CRCLR 4*cr1+eq
+    BL fcntl
+    CMPWI cr0, r3, 0
+    BLT cr0, loc_1002E840
+loc_1002E80C:
+    CLRRWI r5, r3, 1
+    LI r4, 2
+    MR r3, r31
+    CRCLR 4*cr1+eq
+    BL fcntl
+    CMPWI cr7, r3, 0
+    BLT cr7, loc_1002E87C
+loc_1002E828:
+    LWZ r0, 0x20+sender_lr(r1)
+    LWZ r30, 0x20+var_8(r1)
+    LWZ r31, 0x20+var_4(r1)
+    ADDI r1, r1, 0x20
+    MTLR lr, r0
+    BLR lr
+loc_1002E840:
+    LIS r9, stderr@ha
+    LWZ r30, stderr@l(r9)
+    BL __errno_location
+    LWZ r3, 0(r3)
+    BL strerror
+    LIS r5, aDFcntlFGetfdS@ha
+    MR r6, r31
+    ADDI r5, r5, aDFcntlFGetfdS@l
+    MR r7, r3
+loc_1002E864:
+    LI r4, 1
+    MR r3, r30
+    CRCLR 4*cr1+eq
+    BL __fprintf_chk
+    LI r3, 1
+    BL exit
+loc_1002E87C:
+    LIS r9, stderr@ha
+    LWZ r30, stderr@l(r9)
+    BL __errno_location
+    LWZ r3, 0(r3)
+    BL strerror
+    LIS r5, aDFcntlFSetfdS@ha
+    MR r6, r31
+    ADDI r5, r5, aDFcntlFSetfdS@l
+    MR r7, r3
+    B loc_1002E864
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 3,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 5,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 6,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x20+var_4(r1)",
+        "0x20+var_8(r1)",
+        "0x20+var_4(r1)"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_427520:
+    PUSH r12
+    PUSH rbp
+    MOV r12d, ecx
+    PUSH rbx
+    MOV rbx, rdx
+    MOV edx, esi
+    MOV rsi, rdi
+    MOV rbp, r8
+    SUB rsp, 0E0h
+    MOV rdi, rsp
+    MOV rax, fs:28h
+    MOV [rsp+0F8h+var_20], rax
+    XOR eax, eax
+    CALL sub_426BE0
+    MOV edx, r12d
+    MOV rsi, rbx
+    MOV rdi, rsp
+    CALL sub_426A10
+    LEA rsi, [rsp+0F8h+var_38]
+    MOV rdi, rsp
+    LEA rbx, [rsp+0F8h+var_98]
+    CALL sub_426E50
+    LEA rsi, [rsp+0F8h+var_38]
+    MOV edx, 14h
+    MOV rdi, rbx
+    CALL sub_426A10
+    MOV rsi, rbp
+    MOV rdi, rbx
+    CALL sub_426E50
+    MOV rax, [rsp+0F8h+var_20]
+    XOR rax, fs:28h
+    JNZ loc_4275B6
+loc_4275AA:
+    ADD rsp, 0E0h
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_4275B6:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 1,
+      "input_parameter_types": [
+        "Pointer"
+      ],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+        "ControlFlow"
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 1,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": false
+    }
+  },
+}
+```
+############
+```assembly
+loc_417120:
+    PUSH r15
+    PUSH r14
+    MOV r15, rdi
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 28h
+    MOV rax, [rdi]
+    MOV [rsp+58h+var_50], rsi
+    MOV rdi, [rax+60h]
+    CALL _strlen
+    MOV rbp, [r15+8]
+    MOV rbx, rax
+    MOV eax, [rbp+0]
+    CMP eax, 2
+    JZ loc_4172F0
+loc_417155:
+    TEST eax, eax
+    JNZ loc_4173D8
+loc_41715D:
+    MOV rdi, [rbp+8]
+    TEST rdi, rdi
+    JZ loc_417402
+loc_41716A:
+    CALL _strlen
+    MOV rdi, [rbp+20h]
+    MOV r13, rax
+    CALL sub_410F00
+    LEA r8d, [rax+0Eh]
+    ADD eax, 7
+    MOV esi, 1
+    CMOVNS r8d, eax
+    LEA eax, [rbx+r13+0Dh]
+    SAR r8d, 3
+    LEA r14d, [r8+r8]
+    MOV r12d, r8d
+    ADD eax, r14d
+    MOV [rsp+58h+var_44], eax
+    CDQE 
+    MOV rdi, rax
+    MOV [rsp+58h+var_40], rax
+    CALL sub_40AC50
+    MOV rbp, rax
+    MOV eax, ebx
+    SAR eax, 18h
+    MOV [rbp+3], bl
+    LEA r10, [rbp+4]
+    MOV [rbp+0], al
+    MOV eax, ebx
+    SAR eax, 10h
+    MOV rdi, r10
+    MOV [rbp+1], al
+    MOV eax, ebx
+    MOVSXD rbx, ebx
+    SAR eax, 8
+    MOV rdx, rbx
+    MOV [rbp+2], al
+    MOV rax, [r15]
+    MOV rsi, [rax+60h]
+    CALL _memcpy
+    ADD rbx, rax
+    MOV eax, r13d
+    SAR eax, 18h
+    MOV [rbx+3], r13b
+    ADD rbx, 4
+    MOV [rbx-4], al
+    MOV eax, r13d
+    SAR eax, 10h
+    MOV [rbx-3], al
+    MOV eax, r13d
+    MOVSXD r13, r13d
+    SAR eax, 8
+    MOV rdx, r13
+    MOV [rbx-2], al
+    MOV rax, [r15+8]
+    MOV rdi, rbx
+    MOV rsi, [rax+8]
+    CALL _memcpy
+    LEA edx, [r14+1]
+    LEA rax, [rbx+r13]
+    LEA ebx, [r12-1]
+    MOV esi, edx
+    LEA r13, [rax+5]
+    MOV byte ptr [rax+4], 4
+    SAR esi, 18h
+    MOV [rax], sil
+    MOV esi, edx
+    SAR edx, 8
+    MOV [rax+2], dl
+    LEA edx, [r12+r12+1]
+    SAR esi, 10h
+    TEST r12d, r12d
+    MOV [rax+1], sil
+    MOV [rax+3], dl
+    JZ loc_4173DF
+loc_417261:
+    MOV r14, r13
+    MOV r12d, ebx
+    NOP word ptr [rax+rax+00000000h]
+loc_417270:
+    MOV rdi, [r15+10h]
+    MOV esi, r12d
+    SUB r12d, 1
+    ADD r14, 1
+    CALL sub_410FE0
+    MOV [r14-1], al
+    CMP r12d, 0FFFFFFFFh
+    JNZ loc_417270
+loc_41728E:
+    MOV eax, ebx
+    ADD rax, 1
+    LEA r12, [r13+rax+0]
+    MOV r14, rax
+    MOV r13, r12
+    NOP 
+loc_4172A0:
+    MOV rdi, [r15+18h]
+    MOV esi, ebx
+    SUB ebx, 1
+    ADD r13, 1
+    CALL sub_410FE0
+    MOV [r13-1], al
+    CMP ebx, 0FFFFFFFFh
+    JNZ loc_4172A0
+loc_4172BB:
+    MOV r13, r14
+    ADD r13, r12
+    MOV r12, [rsp+58h+var_40]
+loc_4172C6:
+    ADD r12, rbp
+    CMP r13, r12
+    JNZ loc_4173E9
+loc_4172D2:
+    MOV rax, [rsp+58h+var_50]
+    MOV ecx, [rsp+58h+var_44]
+    MOV [rax], ecx
+    MOV rax, rbp
+loc_4172E0:
+    ADD rsp, 28h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_4172F0:
+    MOV r13d, [rbp+18h]
+    SHR r13d, 3
+    CMP r13d, 1
+    JBE loc_4173D8
+loc_417302:
+    LEA eax, [r13+rbx+8]
+    MOV esi, 1
+    LEA r12d, [r13-1]
+    XOR r14d, r14d
+    MOV [rsp+58h+var_44], eax
+    CDQE 
+    MOV rdi, rax
+    MOV [rsp+58h+var_40], rax
+    CALL sub_40AC50
+    MOV rbp, rax
+    MOV eax, ebx
+    SAR eax, 18h
+    MOV [rbp+3], bl
+    LEA r8, [rbp+4]
+    MOV [rbp+0], al
+    MOV eax, ebx
+    SAR eax, 10h
+    MOV rdi, r8
+    MOV [rbp+1], al
+    MOV eax, ebx
+    MOVSXD rbx, ebx
+    SAR eax, 8
+    MOV rdx, rbx
+    MOV [rbp+2], al
+    MOV rax, [r15]
+    MOV rsi, [rax+60h]
+    CALL _memcpy
+    ADD rbx, rax
+    MOV eax, r13d
+    SAR eax, 18h
+    MOV [rbx+3], r13b
+    MOV [rbx], al
+    MOV eax, r13d
+    SAR eax, 10h
+    MOV [rbx+1], al
+    MOV eax, r13d
+    SAR eax, 8
+    MOV [rbx+2], al
+    XCHG ax, ax
+loc_417380:
+    MOV rdi, [r15+18h]
+    MOV esi, r14d
+    CALL sub_410FE0
+    MOV [rbx+r14+4], al
+    ADD r14, 1
+    CMP r12d, r14d
+    JG loc_417380
+loc_41739A:
+    LEA eax, [r13-2]
+    MOV rdi, [r15+18h]
+    MOV esi, r12d
+    LEA rbx, [rbx+rax+5]
+    CALL sub_410FE0
+    AND eax, 7Fh
+    XOR esi, esi
+    LEA r13, [rbx+1]
+    MOV [rbx], al
+    MOV rdi, [r15+10h]
+    CALL sub_411020
+    MOV r12, [rsp+58h+var_40]
+    SHL eax, 7
+    OR [rbx], al
+    JMP loc_4172C6
+loc_4173D8:
+    XOR eax, eax
+    JMP loc_4172E0
+loc_4173DF:
+    MOV r12, [rsp+58h+var_40]
+    JMP loc_4172C6
+loc_4173E9:
+    MOV ecx, offset aEcdsaPublicBlo
+    MOV edx, 777h
+    MOV esi, offset aSsheccC
+    MOV edi, offset aPBlobBloblen
+    CALL ___assert_fail
+loc_417402:
+    MOV ecx, offset aEcdsaPublicBlo
+    MOV edx, 756h
+    MOV esi, offset aSsheccC
+    MOV edi, offset aEcPublickeyCur
+    CALL ___assert_fail
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 3,
+      "input_parameter_types": [
+        "Pointer",
+        "Pointer",
+        "Pointer"
+      ],
+      "return_value_type": "Integer"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 12,
+      "number_of_distinct_call_targets": 3,
+      "number_of_conditional_jump_instructions": 4,
+      "number_of_unconditional_jump_instructions": 2,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [
+        "0x5B8",
+        "0x2",
+        "0x23",
+        "0x3B3",
+        "0x44",
+        "0x1CC",
+        "0x14",
+        "0x1"
+      ],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 11
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": true,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_10031460:
+    LIS r11, pclose_plt@ha
+    LWZ r11, pclose_plt@l(r11)
+    MTCTR ctr, r11
+    BCTR ctr
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 0,
+      "input_parameter_types": [],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "None"
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": false
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
+############
+```assembly
+loc_1002B33C:
+    LWZ r0, 0x40+sender_lr(r1)
+    LWZ r27, 0x40+var_14(r1)
+    LWZ r28, 0x40+var_10(r1)
+    LWZ r29, 0x40+var_C(r1)
+    MTLR lr, r0
+    LWZ r30, 0x40+var_8(r1)
+    LWZ r31, 0x40+var_4(r1)
+    ADDI r1, r1, 0x40
+    BLR lr
+loc_1002B360:
+    BL __stack_chk_fail
+```
+Output:```json
+{
+  "features": {
+    "basic_signature_and_data_flow": {
+      "input_parameter_count": 1,
+      "input_parameter_types": ["Pointer"],
+      "return_value_type": "None"
+    },
+    "core_logic_and_operations": {
+      "dominant_operation_categories": [
+        "Branching",
+        "DataMovement",
+        "FunctionCall",
+        "ControlFlow"
+      ],
+      "loop_indicators": false,
+      "number_of_call_instructions": 0,
+      "number_of_distinct_call_targets": 0,
+      "number_of_conditional_jump_instructions": 0,
+      "number_of_unconditional_jump_instructions": 0,
+      "use_of_indexed_addressing_modes": true
+    },
+    "constants_and_magic_numbers": {
+      "presence_of_notable_integer_constants": [],
+      "presence_of_notable_floating_point_constants": [],
+      "count_of_distinct_immediate_values": 0
+    },
+    "side_effects_and_interactions": {
+      "likely_modifies_input_parameters": false,
+      "likely_modifies_global_state": false,
+      "likely_performs_memory_allocation_deallocation": false,
+      "likely_performs_io_operations": true
+    }
+  },
+}
+```
