@@ -76,7 +76,7 @@ class Context:
                             }
                         )
 
-        prompt.append({"role": "user", "content": assembly})
+        prompt.append({"role": "user", "content": f"```assembly\n{assembly}\n```"})
         return prompt
 
     def get_model(self, accelerator=None):

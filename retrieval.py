@@ -302,8 +302,8 @@ class Retrieval(Context):
 
             # -- decode -> cut at last '\n' -> re-encode --
             decoded = tokenizer.decode(ids, skip_special_tokens=True)
-            trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
-            new_ids = tokenizer(trimmed_text)["input_ids"]
+            trimmed_text = decoded[:-3].rsplit("\n", 1)[0]  # everything up to LAST newline
+            new_ids = tokenizer(trimmed_text + "\n```")["input_ids"]
             final_ids.append(new_ids)
 
         return tokenizer.pad(
