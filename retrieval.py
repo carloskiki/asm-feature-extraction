@@ -297,7 +297,6 @@ class Retrieval(Context):
             tokenize=False,
             add_generation_prompt=True,
         )
-        print(chat)
 
         return tokenizer(
             chat,
