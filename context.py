@@ -105,7 +105,8 @@ class Context:
         """
         Return the tokenizer
         """
-        return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
+        tok = AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
+        return tok
 
     @cached_property
     def empty_prompt_size(self) -> int:
