@@ -233,7 +233,6 @@ class Retrieval(Context):
                 query_outputs = model.generate(
                     **query_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
-                    repetition_penalty=1.5,
                 )[:, query_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
                 query_decoded.extend(
@@ -244,7 +243,6 @@ class Retrieval(Context):
                 target_outputs = model.generate(
                     **target_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
-                    repetition_penalty=1.5,
                 )[:, target_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to target_decoded
                 target_decoded.extend(
