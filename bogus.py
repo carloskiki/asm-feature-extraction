@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from argparse import ArgumentParser
 import context
 from data_processing import LibDataset
+import time
 
 @dataclass
 class Bogus(context.Context):
@@ -24,11 +25,9 @@ class Bogus(context.Context):
         parser.add_argument("out_file", type=str)
 
     def __call__(self):
-        dataset = LibDataset("lib-data", True, 1000, None, "openssl", 2, "gcc")
-
-        with open(self.out_file, "w", encoding="utf-8") as file:
-            for (func, _) in dataset:
-                file.write("#####\n")
-                file.write(func.name + "\n")
-                file.write(str(func))
-                file.write("\n\n")
+        for _ in range(5):
+            start = time.time()
+            self.get_model()
+            self.get_tokenizer()
+            stop = time.time()
+            print(stop - start)
