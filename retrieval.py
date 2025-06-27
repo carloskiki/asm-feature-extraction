@@ -231,7 +231,8 @@ class Retrieval(Context):
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
-                    **query_tokens, max_new_tokens=MAX_NEW_TOKENS, temperature=0.5
+                    **query_tokens,
+                    max_new_tokens=MAX_NEW_TOKENS,
                 )[:, query_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
                 query_decoded.extend(
@@ -240,7 +241,8 @@ class Retrieval(Context):
 
                 # Pass the tokens to LLM
                 target_outputs = model.generate(
-                    **target_tokens, max_new_tokens=MAX_NEW_TOKENS, temperature=0.5
+                    **target_tokens,
+                    max_new_tokens=MAX_NEW_TOKENS,
                 )[:, target_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to target_decoded
                 target_decoded.extend(
@@ -307,10 +309,9 @@ class Retrieval(Context):
 
 
 def save_metrics(metrics, timestamp):
-    with open(
-        Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8"
-    ) as file:
+    with open(Path("metrics") / f"{timestamp}.json", "w", encoding="utf-8") as file:
         json.dump(metrics, file)
+
 
 def calculate_mrr(scores: np.ndarray, relevance: np.ndarray) -> float:
     """
