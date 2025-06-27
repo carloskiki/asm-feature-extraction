@@ -1,6 +1,7 @@
 from pathlib import Path
 from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from functools import cached_property
 
 MODELS = {
     "qwen-2.5-7": "Qwen/Qwen2.5-Coder-7B-Instruct",
@@ -79,6 +80,7 @@ class Context:
         prompt.append({"role": "user", "content": f"```assembly\n{assembly}\n```"})
         return prompt
 
+    @cached_property
     def get_model(self, accelerator=None):
         """
         Return the model
@@ -98,12 +100,14 @@ class Context:
             trust_remote_code=True,
         )
 
+    @cached_property
     def get_tokenizer(self):
         """
         Return the tokenizer
         """
         return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
 
+    @cached_property
     def empty_prompt_size(self) -> int:
         prompt = self.get_prompt("")
         tokenizer = self.get_tokenizer()
