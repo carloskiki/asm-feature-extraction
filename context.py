@@ -109,7 +109,6 @@ class Context:
 
         return self.tokenizer
 
-    @cached_property
     def empty_prompt_size(self) -> int:
         prompt = self.get_prompt("")
         tokenizer = self.get_tokenizer()
