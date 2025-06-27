@@ -22,6 +22,7 @@ class Context:
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
     examples: int  # Number of examples to give the model before query (AKA the number of "shot"s e.g., 3-shot)
+    tokenizer = None
 
     def get_prompt(self, assembly: str) -> list[dict[str, str]]:
         """
@@ -80,7 +81,6 @@ class Context:
         prompt.append({"role": "user", "content": f"```assembly\n{assembly}\n```"})
         return prompt
 
-    @cached_property
     def get_model(self, accelerator=None):
         """
         Return the model
@@ -100,13 +100,14 @@ class Context:
             trust_remote_code=True,
         )
 
-    @cached_property
     def get_tokenizer(self):
         """
         Return the tokenizer
         """
-        tok = AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
-        return tok
+        if self.tokenizer is None:
+            self.tokenizer = AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
+
+        return self.tokenizer
 
     @cached_property
     def empty_prompt_size(self) -> int:
