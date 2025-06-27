@@ -10,7 +10,6 @@ import time
 
 @dataclass
 class Bogus(context.Context):
-    out_file: str
 
     @staticmethod
     def arguments(subparsers):
@@ -22,7 +21,6 @@ class Bogus(context.Context):
             "bogus",
             description="",
         )
-        parser.add_argument("out_file", type=str)
 
     def __call__(self):
         for _ in range(5):
