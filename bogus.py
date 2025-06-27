@@ -25,6 +25,6 @@ class Bogus(context.Context):
     def __call__(self):
         for _ in range(5):
             start = time.time()
-            self.get_tokenizer()
+            tokenizer = self.get_tokenizer()
             stop = time.time()
             print(stop - start)
