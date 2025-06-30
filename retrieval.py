@@ -264,9 +264,9 @@ class Retrieval(Context):
                     **indexed_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
                     temperature = 1. + 0.5 * x
-                )
+                )[:, indexed_tokens["input_ids"].shape[1] :].cpu()
 
-                gen = parse_json(output)
+                gen = parse_json(self.tokenizer.decode(output[0], skip_special_tokens=True))
                 if gen is not None:
                     generated[index] = gen
                     break
