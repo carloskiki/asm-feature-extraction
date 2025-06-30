@@ -259,6 +259,7 @@ class Retrieval(Context):
             input = { key: val[index] for key, val in tokens.items() }
 
             for x in range(3):
+                print(f"got invalid JSON, retrying {x + 1}/3")
                 output = model.generate(
                     input,
                     max_new_tokens=MAX_NEW_TOKENS,
