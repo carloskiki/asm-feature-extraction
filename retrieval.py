@@ -242,16 +242,33 @@ class Retrieval(Context):
         return all_scores
 
     def generate(self, batch, accelerator: Accelerator, model) -> list[object]:
-        query_tokens = self.tokenize_prompts([str(f) for f in batch]).to(
+        tokens = self.tokenize_prompts([str(f) for f in batch]).to(
             accelerator.device
         )
         # Pass the tokens to LLM
         outputs = model.generate(
-            **query_tokens,
+            **tokens,
             max_new_tokens=MAX_NEW_TOKENS,
-        )[:, query_tokens["input_ids"].shape[1] :].cpu()
+            temperature = 0.5
+        )[:, tokens["input_ids"].shape[1] :].cpu()
 
-        return [parse_json(d) for d in self.tokenizer.batch_decode(outputs, skip_special_tokens=True)]
+        generated = [parse_json(d) for d in self.tokenizer.batch_decode(outputs, skip_special_tokens=True)]
+        wrong_json_indices = [i for i, x in enumerate(generated) if x is None]
+
+        for index in wrong_json_indices:
+            for x in range(3):
+                output = model.generate(
+                    tokens[index],
+                    max_new_tokens=MAX_NEW_TOKENS,
+                    temperature = 1. + 0.5 * x
+                )
+
+                gen = parse_json(output)
+                if gen is not None:
+                    generated[index] = gen
+                    break
+        
+        return generated
 
     def tokenize_prompts(self, fns: list[str]):
         size_for_query = self.context_size - self.empty_prompt_size
