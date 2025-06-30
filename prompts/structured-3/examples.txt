@@ -118,7 +118,7 @@ loc_450CE0:
   "number_of_distinct_subroutine_call_targets": 0,
   "use_indexed_addressing_modes": true,
   "presence_of_notable_integer_constants": [
-    "0x18",
+    "0x18"
   ],
   "presence_of_notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 12,
