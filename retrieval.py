@@ -224,6 +224,15 @@ class Retrieval(Context):
                 maximum_score = max(score)
                 if maximum_score > 0.7 and score.index(maximum_score) == index:
                     print(f"found example {index} with similarity {maximum_score}")
+                    with open("good-examples.txt", "w") as file:
+                        (query, target) = loader.dataset[index]
+
+                        file.write(f"##### QUERY {index}\n")
+                        file.write(str(query))
+                        file.write("\n")
+                        file.write(f"##### TARGET {index}\n")
+                        file.write(str(target))
+                        file.write("\n")
 
         torch.cuda.empty_cache()
         return all_scores
