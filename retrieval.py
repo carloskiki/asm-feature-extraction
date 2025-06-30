@@ -256,12 +256,12 @@ class Retrieval(Context):
         wrong_json_indices = [i for i, x in enumerate(generated) if x is None]
 
         for index in wrong_json_indices:
-            input = { key: val[index] for key, val in tokens.items() }
+            indexed_tokens = { key: val[index] for key, val in tokens.items() }
 
             for x in range(3):
                 print(f"got invalid JSON, retrying {x + 1}/3")
                 output = model.generate(
-                    input,
+                    indexed_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
                     temperature = 1. + 0.5 * x
                 )
