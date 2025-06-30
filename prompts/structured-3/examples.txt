@@ -28,7 +28,7 @@ loc_4068F7:
   "return_value_type": "Integer",
   "dominant_operation_categories": [
     "DataMovement",
-    "SubroutineCall",
+    "SubroutineCall"
   ],
   "loop_indicators": false,
   "number_of_distinct_subroutine_call_targets": 2,
@@ -113,7 +113,7 @@ loc_450CE0:
   "return_value_type": "None",
   "dominant_operation_categories": [
     "DataMovement",
-    "Bitwise",
+    "Bitwise"
   ],
   "loop_indicators": false,
   "number_of_distinct_subroutine_call_targets": 0,
@@ -180,8 +180,8 @@ loc_447500:
   "return_value_type": "None",
   "dominant_operation_categories": [
     "SubroutineCall",
-    "MemoryAccess"
-    "DataMovement",
+    "MemoryAccess",
+    "DataMovement"
   ],
   "loop_indicators": false,
   "number_of_distinct_subroutine_call_targets": 6,

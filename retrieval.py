@@ -449,7 +449,6 @@ def parse_json(s: str):
         parsed = json.loads(s)
         return parsed
     except json.JSONDecodeError:
-        print("found invalid json... Skipping")
         with open("invalid-json.txt", "a", encoding="utf-8") as file:
             file.write("#####\n")
             file.write(s)
