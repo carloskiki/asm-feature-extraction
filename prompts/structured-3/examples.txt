@@ -1,0 +1,205 @@
+```assembly
+loc_4068C7:
+    MOVSXD rsi, dword ptr [rbx+3Ch]
+    MOV rdi, [rbx+30h]
+    MOV ebp, [rbx+4]
+    CALL sub_40B660
+    MOV rdi, [rbx+30h]
+    CALL sub_40B5E0
+    MOV esi, 40h
+    MOV rdi, rbx
+    CALL sub_40B660
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    MOV eax, ebp
+loc_4068F7:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+```
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "SubroutineCall",
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_indexed_addressing_modes": true,
+  "presence_of_notable_integer_constants": [
+    "0x3C",
+    "0x30",
+    "0x4",
+    "0x40"
+  ],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
+  "likely_modifies_input_parameters": false,
+  "likely_modifies_global_state": false,
+  "likely_performs_memory_allocation_deallocation": false,
+  "likely_performs_io_operations": false,
+  "likely_performs_block_memory_operations": false,
+  "inferred_algorithm": "Undetermined"
+}
+```
+
+
+```assembly
+loc_450CE0:
+    MOV eax, [rdi]
+    SHR eax, 18h
+    MOV [rsi], al
+    MOV eax, [rdi]
+    SHR eax, 10h
+    MOV [rsi+1], al
+    MOV eax, [rdi]
+    SHR eax, 8
+    MOV [rsi+2], al
+    MOV eax, [rdi]
+    MOV [rsi+3], al
+    MOVZX eax, byte ptr [rdi+7]
+    MOV [rsi+4], al
+    MOVZX eax, word ptr [rdi+6]
+    MOV [rsi+5], al
+    MOV eax, [rdi+4]
+    SHR eax, 8
+    MOV [rsi+6], al
+    MOV eax, [rdi+4]
+    MOV [rsi+7], al
+    MOVZX eax, byte ptr [rdi+0Bh]
+    MOV [rsi+8], al
+    MOVZX eax, word ptr [rdi+0Ah]
+    MOV [rsi+9], al
+    MOV eax, [rdi+8]
+    SHR eax, 8
+    MOV [rsi+0Ah], al
+    MOV eax, [rdi+8]
+    MOV [rsi+0Bh], al
+    MOVZX eax, byte ptr [rdi+0Fh]
+    MOV [rsi+0Ch], al
+    MOVZX eax, word ptr [rdi+0Eh]
+    MOV [rsi+0Dh], al
+    MOV eax, [rdi+0Ch]
+    SHR eax, 8
+    MOV [rsi+0Eh], al
+    MOV eax, [rdi+0Ch]
+    MOV [rsi+0Fh], al
+    MOVZX eax, byte ptr [rdi+13h]
+    MOV [rsi+10h], al
+    MOVZX eax, word ptr [rdi+12h]
+    MOV [rsi+11h], al
+    MOV eax, [rdi+10h]
+    SHR eax, 8
+    MOV [rsi+12h], al
+    MOV eax, [rdi+10h]
+    MOV [rsi+13h], al
+    RETN 
+```
+
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Bitwise",
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_indexed_addressing_modes": true,
+  "presence_of_notable_integer_constants": [
+    "0x18",
+    "0x10",
+    "0x8",
+    "0x7",
+    "0x6",
+    "0xB",
+    "0xA",
+    "0xF",
+    "0xE",
+    "0xC",
+    "0x13",
+    "0x12"
+  ],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 12,
+  "likely_modifies_input_parameters": false,
+  "likely_modifies_global_state": false,
+  "likely_performs_memory_allocation_deallocation": false,
+  "likely_performs_io_operations": false,
+  "likely_performs_block_memory_operations": true,
+  "inferred_algorithm": "Byte Reordering / Endianness Conversion / Data Unpacking"
+}
+```
+
+
+```assembly
+loc_447500:
+    PUSH rbx
+    MOV rbx, rdi
+    LEA rdi, [rdi+720h]
+    CALL sub_449C10
+    MOV rdi, rbx
+    CALL sub_451B20
+    MOV rdi, rbx
+    CALL sub_447460
+    MOV rdi, rbx
+    CALL sub_4474B0
+    MOV rax, [rbx+0A8h]
+    MOV rdi, [rax+118h]
+    CALL sub_449780
+    MOV rax, [rbx+0A8h]
+    MOV rdi, [rax+120h]
+    CALL sub_449780
+    MOV rdi, [rbx+0A8h]
+    MOV edx, 96h
+    MOV esi, offset aSslD1LibC
+    CALL sub_4F43E0
+    MOV qword ptr [rbx+0A8h], 0
+    POP rbx
+    RETN 
+```
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "SubroutineCall",
+    "MemoryAccess"
+    "DataMovement",
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 6,
+  "use_indexed_addressing_modes": true,
+  "presence_of_notable_integer_constants": [
+    "0x720",
+    "0xA8",
+    "0x118",
+    "0x120",
+    "0x96"
+  ],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
+  "likely_modifies_input_parameters": true,
+  "likely_modifies_global_state": false,
+  "likely_performs_memory_allocation_deallocation": false,
+  "likely_performs_io_operations": true,
+  "likely_performs_block_memory_operations": false,
+  "inferred_algorithm": "Object/Structure Initialization or Cleanup"
+}
+```
