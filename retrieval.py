@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, Union
 from statistics import median, mean
-from argparse import ArgumentParser, ArgumentTypeError
+from argparse import ArgumentParser
 from pathlib import Path
 import random
 import json
@@ -17,6 +17,7 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
 from accelerate import Accelerator
+from parsing import platform_parser, optimization_parser
 from data_processing import (
     BINARIES,
     PairsDataset,
@@ -24,39 +25,6 @@ from data_processing import (
 from context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
-
-
-def platform_parser(s):
-    # If input looks like key:value,key:value,...
-    if ":" in s and "," in s:
-        try:
-            return [tuple(p.split(":", 1)) for p in s.split(",")]
-        except ValueError as e:
-            raise ArgumentTypeError("Malformed key:value pair.") from e
-    else:
-        # Just treat it as a plain string
-        return s
-
-
-def optimization_parser(s):
-    # Try to parse as a single int
-    try:
-        return int(s)
-    except ValueError:
-        pass  # Not a single int
-
-    # Try to parse as list of int:int pairs
-    try:
-        pairs = []
-        for p in s.split(","):
-            k, v = p.split(":", 1)
-            pairs.append((int(k), int(v)))
-        return pairs
-    except Exception as e:
-        raise ArgumentTypeError(
-            "Expected an int or comma-separated int:int pairs"
-        ) from e
-
 
 @dataclass
 class Retrieval(Context):
@@ -228,13 +196,13 @@ class Retrieval(Context):
         with open("query-outputs.txt", "w", encoding = "utf-8") as file:
             for idx, query in enumerate(all_queries):
                 file.write(f"##### {idx}\n")
-                file.write(query)
+                json.dump(query, file)
                 file.write("\n")
 
         with open("target-outputs.txt", "w", encoding = "utf-8") as file:
-            for idx, query in enumerate(all_targets):
+            for idx, target in enumerate(all_targets):
                 file.write(f"##### {idx}\n")
-                file.write(query)
+                json.dump(target, file)
                 file.write("\n")
 
         scores: list[list[float]] = []
