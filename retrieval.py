@@ -261,7 +261,7 @@ class Retrieval(Context):
             for x in range(3):
                 print(f"got invalid JSON, retrying {x + 1}/3")
                 output = model.generate(
-                    indexed_tokens,
+                    **indexed_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
                     temperature = 1. + 0.5 * x
                 )
