@@ -201,8 +201,8 @@ class Retrieval(Context):
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
-        query_decoded = []
-        target_decoded = []
+        query_outputs = []
+        target_outputs = []
 
         clear_cache_counter = 0
         with torch.no_grad():
@@ -214,46 +214,19 @@ class Retrieval(Context):
                 # Tokenize the prompts for the batch
                 (queries, targets) = zip(*batch)
 
-                query_tokens = self.tokenize_prompts([str(q) for q in queries]).to(
-                    accelerator.device
-                )
-                target_tokens = self.tokenize_prompts([str(t) for t in targets]).to(
-                    accelerator.device
-                )
-
-                # Pass the tokens to LLM
-                query_outputs = model.generate(
-                    **query_tokens,
-                    max_new_tokens=MAX_NEW_TOKENS,
-                )[:, query_tokens["input_ids"].shape[1] :].cpu()
-                # Add all outputs to query_decoded
-                query_decoded.extend(
-                    self.tokenizer.batch_decode(query_outputs, skip_special_tokens=True)
-                )
-
-                # Pass the tokens to LLM
-                target_outputs = model.generate(
-                    **target_tokens,
-                    max_new_tokens=MAX_NEW_TOKENS,
-                )[:, target_tokens["input_ids"].shape[1] :].cpu()
-                # Add all outputs to target_decoded
-                target_decoded.extend(
-                    self.tokenizer.batch_decode(target_outputs, skip_special_tokens=True)
-                )
+                query_outputs.extend(self.generate(queries, accelerator, model))
+                target_outputs.extend(self.generate(targets, accelerator, model))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
                     gc.collect()
                     clear_cache_counter = 0
 
-        query_words = [parse_json(q) for q in query_decoded]
-        target_words = [parse_json(t) for t in target_decoded]
-
-        all_targets = accelerator.gather_for_metrics(target_words)
+        all_targets = accelerator.gather_for_metrics(target_outputs)
 
         scores: list[list[float]] = []
         for index, query in tqdm(
-            enumerate(query_words),
+            enumerate(query_outputs),
             desc="Scoring results",
             disable=not accelerator.is_main_process,
         ):
@@ -267,6 +240,18 @@ class Retrieval(Context):
 
         torch.cuda.empty_cache()
         return all_scores
+
+    def generate(self, batch, accelerator: Accelerator, model) -> list[object]:
+            query_tokens = self.tokenize_prompts([str(f) for f in batch]).to(
+                accelerator.device
+            )
+            # Pass the tokens to LLM
+            outputs = model.generate(
+                **query_tokens,
+                max_new_tokens=MAX_NEW_TOKENS,
+            )[:, query_tokens["input_ids"].shape[1] :].cpu()
+
+            return [parse_json(d) for d in self.tokenizer.batch_decode(outputs, skip_special_tokens=True)]
 
     def tokenize_prompts(self, fns: list[str]):
         size_for_query = self.context_size - self.empty_prompt_size
@@ -435,13 +420,13 @@ def flatten_to_strings(obj, parent_key="", sep="."):
     return result
 
 
-def parse_json(s: str):
+def parse_json(s: str) -> Optional[object]:
     """
-    Tokenize the query into words that can be compared more easily
+    Parse the generated json, and 
     """
 
     s = s.strip()  # Remove surrounding whitespace
-    s = s.removeprefix("```json")
+    _, _, s = s.partition("```json") # Remove up to and including the opening "```json"
     s = s.removesuffix("```")
     s = s.strip()  # Remove any remaining whitespace or newlines
 
@@ -454,4 +439,4 @@ def parse_json(s: str):
             file.write(s)
             file.write("\n")
 
-        return []
+        return None
