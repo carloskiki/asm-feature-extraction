@@ -257,8 +257,9 @@ class Retrieval(Context):
 
         for index in wrong_json_indices:
             for x in range(3):
+                print(tokens)
                 output = model.generate(
-                    tokens[index],
+                    tokens["input_ids"][index],
                     max_new_tokens=MAX_NEW_TOKENS,
                     temperature = 1. + 0.5 * x
                 )
