@@ -220,13 +220,12 @@ class Retrieval(Context):
         all_scores = accelerator.gather_for_metrics(scores)
 
         if accelerator.is_main_process:
-            for index, score in enumerate(all_scores):
-                maximum_score = max(score)
-                if maximum_score > 0.7 and score.index(maximum_score) == index:
-                    print(f"found example {index} with similarity {maximum_score}")
-                    with open("good-examples.txt", "w") as file:
+            with open("good-examples.txt", "w") as file:
+                for index, score in enumerate(all_scores):
+                    maximum_score = max(score)
+                    if maximum_score > 0.7 and score.index(maximum_score) == index:
+                        print(f"found example {index} with similarity {maximum_score}")
                         (query, target) = loader.dataset[index]
-
                         file.write(f"##### QUERY {index}\n")
                         file.write(query.name)
                         file.write(str(query))
