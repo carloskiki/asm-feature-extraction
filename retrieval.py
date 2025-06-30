@@ -222,7 +222,20 @@ class Retrieval(Context):
                     gc.collect()
                     clear_cache_counter = 0
 
+        all_queries = accelerator.gather_for_metrics(query_outputs)
         all_targets = accelerator.gather_for_metrics(target_outputs)
+
+        with open("query-outputs.txt", "w", encoding = "utf-8") as file:
+            for idx, query in all_queries:
+                file.write(f"##### {idx}\n")
+                file.write(query)
+                file.write("\n")
+
+        with open("target-outputs.txt", "w", encoding = "utf-8") as file:
+            for idx, query in all_queries:
+                file.write(f"##### {idx}\n")
+                file.write(query)
+                file.write("\n")
 
         scores: list[list[float]] = []
         for index, query in tqdm(
@@ -237,6 +250,12 @@ class Retrieval(Context):
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
+
+        if accelerator.is_main_process:
+            for index, score in all_scores:
+                maximum_score = max(score)
+                if maximum_score > 0.7 and score.index(maximum_score) == index:
+                    print(f"found example {index} with similarity {maximum_score}")
 
         torch.cuda.empty_cache()
         return all_scores
