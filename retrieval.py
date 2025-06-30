@@ -226,13 +226,13 @@ class Retrieval(Context):
         all_targets = accelerator.gather_for_metrics(target_outputs)
 
         with open("query-outputs.txt", "w", encoding = "utf-8") as file:
-            for idx, query in all_queries:
+            for idx, query in enumerate(all_queries):
                 file.write(f"##### {idx}\n")
                 file.write(query)
                 file.write("\n")
 
         with open("target-outputs.txt", "w", encoding = "utf-8") as file:
-            for idx, query in all_queries:
+            for idx, query in enumerate(all_targets):
                 file.write(f"##### {idx}\n")
                 file.write(query)
                 file.write("\n")
