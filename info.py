@@ -19,7 +19,7 @@ class Info(context.Context):
         )
 
     def __call__(self):
-        token_count = self.empty_prompt_size()
+        token_count = self.empty_prompt_size
 
         print(f"MODEL: {self.model}")
         print(f"Configuration: {self.get_model().config}")

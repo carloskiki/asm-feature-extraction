@@ -18,7 +18,7 @@ class Query(context.Context):
 
         prompt = self.get_prompt(assembly)
         model = self.get_model()
-        tokenizer = self.get_tokenizer()
+        tokenizer = self.tokenizer()
 
         model_inputs = tokenizer.apply_chat_template(prompt, add_generation_prompt=True, return_tensors="pt").to("cuda")
 

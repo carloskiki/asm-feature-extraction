@@ -1,7 +1,7 @@
 from pathlib import Path
+from functools import cached_property
 from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from functools import cached_property
 import torch
 
 MODELS = {
@@ -23,7 +23,6 @@ class Context:
     model: str  # Name of the model to use.
     prompt: str  # Directory containing the prompt and format to use
     examples: int  # Number of examples to give the model before query (AKA the number of "shot"s e.g., 3-shot)
-    tokenizer = None
 
     def get_prompt(self, assembly: str) -> list[dict[str, str]]:
         """
@@ -101,18 +100,20 @@ class Context:
             trust_remote_code=True,
         )
 
-    def get_tokenizer(self):
+    @cached_property
+    def tokenizer(self):
         """
         Return the tokenizer
         """
-        if self.tokenizer is None:
-            self.tokenizer = AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
+        return AutoTokenizer.from_pretrained(MODELS[self.model], trust_remote_code=True)
 
-        return self.tokenizer
-
+    @cached_property
     def empty_prompt_size(self) -> int:
+        """
+        Size of the system prompt with examples
+        """
         prompt = self.get_prompt("")
-        tokenizer = self.get_tokenizer()
+        tokenizer = self.tokenizer
         tokens = tokenizer.apply_chat_template(
             prompt, tokenize=True, add_generation_prompt=True
         )

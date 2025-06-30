@@ -190,12 +190,6 @@ class Retrieval(Context):
 
                     print(metrics[-1])
 
-        if not accelerator.is_main_process:
-            return
-
-        if self.save_metrics:
-            save_metrics(metrics, timestamp)
-
         print("done")
 
     def generate_scores(
@@ -203,8 +197,6 @@ class Retrieval(Context):
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
-        tokenizer = self.get_tokenizer()
-        empty_prompt_size = self.empty_prompt_size()
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
@@ -222,12 +214,12 @@ class Retrieval(Context):
                 # Tokenize the prompts for the batch
                 (queries, targets) = zip(*batch)
 
-                query_tokens = self.tokenize_prompts(
-                    [str(q) for q in queries], empty_prompt_size, tokenizer
-                ).to(accelerator.device)
-                target_tokens = self.tokenize_prompts(
-                    [str(t) for t in targets], empty_prompt_size, tokenizer
-                ).to(accelerator.device)
+                query_tokens = self.tokenize_prompts([str(q) for q in queries]).to(
+                    accelerator.device
+                )
+                target_tokens = self.tokenize_prompts([str(t) for t in targets]).to(
+                    accelerator.device
+                )
 
                 # Pass the tokens to LLM
                 query_outputs = model.generate(
@@ -236,7 +228,7 @@ class Retrieval(Context):
                 )[:, query_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to query_decoded
                 query_decoded.extend(
-                    tokenizer.batch_decode(query_outputs, skip_special_tokens=True)
+                    self.tokenizer.batch_decode(query_outputs, skip_special_tokens=True)
                 )
 
                 # Pass the tokens to LLM
@@ -246,7 +238,7 @@ class Retrieval(Context):
                 )[:, target_tokens["input_ids"].shape[1] :].cpu()
                 # Add all outputs to target_decoded
                 target_decoded.extend(
-                    tokenizer.batch_decode(target_outputs, skip_special_tokens=True)
+                    self.tokenizer.batch_decode(target_outputs, skip_special_tokens=True)
                 )
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
@@ -276,9 +268,9 @@ class Retrieval(Context):
         torch.cuda.empty_cache()
         return all_scores
 
-    def tokenize_prompts(self, fns: list[str], empty_prompt_size: int, tokenizer):
-        size_for_query = self.context_size - empty_prompt_size
-        batch = tokenizer(
+    def tokenize_prompts(self, fns: list[str]):
+        size_for_query = self.context_size - self.empty_prompt_size
+        batch = self.tokenizer(
             fns,
             truncation=True,
             padding=False,
@@ -289,17 +281,17 @@ class Retrieval(Context):
                 continue
 
             # -- decode -> cut at last '\n' -> re-encode --
-            decoded = tokenizer.decode(ids, skip_special_tokens=True)
+            decoded = self.tokenizer.decode(ids, skip_special_tokens=True)
             trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
             fns[idx] = trimmed_text
 
-        chat = tokenizer.apply_chat_template(
+        chat = self.tokenizer.apply_chat_template(
             [self.get_prompt(f) for f in fns],
             tokenize=False,
             add_generation_prompt=True,
         )
 
-        return tokenizer(
+        return self.tokenizer(
             chat,
             truncation=False,
             padding=True,

@@ -56,7 +56,6 @@ class BatchQuery(Context):
 
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
-        tokenizer = self.get_tokenizer()
 
         dataset = LibDataset(
             self.data_path,
@@ -69,8 +68,6 @@ class BatchQuery(Context):
         )
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
-
-        tokenizer = self.get_tokenizer()
 
         query_decoded = []
         functions = []
@@ -86,10 +83,10 @@ class BatchQuery(Context):
                 prompts = [self.get_prompt(str(f)) for f, _ in batch]
                 functions.extend(batch)
 
-                chat = tokenizer.apply_chat_template(
+                chat = self.tokenizer.apply_chat_template(
                     prompts, tokenize=False, add_generation_prompt=True
                 )
-                token_batch = tokenizer(
+                token_batch = self.tokenizer(
                     chat,
                     truncation=True,
                     padding=self.batch_size > 1,
@@ -103,7 +100,7 @@ class BatchQuery(Context):
                     **token_batch,
                     max_new_tokens=MAX_NEW_TOKENS,
                 )[:, token_batch["input_ids"].shape[1] :].cpu()
-                query_decoded.extend(tokenizer.batch_decode(query_outputs, skip_special_tokens=True))
+                query_decoded.extend(self.tokenizer.batch_decode(query_outputs, skip_special_tokens=True))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
