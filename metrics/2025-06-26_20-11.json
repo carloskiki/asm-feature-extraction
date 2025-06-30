@@ -1,0 +1,117 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.4710705153546869,
+      "recall_at_1": 0.342,
+      "recall_at_10": 0.586,
+      "similarity_mean": {
+        "max": 0.6544683663416471,
+        "median": 0.2612735211341976,
+        "mean": 0.25944633334366557,
+        "min": 0.0
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.412998969628373,
+      "recall_at_1": 0.301,
+      "recall_at_10": 0.55,
+      "similarity_mean": {
+        "max": 0.6346026128200218,
+        "median": 0.251986714806077,
+        "mean": 0.2501313715461641,
+        "min": 0.0
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.3434952632833295,
+      "recall_at_1": 0.234,
+      "recall_at_10": 0.453,
+      "similarity_mean": {
+        "max": 0.6298501915032754,
+        "median": 0.24464308139929855,
+        "mean": 0.24229898823572465,
+        "min": 0.0
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.4564041801414852,
+      "recall_at_1": 0.345,
+      "recall_at_10": 0.555,
+      "similarity_mean": {
+        "max": 0.6514649363244064,
+        "median": 0.23474181557896867,
+        "mean": 0.23199600922285046,
+        "min": 0.0
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.6083351994305176,
+      "recall_at_1": 0.488,
+      "recall_at_10": 0.689,
+      "similarity_mean": {
+        "max": 0.6930745840153061,
+        "median": 0.23647058231559273,
+        "mean": 0.2350371585696559,
+        "min": 0.0
+      }
+    }
+  }
+]

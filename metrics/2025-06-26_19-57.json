@@ -1,0 +1,1 @@
+[{"parameters": {"binary": "putty", "optimization": 0, "target-optimization": 1, "platform": "gcc", "pool-size": 100, "examples": 2, "prompt": "structured-2", "model": "qwen-2.5-7"}, "results": {"mrr": 0.5586413979174022, "recall_at_1": 0.4, "recall_at_10": 0.8, "similarity_mean": {"max": 0.6377403078715019, "median": 0.2971909905049777, "mean": 0.3011489897065655, "min": 0.0}}}]

@@ -1,0 +1,1 @@
+[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 1, "platform": "gcc", "pool-size": 100, "examples": 2, "prompt": "tokens-2", "model": "qwen-2.5-7"}, "results": {"mrr": 0.30670471177660225, "recall_at_1": 0.2, "recall_at_10": 0.52, "similarity_mean": {"max": 0.4852517562545065, "median": 0.21221849077252483, "mean": 0.20487669586424143, "min": 0.0}}}]

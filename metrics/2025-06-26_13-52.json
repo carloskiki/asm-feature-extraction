@@ -1,1 +1,25 @@
-[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 1, "platform": "gcc", "pool-size": 100, "examples": 3, "prompt": "structured-2", "model": "qwen-2.5-0.5"}, "results": {"mrr": 0.2651248888135223, "recall_at_1": 0.03, "recall_at_10": 0.19, "similarity_mean": {"max": 0.8927450510058198, "median": 0.565511279075213, "mean": 0.4981198345100482, "min": 0.0}}}]
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 100,
+      "examples": 3,
+      "prompt": "structured-2",
+      "model": "qwen-2.5-0.5"
+    },
+    "results": {
+      "mrr": 0.2651248888135223,
+      "recall_at_1": 0.03,
+      "recall_at_10": 0.19,
+      "similarity_mean": {
+        "max": 0.8927450510058198,
+        "median": 0.565511279075213,
+        "mean": 0.4981198345100482,
+        "min": 0.0
+      }
+    }
+  }
+]
