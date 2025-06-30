@@ -36,7 +36,6 @@ loc_4068F7:
   "presence_of_notable_integer_constants": [
     "0x3C",
     "0x30",
-    "0x4",
     "0x40"
   ],
   "presence_of_notable_floating_point_constants": [],
@@ -120,17 +119,6 @@ loc_450CE0:
   "use_indexed_addressing_modes": true,
   "presence_of_notable_integer_constants": [
     "0x18",
-    "0x10",
-    "0x8",
-    "0x7",
-    "0x6",
-    "0xB",
-    "0xA",
-    "0xF",
-    "0xE",
-    "0xC",
-    "0x13",
-    "0x12"
   ],
   "presence_of_notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 12,
