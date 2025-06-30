@@ -220,7 +220,7 @@ class Retrieval(Context):
         all_scores = accelerator.gather_for_metrics(scores)
 
         if accelerator.is_main_process:
-            for index, score in all_scores:
+            for index, score in enumerate(all_scores):
                 maximum_score = max(score)
                 if maximum_score > 0.7 and score.index(maximum_score) == index:
                     print(f"found example {index} with similarity {maximum_score}")
