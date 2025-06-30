@@ -228,9 +228,11 @@ class Retrieval(Context):
                         (query, target) = loader.dataset[index]
 
                         file.write(f"##### QUERY {index}\n")
+                        file.write(query.name)
                         file.write(str(query))
                         file.write("\n")
                         file.write(f"##### TARGET {index}\n")
+                        file.write(target.name)
                         file.write(str(target))
                         file.write("\n")
 
