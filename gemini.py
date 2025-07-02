@@ -156,7 +156,7 @@ class GeminiRetrieval(Context):
             model="gemini-2.5-flash",
             config=genai.types.GenerateContentConfig(
                 system_instruction=system_prompt,
-                max_output_otkens=MAX_NEW_TOKENS,
+                max_output_tokens=MAX_NEW_TOKENS,
                 response_mime_type="aplicatoin/json",
                 response_schema=Schema,
             ),
