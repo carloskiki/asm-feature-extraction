@@ -157,8 +157,8 @@ class GeminiRetrieval(Context):
             config=genai.types.GenerateContentConfig(
                 system_instruction=system_prompt,
                 max_output_tokens=MAX_NEW_TOKENS,
-                response_mime_type="application/json",
-                response_schema=Schema,
+                # response_mime_type="application/json",
+                # response_schema=Schema,
             ),
             history=[
                 genai.types.Content(
