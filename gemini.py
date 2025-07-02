@@ -142,7 +142,7 @@ class GeminiRetrieval(Context):
         )
 
         responses = []
-        for fn, _ in batch:
+        for fn in batch:
             print(fn.name)
             # We could instead provide a schema for the model to follow and not parse. But we want to imitate
             # our local setup as much as possible.
