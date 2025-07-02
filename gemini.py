@@ -175,5 +175,5 @@ class GeminiRetrieval(Context):
             responses.append(chat.send_message(f"```assembly\n{str(fn)}\n```"))
         
 
-        with open("saved-chats.pkl", "w") as file:
+        with open("saved-chats.pkl", "wb") as file:
             pickle.dump(responses, file)
