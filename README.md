@@ -1,5 +1,15 @@
 # Extract human readable information by querying an LLM
 
+## New Prompt
+
+- Move the main operation category to boolean fields - Have a single string describing the main operation
+
+- Likely performs error handling
+- Performs simd computation
+- Causes interrupts (count)
+- linear memory accesses
+- k
+
 ## Assumptions
 
 - There is no bad actor trying to mangle or obfuscate the generated assembly.

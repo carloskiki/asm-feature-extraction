@@ -232,7 +232,8 @@ class Retrieval(Context):
             }
 
             for x in range(3):
-                print(f"got invalid JSON, retrying {x + 1}/3")
+                if x == 2:
+                    print("Last change at generating valid json")
                 output = model.generate(
                     **indexed_tokens,
                     max_new_tokens=MAX_NEW_TOKENS,
