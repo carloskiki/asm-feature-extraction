@@ -3,7 +3,9 @@
 Comparaison: Niveau d'optimization 0 vs. 1
 
 platforme: x86_64 compilé avec GCC
+
 Coefficient de similarité: 0.8
+
 Modèle utilisé: Qwen2.5-Coder - 7B paramètres
 
 ## Assembleur pour `-O0`
@@ -142,12 +144,11 @@ loc_40A2C4:
   "input_parameter_types": [
     "Pointer",
     "Pointer",
-    "Pointer"
+    "Integer"
   ],
   "return_value_type": "None",
   "dominant_operation_categories": [
     "DataMovement",
-    "Arithmetic",
     "Bitwise",
     "ConditionalBranching"
   ],
@@ -164,7 +165,7 @@ loc_40A2C4:
   "likely_performs_memory_allocation_deallocation": false,
   "likely_performs_io_operations": false,
   "likely_performs_block_memory_operations": false,
-  "inferred_algorithm": "Block Processing / Looping / Conditional Execution"
+  "inferred_algorithm": "Byte Reordering / Endianness Conversion / Data Packing"
 }
 ```
 
@@ -173,7 +174,9 @@ loc_40A2C4:
 Comparaison: Niveau d'optimization 0 vs. 1
 
 platforme: x86_64 compilé avec GCC
+
 Coefficient de similarité: 0.7143
+
 Modèle utilisé: Qwen2.5-Coder - 7B paramètres
 
 ## Assembleur pour `-O0`
