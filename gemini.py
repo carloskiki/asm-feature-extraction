@@ -156,8 +156,8 @@ class GeminiRetrieval(Context):
             model="gemini-2.5-flash",
             config=genai.types.GenerateContentConfig(
                 system_instruction=system_prompt,
-                # response_mime_type="application/json",
-                # response_schema=Schema,
+                response_mime_type="application/json",
+                response_schema=Schema,
             ),
             history=[
                 genai.types.Content(
