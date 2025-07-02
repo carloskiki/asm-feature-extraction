@@ -61,6 +61,7 @@ class GeminiRetrieval(Context):
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=None)
+        parser.add_argument("--batch-size", type=int)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
