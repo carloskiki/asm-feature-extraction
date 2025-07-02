@@ -84,7 +84,7 @@ class GeminiRetrieval(Context):
                     "pool-size": self.pool_size,
                     "examples": self.examples,
                     "prompt": self.prompt,
-                    "model": "gemini-2.0-flash-lite",
+                    "model": "gemini-2.5-flash-lite-preview-06-17",
                 }
                 data = {
                     "parameters": parameters,
@@ -138,7 +138,7 @@ class GeminiRetrieval(Context):
         system_prompt = prompt[0]["content"]
 
         chat = client.chats.create(
-            model="gemini-2.0-flash-lite",
+            model="gemini-2.5-flash-lite-preview-06-17",
             config=genai.types.GenerateContentConfig(
                 system_instruction=system_prompt,
             ),
