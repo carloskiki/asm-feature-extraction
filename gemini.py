@@ -75,7 +75,15 @@ class GeminiRetrieval(Context):
         client = genai.Client()
         metrics = []
 
-        dataset = LibDataset(self.data_path, True, pool_size=self.pool_size, binary=self.binary, optimization=self.optimization, platform=self.platform)
+        dataset = LibDataset(
+            self.data_path,
+            True,
+            pool_size=self.pool_size,
+            binary=self.binary,
+            optimization=self.optimization,
+            platform=self.platform,
+            seed=self.seed,
+        )
 
         self.generate(dataset, client)
         print("done generating")
@@ -173,7 +181,6 @@ class GeminiRetrieval(Context):
         for fn, _ in batch:
             print(fn)
             responses.append(chat.send_message(f"```assembly\n{str(fn)}\n```"))
-        
 
         with open("saved-chats.pkl", "wb") as file:
             pickle.dump(responses, file)
