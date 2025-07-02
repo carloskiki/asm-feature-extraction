@@ -43,6 +43,7 @@ class GeminiRetrieval(Context):
     optimization: Union[
         int, list[tuple[int, int]], None
     ]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
+    batch_size: int  # Number of batches processed at once
     data_path: str  # Path containing the dataset
 
     save_metrics: bool  # Save results to a file
