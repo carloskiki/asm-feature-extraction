@@ -8,6 +8,7 @@ from query import Query
 from bogus import Bogus
 from retrieval import Retrieval
 from batch_query import BatchQuery
+from gemini import GeminiRetrieval
 from info import Info
 from context import MODELS
 
@@ -16,7 +17,8 @@ COMMANDS = {
     'retrieval': Retrieval,
     'bogus': Bogus,
     'batch-query': BatchQuery,
-    'info': Info
+    'info': Info,
+    'gemini': GeminiRetrieval
 }
 
 def main():
