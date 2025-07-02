@@ -56,7 +56,7 @@ class GeminiRetrieval(Context):
         """
 
         parser: ArgumentParser = subparsers.add_parser(
-            "retrieval",
+            "gemini",
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=None)
