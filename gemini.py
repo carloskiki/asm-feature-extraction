@@ -3,6 +3,7 @@ from typing import Optional, Union
 from dataclasses import dataclass
 import sys
 import random
+import time
 from datetime import datetime
 from google import genai
 from tqdm import tqdm
@@ -25,6 +26,7 @@ class GeminiRetrieval(Context):
     ]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
     batch_size: int  # Number of batches processed at once
     data_path: str  # Path containing the dataset
+    request_per_minute: int # Maximum number of requests per minute to run
 
     save_metrics: bool  # Save results to a file
 
@@ -40,6 +42,7 @@ class GeminiRetrieval(Context):
         )
         parser.add_argument("--pool-size", type=int, default=None)
         parser.add_argument("--batch-size", type=int)
+        parser.add_argument("--request-per-minute", type=int)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
@@ -104,12 +107,19 @@ class GeminiRetrieval(Context):
         query_outputs = []
         target_outputs = []
 
+        interval = 60 * 2 * self.batch_size / self.request_per_minute
+
         for batch in tqdm(loader):
+            start_time = time.time()
+
             # Tokenize the prompts for the batch
             (queries, targets) = zip(*batch)
 
             query_outputs.extend(self.generate(queries, client))
             target_outputs.extend(self.generate(targets, client))
+            
+            elapsed = time.time() - start_time
+            time.sleep(max(0, interval - elapsed))
 
         scores: list[list[float]] = []
         for index, query in tqdm(
