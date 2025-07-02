@@ -171,6 +171,7 @@ class GeminiRetrieval(Context):
         responses = []
 
         for fn, _ in batch:
+            print(fn)
             responses.append(chat.send_message(f"```assembly\n{str(fn)}\n```"))
         
 
