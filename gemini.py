@@ -2,37 +2,15 @@ from argparse import ArgumentParser
 from typing import Optional, Union
 from dataclasses import dataclass
 import sys
-import pickle
 import random
 from datetime import datetime
-from pydantic import BaseModel
 from google import genai
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from context import Context, MAX_NEW_TOKENS
+from context import Context 
 from parsing import platform_parser, optimization_parser
-from data_processing import BINARIES, PairsDataset, LibDataset
-from metrics import save_metrics, flatten_to_strings, jaccard_index, test_retrieval
-
-
-class Schema(BaseModel):
-    input_parameter_count: int
-    input_parameter_types: list[str]
-    return_value_type: str
-    dominant_operation_categories: list[str]
-    loop_indicators: bool
-    number_of_distinct_subroutine_call_targets: int
-    use_indexed_addressing_modes: bool
-    presence_of_notable_integer_constants: list[str]
-    presence_of_notable_floating_point_constants: list[float]
-    count_of_distinct_immediate_values: int
-    likely_modifies_input_parameters: bool
-    likely_modifies_global_state: bool
-    likely_performs_memory_allocation_deallocation: bool
-    likely_performs_io_operations: bool
-    likely_performs_block_memory_operations: bool
-    inferred_algorithm: str
-
+from data_processing import BINARIES, PairsDataset
+from metrics import save_metrics, flatten_to_strings, jaccard_index, test_retrieval, parse_json
 
 @dataclass
 class GeminiRetrieval(Context):
@@ -75,59 +53,46 @@ class GeminiRetrieval(Context):
         client = genai.Client()
         metrics = []
 
-        dataset = LibDataset(
-            self.data_path,
-            True,
-            pool_size=self.pool_size,
-            binary=self.binary,
-            optimization=self.optimization,
-            platform=self.platform,
-            seed=self.seed,
-        )
+        if isinstance(self.optimization, list):
+            platform = None if isinstance(self.platform, list) else self.platform
 
-        self.generate(dataset, client)
-        print("done generating")
+            for query_optimization, target_optimization in self.optimization:
+                dataset = PairsDataset(
+                    self.data_path,
+                    True,
+                    self.pool_size,
+                    self.seed,
+                    self.binary,
+                    query_optimization,
+                    platform,
+                    target_optimization,
+                    None,
+                )
+                scores = self.generate_scores(dataset, client)
 
-        # if isinstance(self.optimization, list):
-        #     platform = None if isinstance(self.platform, list) else self.platform
+                raw_metrics = test_retrieval(scores)
+                parameters = {
+                    "binary": self.binary or "all",
+                    "optimization": query_optimization,
+                    "target-optimization": target_optimization,
+                    "platform": "all"
+                    if self.platform is None or isinstance(self.platform, list)
+                    else self.platform,
+                    "pool-size": self.pool_size,
+                    "examples": self.examples,
+                    "prompt": self.prompt,
+                    "model": self.model,
+                }
+                data = {
+                    "parameters": parameters,
+                    "results": raw_metrics,
+                }
 
-        #     for query_optimization, target_optimization in self.optimization:
-        #         dataset = PairsDataset(
-        #             self.data_path,
-        #             True,
-        #             self.pool_size,
-        #             self.seed,
-        #             self.binary,
-        #             query_optimization,
-        #             platform,
-        #             target_optimization,
-        #             None,
-        #         )
-        #         scores = self.generate_scores(dataset)
+                metrics.append(data)
+                if self.save_metrics:
+                    save_metrics(metrics, datetime.now().strftime("%Y-%m-%d_%H-%M"))
 
-        #         raw_metrics = test_retrieval(scores)
-        #         parameters = {
-        #             "binary": self.binary or "all",
-        #             "optimization": query_optimization,
-        #             "target-optimization": target_optimization,
-        #             "platform": "all"
-        #             if self.platform is None or isinstance(self.platform, list)
-        #             else self.platform,
-        #             "pool-size": self.pool_size,
-        #             "examples": self.examples,
-        #             "prompt": self.prompt,
-        #             "model": self.model,
-        #         }
-        #         data = {
-        #             "parameters": parameters,
-        #             "results": raw_metrics,
-        #         }
-
-        #         metrics.append(data)
-        #         if self.save_metrics:
-        #             save_metrics(metrics, datetime.now().strftime("%Y-%m-%d_%H-%M"))
-
-        #         print(metrics[-1])
+                print(metrics[-1])
 
     def generate_scores(
         self, dataset: PairsDataset, client: genai.Client
@@ -155,6 +120,8 @@ class GeminiRetrieval(Context):
             query = flatten_to_strings(query)
             for target in target_outputs:
                 scores[index].append(jaccard_index(query, flatten_to_strings(target)))
+        
+        return scores
 
     def generate(self, batch, client: genai.Client):
         prompt = self.get_prompt("")
@@ -164,8 +131,6 @@ class GeminiRetrieval(Context):
             model="gemini-2.5-flash",
             config=genai.types.GenerateContentConfig(
                 system_instruction=system_prompt,
-                response_mime_type="application/json",
-                response_schema=Schema,
             ),
             history=[
                 genai.types.Content(
@@ -177,10 +142,10 @@ class GeminiRetrieval(Context):
         )
 
         responses = []
-
         for fn, _ in batch:
-            print(fn)
-            responses.append(chat.send_message(f"```assembly\n{str(fn)}\n```"))
-
-        with open("saved-chats.pkl", "wb") as file:
-            pickle.dump(responses, file)
+            print(fn.name)
+            # We could instead provide a schema for the model to follow and not parse. But we want to imitate
+            # our local setup as much as possible.
+            responses.append(parse_json(chat.send_message(f"```assembly\n{str(fn)}\n```").text))
+        
+        return responses
