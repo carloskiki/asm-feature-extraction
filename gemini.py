@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 from typing import Optional, Union
+from dataclasses import dataclass
 import sys
 import pickle
 import random
@@ -33,6 +34,7 @@ class Schema(BaseModel):
     inferred_algorithm: str
 
 
+@dataclass
 class GeminiRetrieval(Context):
     pool_size: Optional[int]
     seed: int  # Seed for selection of targets, choosed randomly if not set
