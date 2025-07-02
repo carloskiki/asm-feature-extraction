@@ -81,7 +81,7 @@ class GeminiRetrieval(Context):
                     "pool-size": self.pool_size,
                     "examples": self.examples,
                     "prompt": self.prompt,
-                    "model": self.model,
+                    "model": "gemini-2.5-flash",
                 }
                 data = {
                     "parameters": parameters,
