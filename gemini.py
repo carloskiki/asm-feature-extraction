@@ -165,13 +165,14 @@ class GeminiRetrieval(Context):
                     role=obj["role"] if obj["role"] == "user" else "model",
                     parts=[genai.types.Part.from_text(text=obj["content"])],
                 )
-                for obj in prompt[1:]
+                for obj in prompt[1:-1]
             ],
         )
 
         responses = []
 
         for fn in batch:
+            print(fn)
             responses.append(chat.send_message(f"```assembly\n{str(fn)}\n```"))
         
 
