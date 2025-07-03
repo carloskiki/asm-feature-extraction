@@ -156,6 +156,6 @@ class GeminiRetrieval(Context):
             print(fn.name)
             # We could instead provide a schema for the model to follow and not parse. But we want to imitate
             # our local setup as much as possible.
-            responses.append(parse_json(chat.send_message(f"```assembly\n{str(fn)}\n```").text))
+            responses.append(parse_json(chat.send_message(f"```assembly\n{str(fn)[:20_000]}\n```").text))
         
         return responses
