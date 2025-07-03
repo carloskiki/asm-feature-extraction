@@ -4,14 +4,14 @@ Main.
 
 import argparse
 import os
-from query import Query
-from bogus import Bogus
-from retrieval import Retrieval
-from batch_query import BatchQuery
-from gemini import GeminiRetrieval
-from open_ai import OpenAIRetrieval
-from info import Info
-from context import MODELS
+from src.query import Query
+from src.bogus import Bogus
+from src.retrieval import Retrieval
+from src.batch_query import BatchQuery
+from src.gemini import GeminiRetrieval
+from src.open_ai import OpenAIRetrieval
+from src.info import Info
+from src.context import MODELS
 
 COMMANDS = {
     'query': Query,
