@@ -165,47 +165,6 @@ loc_10077DA4:
 }
 ```
 
-```json
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x5B8",
-    "0x23",
-    "0x3B3",
-    "0x44",
-    "0x1CC",
-    "0x14"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 11,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "Undetermined"
-}
-```
-
 
 ```assembly
 loc_6B424:
