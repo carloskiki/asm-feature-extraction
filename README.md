@@ -46,9 +46,11 @@ Generate new pool for all sources, OR generate one pool and run on all elements 
 ### Meta Analysis
 
 - [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
+- [Binary Code Similarity Detection: State and Future](https://ieeexplore.ieee.org/document/10490019)
 
 ### Static Analysis
 
+- [Graph-based comparison of executable objects (english version)](https://www.semanticscholar.org/paper/Graph-based-comparison-of-Executable-Objects-Dullien/7661d4110ef24dea74190f4af69bd206d6253db9)
 - [A New Method of Software Clone Detection Based on Binary Instruction Structure Analysis](https://ieeexplore.ieee.org/document/6478318)
 
 ### Deep Learning Based
@@ -68,6 +70,7 @@ Builds on jTrans:
 Transformer based architecture:
 
 - [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
+- [Cross-Architecture Binary Code Similarity Detection Based on Hybrid Neural Networks](https://ieeexplore.ieee.org/document/11020079)
 
 ### Dynamic Analysis
 
