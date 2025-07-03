@@ -231,21 +231,17 @@ class Retrieval(Context):
                 key: val[index].unsqueeze(0) for key, val in tokens.items()
             }
 
-            for x in range(3):
-                if x == 2:
-                    print("Last change at generating valid json")
-                output = model.generate(
-                    **indexed_tokens,
-                    max_new_tokens=MAX_NEW_TOKENS,
-                    temperature=1.0 + 0.5 * x,
-                )[:, indexed_tokens["input_ids"].shape[1] :].cpu()
+            output = model.generate(
+                **indexed_tokens,
+                max_new_tokens=MAX_NEW_TOKENS,
+                temperature=1.5,
+            )[:, indexed_tokens["input_ids"].shape[1] :].cpu()
 
-                gen = parse_json(
-                    self.tokenizer.decode(output[0], skip_special_tokens=True)
-                )
-                if gen is not None:
-                    generated[index] = gen
-                    break
+            gen = parse_json(
+                self.tokenizer.decode(output[0], skip_special_tokens=True)
+            )
+            if gen is not None:
+                generated[index] = gen
 
         return generated
 
