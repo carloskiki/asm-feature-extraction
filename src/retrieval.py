@@ -13,19 +13,19 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
 from accelerate import Accelerator
-from parsing import platform_parser, optimization_parser
-from metrics import (
+from .parsing import platform_parser, optimization_parser
+from .metrics import (
     save_metrics,
     test_retrieval,
     parse_json,
     flatten_to_strings,
     jaccard_index,
 )
-from data_processing import (
+from .data_processing import (
     BINARIES,
     PairsDataset,
 )
-from context import Context, MAX_NEW_TOKENS
+from .context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 
