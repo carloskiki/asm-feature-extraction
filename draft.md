@@ -63,13 +63,6 @@ TODO: Complete this with the methods we are comparing against.
 
 ## Methodology
 
-### Prompt
-
-- What are the features we extract?
-- What type of output do we expect (main different between prompts)?
-    - How do we solve repetition.
-    - How do we ensure a valid json output?
-
 ### Dataset
 
 The dataset is composed of 7 binaries: busybox, coreutils, curl, image-magick, openssl, putty, and sqlite3.
@@ -86,6 +79,13 @@ platform evaluation.
 We evaluate these models on our dataset.
 - Qwen2.5-Coder [ref] with sizes 0.5B to 7B
 
+### Prompt
+
+- What are the features we extract?
+- What type of output do we expect (main different between prompts)?
+    - How do we solve repetition.
+    - How do we ensure a valid json output?
+
 ### Comparison
 
 Machine learning based methods of BCSD generate a numerical vector embedding for each assembly function [refs], and then compare these vectors
@@ -99,6 +99,13 @@ as a tree, where booleans, numbers, and string elements are leaves, and non-empt
 root-to-leaf paths, and use jaccard similarity (Intesection over union) to obtain a similarity measure.
 
 QUESTION: Do we need refs for cosine similarity & jaccard?
+
+### Evaluation method
+
+The mean reciprocal rank (MRR) and first position recall (Recall@1) metrics are used for evaluation and comparison to other methods.
+A pool of 1_000 function pairs is used for evaluation. For each pair, we compare the generated features for the first element of the pair
+with all second elements of the pairs contained in the pool. We rank the comparisons in order of most similar to least similar, and
+calculate the metrics based on this ranking.
 
 ## Results
 
