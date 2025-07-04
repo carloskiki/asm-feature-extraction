@@ -5,14 +5,18 @@
 ## Intro / Background
 
 Binary code similarity detection (BCSD) is becoming increasingly important as the rate of production and modularity of software grows.
-Modern software is almost never written from scratch, and is becoming increasingly reliant on external libraries.
-For reverse engineers, reducing the amount of repetitive assembly functions to analyze is important,
-    as it allows them to be more efficient and focus on the custom parts of a binary.
-When libraries are statically linked to the binary, it is important to quickly identify which functions
-    are part of common external libraries to minimize repetitive work.
-Furthermore, if a vulnerability is found in a library, it is important to quickly identify if an unknown binary or firmware
-    is using the vulnerable library, so that its impact can be mitigated.
-Other applications of BCSD include license compliance and plagiarism detection.
+Modern software is almost never written from scratch and is increasingly reliant on external libraries. For reverse engineers,
+reducing the amount of repetitive assembly functions to analyze is important, as it allows them to be more efficient and focus on the
+custom parts of a binary. When libraries are statically linked to a binary, it is helpful to quickly identify which functions are part
+of common external libraries and which ones have never been seen before. Furthermore, if a vulnerability is found in a library,
+it is important to efficiently determine whether another binary or firmware is using the vulnerable library,
+so that its impact can be mitigated.
+
+This work presents a method to effectively find binary clones across binaries using large language models (LLM). The method
+is simpler and requires no training nor fine-tuning and matches state-of-the-art results. It has the
+unique advantage of generating human interpretable comparison vectors instead of numerical values. Additionally,
+it effectively scales with the performance and size of the LLM used, and thus benefits from the ample amount of research
+on language models.
 
 ### Contributions
 
