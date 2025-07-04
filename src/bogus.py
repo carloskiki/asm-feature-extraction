@@ -4,7 +4,7 @@ Doesn't do much, just to play around & try stuff
 
 from dataclasses import dataclass
 from argparse import ArgumentParser
-import context
+from . import context
 
 @dataclass
 class Bogus(context.Context):

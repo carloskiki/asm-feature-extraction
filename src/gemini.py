@@ -8,10 +8,10 @@ from datetime import datetime
 from google import genai
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from context import Context 
-from parsing import platform_parser, optimization_parser
-from data_processing import BINARIES, PairsDataset
-from metrics import save_metrics, flatten_to_strings, jaccard_index, test_retrieval, parse_json
+from .context import Context 
+from .parsing import platform_parser, optimization_parser
+from .data_processing import BINARIES, PairsDataset
+from .metrics import save_metrics, flatten_to_strings, jaccard_index, test_retrieval, parse_json
 
 @dataclass
 class GeminiRetrieval(Context):

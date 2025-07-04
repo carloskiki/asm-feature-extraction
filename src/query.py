@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-import context
+from . import context
 
 @dataclass
 class Query(context.Context):

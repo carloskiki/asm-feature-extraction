@@ -9,8 +9,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import torch
 
-from data_processing import LibDataset, BINARIES, PLATFORMS
-from context import Context, MAX_NEW_TOKENS
+from .data_processing import LibDataset, BINARIES, PLATFORMS
+from .context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
 

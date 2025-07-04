@@ -3,7 +3,7 @@ Get info about the Model and prompt used
 """
 
 from dataclasses import dataclass
-import context
+from . import context
 
 @dataclass
 class Info(context.Context):

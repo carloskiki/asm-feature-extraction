@@ -48,7 +48,7 @@ efficient, but tend to fixate on the syntactic elements and their ordering rathe
 
 Dynamic analysis consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior. For BCSD
 this method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
-and solely analyzes the semantics. [2] As such, this method is highly resilient to obfuscations, but requires a sandbox environment
+and solely analyzes the semantics. [2] As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
 equiped with complex software.
 
 ### Machine Learning Methods
@@ -74,10 +74,12 @@ TODO: Complete this with the methods we are comparing against.
 
 The dataset is composed of 7 binaries: busybox, coreutils, curl, image-magick, openssl, putty, and sqlite3.
 All were compiled using gcc for the following platforms: x86_64, x86_32, arm, mips, powerpc.
-For each binary and platform, binary objects were generated for each optimization level (O0 to O3).
-Stripped all debug symbols except for function names, so as to be able to match functions across binaries.
-In total, yeilds 140 different binaries to analyze.
-The binaries were dissassembled using IDA Pro, yielding 383_658 assembly routines.
+For each binary and platform, binary objects were generated for all optimization levels (O0 to O3),
+stripped of debug symbols. In total, yeilds 140 different binaries to analyze.
+The binaries were dissassembled using IDA Pro, yielding 383_658 assembly routines. Pairs of equivalent
+functions from the same platform but distinct optimization level were made for cross optimization
+evaluation, and pairs from the same optimization level but different platform were formed for cross
+platform evaluation.
 
 ### Model
 
