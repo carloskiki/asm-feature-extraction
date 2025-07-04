@@ -142,9 +142,11 @@ class Retrieval(Context):
                         "binary": self.binary or "all",
                         "optimization": query_optimization,
                         "target-optimization": target_optimization,
-                        "platform": "all"
-                        if self.platform is None or isinstance(self.platform, list)
-                        else self.platform,
+                        "platform": (
+                            "all"
+                            if self.platform is None or isinstance(self.platform, list)
+                            else self.platform
+                        ),
                         "pool-size": self.pool_size,
                         "examples": self.examples,
                         "prompt": self.prompt,
@@ -237,9 +239,7 @@ class Retrieval(Context):
                 temperature=1.5,
             )[:, indexed_tokens["input_ids"].shape[1] :].cpu()
 
-            gen = parse_json(
-                self.tokenizer.decode(output[0], skip_special_tokens=True)
-            )
+            gen = parse_json(self.tokenizer.decode(output[0], skip_special_tokens=True))
             if gen is not None:
                 generated[index] = gen
 
