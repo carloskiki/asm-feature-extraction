@@ -67,8 +67,6 @@ For the provided assembly routine, extract the following features and infer the 
     * This feature should **only** be populated if the combination of `dominant_operation_categories`, `constants_and_magic_numbers`, `subroutine_call_targets` (if they form a known pattern), and `control_flow` (even if heuristically determined loops/branches) points *definitively* to a recognized algorithm (e.g., "CRC32 Calculation", "String Length Calculation", "Memcpy", "XOR Cipher").
     * If a specific algorithm cannot be confidently identified, use the string "Undetermined".
 
----
-
 **VI. Inferred Categorization**
 
 * **Inferred Category (String):** A high-level functional category best describing the routine's primary purpose.
