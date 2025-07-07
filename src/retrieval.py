@@ -242,6 +242,8 @@ class Retrieval(Context):
             gen = parse_json(self.tokenizer.decode(output[0], skip_special_tokens=True))
             if gen is not None:
                 generated[index] = gen
+            else:
+                print("Invalid json...")
 
         return generated
 
