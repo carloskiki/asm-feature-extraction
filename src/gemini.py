@@ -122,7 +122,7 @@ class GeminiRetrieval(Context):
             time.sleep(max(0, interval - elapsed))
 
             if index == 250:
-                time.sleep(60 * 60 * 24) # Try sleeping for a day
+                time.sleep(60 * 60 * 12) # sleep for 12h
 
         scores: list[list[float]] = []
         for index, query in tqdm(

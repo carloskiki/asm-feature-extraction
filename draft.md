@@ -146,6 +146,19 @@ calculate the metrics based on this ranking.
 Our method offers a distinct advantage over the current state-of-the art, because the feature vectors generated are human interpretable.
 Other machine learning based methods generate numerical vector embeddings and compare the vectors using numerical methods such as cosine similarity.
 
+## Future Research
+
+These results open avenues for further investigation in LLM based BCSD, and more broadly in LLM assisted reverse engineering.
+A few of these oportunities are outlined here.
+
+### Distillation & Fine Tuning
+
+It was shown that commercial LLMs perform better than smaller local models. Using the process of distillation [ref] on smaller models
+will likely cause large gains in performance for these models, approaching foundational LLMs. Another approach could be to
+use a LLM to annotate the source 
+
+- TODO: Fine Tuning with annotated source code & assembly pairs
+
 # Refs
 
 1. [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
