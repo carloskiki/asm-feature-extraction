@@ -154,8 +154,7 @@ A few of these oportunities are outlined here.
 ### Distillation & Fine Tuning
 
 It was shown that commercial LLMs perform better than smaller local models. Using the process of distillation [ref] on smaller models
-will likely cause large gains in performance for these models, approaching foundational LLMs. Another approach could be to
-use a LLM to annotate the source 
+will likely cause large gains in performance for these models, approaching foundational LLMs.
 
 - TODO: Fine Tuning with annotated source code & assembly pairs
 
