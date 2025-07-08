@@ -75,6 +75,9 @@ class Retrieval(Context):
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
         accelerator = Accelerator()
 
+        # Nasty nasty patch
+        self.invalid_json_count = 0
+
         metrics = []
 
         if isinstance(self.platform, list):
@@ -114,6 +117,7 @@ class Retrieval(Context):
                     data = {
                         "parameters": parameters,
                         "results": raw_metrics,
+                        "invalid-json": self.invalid_json_count
                     }
 
                     metrics.append(data)
@@ -155,6 +159,7 @@ class Retrieval(Context):
                     data = {
                         "parameters": parameters,
                         "results": raw_metrics,
+                        "invalid-json": self.invalid_json_count
                     }
 
                     metrics.append(data)
@@ -243,7 +248,7 @@ class Retrieval(Context):
             if gen is not None:
                 generated[index] = gen
             else:
-                print("Invalid json...")
+                self.invalid_json_count += 1
 
         return generated
 
