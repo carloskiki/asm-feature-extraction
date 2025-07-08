@@ -219,3 +219,44 @@ file.
 # Misc
 
 Computer name: vsi-wpch-frame
+
+# Results Masta Plan
+
+Our project is good, but we need to be very thorough and systematic in our result analysis.
+
+## 1. Show that we match or are better than state of the art
+
+- 1 table for x-optimization
+- 1 table for x-architecture
+
+## 2. Show that our human interpretable output is a benefit
+
+Analogy with ML based techniques downside - letting the model decide some absract feature of which to extract.
+Hard to guide the model into choosing a set of feature that we humans know will be effective in comparison. 
+([refs] to meta analysis that shows how Control flow graphs are not good and that models fixate on function prelude)
+Has the benefits of being easily guidable and modifiable by humans, just like static analysis [refs].
+
+- Figure example of an LLM answer & Comparison between answers (Using diff style view).
+- Figure showing the different categories of feature we extract from the assembly function.
+
+## 3. Ablation on which model was used
+
+- Graph Show the lack of difference between local models used when same size.
+
+- Show how commercial models greatly surpass local models.
+- Metrics on the token use of commercial models
+
+## 4. Ablation study on Model Size
+
+- Graph showing the curve of performance vs. model size.
+- Example of output from a smaller model - show overfitting of provided examples + what happens when
+  doesn't generate JSON output? + repeating.
+- Graph: number of invalid JSON outputs for each model size (Qwen 2.5).
+- Graph: Qwirks of another model (e.g., Gemma with metric).
+
+Overall model perform mostly the same, but they each have their qwirks.
+
+## 5. Ablation on the Prompt used
+
+- Figure: how each prompt is interconnected - Which ones have which features.
+- Show token use for just the prompt - How this is bad for local models.

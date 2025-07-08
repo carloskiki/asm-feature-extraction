@@ -14,13 +14,13 @@ so that its impact can be mitigated.
 
 This work presents a method to effectively find binary clones across binaries using large language models (LLM). The method
 is simpler and requires no training nor fine-tuning and matches state-of-the-art results. It has the
-unique advantage of generating human interpretable comparison vectors instead of numerical values. Additionally,
+unique advantage of generating human interpretable feature vectors instead of numerical values. Additionally,
 it effectively scales with the performance and size of the LLM used, and thus benefits from the ample amount of research
-on language models.
+on large language models.
 
 ### Contributions
 
-We develop an elementary approach to BCSD purely based on the recent advancements in large language models (LLM).
+an elementary approach to BCSD purely based on the recent advancements in large language models (LLM) is developed.
 
 Instead of generating a numerical feature vector for a given assembly function, we generate a feature set containing
 human readable elements.
@@ -154,9 +154,16 @@ A few of these oportunities are outlined here.
 ### Distillation & Fine Tuning
 
 It was shown that commercial LLMs perform better than smaller local models. Using the process of distillation [ref] on smaller models
-will likely cause large gains in performance for these models, approaching foundational LLMs.
+will likely cause large gains for these models, approaching the performance of foundational LLMs. Fine Tuning is another opportunity
+that should be explored to determine whether it provides meaningful gains in performance. One method would be using open source software
+as fine tuning data. One could use source code and generate a feature vector (either manually or by prompting a large language model),
+and then use this analysis as baseline to fine tune the analysis of the compiled assembly code.
 
-- TODO: Fine Tuning with annotated source code & assembly pairs
+### LLM Reasoning
+
+Some state of the art LLMs provide reasoning capabilities by having the model generate a chain of thought [8] it its response.
+It has been shown that this type of output produces more accurate and higher quality responses [8, 9, 10]. We believe that similar
+gains could be seen in assembly function analysis, at the cost of more output token generation and thus more compute.
 
 # Refs
 
@@ -168,6 +175,10 @@ will likely cause large gains in performance for these models, approaching found
 5. [Detecting Clones Across Microsoft .NET Programming Languages](https://ieeexplore.ieee.org/document/6385136)
 6. [Idea: Opcode-Sequence-Based Malware Detection](https://link.springer.com/chapter/10.1007/978-3-642-11747-3_3)
 7. [Binary Function Clustering Using Semantic Hashes](https://ieeexplore.ieee.org/document/6406693)
+
+8. [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)
+9. [Large Language Models are Zero-Shot Reasoners](https://arxiv.org/pdf/2205.11916)
+10. [THINKING LLMS: GENERAL INSTRUCTION FOLLOWING WITH THOUGHT GENERATION](https://arxiv.org/pdf/2410.10630)
 
 - [Blanket execution: Dynamic similarity testing for program binaries and components](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele)
 - [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
