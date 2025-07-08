@@ -1,0 +1,217 @@
+```assembly
+loc_480835:
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 8
+    MOV rbp, rdi
+    CALL sub_4807C1
+    MOV ebx, 1
+    TEST eax, eax
+    JNZ loc_480862
+loc_48084C:
+    MOV ebx, eax
+    MOV edx, 50h
+    MOV esi, 2
+    MOV rdi, rbp
+    CALL sub_456CA5
+    JMP $+2
+loc_480862:
+    MOV eax, ebx
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+```
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x50", "0x2"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+
+
+```assembly
+loc_6D19E0:
+    LA $gp, unk_7AC870
+    RDHWR $v1, $29
+    LW $v1, -0x7490($v1)
+    BNE $zero, $v1, loc_6D1A14
+    NOP 
+loc_6D19F8:
+    LI $v0, 0x1031
+    SYSCALL 0
+    BNEZ $a3, loc_6D19B0
+    NOP 
+loc_6D1A08:
+    JR $ra
+    NOP 
+loc_6D1A14:
+    ADDIU $sp, -0x30
+    SW $ra, 0x30+var_14($sp)
+    SW $gp, 0x30+var_10($sp)
+    SW $a0, 0x30+var_30($sp)
+    SW $a1, 0x30+var_2C($sp)
+    SW $a2, 0x30+var_28($sp)
+    LA $t9, sub_69B090
+    JALR $ra, $t9
+    NOP 
+    LW $gp, 0x30+var_10($sp)
+    SW $v0, 0x30+var_4($sp)
+    LW $a0, 0x30+var_30($sp)
+    LW $a1, 0x30+var_2C($sp)
+    LW $a2, 0x30+var_28($sp)
+    LI $v0, 0x1031
+    SYSCALL 0
+    SW $v0, 0x30+var_C($sp)
+    SW $a3, 0x30+var_8($sp)
+    LW $a0, 0x30+var_4($sp)
+    LA $t9, sub_69B16C
+    JALR $ra, $t9
+    NOP 
+    LW $gp, 0x30+var_10($sp)
+    LW $v0, 0x30+var_C($sp)
+    LW $a3, 0x30+var_8($sp)
+    LW $ra, 0x30+var_14($sp)
+    BNEZ $a3, loc_6D19B0
+    ADDIU $sp, 0x30
+loc_6D1A84:
+    JR $ra
+    NOP 
+loc_6D19B0:
+    LA $t9, sub_6A9180
+    JR $t9
+    NOP 
+```
+
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": ["Pointer", "Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "SystemInteraction"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1031"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 2,
+  "inferred_category": "System/OS Interaction",
+  "att&ck_technique": "T1059"
+}
+```
+
+
+```assembly
+loc_A7490:
+    PUSH {R7,LR}
+    SUB SP, SP, #0x18
+    ADD R7, SP, #8
+    STR R0, [R7,#0x10+var_C]
+    STR R1, [R7,#0x10+var_10]
+    LDR R3, [R7,#0x10+var_10]
+    CMP R3, #0
+    BNE loc_A74BA
+loc_A74A0:
+    MOVS R3, #0x1F
+    STR R3, [SP,#0x18+var_18]
+    MOV R3, #0x2601EC
+    MOVS R2, #0x43
+    MOVS R1, #0xC6
+    MOVS R0, #0x14
+    BL sub_11E488
+    MOVS R3, #0
+    B loc_A74FC
+loc_A74BA:
+    MOVS R3, #1
+    STR R3, [SP,#0x18+var_18]
+    MOVS R3, #0
+    LDR R2, [R7,#0x10+var_10]
+    MOVS R1, #0
+    LDR R0, [R7,#0x10+var_C]
+    BL sub_C94C0
+    STR R0, [R7,#0x10+var_4]
+    LDR R3, [R7,#0x10+var_4]
+    CMP R3, #1
+    BEQ loc_A74EC
+loc_A74D2:
+    MOVS R3, #0x24
+    STR R3, [SP,#0x18+var_18]
+    MOV R3, #0x2601EC
+    LDR R2, [R7,#0x10+var_4]
+    MOVS R1, #0xC6
+    MOVS R0, #0x14
+    BL sub_11E488
+    MOVS R3, #0
+    B loc_A74FC
+loc_A74EC:
+    LDR R3, [R7,#0x10+var_C]
+    LDR.W R3, [R3,#0x378]
+    LDR R1, [R7,#0x10+var_10]
+    MOV R0, R3
+    BL sub_A7C04
+    MOV R3, R0
+loc_A74FC:
+    MOV R0, R3
+    ADDS R7, #0x10
+    MOV SP, R7
+    POP {R7,PC}
+```
+
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["ConditionalBranching", "SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1f", "0x43", "0xc6", "0x14", "0x24", "0x2601ec", "0x378"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 7,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```

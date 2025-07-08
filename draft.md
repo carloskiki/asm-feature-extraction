@@ -61,7 +61,26 @@ The surge of interest and applications for machine learning in recent years has 
 Most state-of-the-art methods use natural language processing (NLP) to achieve their results [refs].
 Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks [refs].
 
-TODO: Complete this with the methods we are comparing against.
+SAFE [11] is one of the first methods that uses a NLP based approach to tackle the BCSD problem. It first encodes
+each instruction of an assembly function into a vector, using the word2vec model [12]. Using a Self-Attentive
+Neural Network [13], SAFE then converts the sequence of instruction vectors from the assembly function into a
+single vector embedding for the function.
+
+Order Matters [16] applies a BERT language reprensentation model [15] along with control flow graph analysis
+to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
+passes the CFG through a graph neural network, passes the adjacency matrix of the CFG through a convolutional
+neural network to compute a graph order embedding. These embedding are then combined using a multi-layer
+perceptron, obtaining the function's embedding.
+
+A more recent BCSD model, PalmTree [14], also bases its work on the BERT model [15].
+It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
+on three tasks. 1. As is common for BERT models, PalmTree is trained on masked language modeling. 2.
+PalmTree is trained on context window prediction, that is detecting whether a two instructions are found
+in the same context window of an assembly function. 3. The model is also trained on Def-Use Prediction -
+whether there is a definition-usage relation between both instructions.
+
+
+
 
 - Others make use of widely available LLMs either during training as data annotation [ref] (CLAP)
 
@@ -180,5 +199,15 @@ gains could be seen in assembly function analysis, at the cost of more output to
 9. [Large Language Models are Zero-Shot Reasoners](https://arxiv.org/pdf/2205.11916)
 10. [THINKING LLMS: GENERAL INSTRUCTION FOLLOWING WITH THOUGHT GENERATION](https://arxiv.org/pdf/2410.10630)
 
+11. [SAFE: Self-Attentive Function Embeddings for Binary Similarity](https://arxiv.org/pdf/1811.05296)
+12. [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/pdf/1310.4546)
+13. [A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING](https://arxiv.org/pdf/1703.03130)
+
+14. [PalmTree: Learning an Assembly Language Model for Instruction Embedding](https://arxiv.org/pdf/2103.03809)
+15. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805)
+
+16. [Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection](https://cdn.aaai.org/ojs/5466/5466-13-8691-1-10-20200511.pdf)
+
 - [Blanket execution: Dynamic similarity testing for program binaries and components](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele)
 - [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
+
