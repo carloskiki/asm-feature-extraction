@@ -110,6 +110,9 @@ class GeminiRetrieval(Context):
         interval = 60 * 2 * self.batch_size / self.request_per_minute
 
         for index, batch in enumerate(tqdm(loader)):
+            if index == 250:
+                time.sleep(60 * 60 * 12) # sleep for 12h
+
             start_time = time.time()
 
             # Tokenize the prompts for the batch
@@ -120,9 +123,6 @@ class GeminiRetrieval(Context):
             
             elapsed = time.time() - start_time
             time.sleep(max(0, interval - elapsed))
-
-            if index == 250:
-                time.sleep(60 * 60 * 12) # sleep for 12h
 
         scores: list[list[float]] = []
         for index, query in tqdm(
