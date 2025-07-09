@@ -13,6 +13,7 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
 from accelerate import Accelerator
+from transformers import AutoModel
 from .parsing import platform_parser, optimization_parser
 from .metrics import (
     save_metrics,
@@ -170,7 +171,7 @@ class Retrieval(Context):
         self, accelerator: Accelerator, dataset: PairsDataset
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
-        model = self.get_model(accelerator)
+        model = AutoModel("hustcw/clap-asm", trust_remote_code=True)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)

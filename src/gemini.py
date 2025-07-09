@@ -109,9 +109,7 @@ class GeminiRetrieval(Context):
 
         interval = 60 * 2 * self.batch_size / self.request_per_minute
 
-        for index, batch in enumerate(tqdm(loader)):
-            if index == 450:
-                time.sleep(60 * 60 * 12) # sleep for 12h
+        for _index, batch in enumerate(tqdm(loader)):
 
             start_time = time.time()
 

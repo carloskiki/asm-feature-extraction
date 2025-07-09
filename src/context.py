@@ -9,7 +9,6 @@ MODELS = {
     "qwen-2.5-1.5": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
     "gemma-3-4": "google/gemma-3-4b-it",
-    "clap": "hustcw/clap-asm",
 }
 MAX_NEW_TOKENS = 512
 
