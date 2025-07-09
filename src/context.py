@@ -1,7 +1,7 @@
 from pathlib import Path
 from functools import cached_property
 from dataclasses import dataclass
-from transformers import AutoModel, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODELS = {
     "qwen-2.5-7": "Qwen/Qwen2.5-Coder-7B-Instruct",
@@ -86,14 +86,14 @@ class Context:
         Return the model
         """
         if accelerator is not None:
-            return AutoModel.from_pretrained(
+            return AutoModelForCausalLM.from_pretrained(
                 MODELS[self.model],
                 torch_dtype="auto",
                 device_map={"": accelerator.process_index},
                 trust_remote_code=True,
             )
 
-        return AutoModel.from_pretrained(
+        return AutoModelForCausalLM.from_pretrained(
             MODELS[self.model],
             torch_dtype="auto",
             device_map="auto",
