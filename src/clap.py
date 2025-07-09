@@ -25,7 +25,7 @@ from .data_processing import (
     BINARIES,
     PairsDataset,
 )
-from .context import Context, MAX_NEW_TOKENS
+from .context import Context
 
 CLEAR_CACHE_PERIOD = 32
 
@@ -96,10 +96,11 @@ class Retrieval(Context):
                     None,
                     target_platform,
                 )
-                scores = self.generate_scores(accelerator, dataset)
+                # scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
-                    raw_metrics = test_retrieval(scores)
+                    # raw_metrics = test_retrieval(scores)
+                    raw_metrics = None
                     parameters = {
                         "binary": self.binary or "all",
                         "platform": query_platform,
@@ -134,10 +135,11 @@ class Retrieval(Context):
                     target_optimization,
                     None,
                 )
-                scores = self.generate_scores(accelerator, dataset)
+                # scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
-                    raw_metrics = test_retrieval(scores)
+                    # raw_metrics = test_retrieval(scores)
+                    raw_metrics = None
                     parameters = {
                         "binary": self.binary or "all",
                         "optimization": query_optimization,
