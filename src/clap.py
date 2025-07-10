@@ -162,7 +162,11 @@ class Clap(Context):
         self, accelerator: Accelerator, dataset: PairsDataset
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
-        model = AutoModel.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
+        model = AutoModel.from_pretrained(
+            "hustcw/clap-asm",
+            trust_remote_code=True,
+            device_map={"": accelerator.process_index},
+        )
         self.tokenizer = AutoTokenizer.from_pretrained(
             "hustcw/clap-asm", trust_remote_code=True
         )
@@ -207,7 +211,6 @@ class Clap(Context):
                 cosine = torch.nn.CosineSimilarity(dim=0)
                 similarity = cosine(query, target).item()
                 scores[index].append(similarity)
-
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
