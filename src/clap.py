@@ -76,8 +76,6 @@ class Clap(Context):
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
         accelerator = Accelerator()
 
-        # Nasty nasty patch
-
         metrics = []
 
         if isinstance(self.platform, list):
@@ -136,7 +134,7 @@ class Clap(Context):
                     target_optimization,
                     None,
                 )
-                # scores = self.generate_scores(accelerator, dataset)
+                self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
                     # raw_metrics = test_retrieval(scores)
@@ -151,7 +149,7 @@ class Clap(Context):
                             else self.platform
                         ),
                         "pool-size": self.pool_size,
-                        "model": self.model,
+                        "model": "clap",
                     }
                     data = {
                         "parameters": parameters,
