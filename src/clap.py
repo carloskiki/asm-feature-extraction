@@ -232,6 +232,6 @@ class Clap(Context):
             return_tensors="pt",
         ).to(accelerator.device)
         # Pass the tokens to LLM
-        embeddings = model(**tokens)
+        embeddings = model(**tokens).cpu()
 
         return embeddings
