@@ -22,10 +22,7 @@ from .metrics import (
     flatten_to_strings,
     jaccard_index,
 )
-from .data_processing import (
-    BINARIES,
-    PairsDataset,
-)
+from .data_processing import BINARIES, PairsDataset, Function
 from .context import Context
 
 CLEAR_CACHE_PERIOD = 32
@@ -170,7 +167,9 @@ class Clap(Context):
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
         model = AutoModel.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
-        self.tokenizer = AutoTokenizer.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "hustcw/clap-asm", trust_remote_code=True
+        )
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
@@ -200,10 +199,10 @@ class Clap(Context):
 
         if not accelerator.is_main_process:
             return
-        
-        import code
-        code.interact(local=locals())
 
+        import code
+
+        code.interact(local=locals())
 
         # scores: list[list[float]] = []
         # for index, query in tqdm(
@@ -222,14 +221,21 @@ class Clap(Context):
         # torch.cuda.empty_cache()
         # return all_scores
 
-    def generate(self, batch, model) -> list[object]:
-        tokens = self.tokenizer([{
-            "0": "pop rdi",
-            "1": "call _free",
-        }], padding=True, return_tensors='pt')
+    def generate(self, batch: list[Function], model) -> list[object]:
+        instructions = (
+            (str(ins) for block in f.blocks for ins in block.instructions)
+            for f in batch
+        )
+
+        tokens = self.tokenizer(
+            [
+                {str(i): instruction for i, instruction in enumerate(f)}
+                for f in instructions
+            ],
+            padding=True,
+            return_tensors="pt",
+        )
         # Pass the tokens to LLM
-        embeddings = model(
-            **tokens
-        ).cpu()
+        embeddings = model(**tokens).cpu()
 
         return embeddings
