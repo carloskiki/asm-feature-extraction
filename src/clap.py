@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, Union
 from argparse import ArgumentParser
+from itertools import islice
 import random
 import sys
 import gc
@@ -222,7 +223,7 @@ class Clap(Context):
 
         tokens = self.tokenizer(
             [
-                {str(i): instruction for i, instruction in enumerate(f)}
+                {str(i): instruction for i, instruction in enumerate(islice(f, 128))}
                 for f in instructions
             ],
             padding=True,
