@@ -13,7 +13,7 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
 from accelerate import Accelerator
-from transformers import AutoModel
+from transformers import AutoModel, AutoTokenizer
 from .parsing import platform_parser, optimization_parser
 from .metrics import (
     save_metrics,
@@ -170,6 +170,7 @@ class Clap(Context):
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
         model = AutoModel.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
