@@ -59,7 +59,7 @@ class Clap(Context):
         """
 
         parser: ArgumentParser = subparsers.add_parser(
-            "retrieval",
+            "clap",
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=None)
