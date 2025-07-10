@@ -18,9 +18,6 @@ from .parsing import platform_parser, optimization_parser
 from .metrics import (
     save_metrics,
     test_retrieval,
-    parse_json,
-    flatten_to_strings,
-    jaccard_index,
 )
 from .data_processing import BINARIES, PairsDataset, Function
 from .context import Context
@@ -131,11 +128,10 @@ class Clap(Context):
                     target_optimization,
                     None,
                 )
-                self.generate_scores(accelerator, dataset)
+                scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
-                    # raw_metrics = test_retrieval(scores)
-                    raw_metrics = None
+                    raw_metrics = test_retrieval(scores)
                     parameters = {
                         "binary": self.binary or "all",
                         "optimization": query_optimization,
@@ -200,26 +196,24 @@ class Clap(Context):
         if not accelerator.is_main_process:
             return
 
-        import code
+        scores: list[list[float]] = []
+        for index, query in tqdm(
+            enumerate(query_outputs),
+            desc="Scoring results",
+            disable=not accelerator.is_main_process,
+        ):
+            scores.append([])
+            for target in all_targets:
+                cosine = torch.nn.CosineSimilarity(dim=0)
+                similarity = cosine(query, target).item()
+                scores[index].append(similarity)
 
-        code.interact(local=locals())
 
-        # scores: list[list[float]] = []
-        # for index, query in tqdm(
-        #     enumerate(query_outputs),
-        #     desc="Scoring results",
-        #     disable=not accelerator.is_main_process,
-        # ):
-        #     scores.append([])
-        #     query = flatten_to_strings(query)
-        #     for target in all_targets:
-        #         scores[index].append(jaccard_index(query, flatten_to_strings(target)))
+        # Assemble all scores together for main process
+        all_scores = accelerator.gather_for_metrics(scores)
 
-        # # Assemble all scores together for main process
-        # all_scores = accelerator.gather_for_metrics(scores)
-
-        # torch.cuda.empty_cache()
-        # return all_scores
+        torch.cuda.empty_cache()
+        return all_scores
 
     def generate(self, batch: list[Function], model) -> list[object]:
         instructions = (
