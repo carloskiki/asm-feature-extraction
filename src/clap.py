@@ -222,41 +222,13 @@ class Clap(Context):
         # return all_scores
 
     def generate(self, batch, model) -> list[object]:
-        tokens = self.tokenizer([str(f) for f in batch], padding=True, return_tensors='pt')
+        tokens = self.tokenizer([{
+            "0": "pop rdi",
+            "1": "call _free",
+        }], padding=True, return_tensors='pt')
         # Pass the tokens to LLM
         embeddings = model(
             **tokens
         ).cpu()
 
         return embeddings
-
-    def tokenize_prompts(self, fns: list[str]):
-        size_for_query = self.context_size - self.empty_prompt_size
-        batch = self.tokenizer(
-            fns,
-            truncation=True,
-            padding=False,
-            max_length=size_for_query,
-        )
-        for idx, ids in enumerate(batch["input_ids"]):
-            if len(ids) < size_for_query:
-                continue
-
-            # -- decode -> cut at last '\n' -> re-encode --
-            decoded = self.tokenizer.decode(ids, skip_special_tokens=True)
-            trimmed_text = decoded.rsplit("\n", 1)[0]  # everything up to LAST newline
-            fns[idx] = trimmed_text
-
-        chat = self.tokenizer.apply_chat_template(
-            [self.get_prompt(f) for f in fns],
-            tokenize=False,
-            add_generation_prompt=True,
-        )
-
-        return self.tokenizer(
-            chat,
-            truncation=False,
-            padding=True,
-            padding_side="left",
-            return_tensors="pt",
-        )
