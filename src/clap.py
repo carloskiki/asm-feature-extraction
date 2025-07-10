@@ -169,7 +169,7 @@ class Clap(Context):
         self, accelerator: Accelerator, dataset: PairsDataset
     ) -> tuple[list[str], list[str]]:
         # No need to prepare the model, because we only do inference
-        model = AutoModel("hustcw/clap-asm", trust_remote_code=True)
+        model = AutoModel.from_pretrained("hustcw/clap-asm", trust_remote_code=True)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
