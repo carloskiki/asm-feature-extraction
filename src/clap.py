@@ -222,7 +222,7 @@ class Clap(Context):
         # return all_scores
 
     def generate(self, batch, model) -> list[object]:
-        tokens = self.tokenizer(batch, padding=True, return_tensors='pt')
+        tokens = self.tokenizer([str(f) for f in batch], padding=True, return_tensors='pt')
         # Pass the tokens to LLM
         embeddings = model(
             **tokens
