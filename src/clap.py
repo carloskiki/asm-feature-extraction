@@ -90,11 +90,10 @@ class Clap(Context):
                     None,
                     target_platform,
                 )
-                # scores = self.generate_scores(accelerator, dataset)
+                scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
-                    # raw_metrics = test_retrieval(scores)
-                    raw_metrics = None
+                    raw_metrics = test_retrieval(scores)
                     parameters = {
                         "binary": self.binary or "all",
                         "platform": query_platform,
