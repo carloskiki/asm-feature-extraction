@@ -194,7 +194,7 @@ class Clap(Context):
                     gc.collect()
                     clear_cache_counter = 0
 
-        all_targets = accelerator.gather_for_metrics(target_outputs)
+        all_targets = accelerator.gather_for_metrics(target_outputs, use_gather_object=True)
 
         if not accelerator.is_main_process:
             return
