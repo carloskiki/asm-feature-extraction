@@ -79,6 +79,8 @@ PalmTree is trained on context window prediction, that is detecting whether a tw
 in the same context window of an assembly function. 3. The model is also trained on Def-Use Prediction -
 whether there is a definition-usage relation between both instructions.
 
+TODO: Asm2Vec, CLAP
+
 
 
 
