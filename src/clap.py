@@ -165,8 +165,7 @@ class Clap(Context):
         model = AutoModel.from_pretrained(
             "hustcw/clap-asm",
             trust_remote_code=True,
-            device_map={"": accelerator.process_index},
-        )
+        ).to(f"cuda:{accelerator.process_index}")
         self.tokenizer = AutoTokenizer.from_pretrained(
             "hustcw/clap-asm", trust_remote_code=True
         )
