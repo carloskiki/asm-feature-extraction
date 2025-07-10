@@ -32,7 +32,7 @@ CLEAR_CACHE_PERIOD = 32
 
 
 @dataclass
-class Retrieval(Context):
+class Clap(Context):
     """
     CLI command to evaluate function retrieval
     """

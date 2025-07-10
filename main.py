@@ -10,6 +10,7 @@ from src.retrieval import Retrieval
 from src.batch_query import BatchQuery
 from src.gemini import GeminiRetrieval
 from src.open_ai import OpenAIRetrieval
+from src.clap import Clap
 from src.info import Info
 from src.context import MODELS
 
@@ -20,7 +21,8 @@ COMMANDS = {
     'batch-query': BatchQuery,
     'info': Info,
     'gemini': GeminiRetrieval,
-    'openai': OpenAIRetrieval
+    'openai': OpenAIRetrieval,
+    'clap': Clap
 }
 
 def main():
