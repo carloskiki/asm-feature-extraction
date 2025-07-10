@@ -196,9 +196,6 @@ class Clap(Context):
 
         all_targets = accelerator.gather_for_metrics(target_outputs, use_gather_object=True)
 
-        if not accelerator.is_main_process:
-            return
-        
         scores: list[list[float]] = []
         for index, query in tqdm(
             enumerate(query_outputs),
