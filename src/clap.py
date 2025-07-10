@@ -199,9 +199,6 @@ class Clap(Context):
         if not accelerator.is_main_process:
             return
         
-        import code
-        code.interact(local=locals())
-        
         scores: list[list[float]] = []
         for index, query in tqdm(
             enumerate(query_outputs),
