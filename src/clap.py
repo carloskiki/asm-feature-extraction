@@ -74,6 +74,8 @@ class Clap(Context):
         metrics = []
 
         if isinstance(self.platform, list):
+            print("here")
+
             optimization = (
                 None if isinstance(self.optimization, list) else self.optimization
             )
