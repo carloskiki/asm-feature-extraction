@@ -165,7 +165,7 @@ class Clap(Context):
         model = AutoModel.from_pretrained(
             "hustcw/clap-asm",
             trust_remote_code=True,
-        ).to(f"cuda:{accelerator.process_index}")
+        ).to(accelerator.device)
         self.tokenizer = AutoTokenizer.from_pretrained(
             "hustcw/clap-asm", trust_remote_code=True
         )
@@ -186,8 +186,8 @@ class Clap(Context):
                 # Tokenize the prompts for the batch
                 (queries, targets) = zip(*batch)
 
-                query_outputs.extend(self.generate(queries, model))
-                target_outputs.extend(self.generate(targets, model))
+                query_outputs.extend(self.generate(queries, model, accelerator))
+                target_outputs.extend(self.generate(targets, model, accelerator))
 
                 if clear_cache_counter == CLEAR_CACHE_PERIOD:
                     torch.cuda.empty_cache()
@@ -217,7 +217,7 @@ class Clap(Context):
         torch.cuda.empty_cache()
         return all_scores
 
-    def generate(self, batch: list[Function], model) -> list[object]:
+    def generate(self, batch: list[Function], model, accelerator: Accelerator) -> list[object]:
         instructions = (
             (str(ins) for block in f.blocks for ins in block.instructions)
             for f in batch
@@ -230,7 +230,7 @@ class Clap(Context):
             ],
             padding=True,
             return_tensors="pt",
-        )
+        ).to(accelerator.device)
         # Pass the tokens to LLM
         embeddings = model(**tokens).cpu()
 
