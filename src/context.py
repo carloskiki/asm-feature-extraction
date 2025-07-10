@@ -8,6 +8,7 @@ MODELS = {
     "qwen-2.5-3": "Qwen/Qwen2.5-Coder-3B-Instruct",
     "qwen-2.5-1.5": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "qwen-3-4": "Qwen/Qwen3-4B",
     "gemma-3-4": "google/gemma-3-4b-it",
 }
 MAX_NEW_TOKENS = 512
