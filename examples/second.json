@@ -1,0 +1,27 @@
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "ConditionalBranching",
+    "SubroutineCall"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_indexed_addressing_modes": false,
+  "presence_of_notable_integer_constants": [
+    "0x2",
+    "0x39",
+    "0x4"
+  ],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "likely_modifies_input_parameters": false,
+  "likely_modifies_global_state": false,
+  "likely_performs_memory_allocation_deallocation": false,
+  "likely_performs_io_operations": false,
+  "likely_performs_block_memory_operations": false,
+  "inferred_algorithm": "Conditional Check and Function Call"
+}
