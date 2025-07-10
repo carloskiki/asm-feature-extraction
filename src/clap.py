@@ -73,8 +73,6 @@ class Clap(Context):
 
         metrics = []
 
-        print(self.platform, dir(self.platform), type(self.platform))
-
         if isinstance(self.platform, list):
             optimization = (
                 None if isinstance(self.optimization, list) else self.optimization
@@ -105,7 +103,7 @@ class Clap(Context):
                         or isinstance(self.optimization, list)
                         else self.optimization,
                         "pool-size": self.pool_size,
-                        "model": self.model,
+                        "model": "clap",
                     }
                     data = {
                         "parameters": parameters,
