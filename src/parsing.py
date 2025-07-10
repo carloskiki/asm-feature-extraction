@@ -2,7 +2,7 @@ from argparse import ArgumentTypeError
 
 def platform_parser(s):
     # If input looks like key:value,key:value,...
-    if ":" in s and "," in s:
+    if ":" in s:
         try:
             return [tuple(p.split(":", 1)) for p in s.split(",")]
         except ValueError as e:
