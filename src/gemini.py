@@ -107,7 +107,7 @@ class GeminiRetrieval(Context):
 
 
         if isinstance(self.platform, list):
-            optimization = None if isinstance(self.optimization, list) else self.platform
+            optimization = None if isinstance(self.optimization, list) else self.optimization
 
             for query_platform, target_platform in self.platform:
                 dataset = PairsDataset(
