@@ -8,10 +8,17 @@ from datetime import datetime
 from google import genai
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from .context import Context 
+from .context import Context
 from .parsing import platform_parser, optimization_parser
 from .data_processing import BINARIES, PairsDataset
-from .metrics import save_metrics, flatten_to_strings, jaccard_index, test_retrieval, parse_json
+from .metrics import (
+    save_metrics,
+    flatten_to_strings,
+    jaccard_index,
+    test_retrieval,
+    parse_json,
+)
+
 
 @dataclass
 class GeminiRetrieval(Context):
@@ -26,7 +33,7 @@ class GeminiRetrieval(Context):
     ]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
     batch_size: int  # Number of batches processed at once
     data_path: str  # Path containing the dataset
-    request_per_minute: int # Maximum number of requests per minute to run
+    request_per_minute: int  # Maximum number of requests per minute to run
 
     save_metrics: bool  # Save results to a file
 
@@ -110,7 +117,6 @@ class GeminiRetrieval(Context):
         interval = 60 * 2 * self.batch_size / self.request_per_minute
 
         for _index, batch in enumerate(tqdm(loader)):
-
             start_time = time.time()
 
             # Tokenize the prompts for the batch
@@ -118,7 +124,7 @@ class GeminiRetrieval(Context):
 
             query_outputs.extend(self.generate(queries, client))
             target_outputs.extend(self.generate(targets, client))
-            
+
             elapsed = time.time() - start_time
             time.sleep(max(0, interval - elapsed))
 
@@ -131,7 +137,7 @@ class GeminiRetrieval(Context):
             query = flatten_to_strings(query)
             for target in target_outputs:
                 scores[index].append(jaccard_index(query, flatten_to_strings(target)))
-        
+
         return scores
 
     def generate(self, batch, client: genai.Client):
@@ -155,8 +161,12 @@ class GeminiRetrieval(Context):
         responses = []
         for fn in batch:
             print(fn.name)
-            # We could instead provide a schema for the model to follow and not parse. But we want to imitate
-            # our local setup as much as possible.
-            responses.append(parse_json(chat.send_message(f"```assembly\n{str(fn)[:20_000]}\n```").text))
-        
+            # We could instead provide a schema for the model to follow and not parse. But we want to
+            # imitate our local setup as much as possible.
+            responses.append(
+                parse_json(
+                    chat.send_message(f"```assembly\n{str(fn)[:10_000]}\n```").text
+                )
+            )
+
         return responses
