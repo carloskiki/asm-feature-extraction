@@ -62,6 +62,7 @@ class GeminiRetrieval(Context):
 
         client = genai.Client()
         metrics = []
+        date = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
         if isinstance(self.optimization, list):
             platform = None if isinstance(self.platform, list) else self.platform
@@ -100,7 +101,47 @@ class GeminiRetrieval(Context):
 
                 metrics.append(data)
                 if self.save_metrics:
-                    save_metrics(metrics, datetime.now().strftime("%Y-%m-%d_%H-%M"))
+                    save_metrics(metrics, date)
+
+                print(metrics[-1])
+
+
+        if isinstance(self.platform, list):
+            optimization = None if isinstance(self.optimization, list) else self.platform
+
+            for query_platform, target_platform in self.platform:
+                dataset = PairsDataset(
+                    self.data_path,
+                    True,
+                    self.pool_size,
+                    self.seed,
+                    self.binary,
+                    optimization,
+                    query_platform,
+                    None,
+                    target_platform,
+                )
+                scores = self.generate_scores(dataset, client)
+
+                raw_metrics = test_retrieval(scores)
+                parameters = {
+                    "binary": self.binary or "all",
+                    "optimization": self.platform,
+                    "platform": query_platform,
+                    "target-platform": target_platform,
+                    "pool-size": self.pool_size,
+                    "examples": self.examples,
+                    "prompt": self.prompt,
+                    "model": "gemini-2.5-flash-lite-preview-06-17",
+                }
+                data = {
+                    "parameters": parameters,
+                    "results": raw_metrics,
+                }
+
+                metrics.append(data)
+                if self.save_metrics:
+                    save_metrics(metrics, date)
 
                 print(metrics[-1])
 
