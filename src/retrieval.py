@@ -3,7 +3,7 @@ Retrieval CLI utilities
 """
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, Union
 from argparse import ArgumentParser
 import random
@@ -12,7 +12,7 @@ import gc
 from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
-from accelerate import Accelerator
+from accelerate import Accelerator, InitProcessGroupKwargs
 from .parsing import platform_parser, optimization_parser
 from .metrics import (
     save_metrics,
@@ -73,7 +73,7 @@ class Retrieval(Context):
 
     def __call__(self):
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-        accelerator = Accelerator()
+        accelerator = Accelerator(kwargs_handlers=[InitProcessGroupKwargs(timeout=timedelta(hours=2))])
 
         # Nasty nasty patch
         self.invalid_json_count = 0
