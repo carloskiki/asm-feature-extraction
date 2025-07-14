@@ -1,57 +1,4 @@
 ```assembly
-loc_480835:
-    PUSH rbp
-    PUSH rbx
-    SUB rsp, 8
-    MOV rbp, rdi
-    CALL sub_4807C1
-    MOV ebx, 1
-    TEST eax, eax
-    JNZ loc_480862
-loc_48084C:
-    MOV ebx, eax
-    MOV edx, 50h
-    MOV esi, 2
-    MOV rdi, rbp
-    CALL sub_456CA5
-    JMP $+2
-loc_480862:
-    MOV eax, ebx
-    ADD rsp, 8
-    POP rbx
-    POP rbp
-    RETN 
-```
-
-```json
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": ["Pointer"],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 2,
-  "use_of_indexed_addressing_modes": false,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": ["0x50", "0x2"],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 2,
-  "string_literal_presence": false,
-  "modifies_input_parameters": false,
-  "modifies_global_state": false,
-  "performs_memory_allocation_deallocation": false,
-  "performs_io_operations": false,
-  "performs_block_memory_operations": false,
-  "performs_linear_memory_accesses": false,
-  "performs_error_handling": true,
-  "number_of_software_interrupts_or_system_calls": 0,
-  "inferred_category": "Utility/Helper"
-}
-```
-
-
-```assembly
 loc_6D19E0:
     LA $gp, unk_7AC870
     RDHWR $v1, $29
@@ -129,6 +76,59 @@ loc_6D19B0:
   "number_of_software_interrupts_or_system_calls": 2,
   "inferred_category": "System/OS Interaction",
   "att&ck_technique": "T1059"
+}
+```
+
+
+```assembly
+loc_480835:
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 8
+    MOV rbp, rdi
+    CALL sub_4807C1
+    MOV ebx, 1
+    TEST eax, eax
+    JNZ loc_480862
+loc_48084C:
+    MOV ebx, eax
+    MOV edx, 50h
+    MOV esi, 2
+    MOV rdi, rbp
+    CALL sub_456CA5
+    JMP $+2
+loc_480862:
+    MOV eax, ebx
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+```
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x50", "0x2"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
 }
 ```
 
