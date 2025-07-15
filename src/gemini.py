@@ -199,6 +199,7 @@ class GeminiRetrieval(Context):
         return scores
 
     def generate(self, batch, client: genai.Client):
+        # TODO: Use cache instead
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
 
@@ -230,14 +231,15 @@ class GeminiRetrieval(Context):
         return responses
 
     def batch_send(self, dataset: PairsDataset, client: genai.Client):
-        self.cache_system_prompt(client, "gemini-2.5-flash")
+        cache = self.cache_system_prompt(client, "gemini-2.5-flash")
 
-    def cache_system_prompt(self, client: genai.Client, model: str):
+        # TODO: Run batches
+
+    def cache_system_prompt(self, client: genai.Client, model: str) -> types.CachedContent:
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
 
-        # Create a cache with a 5 minute TTL
-        cache = client.caches.create(
+        return client.caches.create(
             model=model,
             config=types.CreateCachedContentConfig(
                 display_name=f"prompt-{date}",  # used to identify the cache
@@ -252,6 +254,3 @@ class GeminiRetrieval(Context):
                 ttl="6000s"
             )
         )
-
-        import code
-        code.interact(local=locals())
