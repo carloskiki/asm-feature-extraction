@@ -222,7 +222,7 @@ class Clap(Context):
 
         tokens = self.tokenizer(
             [
-                {str(i): instruction for i, instruction in enumerate(islice(f, 128))}
+                {str(i): instruction for i, instruction in enumerate(islice(f, 512))}
                 for f in instructions
             ],
             padding=True,
