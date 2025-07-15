@@ -250,7 +250,7 @@ class GeminiRetrieval(Context):
                     for obj in prompt[1:-1]
                 ],
                 ttl="3h"
-            ),
+            )
         )
 
         import code
