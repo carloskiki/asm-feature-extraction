@@ -60,7 +60,7 @@ class GeminiRetrieval(Context):
         parser.add_argument("--optimization", type=optimization_parser)
         parser.add_argument("--save-metrics", action="store_true")
 
-        action = parser.add_subparsers("action", dest="action")
+        action = parser.add_subparsers(dest="action")
         action.add_parser("batch", description="Send batch file")
         action.add_parser("normal", description="Normal mode")
 
