@@ -120,6 +120,9 @@ class Retrieval(Context):
                         "invalid-json": self.invalid_json_count
                     }
 
+                    if self.save_metrics:
+                        save_metrics(metrics, timestamp)
+
                     metrics.append(data)
                     print(metrics[-1])
 
