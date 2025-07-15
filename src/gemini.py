@@ -230,7 +230,7 @@ class GeminiRetrieval(Context):
         return responses
 
     def batch_send(self, dataset: PairsDataset, client: genai.Client):
-        self.cache_system_prompt(genai.Client, "gemini-2.5-flash")
+        self.cache_system_prompt(client, "gemini-2.5-flash")
 
     def cache_system_prompt(self, client: genai.Client, model: str):
         prompt = self.get_prompt("")
