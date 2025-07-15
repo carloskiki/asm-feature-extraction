@@ -71,8 +71,18 @@ These fragments are usually first disassembled, and are then compared for simila
 similarity detection is performed with one known fragment (either because it was analyzed before
 or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
 highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work.
+For vulnerability research, if a code fragment is highly similar to a known vulnerability, then it is
+worth checking if the fragment is vulnerable, or if it was patched.
 
 - Explain the process of reverse engineering - where does BCSD come in, which tools are used? DONE
+
+### Problem Definition
+
+Recurring terms:
+
+- 
+- Code fragment will be "function" from thereon.
+
 - Definitions - define recuring terms in our research paper - Define the problem properly.
 - Explain a bit of NLP, how other methods acheive their results vs. how we do it.
 
