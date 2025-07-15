@@ -6,6 +6,7 @@ import random
 import time
 from datetime import datetime
 from google import genai
+from google.genai import types
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from .context import Context
@@ -18,6 +19,8 @@ from .metrics import (
     test_retrieval,
     parse_json,
 )
+
+date = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
 
 @dataclass
@@ -36,6 +39,7 @@ class GeminiRetrieval(Context):
     request_per_minute: int  # Maximum number of requests per minute to run
 
     save_metrics: bool  # Save results to a file
+    action: str
 
     @staticmethod
     def arguments(subparsers):
@@ -55,6 +59,11 @@ class GeminiRetrieval(Context):
         parser.add_argument("--platform", type=platform_parser)
         parser.add_argument("--optimization", type=optimization_parser)
         parser.add_argument("--save-metrics", action="store_true")
+
+        action = parser.add_subparsers("action", dest="action")
+        action.add_parser("batch", description="Send batch file")
+        action.add_parser("normal", description="Normal mode")
+
         parser.add_argument("data_path", type=str)
 
     def __call__(self, *args, **kwds):
@@ -62,7 +71,6 @@ class GeminiRetrieval(Context):
 
         client = genai.Client()
         metrics = []
-        date = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
         if isinstance(self.optimization, list):
             platform = None if isinstance(self.platform, list) else self.platform
@@ -79,6 +87,10 @@ class GeminiRetrieval(Context):
                     target_optimization,
                     None,
                 )
+                if self.action == "batch":
+                    self.batch_send(dataset, client)
+                    continue
+
                 scores = self.generate_scores(dataset, client)
 
                 raw_metrics = test_retrieval(scores)
@@ -105,9 +117,10 @@ class GeminiRetrieval(Context):
 
                 print(metrics[-1])
 
-
         if isinstance(self.platform, list):
-            optimization = None if isinstance(self.optimization, list) else self.optimization
+            optimization = (
+                None if isinstance(self.optimization, list) else self.optimization
+            )
 
             for query_platform, target_platform in self.platform:
                 dataset = PairsDataset(
@@ -121,6 +134,10 @@ class GeminiRetrieval(Context):
                     None,
                     target_platform,
                 )
+                if self.action == "batch":
+                    self.batch_send(dataset, client)
+                    continue
+
                 scores = self.generate_scores(dataset, client)
 
                 raw_metrics = test_retrieval(scores)
@@ -187,13 +204,13 @@ class GeminiRetrieval(Context):
 
         chat = client.chats.create(
             model="gemini-2.5-flash-lite-preview-06-17",
-            config=genai.types.GenerateContentConfig(
+            config=types.GenerateContentConfig(
                 system_instruction=system_prompt,
             ),
             history=[
-                genai.types.Content(
+                types.Content(
                     role=obj["role"] if obj["role"] == "user" else "model",
-                    parts=[genai.types.Part.from_text(text=obj["content"])],
+                    parts=[types.Part.from_text(text=obj["content"])],
                 )
                 for obj in prompt[1:-1]
             ],
@@ -211,3 +228,30 @@ class GeminiRetrieval(Context):
             )
 
         return responses
+
+    def batch_send(self, dataset: PairsDataset, client: genai.Client):
+        self.cache_system_prompt(genai.Client, "gemini-2.5-flash")
+
+    def cache_system_prompt(self, client: genai.Client, model: str):
+        prompt = self.get_prompt("")
+        system_prompt = prompt[0]["content"]
+
+        # Create a cache with a 5 minute TTL
+        cache = client.caches.create(
+            model=model,
+            config=types.CreateCachedContentConfig(
+                display_name=f"prompt-{date}",  # used to identify the cache
+                system_instruction=system_prompt,
+                contents=[
+                    types.Content(
+                        role=obj["role"] if obj["role"] == "user" else "model",
+                        parts=[types.Part.from_text(text=obj["content"])],
+                    )
+                    for obj in prompt[1:-1]
+                ],
+                ttl="3h"
+            ),
+        )
+
+        import code
+        code.interact(local=locals())
