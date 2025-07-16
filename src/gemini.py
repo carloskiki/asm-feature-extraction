@@ -238,33 +238,30 @@ class GeminiRetrieval(Context):
 
         queries, _ = zip(*next(iter(loader)))
 
-        batch_response = (
-            client.batches.create(
-                model=model,
-                src=[
-                    types.InlinedRequest(
-                        model=model,
-                        contents=types.Content(
-                            role="user",
-                            parts=[
-                                types.Part(
-                                    text=f"```assembly\n{str(query)[:10_000]}\n```"
-                                )
-                            ],
-                        ),
-                    )
-                    for query in queries
-                ],
-                config={
-                    'display_name': date,
-                    'thinking_config': types.ThinkingConfig(thinking_budget=0),
-                    'cached_content': cache.name,
-                }
+        batch_response = client.batches.create(
+            model=model,
+            src=[
+                types.InlinedRequest(
+                    model=model,
+                    config=types.GenerateContentConfig(
+                        cached_content=cache.name,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    ),
+                    contents=types.Content(
+                        role="user",
+                        parts=[
+                            types.Part(text=f"```assembly\n{str(query)[:10_000]}\n```")
+                        ],
+                    ),
+                )
+                for query in queries
+            ],
+            config=types.CreateBatchJobConfig(
+                display_name=date,
             ),
         )
 
         import code
-
         code.interact(local=locals())
 
     def cache_system_prompt(
