@@ -223,7 +223,7 @@ class Retrieval(Context):
                 zip(query_outputs, target_outputs)
             ):
                 (query_fn, target_fn) = loader.dataset[index]
-                with open(f"examples/{timestamp}", "w") as file:
+                with open(f"examples/{timestamp}", "w", encoding="utf-8") as file:
                     file.write(
                         f"##### Q {index} - {query_fn.name}\n```assembly{str(query_fn)}```\n-----\n{query_out}\n"
                         f"##### T {index} - {target_fn.name}\n```assembly{str(target_fn)}```\n-----\n{target_out}\n"
@@ -246,7 +246,7 @@ class Retrieval(Context):
             # Get the indices of the top-k scores for each query
             top_k_indices = np.argsort(-np.array(scores), axis=1)[:, : self.save_top_k]
 
-            with open(f"examples/top{self.save_top_k}{timestamp}", "wb") as f:
+            with open(f"examples/top{self.save_top_k}{timestamp}", "w", encoding="utf-8") as f:
                 for i, indices in enumerate(top_k_indices):
                     if i in indices and i != indices[0]:
                         f.write(f"i{i} - {str(indices)}]\n")
