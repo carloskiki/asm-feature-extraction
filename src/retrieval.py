@@ -327,22 +327,22 @@ class Retrieval(Context):
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
-        batch = next(iter(loader))
-
-        (queries, targets) = zip(*batch)
-
 
         query_embs = []
         target_embs = []
 
-        query_embs.extend(model.encode([str(q) for q in queries]))
-        target_embs.extend(model.encode([str(t) for t in targets]))
+        for batch in loader:
+            (queries, targets) = zip(*batch)
 
-        # if accelerator.is_main_process:
-        #     import code
-        #     code.interact(local=locals())
+            query_embs.extend(model.encode([str(q) for q in queries]))
+            target_embs.extend(model.encode([str(t) for t in targets]))
 
         query_embs = np.stack(query_embs, axis=0)
         target_embs = np.stack(target_embs, axis=0)
+
+
+        if accelerator.is_main_process:
+            import code
+            code.interact(local=locals())
 
         return model.similarity(query_embs, target_embs).tolist()
