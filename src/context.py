@@ -95,7 +95,6 @@ class Context:
             return SentenceTransformer(
                 MODELS[self.model],
                 model_kwargs={
-                    "attn_implementation": "flash_attention_2",
                     "device_map": device_map,
                 },
                 tokenizer_kwargs={"padding_side": "left"},
