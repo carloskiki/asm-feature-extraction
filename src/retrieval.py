@@ -340,7 +340,6 @@ class Retrieval(Context):
             (queries, targets) = zip(*batch)
             queries = ["\n".join(str(q).splitlines()[:128]) for q in queries]
             targets = ["\n".join(str(t).splitlines()[:128]) for t in targets]
-            print(queries)
 
             query_embs.extend(model.encode(queries))
             target_embs.extend(model.encode(targets))
