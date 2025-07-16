@@ -244,10 +244,6 @@ class GeminiRetrieval(Context):
                 src=[
                     types.InlinedRequest(
                         model=model,
-                        config=types.GenerateContentConfig(
-                            cached_content=cache.name,
-                            thinking_config=types.ThinkingConfig(thinking_budget=0),
-                        ),
                         contents=types.Content(
                             role="user",
                             parts=[
@@ -262,6 +258,7 @@ class GeminiRetrieval(Context):
                 config=types.GenerateContentConfig(
                     display_name=date,
                     thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    cached_content=cache.name,
                 ),
             ),
         )
