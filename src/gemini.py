@@ -239,6 +239,7 @@ class GeminiRetrieval(Context):
         queries, _ = zip(*next(iter(loader)))
 
         batch_response = client.batches.create(
+            model=model
             src=[
                 types.InlinedRequest(
                     model=model,
