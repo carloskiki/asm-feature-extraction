@@ -246,7 +246,9 @@ class Retrieval(Context):
             # Get the indices of the top-k scores for each query
             top_k_indices = np.argsort(-np.array(scores), axis=1)[:, : self.save_top_k]
 
-            with open(f"examples/top-{self.save_top_k}-{timestamp}", "w", encoding="utf-8") as f:
+            with open(
+                f"examples/top-{self.save_top_k}-{timestamp}", "w", encoding="utf-8"
+            ) as f:
                 for i, indices in enumerate(top_k_indices):
                     if i in indices and i != indices[0]:
                         f.write(f"{i} - {str(indices)}]\n")
@@ -327,11 +329,14 @@ class Retrieval(Context):
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
         loader = accelerator.prepare_data_loader(loader, device_placement=False)
 
-
         query_embs = []
         target_embs = []
 
-        for batch in loader:
+        for batch in tqdm(
+            loader,
+            desc="Generating",
+            disable=not accelerator.is_main_process,
+        ):
             (queries, targets) = zip(*batch)
 
             query_embs.extend(model.encode([str(q) for q in queries]))
@@ -340,9 +345,9 @@ class Retrieval(Context):
         query_embs = np.stack(query_embs, axis=0)
         target_embs = np.stack(target_embs, axis=0)
 
-
         if accelerator.is_main_process:
             import code
+
             code.interact(local=locals())
 
         return model.similarity(query_embs, target_embs).tolist()
