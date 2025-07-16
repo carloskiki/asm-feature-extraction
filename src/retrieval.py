@@ -219,14 +219,14 @@ class Retrieval(Context):
                     clear_cache_counter = 0
 
         if accelerator.is_main_process and self.save_answers:
-            for index, (query_out, target_out) in enumerate(
-                zip(query_outputs, target_outputs)
-            ):
-                (query_fn, target_fn) = loader.dataset[index]
-                with open(f"examples/all-{timestamp}.txt", "w", encoding="utf-8") as file:
+            with open(f"examples/all-{timestamp}.txt", "w", encoding="utf-8") as file:
+                for index, (query_out, target_out) in enumerate(
+                    zip(query_outputs, target_outputs)
+                ):
+                    (query_fn, target_fn) = loader.dataset[index]
                     file.write(
-                        f"##### Q {index} - {query_fn.name}\n```assembly\n{str(query_fn)}\n```\n-----\n{query_out}\n"
-                        f"##### T {index} - {target_fn.name}\n```assembly\n{str(target_fn)}\n```\n-----\n{target_out}\n"
+                        f"##### Q {index} - {query_fn.name}\n```assembly\n{str(query_fn)}\n```\n{query_out}\n\n"
+                        f"##### T {index} - {target_fn.name}\n```assembly\n{str(target_fn)}\n```\n{target_out}\n\n"
                     )
 
         all_targets = accelerator.gather_for_metrics(target_outputs)
@@ -246,7 +246,7 @@ class Retrieval(Context):
             # Get the indices of the top-k scores for each query
             top_k_indices = np.argsort(-np.array(scores), axis=1)[:, : self.save_top_k]
 
-            with open(f"examples/top{self.save_top_k}{timestamp}", "w", encoding="utf-8") as f:
+            with open(f"examples/top-{self.save_top_k}-{timestamp}", "w", encoding="utf-8") as f:
                 for i, indices in enumerate(top_k_indices):
                     if i in indices and i != indices[0]:
                         f.write(f"i{i} - {str(indices)}]\n")
