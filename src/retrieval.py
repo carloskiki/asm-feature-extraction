@@ -347,9 +347,12 @@ class Retrieval(Context):
         query_embs = np.stack(query_embs, axis=0)
         target_embs = np.stack(target_embs, axis=0)
 
-        if accelerator.is_main_process:
-            import code
+        target_embs = accelerator.gather_for_metrics(target_embs)
+        scores = model.similarity(query_embs, target_embs).tolist()
 
-            code.interact(local=locals())
+        all_scores = accelerator.gather_for_metrics(scores)
 
-        return model.similarity(query_embs, target_embs).tolist()
+        import code
+        code.interact(local=locals())
+
+        return all_scores
