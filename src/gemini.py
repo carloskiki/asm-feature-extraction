@@ -37,7 +37,6 @@ class GeminiRetrieval(Context):
     batch_size: int  # Number of batches processed at once
     data_path: str  # Path containing the dataset
     request_per_minute: int  # Maximum number of requests per minute to run
-
     save_metrics: bool  # Save results to a file
     action: str
 
@@ -58,6 +57,7 @@ class GeminiRetrieval(Context):
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
         parser.add_argument("--optimization", type=optimization_parser)
+        parser.add_argument("--save-answers", type=str)
         parser.add_argument("--save-metrics", action="store_true")
 
         action = parser.add_subparsers(dest="action")
@@ -200,7 +200,7 @@ class GeminiRetrieval(Context):
 
     def generate(self, batch, client: genai.Client):
         model = "gemini-2.5-flash",
-        cache = self.cache_system_prompt(client, model, 12000)
+        cache = self.cache_system_prompt(client, model, 120)
 
         responses = []
         for fn in batch:
@@ -210,7 +210,8 @@ class GeminiRetrieval(Context):
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 config=types.GenerateContentConfig(
-                    cached_content=cache.name
+                    cached_content=cache.name,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0),
                 ),
                 contents=f"```assembly\n{str(fn)[:10_000]}\n```"
             )
@@ -225,7 +226,7 @@ class GeminiRetrieval(Context):
 
     def batch_send(self, dataset: PairsDataset, client: genai.Client):
         model = "gemini-2.5-flash"
-        cache = self.cache_system_prompt(client, model, 7200)
+        cache = self.cache_system_prompt(client, model, 120)
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )

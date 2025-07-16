@@ -29,6 +29,7 @@ from .data_processing import (
 from .context import Context, MAX_NEW_TOKENS
 
 CLEAR_CACHE_PERIOD = 32
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
 
 @dataclass
@@ -49,7 +50,9 @@ class Retrieval(Context):
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str  # Path containing the dataset
-    save_top_k: Optional[int] # Save examples that are top-k but not top-1
+
+    save_answers: bool  # Save all answers
+    save_top_k: Optional[int]  # Save examples that are top-k but not top-1
 
     save_metrics: bool  # Save results to a file
 
@@ -71,12 +74,14 @@ class Retrieval(Context):
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-metrics", action="store_true")
+        parser.add_argument("--save-answers", action="store_true")
         parser.add_argument("--save-top-k", type=int)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-        accelerator = Accelerator(kwargs_handlers=[InitProcessGroupKwargs(timeout=timedelta(hours=2))])
+        accelerator = Accelerator(
+            kwargs_handlers=[InitProcessGroupKwargs(timeout=timedelta(hours=2))]
+        )
 
         # Nasty nasty patch
         self.invalid_json_count = 0
@@ -100,7 +105,7 @@ class Retrieval(Context):
                     None,
                     target_platform,
                 )
-                if self.model == 'qwen-emb':
+                if self.model == "qwen-emb":
                     scores = self.generate_emb_scores(accelerator, dataset)
                 else:
                     scores = self.generate_scores(accelerator, dataset)
@@ -123,7 +128,7 @@ class Retrieval(Context):
                     data = {
                         "parameters": parameters,
                         "results": raw_metrics,
-                        "invalid-json": self.invalid_json_count
+                        "invalid-json": self.invalid_json_count,
                     }
 
                     if self.save_metrics:
@@ -147,7 +152,7 @@ class Retrieval(Context):
                     target_optimization,
                     None,
                 )
-                if self.model == 'qwen-emb':
+                if self.model == "qwen-emb":
                     scores = self.generate_emb_scores(accelerator, dataset)
                 else:
                     scores = self.generate_scores(accelerator, dataset)
@@ -171,7 +176,7 @@ class Retrieval(Context):
                     data = {
                         "parameters": parameters,
                         "results": raw_metrics,
-                        "invalid-json": self.invalid_json_count
+                        "invalid-json": self.invalid_json_count,
                     }
 
                     metrics.append(data)
@@ -213,6 +218,17 @@ class Retrieval(Context):
                     gc.collect()
                     clear_cache_counter = 0
 
+        if accelerator.is_main_process and self.save_answers:
+            for index, (query_out, target_out) in enumerate(
+                zip(query_outputs, target_outputs)
+            ):
+                (query_fn, target_fn) = loader.dataset[index]
+                with open(f"examples/{timestamp}", "wb") as file:
+                    file.write(
+                        f"##### Q {index} - {query_fn.name}\n```assembly{str(query_fn)}```\n-----\n{query_out}\n"
+                        f"##### T {index} - {target_fn.name}\n```assembly{str(target_fn)}```\n-----\n{target_out}\n"
+                    )
+
         all_targets = accelerator.gather_for_metrics(target_outputs)
 
         scores: list[list[float]] = []
@@ -228,14 +244,13 @@ class Retrieval(Context):
 
         if accelerator.is_main_process and self.save_top_k is not None:
             # Get the indices of the top-k scores for each query
-            top_k_indices = np.argsort(-np.array(scores), axis=1)[:, :self.save_top_k]
+            top_k_indices = np.argsort(-np.array(scores), axis=1)[:, : self.save_top_k]
 
-            for i, indices in enumerate(top_k_indices):
-                if i in indices and i != indices[0]:
-                    print("found top k but not top 1 candidate")
+            with open(f"examples/top{self.save_top_k}{timestamp}", "wb") as f:
+                for i, indices in enumerate(top_k_indices):
+                    if i in indices and i != indices[0]:
+                        f.write(f"i{i} - {str(indices)}]\n")
 
-            # TODO: Save top k
-        
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
 
@@ -305,9 +320,7 @@ class Retrieval(Context):
             return_tensors="pt",
         )
 
-    def generate_emb_scores(
-        self, accelerator: Accelerator, dataset: PairsDataset
-    ):
+    def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
         # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
 
