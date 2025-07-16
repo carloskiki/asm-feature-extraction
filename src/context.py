@@ -10,6 +10,7 @@ MODELS = {
     "qwen-2.5-1.5": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
     "qwen-3-4": "Qwen/Qwen3-4B",
+    "qwen-emb": "Qwen/Qwen3-Embedding-4B",
     "gemma-3-4": "google/gemma-3-4b-it",
 }
 MAX_NEW_TOKENS = 512
@@ -89,7 +90,7 @@ class Context:
         device_map = {"": accelerator.process_index} if accelerator else "auto",
         if self.model == "qwen-emb":
             return SentenceTransformer(
-                "Qwen/Qwen3-Embedding-4B",
+                MODELS[self.model],
                 model_kwargs={
                     "attn_implementation": "flash_attention_2",
                     "device_map": device_map,

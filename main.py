@@ -22,7 +22,7 @@ COMMANDS = {
     'info': Info,
     'gemini': GeminiRetrieval,
     'openai': OpenAIRetrieval,
-    'clap': Clap
+    'clap': Clap,
 }
 
 def main():
