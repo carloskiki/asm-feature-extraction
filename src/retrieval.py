@@ -331,11 +331,18 @@ class Retrieval(Context):
 
         (queries, targets) = zip(*batch)
 
-        query_embs = model.encode([str(q) for q in queries])
-        target_embs = model.encode([str(t) for t in targets])
 
-        if accelerator.is_main_process:
-            import code
-            code.interact(local=locals())
+        query_embs = []
+        target_embs = []
 
-        # return model.similarity(query_embs, target_embs).tolist()
+        query_embs.extend(model.encode([str(q) for q in queries]))
+        target_embs.extend(model.encode([str(t) for t in targets]))
+
+        # if accelerator.is_main_process:
+        #     import code
+        #     code.interact(local=locals())
+
+        query_embs = np.stack(query_embs, axis=0)
+        target_embs = np.stack(target_embs, axis=0)
+
+        return model.similarity(query_embs, target_embs).tolist()
