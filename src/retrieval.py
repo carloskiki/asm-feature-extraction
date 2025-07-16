@@ -323,7 +323,6 @@ class Retrieval(Context):
         )
 
     def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
-        # No need to prepare the model, because we only do inference
         model = self.get_model(accelerator)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
@@ -346,6 +345,8 @@ class Retrieval(Context):
 
         query_embs = np.stack(query_embs, axis=0)
         target_embs = np.stack(target_embs, axis=0)
+
+        print(len(query_embs))
 
         target_embs = accelerator.gather_for_metrics(target_embs, use_gather_object=True)
         scores = model.similarity(query_embs, target_embs).tolist()
