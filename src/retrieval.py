@@ -331,6 +331,6 @@ class Retrieval(Context):
 
         (queries, targets) = zip(*batch)
 
-        query_embs = model.encode(queries)
-        target_embs = model.encode(targets)
+        query_embs = model.encode([str(q) for q in queries])
+        target_embs = model.encode([str(t) for t in targets])
         return model.similarity(query_embs, target_embs).tolist()
