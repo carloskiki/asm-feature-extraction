@@ -339,8 +339,8 @@ class Retrieval(Context):
         ):
             (queries, targets) = zip(*batch)
 
-            query_embs.extend(model.encode([str(q) for q in queries]))
-            target_embs.extend(model.encode([str(t) for t in targets]))
+            query_embs.extend(model.encode(["\n".join(str(q).splitlines()[:64]) for q in queries]))
+            target_embs.extend(model.encode(["\n".join(str(t).splitlines()[:64]) for t in targets]))
 
         query_embs = np.stack(query_embs, axis=0)
         target_embs = np.stack(target_embs, axis=0)
