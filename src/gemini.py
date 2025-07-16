@@ -281,6 +281,6 @@ class GeminiRetrieval(Context):
                     )
                     for obj in prompt[1:-1]
                 ],
-                ttl="100s",
+                ttl="1000s",
             ),
         )
