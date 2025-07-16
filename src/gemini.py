@@ -199,7 +199,6 @@ class GeminiRetrieval(Context):
         return scores
 
     def generate(self, batch, client: genai.Client):
-        # TODO: Use cache instead
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
 
@@ -231,29 +230,42 @@ class GeminiRetrieval(Context):
         return responses
 
     def batch_send(self, dataset: PairsDataset, client: genai.Client):
-        cache = self.cache_system_prompt(client, "gemini-2.5-flash")
+        model = "gemini-2.5-flash"
+        cache = self.cache_system_prompt(client, model)
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
 
-        # for batch in tqdm(loader):
-        #     pass
+        queries, _ = zip(*next(iter(loader)))
 
-        query, _ = next(iter(loader))[0]
-
-        generated = client.models.generate_content(
-            model= "gemini-2.5-flash",
-            config=types.GenerateContentConfig(
-                cached_content=cache.name,
+        batch_response = client.batches.create(
+            src=[
+                types.InlinedRequest(
+                    model=model,
+                    config=types.GenerateContentConfig(
+                        cached_content=cache.name,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    ),
+                    contents=types.Content(
+                        role="user",
+                        parts=[
+                            types.Part(text=f"```assembly\n{str(query)[:10_000]}\n```")
+                        ],
+                    ),
+                )
+                for query in queries
+            ],
+            config=types.CreateBatchJobConfig(
+                display_name=date,
             ),
-            contents=types.Content(role="user", parts=[types.Part(text=f"```assembly\n{str(query)[:10_000]}\n```")])
         )
 
         import code
         code.interact(local=locals())
 
-
-    def cache_system_prompt(self, client: genai.Client, model: str) -> types.CachedContent:
+    def cache_system_prompt(
+        self, client: genai.Client, model: str
+    ) -> types.CachedContent:
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
 
@@ -269,6 +281,6 @@ class GeminiRetrieval(Context):
                     )
                     for obj in prompt[1:-1]
                 ],
-                ttl="100s"
-            )
+                ttl="100s",
+            ),
         )
