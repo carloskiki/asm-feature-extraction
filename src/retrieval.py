@@ -223,7 +223,7 @@ class Retrieval(Context):
                 zip(query_outputs, target_outputs)
             ):
                 (query_fn, target_fn) = loader.dataset[index]
-                with open(f"examples/{timestamp}", "wb") as file:
+                with open(f"examples/{timestamp}", "w") as file:
                     file.write(
                         f"##### Q {index} - {query_fn.name}\n```assembly{str(query_fn)}```\n-----\n{query_out}\n"
                         f"##### T {index} - {target_fn.name}\n```assembly{str(target_fn)}```\n-----\n{target_out}\n"
