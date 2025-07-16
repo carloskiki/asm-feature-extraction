@@ -255,11 +255,11 @@ class GeminiRetrieval(Context):
                     )
                     for query in queries
                 ],
-                config=types.GenerateContentConfig(
-                    display_name=date,
-                    thinking_config=types.ThinkingConfig(thinking_budget=0),
-                    cached_content=cache.name,
-                ),
+                config={
+                    'display_name': date,
+                    'thinking_config': types.ThinkingConfig(thinking_budget=0),
+                    'cached_content': cache.name,
+                }
             ),
         )
 
