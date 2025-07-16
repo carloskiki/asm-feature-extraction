@@ -242,7 +242,7 @@ class GeminiRetrieval(Context):
         query, _ = next(iter(loader))[0]
 
         generated = client.models.generate_content(
-            model="gemini-2.5-flash-lite-preview-06-17",
+            model= "gemini-2.5-flash",
             config=types.GenerateContentConfig(
                 cached_content=cache.name,
             ),
