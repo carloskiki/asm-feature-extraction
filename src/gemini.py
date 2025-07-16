@@ -199,31 +199,25 @@ class GeminiRetrieval(Context):
         return scores
 
     def generate(self, batch, client: genai.Client):
-        prompt = self.get_prompt("")
-        system_prompt = prompt[0]["content"]
-
-        chat = client.chats.create(
-            model="gemini-2.5-flash-lite-preview-06-17",
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-            ),
-            history=[
-                types.Content(
-                    role=obj["role"] if obj["role"] == "user" else "model",
-                    parts=[types.Part.from_text(text=obj["content"])],
-                )
-                for obj in prompt[1:-1]
-            ],
-        )
+        model = "gemini-2.5-flash",
+        cache = self.cache_system_prompt(client, model, 12000)
 
         responses = []
         for fn in batch:
             print(fn.name)
             # We could instead provide a schema for the model to follow and not parse. But we want to
             # imitate our local setup as much as possible.
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                config=types.GenerateContentConfig(
+                    cached_content=cache.name
+                ),
+                contents=f"```assembly\n{str(fn)[:10_000]}\n```"
+            )
+
             responses.append(
                 parse_json(
-                    chat.send_message(f"```assembly\n{str(fn)[:10_000]}\n```").text
+                    response.text
                 )
             )
 
