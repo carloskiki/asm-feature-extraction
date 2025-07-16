@@ -352,7 +352,8 @@ class Retrieval(Context):
 
         all_scores = accelerator.gather_for_metrics(scores)
 
-        import code
-        code.interact(local=locals())
+        if accelerator.is_main_process:
+            import code
+            code.interact(local=locals())
 
         return all_scores
