@@ -249,7 +249,7 @@ class Retrieval(Context):
             with open(f"examples/top-{self.save_top_k}-{timestamp}", "w", encoding="utf-8") as f:
                 for i, indices in enumerate(top_k_indices):
                     if i in indices and i != indices[0]:
-                        f.write(f"i{i} - {str(indices)}]\n")
+                        f.write(f"{i} - {str(indices)}]\n")
 
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
