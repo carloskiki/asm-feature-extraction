@@ -231,7 +231,7 @@ class GeminiRetrieval(Context):
 
     def batch_send(self, dataset: PairsDataset, client: genai.Client):
         model = "gemini-2.5-flash"
-        cache = self.cache_system_prompt(client, model)
+        cache = self.cache_system_prompt(client, model, 7200)
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
@@ -265,7 +265,7 @@ class GeminiRetrieval(Context):
         code.interact(local=locals())
 
     def cache_system_prompt(
-        self, client: genai.Client, model: str
+        self, client: genai.Client, model: str, time: int
     ) -> types.CachedContent:
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
@@ -282,6 +282,6 @@ class GeminiRetrieval(Context):
                     )
                     for obj in prompt[1:-1]
                 ],
-                ttl="1000s",
+                ttl=f"{time}s",
             ),
         )

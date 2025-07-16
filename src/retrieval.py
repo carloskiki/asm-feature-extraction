@@ -97,7 +97,10 @@ class Retrieval(Context):
                     None,
                     target_platform,
                 )
-                scores = self.generate_scores(accelerator, dataset)
+                if self.model == 'qwen-emb':
+                    scores = self.generate_emb_scores(accelerator, dataset)
+                else:
+                    scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
                     raw_metrics = test_retrieval(scores)
@@ -141,7 +144,10 @@ class Retrieval(Context):
                     target_optimization,
                     None,
                 )
-                scores = self.generate_scores(accelerator, dataset)
+                if self.model == 'qwen-emb':
+                    scores = self.generate_emb_scores(accelerator, dataset)
+                else:
+                    scores = self.generate_scores(accelerator, dataset)
 
                 if accelerator.is_main_process:
                     raw_metrics = test_retrieval(scores)
@@ -285,3 +291,20 @@ class Retrieval(Context):
             padding_side="left",
             return_tensors="pt",
         )
+
+    def generate_emb_scores(
+        self, accelerator: Accelerator, dataset: PairsDataset
+    ):
+        # No need to prepare the model, because we only do inference
+        model = self.get_model(accelerator)
+
+        loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
+        loader = accelerator.prepare_data_loader(loader, device_placement=False)
+
+        batch = next(iter(loader))
+
+        (queries, targets) = zip(*batch)
+
+        query_embs = model.encode(queries)
+        target_embs = model.encode(targets)
+        return model.similarity(query_embs, target_embs).tolist()

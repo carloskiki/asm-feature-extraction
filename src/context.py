@@ -2,6 +2,7 @@ from pathlib import Path
 from functools import cached_property
 from dataclasses import dataclass
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from sentence_transformers import SentenceTransformer
 
 MODELS = {
     "qwen-2.5-7": "Qwen/Qwen2.5-Coder-7B-Instruct",
@@ -85,18 +86,21 @@ class Context:
         """
         Return the model
         """
-        if accelerator is not None:
-            return AutoModelForCausalLM.from_pretrained(
-                MODELS[self.model],
-                torch_dtype="auto",
-                device_map={"": accelerator.process_index},
-                trust_remote_code=True,
+        device_map = {"": accelerator.process_index} if accelerator else "auto",
+        if self.model == "qwen-emb":
+            return SentenceTransformer(
+                "Qwen/Qwen3-Embedding-4B",
+                model_kwargs={
+                    "attn_implementation": "flash_attention_2",
+                    "device_map": device_map,
+                },
+                tokenizer_kwargs={"padding_side": "left"},
             )
 
         return AutoModelForCausalLM.from_pretrained(
             MODELS[self.model],
             torch_dtype="auto",
-            device_map="auto",
+            device_map=device_map,
             trust_remote_code=True,
         )
 
