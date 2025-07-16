@@ -9,6 +9,7 @@ from argparse import ArgumentParser
 import random
 import sys
 import gc
+import numpy as np
 from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
@@ -48,6 +49,7 @@ class Retrieval(Context):
     batch_size: int  # Number of batches processed at once
     context_size: int  # Context window for the LLM
     data_path: str  # Path containing the dataset
+    save_top_k: Optional[int] # Save examples that are top-k but not top-1
 
     save_metrics: bool  # Save results to a file
 
@@ -69,6 +71,7 @@ class Retrieval(Context):
         parser.add_argument("--batch-size", type=int, default=64)
         parser.add_argument("--context-size", type=int, default=8192)
         parser.add_argument("--save-metrics", action="store_true")
+        parser.add_argument("--save-top-k", type=int)
         parser.add_argument("data_path", type=str)
 
     def __call__(self):
@@ -223,6 +226,16 @@ class Retrieval(Context):
             for target in all_targets:
                 scores[index].append(jaccard_index(query, flatten_to_strings(target)))
 
+        if accelerator.is_main_process and self.save_top_k is not None:
+            # Get the indices of the top-k scores for each query
+            top_k_indices = np.argsort(-np.array(scores), axis=1)[:, :self.save_top_k]
+
+            for i, indices in enumerate(top_k_indices):
+                if i in indices and i != indices[0]:
+                    print("found top k but not top 1 candidate")
+
+            # TODO: Save top k
+        
         # Assemble all scores together for main process
         all_scores = accelerator.gather_for_metrics(scores)
 

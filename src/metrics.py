@@ -87,12 +87,11 @@ def test_retrieval(scores: list[list[float]]):
     target_tokens: 2D Tensor containing an embedding for each candidate.
     """
 
-    return compute_retrieval_metrics(np.array(scores), None)
+    return compute_retrieval_metrics(np.array(scores))
 
 
-def compute_retrieval_metrics(scores, relevance):
-    if relevance is None:
-        relevance = np.arange(scores.shape[0])
+def compute_retrieval_metrics(scores):
+    relevance = np.arange(scores.shape[0])
     mrr = calculate_mrr(scores, relevance)
     recall_at_1 = recall_at_k(scores, relevance, 1)
     recall_at_10 = recall_at_k(scores, relevance, 10)
