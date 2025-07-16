@@ -239,7 +239,7 @@ class GeminiRetrieval(Context):
         # for batch in tqdm(loader):
         #     pass
 
-        query, _ = next(loader)[0]
+        query, _ = next(iter(loader))[0]
 
         generated = client.models.generate_content(
             model="gemini-2.5-flash-lite-preview-06-17",
