@@ -223,10 +223,10 @@ class Retrieval(Context):
                 zip(query_outputs, target_outputs)
             ):
                 (query_fn, target_fn) = loader.dataset[index]
-                with open(f"examples/{timestamp}", "w", encoding="utf-8") as file:
+                with open(f"examples/all-{timestamp}.txt", "w", encoding="utf-8") as file:
                     file.write(
-                        f"##### Q {index} - {query_fn.name}\n```assembly{str(query_fn)}```\n-----\n{query_out}\n"
-                        f"##### T {index} - {target_fn.name}\n```assembly{str(target_fn)}```\n-----\n{target_out}\n"
+                        f"##### Q {index} - {query_fn.name}\n```assembly\n{str(query_fn)}\n```\n-----\n{query_out}\n"
+                        f"##### T {index} - {target_fn.name}\n```assembly\n{str(target_fn)}\n```\n-----\n{target_out}\n"
                     )
 
         all_targets = accelerator.gather_for_metrics(target_outputs)
