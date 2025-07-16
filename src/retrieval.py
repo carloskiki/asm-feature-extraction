@@ -333,4 +333,8 @@ class Retrieval(Context):
 
         query_embs = model.encode([str(q) for q in queries])
         target_embs = model.encode([str(t) for t in targets])
-        return model.similarity(query_embs, target_embs).tolist()
+
+        import code
+        code.interact(local=locals())
+
+        # return model.similarity(query_embs, target_embs).tolist()
