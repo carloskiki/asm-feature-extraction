@@ -334,7 +334,8 @@ class Retrieval(Context):
         query_embs = model.encode([str(q) for q in queries])
         target_embs = model.encode([str(t) for t in targets])
 
-        import code
-        code.interact(local=locals())
+        if accelerator.is_main_process:
+            import code
+            code.interact(local=locals())
 
         # return model.similarity(query_embs, target_embs).tolist()
