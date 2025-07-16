@@ -88,6 +88,7 @@ class Context:
         Return the model
         """
         device_map = {"": accelerator.process_index} if accelerator else "auto",
+        print(device_map)
         if self.model == "qwen-emb":
             return SentenceTransformer(
                 MODELS[self.model],
