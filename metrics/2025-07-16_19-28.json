@@ -1,0 +1,122 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.7139455477593,
+      "recall_at_1": 0.64,
+      "recall_at_10": 0.824,
+      "similarity_mean": {
+        "max": 0.8424626497030259,
+        "median": 0.5931774733960629,
+        "mean": 0.5940116865396345,
+        "min": 0.3580807286053896
+      }
+    },
+    "invalid-json": 0
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.6397119040106373,
+      "recall_at_1": 0.554,
+      "recall_at_10": 0.774,
+      "similarity_mean": {
+        "max": 0.8374339975714683,
+        "median": 0.6035556136071683,
+        "mean": 0.6022748832041775,
+        "min": 0.35243882359564305
+      }
+    },
+    "invalid-json": 0
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.603243114073472,
+      "recall_at_1": 0.518,
+      "recall_at_10": 0.736,
+      "similarity_mean": {
+        "max": 0.8357432669997216,
+        "median": 0.6040168669223785,
+        "mean": 0.6017424901430898,
+        "min": 0.35872234231233596
+      }
+    },
+    "invalid-json": 0
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.7076346718490822,
+      "recall_at_1": 0.64,
+      "recall_at_10": 0.8,
+      "similarity_mean": {
+        "max": 0.8658519048690796,
+        "median": 0.6045227247327566,
+        "mean": 0.6042301221582589,
+        "min": 0.4174555137753487
+      }
+    },
+    "invalid-json": 0
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.8472309448458771,
+      "recall_at_1": 0.783,
+      "recall_at_10": 0.926,
+      "similarity_mean": {
+        "max": 0.9043921720385552,
+        "median": 0.6165530699044466,
+        "mean": 0.6158827409754096,
+        "min": 0.4260761829316616
+      }
+    },
+    "invalid-json": 0
+  }
+]

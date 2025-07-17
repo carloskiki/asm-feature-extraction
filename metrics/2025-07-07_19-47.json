@@ -1,0 +1,48 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "blank",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.4955976651743803,
+      "recall_at_1": 0.391,
+      "recall_at_10": 0.632,
+      "similarity_mean": {
+        "max": 0.6690663000256415,
+        "median": 0.3211147794576004,
+        "mean": 0.32300569395774,
+        "min": 0.0
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 2,
+      "prompt": "blank",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.38912877203675084,
+      "recall_at_1": 0.289,
+      "recall_at_10": 0.556,
+      "similarity_mean": {
+        "max": 0.6387695926347073,
+        "median": 0.30383373675354436,
+        "mean": 0.3068446711219723,
+        "min": 0.0
+      }
+    }
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.7662054757302157,
+      "recall_at_1": 0.685,
+      "recall_at_10": 0.878,
+      "similarity_mean": {
+        "max": 0.787865172624588,
+        "median": 0.028966137531911955,
+        "mean": 0.04805372297433733,
+        "min": -0.2193047499358654
+      }
+    }
+  }
+]

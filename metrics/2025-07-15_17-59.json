@@ -1,0 +1,44 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.8388447889562489,
+      "recall_at_1": 0.763,
+      "recall_at_10": 0.908,
+      "similarity_mean": {
+        "max": 0.8419552747607231,
+        "median": 0.02672129066567868,
+        "mean": 0.04672373493267879,
+        "min": -0.21688584552705287
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.9182581716965983,
+      "recall_at_1": 0.837,
+      "recall_at_10": 0.964,
+      "similarity_mean": {
+        "max": 0.9157092889547348,
+        "median": 0.026571606526209508,
+        "mean": 0.04750746944507549,
+        "min": -0.21867334192991256
+      }
+    }
+  }
+]

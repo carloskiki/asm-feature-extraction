@@ -1,0 +1,28 @@
+##### Q 1 - rsadecrypt
+```assembly
+loc_433324:
+    PUSH rbp
+    MOV rbp, rsp
+    SUB rsp, 10h
+    MOV [rbp+var_8], rdi
+    MOV [rbp+var_10], rsi
+    MOV rdx, [rbp+var_10]
+    MOV rax, [rbp+var_8]
+    MOV rsi, rdx
+    MOV rdi, rax
+    CALL sub_432EF8
+    LEAVE 
+    RETN 
+```
+-----
+{'input_parameter_count': 2, 'input_parameter_types': ['Pointer', 'Pointer'], 'return_value_type': 'Integer', 'dominant_operation_categories': ['DataMovement', 'SubroutineCall'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 1, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': [], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 0, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Utility/Helper'}
+##### T 1 - rsadecrypt
+```assembly
+loc_421750:
+    SUB rsp, 8
+    CALL sub_4212C1
+    ADD rsp, 8
+    RETN 
+```
+-----
+{'input_parameter_count': 0, 'input_parameter_types': [], 'return_value_type': 'Integer', 'dominant_operation_categories': ['SubroutineCall'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 1, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': [], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 0, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Utility/Helper'}

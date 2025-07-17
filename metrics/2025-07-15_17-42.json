@@ -1,0 +1,107 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.24405746053654873,
+      "recall_at_1": 0.187,
+      "recall_at_10": 0.341,
+      "similarity_mean": {
+        "max": 0.9004435774087906,
+        "median": 0.5426075252182782,
+        "mean": 0.5295871852240164,
+        "min": 0.050842073956737295
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.22088716485155482,
+      "recall_at_1": 0.176,
+      "recall_at_10": 0.278,
+      "similarity_mean": {
+        "max": 0.8994539330005645,
+        "median": 0.5597949520386756,
+        "mean": 0.531498675288415,
+        "min": -0.05235718725109473
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.21404278394271278,
+      "recall_at_1": 0.168,
+      "recall_at_10": 0.277,
+      "similarity_mean": {
+        "max": 0.8973861429095268,
+        "median": 0.5732836778685451,
+        "mean": 0.5388033001609327,
+        "min": -0.02587668102956377
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.5549640858957864,
+      "recall_at_1": 0.462,
+      "recall_at_10": 0.68,
+      "similarity_mean": {
+        "max": 0.8971908180117607,
+        "median": 0.5480821709744632,
+        "mean": 0.5121434279035019,
+        "min": -0.026329173408914358
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.8104171004095949,
+      "recall_at_1": 0.734,
+      "recall_at_10": 0.871,
+      "similarity_mean": {
+        "max": 0.9432666162848473,
+        "median": 0.5644401358375326,
+        "mean": 0.5341378143913019,
+        "min": -0.008860894200392067
+      }
+    }
+  }
+]

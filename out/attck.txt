@@ -1,0 +1,7626 @@
+############
+```assembly
+loc_401840:
+
+loc_403FC0:
+    SUB rsp, 8
+    MOV edx, offset aRelease070
+    MOV esi, offset aPuttygenKeyGen
+    MOV edi, 1
+    XOR eax, eax
+    CALL ___printf_chk
+    MOV rcx, cs:stdout
+    MOV edi, offset aUsagePuttygenK
+    MOV edx, 0A0h
+    MOV esi, 1
+    CALL _fwrite
+    MOV edi, offset aTSpecifyKeyTyp
+    ADD rsp, 8
+    JMP _puts
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xA0"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "System/OS Interaction"
+}
+```
+############
+```assembly
+loc_4110F0:
+    PUSH r14
+    PUSH rbx
+    MOV r14, rdi
+    MOV rdi, rsi
+    MOV rbx, rsi
+    CALL sub_410F40
+    MOV ecx, [rsi]
+    SHL ecx, 6
+    SUB ecx, 1
+    JS loc_41113D
+loc_41110B:
+    MOV edx, ecx
+    SAR edx, 6
+    MOVSXD rdx, edx
+    CMP qword ptr [rsi+rdx*8+8], 0
+    JNS loc_411135
+loc_41111B:
+    JMP loc_41113D
+loc_411120:
+    MOV edx, ecx
+    SAR edx, 6
+    MOVSXD rdx, edx
+    MOV rdx, [rbx+rdx*8+8]
+    SHR rdx, cl
+    TEST rdx, rdx
+    JNZ loc_41113D
+loc_411135:
+    SUB ecx, 1
+    CMP ecx, 0FFFFFFFFh
+    JNZ loc_411120
+loc_41113D:
+    ADD ecx, 1
+    LEA r8, [r14+2]
+    MOV edx, ecx
+    MOV [r14+1], cl
+    SAR edx, 8
+    CMP eax, 2
+    MOV [r14], dl
+    LEA edx, [rax-3]
+    JNZ loc_411167
+loc_411158:
+    JMP loc_411199
+loc_411160:
+    ADD r8, 1
+    SUB edx, 1
+loc_411167:
+    TEST edx, edx
+    JS loc_41119D
+loc_41116B:
+    MOV esi, [rbx]
+    XOR edi, edi
+    LEA ecx, ds:0[rsi*8]
+    CMP ecx, edx
+    JLE loc_411192
+loc_41117A:
+    MOV edi, edx
+    MOV ecx, edx
+    SAR edi, 3
+    AND ecx, 7
+    MOVSXD rdi, edi
+    SHL ecx, 3
+    MOV rdi, [rbx+rdi*8+8]
+    SHR rdi, cl
+loc_411192:
+    TEST edx, edx
+    MOV [r8], dil
+    JNZ loc_411160
+loc_411199:
+    POP rbx
+    POP r14
+    RETN 
+loc_41119D:
+    MOV byte ptr [r8], 0
+    JMP loc_411160
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement", "Arithmetic"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x2", "0x8", "0x3"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_41CBB0:
+    PUSH r15
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 265E8h
+    MOV rax, [rsp+26618h+arg_0]
+    MOV [rsp+26618h+var_265A0], edx
+    MOV edx, [rsp+26618h+arg_8]
+    MOV [rsp+26618h+var_265CC], edi
+    MOV [rsp+26618h+var_265B4], esi
+    MOV [rsp+26618h+var_26600], rcx
+    MOV [rsp+26618h+var_265E0], rax
+    MOV [rsp+26618h+var_265EC], r8d
+    MOV rax, fs:28h
+    MOV [rsp+26618h+var_40], rax
+    XOR eax, eax
+    TEST edx, edx
+    MOV [rsp+26618h+var_265E8], r9
+    JZ loc_41D28F
+loc_41CC0B:
+    MOV edx, [rsp+26618h+arg_8]
+    XOR ecx, ecx
+loc_41CC14:
+    ADD ecx, 1
+    MOV eax, edx
+    SHR eax, cl
+    TEST eax, eax
+    JNZ loc_41CC14
+loc_41CC1F:
+    MOV [rsp+26618h+var_265B8], ecx
+loc_41CC23:
+    MOV eax, [rsp+26618h+var_265CC]
+    LEA rbp, [rsp+26618h+var_CCB0]
+    LEA r12, [rsp+26618h+var_19920]
+    MOV [rsp+26618h+var_265B0], rbp
+    MOV [rsp+26618h+var_265A8], r12
+    CMP eax, 95h
+    LEA esi, [rax-1]
+    SETLE al
+    XOR ebx, ebx
+    XOR r14d, r14d
+    MOVZX eax, al
+    MOV [rsp+26618h+var_2660C], esi
+    LEA eax, [rax+rax*8+12h]
+    MOV [rsp+26618h+var_2659C], eax
+    XOR eax, eax
+loc_41CC62:
+    ADD eax, 1
+    MOV esi, 6
+    MOV edx, [rsp+26618h+var_265EC]
+    MOV ecx, eax
+    MOV [rsp+26618h+var_265D0], eax
+    MOV [rsp+26618h+var_265F0], eax
+    MOV rdi, [rsp+26618h+var_265E0]
+    MOV rax, [rsp+26618h+var_265E8]
+    CALL rax
+    MOV edi, [rsp+26618h+var_2660C]
+    CALL sub_4110A0
+    MOV esi, [rsp+26618h+var_265CC]
+    MOV [rsp+26618h+var_265F8], rax
+    TEST esi, esi
+    JLE loc_41CD12
+loc_41CC9A:
+    MOV edi, [rsp+26618h+var_265B8]
+    MOV r15d, esi
+    XOR r13d, r13d
+    MOV ebp, r13d
+    MOV r12, rax
+    MOV r13d, esi
+    SUB r15d, edi
+    SUB edi, esi
+    MOV dword ptr [rsp+26618h+src], edi
+    JMP loc_41CCE5
+loc_41CCC0:
+    MOV eax, dword ptr [rsp+26618h+src]
+    MOV edx, [rsp+26618h+arg_8]
+    LEA ecx, [rax+rbp]
+    SHR edx, cl
+    AND edx, 1
+loc_41CCD3:
+    MOV esi, ebp
+    MOV rdi, r12
+    ADD ebp, 1
+    CALL sub_411050
+    CMP r13d, ebp
+    JZ loc_41CD12
+loc_41CCE5:
+    TEST ebp, ebp
+    JZ loc_41D2F9
+loc_41CCED:
+    CMP [rsp+26618h+var_2660C], ebp
+    JZ loc_41D2F9
+loc_41CCF7:
+    CMP r15d, ebp
+    JLE loc_41CCC0
+loc_41CCFC:
+    TEST ebx, ebx
+    JZ loc_41D19A
+loc_41CD04:
+    SUB ebx, 1
+loc_41CD07:
+    MOV edx, r14d
+    SAR r14d, 1
+    AND edx, 1
+    JMP loc_41CCD3
+loc_41CD12:
+    MOV rax, [rsp+26618h+var_26600]
+    TEST rax, rax
+    JZ loc_41CD5F
+loc_41CD1C:
+    MOV rbp, [rsp+26618h+var_265F8]
+    MOV rsi, rax
+    MOV rdi, rbp
+    CALL sub_4119C0
+    MOV rdi, rbp
+    MOV r15, rax
+    MOV [rsp+26618h+var_265F8], rax
+    CALL sub_4108A0
+    XOR esi, esi
+    MOV rdi, r15
+    CALL sub_411020
+    TEST eax, eax
+    JNZ loc_41D311
+loc_41CD4E:
+    MOV rdi, [rsp+26618h+var_265F8]
+    MOV edx, 1
+    XOR esi, esi
+    CALL sub_411050
+loc_41CD5F:
+    XOR r13d, r13d
+    MOV r12d, ebx
+    MOV esi, 3
+    MOV rbx, r13
+    MOV r15, [rsp+26618h+var_26600]
+    MOV r13, [rsp+26618h+var_265F8]
+    JMP loc_41CDA9
+loc_41CD80:
+    MOV esi, ebp
+    MOV rdi, r15
+    CALL sub_411E20
+    MOVZX eax, ax
+    MOV [rsp+rbx*4+26618h+var_CCB8], rax
+    ADD rbx, 2
+    CMP rbx, 331Ah
+    JZ loc_41CDEA
+loc_41CDA2:
+    MOVZX esi, ds:word_4341E0[rbx]
+loc_41CDA9:
+    MOVZX ebp, si
+    MOVZX eax, si
+    MOV rdi, r13
+    MOV esi, ebp
+    MOV [rsp+rbx*4+26618h+var_26598], rax
+    CALL sub_411E20
+    TEST r15, r15
+    MOVZX eax, ax
+    MOV [rsp+rbx*4+26618h+var_19928], rax
+    JNZ loc_41CD80
+loc_41CDD1:
+    MOV [rsp+rbx*4+26618h+var_CCB8], 1
+    ADD rbx, 2
+    CMP rbx, 331Ah
+    JNZ loc_41CDA2
+loc_41CDEA:
+    MOV r15d, [rsp+26618h+var_265B4]
+    MOV rdi, [rsp+26618h+var_265F8]
+    MOV ebx, r12d
+    MOVZX r13d, r15w
+    MOVSXD rax, r15d
+    MOV esi, r13d
+    MOV [rsp+26618h+var_19930], rax
+    CALL sub_411E20
+    MOVZX eax, ax
+    ADD eax, r15d
+    SUB eax, [rsp+26618h+var_265A0]
+    CDQE 
+    MOV [rsp+26618h+var_CCC0], rax
+    MOV rax, [rsp+26618h+var_26600]
+    TEST rax, rax
+    JZ loc_41D267
+loc_41CE30:
+    MOV esi, r13d
+    MOV rdi, rax
+    CALL sub_411E20
+    MOVZX eax, ax
+    MOV [rsp+26618h+var_50], rax
+loc_41CE46:
+    MOV rax, [rsp+26618h+var_CCB8]
+    MOV rsi, [rsp+26618h+var_19928]
+    LEA r8, [rsp+26618h+var_26590]
+    MOV r9, [rsp+26618h+var_26598]
+    MOV rbp, [rsp+26618h+var_265B0]
+    XOR edi, edi
+    MOV r12, [rsp+26618h+var_265A8]
+    LEA r10, [rax+rax]
+    NOP word ptr [rax+rax+00000000h]
+loc_41CE80:
+    XOR edx, edx
+    MOV rax, rsi
+    DIV r9
+    TEST rdx, rdx
+    JZ loc_41CEBD
+loc_41CE8D:
+    XOR ecx, ecx
+    JMP loc_41CEA5
+loc_41CE98:
+    ADD rcx, 8
+    CMP rcx, 0CC68h
+    JZ loc_41CEE0
+loc_41CEA5:
+    MOV rax, rdi
+    XOR edx, edx
+    IMUL rax, [rbp+rcx+0]
+    ADD rax, [r12+rcx]
+    DIV qword ptr [r8+rcx]
+    TEST rdx, rdx
+    JNZ loc_41CE98
+loc_41CEBD:
+    ADD rdi, 2
+    ADD rsi, r10
+    CMP rdi, 10002h
+    JNZ loc_41CE80
+loc_41CECD:
+    MOV rdi, [rsp+26618h+var_265F8]
+    CALL sub_4108A0
+    MOV eax, [rsp+26618h+var_265D0]
+    JMP loc_41CC62
+loc_41CEE0:
+    CMP [rsp+26618h+var_26600], 0
+    JZ loc_41D278
+loc_41CEEC:
+    CALL sub_411C60
+    MOV rdx, [rsp+26618h+var_265F8]
+    MOV rsi, [rsp+26618h+var_26600]
+    MOV r13, rax
+    MOV rdi, rax
+    CALL sub_411660
+    MOV rdi, r13
+    MOV [rsp+26618h+src], rax
+    CALL sub_4108A0
+loc_41CF13:
+    MOV rdi, [rsp+26618h+var_265F8]
+    CALL sub_4108A0
+    CMP [rsp+26618h+var_265CC], 0C7h
+    JG loc_41D1F1
+loc_41CF2B:
+    MOV r13d, [rsp+26618h+var_2659C]
+loc_41CF30:
+    XOR edx, edx
+    MOV r15d, edx
+loc_41CF35:
+    MOV rbp, [rsp+26618h+src]
+    MOV esi, r15d
+    MOV rdi, rbp
+    CALL sub_411020
+    XOR edx, edx
+    TEST r15d, r15d
+    SETZ dl
+    CMP eax, edx
+    JZ loc_41D25E
+loc_41CF55:
+    MOV esi, r15d
+    MOV rdi, rbp
+    MOV [rsp+26618h+var_265C8], r15d
+    CALL sub_411430
+    MOV rdi, rbp
+    MOV [rsp+26618h+var_265F8], rax
+    CALL sub_410860
+    MOV rdi, rax
+    MOV [rsp+26618h+var_265D8], rax
+    CALL sub_410C70
+    MOV edx, [rsp+26618h+var_265C8]
+    ADD r13d, [rsp+26618h+var_265D0]
+    MOV r15d, [rsp+26618h+var_265CC]
+    LEA eax, [rdx-1]
+    MOV [rsp+26618h+var_265D0], r13d
+    MOV [rsp+26618h+var_265C8], eax
+    NOP dword ptr [rax+00000000h]
+loc_41CFA0:
+    MOV edi, [rsp+26618h+var_2660C]
+    CALL sub_4110A0
+    TEST r15d, r15d
+    MOV r13, rax
+    JLE loc_41CFF0
+loc_41CFB1:
+    XOR ebp, ebp
+    JMP loc_41CFD6
+loc_41CFB8:
+    SUB ebx, 1
+loc_41CFBB:
+    MOV edx, r14d
+    MOV esi, ebp
+    MOV rdi, r13
+    AND edx, 1
+    ADD ebp, 1
+    SAR r14d, 1
+    CALL sub_411050
+    CMP r15d, ebp
+    JZ loc_41CFF0
+loc_41CFD6:
+    TEST ebx, ebx
+    JNZ loc_41CFB8
+loc_41CFDA:
+    CALL sub_420F10
+    MOV ebx, 7
+    MOV r14d, eax
+    JMP loc_41CFBB
+loc_41CFF0:
+    MOV rdi, r13
+    CALL sub_410820
+    MOV rsi, [rsp+26618h+src]
+    MOV rdi, r13
+    CALL sub_4111B0
+    TEST eax, eax
+    JNS loc_41D180
+loc_41D00D:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, r13
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_41D180
+loc_41D024:
+    ADD [rsp+26618h+var_265F0], 1
+    MOV edx, [rsp+26618h+var_265EC]
+    MOV esi, 6
+    MOV eax, [rsp+26618h+var_265F0]
+    MOV rdi, [rsp+26618h+var_265E0]
+    MOV ecx, eax
+    MOV rax, [rsp+26618h+var_265E8]
+    CALL rax
+    MOV rdx, [rsp+26618h+src]
+    MOV rsi, [rsp+26618h+var_265F8]
+    MOV rdi, r13
+    CALL sub_412860
+    MOV rdi, r13
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rsi, cs:off_6422C8
+    MOV rdi, rbp
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_41D190
+loc_41D078:
+    MOV rsi, [rsp+26618h+var_265D8]
+    MOV rdi, rbp
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_41D190
+loc_41D08D:
+    MOV eax, [rsp+26618h+var_265C8]
+    TEST eax, eax
+    JLE loc_41D1AC
+loc_41D099:
+    XOR r12d, r12d
+    MOV [rsp+26618h+var_265C4], ebx
+    MOV [rsp+26618h+var_265C0], r14d
+    MOV [rsp+26618h+var_265BC], r15d
+    MOV r14d, r12d
+    MOV r15, rbp
+    MOV rbx, [rsp+26618h+src]
+    MOV rbp, [rsp+26618h+var_265D8]
+    MOV r12d, [rsp+26618h+var_265C8]
+    JMP loc_41D0D8
+loc_41D0C8:
+    ADD r14d, 1
+    MOV r15, r13
+    CMP r12d, r14d
+    JZ loc_41D1DE
+loc_41D0D8:
+    MOV rdx, rbx
+    MOV rsi, r15
+    MOV rdi, r15
+    CALL sub_4108C0
+    MOV rdi, r15
+    MOV r13, rax
+    CALL sub_4108A0
+    MOV rsi, rbp
+    MOV rdi, r13
+    CALL sub_4111B0
+    TEST eax, eax
+    JNZ loc_41D0C8
+loc_41D100:
+    MOV r12d, r14d
+    CMP [rsp+26618h+var_265C8], r12d
+    MOV ebx, [rsp+26618h+var_265C4]
+    MOV r14d, [rsp+26618h+var_265C0]
+    MOV r15d, [rsp+26618h+var_265BC]
+    JLE loc_41D1AF
+loc_41D11C:
+    MOV rdi, r13
+    CALL sub_4108A0
+    NOP dword ptr [rax+00h]
+loc_41D128:
+    MOV esi, [rsp+26618h+var_265F0]
+    CMP [rsp+26618h+var_265D0], esi
+    JNZ loc_41CFA0
+loc_41D136:
+    MOV rdi, [rsp+26618h+var_265F8]
+    CALL sub_4108A0
+    MOV rdi, [rsp+26618h+var_265D8]
+    CALL sub_4108A0
+    MOV rsi, [rsp+26618h+var_40]
+    XOR rsi, fs:28h
+    MOV rax, [rsp+26618h+src]
+    JNZ loc_41D2A7
+loc_41D166:
+    ADD rsp, 265E8h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_41D180:
+    MOV rdi, r13
+    CALL sub_4108A0
+    JMP loc_41CFA0
+loc_41D190:
+    MOV rdi, rbp
+    CALL sub_4108A0
+    JMP loc_41D128
+loc_41D19A:
+    CALL sub_420F10
+    MOV ebx, 7
+    MOV r14d, eax
+    JMP loc_41CD07
+loc_41D1AC:
+    MOV r13, rbp
+loc_41D1AF:
+    MOV rdi, r13
+    CALL sub_4108A0
+    MOV rdi, [rsp+26618h+src]
+    CALL sub_4108A0
+    MOV rdi, [rsp+26618h+var_265D8]
+    CALL sub_4108A0
+    MOV rdi, [rsp+26618h+var_265F8]
+    CALL sub_4108A0
+    MOV eax, [rsp+26618h+var_265F0]
+    JMP loc_41CC62
+loc_41D1DE:
+    MOV eax, [rsp+26618h+var_265BC]
+    MOV ebx, [rsp+26618h+var_265C4]
+    MOV r14d, [rsp+26618h+var_265C0]
+    MOV [rsp+26618h+var_265CC], eax
+    JMP loc_41D1AF
+loc_41D1F1:
+    MOV eax, [rsp+26618h+var_265CC]
+    CMP eax, 0F9h
+    JLE loc_41D2AC
+loc_41D200:
+    CMP eax, 12Bh
+    JLE loc_41D2B7
+loc_41D20B:
+    CMP eax, 15Dh
+    JLE loc_41D2C2
+loc_41D216:
+    CMP eax, 18Fh
+    JLE loc_41D2CD
+loc_41D221:
+    CMP eax, 1C1h
+    JLE loc_41D2D8
+loc_41D22C:
+    CMP eax, 225h
+    JLE loc_41D2E3
+loc_41D237:
+    CMP eax, 289h
+    JLE loc_41D2EE
+loc_41D242:
+    CMP eax, 351h
+    JLE loc_41D29C
+loc_41D249:
+    XOR r13d, r13d
+    CMP eax, 513h
+    SETLE r13b
+    ADD r13d, 2
+    JMP loc_41CF30
+loc_41D25E:
+    ADD r15d, 1
+    JMP loc_41CF35
+loc_41D267:
+    MOV [rsp+26618h+var_50], 1
+    JMP loc_41CE46
+loc_41D278:
+    MOV rsi, rdi
+    MOV rdi, [rsp+26618h+var_265F8]
+    CALL sub_411D40
+    MOV [rsp+26618h+src], rax
+    JMP loc_41CF13
+loc_41D28F:
+    MOV [rsp+26618h+var_265B8], 0
+    JMP loc_41CC23
+loc_41D29C:
+    MOV r13d, 4
+    JMP loc_41CF30
+loc_41D2A7:
+    CALL ___stack_chk_fail
+loc_41D2AC:
+    MOV r13d, 0Fh
+    JMP loc_41CF30
+loc_41D2B7:
+    MOV r13d, 0Ch
+    JMP loc_41CF30
+loc_41D2C2:
+    MOV r13d, 9
+    JMP loc_41CF30
+loc_41D2CD:
+    MOV r13d, 8
+    JMP loc_41CF30
+loc_41D2D8:
+    MOV r13d, 7
+    JMP loc_41CF30
+loc_41D2E3:
+    MOV r13d, 6
+    JMP loc_41CF30
+loc_41D2EE:
+    MOV r13d, 5
+    JMP loc_41CF30
+loc_41D2F9:
+    TEST ebp, ebp
+    SETNZ dl
+    CMP [rsp+26618h+var_26600], 0
+    SETZ al
+    OR edx, eax
+    MOVZX edx, dl
+    JMP loc_41CCD3
+loc_41D311:
+    MOV ecx, offset aPrimegen
+    MOV edx, 381h
+    MOV esi, offset aSshprimeC
+    MOV edi, offset aBignumBitP00
+    CALL ___assert_fail
+```
+Output:_41CCAE:
+    ADD r13d, 1
+    MOV ecx, [rsp+26618h+src]
+    LEA eax, [rcx+r13d*4]
+    MOV [rsp+26618h+src], eax
+    JMP loc_41CCE5
+loc_41CCBE:
+    MOV ecx, [rsp+26618h+src]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265B0]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265A8]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265A0]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265CC]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265E0]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265E8]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265EC]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265F0]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265F8]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_26600]
+    MOV [rsp+26618h+dst], ecx
+    MOV ecx, [rsp+26618h+var_265B4]
+############
+```assembly
+loc_416F00:
+    MOV rax, [rdi+30h]
+    TEST rax, rax
+    JZ loc_417057
+loc_416F0D:
+    PUSH r15
+    PUSH r14
+    MOV r15, rdi
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 28h
+    MOV rdx, [rdi+8]
+    MOV rdi, rax
+    MOV [rsp+58h+var_48], rsi
+    CMP dword ptr [rdx], 2
+    JZ loc_417008
+loc_416F33:
+    CALL sub_410F00
+    LEA ebp, [rax+0Fh]
+    ADD eax, 8
+    CMOVNS ebp, eax
+    SAR ebp, 3
+loc_416F44:
+    LEA eax, [rbp+4]
+    MOV esi, 1
+    MOV [rsp+58h+var_54], eax
+    CDQE 
+    MOV rdi, rax
+    MOV [rsp+58h+var_50], rax
+    CALL sub_40AC50
+    MOV rbx, rax
+    MOV eax, ebp
+    SAR eax, 18h
+    MOV [rbx+3], bpl
+    LEA r13, [rbx+4]
+    MOV [rbx], al
+    MOV eax, ebp
+    SAR eax, 10h
+    MOV [rbx+1], al
+    MOV eax, ebp
+    SAR eax, 8
+    MOV [rbx+2], al
+    MOV rax, [r15+8]
+    CMP dword ptr [rax], 2
+    JZ loc_417020
+loc_416F8E:
+    TEST ebp, ebp
+    LEA ecx, [rbp-1]
+    JZ loc_416FD7
+loc_416F95:
+    MOV eax, ecx
+    MOV r12d, ecx
+    MOV r14, r13
+    LEA rbp, [rbx+rax+5]
+    MOV [rsp+58h+var_40], rax
+    NOP word ptr [rax+rax+00000000h]
+loc_416FB0:
+    MOV rdi, [r15+30h]
+    ADD r14, 1
+    MOV esi, r12d
+    SUB r12d, 1
+    CALL sub_410FE0
+    CMP r14, rbp
+    MOV [r14-1], al
+    JNZ loc_416FB0
+loc_416FCD:
+    MOV rax, [rsp+58h+var_40]
+    LEA r13, [r13+rax+1]
+loc_416FD7:
+    MOV r12, [rsp+58h+var_50]
+    ADD r12, rbx
+    CMP r13, r12
+    JNZ loc_41705A
+loc_416FE4:
+    MOV rax, [rsp+58h+var_48]
+    MOV edx, [rsp+58h+var_54]
+    MOV [rax], edx
+    ADD rsp, 28h
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_417008:
+    CALL sub_410F00
+    LEA ebp, [rax+0Eh]
+    ADD eax, 7
+    CMOVNS ebp, eax
+    SAR ebp, 3
+    JMP loc_416F44
+loc_417020:
+    TEST ebp, ebp
+    JLE loc_416FD7
+loc_417024:
+    XOR r12d, r12d
+    NOP word ptr [rax+rax+00000000h]
+loc_417030:
+    MOV rdi, [r15+30h]
+    MOV esi, r12d
+    CALL sub_410FE0
+    MOV [rbx+r12+4], al
+    ADD r12, 1
+    CMP ebp, r12d
+    JG loc_417030
+loc_41704A:
+    LEA eax, [rbp-1]
+    LEA r13, [r13+rax+1]
+    JMP loc_416FD7
+loc_417057:
+    XOR eax, eax
+    RETN 
+loc_41705A:
+    MOV ecx, offset aEcdsaPrivateBl
+    MOV edx, 7A0h
+    MOV esi, offset aSsheccC
+    MOV edi, offset aPBlobBloblen
+    CALL ___assert_fail
+```
+Output:r12d
+    CALL sub_410FE0
+    INC r12d
+    CMP r12d, ebp
+    JNZ loc_417030
+loc_41703C:
+    MOV rax, [rsp+58h+var_40]
+    LEA r13, [r13+rax+1]
+loc_417046:
+    MOV r12, [rsp+58h+var_50]
+    ADD r12, rbx
+    CMP r13, r12
+    JNZ loc_41705A
+loc_41704D:
+    MOV rax, [rsp+58h+var_48]
+    MOV edx, [rsp+58h+var_54]
+    MOV [rax], edx
+    ADD rsp, 28h
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_417057:
+    ADD rsp, 28h
+    MOV rax, 0FFFFFFFFh
+    RETN 
+loc_41705A:
+    MOV rax, [rsp+58h+var_48]
+    MOV edx, [rsp+58h+var_54]
+    MOV [rax], edx
+    ADD rsp, 28h
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+```
+############
+```assembly
+loc_416700:
+    PUSH r15
+    PUSH r14
+    MOV r15d, r8d
+    PUSH r13
+    PUSH r12
+    MOV r14, rsi
+    PUSH rbp
+    PUSH rbx
+    MOV rbp, rdi
+    MOV r12, rdx
+    SUB rsp, 2A8h
+    LEA rbx, [rsp+2D8h+var_2C8]
+    MOV [rsp+2D8h+var_2D0], rcx
+    MOV rax, fs:28h
+    MOV [rsp+2D8h+var_40], rax
+    XOR eax, eax
+    MOV rdi, rbx
+    CALL sub_4247B0
+    MOV rdi, rbp
+    CALL _strlen
+    LEA edx, [rax+1]
+    MOV rsi, rbp
+    MOV rdi, rbx
+    CALL sub_424870
+    MOV rdi, r12
+    CALL sub_410F00
+    LEA edx, [rax+0Fh]
+    ADD eax, 8
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    CMOVS eax, edx
+    MOV edx, eax
+    MOV r13d, eax
+    SAR edx, 1Bh
+    SAR r13d, 3
+    MOV [rsp+2D8h+var_88], dl
+    MOV edx, eax
+    SAR eax, 0Bh
+    SAR edx, 13h
+    MOV [rsp+2D8h+var_86], al
+    MOV [rsp+2D8h+var_85], r13b
+    MOV [rsp+2D8h+var_87], dl
+    MOV edx, 4
+    LEA ebp, [r13-1]
+    CALL sub_424870
+    TEST r13d, r13d
+    JLE loc_4167EE
+loc_4167B8:
+    NOP dword ptr [rax+rax+00000000h]
+loc_4167C0:
+    MOV esi, ebp
+    MOV rdi, r12
+    SUB ebp, 1
+    CALL sub_410FE0
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV edx, 1
+    MOV rdi, rbx
+    MOV [rsp+2D8h+var_88], al
+    CALL sub_424870
+    CMP ebp, 0FFFFFFFFh
+    JNZ loc_4167C0
+loc_4167EE:
+    LEA rdi, [rsp+2D8h+var_88]
+    MOV esi, 4
+    LEA r12, [rsp+2D8h+var_1A8]
+    CALL sub_40B660
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV r13, r12
+    CALL sub_426250
+    MOV rdi, rbx
+    CALL sub_4247B0
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV edx, 40h
+    MOV rdi, rbx
+    CALL sub_424870
+    MOV rsi, [rsp+2D8h+var_2D0]
+    MOV edx, r15d
+    MOV rdi, rbx
+    CALL sub_424870
+    JMP loc_41686A
+loc_416850:
+    MOV rdi, rbp
+    CALL sub_4108A0
+    MOV edx, 1
+    MOV esi, (offset a2x+2)
+    MOV rdi, rbx
+    CALL sub_424870
+loc_41686A:
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, r13
+    MOV r12, r13
+    CALL sub_426250
+    MOV esi, 118h
+    MOV rdi, r13
+    CALL sub_40B660
+    LEA rdi, [rsp+2D8h+var_88]
+    MOV esi, 40h
+    CALL sub_410CC0
+    MOV rsi, r14
+    MOV r15, rax
+    MOV rdi, rax
+    CALL sub_411EE0
+    MOV rdi, r15
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rsi, cs:off_6422C8
+    MOV rdi, rbp
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_416850
+loc_4168DA:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, rbp
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_416850
+loc_4168F1:
+    MOV esi, 118h
+    MOV rdi, rbx
+    CALL sub_40B660
+    LEA rdi, [rsp+2D8h+var_88]
+    MOV esi, 40h
+    CALL sub_40B660
+    MOV rcx, [rsp+2D8h+var_40]
+    XOR rcx, fs:28h
+    MOV rax, rbp
+    JNZ loc_416938
+loc_416926:
+    ADD rsp, 2A8h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_416938:
+    CALL ___stack_chk_fail
+```
+Output:, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi, rbx
+    MOV ecx, 23h
+    REP 
+    STOSQ
+    MOV rdi, r12
+    MOV ecx, 23h
+    MOV rsi, rbx
+    REP 
+    LEA rsi, [rsp+2D8h+var_88]
+    MOV rdi,
+############
+```assembly
+loc_415FF0:
+    PUSH rbx
+    MOV edi, 1
+    SUB rsp, 30h
+    MOV [rsp+38h+var_30], rsi
+    MOV esi, 28h
+    MOV [rsp+38h+var_34], edx
+    MOV rax, fs:28h
+    MOV [rsp+38h+var_10], rax
+    XOR eax, eax
+    CALL sub_40AC50
+    LEA rdi, [rsp+38h+var_30]
+    LEA rcx, [rsp+38h+var_1C]
+    LEA rdx, [rsp+38h+s1]
+    LEA rsi, [rsp+38h+var_34]
+    MOV rbx, rax
+    CALL sub_415B50
+    MOV rdi, [rsp+38h+s1]
+    TEST rdi, rdi
+    JZ loc_416128
+loc_416047:
+    CMP [rsp+38h+var_1C], 7
+    JNZ loc_416128
+loc_416052:
+    MOV edx, 7
+    MOV esi, offset aSshDss
+    CALL _memcmp
+    TEST eax, eax
+    JNZ loc_416128
+loc_416069:
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    CALL sub_415EC0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx], rax
+    CALL sub_415EC0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx+8], rax
+    CALL sub_415EC0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx+10h], rax
+    CALL sub_415EC0
+    CMP qword ptr [rbx], 0
+    MOV [rbx+18h], rax
+    MOV qword ptr [rbx+20h], 0
+    JZ loc_416118
+loc_4160C2:
+    MOV rdi, [rbx+8]
+    TEST rdi, rdi
+    JZ loc_416118
+loc_4160CB:
+    CMP qword ptr [rbx+10h], 0
+    JZ loc_416118
+loc_4160D2:
+    TEST rax, rax
+    JZ loc_416118
+loc_4160D7:
+    MOV rsi, cs:off_6422D0
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_416118
+loc_4160E7:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, [rbx]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_416118
+loc_4160FA:
+    MOV rax, rbx
+loc_4160FD:
+    MOV rcx, [rsp+38h+var_10]
+    XOR rcx, fs:28h
+    JNZ loc_416134
+loc_41610D:
+    ADD rsp, 30h
+    POP rbx
+    RETN 
+loc_416118:
+    MOV rdi, rbx
+    CALL sub_4159F0
+    XOR eax, eax
+    JMP loc_4160FD
+loc_416128:
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    XOR eax, eax
+    JMP loc_4160FD
+loc_416134:
+    CALL ___stack_chk_fail
+```
+Output:_416134:
+    SUB rsp, 8
+    MOV [rsp], rcx
+    CALL sub_411060
+    ADD rsp, 8
+    JMP loc_4160FD
+```
+
+---
+
+### **Analysis Requirements:**
+
+Analyze the given assembly routine and extract the specified features and infer the algorithm. Ensure your response adheres to the guidelines and requirements outlined above.
+############
+```assembly
+loc_41C850:
+    PUSH rbx
+    MOV rbx, rdx
+    MOV edx, esi
+    MOV rsi, rdi
+    SUB rsp, 70h
+    MOV rdi, rsp
+    MOV [rsp+78h+var_78], 67452301h
+    MOV [rsp+78h+var_74], 0EFCDAB89h
+    MOV rax, fs:28h
+    MOV [rsp+78h+var_10], rax
+    XOR eax, eax
+    MOV [rsp+78h+var_70], 98BADCFEh
+    MOV [rsp+78h+var_6C], 10325476h
+    MOV [rsp+78h+var_28], 0
+    MOV [rsp+78h+var_20], 0
+    MOV [rsp+78h+var_24], 0
+    CALL sub_41B900
+    MOV rsi, rsp
+    MOV rdi, rbx
+    CALL sub_41C2D0
+    MOV esi, 5Ch
+    MOV rdi, rsp
+    CALL sub_40B660
+    MOV rax, [rsp+78h+var_10]
+    XOR rax, fs:28h
+    JNZ loc_41C8DA
+loc_41C8D4:
+    ADD rsp, 70h
+    POP rbx
+    RETN 
+loc_41C8DA:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement", "ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x67452301", "0xEFCDAB89", "0x98BADCFE", "0x10325476", "0x5C"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_642D68:
+    EXTRN 
+```
+Output:The provided assembly snippet appears to be incomplete and lacks any actual assembly instructions. Therefore, it is not possible to extract meaningful features or infer an algorithm from this snippet alone. 
+
+If you have additional assembly code or more context, please provide it so that a detailed analysis can be conducted.
+############
+```assembly
+loc_421100:
+    PUSH r15
+    PUSH r14
+    MOV r15, rdi
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 38h
+    MOV rdi, [rdi+18h]
+    MOV [rsp+68h+var_50], rsi
+    CALL sub_410F00
+    MOV rdi, [r15+20h]
+    LEA r13d, [rax+0Fh]
+    ADD eax, 8
+    CMOVNS r13d, eax
+    CALL sub_410F00
+    MOV rdi, [r15+28h]
+    MOV ebx, r13d
+    LEA r12d, [rax+0Fh]
+    SAR ebx, 3
+    ADD eax, 8
+    CMOVNS r12d, eax
+    CALL sub_410F00
+    LEA ebp, [rax+0Fh]
+    SAR r12d, 3
+    MOV rdi, [r15+30h]
+    ADD eax, 8
+    CMOVNS ebp, eax
+    SAR ebp, 3
+    MOV [rsp+68h+var_48], ebp
+    CALL sub_410F00
+    LEA edx, [rax+0Fh]
+    ADD eax, 8
+    MOV esi, 1
+    CMOVS eax, edx
+    SAR eax, 3
+    MOV ecx, eax
+    MOV [rsp+68h+var_44], eax
+    LEA eax, [rbx+r12+10h]
+    ADD eax, ebp
+    ADD eax, ecx
+    MOV [rsp+68h+var_5C], eax
+    CDQE 
+    MOV rdi, rax
+    MOV [rsp+68h+var_58], rax
+    CALL sub_40AC50
+    MOV rdx, rax
+    MOV [rsp+68h+var_68], rax
+    MOV eax, r13d
+    SAR eax, 1Bh
+    MOV [rdx+3], bl
+    LEA r14, [rdx+4]
+    MOV [rdx], al
+    MOV eax, r13d
+    SAR r13d, 0Bh
+    SAR eax, 13h
+    TEST ebx, ebx
+    MOV [rdx+2], r13b
+    MOV [rdx+1], al
+    JZ loc_421204
+loc_4211C8:
+    LEA r8d, [rbx-1]
+    MOV rbx, r14
+    MOV eax, r8d
+    MOV ebp, r8d
+    LEA r13, [rdx+rax+5]
+    MOV [rsp+68h+var_40], rax
+    NOP 
+loc_4211E0:
+    MOV rdi, [r15+18h]
+    ADD rbx, 1
+    MOV esi, ebp
+    SUB ebp, 1
+    CALL sub_410FE0
+    CMP rbx, r13
+    MOV [rbx-1], al
+    JNZ loc_4211E0
+loc_4211FA:
+    MOV rax, [rsp+68h+var_40]
+    LEA r14, [r14+rax+1]
+loc_421204:
+    MOV eax, r12d
+    MOV [r14+3], r12b
+    LEA r13, [r14+4]
+    SAR eax, 18h
+    LEA r8d, [r12-1]
+    MOV [r14], al
+    MOV eax, r12d
+    SAR eax, 10h
+    MOV [r14+1], al
+    MOV eax, r12d
+    SAR eax, 8
+    TEST r12d, r12d
+    MOV [r14+2], al
+    JZ loc_421269
+loc_421233:
+    MOV ebp, r8d
+    MOV ebx, r8d
+    MOV r12, r13
+    LEA r14, [r14+rbp+5]
+    NOP dword ptr [rax+00000000h]
+loc_421248:
+    MOV rdi, [r15+20h]
+    ADD r12, 1
+    MOV esi, ebx
+    SUB ebx, 1
+    CALL sub_410FE0
+    CMP r12, r14
+    MOV [r12-1], al
+    JNZ loc_421248
+loc_421264:
+    LEA r13, [r13+rbp+1]
+loc_421269:
+    MOV edx, [rsp+68h+var_48]
+    LEA r12, [r13+4]
+    MOV eax, edx
+    MOV [r13+3], dl
+    LEA ecx, [rdx-1]
+    SAR eax, 18h
+    MOV [r13+0], al
+    MOV eax, edx
+    SAR eax, 10h
+    MOV [r13+1], al
+    MOV eax, edx
+    SAR eax, 8
+    TEST edx, edx
+    MOV [r13+2], al
+    JZ loc_4212C8
+loc_421297:
+    MOV ebx, ecx
+    MOV ebp, ecx
+    MOV r14, r12
+    LEA r13, [r13+rbx+5]
+    NOP dword ptr [rax+rax+00h]
+loc_4212A8:
+    MOV rdi, [r15+28h]
+    ADD r14, 1
+    MOV esi, ebp
+    SUB ebp, 1
+    CALL sub_410FE0
+    CMP r14, r13
+    MOV [r14-1], al
+    JNZ loc_4212A8
+loc_4212C3:
+    LEA r12, [r12+rbx+1]
+loc_4212C8:
+    MOV ecx, [rsp+68h+var_44]
+    LEA rbp, [r12+4]
+    MOV eax, ecx
+    MOV [r12+3], cl
+    LEA r14d, [rcx-1]
+    SAR eax, 18h
+    MOV [r12], al
+    MOV eax, ecx
+    SAR eax, 10h
+    MOV [r12+1], al
+    MOV eax, ecx
+    SAR eax, 8
+    TEST ecx, ecx
+    MOV [r12+2], al
+    JZ loc_421332
+loc_4212FB:
+    MOV ebx, r14d
+    MOV r13, rbp
+    LEA r12, [r12+rbx+5]
+    NOP word ptr [rax+rax+00000000h]
+loc_421310:
+    MOV rdi, [r15+30h]
+    ADD r13, 1
+    MOV esi, r14d
+    SUB r14d, 1
+    CALL sub_410FE0
+    CMP r13, r12
+    MOV [r13-1], al
+    JNZ loc_421310
+loc_42132D:
+    LEA rbp, [rbp+rbx+1]
+loc_421332:
+    MOV rax, [rsp+68h+var_58]
+    ADD rax, [rsp+68h+var_68]
+    CMP rbp, rax
+    JNZ loc_42135E
+loc_421340:
+    MOV rax, [rsp+68h+var_50]
+    MOV ecx, [rsp+68h+var_5C]
+    MOV [rax], ecx
+    MOV rax, [rsp+68h+var_68]
+    ADD rsp, 38h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_42135E:
+    MOV ecx, offset aRsa2PrivateBlo
+    MOV edx, 2ACh
+    MOV esi, offset aSshrsaC
+    MOV edi, offset aPBlobBloblen
+    CALL ___assert_fail
+```
+Output:, r13
+    LEA r13, [r14+ebp+5]
+    MOV [rsp+68h+var_40], ebp
+    NOP 
+loc_42124B:
+    MOV rdi, [r15+18h]
+    ADD r14, 1
+    MOV esi, ebx
+    SUB ebx, 1
+    CALL sub_410FE0
+    CMP r14, r13
+    MOV [r14-1], al
+    JNZ loc_42124B
+loc_42125A:
+    MOV rax, [rsp+68h+var_40]
+    LEA r13, [r13+rax+1]
+loc_421269:
+    MOV eax, [rsp+68h+var_44]
+    MOV [r13+3], ralb
+    LEA r12, [r13+4]
+    SAR eax, 18h
+    LEA r8d, [eax-1]
+    MOV [r13], al
+    MOV eax, [rsp+68h+var_44]
+    SAR eax, 10h
+    MOV [r13+1], al
+    MOV eax, [rsp+68h+var_44]
+    SAR eax, 8
+    TEST eax, eax
+    MOV [r13+2], al
+    JZ loc_4212D8
+loc_421293:
+    MOV ebp, r8d
+    MOV ebx, r8d
+    MOV r12, r13
+    LEA r13, [r14+ebp+5]
+    MOV [rsp+68h+var_40], ebp
+    NOP 
+loc_4212AB:
+    MOV rdi, [r15+18h]
+    ADD r13, 1
+    MOV esi, ebx
+    SUB ebx, 1
+    CALL sub_410FE0
+    CMP r13, r14
+    MOV [r13-1], al
+    JNZ loc_4212AB
+loc_4212B4:
+    MOV rax, [rsp
+############
+```assembly
+loc_40A900:
+    SUB rsp, 28h
+    XOR edx, edx
+    MOV rax, fs:28h
+    MOV [rsp+28h+var_10], rax
+    XOR eax, eax
+loc_40A916:
+    MOVSX eax, byte ptr [rdi+rdx]
+    LEA ecx, [rax-41h]
+    CMP cl, 19h
+    JA loc_40A9C0
+loc_40A926:
+    SUB eax, 41h
+loc_40A929:
+    MOV [rsp+rdx*4+28h+var_28], eax
+    ADD rdx, 1
+    CMP rdx, 4
+    JNZ loc_40A916
+loc_40A936:
+    MOV ecx, [rsp+28h+var_28]
+    CMP ecx, 0FFFFFFFFh
+    JZ loc_40AA00
+loc_40A942:
+    MOV edx, [rsp+28h+var_24]
+    CMP edx, 0FFFFFFFFh
+    JZ loc_40AA00
+loc_40A94F:
+    MOV eax, [rsp+28h+var_20]
+    CMP eax, 0FFFFFFFFh
+    JZ loc_40AA08
+loc_40A95C:
+    MOV edi, [rsp+28h+var_1C]
+    XOR r8d, r8d
+    CMP edi, 0FFFFFFFFh
+    SETNZ r8b
+    SHL ecx, 12h
+    SHL edx, 0Ch
+    OR edx, ecx
+    AND edi, 3Fh
+    AND eax, 3Fh
+    OR edx, edi
+    SHL eax, 6
+    OR eax, edx
+    MOV edx, eax
+    SHR edx, 10h
+    MOV [rsi], dl
+    MOV edx, eax
+    SHR edx, 8
+    CMP r8d, 1
+    MOV [rsi+1], dl
+    JNZ loc_40AA50
+loc_40A998:
+    MOV [rsi+2], al
+    MOV eax, 3
+loc_40A9A0:
+    MOV rsi, [rsp+28h+var_10]
+    XOR rsi, fs:28h
+    JNZ loc_40AA5A
+loc_40A9B4:
+    ADD rsp, 28h
+    RETN 
+loc_40A9C0:
+    LEA ecx, [rax-61h]
+    CMP cl, 19h
+    JA loc_40A9D0
+loc_40A9C8:
+    SUB eax, 47h
+    JMP loc_40A929
+loc_40A9D0:
+    LEA ecx, [rax-30h]
+    CMP cl, 9
+    JBE loc_40A9F0
+loc_40A9D8:
+    CMP al, 2Bh
+    JZ loc_40AA30
+loc_40A9DC:
+    CMP al, 2Fh
+    JZ loc_40AA40
+loc_40A9E0:
+    CMP al, 3Dh
+    JNZ loc_40AA00
+loc_40A9E4:
+    MOV eax, 0FFFFFFFFh
+    JMP loc_40A929
+loc_40A9F0:
+    ADD eax, 4
+    JMP loc_40A929
+loc_40AA00:
+    XOR eax, eax
+    JMP loc_40A9A0
+loc_40AA08:
+    CMP [rsp+28h+var_1C], 0FFFFFFFFh
+    JNZ loc_40AA00
+loc_40AA0F:
+    SHL ecx, 12h
+    SHL edx, 0Ch
+    MOV eax, 1
+    OR edx, ecx
+    SHR edx, 10h
+    MOV [rsi], dl
+    JMP loc_40A9A0
+loc_40AA30:
+    MOV eax, 3Eh
+    JMP loc_40A929
+loc_40AA40:
+    MOV eax, 3Fh
+    JMP loc_40A929
+loc_40AA50:
+    MOV eax, 2
+    JMP loc_40A9A0
+loc_40AA5A:
+    CALL ___stack_chk_fail
+```
+Output:0A9A0
+loc_40AA40:
+    MOV eax, 2Fh
+    JMP loc_40A9A0
+loc_40AA50:
+    MOV [rsi+3], al
+    JMP loc_40A9A0
+loc_40AA5A:
+    XOR eax, eax
+    RETN 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+s
+
+
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+############
+```assembly
+loc_40A770:
+    MOV eax, edi
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_410F90:
+    MOV ecx, [rdi]
+    SHL ecx, 6
+    SUB ecx, 1
+    JS loc_410FCC
+loc_410F9A:
+    MOV eax, ecx
+    SAR eax, 6
+    CDQE 
+    CMP qword ptr [rdi+rax*8+8], 0
+    JNS loc_410FC4
+loc_410FA9:
+    JMP loc_410FCC
+loc_410FB0:
+    MOV eax, ecx
+    SAR eax, 6
+    CDQE 
+    MOV rax, [rdi+rax*8+8]
+    SHR rax, cl
+    TEST rax, rax
+    JNZ loc_410FCC
+loc_410FC4:
+    SUB ecx, 1
+    CMP ecx, 0FFFFFFFFh
+    JNZ loc_410FB0
+loc_410FCC:
+    LEA eax, [rcx+10h]
+    ADD ecx, 9
+    CMOVS ecx, eax
+    SAR ecx, 3
+    LEA eax, [rcx+4]
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["Bitwise", "Arithmetic", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x10", "0x9", "0xF"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_4019E0:
+    JMP cs:off_642148
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper"
+}
+```
+############
+```assembly
+loc_424400:
+    PUSH r14
+    PUSH r13
+    MOV r14d, edx
+    PUSH r12
+    PUSH rbp
+    LEA rbp, [rdi+0D8h]
+    PUSH rbx
+    MOV r13, rsi
+    MOV rbx, rdi
+    MOV edx, 4
+    MOV r12, r8
+    SUB rsp, 10h
+    MOV rax, fs:28h
+    MOV [rsp+38h+var_30], rax
+    XOR eax, eax
+    MOV rax, rcx
+    MOV [rsp+38h+var_35], cl
+    MOV rsi, rsp
+    SHR rax, 18h
+    MOV [rsp+38h+var_38], al
+    MOV rax, rcx
+    SHR rax, 10h
+    MOV [rsp+38h+var_37], al
+    MOV rax, rcx
+    SHR rax, 8
+    MOV [rsp+38h+var_36], al
+    MOV rax, [rdi]
+    MOV [rdi+0D8h], rax
+    MOV rax, [rdi+8]
+    MOV [rdi+0E0h], rax
+    MOV rax, [rdi+10h]
+    MOV [rdi+0E8h], rax
+    MOV rax, [rdi+18h]
+    MOV [rdi+0F0h], rax
+    MOV rax, [rdi+20h]
+    MOV [rdi+0F8h], rax
+    MOV rax, [rdi+28h]
+    MOV [rdi+100h], rax
+    MOV rax, [rdi+30h]
+    MOV [rdi+108h], rax
+    MOV rax, [rdi+38h]
+    MOV [rdi+110h], rax
+    MOV rax, [rdi+40h]
+    MOV [rdi+118h], rax
+    MOV rax, [rdi+48h]
+    MOV [rdi+120h], rax
+    MOV rax, [rdi+50h]
+    MOV [rdi+128h], rax
+    MOV rax, [rdi+58h]
+    MOV [rdi+130h], rax
+    MOV rax, [rdi+60h]
+    MOV [rdi+138h], rax
+    MOV eax, [rdi+68h]
+    MOV [rdi+140h], eax
+    MOV rdi, rbp
+    CALL sub_423D00
+    MOV edx, r14d
+    MOV rsi, r13
+    MOV rdi, rbp
+    CALL sub_423D00
+    MOV rsi, r12
+    MOV rdi, rbx
+    CALL sub_424200
+    MOV rax, [rsp+38h+var_30]
+    XOR rax, fs:28h
+    JNZ loc_424530
+loc_424523:
+    ADD rsp, 10h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_424530:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Pointer"],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_4205C0:
+    PUSH r15
+    PUSH r14
+    MOV r14, rdx
+    PUSH r13
+    PUSH r12
+    MOV r13d, ecx
+    PUSH rbp
+    PUSH rbx
+    MOV r12, rdi
+    MOV rbx, rsi
+    SUB rsp, 18h
+    MOV rax, fs:28h
+    MOV [rsp+48h+var_40], rax
+    XOR eax, eax
+    CMP r8d, 9
+    JZ loc_420650
+loc_4205F0:
+    CMP r8d, 0Ah
+    JNZ loc_420799
+loc_4205FA:
+    MOV edx, ecx
+    MOV rdi, rbx
+    MOV rsi, r14
+    CALL sub_41D870
+    MOV rdi, r12
+    MOV rbx, rax
+    MOV rcx, rax
+    MOV edx, 42BE5Dh
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV rdi, rbx
+    CALL sub_40B5E0
+loc_420629:
+    MOV rax, [rsp+48h+var_40]
+    XOR rax, fs:28h
+    JNZ loc_420794
+loc_42063D:
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_420650:
+    MOV rcx, rdi
+    MOV edx, 20h
+    MOV esi, 1
+    MOV edi, offset aBeginSsh2Publi_0
+    CALL _fwrite
+    TEST rbx, rbx
+    JZ loc_4206D7
+loc_42066C:
+    MOV rcx, r12
+    MOV edx, 0Ah
+    MOV esi, 1
+    MOV edi, offset aComment_0
+    CALL _fwrite
+    MOVZX eax, byte ptr [rbx]
+    TEST al, al
+    JNZ loc_4206A6
+loc_42068A:
+    JMP loc_4206C0
+loc_420690:
+    MOVSX edi, byte ptr [rbx]
+    MOV rsi, r12
+    ADD rbx, 1
+    CALL _fputc
+    MOVZX eax, byte ptr [rbx]
+    TEST al, al
+    JZ loc_4206C0
+loc_4206A6:
+    CMP al, 5Ch
+    JZ loc_4206AE
+loc_4206AA:
+    CMP al, 22h
+    JNZ loc_420690
+loc_4206AE:
+    MOV rsi, r12
+    MOV edi, 5Ch
+    CALL _fputc
+    JMP loc_420690
+loc_4206C0:
+    MOV rcx, r12
+    MOV edx, 2
+    MOV esi, 1
+    MOV edi, (offset aS_1+2)
+    CALL _fwrite
+loc_4206D7:
+    TEST r13d, r13d
+    JLE loc_420778
+loc_4206E0:
+    CMP r13d, 3
+    MOV ebp, 3
+    MOV rdx, rsp
+    CMOVLE ebp, r13d
+    MOV rdi, r14
+    MOV r15d, 1
+    MOV esi, ebp
+    CALL sub_40A830
+    MOV rsi, r12
+    MOV rdi, rsp
+    MOV [rsp+48h+var_44], 0
+    CALL _fputs
+loc_420710:
+    CMP r13d, ebp
+    JLE loc_420766
+loc_420715:
+    MOV ebx, r13d
+    MOV eax, 3
+    MOVSXD rdi, ebp
+    SUB ebx, ebp
+    MOV rdx, rsp
+    CMP ebx, 3
+    CMOVG ebx, eax
+    ADD rdi, r14
+    ADD r15d, 1
+    MOV esi, ebx
+    ADD ebp, ebx
+    CALL sub_40A830
+    MOV rsi, r12
+    MOV rdi, rsp
+    MOV [rsp+48h+var_44], 0
+    CALL _fputs
+    CMP r15d, 10h
+    JNZ loc_420710
+loc_420751:
+    MOV rsi, r12
+    MOV edi, 0Ah
+    XOR r15d, r15d
+    CALL _fputc
+    CMP r13d, ebp
+    JG loc_420715
+loc_420766:
+    TEST r15d, r15d
+    JZ loc_420778
+loc_42076B:
+    MOV rsi, r12
+    MOV edi, 0Ah
+    CALL _fputc
+loc_420778:
+    MOV rcx, r12
+    MOV edx, 1Eh
+    MOV esi, 1
+    MOV edi, offset aEndSsh2PublicK_0
+    CALL _fwrite
+    JMP loc_420629
+loc_420794:
+    CALL ___stack_chk_fail
+loc_420799:
+    MOV ecx, offset aSsh2WritePubke
+    MOV edx, 623h
+    MOV esi, offset aSshpubkC
+    MOV edi, offset a0BadKeyTypeInS
+    CALL ___assert_fail
+```
+Output:, eax
+    SHL rdi, 2
+    LEA rdi, [rsp+rsp+rax+rdi]
+    MOVZX eax, byte ptr [rdi]
+    TEST al, al
+    JZ loc_420756
+loc_420725:
+    MOV rsi, r12
+    MOV edi, al
+    CALL _fputc
+    MOVZX eax, byte ptr [rdi]
+    TEST al, al
+    JZ loc_420756
+loc_420735:
+    CMP al, 5Ch
+    JZ loc_42073D
+loc_42073D:
+    CMP al, 22h
+    JNZ loc_420725
+loc_420745:
+    MOV rsi, r12
+    MOV edi, 5Ch
+    CALL _fputc
+    JMP loc_420725
+loc_420756:
+    MOV rdi, r12
+    MOV esi, 2
+    MOV ecx, 1
+    CALL _fwrite
+loc_420766:
+    ADD r13d, 4
+    JMP loc_420710
+loc_420778:
+    MOV rdi, r12
+    MOV esi, 2
+    MOV ecx, 1
+    CALL _fwrite
+loc_420780:
+    MOV rdi, r12
+    MOV esi, 2
+    MOV ecx, 1
+    CALL _fwrite
+loc_420788:
+    MOV rdi, r12
+    MOV esi, 2
+    MOV ecx, 1
+    CALL _fwrite
+loc_420790:
+    MOV rdi, r12
+    MOV esi, 2
+    MOV ecx, 1
+    CALL _fwrite
+loc_420794:
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_420799:
+    MOV rdi, r12
+    MOV esi,
+############
+```assembly
+loc_40D820:
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 30h
+    MOV rax, fs:28h
+    MOV [rsp+58h+var_30], rax
+    XOR eax, eax
+    TEST dl, 0Fh
+    JNZ loc_40D960
+loc_40D845:
+    MOV ecx, edx
+    MOV rax, [rdi+3D0h]
+    MOV rdx, [rdi+3D8h]
+    TEST ecx, ecx
+    MOV r13, rdi
+    MOV [rsp+58h+var_58], rax
+    MOV [rsp+58h+var_50], rdx
+    JLE loc_40D935
+loc_40D869:
+    SUB ecx, 1
+    LEA r12, [rsi+1]
+    LEA r14, [rsp+58h+var_68]
+    SHR ecx, 4
+    LEA rbp, [rsp+58h+var_38]
+    SHL rcx, 4
+    LEA rbx, [rsi+rcx+11h]
+    NOP word ptr [rax+rax+00000000h]
+loc_40D890:
+    MOV [rsp+58h+var_48], rax
+    LEA rsi, [rsp+58h+var_48]
+    MOV [rsp+58h+var_40], rdx
+    MOV rdi, r13
+    CALL qword ptr [r13+3C0h]
+    LEA rsi, [rsp+58h+var_48]
+    MOV rax, r12
+loc_40D8B1:
+    MOVZX edx, byte ptr [rax-1]
+    MOV edi, [rsi]
+    ADD rsi, 4
+    ADD rax, 4
+    MOV ecx, edx
+    MOVZX edx, byte ptr [rax-4]
+    SHL ecx, 18h
+    SHL edx, 10h
+    OR edx, ecx
+    MOVZX ecx, byte ptr [rax-2]
+    OR edx, ecx
+    MOVZX ecx, byte ptr [rax-3]
+    SHL ecx, 8
+    OR edx, ecx
+    MOV ecx, edx
+    XOR edx, edi
+    XOR ecx, edi
+    MOV [rax-2], dl
+    MOV r8d, ecx
+    SHR r8d, 18h
+    MOV [rax-5], r8b
+    MOV r8d, ecx
+    SHR ecx, 8
+    SHR r8d, 10h
+    MOV [rax-3], cl
+    MOV [rax-4], r8b
+    CMP rbp, rsi
+    JNZ loc_40D8B1
+loc_40D906:
+    MOV rax, rsp
+loc_40D909:
+    MOV edi, [rax+0Ch]
+    LEA edx, [rdi+1]
+    TEST edx, edx
+    MOV [rax+0Ch], edx
+    JNZ loc_40D91F
+loc_40D916:
+    SUB rax, 4
+    CMP r14, rax
+    JNZ loc_40D909
+loc_40D91F:
+    ADD r12, 10h
+    MOV rax, [rsp+58h+var_58]
+    MOV rdx, [rsp+58h+var_50]
+    CMP r12, rbx
+    JNZ loc_40D890
+loc_40D935:
+    MOV [r13+3D0h], rax
+    MOV [r13+3D8h], rdx
+    MOV rax, [rsp+58h+var_30]
+    XOR rax, fs:28h
+    JNZ loc_40D979
+loc_40D953:
+    ADD rsp, 30h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_40D960:
+    MOV ecx, offset aAesSdctr
+    MOV edx, 437h
+    MOV esi, offset aSshaesC
+    MOV edi, offset aLen150
+    CALL ___assert_fail
+loc_40D979:
+    CALL ___stack_chk_fail
+```
+Output:loc_40D960:
+    MOV rax, [rdi+3D0h]
+    MOV rdx, [rdi+3D8h]
+    MOV r13, rdi
+    MOV [rsp+58h+var_58], rax
+    MOV [rsp+58h+var_50], rdx
+    JMP loc_40D869
+loc_40D979:
+    SUB rsp, 8
+    CALL qword ptr [rip+sub_40D980@got]
+    ADD rsp, 8
+    JMP loc_40D953
+```
+
+Assistant, please analyze this assembly routine and provide its extracted features and inferred algorithm in JSON format.
+############
+```assembly
+loc_401A60:
+    JMP cs:off_642188
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_4041A0:
+    PUSH r12
+    MOV r12, rdi
+    PUSH rbp
+    PUSH rbx
+    MOV rdi, [rdi]
+    MOV rbx, rsi
+    CALL sub_428750
+    TEST rax, rax
+    JZ loc_4041E4
+loc_4041B7:
+    CMP rbx, rax
+    MOV rbp, rax
+    JZ loc_4041E4
+loc_4041BF:
+    MOV rdi, [r12]
+    MOV rsi, rax
+    CALL sub_428AA0
+    MOV rdi, rbp
+    CALL sub_404010
+    MOV rdi, [r12]
+    MOV rsi, rbx
+    CALL sub_428750
+    CMP rbx, rax
+    JNZ loc_4041E9
+loc_4041E4:
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_4041E9:
+    MOV ecx, offset aConfInsert
+    MOV edx, 0E6h
+    MOV esi, offset aConfC
+    MOV edi, offset aOldentryEntry
+    CALL ___assert_fail
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xE6"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_642C78:
+    EXTRN 
+```
+Output:The provided assembly snippet does not contain any meaningful assembly instructions or code. It simply includes an `EXTRN` directive, which indicates that an external symbol (function or variable) is being referenced but no actual code follows. Therefore, it is not possible to extract any features or infer any algorithm from this snippet alone.
+
+Given the constraints and requirements outlined, the appropriate response would be:
+
+```json
+{
+  "error": "Insufficient assembly code provided."
+}
+```
+
+This indicates that the input assembly code is incomplete or lacks the necessary information to perform any meaningful analysis.
+############
+```assembly
+loc_401A80:
+    JMP cs:off_642198
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_642CE0:
+    EXTRN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["ExternalFunctionCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper"
+}
+```
+############
+```assembly
+loc_42BE10:
+    REP 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["LoopIndicators"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_42A0E0:
+    MOV rdi, [rdi]
+    JMP sub_42A0B0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["MemoryAccess", "SubroutineCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_41FA10:
+    PUSH r14
+    PUSH r13
+    MOV r13, rsi
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 30h
+    MOV rax, fs:28h
+    MOV [rsp+58h+var_30], rax
+    XOR eax, eax
+    TEST rsi, rsi
+    JZ loc_41FA3B
+loc_41FA34:
+    MOV qword ptr [rsi], 0
+loc_41FA3B:
+    XOR edx, edx
+    MOV esi, offset aRb
+    XOR ebx, ebx
+    CALL sub_42A050
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_41FAD5
+loc_41FA55:
+    MOV rsi, rsp
+    MOV rdi, rax
+    MOV r12, rsp
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41FACB
+loc_41FA67:
+    MOV edi, offset aPuttyUserKeyFi
+    MOV ecx, 16h
+    MOV rsi, rsp
+    REPE 
+    JZ loc_41FA89
+loc_41FA78:
+    MOV edi, offset aPuttyUserKeyFi_0
+    MOV ecx, 16h
+    MOV rsi, rsp
+    REPE 
+    JNZ loc_41FACB
+loc_41FA89:
+    MOV rdi, rbp
+    CALL sub_41D9B0
+    TEST rax, rax
+    JZ loc_41FACB
+loc_41FA96:
+    MOV rdi, rax
+    CALL sub_40B5E0
+    MOV rsi, r12
+    MOV rdi, rbp
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41FACB
+loc_41FAAD:
+    MOV edi, offset aEncryption
+    MOV ecx, 0Bh
+    MOV rsi, r12
+    REPE 
+    SETNBE bl
+    SETB al
+    SUB ebx, eax
+    MOVSX ebx, bl
+    TEST ebx, ebx
+    JZ loc_41FB00
+loc_41FACB:
+    MOV rdi, rbp
+    XOR ebx, ebx
+    CALL _fclose
+loc_41FAD5:
+    MOV rcx, [rsp+58h+var_30]
+    XOR rcx, fs:28h
+    MOV eax, ebx
+    JNZ loc_41FBA7
+loc_41FAEB:
+    ADD rsp, 30h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_41FB00:
+    MOV rdi, rbp
+    CALL sub_41D9B0
+    TEST rax, rax
+    MOV r14, rax
+    JZ loc_41FB90
+loc_41FB14:
+    MOV rsi, r12
+    MOV rdi, rbp
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41FB34
+loc_41FB23:
+    MOV edi, offset aComment
+    MOV ecx, 8
+    MOV rsi, r12
+    REPE 
+    JZ loc_41FB50
+loc_41FB34:
+    MOV rdi, rbp
+    MOV ebx, 1
+    CALL _fclose
+    MOV rdi, r14
+    CALL sub_40B5E0
+    JMP loc_41FAD5
+loc_41FB50:
+    MOV rdi, rbp
+    CALL sub_41D9B0
+    TEST rax, rax
+    JZ loc_41FB34
+loc_41FB5D:
+    TEST r13, r13
+    JZ loc_41FB9D
+loc_41FB62:
+    MOV [r13+0], rax
+loc_41FB66:
+    MOV rdi, rbp
+    CALL _fclose
+    MOV edi, offset aAes256Cbc
+    MOV ecx, 0Bh
+    MOV rsi, r14
+    REPE 
+    MOV rdi, r14
+    SETZ bl
+    MOVZX ebx, bl
+    CALL sub_40B5E0
+    JMP loc_41FAD5
+loc_41FB90:
+    MOV rdi, rbp
+    CALL _fclose
+    JMP loc_41FAD5
+loc_41FB9D:
+    MOV rdi, rax
+    CALL sub_40B5E0
+    JMP loc_41FB66
+loc_41FBA7:
+    CALL ___stack_chk_fail
+```
+Output:MOV rsi, r12
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41FB86
+loc_41FB75:
+    MOV edi, offset aComment_0
+    MOV ecx, 8
+    MOV rsi, r12
+    REPE 
+    JZ loc_41FB9D
+loc_41FB86:
+    MOV rdi, rbp
+    MOV ebx, 1
+    CALL _fclose
+    MOV rdi, r14
+    CALL sub_40B5E0
+    JMP loc_41FAD5
+loc_41FB90:
+    MOV rdi, rbp
+    CALL sub_41D9B0
+    TEST rax, rax
+    JZ loc_41FB75
+loc_41FB9D:
+    MOV rdi, rbp
+    XOR ebx, ebx
+    CALL _fclose
+loc_41FBA7:
+    ADD rsp, 30h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+```
+############
+```assembly
+loc_401820:
+
+loc_40B000:
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, rsi
+    MOV rbp, rsi
+    SUB rsp, 8
+    CALL _strlen
+    LEA esi, [rax+1]
+    CMP esi, [rbx+18h]
+    JLE loc_40B024
+loc_40B01C:
+    MOV rdi, rbx
+    CALL sub_40AF60
+loc_40B024:
+    MOV rdi, [rbx+10h]
+    ADD rsp, 8
+    MOV rsi, rbp
+    POP rbx
+    POP rbp
+    JMP _strcpy
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement", "Comparison"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Memory Management"
+}
+```
+############
+```assembly
+loc_411AC0:
+    PUSH r15
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rbp, rsi
+    SUB rsp, 38h
+    MOV rdi, [rdi]
+    MOV rax, [rsi]
+    MOV [rsp+68h+var_58], r11
+    MOV [rsp+68h+var_50], r12
+    CMP eax, edi
+    MOV r15d, edi
+    CMOVG r15d, eax
+    MOV edi, r15d
+    CALL sub_40FCB0
+    TEST r15d, r15d
+    JLE loc_411BA2
+loc_411AFE:
+    LEA edi, [r15+1]
+    MOV r9d, 1
+    MOV ecx, 8
+    XOR r8d, r8d
+    MOV edx, 1
+    MOV rsi, r9
+    MOV [rsp+68h+var_5C], edi
+    JMP loc_411B79
+loc_411B20:
+    MOV r11, [rbx+rcx]
+    XOR r12d, r12d
+loc_411B27:
+    XOR r10d, r10d
+    CMP edx, [rbp+0]
+    MOV r9, 0FFFFFFFFFFFFFFFFh
+    JG loc_411B44
+loc_411B36:
+    MOV rdi, [rbp+rcx+0]
+    XOR r10d, r10d
+    NOT rdi
+    MOV r9, rdi
+loc_411B44:
+    XOR r14d, r14d
+    ADD rsi, r11
+    MOV rdi, r14
+    ADC rdi, r12
+    ADD rsi, r9
+    ADC rdi, r10
+    CMP edx, r8d
+    MOV r15, rsi
+    MOV [rax+rcx], rsi
+    MOV rsi, rdi
+    JLE loc_411B6C
+loc_411B65:
+    TEST r15, r15
+    CMOVNZ r8d, edx
+loc_411B6C:
+    ADD edx, 1
+    ADD rcx, 8
+    CMP edx, [rsp+68h+var_5C]
+    JZ loc_411B88
+loc_411B79:
+    CMP edx, [rbx]
+    JLE loc_411B20
+loc_411B7D:
+    XOR r11d, r11d
+    XOR r12d, r12d
+    JMP loc_411B27
+loc_411B88:
+    MOVSXD r8, r8d
+    TEST rsi, rsi
+    MOV [rax], r8
+    JZ loc_411BAB
+loc_411B93:
+    ADD rsp, 38h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_411BA2:
+    MOV qword ptr [rax], 0
+    JMP loc_411B93
+loc_411BAB:
+    MOV rdi, rax
+    CALL sub_4108A0
+    XOR eax, eax
+    JMP loc_411B93
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["Arithmetic", "Bitwise", "DataMovement", "ConditionalBranching", "SubroutineCall"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x8", "0xFFFFFFFFFFFFFFFF", "0x0"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_642CA8:
+    EXTRN 
+```
+Output:The provided assembly snippet (`EXTRN`) indicates an external reference, but it does not contain any executable instructions. Therefore, it does not provide enough information to extract meaningful features or infer an algorithm. As a result, the JSON output will reflect this lack of concrete content:
+
+```json
+{
+  "input_parameter_count": null,
+  "input_parameter_types": null,
+  "return_value_type": null,
+  "dominant_operation_categories": null,
+  "loop_indicators": null,
+  "number_of_distinct_subroutine_call_targets": null,
+  "use_of_indexed_addressing_modes": null,
+  "jump_table_indicators": null,
+  "presence_of_simd_instructions": null,
+  "presence_of_notable_integer_constants": null,
+  "presence_of_notable_floating_point_constants": null,
+  "count_of_distinct_immediate_values": null,
+  "string_literal_presence": null,
+  "modifies_input_parameters": null,
+  "modifies_global_state": null,
+  "performs_memory_allocation_deallocation": null,
+  "performs_io_operations": null,
+  "performs_block_memory_operations": null,
+  "performs_linear_memory_accesses": null,
+  "performs_error_handling": null,
+  "number_of_software_interrupts_or_system_calls": null,
+  "inferred_category": "Undetermined"
+}
+```
+
+This JSON object indicates that the assembly code does not contain executable instructions, and thus, no meaningful analysis can be performed.
+############
+```assembly
+loc_4050C0:
+    PUSH r15
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 28h
+    MOV rcx, fs:28h
+    MOV [rsp+58h+var_40], rcx
+    XOR ecx, ecx
+    CMP edx, 3
+    MOV [rsp+58h+var_58], rdi
+    MOV [rsp+58h+var_50], rsi
+    JLE loc_40533F
+loc_4050F0:
+    MOV r12d, edx
+    MOV edx, [rsi]
+    LEA rbx, [rsi+4]
+    LEA ebp, [r12-4]
+    BSWAP edx
+    CMP edx, 0B7h
+    MOV r15d, edx
+    JA loc_405343
+loc_40510F:
+    MOV r14, [rsp+58h+var_50]
+    JMP loc_4051E6
+loc_405120:
+    CMP eax, 2
+    JNZ loc_40515D
+loc_405125:
+    XOR esi, esi
+    MOVSXD rdx, ebp
+    MOV rdi, rbx
+    CALL _memchr
+    TEST rax, rax
+    MOV r12, rax
+    JZ loc_4052EA
+loc_40513E:
+    MOV rdi, rbx
+    ADD r12, 1
+    CALL sub_40ACA0
+    MOV edx, [r13+0]
+    MOV [r13+8], rax
+    MOV rax, r12
+    SUB rax, rbx
+    MOV rbx, r12
+    SUB ebp, eax
+loc_40515D:
+    MOVSXD r12, edx
+    MOV eax, ds:dword_42D400[r12*4]
+    CMP eax, 2
+    JZ loc_40524B
+loc_405171:
+    JLE loc_405288
+loc_405177:
+    CMP eax, 3
+    JZ loc_4052C0
+loc_405180:
+    CMP eax, 4
+    JNZ loc_4052B0
+loc_405189:
+    LEA rdx, [rsp+58h+var_44]
+    MOV esi, ebp
+    MOV rdi, rbx
+    CALL sub_42A150
+    TEST rax, rax
+    MOV [r13+10h], rax
+    JZ loc_4052DC
+loc_4051A5:
+    MOVSXD rcx, [rsp+58h+var_44]
+    SUB ebp, ecx
+    LEA r14, [rbx+rcx]
+    MOV r12d, ebp
+loc_4051B3:
+    MOV rdi, [rsp+58h+var_58]
+    MOV rsi, r13
+    CALL sub_4041A0
+    CMP r12d, 3
+    JLE loc_405320
+loc_4051C9:
+    MOV edx, [r14]
+    LEA rbx, [r14+4]
+    LEA ebp, [r12-4]
+    BSWAP edx
+    CMP edx, 0B7h
+    MOV r15d, edx
+    JA loc_4052F2
+loc_4051E6:
+    MOV esi, 18h
+    MOV edi, 1
+    CALL sub_40AC50
+    MOV r13, rax
+    MOVSXD rax, r15d
+    MOV rdx, rax
+    MOV [r13+0], eax
+    MOV eax, ds:dword_42D6E0[rax*4]
+    CMP eax, 1
+    JNZ loc_405120
+loc_405212:
+    CMP ebp, 3
+    JLE loc_4052EA
+loc_40521B:
+    MOV edi, [r14+4]
+    LEA ebp, [r12-8]
+    LEA rbx, [r14+8]
+    BSWAP edi
+    CALL sub_40A770
+    MOV edx, [r13+0]
+    MOV [r13+8], eax
+    MOVSXD r12, edx
+    MOV eax, ds:dword_42D400[r12*4]
+    CMP eax, 2
+    JNZ loc_405171
+loc_40524B:
+    XOR esi, esi
+    MOVSXD rdx, ebp
+    MOV rdi, rbx
+    CALL _memchr
+    TEST rax, rax
+    MOV r15, rax
+    JZ loc_405329
+loc_405264:
+    LEA r14, [r15+1]
+    MOV rdi, rbx
+    CALL sub_40ACA0
+    MOV [r13+10h], rax
+    MOV rax, r14
+    SUB rax, rbx
+    SUB ebp, eax
+    MOV r12d, ebp
+    JMP loc_4051B3
+loc_405288:
+    CMP eax, 1
+    JNZ loc_4052B0
+loc_40528D:
+    CMP ebp, 3
+    JLE loc_405329
+loc_405296:
+    MOV edi, [rbx]
+    LEA r14, [rbx+4]
+    LEA r12d, [rbp-4]
+    BSWAP edi
+    CALL sub_40A770
+    MOV [r13+10h], eax
+    JMP loc_4051B3
+loc_4052B0:
+    MOV r14, rbx
+    MOV r12d, ebp
+    JMP loc_4051B3
+loc_4052C0:
+    LEA rdx, [rsp+58h+var_44]
+    MOV esi, ebp
+    MOV rdi, rbx
+    CALL sub_429D40
+    TEST rax, rax
+    MOV [r13+10h], rax
+    JNZ loc_4051A5
+loc_4052DC:
+    MOVSXD rax, dword ptr [r13+0]
+    CMP ds:dword_42D6E0[rax*4], 2
+    JZ loc_405334
+loc_4052EA:
+    MOV rdi, r13
+    CALL sub_40B5E0
+loc_4052F2:
+    MOV eax, ebx
+    SUB eax, dword ptr [rsp+58h+var_50]
+loc_4052F8:
+    MOV rcx, [rsp+58h+var_40]
+    XOR rcx, fs:28h
+    JNZ loc_40534A
+loc_405308:
+    ADD rsp, 28h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_405320:
+    MOV eax, r14d
+    SUB eax, dword ptr [rsp+58h+var_50]
+    JMP loc_4052F8
+loc_405329:
+    CMP ds:dword_42D6E0[r12*4], 2
+    JNZ loc_4052EA
+loc_405334:
+    MOV rdi, [r13+8]
+    CALL sub_40B5E0
+    JMP loc_4052EA
+loc_40533F:
+    XOR eax, eax
+    JMP loc_4052F8
+loc_405343:
+    MOV eax, 4
+    JMP loc_4052F8
+loc_40534A:
+    CALL ___stack_chk_fail
+```
+Output:05280
+    MOV edx, [r14]
+    LEA rbx, [r14+4]
+    LEA ebp, [ebp-4]
+    BSWAP edx
+    CMP edx, 0B7h
+    MOV r15d, edx
+    JA loc_4052F6
+loc_405230:
+    MOV esi, 18h
+    MOV edi, 2
+    CALL sub_40AC50
+    MOV r13, rax
+    MOVSXD rax, r15d
+    MOV rdx, rax
+    MOV [r13+0], eax
+    MOV eax, ds:dword_42D6E0[rax*4]
+    CMP eax, 2
+    JNZ loc_405120
+loc_405262:
+    CMP ebp, 3
+    JLE loc_405280
+    MOV edx, [r14]
+    LEA rbx, [r14+4]
+    LEA ebp, [ebp-4]
+    BSWAP edx
+    CMP edx, 0B7h
+    MOV r15d, edx
+    JA loc_4052FA
+loc_405280:
+    MOV esi, 18h
+    MOV edi, 3
+    CALL sub_40AC50
+    MOV r13, rax
+    MOVSXD rax, r15d
+    MOV rdx, rax
+    MOV [r13+0], eax
+    MOV eax, ds:dword_42D6E0[rax*4]
+    CMP eax, 3
+    JNZ loc_405120
+loc_4052B0:
+    CMP ebp, 3
+    JLE loc_405280
+    MOV edx, [r14]
+    LEA rbx, [r14+4]
+    LEA ebp, [ebp-4]
+    BSWAP edx
+    CMP edx, 0B7h
+    MOV r15d, edx
+    JA loc_4052FA
+loc_4052C0:
+    MOV esi, 18h
+    MOV edi,
+############
+```assembly
+loc_417CB0:
+    PUSH r12
+    PUSH rbp
+    MOV r12, rsi
+    PUSH rbx
+    MOV esi, 1
+    MOV rbx, rdi
+    CALL sub_411530
+    MOV rsi, rbx
+    MOV rbp, rax
+    MOV rdi, rax
+    CALL sub_4119D0
+    MOV rdi, rbp
+    MOV rbx, rax
+    CALL sub_4108A0
+    JMP loc_417CFF
+loc_417CE0:
+    MOV rsi, [r12]
+    MOV rdi, rbx
+    CALL sub_411AC0
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_417D17
+loc_417CF4:
+    MOV rdi, rbx
+    MOV rbx, rbp
+    CALL sub_4108A0
+loc_417CFF:
+    MOV rsi, [r12]
+    MOV rdi, rbx
+    CALL sub_4111B0
+    TEST eax, eax
+    JNS loc_417CE0
+loc_417D0F:
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_417D17:
+    MOV ecx, offset aEcfTreble
+    MOV edx, 1E0h
+    MOV esi, offset aSsheccC
+    MOV edi, (offset aTmp+1)
+    CALL ___assert_fail
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1E0"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Error/Exception Handling"
+}
+```
+############
+```assembly
+loc_401820:
+
+loc_40B000:
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, rsi
+    MOV rbp, rsi
+    SUB rsp, 8
+    CALL _strlen
+    LEA esi, [rax+1]
+    CMP esi, [rbx+18h]
+    JLE loc_40B024
+loc_40B01C:
+    MOV rdi, rbx
+    CALL sub_40AF60
+loc_40B024:
+    MOV rdi, [rbx+10h]
+    ADD rsp, 8
+    MOV rsi, rbp
+    POP rbx
+    POP rbp
+    JMP _strcpy
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_415080:
+    PUSH r12
+    PUSH rbp
+    MOV rbp, rsi
+    PUSH rbx
+    MOV rbx, rdi
+    MOV r12d, edx
+    SUB rsp, 1A0h
+    MOV esi, [rdi+4]
+    MOV edi, [rdi]
+    MOV rdx, rsp
+    MOV rax, fs:28h
+    MOV [rsp+1B8h+var_20], rax
+    XOR eax, eax
+    BSWAP esi
+    BSWAP edi
+    CALL sub_4130F0
+    MOV esi, [rbx+0Ch]
+    MOV edi, [rbx+8]
+    LEA rdx, [rsp+1B8h+var_130]
+    BSWAP esi
+    BSWAP edi
+    CALL sub_4130F0
+    MOV esi, [rbx+4]
+    MOV edi, [rbx]
+    LEA rdx, [rsp+1B8h+var_A8]
+    BSWAP esi
+    BSWAP edi
+    CALL sub_4130F0
+    MOV rdx, rsp
+    MOV esi, r12d
+    MOV rdi, rbp
+    CALL sub_414AA0
+    MOV esi, 198h
+    MOV rdi, rsp
+    CALL sub_40B660
+    MOV rax, [rsp+1B8h+var_20]
+    XOR rax, fs:28h
+    JNZ loc_41511F
+loc_415113:
+    ADD rsp, 1A0h
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_41511F:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "Bitwise", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x198"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_417A80:
+    PUSH r15
+    PUSH r14
+    MOV r15, rsi
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rbp, rdx
+    SUB rsp, 18h
+    MOV r12, [rdi+18h]
+    MOV rax, [rdi]
+    MOV rdi, [rdi+8]
+    MOV [rsp+48h+var_40], rcx
+    TEST r12, r12
+    CMOVZ r12, cs:off_6422C8
+    TEST rdx, rdx
+    LEA rdx, [rax+20h]
+    CMOVZ rbp, cs:off_6422C8
+    MOV rsi, r12
+    CALL sub_417A10
+    MOV r14, rax
+    MOV rax, [rbx]
+    MOV rdi, [r15]
+    MOV rsi, rbp
+    MOV rdx, [rax+20h]
+    CALL sub_412400
+    MOV r8, rax
+    MOV rax, [rbx]
+    MOV rdi, r14
+    MOV rsi, r8
+    MOV [rsp+48h+var_48], r8
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, r14
+    MOV r13, rax
+    CALL sub_4108A0
+    MOV r8, [rsp+48h+var_48]
+    MOV rdi, r8
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rdi, [rbx+8]
+    MOV rsi, r12
+    MOV rdx, [rax+20h]
+    CALL sub_412400
+    MOV r14, rax
+    MOV rax, [rbx]
+    MOV rdi, [r15]
+    MOV rsi, rbp
+    LEA rdx, [rax+20h]
+    CALL sub_417A10
+    MOV rbp, rax
+    MOV rax, [rbx]
+    MOV rdi, r14
+    MOV rsi, rbp
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, r14
+    MOV r12, rax
+    CALL sub_4108A0
+    MOV rdi, rbp
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, r12
+    MOV rdi, r13
+    LEA rdx, [rax+20h]
+    CALL sub_417A10
+    MOV rbp, rax
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, rbp
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, rbp
+    MOV r14, rax
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, r12
+    MOV rdi, r13
+    MOV rdx, [rax+20h]
+    CALL sub_412400
+    MOV rdi, r13
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, rbp
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, rbp
+    MOV r12, rax
+    CALL sub_4108A0
+    MOV rcx, [rsp+48h+var_40]
+    MOV rax, [rbx]
+    MOV rsi, r12
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, r12
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rbx, [rbx]
+    MOV esi, 28h
+    MOV edi, 1
+    CALL sub_40AC50
+    MOV [rax+8], r14
+    MOV qword ptr [rax+10h], 0
+    MOV [rax], rbx
+    MOV [rax+18h], rbp
+    MOV byte ptr [rax+20h], 0
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+```
+Output:MOV rdi, r12
+    MOV r14, rax
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_412400
+    MOV rdi, r13
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, rbp
+    MOV r12, rax
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, r14
+    MOV rdi, [rcx]
+    LEA rdx, [rax+20h]
+    CALL sub_417A10
+    MOV rbp, rax
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, rbp
+    MOV r14, rax
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, r12
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_412400
+    MOV rdi, r13
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    MOV rax, [rbx]
+    MOV rsi, rbp
+    MOV rdi, [rcx]
+    MOV rdx, [rax+20h]
+    CALL sub_4108C0
+    MOV rdi, rbp
+    MOV r12, rax
+    CALL sub_4108
+############
+```assembly
+loc_41E2B0:
+    PUSH rbp
+    PUSH rbx
+    MOV rcx, rdi
+    MOV rbp, rdi
+    MOV edx, 5945h
+    MOV esi, 1
+    SUB rsp, 4B8h
+    MOV rax, fs:28h
+    MOV [rsp+4C8h+var_20], rax
+    XOR eax, eax
+    MOV rax, 474542202D2D2D2Dh
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV [rsp+4C8h+var_45C], dx
+    MOV [rsp+4C8h+s2], rax
+    MOV rax, 2032485353204E49h
+    MOV edx, 3FFh
+    MOV [rsp+4C8h+var_490], rax
+    MOV rax, 4B2043494C425550h
+    MOV [rsp+4C8h+var_47E], 0
+    MOV [rsp+4C8h+var_488], rax
+    MOV eax, 5945h
+    MOV [rsp+4C8h+var_4A8], 2D656C69h
+    MOV [rsp+4C8h+var_480], ax
+    MOV rax, 73552D5954547550h
+    MOV [rsp+4C8h+var_4A4], 0
+    MOV [rsp+4C8h+var_4B8], rax
+    MOV rax, 462D79654B2D7265h
+    MOV [rsp+4C8h+var_438], 0
+    MOV [rsp+4C8h+var_4B0], rax
+    MOV rax, 474542202D2D2D2Dh
+    MOV [rsp+4C8h+var_460], 4B204554h
+    MOV [rsp+4C8h+var_458], rax
+    MOV rax, 2032485353204E49h
+    MOV [rsp+4C8h+var_45A], 0
+    MOV [rsp+4C8h+var_450], rax
+    MOV rax, 4554505952434E45h
+    MOV [rsp+4C8h+var_4C0], 204E49h
+    MOV [rsp+4C8h+var_448], rax
+    MOV rax, 5441564952502044h
+    MOV [rsp+4C8h+var_440], rax
+    MOV rax, 4745422D2D2D2D2Dh
+    MOV [rsp+4C8h+var_478], rax
+    MOV rax, 534E45504F204E49h
+    MOV [rsp+4C8h+var_470], rax
+    MOV rax, 4156495250204853h
+    MOV [rsp+4C8h+var_468], rax
+    MOV rax, 4745422D2D2D2D2Dh
+    MOV [rsp+4C8h+var_4C8], rax
+    CALL _fread
+    MOV rdi, rbp
+    MOV rbx, rax
+    CALL _rewind
+    TEST ebx, ebx
+    JS loc_41E470
+loc_41E403:
+    CMP ebx, 1Fh
+    JLE loc_41E468
+loc_41E408:
+    LEA eax, [rbx-1]
+    CMP eax, 3FEh
+    JA loc_41E5B7
+loc_41E416:
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 20h
+    MOVSXD rbx, ebx
+    MOV esi, offset aSshPrivateKeyF
+    MOV [rsp+rbx+4C8h+ptr], 0
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 2
+    JNZ loc_41E478
+loc_41E441:
+    MOV rcx, [rsp+4C8h+var_20]
+    XOR rcx, fs:28h
+    MOV eax, edx
+    JNZ loc_41E5B2
+loc_41E45A:
+    ADD rsp, 4B8h
+    POP rbx
+    POP rbp
+    RETN 
+loc_41E468:
+    MOV edx, 1
+    JMP loc_41E441
+loc_41E470:
+    XOR edx, edx
+    JMP loc_41E441
+loc_41E478:
+    LEA rsi, [rsp+4C8h+s2]
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 1Ah
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 9
+    JZ loc_41E441
+loc_41E498:
+    LEA rsi, [rsp+4C8h+var_4B8]
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 14h
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 3
+    JZ loc_41E441
+loc_41E4B8:
+    LEA rsi, [rsp+4C8h+var_478]
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 1Eh
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 6
+    JZ loc_41E441
+loc_41E4DC:
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 0Bh
+    MOV rsi, rsp
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 5
+    JZ loc_41E441
+loc_41E4FE:
+    LEA rsi, [rsp+4C8h+var_458]
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV edx, 20h
+    CALL _memcmp
+    TEST eax, eax
+    MOV edx, 7
+    JZ loc_41E441
+loc_41E522:
+    LEA rdi, [rsp+4C8h+ptr]
+    MOV esi, offset accept
+    CALL _strspn
+    LEA rcx, [rsp+4C8h+ptr]
+    LEA rbx, [rcx+rax]
+    CMP byte ptr [rbx], 20h
+    JZ loc_41E5D0
+loc_41E549:
+    TEST [rsp+4C8h+ptr], 0DFh
+    JZ loc_41E615
+loc_41E557:
+    XOR edi, edi
+loc_41E559:
+    ADD rdi, 1
+    LEA rax, [rsp+4C8h+ptr]
+    TEST [rsp+rdi+4C8h+ptr], 0DFh
+    LEA rbx, [rax+rdi]
+    JNZ loc_41E559
+loc_41E573:
+    LEA rsi, [rsp+4C8h+ptr]
+    CALL sub_41E1F0
+    TEST rax, rax
+    JZ loc_41E468
+loc_41E589:
+    LEA rdi, [rbx+1]
+    MOV esi, offset a0123456789abcd
+    CALL _strspn
+    MOVZX eax, byte ptr [rbx+rax+1]
+    TEST al, 0DFh
+    JZ loc_41E5A8
+loc_41E5A0:
+    CMP al, 0Ah
+    JNZ loc_41E468
+loc_41E5A8:
+    MOV edx, 0Ah
+    JMP loc_41E441
+loc_41E5B2:
+    CALL ___stack_chk_fail
+loc_41E5B7:
+    MOV ecx, offset aKeyTypeFp
+    MOV edx, 674h
+    MOV esi, offset aSshpubkC
+    MOV edi, offset aI0ISizeofBuf
+    CALL ___assert_fail
+loc_41E5D0:
+    LEA rdi, [rbx+1]
+    MOV esi, offset accept
+    CALL _strspn
+    LEA rbx, [rbx+rax+1]
+    CMP byte ptr [rbx], 20h
+    JNZ loc_41E549
+loc_41E5EC:
+    LEA rdi, [rbx+1]
+    MOV esi, offset accept
+    CALL _strspn
+    MOVZX eax, byte ptr [rbx+rax+1]
+    TEST al, 0DFh
+    JZ loc_41E60B
+loc_41E603:
+    CMP al, 0Ah
+    JNZ loc_41E549
+loc_41E60B:
+    MOV edx, 8
+    JMP loc_41E441
+loc_41E615:
+    LEA rbx, [rsp+4C8h+ptr]
+    XOR edi, edi
+    JMP loc_41E573
+```
+Output:A ecx, [rdi+rbx]
+    MOV rdx, 20h
+    CALL _fwrite
+    LEA rax, [rbx-1]
+    DEC rbx
+    JMP loc_41E408
+loc_41E468:
+    LEA rax, [rdi+rbx]
+    MOV rdx, rbx
+    CALL _fwrite
+    JMP loc_41E470
+loc_41E470:
+    MOV rax, [rsp+4C8h+var_20]
+    MOV fs:28h, rax
+    ADD rsp, 4B8h
+    POP rbx
+    POP rbp
+    RETN
+```
+############
+```assembly
+loc_40A7C0:
+    TEST rdi, rdi
+    PUSH rbx
+    MOV rbx, rdi
+    JZ loc_40A7FC
+loc_40A7C9:
+    CALL _strlen
+    TEST eax, eax
+    MOV edx, eax
+    MOVSXD rcx, eax
+    JLE loc_40A7F8
+loc_40A7D7:
+    CDQE 
+    MOVZX esi, byte ptr [rbx+rax-1]
+    LEA rcx, [rax-1]
+    CMP sil, 0Dh
+    JZ loc_40A81C
+loc_40A7E8:
+    CMP sil, 0Ah
+    JZ loc_40A81C
+loc_40A7EE:
+    MOV rcx, rax
+    NOP dword ptr [rax+00000000h]
+loc_40A7F8:
+    MOV byte ptr [rbx+rcx], 0
+loc_40A7FC:
+    MOV rax, rbx
+    POP rbx
+    RETN 
+loc_40A808:
+    MOVZX eax, byte ptr [rbx+rcx-1]
+    LEA rsi, [rcx-1]
+    CMP al, 0Dh
+    JZ loc_40A819
+loc_40A815:
+    CMP al, 0Ah
+    JNZ loc_40A7F8
+loc_40A819:
+    MOV rcx, rsi
+loc_40A81C:
+    SUB edx, 1
+    JNZ loc_40A808
+loc_40A821:
+    XOR ecx, ecx
+    MOV byte ptr [rbx+rcx], 0
+    JMP loc_40A7FC
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xD", "0xA"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_419040:
+    MOV rdi, [rbx+10h]
+    SUB esi, 1
+    CALL sub_411020
+    MOV [rsp+48h+var_44], eax
+    MOV rax, [rbx]
+    XOR edx, edx
+    MOV rdi, [rbx+10h]
+    MOV esi, [rax+18h]
+    SUB esi, 1
+    CALL sub_411050
+    MOV rdi, [rbx+10h]
+    CALL sub_410820
+    MOV rbp, [rbx]
+    MOV rdi, [rbx+10h]
+    MOV rdx, [rbp+20h]
+    MOV rsi, rdi
+    CALL sub_4108C0
+    MOV rdx, [rbp+20h]
+    MOV rdi, [rbp+30h]
+    MOV rsi, rax
+    MOV r14, rax
+    CALL sub_4108C0
+    MOV rsi, cs:off_6422C8
+    LEA rdx, [rbp+20h]
+    MOV r12, rax
+    MOV rdi, rax
+    CALL sub_417A10
+    MOV rdi, r12
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV rsi, [rbp+20h]
+    MOV rdi, r15
+    CALL sub_412590
+    MOV rdi, r15
+    MOV r12, rax
+    CALL sub_4108A0
+    TEST r12, r12
+    JZ loc_4192A8
+loc_4190D4:
+    MOV rdx, [rbp+20h]
+    MOV rsi, cs:off_6422C8
+    MOV rdi, r14
+    CALL sub_412400
+    MOV rdi, r14
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV rdx, [rbp+20h]
+    MOV rsi, r12
+    MOV rdi, r15
+    CALL sub_4108C0
+    MOV rdi, r15
+    MOV r14, rax
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    MOV rdi, [rbp+20h]
+    MOV esi, 3
+    CALL sub_411D40
+    MOV esi, 3
+    MOV r12, rax
+    MOV rdi, rax
+    CALL sub_411430
+    MOV rdi, r12
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV rdx, [rbp+20h]
+    MOV rsi, r15
+    MOV rdi, r14
+    CALL sub_412860
+    MOV rdi, r15
+    MOV r12, rax
+    CALL sub_4108A0
+    MOV rdx, [rbp+20h]
+    MOV rsi, r12
+    MOV rdi, r12
+    CALL sub_4108C0
+    MOV rdx, [rbp+20h]
+    MOV rsi, r14
+    MOV r13, rax
+    MOV rdi, rax
+    CALL sub_412400
+    MOV rdi, r13
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV rdi, r14
+    CALL sub_4108A0
+    MOV rsi, cs:off_6422D0
+    MOV rdi, r15
+    CALL sub_4111B0
+    TEST eax, eax
+    MOV rdi, r15
+    JNZ loc_419210
+loc_4191A5:
+    CALL sub_4108A0
+loc_4191AA:
+    XOR esi, esi
+    MOV rdi, r12
+    CALL sub_411020
+    TEST eax, eax
+    JZ loc_4191D5
+loc_4191B8:
+    MOV rdi, [rbp+20h]
+    MOV rsi, r12
+    MOV rdx, rdi
+    CALL sub_412400
+    MOV rbp, rax
+    MOV rdi, r12
+    MOV r12, rbp
+    CALL sub_4108A0
+loc_4191D5:
+    TEST r12, r12
+    MOV [rbx+8], r12
+    JZ loc_4192B8
+loc_4191E2:
+    MOV eax, [rsp+48h+var_44]
+    TEST eax, eax
+    JNZ loc_4192E0
+loc_4191EE:
+    CMP byte ptr [rbx+20h], 0
+    JZ loc_41930C
+loc_4191F8:
+    ADD rsp, 18h
+    MOV eax, 1
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_419210:
+    CALL sub_4108A0
+    MOV rdi, [rbp+20h]
+    MOV rsi, cs:off_6422C8
+    MOV rdx, rdi
+    CALL sub_412400
+    MOV esi, 2
+    MOV r14, rax
+    MOV rdi, rax
+    CALL sub_411430
+    MOV rdi, r14
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV edi, 2
+    CALL sub_411C60
+    MOV rdx, [rbp+20h]
+    MOV rsi, r15
+    MOV rdi, rax
+    MOV [rsp+48h+var_40], rax
+    CALL sub_412860
+    MOV rcx, [rsp+48h+var_40]
+    MOV r14, rax
+    MOV rdi, rcx
+    CALL sub_4108A0
+    MOV rdi, r15
+    CALL sub_4108A0
+    MOV rdx, [rbp+20h]
+    MOV rsi, r14
+    MOV rdi, r12
+    CALL sub_4108C0
+    MOV rdi, r12
+    MOV r15, rax
+    CALL sub_4108A0
+    MOV rdi, r14
+    MOV r12, r15
+    CALL sub_4108A0
+    JMP loc_4191AA
+loc_4192A8:
+    MOV rdi, r14
+    CALL sub_4108A0
+    MOV qword ptr [rbx+8], 0
+loc_4192B8:
+    MOV rdi, [rbx+10h]
+    CALL sub_4108A0
+    MOV qword ptr [rbx+10h], 0
+    ADD rsp, 18h
+    XOR eax, eax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_4192E0:
+    MOV rax, [rbx]
+    MOV rsi, r12
+    MOV rdi, [rax+20h]
+    MOV rdx, rdi
+    CALL sub_412400
+    MOV rdi, [rbx+8]
+    MOV rbp, rax
+    CALL sub_4108A0
+    CMP byte ptr [rbx+20h], 0
+    MOV [rbx+8], rbp
+    JNZ loc_4191F8
+loc_41930C:
+    MOV rdi, rbx
+    CALL sub_418E20
+    TEST eax, eax
+    MOV [rsp+48h+var_44], eax
+    JNZ loc_4191F8
+loc_419320:
+    MOV rdi, [rbx+8]
+    CALL sub_4108A0
+    MOV rdi, [rbx+10h]
+    MOV qword ptr [rbx+8], 0
+    CALL sub_4108A0
+    MOV qword ptr [rbx+10h], 0
+    MOV eax, [rsp+48h+var_44]
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+```
+Output:CALL sub_4108A0
+    MOV rdi, r15
+    CALL sub_4108A0
+    MOV rdi, r14
+    CALL sub_4108A0
+    MOV rdi, r13
+    CALL sub_4108A0
+    ADD rsp, 48h
+    POP rbp
+    RETN
+```
+
+### Assembly Routine Analysis:
+
+The provided assembly routine appears to be performing some form of cryptographic operation or data transformation. It involves multiple subroutine calls and a series of arithmetic and bitwise operations. Given the complexity and nature of the operations, it is likely involved in some kind of cryptographic processing.
+
+### Feature Extraction:
+
+- **Input Parameter Count:** 1
+- **Input Parameter Types:** Pointer
+- **Return Value Type:** Unknown
+- **Dominant Operation Categories:** SubroutineCall, Arithmetic, Bitwise
+- **Loop Indicators:** True
+- **Number of Distinct Subroutine Call Targets:** 7
+- **Use of Indexed Addressing Modes:** False
+- **Jump Table Indicators:** False
+- **Presence of SIMD Instructions:** False
+- **Notable Integer Constants:** ["0x3"]
+- **Notable Floating Point Constants:** None
+- **Distinct Immediate Values:** 2
+- **String Literals:** None
+- **Modifies Input Parameters:** False
+- **Modifies Global State:** False
+- **Memory Allocation/Deallocation:** False
+- **IO Operations:** False
+- **Block Memory Operations:** False
+- **Linear Memory Accesses:** False
+- **Error Handling:** True
+- **Software Interrupts/System Calls:** None
+- **Inferred Category:** Cryptographic/Hashing
+
+### Optional ATT&CK Technique:
+- **T1027 Obfuscated Files or Information:** Potentially, depending on the context and specific implementations of the subroutines called.
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall", "Arithmetic", "Bitwise"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 7,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer
+############
+```assembly
+loc_412590:
+    PUSH r15
+    PUSH r14
+    MOV r14, rdi
+    PUSH r13
+    PUSH r12
+    MOV rdi, rsi
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 28h
+    MOV [rsp+58h+var_40], rsi
+    CALL sub_410860
+    MOV rdi, r14
+    MOV rbp, rax
+    CALL sub_410860
+    MOV rdi, cs:off_6422D0
+    MOV rbx, rax
+    CALL sub_410860
+    MOV rdi, cs:off_6422C8
+    MOV r13, rax
+    CALL sub_410860
+    MOV r12, rax
+    MOV rax, [r14]
+    CMP qword ptr [r14+rax*8], 0
+    JZ loc_412839
+loc_4125E8:
+    MOV rcx, [rsp+58h+var_40]
+    MOV rax, [rcx]
+    CMP qword ptr [rcx+rax*8], 0
+    JZ loc_412820
+loc_4125FB:
+    MOV [rsp+58h+var_44], 1
+    NOP dword ptr [rax+rax+00h]
+loc_412608:
+    MOV rsi, cs:off_6422C8
+    MOV rdi, rbx
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_412702
+loc_41261F:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, rbx
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_412733
+loc_412636:
+    MOV edi, [rbx]
+    CALL sub_40FCB0
+    MOV edi, [rbp+0]
+    MOV r15, rax
+    CALL sub_40FCB0
+    MOV rdx, r15
+    MOV rcx, rax
+    MOV rsi, rbx
+    MOV rdi, rbp
+    MOV r14, rax
+    CALL sub_40FA90
+    MOV rax, [r15]
+    CMP rax, 1
+    JBE loc_41268D
+loc_412665:
+    CMP qword ptr [r15+rax*8], 0
+    JNZ loc_41268D
+loc_41266C:
+    SUB rax, 1
+    JMP loc_412684
+loc_412678:
+    SUB rax, 1
+    CMP qword ptr [r15+rax*8+8], 0
+    JNZ loc_41268D
+loc_412684:
+    CMP rax, 1
+    MOV [r15], rax
+    JNZ loc_412678
+loc_41268D:
+    MOV rdx, [r14]
+    CMP rdx, 1
+    JBE loc_4126BD
+loc_412696:
+    CMP qword ptr [r14+rdx*8], 0
+    LEA rax, [rdx-1]
+    JZ loc_4126B4
+loc_4126A1:
+    JMP loc_4126BD
+loc_4126A8:
+    SUB rax, 1
+    CMP qword ptr [r14+rax*8+8], 0
+    JNZ loc_4126BD
+loc_4126B4:
+    CMP rax, 1
+    MOV [r14], rax
+    JNZ loc_4126A8
+loc_4126BD:
+    MOV rdi, rbp
+    MOV rbp, rbx
+    MOV rbx, r15
+    CALL sub_4108A0
+    MOV rdx, r13
+    MOV rsi, r12
+    MOV rdi, r14
+    CALL sub_411660
+    MOV rdi, r13
+    MOV [rsp+58h+var_50], rax
+    NEG [rsp+58h+var_44]
+    CALL sub_4108A0
+    MOV rdi, r14
+    MOV r13, r12
+    CALL sub_4108A0
+    MOV rax, [rsp+58h+var_50]
+    MOV r12, rax
+    JMP loc_412608
+loc_412702:
+    MOV rdi, rbx
+    CALL sub_4108A0
+    MOV rdi, rbp
+    CALL sub_4108A0
+    MOV rdi, r13
+    CALL sub_4108A0
+    CMP [rsp+58h+var_44], 0FFFFFFFFh
+    MOV rax, r12
+    JZ loc_412764
+loc_412724:
+    ADD rsp, 28h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_412733:
+    MOV rdi, rbx
+    CALL sub_4108A0
+    MOV rdi, rbp
+    CALL sub_4108A0
+    MOV rdi, r13
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    ADD rsp, 28h
+    XOR eax, eax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_412764:
+    MOV rax, [rsp+58h+var_40]
+    MOV rax, [rax]
+    MOV [rsp+58h+var_50], rax
+    MOV edi, dword ptr [rsp+58h+var_50]
+    CALL sub_40FCB0
+    MOV rbx, rax
+    MOV eax, [rax]
+    TEST eax, eax
+    JLE loc_412818
+loc_412787:
+    MOV eax, 8
+    MOV ecx, 1
+    MOV r8d, 1
+    XOR esi, esi
+    JMP loc_4127B6
+loc_41279B:
+    XOR esi, esi
+    CMP r9, rdx
+    SETBE sil
+loc_4127A4:
+    TEST rdx, rdx
+    CMOVNZ r8d, ecx
+    ADD ecx, 1
+    ADD rax, 8
+    CMP ecx, [rbx]
+    JG loc_4127F8
+loc_4127B6:
+    MOV rdi, [rsp+58h+var_40]
+    XOR edx, edx
+    CMP ecx, [rdi]
+    JG loc_4127C5
+loc_4127C1:
+    MOV rdx, [rdi+rax]
+loc_4127C5:
+    XOR edi, edi
+    CMP ecx, [r12]
+    MOV r9, 0FFFFFFFFFFFFFFFFh
+    JG loc_4127DE
+loc_4127D4:
+    MOV rdi, [r12+rax]
+    MOV r9, rdi
+    NOT r9
+loc_4127DE:
+    SUB rdx, rdi
+    SUB rdx, rsi
+    TEST rsi, rsi
+    MOV [rbx+rax], rdx
+    JNZ loc_41279B
+loc_4127ED:
+    XOR esi, esi
+    CMP r9, rdx
+    SETB sil
+    JMP loc_4127A4
+loc_4127F8:
+    MOVSXD r8, r8d
+loc_4127FB:
+    MOV [rbx], r8
+    MOV rdi, r12
+    CALL sub_4108A0
+    ADD rsp, 28h
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_412818:
+    MOV r8d, 1
+    JMP loc_4127FB
+loc_412820:
+    MOV ecx, offset aModinv
+    MOV edx, 7E3h
+    MOV esi, offset aSshbnC
+    MOV edi, offset aModulusModulus
+    CALL ___assert_fail
+loc_412839:
+    MOV ecx, offset aModinv
+    MOV edx, 7E2h
+    MOV esi, offset aSshbnC
+    MOV edi, offset aNumberNumber00
+    CALL ___assert_fail
+```
+Output:MOV rcx, r12
+    MOV rsi, rbx
+    MOV rdi, rbp
+    CALL sub_4108A0
+    MOV rax, rbx
+    ADD rsp, 28h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN
+loc_412820:
+    MOV [rsp+58h+var_44], 0
+    JMP loc_412608
+loc_412839:
+    MOV [rsp+58h+var_44], 0
+    JMP loc_412608
+```
+############
+```assembly
+loc_41D330:
+    PUSH rbp
+    PUSH rbx
+    MOV rbp, rsi
+    MOV rbx, rdi
+    SUB rsp, 8
+    NOP dword ptr [rax+00h]
+loc_41D340:
+    CALL sub_420F10
+    OR ah, 1
+    MOV [rbx], eax
+    CALL sub_420F10
+    OR ah, 1
+    MOV [rbp+0], eax
+    IMUL eax, [rbx]
+    CMP eax, 1FFFFh
+    JBE loc_41D340
+loc_41D35F:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "Arithmetic", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1FFFF"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_410820:
+    MOV rax, [rdi]
+    CMP rax, 1
+    JBE locret_410855
+loc_410829:
+    CMP qword ptr [rdi+rax*8], 0
+    JNZ locret_410855
+loc_410830:
+    SUB rax, 1
+    JMP loc_41084C
+loc_410840:
+    SUB rax, 1
+    CMP qword ptr [rdi+rax*8+8], 0
+    JNZ locret_410855
+loc_41084C:
+    CMP rax, 1
+    MOV [rdi], rax
+    JNZ loc_410840
+loc_410855:
+    REP 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["ConditionalBranching", "Arithmetic", "MemoryAccess"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_40B9B0:
+    PUSH r12
+    PUSH rbp
+    MOV ebp, edi
+    PUSH rbx
+    MOV rdi, rdx
+    MOV rbx, rdx
+    MOV r12, rsi
+    CALL _strlen
+    MOV rdx, rax
+    XOR eax, eax
+    CMP edx, ebp
+    JZ loc_40B9D8
+loc_40B9CD:
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_40B9D8:
+    MOV rsi, rbx
+    MOV rdi, r12
+    MOVSXD rdx, edx
+    CALL _memcmp
+    TEST eax, eax
+    SETZ al
+    POP rbx
+    MOVZX eax, al
+    POP rbp
+    POP r12
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_408629:
+    MOV rdi, [r12+10h]
+    LEA r14, [rsp+0C8h+var_88]
+    CALL _strlen
+    MOV rbp, rax
+    MOV rax, [r12]
+    MOV rdi, [rax+60h]
+    CALL _strlen
+    ADD ebx, [rsp+0C8h+var_8C]
+    MOV esi, 1
+    LEA eax, [rbx+rax+0BCh]
+    LEA rbx, [r14+10h]
+    ADD ebp, eax
+    MOVSXD rax, ebp
+    MOV rdi, rax
+    MOV [rsp+0C8h+var_A8], rax
+    CALL sub_40AC50
+    CMP [rsp+0C8h+var_B0], 0
+    MOV r13, rax
+    MOV rax, 2D6873736E65706Fh
+    MOV [r13+0], rax
+    MOV eax, 3176h
+    MOV dword ptr [r13+8], 2D79656Bh
+    MOV [r13+0Ch], ax
+    MOV byte ptr [r13+0Eh], 0
+    LEA rbp, [r13+0Fh]
+    JZ loc_4089AC
+loc_4086A6:
+    NOP word ptr [rax+rax+00000000h]
+loc_4086B0:
+    CALL sub_420F10
+    ADD r14, 1
+    MOV [r14-1], al
+    CMP rbx, r14
+    JNZ loc_4086B0
+loc_4086C2:
+    MOV rdi, rbp
+    MOV esi, offset aAes256Cbc
+    CALL sub_4054D0
+    CDQE 
+    MOV esi, offset aBcrypt
+    ADD rbp, rax
+    MOV rdi, rbp
+    CALL sub_4054D0
+    CDQE 
+    ADD rbp, rax
+    MOV byte ptr [rbp+4], 0
+    MOV byte ptr [rbp+5], 0
+    LEA rbx, [rbp+1Ch]
+    MOV byte ptr [rbp+6], 0
+    MOV byte ptr [rbp+7], 10h
+    MOV rdx, [rsp+0C8h+var_80]
+    MOV rax, [rsp+0C8h+var_88]
+    MOV byte ptr [rbp+18h], 0
+    MOV byte ptr [rbp+19h], 0
+    MOV byte ptr [rbp+1Ah], 0
+    MOV byte ptr [rbp+1Bh], 10h
+    MOV [rbp+8], rax
+    MOV [rbp+10h], rdx
+    MOV byte ptr [rbp+0], 0
+    MOV byte ptr [rbp+1], 0
+    MOV byte ptr [rbp+2], 0
+    MOV byte ptr [rbp+3], 18h
+loc_40872C:
+    MOV byte ptr [rbx], 0
+    MOV byte ptr [rbx+1], 0
+    LEA rdi, [rbx+8]
+    MOV byte ptr [rbx+2], 0
+    MOV byte ptr [rbx+3], 1
+    MOVSXD rdx, [rsp+0C8h+var_8C]
+    MOV rsi, [rsp+0C8h+src]
+    MOV rbp, rdx
+    MOV eax, edx
+    MOV [rbx+7], dl
+    SAR eax, 18h
+    ADD ebp, 4
+    MOV [rbx+4], al
+    MOVSXD rbp, ebp
+    MOV eax, edx
+    LEA r15, [rbx+rbp+4]
+    SAR eax, 10h
+    MOV ebp, 4
+    MOV [rbx+5], al
+    MOV eax, edx
+    SAR eax, 8
+    LEA r14, [r15+4]
+    MOV [rbx+6], al
+    XOR ebx, ebx
+    CALL _memcpy
+loc_408781:
+    SHL ebx, 8
+    CALL sub_420F10
+    ADD ebx, eax
+    SUB ebp, 1
+    JNZ loc_408781
+loc_408790:
+    MOV esi, ebx
+    MOV edx, ebx
+    MOV eax, ebx
+    SHR edx, 10h
+    SHR esi, 18h
+    SHR eax, 8
+    MOV [r15+5], dl
+    MOV [r15+7], bl
+    LEA rbp, [r15+0Ch]
+    MOV [r15+9], dl
+    MOV [r15+0Bh], bl
+    MOV [r15+4], sil
+    MOV [r15+6], al
+    MOV rdi, rbp
+    MOV [r15+8], sil
+    MOV [r15+0Ah], al
+    MOV rax, [r12]
+    MOV rsi, [rax+60h]
+    CALL sub_4054D0
+    MOV rbx, [rsp+0C8h+n]
+    CDQE 
+    MOV rsi, [rsp+0C8h+var_B8]
+    ADD rbp, rax
+    MOV rdi, rbp
+    MOV rdx, rbx
+    ADD rbp, rbx
+    CALL _memcpy
+    MOV rsi, [r12+10h]
+    MOV rdi, rbp
+    CALL sub_4054D0
+    CDQE 
+    ADD rbp, rax
+    MOV eax, 1
+    NOP word ptr [rax+rax+00000000h]
+loc_408810:
+    ADD rbp, 1
+    MOV [rbp-1], al
+    ADD eax, 1
+    MOV r12, rbp
+    SUB r12, r14
+    TEST r12b, 0Fh
+    JNZ loc_408810
+loc_408826:
+    SUB rbp, r13
+    CMP rbp, [rsp+0C8h+var_A8]
+    JGE loc_4089FA
+loc_408834:
+    MOV rax, r12
+    MOV [r15+3], r12b
+    SAR rax, 18h
+    MOV [r15], al
+    MOV rax, r12
+    SAR rax, 10h
+    MOV [r15+1], al
+    MOV rax, r12
+    SAR rax, 8
+    MOV [r15+2], al
+    MOV rax, [rsp+0C8h+var_B0]
+    TEST rax, rax
+    JZ loc_4088CB
+loc_408862:
+    LEA r8, [rsp+0C8h+var_78]
+    LEA rsi, [rsp+0C8h+var_88]
+    MOV r9d, 30h
+    MOV ecx, 10h
+    MOV edx, 10h
+    MOV rdi, rax
+    CALL sub_40DF70
+    CALL sub_40D570
+    LEA rsi, [rsp+0C8h+var_78]
+    MOV rdi, rax
+    MOV rbx, rax
+    CALL sub_40DBF0
+    LEA rsi, [rsp+0C8h+var_58]
+    MOV rdi, rbx
+    CALL sub_40D530
+    MOV rsi, r14
+    MOV edx, r12d
+    MOV rdi, rbx
+    CALL sub_40D6C0
+    MOV rdi, rbx
+    CALL sub_40D580
+    LEA rdi, [rsp+0C8h+var_78]
+    MOV esi, 30h
+    CALL sub_40B660
+loc_4088CB:
+    MOV rdi, [rsp+0C8h+var_A0]
+    MOV edx, 1
+    MOV esi, offset aWb
+    XOR r12d, r12d
+    CALL sub_42A050
+    TEST rax, rax
+    MOV rbx, rax
+    JZ loc_408938
+loc_4088EA:
+    MOV rcx, rbx
+    MOV edx, 24h
+    MOV esi, 1
+    MOV edi, offset aBeginOpensshPr_0
+    MOV r12d, 1
+    CALL _fwrite
+    MOV ecx, 40h
+    MOV edx, ebp
+    MOV rsi, r13
+    MOV rdi, rbx
+    CALL sub_41FBD0
+    MOV rcx, rbx
+    MOV edx, 22h
+    MOV esi, 1
+    MOV edi, offset aEndOpensshPriv_0
+    CALL _fwrite
+    MOV rdi, rbx
+    CALL _fclose
+loc_408938:
+    MOV rsi, [rsp+0C8h+var_A8]
+    MOV rdi, r13
+    CALL sub_40B660
+    MOV rdi, r13
+    CALL sub_40B5E0
+    MOV rbx, [rsp+0C8h+var_B8]
+    MOV rsi, [rsp+0C8h+n]
+    MOV rdi, rbx
+    CALL sub_40B660
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    MOV rbx, [rsp+0C8h+src]
+    MOVSXD rsi, [rsp+0C8h+var_8C]
+    MOV rdi, rbx
+    CALL sub_40B660
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    MOV rcx, [rsp+0C8h+var_40]
+    XOR rcx, fs:28h
+    MOV eax, r12d
+    JNZ loc_408A2C
+loc_40899A:
+    ADD rsp, 98h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_4089AC:
+    MOV esi, offset aNone
+    MOV rdi, rbp
+    MOV [rsp+0C8h+var_88], 0
+    MOV [rsp+0C8h+var_80], 0
+    CALL sub_4054D0
+    MOVSXD rbx, eax
+    MOV esi, offset aNone
+    ADD rbx, rbp
+    MOV rdi, rbx
+    CALL sub_4054D0
+    CDQE 
+    MOV esi, 42E60Dh
+    ADD rbx, rax
+    MOV rdi, rbx
+    CALL sub_4054D0
+    CDQE 
+    ADD rbx, rax
+    JMP loc_40872C
+loc_4089FA:
+    MOV ecx, offset aOpensshNewWrit
+    MOV edx, 72Eh
+    MOV esi, offset aImportC
+    MOV edi, offset aPOutblobMaxsiz
+    CALL ___assert_fail
+loc_408A13:
+    MOV ecx, offset aOpensshNewWrit
+    MOV edx, 6DCh
+    MOV esi, offset aImportC
+    MOV edi, offset aPrivlenI
+    CALL ___assert_fail
+loc_408A2C:
+    CALL ___stack_chk_fail
+```
+Output:+6], al
+    MOV [rbx+8], r15
+    MOV r15, [rbx+10]
+    MOV r14, [rbx+14]
+    MOV r13, [rbx+12]
+    MOV r12, r15
+    MOV r11, r14
+    MOV r10, r13
+    MOV r9, [rbx+8]
+    MOV r8, [rbx+10]
+    MOV rdi, r15
+    MOV rsi, r14
+    MOV rdx, r13
+    MOV rcx, r9
+    MOV rax, r8
+    CALL sub_40AC50
+    CMP rax, 0
+    JZ loc_408784
+    MOV [rsp+0C8h+var_A8], rax
+    LEA rdi, [rsp+0C8h+var_A8]
+    MOV esi, offset aBcrypt
+    CALL sub_4054D0
+    CDQE 
+    ADD rbp, rax
+    MOV rdi, rbp
+    CALL sub_4054D0
+    CDQE 
+    ADD rbp, rax
+    MOV byte ptr [rbp+4], 0
+    MOV byte ptr [rbp+5], 0
+    LEA rbx, [rbp+1Ch]
+    MOV byte ptr [rbp+6], 0
+    MOV byte ptr [rbp+7], 10h
+    MOV rdx, [rsp+0C8h+var_80]
+    MOV rax, [rsp+0C8h+var_88]
+    MOV byte ptr [rbp+18h], 0
+    MOV byte ptr [rbp+19h], 0
+    MOV byte ptr [rbp+1Ah], 0
+    MOV byte ptr [rbp+1Bh], 10h
+    MOV [rbp+8], rax
+    MOV [rbp+10h], rdx
+    MOV byte ptr [rbp+0], 0
+    MOV byte ptr [rbp+1], 0
+    MOV byte ptr [rbp+2], 0
+    MOV byte ptr [
+############
+```assembly
+loc_642C40:
+    EXTRN 
+```
+Output:The provided assembly snippet does not contain any actual assembly instructions; it only includes an `EXTRN` directive, which is used to declare external symbols (functions or variables) that are defined elsewhere. Without any instructions, it is impossible to extract meaningful features or infer an algorithm. Therefore, the output will reflect this lack of content:
+
+```json
+{
+  "input_parameter_count": null,
+  "input_parameter_types": null,
+  "return_value_type": null,
+  "dominant_operation_categories": null,
+  "loop_indicators": null,
+  "number_of_distinct_subroutine_call_targets": null,
+  "use_of_indexed_addressing_modes": null,
+  "jump_table_indicators": null,
+  "presence_of_simd_instructions": null,
+  "presence_of_notable_integer_constants": null,
+  "presence_of_notable_floating_point_constants": null,
+  "count_of_distinct_immediate_values": null,
+  "string_literal_presence": null,
+  "modifies_input_parameters": null,
+  "modifies_global_state": null,
+  "performs_memory_allocation_deallocation": null,
+  "performs_io_operations": null,
+  "performs_block_memory_operations": null,
+  "performs_linear_memory_accesses": null,
+  "performs_error_handling": null,
+  "number_of_software_interrupts_or_system_calls": null,
+  "inferred_category": null
+}
+```
+############
+```assembly
+loc_424870:
+    PUSH r15
+    PUSH r14
+    MOV rax, rdi
+    PUSH r13
+    PUSH r12
+    ADD rax, 104h
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 7B8h
+    MOV [rsp+7E8h+src], rsi
+    MOV [rsp+7E8h+var_700], rdi
+    MOV rsi, fs:28h
+    MOV [rsp+7E8h+var_40], rsi
+    XOR esi, esi
+    MOV rsi, rdi
+    MOV [rsp+7E8h+var_6DC], edx
+    ADD rsi, 114h
+loc_4248BE:
+    MOV ecx, [rax]
+    ADD ecx, edx
+    CMP ecx, edx
+    MOV [rax], ecx
+    SETB dl
+    ADD rax, 4
+    CMP rax, rsi
+    MOVZX edx, dl
+    JNZ loc_4248BE
+loc_4248D5:
+    MOV rax, [rsp+7E8h+var_700]
+    MOVSXD rax, dword ptr [rax+100h]
+    TEST eax, eax
+    JZ loc_426130
+loc_4248EC:
+    MOV esi, [rsp+7E8h+var_6DC]
+    LEA edx, [rsi+rax]
+    CMP edx, 7Fh
+    JLE loc_4261DF
+loc_4248FF:
+    MOV rsi, [rsp+7E8h+var_700]
+    LEA rcx, [rsi+80h]
+    ADD rsi, 81h
+    MOV [rsp+7E8h+var_660], rsi
+    LEA rsi, [rsp+7E8h+var_548]
+    MOV [rsp+7E8h+var_668], rcx
+    MOV [rsp+7E8h+var_658], rsi
+    ADD rsi, 408h
+    MOV [rsp+7E8h+var_650], rsi
+    NOP dword ptr [rax+00h]
+loc_424948:
+    MOV r14, [rsp+7E8h+src]
+    MOVSXD rdi, eax
+    MOV ebx, 80h
+    ADD rdi, [rsp+7E8h+var_668]
+    MOV edx, ebx
+    SUB edx, eax
+    MOV rsi, r14
+    MOVSXD rdx, edx
+    CALL _memcpy
+    MOV rax, [rsp+7E8h+var_700]
+    MOV rsi, r14
+    MOV rdi, [rsp+7E8h+var_660]
+    LEA r8, [rsp+7E8h+var_648]
+    SUB ebx, [rax+100h]
+    SUB [rsp+7E8h+var_6DC], ebx
+    MOVSXD rax, ebx
+    ADD rsi, rax
+    MOV [rsp+7E8h+src], rsi
+    MOV rsi, [rsp+7E8h+var_658]
+    NOP dword ptr [rax]
+loc_4249B0:
+    MOVZX eax, byte ptr [rdi+3]
+    ADD r8, 10h
+    ADD rdi, 8
+    SHL eax, 18h
+    MOV edx, eax
+    MOVZX eax, byte ptr [rdi-4]
+    SHL eax, 10h
+    OR eax, edx
+    MOVZX edx, byte ptr [rdi-2]
+    OR eax, edx
+    MOVZX edx, byte ptr [rdi-3]
+    SHL edx, 8
+    OR eax, edx
+    MOVZX edx, byte ptr [rdi-9]
+    MOV [r8-8], rax
+    MOV ecx, edx
+    MOVZX edx, byte ptr [rdi-8]
+    SHL ecx, 18h
+    SHL edx, 10h
+    OR edx, ecx
+    MOVZX ecx, byte ptr [rdi-6]
+    OR edx, ecx
+    MOVZX ecx, byte ptr [rdi-7]
+    SHL ecx, 8
+    OR edx, ecx
+    MOV ecx, edx
+    MOV [r8-10h], rcx
+    CMP r8, rsi
+    JNZ loc_4249B0
+loc_424A09:
+    XOR eax, eax
+    NOP dword ptr [rax+rax+00h]
+loc_424A10:
+    MOV rcx, [rsp+rax+7E8h+var_648]
+    MOV rbx, [rsp+rax+7E8h+var_640]
+    ADD rax, 10h
+    MOV [rsp+rax+7E8h+var_558], rcx
+    MOV [rsp+rax+7E8h+var_550], rbx
+    CMP rax, 100h
+    JNZ loc_424A10
+loc_424A3C:
+    MOV rbp, [rsp+7E8h+var_650]
+    LEA r11, [rsp+7E8h+var_540]
+    NOP dword ptr [rax+00h]
+loc_424A50:
+    MOV rcx, [r11+0D8h]
+    MOV r13, [r11+0E0h]
+    MOV r14, [r11+88h]
+    ADD r14, [r11-8]
+    MOV rbx, [r11+90h]
+    MOV esi, r13d
+    MOV eax, ecx
+    LEA edx, ds:0[r13*8]
+    SHL eax, 0Dh
+    SHR esi, 13h
+    MOV r15d, ecx
+    OR esi, eax
+    MOV eax, ecx
+    MOV r12d, r13d
+    SHR eax, 1Dh
+    SHL r12d, 0Dh
+    SHR r15d, 13h
+    OR eax, edx
+    MOV edx, ecx
+    OR r15d, r12d
+    XOR eax, esi
+    MOV esi, r13d
+    SHL edx, 1Ah
+    SHR esi, 6
+    LEA r12d, ds:0[rcx*8]
+    SHR r13d, 1Dh
+    OR esi, edx
+    MOV rdx, [r11+10h]
+    SHR ecx, 6
+    XOR esi, eax
+    MOV rax, [r11+8]
+    OR r13d, r12d
+    XOR r15d, r13d
+    MOV r12, r14
+    MOV r8d, edx
+    XOR ecx, r15d
+    MOV edi, eax
+    SHR r8d, 1
+    MOV r9d, eax
+    SHL edi, 1Fh
+    SHL r9d, 18h
+    MOV r13d, eax
+    OR r8d, edi
+    MOV edi, edx
+    SHR edi, 8
+    OR edi, r9d
+    MOV r9d, edx
+    XOR edi, r8d
+    MOV r8d, eax
+    SHR r9d, 7
+    SHL r8d, 19h
+    OR r8d, r9d
+    MOV r9d, esi
+    XOR r8d, edi
+    MOV edi, r8d
+    ADD rdi, r9
+    MOV r9, [r11]
+    ADD rdi, rbx
+    ADD r12, rcx
+    MOV ecx, edx
+    SHL ecx, 1Fh
+    SHR r13d, 1
+    SHL edx, 18h
+    OR r13d, ecx
+    MOV ecx, eax
+    LEA r10, [rdi+r9]
+    SHR ecx, 8
+    OR edx, ecx
+    MOV ecx, r13d
+    MOV [r11+100h], r10
+    XOR ecx, edx
+    MOV edx, eax
+    SHR edx, 7
+    MOV eax, ecx
+    XOR eax, edx
+    ADD esi, r8d
+    ADC rax, r12
+    XOR edx, edx
+    CMP edi, ebx
+    SETB dl
+    CMP r10d, r9d
+    ADC rax, rdx
+    ADD r11, 10h
+    MOV [r11+0E8h], rax
+    CMP rbp, r11
+    JNZ loc_424A50
+loc_424B6F:
+    MOV rax, [rsp+7E8h+var_700]
+    MOV rsi, [rax]
+    MOV rcx, [rax+20h]
+    MOV r12, [rax+68h]
+    MOV rdx, [rax+18h]
+    MOV r15, [rax+38h]
+    MOV r8, [rax+48h]
+    MOV rbx, rsi
+    MOV [rsp+7E8h+var_6D8], rsi
+    MOV r13, rcx
+    MOV rsi, [rax+8]
+    MOV [rsp+7E8h+var_6B8], rcx
+    MOV rcx, [rax+28h]
+    MOV r10, [rax+40h]
+    MOV r11, [rax+50h]
+    MOV r9, [rax+58h]
+    MOV rbp, [rax+60h]
+    MOV [rsp+7E8h+var_6D0], rsi
+    MOV r14, rsi
+    MOV rdi, rcx
+    MOV rsi, [rax+10h]
+    MOV [rsp+7E8h+var_6B0], rcx
+    MOV [rsp+7E8h+var_6F8], r12
+    MOV rcx, [rax+30h]
+    MOV r12, [rax+70h]
+    MOV rax, [rax+78h]
+    MOV [rsp+7E8h+var_6C8], rsi
+    MOV [rsp+7E8h+var_6C0], rdx
+    MOV [rsp+7E8h+var_6A8], rcx
+    MOV [rsp+7E8h+var_6A0], r15
+    MOV [rsp+7E8h+var_690], r8
+    MOV [rsp+7E8h+var_670], r12
+    MOV [rsp+7E8h+var_698], r10
+    MOV [rsp+7E8h+var_688], r11
+    MOV [rsp+7E8h+var_680], r9
+    MOV [rsp+7E8h+var_678], rbp
+    MOV [rsp+7E8h+var_6F0], rax
+    MOV [rsp+7E8h+var_7C0], rsi
+    MOV rsi, rdx
+    MOV rdx, [rsp+7E8h+var_6F0]
+    MOV [rsp+7E8h+var_798], rcx
+    MOV rcx, r15
+    MOV r15, [rsp+7E8h+var_6F8]
+    MOV [rsp+7E8h+var_7A0], r12
+    MOV r12d, 428A2F98h
+    MOV [rsp+7E8h+var_7B8], r8
+    LEA rax, [rsp+7E8h+var_548]
+    MOV [rsp+7E8h+var_788], offset unk_4381C0
+    MOV [rsp+7E8h+var_7C8], rdx
+    MOV edx, 0AB1C5ED5h
+    MOV [rsp+7E8h+var_7B0], rbx
+    MOV [rsp+7E8h+var_710], rdx
+    MOV edx, 0DA6D8118h
+    MOV [rsp+7E8h+var_7D0], r11
+    MOV [rsp+7E8h+var_718], rdx
+    MOV edx, 923F82A4h
+    MOV [rsp+7E8h+var_7E8], r9
+    MOV [rsp+7E8h+var_720], rdx
+    MOV edx, 0AF194F9Bh
+    MOV [rsp+7E8h+var_7A8], rbp
+    MOV [rsp+7E8h+var_728], rdx
+    MOV edx, 0B605D019h
+    MOV [rsp+7E8h+var_7E0], r10
+    MOV [rsp+7E8h+var_760], rdx
+    MOV edx, 0F348B538h
+    MOV [rsp+7E8h+var_730], 59F111F1h
+    MOV [rsp+7E8h+var_768], rdx
+    MOV edx, 0E9B5DBA5h
+    MOV [rsp+7E8h+var_738], 3956C25Bh
+    MOV [rsp+7E8h+var_740], rdx
+    MOV edx, 8189DBBCh
+    MOV [rsp+7E8h+var_750], 71374491h
+    MOV [rsp+7E8h+var_770], rdx
+    MOV edx, 0B5C0FBCFh
+    MOV [rsp+7E8h+var_780], 23EF65CDh
+    MOV [rsp+7E8h+var_748], rdx
+    MOV edx, 0EC4D3B2Fh
+    MOV r8d, 0D728AE22h
+    MOV [rsp+7E8h+var_778], rdx
+    MOV [rsp+7E8h+var_6E0], 0
+    MOV rdx, rdi
+    MOV [rsp+7E8h+var_7D8], r15
+    MOV [rsp+7E8h+var_790], r13
+    MOV [rsp+7E8h+var_758], r12
+    JMP loc_424E26
+loc_424D78:
+    MOV rdi, [rbx]
+    MOV r8, [rbx+8]
+    MOV [rsp+7E8h+var_758], rdi
+    MOV rdi, [rbx+18h]
+    MOV [rsp+7E8h+var_780], rdi
+    MOV rdi, [rbx+10h]
+    MOV [rsp+7E8h+var_750], rdi
+    MOV rdi, [rbx+28h]
+    MOV [rsp+7E8h+var_778], rdi
+    MOV rdi, [rbx+20h]
+    MOV [rsp+7E8h+var_748], rdi
+    MOV rdi, [rbx+38h]
+    MOV [rsp+7E8h+var_770], rdi
+    MOV rdi, [rbx+30h]
+    MOV [rsp+7E8h+var_740], rdi
+    MOV rdi, [rbx+48h]
+    MOV [rsp+7E8h+var_768], rdi
+    MOV rdi, [rbx+40h]
+    MOV [rsp+7E8h+var_738], rdi
+    MOV rdi, [rbx+58h]
+    MOV [rsp+7E8h+var_760], rdi
+    MOV rdi, [rbx+50h]
+    MOV [rsp+7E8h+var_730], rdi
+    MOV rdi, [rbx+68h]
+    MOV [rsp+7E8h+var_728], rdi
+    MOV rdi, [rbx+60h]
+    MOV [rsp+7E8h+var_720], rdi
+    MOV rdi, [rbx+78h]
+    MOV rbx, [rbx+70h]
+    MOV [rsp+7E8h+var_718], rdi
+    MOV [rsp+7E8h+var_710], rbx
+loc_424E26:
+    MOV r9, [rsp+7E8h+var_7B8]
+    MOV r11, [rsp+7E8h+var_7E0]
+    MOV r15, [rsp+7E8h+var_7C8]
+    MOV rbp, r9
+    MOV rdi, r9
+    AND rdi, [rsp+7E8h+var_7E8]
+    NOT rbp
+    AND rbp, [rsp+7E8h+var_7D8]
+    MOV r10d, r9d
+    SHR r10d, 0Eh
+    XOR rbp, rdi
+    MOV edi, r11d
+    SHL edi, 12h
+    OR r10d, edi
+    MOV rdi, r11
+    SHL r11d, 0Eh
+    MOV ebx, r10d
+    MOV r10d, r9d
+    SHR edi, 9
+    SHR r10d, 12h
+    OR r10d, r11d
+    MOV r11, r9
+    SHL r9d, 17h
+    XOR r10d, ebx
+    OR edi, r9d
+    MOV r9d, r11d
+    XOR edi, r10d
+    SHL r9d, 12h
+    ADD rdi, rbp
+    LEA r13, [rdi+r8]
+    MOV r12, r13
+    ADD r12, [rax+8]
+    LEA rbx, [r15+r12]
+    MOV r15, [rsp+7E8h+var_7E0]
+    MOV r10d, r15d
+    SHR r10d, 0Eh
+    OR r10d, r9d
+    MOV r9d, r15d
+    MOV r15, r11
+    SHR r9d, 12h
+    SHL r11d, 0Eh
+    OR r9d, r11d
+    XOR r9d, r10d
+    MOV r10d, r15d
+    MOV r15, [rsp+7E8h+var_7E0]
+    SHR r10d, 9
+    MOV r11d, r15d
+    SHL r11d, 17h
+    OR r10d, r11d
+    MOV r11, r15
+    XOR r10d, r9d
+    MOV r9, r15
+    MOV r15, [rsp+7E8h+var_7D0]
+    NOT r11
+    AND r11, [rsp+7E8h+var_7A8]
+    AND r15, r9
+    MOV r9, r15
+    XOR r9, r11
+    ADD r9, [rax]
+    CMP edi, ebp
+    MOV rbp, [rsp+7E8h+var_7B0]
+    MOV rdi, [rsp+7E8h+var_758]
+    ADC r9, r10
+    XOR r10d, r10d
+    CMP r13d, r8d
+    SETB r10b
+    CMP r12d, [rax+8]
+    MOV r8d, r14d
+    MOV r11, rbp
+    MOV r13, r14
+    ADC r9, r10
+    CMP ebx, dword ptr [rsp+7E8h+var_7C8]
+    MOV r10d, r14d
+    ADC r9, [rsp+7E8h+var_7A0]
+    SHR r8d, 1Ch
+    SHL r10d, 1Eh
+    AND r11, [rsp+7E8h+var_7C0]
+    AND r13, rdx
+    ADD rdi, r9
+    MOV r9d, r8d
+    MOV r8d, ebp
+    SHL r8d, 4
+    MOV r12d, r9d
+    MOV [rsp+7E8h+var_758], r11
+    OR r12d, r8d
+    MOV r8d, ebp
+    MOV r11, r13
+    SHR r8d, 2
+    MOV r13, rsi
+    OR r8d, r10d
+    MOV r10d, ebp
+    AND r13, rdx
+    XOR r12d, r8d
+    MOV r8d, r14d
+    SHR r10d, 7
+    SHL r8d, 19h
+    OR r8d, r10d
+    MOV r10d, ebp
+    XOR r8d, r12d
+    MOV r12, r14
+    AND r12, rsi
+    MOV r9d, r8d
+    XOR r11, r12
+    MOV [rsp+7E8h+var_708], r12
+    XOR r11, r13
+    LEA r13, [rcx+rbx]
+    ADD r11, r9
+    MOV r9, rbp
+    CMP r13d, ecx
+    MOV rcx, [rsp+7E8h+var_798]
+    MOV r15, r13
+    MOV [rsp+7E8h+var_798], r15
+    ADC rcx, rdi
+    SHR r10d, 1Ch
+    SHL ebp, 1Eh
+    MOV r12d, r10d
+    MOV r10d, r14d
+    MOV [rsp+7E8h+var_7C8], rcx
+    SHL r10d, 4
+    MOV r13d, r12d
+    LEA rcx, [rbx+r11]
+    OR r13d, r10d
+    MOV r10d, r14d
+    SHR r10d, 2
+    OR r10d, ebp
+    MOV ebp, r13d
+    MOV r13, [rsp+7E8h+var_790]
+    XOR ebp, r10d
+    MOV r12d, ebp
+    MOV ebp, r14d
+    SHR ebp, 7
+    MOV r10d, ebp
+    MOV ebp, r9d
+    SHL ebp, 19h
+    OR r10d, ebp
+    MOV rbp, r9
+    MOV r9, [rsp+7E8h+var_7C0]
+    AND rbp, r13
+    XOR rbp, [rsp+7E8h+var_758]
+    XOR r10d, r12d
+    AND r9, r13
+    XOR r9, rbp
+    ADD r9, r10
+    XOR r10d, r10d
+    CMP r8d, r11d
+    SETNBE r10b
+    MOV r8, [rsp+7E8h+var_7C8]
+    MOV r11d, r15d
+    ADD r9, r10
+    XOR r10d, r10d
+    CMP ebx, ecx
+    SETNBE r10b
+    SHR r11d, 0Eh
+    ADD r9, r10
+    LEA rbx, [r9+rdi]
+    MOV rdi, [rsp+7E8h+var_7B8]
+    MOV [rsp+7E8h+var_7A0], rbx
+    MOV rbx, r15
+    NOT rbx
+    AND rbx, [rsp+7E8h+var_7E8]
+    AND rdi, r15
+    XOR rbx, rdi
+    MOV edi, r8d
+    SHL edi, 12h
+    OR r11d, edi
+    MOV edi, r15d
+    SHR edi, 12h
+    MOV r9d, edi
+    MOV rdi, r8
+    SHL r8d, 0Eh
+    OR r9d, r8d
+    MOV r8d, edi
+    MOV r10, rdi
+    SHR r8d, 9
+    XOR r9d, r11d
+    MOV edi, r8d
+    MOV r8d, r15d
+    SHL r8d, 17h
+    OR edi, r8d
+    MOV r8, [rsp+7E8h+var_780]
+    XOR edi, r9d
+    MOV r9, r10
+    SHR r10d, 0Eh
+    ADD rdi, rbx
+    LEA r12, [rdi+r8]
+    MOV r8d, r15d
+    SHL r8d, 12h
+    OR r8d, r10d
+    MOV r10d, r9d
+    MOV r11, r12
+    SHR r10d, 12h
+    ADD r11, [rax+18h]
+    MOV r9d, r10d
+    MOV r10d, r15d
+    SHL r10d, 0Eh
+    OR r9d, r10d
+    MOV rbp, r11
+    XOR r8d, r9d
+    MOV r11, [rsp+7E8h+var_7D8]
+    MOV r13, [rsp+7E8h+var_7C8]
+    MOV r10d, r8d
+    MOV r8d, r15d
+    SHR r8d, 9
+    MOV r15, [rsp+7E8h+var_7A8]
+    MOV r9d, r8d
+    ADD r11, rbp
+    MOV r8d, r13d
+    SHL r8d, 17h
+    OR r9d, r8d
+    MOV r8, r13
+    AND r8, [rsp+7E8h+var_7E0]
+    XOR r9d, r10d
+    MOV r10, r13
+    MOV r13, [rsp+7E8h+var_7A0]
+    NOT r10
+    AND r10, [rsp+7E8h+var_7D0]
+    XOR r10, r8
+    ADD r15, [rax+10h]
+    MOV r8, r15
+    LEA r15, [rdx+r11]
+    ADD r8, r10
+    CMP edi, ebx
+    MOV ebx, ecx
+    ADC r8, r9
+    XOR r9d, r9d
+    CMP r12d, dword ptr [rsp+7E8h+var_780]
+    MOV r10d, ecx
+    SETB r9b
+    CMP ebp, [rax+18h]
+    MOV ebp, r13d
+    ADC r8, r9
+    CMP r11d, dword ptr [rsp+7E8h+var_7D8]
+    ADC r8, [rsp+7E8h+var_750]
+    SHR ebx, 1Ch
+    SHL r10d, 1Eh
+    MOV r9d, ebx
+    MOV ebx, r13d
+    SHL ebx, 4
+    MOV edi, ebx
+    MOV ebx, r9d
+    OR ebx, edi
+    MOV edi, r13d
+    SHR edi, 2
+    OR edi, r10d
+    XOR ebx, edi
+    MOV r9d, ebx
+    MOV ebx, r13d
+    SHR ebx, 7
+    MOV r10d, ebx
+    MOV ebx, ecx
+    SHL ebx, 19h
+    MOV edi, ebx
+    MOV rbx, r14
+    XOR rbx, rsi
+    OR edi, r10d
+    MOV r10d, r13d
+    AND rbx, rcx
+    XOR rbx, [rsp+7E8h+var_708]
+    XOR edi, r9d
+    MOV r9d, edi
+    ADD rbx, r9
+    CMP r15d, edx
+    MOV rdx, [rsp+7E8h+var_790]
+    MOV r9d, ecx
+    ADC rdx, r8
+    SHL r9d, 4
+    SHR r10d, 1Ch
+    OR r10d, r9d
+    SHL ebp, 1Eh
+    MOV r9d, r13d
+    MOV r12d, r10d
+    MOV r10d, ecx
+    SHL r9d, 19h
+    SHR r10d, 2
+    MOV [rsp+7E8h+var_7D8], rdx
+    LEA rdx, [r11+rbx]
+    OR r10d, ebp
+    MOV ebp, ecx
+    XOR r10d, r12d
+    MOV r12, [rsp+7E8h+var_7B0]
+    XOR r12, [rsp+7E8h+var_7C0]
+    SHR ebp, 7
+    OR r9d, ebp
+    XOR r10d, r9d
+    AND r12, r13
+    XOR r12, [rsp+7E8h+var_758]
+    MOV r13, [rsp+7E8h+var_7D8]
+    ADD r10, r12
+    XOR r12d, r12d
+    CMP edi, ebx
+    SETNBE r12b
+    MOV rdi, [rsp+7E8h+var_798]
+    ADD r10, r12
+    ADD r10, r8
+    XOR r8d, r8d
+    CMP r11d, edx
+    SETNBE r8b
+    MOV r11, r15
+    AND rdi, r15
+    LEA rbx, [r10+r8]
+    NOT r11
+    MOV r10d, r15d
+    SHR r10d, 12h
+    MOV r8d, r15d
+    MOV [rsp+7E8h+var_7A8], rbx
+    MOV rbx, r11
+    MOV r11d, r15d
+    AND rbx, [rsp+7E8h+var_7B8]
+    SHR r11d, 0Eh
+    SHL r8d, 12h
+    MOV r9d, r11d
+    MOV r11d, r13d
+    SHL r11d, 12h
+    XOR rbx, rdi
+    MOV edi, r11d
+    MOV r11d, r9d
+    MOV r9d, r10d
+    MOV r10d, r13d
+    OR r11d, edi
+    SHL r10d, 0Eh
+    OR r9d, r10d
+    MOV r10d, r13d
+    XOR r9d, r11d
+    MOV r11d, r13d
+    SHR r10d, 0Eh
+    SHR r11d, 9
+    OR r8d, r10d
+    MOV r10d, r13d
+    MOV edi, r11d
+    MOV r11d, r15d
+    SHR r10d, 12h
+    SHL r11d, 17h
+    MOV r13, [rsp+7E8h+var_7D8]
+    OR edi, r11d
+    MOV r11, [rsp+7E8h+var_778]
+    XOR edi, r9d
+    MOV r9d, r10d
+    MOV r10d, r15d
+    SHL r10d, 0Eh
+    ADD rdi, rbx
+    OR r9d, r10d
+    MOV r10d, r8d
+    MOV r8d, r15d
+    SHR r8d, 9
+    XOR r10d, r9d
+    LEA r12, [rdi+r11]
+    MOV r9d, r8d
+    MOV r8d, r13d
+    SHL r8d, 17h
+    MOV r11, r12
+    ADD r11, [rax+28h]
+    OR r9d, r8d
+    MOV r8, [rsp+7E8h+var_7C8]
+    XOR r9d, r10d
+    MOV r10, r13
+    NOT r10
+    AND r10, [rsp+7E8h+var_7E0]
+    AND r8, r13
+    MOV r13, [rsp+7E8h+var_7D0]
+    ADD r13, [rax+20h]
+    MOV rbp, r11
+    MOV r11, [rsp+7E8h+var_7E8]
+    XOR r10, r8
+    MOV r8, r13
+    ADD r11, rbp
+    ADD r8, r10
+    CMP edi, ebx
+    MOV ebx, edx
+    ADC r8, r9
+    XOR r9d, r9d
+    CMP r12d, dword ptr [rsp+7E8h+var_778]
+    SETB r9b
+    CMP ebp, [rax+28h]
+    ADC r8, r9
+    CMP r11d, dword ptr [rsp+7E8h+var_7E8]
+    ADC r8, [rsp+7E8h+var_748]
+    MOV rbp, [rsp+7E8h+var_7A8]
+    SHR ebx, 1Ch
+    MOV r9d, ebx
+    MOV ebx, ebp
+    MOV r10d, ebp
+    MOV r12d, ebp
+    SHL ebx, 4
+    SHR r10d, 2
+    MOV edi, ebx
+    MOV ebx, r9d
+    OR ebx, edi
+    MOV edi, r10d
+    MOV r10d, edx
+    SHL r10d, 1Eh
+    OR edi, r10d
+    XOR ebx, edi
+    MOV r9d, ebx
+    MOV ebx, ebp
+    SHR ebx, 7
+    MOV r10d, ebx
+    MOV ebx, edx
+    SHL ebx, 19h
+    MOV edi, ebx
+    MOV rbx, r14
+    OR edi, r10d
+    XOR rbx, rcx
+    MOV r10, r14
+    AND r10, rcx
+    AND rbx, rdx
+    XOR edi, r9d
+    XOR rbx, r10
+    LEA r10, [rsi+r11]
+    MOV r9d, edi
+    ADD rbx, r9
+    MOV r9, [rsp+7E8h+var_7C0]
+    MOV [rsp+7E8h+var_7E8], r10
+    CMP dword ptr [rsp+7E8h+var_7E8], esi
+    MOV r10d, edx
+    LEA rsi, [r11+rbx]
+    ADC r9, r8
+    SHR r12d, 1Ch
+    SHR r10d, 2
+    MOV [rsp+7E8h+var_7C0], r9
+    MOV r9d, edx
+    SHL r9d, 4
+    OR r12d, r9d
+    MOV r9, rbp
+    SHL ebp, 1Eh
+    OR r10d, ebp
+    MOV ebp, r9d
+    MOV r13, r9
+    XOR r12d, r10d
+    MOV r10d, edx
+    SHL ebp, 19h
+    SHR r10d, 7
+    MOV r9, [rsp+7E8h+var_7A0]
+    OR r10d, ebp
+    XOR r10d, r12d
+    MOV r12, [rsp+7E8h+var_7B0]
+    MOV rbp, r12
+    AND r12, r9
+    XOR rbp, r9
+    MOV r9, r12
+    AND rbp, r13
+    MOV r13, [rsp+7E8h+var_7C0]
+    XOR r9, rbp
+    MOV rbp, [rsp+7E8h+var_7E8]
+    ADD r9, r10
+    XOR r10d, r10d
+    CMP edi, ebx
+    SETNBE r10b
+    ADD r9, r10
+    MOV rdi, rbp
+    MOV r10d, ebp
+    ADD r9, r8
+    XOR r8d, r8d
+    CMP r11d, esi
+    SETNBE r8b
+    MOV r11d, ebp
+    AND rdi, r15
+    LEA rbx, [r9+r8]
+    SHR r11d, 0Eh
+    SHR r10d, 12h
+    MOV r9d, r11d
+    MOV r11d, r13d
+    MOV [rsp+7E8h+var_7D0], rbx
+    MOV rbx, rbp
+    SHL r11d, 12h
+    NOT rbx
+    AND rbx, [rsp+7E8h+var_798]
+    XOR rbx, rdi
+    MOV edi, r11d
+    MOV r11d, r9d
+    MOV r9d, r10d
+    MOV r10d, r13d
+    OR r11d, edi
+    SHL r10d, 0Eh
+    OR r9d, r10d
+    XOR r9d, r11d
+    MOV r11d, r13d
+    SHR r11d, 9
+    MOV edi, r11d
+    MOV r11d, ebp
+    SHL r11d, 17h
+    OR edi, r11d
+    MOV r11, [rsp+7E8h+var_770]
+    XOR edi, r9d
+    MOV r9d, dword ptr [rsp+7E8h+var_7E8]
+    ADD rdi, rbx
+    LEA r12, [rdi+r11]
+    MOV r11, [rsp+7E8h+var_7B8]
+    SHL r9d, 12h
+    MOV r10, r12
+    ADD r10, [rax+38h]
+    MOV r8d, r9d
+    MOV r9d, r13d
+    SHR r9d, 12h
+    ADD r11, r10
+    MOV rbp, r10
+    MOV r10d, r13d
+    SHR r10d, 0Eh
+    MOV r13, [rsp+7E8h+var_7C0]
+    OR r8d, r10d
+    MOV r10d, dword ptr [rsp+7E8h+var_7E8]
+    SHL r10d, 0Eh
+    OR r9d, r10d
+    MOV r10d, r8d
+    MOV r8d, r13d
+    XOR r10d, r9d
+    MOV r9d, dword ptr [rsp+7E8h+var_7E8]
+    SHL r8d, 17h
+    SHR r9d, 9
+    OR r9d, r8d
+    MOV r8, [rsp+7E8h+var_7D8]
+    XOR r9d, r10d
+    MOV r10, r13
+    NOT r10
+    AND r10, [rsp+7E8h+var_7C8]
+    AND r8, r13
+    MOV r13, [rsp+7E8h+var_7D0]
+    XOR r10, r8
+    MOV r8, [rsp+7E8h+var_7E0]
+    ADD r8, [rax+30h]
+    ADD r8, r10
+    CMP edi, ebx
+    MOV ebx, esi
+    ADC r8, r9
+    XOR r9d, r9d
+    CMP r12d, dword ptr [rsp+7E8h+var_770]
+    MOV edi, r13d
+    MOV r10d, esi
+    MOV r12, r13
+    SETB r9b
+    CMP ebp, [rax+38h]
+    MOV rbp, rcx
+    ADC r8, r9
+    XOR r9d, r9d
+    CMP dword ptr [rsp+7E8h+var_7B8], r11d
+    SETNBE r9b
+    SHL edi, 4
+    SHR ebx, 1Ch
+    OR ebx, edi
+    MOV edi, r13d
+    ADD r8, r9
+    SHR edi, 2
+    SHL r10d, 1Eh
+    XOR rbp, rdx
+    MOV r9d, edi
+    AND rbp, rsi
+    ADD r8, [rsp+7E8h+var_740]
+    OR r9d, r10d
+    XOR ebx, r9d
+    MOV edi, ebx
+    MOV ebx, r13d
+    SHR ebx, 7
+    MOV r10d, ebx
+    MOV ebx, esi
+    SHL ebx, 19h
+    MOV r9d, ebx
+    MOV rbx, rcx
+    AND rbx, rdx
+    OR r9d, r10d
+    XOR r9d, edi
+    XOR rbp, rbx
+    LEA rbx, [r14+r11]
+    MOV edi, r9d
+    ADD rbp, rdi
+    MOV [rsp+7E8h+var_7B8], rbx
+    XOR edi, edi
+    CMP r14d, dword ptr [rsp+7E8h+var_7B8]
+    MOV ebx, r13d
+    LEA r10, [r11+rbp]
+    SETNBE dil
+    SHR ebx, 1Ch
+    ADD rdi, r8
+    ADD rdi, [rsp+7E8h+var_7B0]
+    MOV r14d, ebx
+    MOV ebx, esi
+    SHR ebx, 2
+    MOV [rsp+7E8h+var_7E0], rdi
+    MOV edi, esi
+    SHL edi, 4
+    OR r14d, edi
+    MOV rdi, r12
+    SHL r12d, 1Eh
+    OR ebx, r12d
+    MOV r12d, edi
+    XOR r14d, ebx
+    MOV ebx, esi
+    SHL r12d, 19h
+    SHR ebx, 7
+    OR ebx, r12d
+    XOR ebx, r14d
+    MOV r14, [rsp+7E8h+var_7A0]
+    MOV r13, [rsp+7E8h+var_7A8]
+    MOV r12, r14
+    MOV rdi, r14
+    MOV r14, [rsp+7E8h+var_7B8]
+    XOR r12, r13
+    AND r12, [rsp+7E8h+var_7D0]
+    AND rdi, r13
+    XOR rdi, r12
+    MOV r12, [rsp+7E8h+var_7E0]
+    ADD rdi, rbx
+    XOR ebx, ebx
+    CMP r9d, ebp
+    SETNBE bl
+    MOV rbp, r14
+    ADD rdi, rbx
+    NOT rbp
+    ADD rdi, r8
+    XOR r8d, r8d
+    CMP r11d, r10d
+    SETNBE r8b
+    MOV r11d, r14d
+    AND rbp, r15
+    LEA r9, [rdi+r8]
+    SHR r11d, 0Eh
+    MOV rdi, [rsp+7E8h+var_7E8]
+    MOV [rsp+7E8h+var_7B0], r9
+    MOV r9d, r11d
+    MOV r11d, r12d
+    SHL r11d, 12h
+    MOV ebx, r9d
+    AND rdi, r14
+    OR ebx, r11d
+    MOV r11d, r14d
+    XOR rbp, rdi
+    SHR r11d, 12h
+    MOV edi, r14d
+    MOV r9d, r11d
+    MOV r11d, r12d
+    SHL edi, 12h
+    SHL r11d, 0Eh
+    OR r9d, r11d
+    MOV r11d, r12d
+    SHR r11d, 9
+    XOR r9d, ebx
+    MOV r8d, r11d
+    MOV r11d, r14d
+    SHL r11d, 17h
+    OR r8d, r11d
+    MOV r11, [rsp+7E8h+var_768]
+    XOR r8d, r9d
+    MOV r9, [rsp+7E8h+var_7E0]
+    ADD r8, rbp
+    LEA r13, [r8+r11]
+    MOV r11, [rsp+7E8h+var_798]
+    MOV rbx, r13
+    ADD rbx, [rax+48h]
+    MOV r12, rbx
+    LEA rbx, [r11+rbx]
+    MOV r11d, r9d
+    SHR r11d, 0Eh
+    OR edi, r11d
+    MOV r11d, r9d
+    SHR r11d, 12h
+    MOV r9d, r11d
+    MOV r11d, r14d
+    MOV r14, [rsp+7E8h+var_7E0]
+    SHL r11d, 0Eh
+    OR r9d, r11d
+    MOV r11d, edi
+    XOR r11d, r9d
+    MOV r9d, dword ptr [rsp+7E8h+var_7B8]
+    MOV edi, r14d
+    SHL edi, 17h
+    SHR r9d, 9
+    OR r9d, edi
+    MOV rdi, [rsp+7E8h+var_7C0]
+    XOR r9d, r11d
+    MOV r11, r14
+    NOT r11
+    AND r11, [rsp+7E8h+var_7D8]
+    AND rdi, r14
+    MOV r14, [rsp+7E8h+var_7C8]
+    ADD r14, [rax+40h]
+    XOR r11, rdi
+    MOV rdi, r14
+    ADD rdi, r11
+    CMP r8d, ebp
+    MOV r11d, r10d
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP r13d, dword ptr [rsp+7E8h+var_768]
+    MOV r13, [rsp+7E8h+var_7B0]
+    MOV ebp, r10d
+    MOV r8, [rsp+7E8h+var_738]
+    SETB r9b
+    CMP r12d, [rax+48h]
+    MOV r12d, r13d
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP dword ptr [rsp+7E8h+var_798], ebx
+    SETNBE r9b
+    SHL r12d, 4
+    SHL r11d, 1Eh
+    ADD rdi, r9
+    MOV r9d, r13d
+    SHR ebp, 1Ch
+    SHR r9d, 2
+    OR ebp, r12d
+    MOV r12, rdx
+    OR r9d, r11d
+    AND r12, rsi
+    ADD r8, rdi
+    XOR ebp, r9d
+    MOV r9d, r13d
+    SHR r9d, 7
+    MOV r11d, r9d
+    MOV r9d, r10d
+    SHL r9d, 19h
+    OR r9d, r11d
+    XOR r9d, ebp
+    MOV rbp, rdx
+    XOR rbp, rsi
+    MOV edi, r9d
+    AND rbp, r10
+    XOR rbp, r12
+    LEA r12, [rcx+rbx]
+    ADD rbp, rdi
+    XOR edi, edi
+    MOV [rsp+7E8h+var_7C8], r12
+    CMP ecx, dword ptr [rsp+7E8h+var_7C8]
+    LEA rcx, [rbx+rbp]
+    MOV dword ptr [rsp+7E8h+var_780], r12d
+    MOV r12, r13
+    MOV dword ptr [rsp+7E8h+var_778], ecx
+    SETNBE dil
+    SHR r13d, 1Ch
+    ADD rdi, r8
+    MOV r11, rdi
+    ADD r11, [rsp+7E8h+var_7A0]
+    MOV rdi, r12
+    MOV [rsp+7E8h+var_7A0], r11
+    MOV r11d, r10d
+    SHL r11d, 4
+    OR r13d, r11d
+    MOV r11d, r10d
+    MOV r14d, r13d
+    MOV r13d, r12d
+    SHR r11d, 2
+    SHL r13d, 1Eh
+    MOV r12d, edi
+    MOV rdi, [rsp+7E8h+var_7D0]
+    OR r11d, r13d
+    MOV r13d, r14d
+    MOV r14, [rsp+7E8h+var_7A8]
+    XOR r13d, r11d
+    MOV r11d, r10d
+    SHL r12d, 19h
+    SHR r11d, 7
+    OR r11d, r12d
+    XOR r11d, r13d
+    MOV r13, r14
+    XOR r13, rdi
+    MOV r12, r13
+    AND r12, [rsp+7E8h+var_7B0]
+    MOV r13, r14
+    AND r13, rdi
+    MOV r14, [rsp+7E8h+var_7C8]
+    MOV rdi, r13
+    XOR rdi, r12
+    ADD rdi, r11
+    XOR r11d, r11d
+    CMP r9d, ebp
+    SETNBE r11b
+    MOV rbp, r14
+    ADD rdi, r11
+    NOT rbp
+    ADD rdi, r8
+    XOR r8d, r8d
+    CMP ebx, ecx
+    SETNBE r8b
+    LEA r9, [rdi+r8]
+    MOV [rsp+7E8h+var_798], r9
+    AND rbp, [rsp+7E8h+var_7E8]
+    MOV r9d, r14d
+    MOV r8, [rsp+7E8h+var_7A0]
+    MOV r11, [rsp+7E8h+var_7B8]
+    SHR r9d, 0Eh
+    MOV ebx, r8d
+    AND r11, r14
+    SHL ebx, 12h
+    XOR rbp, r11
+    MOV r11d, r8d
+    MOV edi, ebx
+    MOV ebx, r9d
+    MOV r9d, r14d
+    SHL r11d, 0Eh
+    SHR r9d, 12h
+    OR ebx, edi
+    OR r9d, r11d
+    MOV r11, r8
+    SHR r8d, 9
+    XOR r9d, ebx
+    MOV ebx, r14d
+    MOV edi, r14d
+    SHL ebx, 17h
+    SHL edi, 12h
+    OR r8d, ebx
+    MOV rbx, [rsp+7E8h+var_760]
+    XOR r8d, r9d
+    MOV r9, r11
+    SHR r11d, 0Eh
+    OR edi, r11d
+    MOV r11d, r14d
+    SHR r9d, 12h
+    SHL r11d, 0Eh
+    MOV r14, [rsp+7E8h+var_7A0]
+    ADD r8, rbp
+    OR r9d, r11d
+    MOV r11d, edi
+    LEA r13, [r8+rbx]
+    XOR r11d, r9d
+    MOV r9d, dword ptr [rsp+7E8h+var_7C8]
+    MOV edi, r14d
+    MOV r12, r13
+    ADD r12, [rax+58h]
+    SHL edi, 17h
+    SHR r9d, 9
+    OR r9d, edi
+    MOV rdi, r14
+    XOR r9d, r11d
+    MOV r11, r14
+    MOV r14, [rsp+7E8h+var_7E0]
+    NOT r11
+    AND r11, [rsp+7E8h+var_7C0]
+    LEA rbx, [r15+r12]
+    AND r14, rdi
+    XOR r11, r14
+    MOV r14, [rsp+7E8h+var_7D8]
+    ADD r14, [rax+50h]
+    MOV rdi, r14
+    LEA r14, [rdx+rbx]
+    ADD rdi, r11
+    CMP r8d, ebp
+    MOV ebp, ecx
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP r13d, dword ptr [rsp+7E8h+var_760]
+    MOV [rsp+7E8h+var_7D8], r14
+    MOV dword ptr [rsp+7E8h+var_770], r14d
+    SETB r9b
+    CMP r12d, [rax+58h]
+    MOV r12, [rsp+7E8h+var_798]
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP r15d, ebx
+    MOV r15d, r12d
+    SETNBE r9b
+    SHR ebp, 1Ch
+    SHL r15d, 4
+    ADD rdi, r9
+    MOV r9d, r12d
+    OR ebp, r15d
+    MOV r15d, ecx
+    SHR r9d, 2
+    SHL r15d, 1Eh
+    ADD rdi, [rsp+7E8h+var_730]
+    OR r9d, r15d
+    MOV r15d, r12d
+    XOR ebp, r9d
+    MOV r9d, ecx
+    SHR r15d, 7
+    SHL r9d, 19h
+    OR r9d, r15d
+    MOV r15, rsi
+    XOR r9d, ebp
+    MOV rbp, rsi
+    AND r15, r10
+    XOR rbp, r10
+    MOV r8d, r9d
+    AND rbp, rcx
+    XOR rbp, r15
+    MOV r15d, r12d
+    ADD rbp, r8
+    XOR r8d, r8d
+    CMP edx, dword ptr [rsp+7E8h+var_7D8]
+    SETNBE r8b
+    SHR r15d, 1Ch
+    MOV r13d, r15d
+    MOV r15d, ecx
+    ADD r8, rdi
+    SHL r15d, 4
+    MOV rdx, r8
+    ADD rdx, [rsp+7E8h+var_7A8]
+    MOV r8d, r15d
+    MOV r15d, r13d
+    OR r15d, r8d
+    MOV r8, r12
+    MOV r14d, r15d
+    MOV r15d, ecx
+    SHR r15d, 2
+    MOV [rsp+7E8h+var_7A8], rdx
+    LEA rdx, [rbx+rbp]
+    MOV r11d, r15d
+    MOV r15d, r12d
+    SHL r15d, 1Eh
+    MOV dword ptr [rsp+7E8h+var_768], edx
+    OR r11d, r15d
+    MOV r15d, r14d
+    MOV r14, [rsp+7E8h+var_7B0]
+    XOR r15d, r11d
+    MOV r13d, r15d
+    MOV r15d, ecx
+    SHR r15d, 7
+    MOV r11d, r15d
+    MOV r15d, r8d
+    SHL r15d, 19h
+    OR r11d, r15d
+    XOR r11d, r13d
+    MOV r13, [rsp+7E8h+var_7D0]
+    MOV r12, r13
+    MOV r8, r13
+    XOR r12, r14
+    AND r12, [rsp+7E8h+var_798]
+    AND r8, r14
+    MOV r14, [rsp+7E8h+var_7D8]
+    XOR r8, r12
+    MOV r12, [rsp+7E8h+var_7A8]
+    MOV r15d, r14d
+    ADD r8, r11
+    XOR r11d, r11d
+    CMP r9d, ebp
+    SETNBE r11b
+    MOV rbp, r14
+    ADD r8, r11
+    NOT rbp
+    MOV r11, r12
+    ADD r8, rdi
+    XOR edi, edi
+    CMP ebx, edx
+    SETNBE dil
+    SHR r15d, 0Eh
+    AND rbp, [rsp+7E8h+var_7B8]
+    LEA r9, [r8+rdi]
+    MOV r8, [rsp+7E8h+var_7C8]
+    MOV [rsp+7E8h+var_790], r9
+    MOV r9d, r15d
+    MOV r15d, r12d
+    SHL r15d, 12h
+    AND r8, r14
+    MOV edi, r15d
+    MOV r15d, r9d
+    XOR rbp, r8
+    OR r15d, edi
+    MOV ebx, r15d
+    MOV r15d, r14d
+    SHR r15d, 12h
+    MOV r9d, r15d
+    MOV r15d, r12d
+    SHL r15d, 0Eh
+    OR r9d, r15d
+    MOV r15d, r12d
+    SHR r15d, 9
+    XOR r9d, ebx
+    MOV rbx, [rsp+7E8h+var_7E8]
+    MOV r8d, r15d
+    MOV r15d, r14d
+    SHL r14d, 12h
+    SHL r15d, 17h
+    MOV edi, r14d
+    OR r8d, r15d
+    MOV r15, [rsp+7E8h+var_728]
+    XOR r8d, r9d
+    MOV r9, r11
+    SHR r11d, 0Eh
+    ADD r8, rbp
+    OR edi, r11d
+    SHR r9d, 12h
+    LEA r13, [r8+r15]
+    MOV r12, r13
+    ADD r12, [rax+68h]
+    MOV r11d, dword ptr [rsp+7E8h+var_7D8]
+    MOV r14, [rsp+7E8h+var_7A8]
+    SHL r11d, 0Eh
+    OR r9d, r11d
+    MOV r11d, edi
+    MOV edi, r14d
+    XOR r11d, r9d
+    MOV r9d, dword ptr [rsp+7E8h+var_7D8]
+    SHL edi, 17h
+    ADD rbx, r12
+    SHR r9d, 9
+    OR r9d, edi
+    MOV rdi, [rsp+7E8h+var_7A0]
+    XOR r9d, r11d
+    MOV r11, r14
+    NOT r11
+    AND r11, [rsp+7E8h+var_7E0]
+    AND rdi, r14
+    XOR r11, rdi
+    MOV rdi, [rsp+7E8h+var_7C0]
+    ADD rdi, [rax+60h]
+    ADD rdi, r11
+    CMP r8d, ebp
+    MOV ebp, edx
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP r13d, r15d
+    SETB r9b
+    CMP r12d, [rax+68h]
+    MOV r13, [rsp+7E8h+var_790]
+    LEA r12, [rsi+rbx]
+    MOV r15d, r13d
+    MOV dword ptr [rsp+7E8h+var_758], r12d
+    ADC rdi, r9
+    XOR r9d, r9d
+    CMP dword ptr [rsp+7E8h+var_7E8], ebx
+    MOV [rsp+7E8h+var_7E8], r12
+    MOV r12, r13
+    SETNBE r9b
+    SHL r15d, 4
+    SHR ebp, 1Ch
+    ADD rdi, r9
+    OR ebp, r15d
+    MOV r9d, r13d
+    MOV r15d, edx
+    SHR r9d, 2
+    ADD rdi, [rsp+7E8h+var_720]
+    SHL r15d, 1Eh
+    OR r9d, r15d
+    MOV r15d, r13d
+    XOR ebp, r9d
+    MOV r9d, edx
+    SHR r15d, 7
+    SHL r9d, 19h
+    OR r9d, r15d
+    MOV r15, r10
+    XOR r9d, ebp
+    MOV rbp, r10
+    AND r15, rcx
+    XOR rbp, rcx
+    MOV r8d, r9d
+    AND rbp, rdx
+    XOR rbp, r15
+    MOV r15d, r13d
+    ADD rbp, r8
+    XOR r8d, r8d
+    CMP esi, dword ptr [rsp+7E8h+var_7E8]
+    SETNBE r8b
+    SHR r15d, 1Ch
+    MOV r13d, r15d
+    MOV r15d, edx
+    ADD r8, rdi
+    SHL r15d, 4
+    MOV rsi, r8
+    ADD rsi, [rsp+7E8h+var_7D0]
+    MOV r8d, r15d
+    MOV r15d, r13d
+    OR r15d, r8d
+    MOV r8, r12
+    MOV r14d, r15d
+    MOV r15d, edx
+    SHR r15d, 2
+    MOV [rsp+7E8h+var_7D0], rsi
+    LEA rsi, [rbx+rbp]
+    MOV r11d, r15d
+    MOV r15d, r12d
+    SHL r15d, 1Eh
+    MOV dword ptr [rsp+7E8h+var_760], esi
+    OR r11d, r15d
+    MOV r15d, r14d
+    MOV r14, r8
+    XOR r15d, r11d
+    MOV r13d, r15d
+    MOV r15d, edx
+    SHR r15d, 7
+    MOV r11d, r15d
+    MOV r15d, r8d
+    MOV r8, [rsp+7E8h+var_798]
+    SHL r15d, 19h
+    OR r11d, r15d
+    XOR r11d, r13d
+    MOV r13, [rsp+7E8h+var_7B0]
+    MOV r12, r13
+    AND r13, r8
+    XOR r12, r8
+    MOV r8, r13
+    AND r12, r14
+    MOV r14, [rsp+7E8h+var_7E8]
+    XOR r8, r12
+    ADD r8, r11
+    XOR r11d, r11d
+    CMP r9d, ebp
+    SETNBE r11b
+    MOV r9, r14
+    MOV r15d, r14d
+    ADD r8, r11
+    MOV r11, [rsp+7E8h+var_7B8]
+    ADD r8, rdi
+    XOR edi, edi
+    CMP ebx, esi
+    MOV rbx, r14
+    SETNBE dil
+    AND r9, [rsp+7E8h+var_7D8]
+    NOT rbx
+    AND rbx, [rsp+7E8h+var_7C8]
+    SHR r15d, 0Eh
+    LEA rbp, [r8+rdi]
+    MOV r8d, r15d
+    MOV [rsp+7E8h+var_7C0], rbp
+    XOR rbx, r9
+    MOV r9, [rsp+7E8h+var_7D0]
+    MOV r15d, r9d
+    SHL r15d, 12h
+    MOV edi, r15d
+    MOV r15d, r8d
+    OR r15d, edi
+    MOV edi, r14d
+    MOV ebp, r15d
+    MOV r15d, r14d
+    SHL edi, 12h
+    SHR r15d, 12h
+    MOV r8d, r15d
+    MOV r15d, r9d
+    SHL r15d, 0Eh
+    OR r8d, r15d
+    MOV r15d, r9d
+    SHR r15d, 9
+    XOR r8d, ebp
+    MOV r9d, r15d
+    MOV r15d, r14d
+    SHL r15d, 17h
+    OR r9d, r15d
+    MOV r15, [rsp+7E8h+var_718]
+    XOR r9d, r8d
+    MOV r8, [rsp+7E8h+var_7D0]
+    ADD r9, rbx
+    LEA r13, [r9+r15]
+    MOV r12, r13
+    ADD r12, [rax+78h]
+    MOV rbp, r12
+    LEA r12, [r11+r12]
+    MOV r11d, r8d
+    SHR r11d, 0Eh
+    OR edi, r11d
+    MOV r11d, r8d
+    SHR r11d, 12h
+    MOV r8d, r11d
+    MOV r11d, r14d
+    MOV r14, [rsp+7E8h+var_7D0]
+    SHL r11d, 0Eh
+    OR r8d, r11d
+    MOV r11d, edi
+    XOR r11d, r8d
+    MOV r8d, dword ptr [rsp+7E8h+var_7E8]
+    MOV edi, r14d
+    SHL edi, 17h
+    SHR r8d, 9
+    OR r8d, edi
+    MOV rdi, [rsp+7E8h+var_7A8]
+    XOR r8d, r11d
+    MOV r11, r14
+    NOT r11
+    AND r11, [rsp+7E8h+var_7A0]
+    AND rdi, r14
+    XOR r11, rdi
+    MOV rdi, [rsp+7E8h+var_7E0]
+    ADD rdi, [rax+70h]
+    ADD rdi, r11
+    CMP r9d, ebx
+    MOV ebx, esi
+    ADC rdi, r8
+    XOR r8d, r8d
+    CMP r13d, r15d
+    SETB r8b
+    CMP ebp, [rax+78h]
+    MOV rbp, [rsp+7E8h+var_7C0]
+    MOV r11d, esi
+    MOV r15d, esi
+    MOV r9d, ebp
+    ADC rdi, r8
+    XOR r8d, r8d
+    CMP dword ptr [rsp+7E8h+var_7B8], r12d
+    SETNBE r8b
+    SHR ebx, 1Ch
+    SHL r11d, 1Eh
+    ADD r8, rdi
+    MOV edi, ebp
+    SHR r9d, 2
+    SHL edi, 4
+    OR r9d, r11d
+    MOV r11d, ebp
+    OR ebx, edi
+    SHR r11d, 7
+    ADD r8, [rsp+7E8h+var_710]
+    MOV edi, ebx
+    MOV ebx, ebp
+    XOR edi, r9d
+    MOV r9d, esi
+    SHL r9d, 19h
+    OR r9d, r11d
+    XOR r9d, edi
+    MOV rdi, rcx
+    XOR rdi, rdx
+    MOV r13, rdi
+    MOV rdi, rcx
+    AND rdi, rdx
+    AND r13, rsi
+    XOR r13, rdi
+    MOV edi, r9d
+    ADD r13, rdi
+    LEA rdi, [r10+r12]
+    LEA r14, [r12+r13]
+    CMP r10d, edi
+    MOV [rsp+7E8h+var_7B8], rdi
+    MOV r11d, edi
+    SETNBE dil
+    SHL r15d, 4
+    SHR ebx, 1Ch
+    OR ebx, r15d
+    MOV r15d, esi
+    MOVZX edi, dil
+    SHR r15d, 2
+    ADD rdi, r8
+    ADD rdi, [rsp+7E8h+var_7B0]
+    MOV r10d, r15d
+    MOV r15d, ebp
+    MOV ebp, dword ptr [rsp+7E8h+var_7C0]
+    SHL r15d, 1Eh
+    OR r10d, r15d
+    MOV r15, [rsp+7E8h+var_790]
+    XOR r10d, ebx
+    MOV ebx, esi
+    SHL ebp, 19h
+    SHR ebx, 7
+    MOV [rsp+7E8h+var_7E0], rdi
+    MOV edi, r14d
+    OR ebx, ebp
+    XOR ebx, r10d
+    MOV r10, [rsp+7E8h+var_798]
+    MOV rbp, r10
+    AND r10, r15
+    XOR rbp, r15
+    AND rbp, [rsp+7E8h+var_7C0]
+    XOR r10, rbp
+    ADD r10, rbx
+    XOR ebx, ebx
+    CMP r9d, r13d
+    SETNBE bl
+    ADD r10, rbx
+    ADD r10, r8
+    XOR r8d, r8d
+    CMP r12d, r14d
+    SETNBE r8b
+    ADD [rsp+7E8h+var_6E0], 8
+    SUB [rsp+7E8h+var_788], 0FFFFFFFFFFFFFF80h
+    MOV r15d, [rsp+7E8h+var_6E0]
+    LEA rbx, [r10+r8]
+    SUB rax, 0FFFFFFFFFFFFFF80h
+    CMP r15d, 50h
+    MOV [rsp+7E8h+var_7B0], rbx
+    MOV rbx, [rsp+7E8h+var_788]
+    JNZ loc_424D78
+loc_425F30:
+    MOV rax, [rsp+7E8h+var_6D0]
+    MOV r10, rdx
+    MOV rdx, [rsp+7E8h+var_6D8]
+    MOV r13, [rsp+7E8h+var_790]
+    MOV r15, [rsp+7E8h+var_7D8]
+    MOV ebx, dword ptr [rsp+7E8h+var_758]
+    ADD rax, r14
+    MOV r14, [rsp+7E8h+var_700]
+    CMP edi, eax
+    MOV [r14+8], rax
+    SETNBE al
+    ADD rdx, [rsp+7E8h+var_7B0]
+    MOVZX eax, al
+    ADD rax, rdx
+    MOV rdx, [rsp+7E8h+var_6A8]
+    MOV [r14], rax
+    MOV rax, [rsp+7E8h+var_6C0]
+    ADD rax, rsi
+    CMP dword ptr [rsp+7E8h+var_760], eax
+    MOV rsi, [rsp+7E8h+var_6C8]
+    MOV [r14+18h], rax
+    SETNBE al
+    ADD rsi, [rsp+7E8h+var_7C0]
+    MOVZX eax, al
+    ADD rax, rsi
+    MOV rsi, [rsp+7E8h+var_698]
+    MOV [r14+10h], rax
+    MOV rax, [rsp+7E8h+var_6B0]
+    ADD rax, r10
+    CMP dword ptr [rsp+7E8h+var_768], eax
+    MOV [r14+28h], rax
+    SETNBE al
+    ADD r13, [rsp+7E8h+var_6B8]
+    MOVZX eax, al
+    ADD rax, r13
+    MOV [r14+20h], rax
+    MOV rax, [rsp+7E8h+var_6A0]
+    ADD rax, rcx
+    CMP dword ptr [rsp+7E8h+var_778], eax
+    MOV [r14+38h], rax
+    SETNBE al
+    ADD rdx, [rsp+7E8h+var_798]
+    MOVZX eax, al
+    ADD rax, rdx
+    MOV [r14+30h], rax
+    MOV rax, [rsp+7E8h+var_690]
+    ADD rax, [rsp+7E8h+var_7B8]
+    CMP r11d, eax
+    MOV [r14+48h], rax
+    SETNBE al
+    ADD rsi, [rsp+7E8h+var_7E0]
+    MOVZX eax, al
+    ADD rax, rsi
+    MOV [r14+40h], rax
+    MOV rax, [rsp+7E8h+var_680]
+    ADD rax, [rsp+7E8h+var_7E8]
+    MOV r8, [rsp+7E8h+var_688]
+    MOV dword ptr [r14+100h], 0
+    CMP ebx, eax
+    MOV [r14+58h], rax
+    SETNBE al
+    ADD r8, [rsp+7E8h+var_7D0]
+    XOR edx, edx
+    MOVZX eax, al
+    ADD rax, r8
+    MOV [r14+50h], rax
+    MOV rax, [rsp+7E8h+var_6F8]
+    ADD rax, r15
+    CMP dword ptr [rsp+7E8h+var_770], eax
+    MOV [r14+68h], rax
+    MOV rax, [rsp+7E8h+var_678]
+    SETNBE dl
+    ADD rax, [rsp+7E8h+var_7A8]
+    ADD rax, rdx
+    MOV rdx, [rsp+7E8h+var_670]
+    MOV [r14+60h], rax
+    MOV rax, [rsp+7E8h+var_6F0]
+    ADD rax, [rsp+7E8h+var_7C8]
+    CMP dword ptr [rsp+7E8h+var_780], eax
+    MOV [r14+78h], rax
+    SETNBE al
+    ADD rdx, [rsp+7E8h+var_7A0]
+    MOVZX eax, al
+    ADD rax, rdx
+    MOV [r14+70h], rax
+    XOR eax, eax
+    CMP [rsp+7E8h+var_6DC], 7Fh
+    JG loc_424948
+loc_4260CE:
+    MOVSXD rcx, [rsp+7E8h+var_6DC]
+    CMP rcx, 8
+    JNB loc_426164
+loc_4260E0:
+    TEST cl, 4
+    JNZ loc_426210
+loc_4260E9:
+    TEST rcx, rcx
+    JZ loc_4261A5
+loc_4260F2:
+    MOV rax, [rsp+7E8h+src]
+    MOV rsi, [rsp+7E8h+var_668]
+    TEST cl, 2
+    MOVZX eax, byte ptr [rax]
+    MOV [rsi], al
+    JZ loc_4261A5
+loc_426110:
+    MOV rax, [rsp+7E8h+src]
+    MOV rsi, [rsp+7E8h+var_668]
+    MOVZX eax, word ptr [rax+rcx-2]
+    MOV [rsi+rcx-2], ax
+    JMP loc_4261A5
+loc_426130:
+    CMP [rsp+7E8h+var_6DC], 7Fh
+    JG loc_4248FF
+loc_42613E:
+    MOVSXD rcx, [rsp+7E8h+var_6DC]
+    MOV rax, [rsp+7E8h+var_700]
+    SUB rax, 0FFFFFFFFFFFFFF80h
+    CMP rcx, 8
+    MOV [rsp+7E8h+var_668], rax
+    JB loc_4260E0
+loc_426164:
+    MOV rdx, [rsp+7E8h+src]
+    MOV rsi, [rsp+7E8h+var_668]
+    MOV rax, [rdx]
+    LEA rdi, [rsi+8]
+    AND rdi, 0FFFFFFFFFFFFFFF8h
+    MOV [rsi], rax
+    MOV rax, [rdx+rcx-8]
+    MOV [rsi+rcx-8], rax
+    SUB rsi, rdi
+    MOV rax, rsi
+    MOV rsi, rdx
+    SUB rsi, rax
+    ADD rax, rcx
+    SHR rax, 3
+    MOV rcx, rax
+    REP 
+loc_4261A5:
+    MOV rax, [rsp+7E8h+var_700]
+    MOV esi, [rsp+7E8h+var_6DC]
+    MOV [rax+100h], esi
+loc_4261BA:
+    MOV rax, [rsp+7E8h+var_40]
+    XOR rax, fs:28h
+    JNZ loc_426231
+loc_4261CD:
+    ADD rsp, 7B8h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_4261DF:
+    MOV rbx, [rsp+7E8h+var_700]
+    MOV r14d, [rsp+7E8h+var_6DC]
+    MOV rsi, [rsp+7E8h+src]
+    LEA rdi, [rbx+rax+80h]
+    MOVSXD rdx, r14d
+    CALL _memcpy
+    ADD [rbx+100h], r14d
+    JMP loc_4261BA
+loc_426210:
+    MOV rsi, [rsp+7E8h+src]
+    MOV rdx, [rsp+7E8h+var_668]
+    MOV eax, [rsi]
+    MOV [rdx], eax
+    MOV eax, [rsi+rcx-4]
+    MOV [rdx+rcx-4], eax
+    JMP loc_4261A5
+loc_426231:
+    CALL ___stack_chk_fail
+```
+Output:ecx
+    MOVZX ecx, byte ptr [rdi-5]
+    SHL ecx, 8
+    OR edx, ecx
+    MOVZX ecx, byte ptr [rdi-11]
+    MOV [r8-4], rdx
+    MOVZX eax, byte ptr [rdi-7]
+    SHL eax, 18h
+    SHL edx, 10h
+    OR edx, eax
+    MOVZX eax, byte ptr [rdi-10]
+    OR edx, eax
+    MOVZX eax, byte ptr [rdi-12]
+    SHL eax, 8
+    OR edx, eax
+    MOVZX eax, byte ptr [rdi-18]
+    MOV [r8], rdx
+    ADD r8, 4
+    ADD rdi, 8
+    DEC rsi
+    JNS loc_4249B0
+    MOV rax, [rsp+7E8h+var_700]
+    ADD [rax+100h], esi
+    MOV rax, [rsp+7E8h+var_700]
+    LEA rsi, [rsp+7E8h+var_648]
+    MOV rdi, [rsp+7E8h+var_650]
+    MOV r8, [rsp+7E8h+var_660]
+    MOV r9, [rsp+7E8h+var_668]
+    CALL _memset
+    MOV rax, [rsp+7E8h+var_700]
+    ADD [rax+100h], esi
+    MOV rax, [rsp+7E8h+var_700]
+    LEA rsi, [rsp+7E8h+var_648]
+    MOV rdi, [rsp+7E8h+var_650]
+    MOV r8, [rsp+7E8h+var_660]
+    MOV r9, [rsp+7E8h+var_668]
+    CALL _memset
+    MOV rax, [rsp+7E8h+var_700]
+    ADD [rax+100h], esi
+    MOV rax, [rsp+7E8h+var_700]
+############
+```assembly
+loc_410DA0:
+    CMP esi, 0FFFFFFEh
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    JA loc_410E62
+loc_410DB0:
+    LEA r12d, [rsi+7]
+    MOV rbx, rdi
+    MOV ebp, esi
+    SAR r12d, 3
+    MOV edi, r12d
+    CALL sub_40FCB0
+    TEST r12d, r12d
+    JZ loc_410DF0
+loc_410DCA:
+    LEA ecx, [r12-1]
+    LEA rdx, [rax+8]
+    LEA rcx, [rax+rcx*8+10h]
+    NOP dword ptr [rax+rax+00000000h]
+loc_410DE0:
+    MOV qword ptr [rdx], 0
+    ADD rdx, 8
+    CMP rcx, rdx
+    JNZ loc_410DE0
+loc_410DF0:
+    XOR edi, edi
+    TEST ebp, ebp
+    JZ loc_410E2C
+loc_410DF6:
+    NOP word ptr [rax+rax+00000000h]
+loc_410E00:
+    ADD rbx, 1
+    MOV edx, edi
+    MOVZX r8d, byte ptr [rbx-1]
+    SAR edx, 3
+    LEA ecx, ds:0[rdi*8]
+    ADD edi, 1
+    ADD edx, 1
+    AND ecx, 3Fh
+    MOVSXD rdx, edx
+    SHL r8, cl
+    OR [rax+rdx*8], r8
+    CMP ebp, edi
+    JNZ loc_410E00
+loc_410E2C:
+    MOV rdx, [rax]
+    CMP rdx, 1
+    JBE loc_410E5D
+loc_410E35:
+    CMP qword ptr [rax+rdx*8], 0
+    JNZ loc_410E5D
+loc_410E3C:
+    SUB rdx, 1
+    JMP loc_410E54
+loc_410E48:
+    SUB rdx, 1
+    CMP qword ptr [rax+rdx*8+8], 0
+    JNZ loc_410E5D
+loc_410E54:
+    CMP rdx, 1
+    MOV [rax], rdx
+    JNZ loc_410E48
+loc_410E5D:
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_410E62:
+    MOV ecx, offset aBignumFromByte_0
+    MOV edx, 599h
+    MOV esi, offset aSshbnC
+    MOV edi, offset aNbytes0NbytesI
+    CALL ___assert_fail
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Integer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["Arithmetic", "Bitwise", "ConditionalBranching", "DataMovement", "SubroutineCall"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xFFFFFFE", "0x599"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_41B570:
+    PUSH r15
+    PUSH r14
+    MOV eax, 8
+    PUSH r13
+    MOVSXD r13, edi
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    MOV r15, r13
+    MOV r14, rsi
+    MOV ebx, offset off_433620
+    MOV r12d, offset off_434000
+    SUB rsp, 18h
+    CMP r15d, eax
+    MOV ebp, offset off_433F80
+    MOV [rsp+48h+var_40], rdx
+    JZ loc_41B5C4
+loc_41B5A6:
+    ADD rbx, 8
+    CMP rbx, offset unk_433638
+    JZ loc_41B5F0
+loc_41B5B3:
+    MOV rbp, [rbx]
+    MOV r12, [rbp+70h]
+    MOV eax, [r12+18h]
+    CMP r15d, eax
+    JNZ loc_41B5A6
+loc_41B5C4:
+    MOV rsi, [r12+10h]
+    MOV rdx, r13
+    MOV rdi, r14
+    CALL _memcmp
+    TEST eax, eax
+    JNZ loc_41B5A6
+loc_41B5D8:
+    CALL qword ptr [r12]
+    MOV rcx, [rsp+48h+var_40]
+    MOV [rcx], rax
+    JMP loc_41B5F2
+loc_41B5F0:
+    XOR ebp, ebp
+loc_41B5F2:
+    ADD rsp, 18h
+    MOV rax, rbp
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["MemoryAccess", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x8", "0x70", "0x18", "0x10"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_403E10:
+    PUSH rbx
+    MOV rbx, rdi
+    SUB rsp, 0D0h
+    TEST al, al
+    MOV [rsp+0D8h+var_B0], rsi
+    MOV [rsp+0D8h+var_A8], rdx
+    MOV [rsp+0D8h+var_A0], rcx
+    MOV [rsp+0D8h+var_98], r8
+    MOV [rsp+0D8h+var_90], r9
+    JZ loc_403E6F
+loc_403E38:
+    MOVAPS [rsp+0D8h+var_88], xmm0
+    MOVAPS [rsp+0D8h+var_78], xmm1
+    MOVAPS [rsp+0D8h+var_68], xmm2
+    MOVAPS [rsp+0D8h+var_58], xmm3
+    MOVAPS [rsp+0D8h+var_48], xmm4
+    MOVAPS [rsp+0D8h+var_38], xmm5
+    MOVAPS [rsp+0D8h+var_28], xmm6
+    MOVAPS [rsp+0D8h+var_18], xmm7
+loc_403E6F:
+    MOV edx, 7
+    MOV esi, 1
+    MOV edi, (offset aFatalError+6)
+    MOV rax, fs:28h
+    MOV [rsp+0D8h+var_C0], rax
+    XOR eax, eax
+    MOV rcx, cs:stderr
+    CALL _fwrite
+    LEA rax, [rsp+0D8h+arg_0]
+    MOV rdi, cs:stderr
+    MOV rcx, rsp
+    MOV rdx, rbx
+    MOV esi, 1
+    MOV [rsp+0D8h+var_D8], 8
+    MOV [rsp+0D8h+var_D0], rax
+    LEA rax, [rsp+0D8h+var_B8]
+    MOV [rsp+0D8h+var_D4], 30h
+    MOV [rsp+0D8h+var_C8], rax
+    CALL ___vfprintf_chk
+    MOV rsi, cs:stderr
+    MOV edi, 0Ah
+    CALL _fputc
+    MOV rax, [rsp+0D8h+var_C0]
+    XOR rax, fs:28h
+    JNZ loc_403F01
+loc_403EF8:
+    ADD rsp, 0D0h
+    POP rbx
+    RETN 
+loc_403F01:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": true,
+  "presence_of_notable_integer_constants": ["0x7", "0x1", "0xA", "0x30"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Error/Exception Handling"
+}
+```
+############
+```assembly
+loc_4043B0:
+    SUB rsp, 28h
+    MOV rax, fs:28h
+    MOV [rsp+28h+var_10], rax
+    XOR eax, eax
+    MOVSXD rax, esi
+    MOV edx, ds:dword_42D6E0[rax*4]
+    TEST edx, edx
+    JNZ loc_404409
+loc_4043D2:
+    CMP ds:dword_42D400[rax*4], 1
+    JNZ loc_404440
+loc_4043DC:
+    MOV rdi, [rdi]
+    MOV [rsp+28h+var_28], esi
+    XOR edx, edx
+    MOV rsi, rsp
+    CALL sub_428A20
+    TEST rax, rax
+    JZ loc_404427
+loc_4043F1:
+    MOV rcx, [rsp+28h+var_10]
+    XOR rcx, fs:28h
+    MOV eax, [rax+10h]
+    JNZ loc_404422
+loc_404404:
+    ADD rsp, 28h
+    RETN 
+loc_404409:
+    MOV ecx, offset aConfGetInt
+    MOV edx, 108h
+    MOV esi, offset aConfC
+    MOV edi, offset aSubkeytypesPri
+    CALL ___assert_fail
+loc_404422:
+    CALL ___stack_chk_fail
+loc_404427:
+    MOV ecx, offset aConfGetInt
+    MOV edx, 10Ch
+    MOV esi, offset aConfC
+    MOV edi, (offset aOldentryEntry+0Ch)
+    CALL ___assert_fail
+loc_404440:
+    MOV ecx, offset aConfGetInt
+    MOV edx, 109h
+    MOV esi, offset aConfC
+    MOV edi, offset aValuetypesPrim
+    CALL ___assert_fail
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Integer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x108", "0x10C", "0x109"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Error/Exception Handling"
+}
+```
+############
+```assembly
+loc_401AD0:
+
+loc_428B00:
+    TEST edx, edx
+    PUSH r12
+    MOV r12, rdi
+    PUSH rbp
+    PUSH rbx
+    JLE loc_428B49
+loc_428B0B:
+    LEA eax, [rdx-1]
+    MOV rbx, rsi
+    LEA rbp, [rsi+rax+1]
+    JMP loc_428B2F
+loc_428B20:
+    CMP dil, 0Ah
+    JZ loc_428B38
+loc_428B26:
+    ADD rbx, 1
+    CMP rbp, rbx
+    JZ loc_428B49
+loc_428B2F:
+    MOVSX edi, byte ptr [rbx]
+    TEST dil, 60h
+    JZ loc_428B20
+loc_428B38:
+    MOV rsi, r12
+    ADD rbx, 1
+    CALL _fputc
+    CMP rbp, rbx
+    JNZ loc_428B2F
+loc_428B49:
+    POP rbx
+    MOV rdi, r12
+    POP rbp
+    POP r12
+    JMP _fflush
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["ConditionalBranching", "DataMovement", "MemoryAccess"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xA"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_41F6C0:
+    PUSH r15
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    MOV r13, rdx
+    PUSH rbp
+    PUSH rbx
+    XOR edx, edx
+    MOV r12, rsi
+    MOV esi, offset aRb
+    MOV rbp, rcx
+    SUB rsp, 68h
+    MOV rbx, r8
+    MOV rax, fs:28h
+    MOV [rsp+98h+var_40], rax
+    XOR eax, eax
+    CALL sub_42A050
+    TEST rax, rax
+    JZ loc_41F788
+loc_41F6FF:
+    MOV rdi, rax
+    MOV r15, rax
+    CALL sub_41E2B0
+    CMP eax, 9
+    JZ loc_41F880
+loc_41F713:
+    CMP eax, 0Ah
+    JZ loc_41F8B0
+loc_41F71C:
+    CMP eax, 3
+    JZ loc_41F7A0
+loc_41F721:
+    XOR r12d, r12d
+    XOR r14d, r14d
+    MOV r13d, offset aNotAPuttySsh2P
+loc_41F72D:
+    MOV rdi, r15
+    CALL _fclose
+    TEST rbx, rbx
+    JZ loc_41F73D
+loc_41F73A:
+    MOV [rbx], r13
+loc_41F73D:
+    TEST r12b, r12b
+    JNZ loc_41F770
+loc_41F742:
+    XOR eax, eax
+loc_41F744:
+    MOV rcx, [rsp+98h+var_40]
+    XOR rcx, fs:28h
+    JNZ loc_41F96F
+loc_41F758:
+    ADD rsp, 68h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_41F770:
+    MOV rdi, r14
+    CALL sub_40B5E0
+    MOV qword ptr [rbp+0], 0
+    JMP loc_41F742
+loc_41F788:
+    TEST rbx, rbx
+    JZ loc_41F742
+loc_41F78D:
+    XOR r12d, r12d
+    XOR r14d, r14d
+    MOV r13d, offset aCanTOpenFile
+    JMP loc_41F73A
+loc_41F7A0:
+    LEA rsi, [rsp+98h+s1]
+    MOV rdi, r15
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41F858
+loc_41F7B5:
+    LEA rsi, [rsp+98h+s1]
+    MOV edi, offset aPuttyUserKeyFi
+    MOV ecx, 16h
+    REPE 
+    JZ loc_41F7DB
+loc_41F7C8:
+    LEA rsi, [rsp+98h+s1]
+    MOV edi, offset aPuttyUserKeyFi_0
+    MOV ecx, 16h
+    REPE 
+    JNZ loc_41F858
+loc_41F7DB:
+    MOV rdi, r15
+    CALL sub_41D9B0
+    TEST rax, rax
+    MOV r14, rax
+    JZ loc_41F840
+loc_41F7EB:
+    MOV rdi, rax
+    CALL _strlen
+    MOV rsi, r14
+    MOV edi, eax
+    CALL sub_41E1F0
+    MOV rdi, r14
+    MOV [rsp+98h+var_90], rax
+    CALL sub_40B5E0
+    CMP [rsp+98h+var_90], 0
+    JZ loc_41F840
+loc_41F812:
+    LEA rsi, [rsp+98h+s1]
+    MOV rdi, r15
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41F840
+loc_41F823:
+    LEA rsi, [rsp+98h+s1]
+    MOV edi, offset aEncryption
+    MOV ecx, 0Bh
+    REPE 
+    JZ loc_41F8D7
+loc_41F83A:
+    NOP word ptr [rax+rax+00h]
+loc_41F840:
+    XOR r12d, r12d
+    XOR r14d, r14d
+    MOV r13d, offset aFileFormatErro
+    JMP loc_41F72D
+loc_41F858:
+    LEA rsi, [rsp+98h+s1]
+    MOV edi, offset aPuttyUserKeyFi_1
+    MOV ecx, 14h
+    REPE 
+    JNZ loc_41F721
+loc_41F86F:
+    XOR r12d, r12d
+    XOR r14d, r14d
+    MOV r13d, offset aPuttyKeyFormat
+    JMP loc_41F72D
+loc_41F880:
+    MOV r8, rbx
+    MOV rcx, rbp
+    MOV rdx, r13
+    MOV rsi, r12
+    MOV rdi, r15
+    CALL sub_41F0E0
+    MOV rdi, r15
+    MOV rbx, rax
+    CALL _fclose
+    MOV rax, rbx
+    JMP loc_41F744
+loc_41F8B0:
+    MOV r8, rbx
+    MOV rcx, rbp
+    MOV rdx, r13
+    MOV rsi, r12
+    MOV rdi, r15
+    CALL sub_41F4D0
+    MOV rdi, r15
+    MOV rbx, rax
+    CALL _fclose
+    MOV rax, rbx
+    JMP loc_41F744
+loc_41F8D7:
+    MOV rdi, r15
+    CALL sub_41D9B0
+    TEST rax, rax
+    JZ loc_41F840
+loc_41F8E8:
+    MOV rdi, rax
+    CALL sub_40B5E0
+    LEA rsi, [rsp+98h+s1]
+    MOV rdi, r15
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41F840
+loc_41F905:
+    LEA rdi, [rsp+98h+s1]
+    MOV esi, offset aComment
+    CALL _strcmp
+    TEST eax, eax
+    JNZ loc_41F840
+loc_41F91C:
+    MOV rdi, r15
+    CALL sub_41D9B0
+    TEST rax, rax
+    MOV r14, rax
+    JZ loc_41F840
+loc_41F930:
+    TEST rbp, rbp
+    JZ loc_41F974
+loc_41F935:
+    MOV [rbp+0], rax
+loc_41F939:
+    LEA rsi, [rsp+98h+s1]
+    MOV rdi, r15
+    CALL sub_41D800
+    TEST eax, eax
+    JZ loc_41F95D
+loc_41F94A:
+    LEA rdi, [rsp+98h+s1]
+    MOV esi, offset aPublicLines
+    CALL _strcmp
+    TEST eax, eax
+    JZ loc_41F97E
+loc_41F95D:
+    TEST rbp, rbp
+    MOV r13d, offset aFileFormatErro
+    SETNZ r12b
+    JMP loc_41F72D
+loc_41F96F:
+    CALL ___stack_chk_fail
+loc_41F974:
+    MOV rdi, rax
+    CALL sub_40B5E0
+    JMP loc_41F939
+loc_41F97E:
+    MOV rdi, r15
+    CALL sub_41D9B0
+    TEST rax, rax
+    JZ loc_41F95D
+loc_41F98B:
+    XOR esi, esi
+    MOV edx, 0Ah
+    MOV rdi, rax
+    MOV [rsp+98h+var_80], rax
+    CALL _strtol
+    MOV rcx, [rsp+98h+var_80]
+    MOV [rsp+98h+var_88], rax
+    MOV rdi, rcx
+    CALL sub_40B5E0
+    MOV rax, [rsp+98h+var_88]
+    LEA rdx, [rsp+98h+var_6C]
+    MOV rdi, r15
+    MOV esi, eax
+    CALL sub_401D24
+    TEST rax, rax
+    MOV [rsp+98h+var_88], rax
+    JZ loc_41F95D
+loc_41F9CF:
+    MOV rdi, r15
+    CALL _fclose
+    TEST r13, r13
+    JZ loc_41F9E4
+loc_41F9DC:
+    MOV eax, [rsp+98h+var_6C]
+    MOV [r13+0], eax
+loc_41F9E4:
+    TEST r12, r12
+    JZ loc_41FA05
+loc_41F9E9:
+    MOV rax, [rsp+98h+var_90]
+    MOV rdi, [rax+60h]
+    CALL sub_40ACA0
+    MOV [r12], rax
+    MOV rax, [rsp+98h+var_88]
+    JMP loc_41F744
+loc_41FA05:
+    MOV rax, [rsp+98h+var_88]
+    JMP loc_41F744
+```
+Output:B5E0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r14
+    MOV [rsp+98h+var_A0], rax
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV rdi, r15
+    CALL sub_41D9B0
+    MOV rsi, r14
+    CALL sub_41E1F0
+    MOV
+############
+```assembly
+loc_401B10:
+    JMP cs:off_6421E0
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_642D50:
+    EXTRN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": [],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Undetermined"
+}
+```

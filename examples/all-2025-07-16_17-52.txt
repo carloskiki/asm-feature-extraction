@@ -1,0 +1,141 @@
+##### Q 0 - conf_get_str
+```assembly
+loc_404CF0:
+    PUSH rbp
+    MOV rbp, rsp
+    SUB rsp, 40h
+    MOV [rbp+var_38], rdi
+    MOV [rbp+var_3C], esi
+    MOV rax, fs:28h
+    MOV [rbp+var_8], rax
+    XOR eax, eax
+    MOV eax, [rbp+var_3C]
+    CDQE 
+    MOV eax, dword_6582E0[rax*4]
+    TEST eax, eax
+    JZ loc_404D37
+loc_404D1E:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 123h
+    MOV esi, offset aConfC
+    MOV edi, offset aSubkeytypesPri
+    CALL ___assert_fail
+loc_404D37:
+    MOV eax, [rbp+var_3C]
+    CDQE 
+    MOV eax, dword_6585C0[rax*4]
+    CMP eax, 2
+    JZ loc_404D61
+loc_404D48:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 124h
+    MOV esi, offset aConfC
+    MOV edi, offset aValuetypesPrim_0
+    CALL ___assert_fail
+loc_404D61:
+    MOV eax, [rbp+var_3C]
+    MOV [rbp+var_20], eax
+    MOV rax, [rbp+var_38]
+    MOV rax, [rax]
+    LEA rcx, [rbp+var_20]
+    MOV edx, 0
+    MOV rsi, rcx
+    MOV rdi, rax
+    CALL sub_43E508
+    MOV [rbp+var_28], rax
+    CMP [rbp+var_28], 0
+    JNZ loc_404DA6
+loc_404D8D:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 127h
+    MOV esi, offset aConfC
+    MOV edi, offset aEntry
+    CALL ___assert_fail
+loc_404DA6:
+    MOV rax, [rbp+var_28]
+    MOV rax, [rax+10h]
+    MOV rdx, [rbp+var_8]
+    XOR rdx, fs:28h
+    JZ locret_404DC2
+loc_404DBD:
+    CALL ___stack_chk_fail
+loc_404DC2:
+    LEAVE 
+    RETN 
+```
+{'input_parameter_count': 2, 'input_parameter_types': ['Pointer', 'Integer'], 'return_value_type': 'Pointer', 'dominant_operation_categories': ['DataMovement', 'SubroutineCall', 'ConditionalBranching'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 4, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': ['0x123', '0x124', '0x127'], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 5, 'string_literal_presence': True, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': True, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Data Processing/Transformation'}
+
+##### T 0 - conf_get_str
+```assembly
+loc_404373:
+    SUB rsp, 28h
+    MOV rax, fs:28h
+    MOV [rsp+28h+var_10], rax
+    XOR eax, eax
+    MOVSXD rax, esi
+    CMP ds:dword_42B9A0[rax*4], 0
+    JZ loc_4043AD
+loc_404394:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 123h
+    MOV esi, offset aConfC
+    MOV edi, offset aSubkeytypesPri
+    CALL ___assert_fail
+loc_4043AD:
+    MOVSXD rax, esi
+    CMP ds:dword_42B6C0[rax*4], 2
+    JZ loc_4043D3
+loc_4043BA:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 124h
+    MOV esi, offset aConfC
+    MOV edi, offset aValuetypesPrim_0
+    CALL ___assert_fail
+loc_4043D3:
+    MOV [rsp+28h+var_28], esi
+    MOV edx, 0
+    MOV rsi, rsp
+    MOV rdi, [rdi]
+    CALL sub_426E89
+    TEST rax, rax
+    JNZ loc_404404
+loc_4043EB:
+    MOV ecx, offset aConfGetStr
+    MOV edx, 127h
+    MOV esi, offset aConfC
+    MOV edi, (offset aOldentryEntry+0Ch)
+    CALL ___assert_fail
+loc_404404:
+    MOV rax, [rax+10h]
+    MOV rcx, [rsp+28h+var_10]
+    XOR rcx, fs:28h
+    JZ loc_40441D
+loc_404418:
+    CALL ___stack_chk_fail
+loc_40441D:
+    ADD rsp, 28h
+    RETN 
+```
+{'input_parameter_count': 1, 'input_parameter_types': ['Pointer'], 'return_value_type': 'Integer', 'dominant_operation_categories': ['DataMovement', 'SubroutineCall', 'ConditionalBranching'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 3, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': ['0x28', '0x123', '0x124', '0x127', '0x10'], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 7, 'string_literal_presence': True, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': True, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Error/Exception Handling'}
+
+##### Q 1 - filename_to_str
+```assembly
+loc_44097D:
+    PUSH rbp
+    MOV rbp, rsp
+    MOV [rbp+var_8], rdi
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax]
+    POP rbp
+    RETN 
+```
+{'input_parameter_count': 1, 'input_parameter_types': ['Pointer'], 'return_value_type': 'Pointer', 'dominant_operation_categories': ['DataMovement', 'MemoryAccess'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 0, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': [], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 0, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Utility/Helper'}
+
+##### T 1 - filename_to_str
+```assembly
+loc_427F74:
+    MOV rax, [rdi]
+    RETN 
+```
+{'input_parameter_count': 1, 'input_parameter_types': ['Pointer'], 'return_value_type': 'Pointer', 'dominant_operation_categories': ['MemoryAccess'], 'loop_indicators': False, 'number_of_distinct_subroutine_call_targets': 0, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': [], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 0, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Memory Access'}
+

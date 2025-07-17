@@ -1,0 +1,23 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.23763725332645202,
+      "recall_at_1": 0.183,
+      "recall_at_10": 0.325,
+      "similarity_mean": {
+        "max": 0.9043573712706566,
+        "median": 0.5570654811635614,
+        "mean": 0.5434228060119738,
+        "min": 0.06147073679114692
+      }
+    }
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 500,
+      "examples": 3,
+      "prompt": "blank",
+      "model": "gemini-2.5-flash-lite-preview-06-17"
+    },
+    "results": {
+      "mrr": 0.7072910555860636,
+      "recall_at_1": 0.622,
+      "recall_at_10": 0.792,
+      "similarity_mean": {
+        "max": 0.6359075003736316,
+        "median": 0.24971224138196113,
+        "mean": 0.24589404621591396,
+        "min": 0.0
+      }
+    }
+  }
+]

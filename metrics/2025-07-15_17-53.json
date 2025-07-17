@@ -1,0 +1,44 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.5687009863084849,
+      "recall_at_1": 0.479,
+      "recall_at_10": 0.665,
+      "similarity_mean": {
+        "max": 0.8927497034668922,
+        "median": 0.5351666353195905,
+        "mean": 0.5038326223988459,
+        "min": -0.022076622897293417
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "arm",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.8115671342486208,
+      "recall_at_1": 0.733,
+      "recall_at_10": 0.87,
+      "similarity_mean": {
+        "max": 0.9410297992825508,
+        "median": 0.5682237175162882,
+        "mean": 0.5331084898680855,
+        "min": -0.003874517805874348
+      }
+    }
+  }
+]

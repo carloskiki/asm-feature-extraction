@@ -1,0 +1,194 @@
+##### Q 1 - index234
+```assemblyloc_43E1BA:
+    PUSH rbp
+    MOV rbp, rsp
+    SUB rsp, 20h
+    MOV [rbp+var_18], rdi
+    MOV [rbp+var_1C], esi
+    MOV rax, [rbp+var_18]
+    MOV rax, [rax]
+    TEST rax, rax
+    JNZ loc_43E1DF
+loc_43E1D5:
+    MOV eax, 0
+    JMP locret_43E2DA
+loc_43E1DF:
+    CMP [rbp+var_1C], 0
+    JS loc_43E1F9
+loc_43E1E5:
+    MOV rax, [rbp+var_18]
+    MOV rax, [rax]
+    MOV rdi, rax
+    CALL sub_43D3AF
+    CMP eax, [rbp+var_1C]
+    JG loc_43E203
+loc_43E1F9:
+    MOV eax, 0
+    JMP locret_43E2DA
+loc_43E203:
+    MOV rax, [rbp+var_18]
+    MOV rax, [rax]
+    MOV [rbp+var_8], rax
+    JMP loc_43E2CA
+loc_43E213:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+28h]
+    CMP eax, [rbp+var_1C]
+    JLE loc_43E230
+loc_43E21F:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+8]
+    MOV [rbp+var_8], rax
+    JMP loc_43E2CA
+loc_43E230:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+28h]
+    ADD eax, 1
+    SUB [rbp+var_1C], eax
+    CMP [rbp+var_1C], 0
+    JNS loc_43E250
+loc_43E243:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+38h]
+    JMP locret_43E2DA
+loc_43E250:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+2Ch]
+    CMP eax, [rbp+var_1C]
+    JLE loc_43E26A
+loc_43E25C:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+10h]
+    MOV [rbp+var_8], rax
+    JMP loc_43E2CA
+loc_43E26A:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+2Ch]
+    ADD eax, 1
+    SUB [rbp+var_1C], eax
+    CMP [rbp+var_1C], 0
+    JNS loc_43E287
+loc_43E27D:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+40h]
+    JMP locret_43E2DA
+loc_43E287:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+30h]
+    CMP eax, [rbp+var_1C]
+    JLE loc_43E2A1
+loc_43E293:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+18h]
+    MOV [rbp+var_8], rax
+    JMP loc_43E2CA
+loc_43E2A1:
+    MOV rax, [rbp+var_8]
+    MOV eax, [rax+30h]
+    ADD eax, 1
+    SUB [rbp+var_1C], eax
+    CMP [rbp+var_1C], 0
+    JNS loc_43E2BE
+loc_43E2B4:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+48h]
+    JMP locret_43E2DA
+loc_43E2BE:
+    MOV rax, [rbp+var_8]
+    MOV rax, [rax+20h]
+    MOV [rbp+var_8], rax
+loc_43E2CA:
+    CMP [rbp+var_8], 0
+    JNZ loc_43E213
+loc_43E2D5:
+    MOV eax, 0
+loc_43E2DA:
+    LEAVE 
+    RETN ```
+-----
+{'input_parameter_count': 2, 'input_parameter_types': ['Pointer', 'Integer'], 'return_value_type': 'Integer', 'dominant_operation_categories': ['DataMovement', 'ConditionalBranching', 'Arithmetic'], 'loop_indicators': True, 'number_of_distinct_subroutine_call_targets': 1, 'indexed_addressing_modes': False, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': ['0x28', '0x8', '0x2C', '0x10', '0x20', '0x30', '0x38', '0x40', '0x48'], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 10, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Data Processing/Transformation'}
+##### T 1 - index234
+```assemblyloc_426C4A:
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, [rdi]
+    MOV eax, esi
+    SHR eax, 1Fh
+    TEST al, al
+    JNZ loc_426CCE
+loc_426C58:
+    MOV ebp, esi
+    TEST rbx, rbx
+    JZ loc_426CCE
+loc_426C5F:
+    MOV rdi, rbx
+    CALL sub_425BCE
+    CMP ebp, eax
+    JGE loc_426CD5
+loc_426C6B:
+    TEST rbx, rbx
+    JZ loc_426CDC
+loc_426C70:
+    MOV eax, [rbx+28h]
+    CMP eax, ebp
+    JLE loc_426C7D
+loc_426C77:
+    MOV rbx, [rbx+8]
+    JMP loc_426CC2
+loc_426C7D:
+    ADD eax, 1
+    SUB ebp, eax
+    JNS loc_426C8A
+loc_426C84:
+    MOV rax, [rbx+38h]
+    JMP loc_426CE1
+loc_426C8A:
+    MOV eax, [rbx+2Ch]
+    CMP ebp, eax
+    JGE loc_426C97
+loc_426C91:
+    MOV rbx, [rbx+10h]
+    JMP loc_426CC2
+loc_426C97:
+    ADD eax, 1
+    SUB ebp, eax
+    JNS loc_426CA4
+loc_426C9E:
+    MOV rax, [rbx+40h]
+    JMP loc_426CE1
+loc_426CA4:
+    MOV eax, [rbx+30h]
+    CMP ebp, eax
+    JGE loc_426CB1
+loc_426CAB:
+    MOV rbx, [rbx+18h]
+    JMP loc_426CC2
+loc_426CB1:
+    ADD eax, 1
+    SUB ebp, eax
+    JNS loc_426CBE
+loc_426CB8:
+    MOV rax, [rbx+48h]
+    JMP loc_426CE1
+loc_426CBE:
+    MOV rbx, [rbx+20h]
+loc_426CC2:
+    TEST rbx, rbx
+    JNZ loc_426C70
+loc_426CC7:
+    MOV eax, 0
+    JMP loc_426CE1
+loc_426CCE:
+    MOV eax, 0
+    JMP loc_426CE1
+loc_426CD5:
+    MOV eax, 0
+    JMP loc_426CE1
+loc_426CDC:
+    MOV eax, 0
+loc_426CE1:
+    POP rbx
+    POP rbp
+    RETN ```
+-----
+{'input_parameter_count': 2, 'input_parameter_types': ['Pointer', 'Integer'], 'return_value_type': 'Integer', 'dominant_operation_categories': ['DataMovement', 'SubroutineCall', 'ConditionalBranching'], 'loop_indicators': True, 'number_of_distinct_subroutine_call_targets': 1, 'indexed_addressing_modes': True, 'jump_table_indicators': False, 'simd_instructions': False, 'notable_integer_constants': ['0x28', '0x8', '0x38', '0x2C', '0x40', '0x30', '0x10', '0x48', '0x20'], 'notable_floating_point_constants': [], 'count_of_distinct_immediate_values': 10, 'string_literal_presence': False, 'modifies_input_parameters': False, 'modifies_global_state': False, 'memory_allocation_deallocation': False, 'io_operations': False, 'block_memory_operations': False, 'linear_memory_accesses': False, 'error_handling': False, 'number_of_software_interrupts_system_calls': 0, 'inferred_category': 'Data Processing/Transformation'}

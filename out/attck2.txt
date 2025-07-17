@@ -1,0 +1,4557 @@
+############
+```assembly
+loc_410E85:
+    PUSH r13
+    PUSH r12
+    LEA r13, [rdi+2]
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 8
+    MOVZX eax, byte ptr [rdi]
+    MOVZX ecx, byte ptr [rdi+1]
+    SHL eax, 8
+    LEA ebx, [rax+rcx+7]
+    SAR ebx, 3
+    LEA eax, [rbx+1]
+    CMP esi, eax
+    JLE loc_410EE0
+loc_410EAB:
+    TEST rdx, rdx
+    LEA eax, [rbx+2]
+    JZ loc_410ECD
+loc_410EB3:
+    MOV r12, rdx
+    MOV rbp, rdi
+    MOV esi, ebx
+    MOV rdi, r13
+    CALL sub_410CC0
+    MOV [r12], rax
+    LEA eax, [rbx+r13]
+    SUB eax, ebp
+loc_410ECD:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    RETN 
+loc_410EE0:
+    MOV eax, 0FFFFFFFFh
+    JMP loc_410ECD
+loc_410EF0:
+    MOV eax, 0FFFFFFFFh
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Integer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["Arithmetic", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xFFFFFFFFh"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_4227D0:
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    MOV r12, rdi
+    PUSH rbx
+    MOV rbx, rdx
+    MOV ebp, esi
+    SUB rsp, 0E0h
+    LEA rdi, [rsp+108h+var_F8]
+    LEA r14, [rsp+108h+var_F9]
+    MOV rax, fs:28h
+    MOV [rsp+108h+var_30], rax
+    XOR eax, eax
+    CALL sub_41B8C0
+    MOV rdi, [rbx+8]
+    CALL sub_410F40
+    CMP eax, 2
+    LEA r13d, [rax-3]
+    JZ loc_42284C
+loc_42281B:
+    NOP dword ptr [rax+rax+00h]
+loc_422820:
+    MOV rdi, [rbx+8]
+    MOV esi, r13d
+    SUB r13d, 1
+    CALL sub_410FE0
+    LEA rdi, [rsp+108h+var_F8]
+    MOV edx, 1
+    MOV rsi, r14
+    MOV [rsp+108h+var_F9], al
+    CALL sub_41B900
+    CMP r13d, 0FFFFFFFFh
+    JNZ loc_422820
+loc_42284C:
+    MOV rdi, [rbx+10h]
+    LEA r14, [rsp+108h+var_F9]
+    CALL sub_410F40
+    CMP eax, 2
+    LEA r13d, [rax-3]
+    JZ loc_422894
+loc_422863:
+    NOP dword ptr [rax+rax+00h]
+loc_422868:
+    MOV rdi, [rbx+10h]
+    MOV esi, r13d
+    SUB r13d, 1
+    CALL sub_410FE0
+    LEA rdi, [rsp+108h+var_F8]
+    MOV edx, 1
+    MOV rsi, r14
+    MOV [rsp+108h+var_F9], al
+    CALL sub_41B900
+    CMP r13d, 0FFFFFFFFh
+    JNZ loc_422868
+loc_422894:
+    LEA rsi, [rsp+108h+var_F8]
+    LEA rdi, [rsp+108h+var_98]
+    MOV r14d, 1
+    XOR r13d, r13d
+    CALL sub_41C2D0
+    MOV rdi, [rbx+8]
+    CALL sub_410F00
+    LEA rdi, [rsp+108h+src]
+    MOV r8d, eax
+    MOV ecx, offset aD
+    MOV edx, 58h
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___sprintf_chk
+    JMP loc_4228E8
+loc_4228E0:
+    ADD r13, 1
+    ADD r14d, 1
+loc_4228E8:
+    TEST r13, r13
+    MOVZX r9d, [rsp+r13+108h+var_98]
+    JZ loc_4229D3
+loc_4228F7:
+    LEA rdi, [rsp+108h+src]
+loc_4228FF:
+    MOV edx, [rdi]
+    ADD rdi, 4
+    LEA eax, [rdx-1010101h]
+    NOT edx
+    AND eax, edx
+    AND eax, 80808080h
+    JZ loc_4228FF
+loc_422916:
+    MOV edx, eax
+    MOV r8d, 42E7FDh
+    MOV esi, 1
+    SHR edx, 10h
+    TEST eax, 8080h
+    CMOVZ eax, edx
+    LEA rdx, [rdi+2]
+    MOV ecx, eax
+    CMOVZ rdi, rdx
+    ADD cl, al
+    MOV rdx, 0FFFFFFFFFFFFFFFFh
+    SBB rdi, 3
+    MOV ecx, offset unk_437D11
+    XOR eax, eax
+    CALL ___sprintf_chk
+    CMP r14d, 10h
+    JNZ loc_4228E0
+loc_422957:
+    MOVSXD r13, ebp
+    LEA rsi, [rsp+108h+src]
+    MOV rdi, r12
+    MOV rdx, r13
+    LEA r13, [r12+r13-1]
+    CALL _strncpy
+    MOV byte ptr [r13+0], 0
+    MOV rdi, r12
+    CALL _strlen
+    CMP qword ptr [rbx+38h], 0
+    JZ loc_4229B0
+loc_422986:
+    LEA edx, [rbp-1]
+    CMP eax, edx
+    JGE loc_4229B0
+loc_42298D:
+    MOVSXD rcx, eax
+    SUB ebp, eax
+    MOV byte ptr [r12+rcx], 20h
+    LEA edx, [rbp-1]
+    MOV rsi, [rbx+38h]
+    LEA rdi, [r12+rcx+1]
+    MOVSXD rdx, edx
+    CALL _strncpy
+    MOV byte ptr [r13+0], 0
+loc_4229B0:
+    MOV rax, [rsp+108h+var_30]
+    XOR rax, fs:28h
+    JNZ loc_422A35
+loc_4229C3:
+    ADD rsp, 0E0h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_4229D3:
+    LEA rdx, [rsp+108h+src]
+loc_4229DB:
+    MOV ecx, [rdx]
+    ADD rdx, 4
+    LEA eax, [rcx-1010101h]
+    NOT ecx
+    AND eax, ecx
+    AND eax, 80808080h
+    JZ loc_4229DB
+loc_4229F2:
+    MOV ecx, eax
+    MOV r8d, 42E60Dh
+    MOV esi, 1
+    SHR ecx, 10h
+    TEST eax, 8080h
+    CMOVZ eax, ecx
+    LEA rcx, [rdx+2]
+    CMOVZ rdx, rcx
+    MOV ecx, eax
+    ADD cl, al
+    MOV ecx, offset unk_437D11
+    SBB rdx, 3
+    XOR eax, eax
+    MOV rdi, rdx
+    MOV rdx, 0FFFFFFFFFFFFFFFFh
+    CALL ___sprintf_chk
+    JMP loc_4228E0
+loc_422A35:
+    CALL ___stack_chk_fail
+```
+Output:FE0
+    LEA rdi, [rsp+108h+var_F8]
+    MOV edx, 1
+    MOV rsi, r14
+    MOV [rsp+108h+var_F9], al
+    CALL sub_41B900
+    CMP r13d, 0FFFFFFFFh
+    JNZ loc_422868
+loc_422894:
+    LEA rdi, [rsp+108h+var_F8]
+    MOV rsi, r14
+    MOV ecx, 1
+    MOV rdx, 1
+    MOV rax, qword ptr fs:28h
+    XOR rbp, rbp
+    MOV [rsp+108h+var_30], rax
+    CALL sub_41B920
+    ADD rsp, 0E0h
+    POP r15
+    POP r14
+    POP r13
+    POP r12
+    POP rbp
+    RET
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+s
+
+
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+############
+```assembly
+loc_429EB0:
+    PUSH rbx
+    XOR eax, eax
+    MOV esi, 1
+    MOV ebx, edi
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429EDC
+loc_429EC3:
+    AND eax, 0FFFFFFFEh
+    MOV esi, 2
+    MOV edi, ebx
+    MOV edx, eax
+    XOR eax, eax
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429F0F
+loc_429EDA:
+    POP rbx
+    RETN 
+loc_429EDC:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebx
+    MOV r8, rax
+    MOV edx, offset aDFcntlFGetfdS
+loc_429EF2:
+    MOV rdi, cs:stderr
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV edi, 1
+    CALL _exit
+loc_429F0F:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebx
+    MOV r8, rax
+    MOV edx, offset aDFcntlFSetfdS
+    JMP loc_429EF2
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["FileDescriptor"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "SystemInteraction"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xFFFFFFFE"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 4,
+  "inferred_category": "System/OS Interaction",
+  "att&ck_technique": "T1059"
+}
+```
+############
+```assembly
+loc_4243B0:
+    PUSH rbx
+    MOV rbx, rsi
+    SUB rsp, 30h
+    MOV rsi, rsp
+    MOV rax, fs:28h
+    MOV [rsp+38h+var_10], rax
+    XOR eax, eax
+    CALL sub_424200
+    MOV edx, 20h
+    MOV rsi, rbx
+    MOV rdi, rsp
+    CALL sub_40B970
+    MOV rcx, [rsp+38h+var_10]
+    XOR rcx, fs:28h
+    JNZ loc_4243F6
+loc_4243F0:
+    ADD rsp, 30h
+    POP rbx
+    RETN 
+loc_4243F6:
+    CALL ___stack_chk_fail
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "StackManipulation"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x20"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": true,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper",
+  "att&ck_technique": "T1550.001"
+}
+```
+############
+```assembly
+loc_4199A2:
+    CMP eax, 2
+    JZ loc_419B10
+loc_4199AB:
+    XOR esi, esi
+    CALL sub_418410
+    MOV rdi, r14
+    MOV rbx, rax
+    CALL sub_416E60
+    MOV rdi, r13
+    MOV r12, rax
+    CALL sub_410F00
+    SUB eax, 2
+    MOV ebp, eax
+    JS loc_419A77
+loc_4199D3:
+    ADD r14, 8
+    JMP loc_419A28
+loc_4199E0:
+    MOV rdx, [rbx+18h]
+    LEA rsi, [rbx+8]
+    MOV rcx, r14
+    MOV rdi, r12
+    SUB ebp, 1
+    CALL sub_417A80
+    MOV rdi, rbx
+    MOV r15, rax
+    CALL sub_419800
+    XOR esi, esi
+    MOV rdi, r12
+    MOV rbx, r15
+    CALL sub_418410
+    MOV rdi, r12
+    MOV [rsp+48h+var_40], rax
+    CALL sub_419800
+    MOV rax, [rsp+48h+var_40]
+    CMP ebp, 0FFFFFFFFh
+    MOV r12, rax
+    JZ loc_419A77
+loc_419A28:
+    MOV esi, ebp
+    MOV rdi, r13
+    CALL sub_411020
+    TEST eax, eax
+    JZ loc_4199E0
+loc_419A36:
+    MOV rdx, [rbx+18h]
+    LEA rsi, [rbx+8]
+    MOV rcx, r14
+    MOV rdi, r12
+    SUB ebp, 1
+    CALL sub_417A80
+    MOV rdi, r12
+    MOV r15, rax
+    CALL sub_419800
+    XOR esi, esi
+    MOV rdi, rbx
+    CALL sub_418410
+    MOV rdi, rbx
+    MOV r12, rax
+    CALL sub_419800
+    CMP ebp, 0FFFFFFFFh
+    MOV rbx, r12
+    MOV r12, r15
+    JNZ loc_419A28
+loc_419A77:
+    MOV rdi, rbx
+    CALL sub_419800
+    TEST r12, r12
+    JZ loc_419B00
+loc_419A84:
+    CMP byte ptr [r12+20h], 0
+    MOV rbx, r12
+    JZ loc_419AF0
+loc_419A8F:
+    ADD rsp, 18h
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_419AA8:
+    MOV rdi, rbp
+    CALL sub_417810
+    MOV rsi, r13
+    MOV edx, eax
+    MOV rdi, r14
+    CALL sub_419860
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_419ADA
+loc_419AC5:
+    CMP byte ptr [rax+20h], 0
+    MOV rbx, rax
+    JNZ loc_419A8F
+loc_419ACE:
+    MOV rdi, rax
+    CALL sub_417850
+    TEST eax, eax
+    JNZ loc_419A8F
+loc_419ADA:
+    MOV rdi, rbp
+    XOR ebx, ebx
+    CALL sub_419800
+    JMP loc_419A8F
+loc_419AF0:
+    MOV rdi, r12
+    CALL sub_417850
+    TEST eax, eax
+    JNZ loc_419A8F
+loc_419AFC:
+    NOP dword ptr [rax+00h]
+loc_419B00:
+    MOV rdi, r12
+    XOR ebx, ebx
+    CALL sub_419800
+    JMP loc_419A8F
+loc_419B10:
+    MOV esi, 28h
+    MOV edi, 1
+    CALL sub_40AC50
+    MOV rdi, r13
+    MOV [rax], rbp
+    MOV qword ptr [rax+8], 0
+    MOV qword ptr [rax+10h], 0
+    MOV qword ptr [rax+18h], 0
+    MOV rbx, rax
+    MOV byte ptr [rax+20h], 1
+    CALL sub_410F00
+    TEST eax, eax
+    MOV ebp, eax
+    JS loc_419A8F
+loc_419B53:
+    NOP dword ptr [rax+rax+00h]
+loc_419B58:
+    XOR esi, esi
+    MOV rdi, rbx
+    CALL sub_418410
+    MOV rdi, rbx
+    MOV r12, rax
+    CALL sub_419800
+    TEST r12, r12
+    JZ loc_419BA0
+loc_419B72:
+    MOV esi, ebp
+    MOV rdi, r13
+    MOV rbx, r12
+    CALL sub_411020
+    TEST eax, eax
+    JNZ loc_419BB0
+loc_419B83:
+    SUB ebp, 1
+    JS loc_419A8F
+loc_419B8C:
+    TEST rbx, rbx
+    JNZ loc_419B58
+loc_419B91:
+    JMP loc_419A8F
+loc_419BA0:
+    XOR ebx, ebx
+    JMP loc_419A8F
+loc_419BB0:
+    MOV rdi, r12
+    XOR edx, edx
+    MOV rsi, r14
+    CALL sub_417D30
+    MOV rdi, r12
+    MOV rbx, rax
+    CALL sub_419800
+    JMP loc_419B83
+```
+Output:, rax
+    CALL sub_419800
+    XOR esi, esi
+    MOV rdi, r12
+    MOV rbx, r15
+    CALL sub_418410
+    MOV rdi, r12
+    MOV [rsp+48h+var_40], rax
+    CALL sub_419800
+    MOV rax, [rsp+48h+var_40]
+    CMP ebp, 0FFFFFFFFh
+    MOV r12, rax
+    JZ loc_419A77
+loc_419A77:
+    RET
+```
+############
+```assembly
+loc_411C60:
+    PUSH rbx
+    MOV rbx, rdi
+    MOV edi, 1
+    CALL sub_40FCB0
+    XOR edx, edx
+    TEST rbx, rbx
+    MOV [rax+8], rbx
+    SETNZ dl
+    MOV [rax], rdx
+    POP rbx
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_42A0F0:
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, [rdi]
+    CALL sub_40B5E0
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_642CA0:
+    EXTRN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["ExternalCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_404260:
+    PUSH r14
+    PUSH r13
+    MOV r13, rdi
+    PUSH r12
+    PUSH rbp
+    MOV r12, rsi
+    PUSH rbx
+    XOR ebp, ebp
+    CALL sub_404090
+    JMP loc_4042D5
+loc_404280:
+    CMP eax, 2
+    JNZ loc_404292
+loc_404285:
+    MOV rdi, [rbx+8]
+    CALL sub_40ACA0
+    MOV [r14+8], rax
+loc_404292:
+    MOVSXD rax, dword ptr [rbx]
+    MOV eax, ds:dword_42D400[rax*4]
+    CMP eax, 2
+    JZ loc_40432E
+loc_4042A5:
+    JLE loc_404340
+loc_4042AB:
+    CMP eax, 3
+    JZ loc_404358
+loc_4042B4:
+    CMP eax, 4
+    JNZ loc_4042C6
+loc_4042B9:
+    MOV rdi, [rbx+10h]
+    CALL sub_42A0E0
+    MOV [r14+10h], rax
+loc_4042C6:
+    MOV rdi, [r13+0]
+    MOV rsi, r14
+    ADD ebp, 1
+    CALL sub_428750
+loc_4042D5:
+    MOV rdi, [r12]
+    MOV esi, ebp
+    CALL sub_428790
+    TEST rax, rax
+    MOV rbx, rax
+    JZ loc_404370
+loc_4042EC:
+    MOV esi, 18h
+    MOV edi, 1
+    CALL sub_40AC50
+    MOV r14, rax
+    MOVSXD rax, dword ptr [rbx]
+    MOV [r14], eax
+    MOV eax, ds:dword_42D6E0[rax*4]
+    CMP eax, 1
+    JNZ loc_404280
+loc_404314:
+    MOV eax, [rbx+8]
+    MOV [r14+8], eax
+    MOVSXD rax, dword ptr [rbx]
+    MOV eax, ds:dword_42D400[rax*4]
+    CMP eax, 2
+    JNZ loc_4042A5
+loc_40432E:
+    MOV rdi, [rbx+10h]
+    CALL sub_40ACA0
+    MOV [r14+10h], rax
+    JMP loc_4042C6
+loc_404340:
+    CMP eax, 1
+    JNZ loc_4042C6
+loc_404345:
+    MOV eax, [rbx+10h]
+    MOV [r14+10h], eax
+    JMP loc_4042C6
+loc_404358:
+    MOV rdi, [rbx+10h]
+    CALL sub_429C90
+    MOV [r14+10h], rax
+    JMP loc_4042C6
+loc_404370:
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+```
+Output::dword_42D400[rax*4]
+    CMP eax, 2
+    JZ loc_40432E
+    JMP loc_404332
+loc_40432E:
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+loc_404332:
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AFA0
+    MOV r14, rax
+    MOV rdi, r14
+    CALL sub_40AC90
+    MOV r14, rax
+    MOV
+############
+```assembly
+loc_41ABF0:
+    PUSH r13
+    PUSH r12
+    MOV r12, rdx
+    PUSH rbp
+    PUSH rbx
+    MOV rbp, rsi
+    MOV r13, rdi
+    MOV rsi, r12
+    MOV rdi, rbp
+    SUB rsp, 28h
+    LEA rdx, [rsp+48h+s2]
+    MOV rcx, rsp
+    MOV rax, fs:28h
+    MOV [rsp+48h+var_30], rax
+    XOR eax, eax
+    CALL sub_418D50
+    CMP [rsp+48h+s2], 0
+    JZ loc_41AD88
+loc_41AC32:
+    MOV esi, 38h
+    MOV edi, 1
+    CALL sub_40AC50
+    CMP cs:byte_6425A8, 0
+    MOV rbx, rax
+    MOV [rax], r13
+    JZ loc_41AD58
+loc_41AC54:
+    MOV esi, [rsp+48h+var_48]
+    MOV rdi, [rsp+48h+s2]
+    LEA rdx, [rbx+8]
+    MOV qword ptr [rbx+8], offset dword_642540
+    MOV byte ptr [rbx+28h], 0
+    MOV qword ptr [rbx+30h], 0
+    MOV qword ptr [rbx+10h], 0
+    MOV qword ptr [rbx+20h], 0
+    MOV qword ptr [rbx+18h], 0
+    CALL sub_419010
+    TEST eax, eax
+    JZ loc_41AD30
+loc_41AC99:
+    LEA rcx, [rsp+48h+var_44]
+    LEA rdx, [rsp+48h+var_38]
+    MOV rdi, rbp
+    MOV rsi, r12
+    CALL sub_418D50
+    MOV rdi, [rsp+48h+var_38]
+    TEST rdi, rdi
+    JZ loc_41AD30
+loc_41ACB8:
+    CMP [rsp+48h+var_44], 40h
+    JNZ loc_41AD30
+loc_41ACBF:
+    MOV esi, 20h
+    CALL sub_410DA0
+    MOV rsi, [rbx+8]
+    MOV [rbx+30h], rax
+    MOV rdi, rax
+    CALL sub_41ABC0
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_41ACF2
+loc_41ACE1:
+    MOV rsi, [rbx+10h]
+    MOV rdi, [rax+8]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_41AD68
+loc_41ACF2:
+    MOV rdi, rbx
+    XOR ebx, ebx
+    CALL sub_416E00
+loc_41ACFC:
+    MOV rdi, rbp
+    CALL sub_419800
+    CMP [rsp+48h+var_48], 20h
+    JNZ loc_41AD30
+loc_41AD0A:
+    MOV rax, [rsp+48h+var_38]
+    MOV rsi, [rsp+48h+s2]
+    MOV edx, 20h
+    LEA rdi, [rax+20h]
+    CALL _memcmp
+    MOV edx, eax
+    MOV rax, rbx
+    TEST edx, edx
+    JZ loc_41AD3A
+loc_41AD2B:
+    NOP dword ptr [rax+rax+00h]
+loc_41AD30:
+    MOV rdi, rbx
+    CALL sub_416E00
+    XOR eax, eax
+loc_41AD3A:
+    MOV rcx, [rsp+48h+var_30]
+    XOR rcx, fs:28h
+    JNZ loc_41AD8C
+loc_41AD4A:
+    ADD rsp, 28h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    RETN 
+loc_41AD58:
+    CALL sub_419710
+    JMP loc_41AC54
+loc_41AD68:
+    MOV rsi, [rbx+18h]
+    MOV rdi, [rbp+10h]
+    CALL sub_4111B0
+    TEST eax, eax
+    JNZ loc_41ACF2
+loc_41AD7D:
+    JMP loc_41ACFC
+loc_41AD88:
+    XOR eax, eax
+    JMP loc_41AD3A
+loc_41AD8C:
+    CALL ___stack_chk_fail
+```
+Output:8]
+    CALL sub_418D50
+    MOV rdi, [rsp+48h+var_44]
+    CALL sub_418D50
+    JMP loc_41AD40
+loc_41AD30:
+    LEA rax, [rsp+48h+var_44]
+    LEA rdi, [rsp+48h+var_38]
+    MOV rsi, r12
+    CALL sub_418D50
+    LEA rax, [rsp+48h+var_38]
+    CALL sub_418D50
+    LEA rax, [rsp+48h+var_44]
+    CALL sub_418D50
+    JMP loc_41AD40
+loc_41AD40:
+    ADD rsp, 28h
+    POP r13
+    POP r12
+    POP rbp
+    RET
+loc_41AD58:
+    MOV [rsp+48h+var_48], 0
+    JMP loc_41AC54
+loc_41AD88:
+    ADD rsp, 28h
+    POP r13
+    POP r12
+    POP rbp
+    RET
+```
+
+Assistant, please analyze this assembly code and provide the extracted features and inferred algorithm in JSON format.
+############
+```assembly
+loc_42A1A0:
+    PUSH rbp
+    PUSH rbx
+    MOV esi, 1C0h
+    MOV rbx, rdi
+    SUB rsp, 0A8h
+    MOV rax, fs:28h
+    MOV [rsp+0B8h+var_20], rax
+    XOR eax, eax
+    CALL _mkdir
+    TEST eax, eax
+    JS loc_42A248
+loc_42A1CD:
+    MOV rdx, rsp
+    MOV rsi, rbx
+    MOV edi, 1
+    CALL ___xstat
+    TEST eax, eax
+    JS loc_42A278
+loc_42A1E5:
+    MOV ebp, [rsp+0B8h+var_9C]
+    CALL _getuid
+    CMP ebp, eax
+    JNZ loc_42A230
+loc_42A1F2:
+    MOV edx, [rsp+0B8h+var_A0]
+    XOR eax, eax
+    TEST dl, 3Fh
+    JZ loc_42A210
+loc_42A1FD:
+    AND edx, 1FFh
+    MOV rsi, rbx
+    MOV edi, offset aSDirectoryHasO
+    CALL sub_40B290
+loc_42A210:
+    MOV rcx, [rsp+0B8h+var_20]
+    XOR rcx, fs:28h
+    JNZ loc_42A29B
+loc_42A223:
+    ADD rsp, 0A8h
+    POP rbx
+    POP rbp
+    RETN 
+loc_42A230:
+    MOV edx, [rsp+0B8h+var_9C]
+    MOV rsi, rbx
+    MOV edi, offset aSDirectoryOwne
+    XOR eax, eax
+    CALL sub_40B290
+    JMP loc_42A210
+loc_42A248:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CMP edi, 11h
+    JZ loc_42A1CD
+loc_42A258:
+    CALL _strerror
+    MOV rsi, rbx
+    MOV rdx, rax
+    MOV edi, offset aSMkdirS
+    XOR eax, eax
+    CALL sub_40B290
+    JMP loc_42A210
+loc_42A278:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV rsi, rbx
+    MOV rdx, rax
+    MOV edi, offset aSStatS
+    XOR eax, eax
+    CALL sub_40B290
+    JMP loc_42A210
+loc_42A29B:
+    CALL ___stack_chk_fail
+```
+Output:perror
+    JMP loc_42A223
+loc_42A278:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CMP edi, 2h
+    JZ loc_42A1E5
+loc_42A288:
+    CALL _perror
+    JMP loc_42A223
+loc_42A29B:
+    ADD rsp, 0A8h
+    POP rbx
+    POP rbp
+    RETN 
+```
+
+### **Task Description:**
+
+Analyze the provided assembly routine and provide a detailed description of its functionality, including:
+
+1. **Function Purpose**: What does this function do?
+2. **Parameters**: What are the expected parameters and their roles?
+3. **Return Value**: What does the function return?
+4. **Key Operations**: What are the main operations being performed?
+5. **Control Flow**: How does the function manage control flow?
+
+### **Detailed Analysis**:
+
+#### Function Purpose:
+The function appears to be responsible for checking if a directory exists and has specific ownership properties. It also handles potential errors during these checks.
+
+#### Parameters:
+- **rdi**: A pointer to a directory path string (`char* dir_path`)
+- **rsi**: A pointer to a user ID (`int uid`)
+- **rdx**: A pointer to a bitmask (`unsigned char mask`)
+
+#### Return Value:
+- **eax**: An integer indicating success or failure. Specifically, it returns 0 on success and a non-zero value on failure.
+
+#### Key Operations:
+1. **Directory Creation**:
+   ```assembly
+   MOV esi, 1C0h
+   MOV rbx, rdi
+   SUB rsp, 0A8h
+   MOV rax, fs:28h
+   MOV [rsp+0B8h+var_20], rax
+   XOR eax, eax
+   CALL _mkdir
+   TEST eax, eax
+   JS loc_42A248
+   ```
+   This block attempts to create a directory with permissions set to `0o700`. If `_mkdir` fails (returns a negative value), the function jumps to handle the error.
+
+2. **File Status Check**:
+   ```assembly
+   MOV rdx, rsp
+   MOV rsi, rbx
+   MOV edi, 1
+   CALL ___xstat
+   TEST eax, eax
+############
+```assembly
+loc_642C58:
+    EXTRN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": [],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Undetermined"
+}
+```
+############
+```assembly
+loc_4266C0:
+    PUSH rbx
+    MOV esi, 120h
+    MOV rbx, rdi
+    CALL sub_40B660
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x120"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_401A10:
+    JMP cs:off_642160
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["JumpTableIndicators"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_418D50:
+    CMP dword ptr [rsi], 3
+    MOV qword ptr [rdx], 0
+    JG loc_418D60
+loc_418D5C:
+    RETN 
+loc_418D60:
+    PUSH r13
+    PUSH r12
+    MOV r13, rdx
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rbp, rcx
+    MOV r12, rsi
+    SUB rsp, 8
+    MOV rax, [rdi]
+    MOV edi, [rax]
+    BSWAP edi
+    CALL sub_40A770
+    TEST eax, eax
+    MOV [rbp+0], eax
+    JS loc_418DB5
+loc_418D89:
+    MOV eax, [r12]
+    MOV rsi, [rbx]
+    SUB eax, 4
+    LEA rdx, [rsi+4]
+    MOV [r12], eax
+    MOV ecx, [rbp+0]
+    MOV [rbx], rdx
+    CMP eax, ecx
+    JL loc_418DB5
+loc_418DA5:
+    SUB eax, ecx
+    MOV [r13+0], rdx
+    MOVSXD rdx, ecx
+    ADD [rbx], rdx
+    MOV [r12], eax
+loc_418DB5:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["Arithmetic", "ConditionalBranching", "MemoryAccess"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x4"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_417A10:
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    MOV rbp, rsi
+    MOV rbx, rdx
+    SUB rsp, 8
+    MOV rsi, [rdx]
+    CALL sub_411EE0
+    MOV rsi, [rbx]
+    MOV r13, rax
+    MOV rdi, rbp
+    CALL sub_411EE0
+    MOV rdi, r13
+    MOV rsi, rax
+    MOV r12, rax
+    CALL sub_4119D0
+    MOV rdi, r13
+    MOV rbp, rax
+    CALL sub_4108A0
+    MOV rdi, r12
+    CALL sub_4108A0
+    MOV rsi, [rbx]
+    MOV rdi, rbp
+    CALL sub_411EE0
+    MOV rdi, rbp
+    MOV rbx, rax
+    CALL sub_4108A0
+    ADD rsp, 8
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement", "ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_422E20:
+    PUSH rbx
+    MOV edi, 1
+    SUB rsp, 30h
+    MOV [rsp+38h+var_30], rsi
+    MOV esi, 40h
+    MOV [rsp+38h+var_34], edx
+    MOV rax, fs:28h
+    MOV [rsp+38h+var_10], rax
+    XOR eax, eax
+    CALL sub_40AC50
+    LEA rdi, [rsp+38h+var_30]
+    LEA rcx, [rsp+38h+var_1C]
+    LEA rdx, [rsp+38h+s1]
+    LEA rsi, [rsp+38h+var_34]
+    MOV rbx, rax
+    CALL sub_421660
+    MOV rdi, [rsp+38h+s1]
+    TEST rdi, rdi
+    JZ loc_422F20
+loc_422E77:
+    CMP [rsp+38h+var_1C], 7
+    JNZ loc_422F20
+loc_422E82:
+    MOV edx, 7
+    MOV esi, offset aSshRsa
+    CALL _memcmp
+    TEST eax, eax
+    JNZ loc_422F20
+loc_422E99:
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    CALL sub_4216D0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx+10h], rax
+    CALL sub_4216D0
+    CMP qword ptr [rbx+10h], 0
+    MOV [rbx+8], rax
+    MOV qword ptr [rbx+18h], 0
+    MOV qword ptr [rbx+30h], 0
+    MOV qword ptr [rbx+28h], 0
+    MOV qword ptr [rbx+20h], 0
+    MOV qword ptr [rbx+38h], 0
+    JZ loc_422F10
+loc_422EEE:
+    TEST rax, rax
+    JZ loc_422F10
+loc_422EF3:
+    MOV rax, rbx
+loc_422EF6:
+    MOV rcx, [rsp+38h+var_10]
+    XOR rcx, fs:28h
+    JNZ loc_422F2C
+loc_422F06:
+    ADD rsp, 30h
+    POP rbx
+    RETN 
+loc_422F10:
+    MOV rdi, rbx
+    CALL sub_422CC0
+    NOP dword ptr [rax+rax+00000000h]
+loc_422F20:
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    XOR eax, eax
+    JMP loc_422EF6
+loc_422F2C:
+    CALL ___stack_chk_fail
+```
+Output:MOV rdi, [rsp+38h+var_34]
+    MOV rsi, [rsp+38h+var_30]
+    CALL sub_4216D0
+    CMP qword ptr [rbx+8], 0
+    JZ loc_422EBF
+    LEA rsi, [rsp+38h+var_30]
+    LEA rdi, [rsp+38h+var_34]
+    CALL sub_4216D0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx+18h], rax
+    CALL sub_4216D0
+    CMP qword ptr [rbx+18h], 0
+    MOV [rbx+10h], rax
+    MOV qword ptr [rbx+30h], 0
+    MOV qword ptr [rbx+28h], 0
+    MOV rdi, [rsp+38h+var_34]
+    MOV rsi, [rsp+38h+var_30]
+    CALL sub_4216D0
+    CMP qword ptr [rbx+10h], 0
+    JZ loc_422ECF
+    LEA rsi, [rsp+38h+var_30]
+    LEA rdi, [rsp+38h+var_34]
+    CALL sub_4216D0
+    LEA rsi, [rsp+38h+var_34]
+    LEA rdi, [rsp+38h+var_30]
+    MOV [rbx+28h], rax
+    CALL sub_4216D0
+    CMP qword ptr [rbx+28h], 0
+    MOV [rbx+10h], rax
+    MOV qword ptr [rbx+30h], 0
+    MOV qword ptr [rbx+18h], 0
+    MOV rdi, [rsp+38h+var_34]
+    MOV rsi, [rsp+38h+var_30]
+############
+```assembly
+loc_4019E0:
+    JMP cs:off_642148
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_429F30:
+    PUSH rbp
+    PUSH rbx
+    XOR eax, eax
+    MOV esi, 3
+    MOV ebp, edi
+    SUB rsp, 8
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429F6F
+loc_429F48:
+    MOV edx, eax
+    MOV ebx, eax
+    MOV esi, 4
+    OR dh, 8
+    XOR eax, eax
+    MOV edi, ebp
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429FA2
+loc_429F61:
+    MOV eax, ebx
+    ADD rsp, 8
+    AND eax, 800h
+    POP rbx
+    POP rbp
+    RETN 
+loc_429F6F:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebp
+    MOV r8, rax
+    MOV edx, offset aDFcntlFGetflS
+loc_429F85:
+    MOV rdi, cs:stderr
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV edi, 1
+    CALL _exit
+loc_429FA2:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebp
+    MOV r8, rax
+    MOV edx, offset aDFcntlFSetflS
+    JMP loc_429F85
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 5,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x8", "0x800"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 2,
+  "inferred_category": "System/OS Interaction",
+  "att&ck_technique": "T1059"
+}
+```
+############
+```assembly
+loc_40AC63:
+    IMUL rdi, rsi
+    MOV eax, 1
+    TEST rdi, rdi
+    CMOVZ rdi, rax
+    CALL _malloc
+    TEST rax, rax
+    JZ loc_40AC88
+loc_40AC7D:
+    ADD rsp, 8
+    RETN 
+loc_40AC88:
+    CALL sub_40A310
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Integer", "Integer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["Arithmetic", "ConditionalBranching", "MemoryAllocation"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": true,
+  "performs_memory_allocation_deallocation": true,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 1,
+  "inferred_category": "MemoryManagement"
+}
+```
+############
+```assembly
+loc_4039F0:
+    XOR ebp, ebp
+    MOV r9, rdx
+    POP rsi
+    MOV rdx, rsp
+    AND rsp, 0FFFFFFFFFFFFFFF0h
+    PUSH rax
+    PUSH rsp
+    MOV r8, offset fini
+    MOV rcx, offset init
+    MOV rdi, offset main
+    CALL ___libc_start_main
+    HLT 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Pointer"],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall", "MemoryAccess", "ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xFFFFFFFFFFFFFFF0"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Initialization/Setup",
+  "att&ck_technique": "N/A"
+}
+```
+############
+```assembly
+loc_40B440:
+    SUB rsp, 0D8h
+    TEST al, al
+    MOV [rsp+0D8h+var_A8], rdx
+    MOV [rsp+0D8h+var_A0], rcx
+    MOV [rsp+0D8h+var_98], r8
+    MOV [rsp+0D8h+var_90], r9
+    JZ loc_40B496
+loc_40B45F:
+    MOVAPS [rsp+0D8h+var_88], xmm0
+    MOVAPS [rsp+0D8h+var_78], xmm1
+    MOVAPS [rsp+0D8h+var_68], xmm2
+    MOVAPS [rsp+0D8h+var_58], xmm3
+    MOVAPS [rsp+0D8h+var_48], xmm4
+    MOVAPS [rsp+0D8h+var_38], xmm5
+    MOVAPS [rsp+0D8h+var_28], xmm6
+    MOVAPS [rsp+0D8h+var_18], xmm7
+loc_40B496:
+    MOV rax, fs:28h
+    MOV [rsp+0D8h+var_C0], rax
+    XOR eax, eax
+    LEA rax, [rsp+0D8h+arg_0]
+    MOV rdx, rsp
+    MOV [rsp+0D8h+var_D0], rax
+    LEA rax, [rsp+0D8h+var_B8]
+    MOV [rsp+0D8h+var_D8], 10h
+    MOV [rsp+0D8h+var_D4], 30h
+    MOV [rsp+0D8h+var_C8], rax
+    CALL sub_40B400
+    MOV rax, [rsp+0D8h+var_C0]
+    XOR rax, fs:28h
+    JNZ loc_40B4EC
+loc_40B4E4:
+    ADD rsp, 0D8h
+    RETN 
+loc_40B4EC:
+    CALL ___stack_chk_fail
+```
+Output:
+############
+```assembly
+loc_40BBC0:
+    PUSH r14
+    PUSH r12
+    MOV r10, rdi
+    PUSH rbp
+    PUSH rbx
+    CMP dword ptr [rdi+3F4h], 1
+    MOV ecx, [rsi]
+    MOV r8d, [rsi+4]
+    MOV r9d, [rsi+8]
+    MOV eax, [rsi+0Ch]
+    JLE loc_40BD1B
+loc_40BBE3:
+    XOR r11d, r11d
+    NOP word ptr [rax+rax+00000000h]
+loc_40BBF0:
+    XOR ecx, [r10]
+    ADD r10, 10h
+    ADD r11d, 1
+    MOV [rsi], ecx
+    XOR r8d, [r10-0Ch]
+    MOV edx, ecx
+    MOV [rsi+4], r8d
+    MOV ebx, [r10-8]
+    MOV ecx, r8d
+    SHR ecx, 10h
+    MOV ebp, r8d
+    MOV r8d, edx
+    MOVZX ecx, cl
+    SHR r8d, 18h
+    MOVZX r12d, bpl
+    XOR ebx, r9d
+    MOV ecx, ds:dword_4306A0[rcx*4]
+    MOVZX r9d, dl
+    MOV [rsi+8], ebx
+    XOR eax, [r10-4]
+    MOV r14d, eax
+    MOVZX eax, bh
+    XOR ecx, ds:dword_4302A0[rax*4]
+    MOV rax, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, r14b
+    MOVZX eax, ah
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, ebp
+    SHR r8d, 18h
+    MOV r8d, ds:dword_430AA0[r8*4]
+    XOR r8d, ds:dword_42FEA0[r9*4]
+    MOV r9d, ebx
+    SHR r9d, 10h
+    MOVZX r9d, r9b
+    MOV [rsi], ecx
+    XOR r8d, ds:dword_4306A0[r9*4]
+    MOV r9d, ebx
+    MOVZX ebx, bl
+    SHR r9d, 18h
+    XOR r8d, ds:dword_4302A0[rax*4]
+    MOVZX eax, dh
+    MOV r9d, ds:dword_430AA0[r9*4]
+    XOR r9d, ds:dword_42FEA0[r12*4]
+    SHR edx, 10h
+    XOR r9d, ds:dword_4302A0[rax*4]
+    MOV rax, rbp
+    MOVZX edx, dl
+    MOVZX ebp, ah
+    MOV edx, ds:dword_4306A0[rdx*4]
+    MOV r12d, r14d
+    XOR edx, ds:dword_4302A0[rbp*4]
+    MOV eax, r14d
+    SHR r12d, 10h
+    XOR edx, ds:dword_42FEA0[rbx*4]
+    SHR eax, 18h
+    MOVZX r12d, r12b
+    XOR r9d, ds:dword_4306A0[r12*4]
+    MOV [rsi+4], r8d
+    MOV ebx, edx
+    MOV edx, eax
+    MOV eax, ds:dword_430AA0[rdx*4]
+    MOV [rsi+8], r9d
+    XOR eax, ebx
+    MOV [rsi+0Ch], eax
+    MOV ebx, [rdi+3F4h]
+    LEA edx, [rbx-1]
+    CMP edx, r11d
+    JG loc_40BBF0
+loc_40BD1B:
+    XOR ecx, [r10]
+    MOV [rsi], ecx
+    MOV edx, [r10+4]
+    MOV edi, ecx
+    SHR edi, 18h
+    MOVZX ebx, ds:byte_430FA0[rdi]
+    XOR edx, r8d
+    MOV [rsi+4], edx
+    XOR r9d, [r10+8]
+    SHL ebx, 18h
+    MOV [rsi+8], r9d
+    XOR eax, [r10+0Ch]
+    MOVZX edi, al
+    MOVZX ebp, ah
+    MOVZX r8d, ds:byte_430FA0[rdi]
+    MOV edi, edx
+    SHR edi, 10h
+    MOVZX edi, dil
+    OR ebx, r8d
+    MOVZX r8d, ds:byte_430FA0[rdi]
+    MOV edi, ebx
+    MOV rbx, r9
+    MOVZX ebx, bh
+    MOVZX ebx, ds:byte_430FA0[rbx]
+    SHL r8d, 10h
+    OR edi, r8d
+    SHL ebx, 8
+    OR ebx, edi
+    MOV edi, edx
+    SHR edi, 18h
+    MOV [rsi], ebx
+    MOVZX r11d, ds:byte_430FA0[rdi]
+    MOVZX edi, cl
+    MOVZX r8d, ds:byte_430FA0[rdi]
+    MOV edi, r9d
+    SHR edi, 10h
+    MOVZX edi, dil
+    SHL r11d, 18h
+    OR r11d, r8d
+    MOVZX r8d, ds:byte_430FA0[rdi]
+    MOV edi, r11d
+    MOVZX r11d, ss:byte_430FA0[rbp]
+    SHL r8d, 10h
+    OR edi, r8d
+    SHL r11d, 8
+    MOVZX r8d, dl
+    OR r11d, edi
+    MOV edi, r9d
+    MOVZX ebp, ds:byte_430FA0[r8]
+    SHR edi, 18h
+    MOV r8d, eax
+    SHR eax, 18h
+    MOVZX edi, ds:byte_430FA0[rdi]
+    SHR r8d, 10h
+    MOVZX eax, ds:byte_430FA0[rax]
+    MOVZX r8d, r8b
+    MOVZX r9d, r9b
+    MOVZX edx, dh
+    MOVZX edx, ds:byte_430FA0[rdx]
+    MOV [rsi+4], r11d
+    SHL edi, 18h
+    SHL eax, 18h
+    OR edi, ebp
+    MOVZX ebp, ds:byte_430FA0[r8]
+    SHL ebp, 10h
+    OR edi, ebp
+    MOV r8d, edi
+    MOVZX edi, ch
+    SHR ecx, 10h
+    MOVZX edi, ds:byte_430FA0[rdi]
+    MOVZX ecx, cl
+    MOVZX ecx, ds:byte_430FA0[rcx]
+    SHL edi, 8
+    OR edi, r8d
+    MOVZX r8d, ds:byte_430FA0[r9]
+    MOV [rsi+8], edi
+    OR eax, r8d
+    SHL ecx, 10h
+    SHL edx, 8
+    OR eax, ecx
+    OR eax, edx
+    MOV [rsi+0Ch], eax
+    XOR ebx, [r10+10h]
+    MOV [rsi], ebx
+    XOR r11d, [r10+14h]
+    MOV [rsi+4], r11d
+    XOR edi, [r10+18h]
+    MOV [rsi+8], edi
+    XOR eax, [r10+1Ch]
+    POP rbx
+    POP rbp
+    POP r12
+    MOV [rsi+0Ch], eax
+    POP r14
+    RETN 
+```
+Output:14d, r8d
+    MOVZX r8d, al
+    XOR ecx, ds:dword_4302A0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, bl
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, ch
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, dh
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, bh
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, ah
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, bl
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, ch
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, dh
+    XOR ecx, ds:dword_42FEA0[r8*4]
+    MOV r8d, r14
+    XOR ecx, ds:dword_430AA0[r8*4]
+    MOVZX r8d, bh
+############
+```assembly
+loc_401A60:
+    JMP cs:off_642188
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["JumpTableIndicators"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_429CE0:
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, [rdi]
+    CALL sub_40B5E0
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_420960:
+    PUSH rbp
+    PUSH rbx
+    XOR edx, edx
+    MOV esi, 42E3F3h
+    SUB rsp, 8
+    CALL sub_42A050
+    MOV rbp, rax
+    XOR eax, eax
+    TEST rbp, rbp
+    JZ loc_420990
+loc_42097C:
+    MOV rdi, rbp
+    CALL sub_41E2B0
+    MOV rdi, rbp
+    MOV ebx, eax
+    CALL _fclose
+    MOV eax, ebx
+loc_420990:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "MemoryAccess"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x42E3F3"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "File Manipulation",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_401930:
+    JMP cs:off_6420F0
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_642C30:
+    EXTRN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": [],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Undetermined"
+}
+```
+############
+```assembly
+loc_4054D0:
+    PUSH r12
+    PUSH rbp
+    MOV rbp, rdi
+    PUSH rbx
+    MOV rdi, rsi
+    MOV r12, rsi
+    CALL _strlen
+    MOV rbx, rax
+    SAR eax, 18h
+    LEA rdi, [rbp+4]
+    MOV [rbp+0], al
+    MOV eax, ebx
+    MOV [rbp+3], bl
+    SAR eax, 10h
+    MOVSXD rdx, ebx
+    MOV rsi, r12
+    MOV [rbp+1], al
+    MOV eax, ebx
+    SAR eax, 8
+    MOV [rbp+2], al
+    CALL _memcpy
+    LEA eax, [rbx+4]
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["DataMovement", "Arithmetic", "MemoryAccess"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x18", "0x10", "0x8"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": true,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+############
+```assembly
+loc_416E00:
+    TEST rdi, rdi
+    JZ locret_416E50
+loc_416E05:
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, [rdi+10h]
+    TEST rdi, rdi
+    JZ loc_416E17
+loc_416E12:
+    CALL sub_4108A0
+loc_416E17:
+    MOV rdi, [rbx+18h]
+    TEST rdi, rdi
+    JZ loc_416E25
+loc_416E20:
+    CALL sub_4108A0
+loc_416E25:
+    MOV rdi, [rbx+20h]
+    TEST rdi, rdi
+    JZ loc_416E33
+loc_416E2E:
+    CALL sub_4108A0
+loc_416E33:
+    MOV rdi, [rbx+30h]
+    TEST rdi, rdi
+    JZ loc_416E41
+loc_416E3C:
+    CALL sub_4108A0
+loc_416E41:
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+loc_416E50:
+    REP 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch"
+}
+```
+############
+```assembly
+loc_401920:
+    JMP cs:off_6420E8
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper"
+}
+```
+############
+```assembly
+loc_422D40:
+    PUSH r12
+    PUSH rbp
+    MOV r12, rdx
+    PUSH rbx
+    MOV rbp, rsi
+    MOV edi, 1
+    MOV esi, 40h
+    CALL sub_40AC50
+    MOV rsi, r12
+    MOV rbx, rax
+    MOV rdi, rbp
+    MOV qword ptr [rax+38h], 0
+    CALL sub_4216D0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+8], rax
+    CALL sub_4216D0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+10h], rax
+    CALL sub_4216D0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+18h], rax
+    CALL sub_4216D0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+30h], rax
+    CALL sub_4216D0
+    MOV rsi, r12
+    MOV [rbx+20h], rax
+    MOV rdi, rbp
+    CALL sub_4216D0
+    CMP qword ptr [rbx+8], 0
+    MOV [rbx+28h], rax
+    JZ loc_422E00
+loc_422DC5:
+    CMP qword ptr [rbx+10h], 0
+    JZ loc_422E00
+loc_422DCC:
+    CMP qword ptr [rbx+18h], 0
+    JZ loc_422E00
+loc_422DD3:
+    CMP qword ptr [rbx+30h], 0
+    JZ loc_422E00
+loc_422DDA:
+    CMP qword ptr [rbx+20h], 0
+    JZ loc_422E00
+loc_422DE1:
+    TEST rax, rax
+    JZ loc_422E00
+loc_422DE6:
+    MOV rdi, rbx
+    CALL sub_422A40
+    TEST eax, eax
+    JZ loc_422E00
+loc_422DF2:
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_422E00:
+    MOV rdi, rbx
+    CALL sub_422CC0
+    MOV rdi, rbx
+    XOR ebx, ebx
+    CALL sub_40B5E0
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+```
+Output:, rax
+    JZ loc_422E00
+    MOV rsi, r12
+    MOV rdi, rbp
+    CALL sub_4216D0
+    JMP loc_422DC5
+loc_422E00:
+    POP r12
+    POP rbp
+    RET
+```
+
+### **Assembly Code Analysis**
+
+Given the assembly code snippet, perform a detailed analysis and extract the required features and infer the algorithm. Format your response as a JSON object as specified in the guidelines.
+
+---
+
+### **Guidelines for JSON Output:**
+
+- **Input Parameter Count (Integer):** Number of distinct conceptual inputs.
+- **Input Parameter Types (Array of Strings):** Abstract data type categories representing the inputs.
+- **Return Value Type (String):** Abstract data type of the value returned, if any.
+- **Dominant Operation Categories (Array of Strings):** Most frequent types of operations performed.
+- **Loop Indicators (Boolean):** True if loops are present.
+- **Number of Distinct Subroutine Call Targets (Integer):** Unique subroutine targets.
+- **Use of Indexed Addressing Modes (Boolean):** True if indexed addressing is used.
+- **Jump Table Indicators (Boolean):** True if jump tables are present.
+- **Presence of SIMD Instructions (Boolean):** True if SIMD instructions are used.
+- **Notable Integer Constants (Array of Hexadecimal Strings):** Prominent integer constants.
+- **Notable Floating Point Constants (Array of Floats/Doubles):** Prominent floating point constants.
+- **Count of Distinct Immediate Values (Integer):** Total unique immediate values.
+- **String Literal Presence (Boolean):** True if string literals are present.
+- **Modifies Input Parameters (Boolean):** True if input parameters are modified.
+- **Modifies Global State (Boolean):** True if global state is modified.
+- **Performs Memory Allocation/Deallocation (Boolean):** True if memory allocation/deallocation is performed.
+- **Performs I/O Operations (Boolean):** True if I/O operations are performed.
+- **Performs Block Memory Operations (Boolean):** True if block memory operations are performed.
+- **Performs Linear Memory Accesses (Boolean):** True if linear memory accesses are performed.
+- **Performs Error Handling (Boolean):** True if error handling is performed.
+- **Number of Software Interrupts / System Calls (Integer):** Count of software interrupts/system
+############
+```assembly
+loc_415F20:
+    PUSH r12
+    PUSH rbp
+    MOV r12, rdx
+    PUSH rbx
+    MOV rbp, rsi
+    MOV edi, 1
+    MOV esi, 28h
+    CALL sub_40AC50
+    MOV rsi, r12
+    MOV rbx, rax
+    MOV rdi, rbp
+    CALL sub_415EC0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx], rax
+    CALL sub_415EC0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+8], rax
+    CALL sub_415EC0
+    MOV rsi, r12
+    MOV rdi, rbp
+    MOV [rbx+10h], rax
+    CALL sub_415EC0
+    MOV rsi, r12
+    MOV [rbx+18h], rax
+    MOV rdi, rbp
+    CALL sub_415EC0
+    CMP qword ptr [rbx], 0
+    MOV [rbx+20h], rax
+    JZ loc_415FD8
+loc_415F8C:
+    MOV rdi, [rbx+8]
+    TEST rdi, rdi
+    JZ loc_415FD8
+loc_415F95:
+    CMP qword ptr [rbx+10h], 0
+    JZ loc_415FD8
+loc_415F9C:
+    CMP qword ptr [rbx+18h], 0
+    JZ loc_415FD8
+loc_415FA3:
+    TEST rax, rax
+    JZ loc_415FD8
+loc_415FA8:
+    MOV rsi, cs:off_6422D0
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FB8:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, [rbx]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FCB:
+    MOV rax, rbx
+    POP rbx
+    POP rbp
+    POP r12
+    RETN 
+loc_415FD8:
+    MOV rdi, rbx
+    CALL sub_4159F0
+    POP rbx
+    XOR eax, eax
+    POP rbp
+    POP r12
+    RETN 
+```
+Output:CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FC8:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, [rbx+8]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FD3:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, [rbx+10h]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FE3:
+    MOV rsi, cs:off_6422D0
+    MOV rdi, [rbx+18h]
+    CALL sub_4111B0
+    TEST eax, eax
+    JZ loc_415FD8
+loc_415FD8:
+    POP r12
+    POP rbp
+    RET
+```
+
+Assistant, please analyze this assembly routine and provide its extracted features and inferred algorithm in JSON format.
+############
+```assembly
+loc_414CB0:
+    PUSH r15
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 18h
+    MOV rax, fs:28h
+    MOV [rsp+48h+var_40], rax
+    XOR eax, eax
+    TEST sil, 7
+    JNZ loc_414DC6
+loc_414CD8:
+    TEST esi, esi
+    MOV r12d, esi
+    MOV rbp, rdx
+    MOV ecx, [rdx+80h]
+    MOV eax, [rdx+84h]
+    JZ loc_414D9B
+loc_414CF2:
+    LEA r15, [rdx+88h]
+    LEA r14, [rdx+110h]
+    MOV r13, rdi
+    MOV rbx, rdi
+    NOP word ptr [rax+rax+00000000h]
+loc_414D10:
+    MOV esi, [rbx]
+    MOV edx, [rbx+4]
+    MOV rdi, rsp
+    ADD rbx, 8
+    BSWAP esi
+    BSWAP edx
+    XOR edx, eax
+    XOR esi, ecx
+    MOV rcx, rbp
+    CALL sub_4132A0
+    MOV edx, [rsp+48h+var_44]
+    MOV esi, [rsp+48h+var_48]
+    MOV rcx, r15
+    MOV rdi, rsp
+    CALL sub_413C90
+    MOV edx, [rsp+48h+var_44]
+    MOV esi, [rsp+48h+var_48]
+    MOV rcx, r14
+    MOV rdi, rsp
+    CALL sub_4132A0
+    MOV ecx, [rsp+48h+var_48]
+    MOV eax, [rsp+48h+var_44]
+    MOV edx, ecx
+    MOV [rbx-5], cl
+    MOV [rbx-1], al
+    SHR edx, 18h
+    MOV [rbx-8], dl
+    MOV edx, ecx
+    SHR edx, 10h
+    MOV [rbx-7], dl
+    MOV edx, ecx
+    SHR edx, 8
+    MOV [rbx-6], dl
+    MOV edx, eax
+    SHR edx, 18h
+    MOV [rbx-4], dl
+    MOV edx, eax
+    SHR edx, 10h
+    MOV [rbx-3], dl
+    MOV edx, eax
+    SHR edx, 8
+    MOV [rbx-2], dl
+    MOV edx, ebx
+    SUB edx, r13d
+    CMP r12d, edx
+    JA loc_414D10
+loc_414D9B:
+    MOV [rbp+84h], eax
+    MOV [rbp+80h], ecx
+    MOV rax, [rsp+48h+var_40]
+    XOR rax, fs:28h
+    JNZ loc_414DDF
+loc_414DB7:
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_414DC6:
+    MOV ecx, offset aDesCbc3Encrypt
+    MOV edx, 29Bh
+    MOV esi, offset aSshdesC
+    MOV edi, offset aLen70
+    CALL ___assert_fail
+loc_414DDF:
+    CALL ___stack_chk_fail
+```
+Output:[rbx-3], dl
+    JMP loc_414D45
+loc_414D45:
+    CMP r13, rbx
+    JL loc_414CF2
+    JMP loc_414D9B
+loc_414D5D:
+    XOR eax, eax
+    MOV r12d, esi
+    MOV rbp, rdx
+    MOV ecx, [rdx+80h]
+    MOV eax, [rdx+84h]
+    JZ loc_414D9B
+loc_414D72:
+    LEA r15, [rdx+88h]
+    LEA r14, [rdx+110h]
+    MOV r13, rdi
+    MOV rbx, rdi
+    NOP word ptr [rax+rax+00000000h]
+loc_414D90:
+    MOV esi, [rbx]
+    MOV edx, [rbx+4]
+    MOV rdi, rsp
+    ADD rbx, 8
+    BSWAP esi
+    BSWAP edx
+    XOR edx, eax
+    XOR esi, ecx
+    MOV rcx, rbp
+    CALL sub_4132A0
+    MOV edx, [rsp+48h+var_44]
+    MOV esi, [rsp+48h+var_48]
+    MOV rcx, r15
+    MOV rdi, rsp
+    CALL sub_413C90
+    MOV edx, [rsp+48h+var_44]
+    MOV esi, [rsp+48h+var_48]
+    MOV rcx, r14
+    MOV rdi, rsp
+    CALL sub_4132A0
+    MOV ecx, [rsp+48h+var_48]
+    MOV eax, [rsp+48h+var_44]
+    MOV edx, ecx
+    MOV [rbx-5], cl
+    MOV [rbx-1], al
+    SHR edx, 18h
+    MOV [rbx-3], dl
+    JMP loc_414DBC
+loc_414DBC:
+    CMP r13, rbx
+    JL loc_
+############
+```assembly
+loc_423610:
+    PUSH rbx
+    MOV esi, 6Ch
+    MOV rbx, rdi
+    MOV edi, 1
+    CALL sub_40AC50
+    MOV rdx, [rbx]
+    MOV [rax], rdx
+    MOV rdx, [rbx+8]
+    MOV [rax+8], rdx
+    MOV rdx, [rbx+10h]
+    MOV [rax+10h], rdx
+    MOV rdx, [rbx+18h]
+    MOV [rax+18h], rdx
+    MOV rdx, [rbx+20h]
+    MOV [rax+20h], rdx
+    MOV rdx, [rbx+28h]
+    MOV [rax+28h], rdx
+    MOV rdx, [rbx+30h]
+    MOV [rax+30h], rdx
+    MOV rdx, [rbx+38h]
+    MOV [rax+38h], rdx
+    MOV rdx, [rbx+40h]
+    MOV [rax+40h], rdx
+    MOV rdx, [rbx+48h]
+    MOV [rax+48h], rdx
+    MOV rdx, [rbx+50h]
+    MOV [rax+50h], rdx
+    MOV rdx, [rbx+58h]
+    MOV [rax+58h], rdx
+    MOV rdx, [rbx+60h]
+    MOV [rax+60h], rdx
+    MOV edx, [rbx+68h]
+    MOV [rax+68h], edx
+    POP rbx
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": true,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Memory Management"
+}
+```
+############
+```assembly
+loc_423080:
+    JMP loc_423060
+loc_423060:
+    PUSH rbx
+    MOV rbx, rdi
+    CALL sub_422CC0
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement", "ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_40B440:
+    SUB rsp, 0D8h
+    TEST al, al
+    MOV [rsp+0D8h+var_A8], rdx
+    MOV [rsp+0D8h+var_A0], rcx
+    MOV [rsp+0D8h+var_98], r8
+    MOV [rsp+0D8h+var_90], r9
+    JZ loc_40B496
+loc_40B45F:
+    MOVAPS [rsp+0D8h+var_88], xmm0
+    MOVAPS [rsp+0D8h+var_78], xmm1
+    MOVAPS [rsp+0D8h+var_68], xmm2
+    MOVAPS [rsp+0D8h+var_58], xmm3
+    MOVAPS [rsp+0D8h+var_48], xmm4
+    MOVAPS [rsp+0D8h+var_38], xmm5
+    MOVAPS [rsp+0D8h+var_28], xmm6
+    MOVAPS [rsp+0D8h+var_18], xmm7
+loc_40B496:
+    MOV rax, fs:28h
+    MOV [rsp+0D8h+var_C0], rax
+    XOR eax, eax
+    LEA rax, [rsp+0D8h+arg_0]
+    MOV rdx, rsp
+    MOV [rsp+0D8h+var_D0], rax
+    LEA rax, [rsp+0D8h+var_B8]
+    MOV [rsp+0D8h+var_D8], 10h
+    MOV [rsp+0D8h+var_D4], 30h
+    MOV [rsp+0D8h+var_C8], rax
+    CALL sub_40B400
+    MOV rax, [rsp+0D8h+var_C0]
+    XOR rax, fs:28h
+    JNZ loc_40B4EC
+loc_40B4E4:
+    ADD rsp, 0D8h
+    RETN 
+loc_40B4EC:
+    CALL ___stack_chk_fail
+```
+Output:
+############
+```assembly
+loc_4286F0:
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rdi, [rdi]
+    CALL sub_427DB0
+    MOV rdi, rbx
+    POP rbx
+    JMP sub_40B5E0
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["Pointer"],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper"
+}
+```
+############
+```assembly
+loc_4207C0:
+    PUSH r14
+    PUSH r13
+    MOV r14d, esi
+    PUSH r12
+    PUSH rbp
+    XOR ebp, ebp
+    PUSH rbx
+    MOV r13, rdi
+    SUB rsp, 50h
+    LEA r12, [rsp+78h+src]
+    MOV rdx, rsp
+    MOV rbx, rsp
+    MOV rax, fs:28h
+    MOV [rsp+78h+var_30], rax
+    XOR eax, eax
+    CALL sub_41C850
+    NOP dword ptr [rax+00h]
+loc_4207F8:
+    MOVZX r8d, byte ptr [rbx]
+    MOV rdi, r12
+    XOR eax, eax
+    MOV r9d, 42E7FDh
+    MOV ecx, offset a02xS
+    MOV rdx, 0FFFFFFFFFFFFFFFFh
+    MOV esi, 1
+    ADD ebp, 1
+    ADD rbx, 1
+    ADD r12, 3
+    CALL ___sprintf_chk
+    CMP ebp, 0Fh
+    JNZ loc_4207F8
+loc_42082D:
+    MOVZX r8d, [rsp+78h+var_69]
+    LEA rdi, [rsp+78h+var_3B]
+    MOV r9d, 42E60Dh
+    MOV ecx, offset a02xS
+    MOV rdx, 0FFFFFFFFFFFFFFFFh
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___sprintf_chk
+    MOV edi, [r13+0]
+    BSWAP edi
+    CALL sub_40A770
+    TEST eax, eax
+    MOV ebx, eax
+    JLE loc_42086F
+loc_420867:
+    LEA eax, [r14-4]
+    CMP ebx, eax
+    JL loc_4208A0
+loc_42086F:
+    LEA rdi, [rsp+78h+src]
+    CALL sub_40ACA0
+loc_420879:
+    MOV rcx, [rsp+78h+var_30]
+    XOR rcx, fs:28h
+    JNZ loc_4208F1
+loc_420889:
+    ADD rsp, 50h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_4208A0:
+    LEA rbp, [r13+4]
+    MOV edi, ebx
+    MOV rsi, rbp
+    CALL sub_41E1F0
+    TEST rax, rax
+    JZ loc_4208D9
+loc_4208B3:
+    MOV edx, r14d
+    MOV rsi, r13
+    MOV rdi, rax
+    CALL qword ptr [rax+48h]
+    LEA r8, [rsp+78h+src]
+    MOV ecx, eax
+    MOV rdx, rbp
+    MOV esi, ebx
+    MOV edi, offset aSDS
+    XOR eax, eax
+    CALL sub_40B290
+    JMP loc_420879
+loc_4208D9:
+    LEA rcx, [rsp+78h+src]
+    MOV rdx, rbp
+    MOV esi, ebx
+    MOV edi, offset aSS
+    XOR eax, eax
+    CALL sub_40B290
+    JMP loc_420879
+loc_4208F1:
+    CALL ___stack_chk_fail
+```
+Output:878:
+    LEA rdi, [rsp+78h+var_3B]
+    CALL sub_40ACA0
+loc_420881:
+    LEA rdi, [rsp+78h+var_30]
+    CALL sub_40ACA0
+loc_42088A:
+    LEA rdi, [rsp+78h+var_3B]
+    CALL sub_40ACA0
+loc_420893:
+    LEA rdi, [rsp+78h+var_30]
+    CALL sub_40ACA0
+loc_42089C:
+    LEA rdi, [rsp+78h+var_3B]
+    CALL sub_40ACA0
+loc_4208A0:
+    MOV eax, ebx
+    ADD rsp, 50h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN
+```
+############
+```assembly
+loc_40DC00:
+    MOV edx, 18h
+    JMP sub_40D980
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall", "ImmediateValueUsage"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x18"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_41FCB0:
+    PUSH r15
+    PUSH r14
+    MOV r15, rsi
+    PUSH r13
+    PUSH r12
+    MOV r14, rdx
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 138h
+    MOV rax, fs:28h
+    MOV [rsp+168h+var_40], rax
+    XOR eax, eax
+    MOV rax, [rsi]
+    MOV [rsp+168h+var_150], rdi
+    MOV rdi, [rsi+8]
+    LEA rsi, [rsp+168h+var_110]
+    CALL qword ptr [rax+18h]
+    MOV rbx, rax
+    MOV [rsp+168h+var_168], rax
+    MOV rax, [r15]
+    MOV rdi, [r15+8]
+    LEA rsi, [rsp+168h+var_10C]
+    CALL qword ptr [rax+20h]
+    TEST rbx, rbx
+    MOV [rsp+168h+src], rax
+    JZ loc_4203F0
+loc_41FD12:
+    TEST rax, rax
+    JZ loc_4203F0
+loc_41FD1B:
+    TEST r14, r14
+    MOV edx, offset aAes256Cbc
+    MOV eax, offset aNone
+    CMOVNZ rax, rdx
+    CMP r14, 1
+    MOV ebp, [rsp+168h+var_10C]
+    SBB ecx, ecx
+    MOV [rsp+168h+s], rax
+    MOV esi, 1
+    AND ecx, 0FFFFFFF1h
+    ADD ecx, 10h
+    ADD ebp, ecx
+    SUB ebp, 1
+    MOV eax, ebp
+    CDQ 
+    IDIV ecx
+    SUB ebp, edx
+    MOVSXD rax, ebp
+    MOV rbx, rax
+    MOV rdi, rax
+    MOV [rsp+168h+n], rax
+    CALL sub_40AC50
+    MOV rdx, rbx
+    XOR esi, esi
+    MOV rdi, rax
+    MOV r12, rax
+    LEA rbx, [rsp+168h+var_A8]
+    CALL _memset
+    MOV r13, [rsp+168h+src]
+    MOVSXD rdx, [rsp+168h+var_10C]
+    MOV rdi, r12
+    MOV rsi, r13
+    CALL _memcpy
+    MOV esi, [rsp+168h+var_10C]
+    MOV rdx, rbx
+    MOV rdi, r13
+    CALL sub_427480
+    MOVSXD rax, [rsp+168h+var_10C]
+    MOV edx, ebp
+    SUB edx, eax
+    CMP edx, 13h
+    JG loc_42045A
+loc_41FDB3:
+    MOVSXD rdx, edx
+    ADD rax, r12
+    CMP rdx, 8
+    JB loc_420350
+loc_41FDC3:
+    MOV rcx, [rbx]
+    MOV rsi, rbx
+    MOV [rax], rcx
+    MOV rcx, [rbx+rdx-8]
+    MOV [rax+rdx-8], rcx
+    LEA rcx, [rax+8]
+    AND rcx, 0FFFFFFFFFFFFFFF8h
+    SUB rax, rcx
+    SUB rsi, rax
+    ADD rax, rdx
+    AND rax, 0FFFFFFFFFFFFFFF8h
+    CMP rax, 8
+    JB loc_41FE10
+loc_41FDF1:
+    AND rax, 0FFFFFFFFFFFFFFF8h
+    XOR edx, edx
+loc_41FDF7:
+    MOV rdi, [rsi+rdx]
+    MOV [rcx+rdx], rdi
+    ADD rdx, 8
+    CMP rdx, rax
+    JB loc_41FDF7
+loc_41FE08:
+    NOP dword ptr [rax+rax+00000000h]
+loc_41FE10:
+    MOV rax, [r15]
+    MOV rdi, [rax+60h]
+    CALL _strlen
+    MOV rdi, [rsp+168h+s]
+    MOV [rsp+168h+var_138], rax
+    CALL _strlen
+    MOV rdi, [r15+10h]
+    MOV [rsp+168h+var_140], rax
+    CALL _strlen
+    MOV rcx, rax
+    MOV rax, 72702D7974747570h
+    MOV r10, [rsp+168h+var_140]
+    MOV r8, [rsp+168h+var_138]
+    MOV [rsp+168h+var_68], rax
+    MOV rax, 656B2D6574617669h
+    MOV [rsp+168h+var_60], rax
+    MOV rax, 6D2D656C69662D79h
+    MOV esi, 1
+    MOV [rsp+168h+var_58], rax
+    MOV eax, 7965h
+    MOV [rsp+168h+var_120], rcx
+    MOV [rsp+168h+var_4C], ax
+    LEA eax, [r8+r10+0Ch]
+    ADD eax, [rsp+168h+var_110]
+    MOV [rsp+168h+var_128], r10
+    MOV [rsp+168h+var_130], r8
+    MOV [rsp+168h+var_50], 6B2D6361h
+    MOV [rsp+168h+var_4A], 0
+    LEA eax, [rax+rcx+8]
+    ADD eax, ebp
+    MOVSXD rdx, eax
+    MOV dword ptr [rsp+168h+var_140], eax
+    MOV rdi, rdx
+    MOV [rsp+168h+var_138], rdx
+    CALL sub_40AC50
+    MOV r8, [rsp+168h+var_130]
+    MOV r13, rax
+    MOV edi, r8d
+    MOV [r13+3], r8b
+    MOVSXD rdx, r8d
+    SAR edi, 18h
+    MOV [r13+0], dil
+    MOV edi, r8d
+    SAR edi, 10h
+    MOV [r13+1], dil
+    MOV edi, r8d
+    SAR edi, 8
+    MOV [r13+2], dil
+    MOV rax, [r15]
+    LEA rdi, [r13+4]
+    MOV rsi, [rax+60h]
+    CALL _memcpy
+    MOV r8, [rsp+168h+var_130]
+    MOV r10, [rsp+168h+var_128]
+    MOV rsi, [rsp+168h+s]
+    ADD r8d, 4
+    MOV edi, r10d
+    MOVSXD rdx, r10d
+    MOVSXD r8, r8d
+    SAR edi, 18h
+    MOV [rsp+168h+var_130], r10
+    LEA r11, [r13+r8+0]
+    MOV [r11], dil
+    MOV edi, r10d
+    MOV [r11+3], r10b
+    SAR edi, 10h
+    MOV [rsp+168h+var_128], r11
+    MOV [r11+1], dil
+    MOV edi, r10d
+    SAR edi, 8
+    MOV [r11+2], dil
+    LEA rdi, [r11+4]
+    CALL _memcpy
+    MOV r10, [rsp+168h+var_130]
+    MOV rcx, [rsp+168h+var_120]
+    MOV r11, [rsp+168h+var_128]
+    ADD r10d, 4
+    MOV edi, ecx
+    MOVSXD rdx, ecx
+    MOVSXD r10, r10d
+    SAR edi, 18h
+    MOV [rsp+168h+var_130], rcx
+    LEA r8, [r11+r10]
+    MOV [r8], dil
+    MOV edi, ecx
+    MOV [r8+3], cl
+    SAR edi, 10h
+    MOV [rsp+168h+var_128], r8
+    MOV [r8+1], dil
+    MOV edi, ecx
+    SAR edi, 8
+    MOV [r8+2], dil
+    MOV rsi, [r15+10h]
+    LEA rdi, [r8+4]
+    CALL _memcpy
+    MOV rcx, [rsp+168h+var_130]
+    MOVSX eax, byte ptr [rsp+168h+var_110+3]
+    MOV r8, [rsp+168h+var_128]
+    MOV rsi, [rsp+168h+var_168]
+    ADD ecx, 4
+    MOVSXD rcx, ecx
+    ADD rcx, r8
+    MOV [rcx], al
+    MOVSX eax, word ptr [rsp+168h+var_110+2]
+    MOV [rsp+168h+var_128], rcx
+    MOV [rcx+1], al
+    MOV edi, [rsp+168h+var_110]
+    SAR edi, 8
+    MOV [rcx+2], dil
+    MOV eax, [rsp+168h+var_110]
+    LEA rdi, [rcx+4]
+    MOV [rcx+3], al
+    MOVSXD rdx, [rsp+168h+var_110]
+    MOV dword ptr [rsp+168h+var_130], edx
+    CALL _memcpy
+    MOV r8d, dword ptr [rsp+168h+var_130]
+    MOV rcx, [rsp+168h+var_128]
+    MOV rsi, r12
+    MOV rdx, [rsp+168h+n]
+    ADD r8d, 4
+    MOVSXD rdi, r8d
+    ADD rcx, rdi
+    MOV edi, ebp
+    SAR edi, 18h
+    MOV [rcx+3], bpl
+    MOV [rcx], dil
+    MOV edi, ebp
+    SAR edi, 10h
+    MOV [rcx+1], dil
+    MOV edi, ebp
+    SAR edi, 8
+    MOV [rcx+2], dil
+    LEA rdi, [rcx+4]
+    CALL _memcpy
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_4269D0
+    LEA rdi, [rsp+168h+var_68]
+    MOV edx, 1Eh
+    MOV rsi, rdi
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_426A10
+    TEST r14, r14
+    JZ loc_420380
+loc_420073:
+    MOV rdi, r14
+    CALL _strlen
+    LEA rdi, [rsp+168h+var_108]
+    MOV edx, eax
+    MOV rsi, r14
+    CALL sub_426A10
+    LEA rsi, [rsp+168h+var_88]
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_426E50
+    MOV ecx, dword ptr [rsp+168h+var_140]
+    LEA rdi, [rsp+168h+var_88]
+    MOV r8, rbx
+    MOV rdx, r13
+    MOV esi, 14h
+    CALL sub_427520
+    MOV rsi, [rsp+168h+var_138]
+    MOV rdi, r13
+    CALL sub_40B660
+    MOV rdi, r13
+    CALL sub_40B5E0
+    LEA rdi, [rsp+168h+var_88]
+    MOV esi, 14h
+    CALL sub_40B660
+    LEA rdi, [rsp+168h+var_108]
+    MOV esi, 60h
+    CALL sub_40B660
+    MOV rdi, r14
+    CALL _strlen
+    LEA rdi, [rsp+168h+var_108]
+    MOV r13, rax
+    CALL sub_4269D0
+    LEA rdi, [rsp+168h+var_108]
+    MOV edx, 4
+    MOV esi, offset unk_437BA0
+    CALL sub_426A10
+    LEA rdi, [rsp+168h+var_108]
+    MOV edx, r13d
+    MOV rsi, r14
+    CALL sub_426A10
+    LEA rsi, [rsp+168h+var_68]
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_426E50
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_4269D0
+    LEA rdi, [rsp+168h+var_108]
+    MOV edx, 4
+    MOV esi, offset unk_437BA5
+    CALL sub_426A10
+    LEA rdi, [rsp+168h+var_108]
+    MOV edx, r13d
+    MOV rsi, r14
+    CALL sub_426A10
+    LEA rsi, [rsp+168h+var_58+4]
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_426E50
+    LEA rdi, [rsp+168h+var_68]
+    MOV edx, ebp
+    MOV rsi, r12
+    CALL sub_40DC20
+    LEA rdi, [rsp+168h+var_68]
+    MOV esi, 28h
+    CALL sub_40B660
+    LEA rdi, [rsp+168h+var_108]
+    MOV esi, 60h
+    CALL sub_40B660
+loc_4201AC:
+    MOV rdi, [rsp+168h+var_150]
+    MOV edx, 1
+    MOV esi, 4375D3h
+    CALL sub_42A050
+    TEST rax, rax
+    MOV r13, rax
+    JZ loc_42040A
+loc_4201CC:
+    MOV rax, [r15]
+    MOV edx, offset aPuttyUserKeyFi_2
+    MOV esi, 1
+    MOV rdi, r13
+    MOV r14d, 2AAAAAABh
+    MOV rcx, [rax+60h]
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV rcx, [rsp+168h+s]
+    MOV edx, offset aEncryptionS
+    MOV esi, 1
+    MOV rdi, r13
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV rcx, [r15+10h]
+    MOV edx, offset aCommentS
+    MOV esi, 1
+    MOV rdi, r13
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV eax, [rsp+168h+var_110]
+    MOV rdi, r13
+    LEA esi, [rax+2Fh]
+    MOV eax, esi
+    SAR esi, 1Fh
+    IMUL r14d
+    XOR eax, eax
+    SAR edx, 3
+    SUB edx, esi
+    MOV esi, 1
+    MOV ecx, edx
+    MOV edx, offset aPublicLinesD
+    CALL ___fprintf_chk
+    MOV edx, [rsp+168h+var_110]
+    MOV rsi, [rsp+168h+var_168]
+    MOV ecx, 40h
+    MOV rdi, r13
+    CALL sub_41FBD0
+    LEA ecx, [rbp+2Fh]
+    MOV esi, 1
+    MOV rdi, r13
+    MOV eax, ecx
+    SAR ecx, 1Fh
+    IMUL r14d
+    XOR eax, eax
+    SAR edx, 3
+    SUB edx, ecx
+    MOV ecx, edx
+    MOV edx, offset aPrivateLinesD
+    CALL ___fprintf_chk
+    MOV edx, ebp
+    MOV ecx, 40h
+    MOV rsi, r12
+    MOV rdi, r13
+    LEA rbp, [rbx+14h]
+    CALL sub_41FBD0
+    MOV rcx, r13
+    MOV edx, 0Dh
+    MOV esi, 1
+    MOV edi, offset aPrivateMac_0
+    CALL _fwrite
+loc_4202B0:
+    MOVZX ecx, byte ptr [rbx]
+    XOR eax, eax
+    MOV edx, offset a02x_0
+    MOV esi, 1
+    MOV rdi, r13
+    ADD rbx, 1
+    CALL ___fprintf_chk
+    CMP rbp, rbx
+    JNZ loc_4202B0
+loc_4202D0:
+    MOV rsi, r13
+    MOV edi, 0Ah
+    CALL _fputc
+    MOV rdi, r13
+    CALL _fclose
+    MOV rdi, [rsp+168h+var_168]
+    CALL sub_40B5E0
+    MOVSXD rsi, [rsp+168h+var_10C]
+    MOV rbx, [rsp+168h+src]
+    MOV rdi, rbx
+    CALL sub_40B660
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    MOVSXD rsi, [rsp+168h+var_10C]
+    MOV rdi, r12
+    CALL sub_40B660
+    MOV rdi, r12
+    CALL sub_40B5E0
+    MOV eax, 1
+loc_420322:
+    MOV rbx, [rsp+168h+var_40]
+    XOR rbx, fs:28h
+    JNZ loc_420473
+loc_420339:
+    ADD rsp, 138h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    POP r15
+    RETN 
+loc_420350:
+    TEST dl, 4
+    JNZ loc_420449
+loc_420359:
+    TEST rdx, rdx
+    JZ loc_41FE10
+loc_420362:
+    MOVZX ecx, byte ptr [rbx]
+    TEST dl, 2
+    MOV [rax], cl
+    JZ loc_41FE10
+loc_420370:
+    MOVZX ecx, word ptr [rbx+rdx-2]
+    MOV [rax+rdx-2], cx
+    JMP loc_41FE10
+loc_420380:
+    LEA rsi, [rsp+168h+var_88]
+    LEA rdi, [rsp+168h+var_108]
+    CALL sub_426E50
+    MOV ecx, dword ptr [rsp+168h+var_140]
+    LEA rdi, [rsp+168h+var_88]
+    MOV r8, rbx
+    MOV rdx, r13
+    MOV esi, 14h
+    CALL sub_427520
+    MOV rsi, [rsp+168h+var_138]
+    MOV rdi, r13
+    CALL sub_40B660
+    MOV rdi, r13
+    CALL sub_40B5E0
+    LEA rdi, [rsp+168h+var_88]
+    MOV esi, 14h
+    CALL sub_40B660
+    LEA rdi, [rsp+168h+var_108]
+    MOV esi, 60h
+    CALL sub_40B660
+    JMP loc_4201AC
+loc_4203F0:
+    MOV rdi, [rsp+168h+var_168]
+    CALL sub_40B5E0
+    MOV rdi, [rsp+168h+src]
+    CALL sub_40B5E0
+    XOR eax, eax
+    JMP loc_420322
+loc_42040A:
+    MOV rdi, [rsp+168h+var_168]
+    CALL sub_40B5E0
+    MOVSXD rsi, [rsp+168h+var_10C]
+    MOV rbx, [rsp+168h+src]
+    MOV rdi, rbx
+    CALL sub_40B660
+    MOV rdi, rbx
+    CALL sub_40B5E0
+    MOVSXD rsi, [rsp+168h+var_10C]
+    MOV rdi, r12
+    CALL sub_40B660
+    MOV rdi, r12
+    CALL sub_40B5E0
+    XOR eax, eax
+    JMP loc_420322
+loc_420449:
+    MOV ecx, [rbx]
+    MOV [rax], ecx
+    MOV ecx, [rbx+rdx-4]
+    MOV [rax+rdx-4], ecx
+    JMP loc_41FE10
+loc_42045A:
+    MOV ecx, offset aSsh2SaveUserke
+    MOV edx, 543h
+    MOV esi, offset aSshpubkC
+    MOV edi, offset aPrivEncryptedL
+    CALL ___assert_fail
+loc_420473:
+    CALL ___stack_chk_fail
+```
+Output:MOV [rsp+168h+m], rax
+    MOV rax, [rbx]
+    MOV rdx, [rbx+8]
+    LEA rcx, [rsp+168h+var_118]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_160], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var_120]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_164], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var_128]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_16c], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var_130]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_170], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var_138]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_174], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var_140]
+    CALL qword ptr [rax+18h]
+    MOV [rsp+168h+var_178], rax
+    MOV rax, [rbx+10h]
+    MOV rdx, [rbx+18h]
+    LEA rcx, [rsp+168h+var
+############
+```assembly
+loc_418CE0:
+    CMP cs:byte_642428, 0
+    JZ loc_418CF0
+loc_418CE9:
+    MOV eax, offset unk_6423C0
+    RETN 
+loc_418CF0:
+    SUB rsp, 8
+    MOV r9d, offset unk_433780
+    MOV r8d, offset unk_4337E0
+    PUSH offset unk_4336C0
+    PUSH offset unk_433720
+    MOV ecx, offset unk_433840
+    MOV edx, offset unk_4338A0
+    MOV esi, 209h
+    MOV edi, offset unk_6423C0
+    CALL sub_417080
+    MOV cs:qword_6423C8, offset aNistp521
+    MOV cs:qword_6423D0, offset aNistp521
+    MOV eax, offset unk_6423C0
+    MOV cs:byte_642428, 1
+    ADD rsp, 18h
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "MemoryAccess"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x209"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": true,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Initialization/Setup",
+  "att&ck_technique": null
+}
+```
+############
+```assembly
+loc_42B380:
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 8
+    CALL sub_42B1A0
+    TEST rax, rax
+    JZ loc_42B3B0
+loc_42B390:
+    MOV rbx, rax
+    MOV rdi, rax
+    CALL sub_429C60
+    MOV rdi, rbx
+    MOV rbp, rax
+    CALL sub_40B5E0
+    MOV rax, rbp
+loc_42B3A9:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    RETN 
+loc_42B3B0:
+    XOR eax, eax
+    JMP loc_42B3A9
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+############
+```assembly
+loc_401C80:
+    JMP cs:off_642298
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": ["SubroutineCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Interfacing/Wrapper"
+}
+```
+############
+```assembly
+loc_41B620:
+    CMP edi, 180h
+    PUSH rbx
+    JZ loc_41B670
+loc_41B629:
+    CMP edi, 209h
+    JZ loc_41B660
+loc_41B631:
+    XOR eax, eax
+    CMP edi, 100h
+    JZ loc_41B640
+loc_41B63B:
+    POP rbx
+    RETN 
+loc_41B640:
+    MOV qword ptr [rdx], offset off_433F80
+    MOV eax, offset sub_418C00
+loc_41B64C:
+    MOV rbx, rsi
+    CALL rax
+    MOV [rbx], rax
+    MOV eax, 1
+    POP rbx
+    RETN 
+loc_41B660:
+    MOV qword ptr [rdx], offset off_433E00
+    MOV eax, offset sub_418CE0
+    JMP loc_41B64C
+loc_41B670:
+    MOV qword ptr [rdx], offset off_433EC0
+    MOV eax, offset sub_418C70
+    JMP loc_41B64C
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Integer", "Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["ConditionalBranching", "Arithmetic", "SubroutineCall"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x180", "0x209", "0x100"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation",
+  "att&ck_technique": ""
+}
+```
+############
+```assembly
+loc_401890:
+    JMP cs:off_6420A0
+```
+Output:```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": ["ConditionalBranching"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Control Flow/Dispatch",
+  "att&ck_technique": "N/A"
+}
+```
+############
+```assembly
+loc_421660:
+    CMP dword ptr [rsi], 3
+    MOV qword ptr [rdx], 0
+    JG loc_421670
+loc_42166C:
+    RETN 
+loc_421670:
+    PUSH r13
+    PUSH r12
+    MOV r13, rdx
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    MOV rbp, rcx
+    MOV r12, rsi
+    SUB rsp, 8
+    MOV rax, [rdi]
+    MOV edi, [rax]
+    BSWAP edi
+    CALL sub_40A770
+    TEST eax, eax
+    MOV [rbp+0], eax
+    JS loc_4216C5
+loc_421699:
+    MOV eax, [r12]
+    MOV rsi, [rbx]
+    SUB eax, 4
+    LEA rdx, [rsi+4]
+    MOV [r12], eax
+    MOV ecx, [rbp+0]
+    MOV [rbx], rdx
+    CMP eax, ecx
+    JL loc_4216C5
+loc_4216B5:
+    SUB eax, ecx
+    MOV [r13+0], rdx
+    MOVSXD rdx, ecx
+    ADD [rbx], rdx
+    MOV [r12], eax
+loc_4216C5:
+    ADD rsp, 8
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    RETN 
+```
+Output:```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": ["Pointer", "Pointer", "Integer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["Comparison", "Arithmetic", "DataMovement"],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": false,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation",
+  "att&ck_technique": ""
+}
+```
+############
+```assembly
+loc_40ACA0:
+
+loc_42A7D0:
+    PUSH r14
+    PUSH r13
+    PUSH r12
+    PUSH rbp
+    PUSH rbx
+    SUB rsp, 10h
+    TEST edi, edi
+    JZ loc_42A840
+loc_42A7E0:
+    CMP edi, 4
+    JZ loc_42A8C0
+loc_42A7E9:
+    CMP edi, 5
+    JZ loc_42AA18
+loc_42A7F2:
+    CMP edi, 1
+    JZ loc_42A870
+loc_42A7F7:
+    CMP edi, 2
+    JZ loc_42ABA0
+loc_42A800:
+    CMP edi, 3
+    JZ loc_42A898
+loc_42A809:
+    XOR esi, esi
+    XOR edi, edi
+    CALL sub_42A7D0
+    MOV edi, offset aSError
+    MOV rbx, rax
+    MOV rsi, rax
+loc_42A81D:
+    XOR eax, eax
+    CALL sub_40B290
+    MOV rdi, rbx
+    MOV rbp, rax
+    CALL sub_40B5E0
+    MOV rax, rbp
+loc_42A832:
+    ADD rsp, 10h
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    RETN 
+loc_42A840:
+    MOV edi, offset aPuttydir
+    CALL _getenv
+    TEST rax, rax
+    JZ loc_42A8F0
+loc_42A853:
+    ADD rsp, 10h
+    MOV rdi, rax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    JMP sub_40ACA0
+loc_42A870:
+    MOV edi, offset aPuttysshhostke
+    CALL _getenv
+    TEST rax, rax
+    JNZ loc_42A853
+loc_42A87F:
+    XOR esi, esi
+    XOR edi, edi
+    CALL sub_42A7D0
+    MOV edi, offset aSSshhostkeys
+    MOV rbx, rax
+    MOV rsi, rax
+    JMP loc_42A81D
+loc_42A898:
+    MOV edi, offset aPuttyrandomsee
+    CALL _getenv
+    TEST rax, rax
+    JNZ loc_42A853
+loc_42A8A7:
+    XOR esi, esi
+    XOR edi, edi
+    CALL sub_42A7D0
+    MOV edi, offset aSRandomseed
+    MOV rbx, rax
+    MOV rsi, rax
+    JMP loc_42A81D
+loc_42A8C0:
+    MOV edi, offset aPuttysessions
+    CALL _getenv
+    TEST rax, rax
+    JNZ loc_42A853
+loc_42A8CF:
+    XOR esi, esi
+    XOR edi, edi
+    CALL sub_42A7D0
+    MOV edi, offset aSSessions
+    MOV rbx, rax
+    MOV rsi, rax
+    JMP loc_42A81D
+loc_42A8F0:
+    MOV edi, offset aHome
+    CALL _getenv
+    MOV rbx, rax
+    CALL _getuid
+    MOV edi, eax
+    CALL _getpwuid
+    TEST rax, rax
+    JZ loc_42AC07
+loc_42A912:
+    MOV r13, [rax+20h]
+loc_42A916:
+    MOV edi, offset aXdgConfig
+    CALL _getenv
+    TEST rax, rax
+    JZ loc_42A92E
+loc_42A925:
+    CMP byte ptr [rax], 0
+    JNZ loc_42AAD8
+loc_42A92E:
+    TEST rbx, rbx
+    JZ loc_42AC93
+loc_42A937:
+    XOR eax, eax
+    MOV rsi, rbx
+    MOV edi, offset aSConfigPutty
+    CALL sub_40B290
+    TEST rax, rax
+    MOV rbp, rax
+    JNZ loc_42ACCA
+loc_42A952:
+    XOR eax, eax
+    MOV rsi, rbx
+    MOV edi, offset aSPutty
+    CALL sub_40B290
+    TEST r13, r13
+    MOV r12, rax
+    JZ loc_42ABD9
+loc_42A96D:
+    MOV rsi, r13
+    MOV edi, offset aSPutty
+    XOR eax, eax
+    CALL sub_40B290
+    MOV edi, (offset aSPutty+2)
+    MOV rbx, rax
+    CALL sub_40ACA0
+    TEST r12, r12
+    MOV r13, rax
+    JZ loc_42A99F
+loc_42A991:
+    XOR esi, esi
+    MOV rdi, r12
+    CALL _access
+    TEST eax, eax
+    JZ loc_42A9D1
+loc_42A99F:
+    TEST rbx, rbx
+    JZ loc_42A9B6
+loc_42A9A4:
+    XOR esi, esi
+    MOV rdi, rbx
+    CALL _access
+    TEST eax, eax
+    JZ loc_42ABC0
+loc_42A9B6:
+    XOR esi, esi
+    MOV rdi, r13
+    CALL _access
+    TEST eax, eax
+    JZ loc_42AC83
+loc_42A9C8:
+    TEST r12, r12
+    JZ loc_42ACC0
+loc_42A9D1:
+    MOV r14, rbx
+    MOV rbx, r12
+loc_42A9D7:
+    CMP rbx, r14
+    JZ loc_42A9E4
+loc_42A9DC:
+    MOV rdi, r14
+    CALL sub_40B5E0
+loc_42A9E4:
+    CMP r13, rbx
+    JZ loc_42A9F1
+loc_42A9E9:
+    MOV rdi, r13
+    CALL sub_40B5E0
+loc_42A9F1:
+    CMP rbx, rbp
+    MOV rax, rbx
+    JZ loc_42A832
+loc_42A9FD:
+    MOV rdi, rbp
+    MOV [rsp+38h+var_30], rbx
+    CALL sub_40B5E0
+    MOV rax, [rsp+38h+var_30]
+    JMP loc_42A832
+loc_42AA18:
+    TEST rsi, rsi
+    MOV rbx, rsi
+    JZ loc_42AB48
+loc_42AA24:
+    CMP byte ptr [rsi], 0
+    JZ loc_42AB48
+loc_42AA2D:
+    MOV rdi, rsi
+    CALL _strlen
+    LEA rdi, [rax+rax*2+1]
+loc_42AA3A:
+    MOV esi, 1
+    CALL sub_40AC50
+    MOV rbp, rax
+    MOVZX eax, byte ptr [rbx]
+    MOV rdx, rbp
+    TEST al, al
+    JZ loc_42AB60
+loc_42AA55:
+    MOV rsi, 1000000020000Dh
+    JMP loc_42AABF
+loc_42AA68:
+    LEA ecx, [rax-30h]
+    CMP cl, 9
+    JBE loc_42AACD
+loc_42AA70:
+    MOV ecx, eax
+    AND ecx, 0FFFFFFDFh
+    SUB ecx, 41h
+    CMP cl, 19h
+    JBE loc_42AACD
+loc_42AA7D:
+    MOV byte ptr [rdx], 25h
+    MOVZX eax, byte ptr [rbx]
+    ADD rdx, 3
+    SHR al, 4
+    AND eax, 0Fh
+    MOVZX eax, ds:byte_439F90[rax]
+    MOV [rdx-2], al
+    MOVZX eax, byte ptr [rbx]
+    AND eax, 0Fh
+    MOVZX eax, ds:byte_439F90[rax]
+    MOV [rdx-1], al
+    NOP word ptr [rax+rax+00000000h]
+loc_42AAB0:
+    ADD rbx, 1
+    MOVZX eax, byte ptr [rbx]
+    TEST al, al
+    JZ loc_42AB60
+loc_42AABF:
+    LEA ecx, [rax-2Bh]
+    CMP cl, 34h
+    JA loc_42AA68
+loc_42AAC7:
+    BT rsi, rcx
+    JNB loc_42AA68
+loc_42AACD:
+    MOV [rdx], al
+    ADD rdx, 1
+    JMP loc_42AAB0
+loc_42AAD8:
+    MOV rsi, rax
+    MOV edi, offset aSPutty_0
+    XOR eax, eax
+    CALL sub_40B290
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_42A92E
+loc_42AAF3:
+    XOR esi, esi
+    MOV rdi, rbp
+    CALL _access
+    MOV edx, eax
+    MOV rax, rbp
+    TEST edx, edx
+    JZ loc_42A832
+loc_42AB0A:
+    TEST rbx, rbx
+    JNZ loc_42A952
+loc_42AB13:
+    TEST r13, r13
+    JZ loc_42AC3F
+loc_42AB1C:
+    MOV rsi, r13
+    MOV edi, offset aSPutty
+    XOR eax, eax
+    CALL sub_40B290
+    MOV edi, (offset aSPutty+2)
+    MOV rbx, rax
+    XOR r12d, r12d
+    CALL sub_40ACA0
+    MOV r13, rax
+    JMP loc_42A99F
+loc_42AB48:
+    MOV edi, 31h
+    MOV ebx, offset aDefaultSetting
+    JMP loc_42AA3A
+loc_42AB60:
+    MOV byte ptr [rdx], 0
+    XOR esi, esi
+    MOV edi, 4
+    CALL sub_42A7D0
+    MOV rdx, rbp
+    MOV rsi, rax
+    MOV rbx, rax
+    MOV edi, offset aSS_0
+    XOR eax, eax
+    CALL sub_40B290
+    MOV rdi, rbx
+    MOV r12, rax
+    CALL sub_40B5E0
+    MOV rdi, rbp
+    CALL sub_40B5E0
+    MOV rax, r12
+    JMP loc_42A832
+loc_42ABA0:
+    XOR esi, esi
+    MOV edi, 1
+    CALL sub_42A7D0
+    MOV edi, offset unk_439D39
+    MOV rbx, rax
+    MOV rsi, rax
+    JMP loc_42A81D
+loc_42ABC0:
+    CMP rbx, r12
+    JZ loc_42A9E4
+loc_42ABC9:
+    MOV r14, rbx
+loc_42ABCC:
+    MOV rdi, r12
+    CALL sub_40B5E0
+    JMP loc_42A9D7
+loc_42ABD9:
+    MOV edi, (offset aSPutty+2)
+    CALL sub_40ACA0
+    TEST r12, r12
+    MOV r13, rax
+    MOV rbx, rax
+    JZ loc_42AC4C
+loc_42ABEE:
+    XOR esi, esi
+    MOV rdi, r12
+    CALL _access
+    TEST eax, eax
+    JNZ loc_42AC6F
+loc_42ABFC:
+    MOV rbx, r12
+    XOR r14d, r14d
+    JMP loc_42A9DC
+loc_42AC07:
+    XOR r13d, r13d
+    JMP loc_42A916
+loc_42AC0F:
+    XOR eax, eax
+    MOV esi, 42E60Dh
+    MOV edi, offset aSConfigPutty
+    CALL sub_40B290
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_42AC3F
+loc_42AC28:
+    XOR esi, esi
+    MOV rdi, rax
+    CALL _access
+    MOV edx, eax
+    MOV rax, rbp
+    TEST edx, edx
+    JZ loc_42A832
+loc_42AC3F:
+    MOV edi, (offset aSPutty+2)
+    CALL sub_40ACA0
+    MOV rbx, rax
+loc_42AC4C:
+    XOR esi, esi
+    MOV rdi, rbx
+    XOR r12d, r12d
+    CALL _access
+    XOR r14d, r14d
+    TEST eax, eax
+    MOV r13, rbx
+    JZ loc_42ABCC
+loc_42AC67:
+    XOR r12d, r12d
+    JMP loc_42ABCC
+loc_42AC6F:
+    XOR esi, esi
+    MOV rdi, r13
+    XOR ebx, ebx
+    CALL _access
+    TEST eax, eax
+    JNZ loc_42A9D1
+loc_42AC83:
+    CMP r13, r12
+    JZ loc_42ACE6
+loc_42AC88:
+    MOV r14, rbx
+    MOV rbx, r13
+    JMP loc_42ABCC
+loc_42AC93:
+    TEST r13, r13
+    JZ loc_42AC0F
+loc_42AC9C:
+    XOR eax, eax
+    MOV rsi, r13
+    MOV edi, offset aSConfigPutty
+    CALL sub_40B290
+    TEST rax, rax
+    MOV rbp, rax
+    JZ loc_42AB1C
+loc_42ACB7:
+    JMP loc_42AAF3
+loc_42ACC0:
+    TEST rbx, rbx
+    JZ loc_42ACFA
+loc_42ACC5:
+    MOV r14, rbx
+    JMP loc_42AC67
+loc_42ACCA:
+    XOR esi, esi
+    MOV rdi, rax
+    CALL _access
+    MOV edx, eax
+    MOV rax, rbp
+    TEST edx, edx
+    JNZ loc_42A952
+loc_42ACE1:
+    JMP loc_42A832
+loc_42ACE6:
+    CMP rbx, r13
+    JZ loc_42A9F1
+loc_42ACEF:
+    MOV r14, rbx
+    MOV rbx, r13
+    JMP loc_42A9DC
+loc_42ACFA:
+    XOR r14d, r14d
+    MOV rbx, r13
+    JMP loc_42AC67
+```
+Output:JZ loc_42A8F0
+loc_42A883:
+    ADD rsp, 10h
+    MOV rdi, rax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    JMP sub_40ACA0
+loc_42A898:
+    MOV edi, offset aPuttysshprikey
+    CALL _getenv
+    TEST rax, rax
+    JZ loc_42A8F0
+loc_42A8A8:
+    ADD rsp, 10h
+    MOV rdi, rax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    JMP sub_40ACA0
+loc_42A8B8:
+    MOV edi, offset aPuttysshpassphrase
+    CALL _getenv
+    TEST rax, rax
+    JZ loc_42A8F0
+loc_42A8C8:
+    ADD rsp, 10h
+    MOV rdi, rax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    JMP sub_40ACA0
+loc_42A8D8:
+    MOV edi, offset aPuttysshport
+    CALL _getenv
+    TEST rax, rax
+    JZ loc_42A8F0
+loc_42A8E8:
+    ADD rsp, 10h
+    MOV rdi, rax
+    POP rbx
+    POP rbp
+    POP r12
+    POP r13
+    POP r14
+    JMP sub_40ACA0
+loc_42A8F0:
+    XOR esi, esi
+    XOR edi, edi
+    CALL sub_42A7D0
+    MOV edi, offset aNoEnvVar
+    MOV rbx, rax
+    MOV rsi, rax
+loc_42A904:
+    XOR eax, eax
+    CALL sub_40B290
+    MOV rdi, rbx
+    MOV rbp, rax
+    CALL sub_40
+############
+```assembly
+loc_429EB0:
+    PUSH rbx
+    XOR eax, eax
+    MOV esi, 1
+    MOV ebx, edi
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429EDC
+loc_429EC3:
+    AND eax, 0FFFFFFFEh
+    MOV esi, 2
+    MOV edi, ebx
+    MOV edx, eax
+    XOR eax, eax
+    CALL _fcntl
+    TEST eax, eax
+    JS loc_429F0F
+loc_429EDA:
+    POP rbx
+    RETN 
+loc_429EDC:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebx
+    MOV r8, rax
+    MOV edx, offset aDFcntlFGetfdS
+loc_429EF2:
+    MOV rdi, cs:stderr
+    MOV esi, 1
+    XOR eax, eax
+    CALL ___fprintf_chk
+    MOV edi, 1
+    CALL _exit
+loc_429F0F:
+    CALL ___errno_location
+    MOV edi, [rax]
+    CALL _strerror
+    MOV ecx, ebx
+    MOV r8, rax
+    MOV edx, offset aDFcntlFSetfdS
+    JMP loc_429EF2
+```
+Output:```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": ["FileDescriptor"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["SubroutineCall", "ConditionalBranching", "SystemInteraction"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 5,
+  "use_of_indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0xFFFFFFFEh"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": true,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 2,
+  "inferred_category": "System/OS Interaction",
+  "att&ck_technique": "T1059"
+}
+```
+############
+```assembly
+loc_642C78:
+    EXTRN 
+```
+Output:The provided assembly snippet only shows an `EXTRN` directive, which indicates that the assembler is being told about an external symbol (function or variable) but does not provide any actual machine code. Without additional context or the full assembly routine, it's impossible to accurately extract features or infer the algorithm. Therefore, I cannot generate a comprehensive JSON output based on this limited information.
+
+If you provide more assembly code, I would be happy to assist you with extracting features and inferring the algorithm.
