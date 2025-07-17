@@ -35,7 +35,6 @@ class Composite(Context):
     """
 
     pool_size: Optional[int]
-    top_k: int
     seed: int  # Seed for selection of targets, uses random seed if not set
     binary: Optional[str]  # Run for a specific binary, run on all binaries if None
     platform: Union[
@@ -60,7 +59,6 @@ class Composite(Context):
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=None)
-        parser.add_argument("--top-k", type=int, default=10)
         parser.add_argument("--seed", type=int, default=random.randrange(sys.maxsize))
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
