@@ -56,7 +56,7 @@ class Composite(Context):
         """
 
         parser: ArgumentParser = subparsers.add_parser(
-            "retrieval",
+            "composite",
             description="Find the most similar assembly function from a set",
         )
         parser.add_argument("--pool-size", type=int, default=None)
