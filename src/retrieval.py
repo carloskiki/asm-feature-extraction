@@ -105,7 +105,7 @@ class Retrieval(Context):
                     None,
                     target_platform,
                 )
-                if self.model == "qwen-emb":
+                if self.model.startswith("qwen-emb"):
                     scores = self.generate_emb_scores(accelerator, dataset)
                 else:
                     scores = self.generate_scores(accelerator, dataset)
@@ -152,7 +152,7 @@ class Retrieval(Context):
                     target_optimization,
                     None,
                 )
-                if self.model == "qwen-emb":
+                if self.model.startswith("qwen-emb"):
                     scores = self.generate_emb_scores(accelerator, dataset)
                 else:
                     scores = self.generate_scores(accelerator, dataset)

@@ -11,6 +11,7 @@ MODELS = {
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
     "qwen-3-4": "Qwen/Qwen3-4B",
     "qwen-emb": "Qwen/Qwen3-Embedding-4B",
+    "qwen-emb-8": "Qwen/Qwen3-Embedding-8B",
     "gemma-3-4": "google/gemma-3-4b-it",
 }
 MAX_NEW_TOKENS = 512
@@ -91,7 +92,7 @@ class Context:
             device_map = {"": accelerator.process_index} 
         else:
             device_map = "auto"
-        if self.model == "qwen-emb":
+        if self.model.startswith("qwen-emb"):
             return SentenceTransformer(
                 MODELS[self.model],
                 model_kwargs={
