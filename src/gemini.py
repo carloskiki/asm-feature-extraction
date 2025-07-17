@@ -57,7 +57,6 @@ class GeminiRetrieval(Context):
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
         parser.add_argument("--optimization", type=optimization_parser)
-        parser.add_argument("--save-answers", type=str)
         parser.add_argument("--save-metrics", action="store_true")
 
         action = parser.add_subparsers(dest="action")
