@@ -198,7 +198,7 @@ class GeminiRetrieval(Context):
         return scores
 
     def generate(self, batch, client: genai.Client):
-        model = "gemini-2.5-flash",
+        model = "gemini-2.5-flash"
         cache = self.cache_system_prompt(client, model, 120)
 
         responses = []
