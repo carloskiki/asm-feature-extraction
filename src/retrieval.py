@@ -323,6 +323,7 @@ class Retrieval(Context):
         )
 
     def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
+        print("here")
         model = self.get_model(accelerator)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
