@@ -337,8 +337,8 @@ class Retrieval(Context):
             disable=not accelerator.is_main_process,
         ):
             (queries, targets) = zip(*batch)
-            queries = ["\n".join(str(q).splitlines()[:256]) for q in queries]
-            targets = ["\n".join(str(t).splitlines()[:256]) for t in targets]
+            queries = ["\n".join(str(q).splitlines()[:512]) for q in queries]
+            targets = ["\n".join(str(t).splitlines()[:512]) for t in targets]
 
             query_embs.extend(model.encode(queries))
             target_embs.extend(model.encode(targets))
