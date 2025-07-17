@@ -199,7 +199,7 @@ class GeminiRetrieval(Context):
 
     def generate(self, batch, client: genai.Client):
         model = "gemini-2.5-flash"
-        cache = self.cache_system_prompt(client, model, 120)
+        cache = self.cache_system_prompt(client, model, 600)
 
         responses = []
         for fn in batch:
