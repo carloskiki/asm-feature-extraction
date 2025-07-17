@@ -323,7 +323,6 @@ class Retrieval(Context):
         )
 
     def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
-        print("here")
         model = self.get_model(accelerator)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
@@ -338,8 +337,8 @@ class Retrieval(Context):
             disable=not accelerator.is_main_process,
         ):
             (queries, targets) = zip(*batch)
-            queries = ["\n".join(str(q).splitlines()[:64]) for q in queries]
-            targets = ["\n".join(str(t).splitlines()[:64]) for t in targets]
+            queries = ["\n".join(str(q).splitlines()[:256]) for q in queries]
+            targets = ["\n".join(str(t).splitlines()[:256]) for t in targets]
 
             query_embs.extend(model.encode(queries))
             target_embs.extend(model.encode(targets))
