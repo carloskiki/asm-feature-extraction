@@ -213,7 +213,7 @@ class GeminiRetrieval(Context):
                     cached_content=cache.name,
                     thinking_config=types.ThinkingConfig(thinking_budget=0),
                 ),
-                contents=f"```assembly\n{str(fn)[:10_000]}\n```"
+                contents=f"```assembly\n{"\n".join(str(fn).splitlines()[:256])}\n```"
             )
 
             responses.append(
