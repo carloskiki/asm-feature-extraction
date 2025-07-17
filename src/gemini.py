@@ -211,6 +211,7 @@ class GeminiRetrieval(Context):
                 config=types.GenerateContentConfig(
                     cached_content=cache.name,
                     thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    max_output_tokens=800,
                 ),
                 contents=f"```assembly\n{"\n".join(str(fn).splitlines()[:256])}\n```"
             )
