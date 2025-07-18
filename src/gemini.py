@@ -168,7 +168,7 @@ class GeminiRetrieval(Context):
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
-        cache = self.cache_system_prompt(client, model, 4 * self.pool_size)
+        cache = self.cache_system_prompt(client, model, 5 * self.pool_size)
 
         query_outputs = []
         target_outputs = []
