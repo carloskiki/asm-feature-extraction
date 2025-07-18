@@ -27,6 +27,7 @@ from .context import Context
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
+PROMPT = "Given an assembly function, retrieve the most similar function in terms of behavior."
 
 @dataclass
 class Composite(Context):
@@ -125,7 +126,7 @@ class Composite(Context):
                         "pool-size": self.pool_size,
                         "examples": self.examples,
                         "prompt": self.prompt,
-                        "model": self.model,
+                        "model": "composite",
                     }
                     data = {
                         "parameters": parameters,
@@ -172,7 +173,7 @@ class Composite(Context):
                         "pool-size": self.pool_size,
                         "examples": self.examples,
                         "prompt": self.prompt,
-                        "model": self.model,
+                        "model": "composite",
                     }
                     data = {
                         "parameters": parameters,
@@ -206,7 +207,7 @@ class Composite(Context):
             queries = ["\n".join(str(q).splitlines()[:128]) for q in queries]
             targets = ["\n".join(str(t).splitlines()[:128]) for t in targets]
 
-            query_embs.extend(model.encode(queries))
+            query_embs.extend(model.encode(queries, prompt=PROMPT))
             target_embs.extend(model.encode(targets))
 
         query_embs = np.stack(query_embs, axis=0)
