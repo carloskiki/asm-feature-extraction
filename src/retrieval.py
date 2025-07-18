@@ -324,7 +324,6 @@ class Retrieval(Context):
         )
 
     def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
-        prompt = "Given an assembly function, retrieve the most similar function in terms of behavior."
         model = self.get_model(accelerator)
 
         loader = DataLoader(dataset, batch_size=self.batch_size, collate_fn=lambda x: x)
@@ -342,7 +341,7 @@ class Retrieval(Context):
             queries = ["\n".join(str(q).splitlines()[:128]) for q in queries]
             targets = ["\n".join(str(t).splitlines()[:128]) for t in targets]
 
-            query_embs.extend(model.encode(queries, prompt=prompt))
+            query_embs.extend(model.encode(queries))
             target_embs.extend(model.encode(targets))
 
         query_embs = np.stack(query_embs, axis=0)
