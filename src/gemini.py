@@ -6,7 +6,7 @@ import random
 import time
 from datetime import datetime
 from google import genai
-from google.genai import types
+from google.genai import types, errors
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from .context import Context
@@ -205,15 +205,22 @@ class GeminiRetrieval(Context):
         for fn in batch:
             # We could instead provide a schema for the model to follow and not parse. But we want to
             # imitate our local setup as much as possible.
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                config=types.GenerateContentConfig(
-                    cached_content=cache.name,
-                    thinking_config=types.ThinkingConfig(thinking_budget=0),
-                    max_output_tokens=800,
-                ),
-                contents=f"```assembly\n{"\n".join(str(fn).splitlines()[:256])}\n```"
-            )
+
+            for _ in range(3):
+                try:
+                    response = client.models.generate_content(
+                        model="gemini-2.5-flash",
+                        config=types.GenerateContentConfig(
+                            cached_content=cache.name,
+                            thinking_config=types.ThinkingConfig(thinking_budget=0),
+                            max_output_tokens=800,
+                        ),
+                        contents=f"```assembly\n{"\n".join(str(fn).splitlines()[:256])}\n```"
+                    )
+                except errors.APIError:
+                    time.sleep(60)
+                    continue
+                break
 
             responses.append(
                 parse_json(
