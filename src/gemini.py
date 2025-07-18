@@ -164,9 +164,11 @@ class GeminiRetrieval(Context):
     def generate_scores(
         self, dataset: PairsDataset, client: genai.Client
     ) -> list[list[float]]:
+        model = "gemini-2.5-flash"
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
+        cache = self.cache_system_prompt(client, model, 6 * self.pool_size)
 
         query_outputs = []
         target_outputs = []
@@ -179,8 +181,8 @@ class GeminiRetrieval(Context):
             # Tokenize the prompts for the batch
             (queries, targets) = zip(*batch)
 
-            query_outputs.extend(self.generate(queries, client))
-            target_outputs.extend(self.generate(targets, client))
+            query_outputs.extend(self.generate(queries, client, cache))
+            target_outputs.extend(self.generate(targets, client, cache))
 
             elapsed = time.time() - start_time
             time.sleep(max(0, interval - elapsed))
@@ -197,9 +199,7 @@ class GeminiRetrieval(Context):
 
         return scores
 
-    def generate(self, batch, client: genai.Client):
-        model = "gemini-2.5-flash"
-        cache = self.cache_system_prompt(client, model, 6 * self.pool_size)
+    def generate(self, batch, client: genai.Client, cache: types.CachedContent):
 
         responses = []
         for fn in batch:
