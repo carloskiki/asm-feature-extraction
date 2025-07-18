@@ -108,10 +108,10 @@ class Composite(Context):
                 )
 
                 first_part = self.generate_emb_scores(accelerator, dataset)
-                second_part = gemini.generate_scores(dataset, client)
-                score = (np.array(first_part) + np.array(second_part)) / 2
 
                 if accelerator.is_main_process:
+                    second_part = gemini.generate_scores(dataset, client)
+                    score = (np.array(first_part) + np.array(second_part)) / 2
                     raw_metrics = test_retrieval(score)
                     parameters = {
                         "binary": self.binary or "all",
@@ -136,6 +136,8 @@ class Composite(Context):
 
                     metrics.append(data)
                     print(metrics[-1])
+                
+                accelerator.wait_for_everyone()
 
         if isinstance(self.optimization, list):
             platform = None if isinstance(self.platform, list) else self.platform
@@ -154,10 +156,10 @@ class Composite(Context):
                 )
 
                 first_part = self.generate_emb_scores(accelerator, dataset)
-                second_part = gemini.generate_scores(dataset, client)
-                score = (np.array(first_part) + np.array(second_part)) / 2
 
                 if accelerator.is_main_process:
+                    second_part = gemini.generate_scores(dataset, client)
+                    score = (np.array(first_part) + np.array(second_part)) / 2
                     raw_metrics = test_retrieval(score)
                     parameters = {
                         "binary": self.binary or "all",
@@ -184,7 +186,8 @@ class Composite(Context):
                         save_metrics(metrics, timestamp)
 
                     print(metrics[-1])
-
+                
+                accelerator.wait_for_everyone()
         print("done")
 
     def generate_emb_scores(self, accelerator: Accelerator, dataset: PairsDataset):
