@@ -27,7 +27,7 @@ from .context import Context
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
-PROMPT = "Given an assembly function, retrieve the most similar function in terms of behavior."
+PROMPT = "Given an assembly function, retrieve the most similar function in terms of semantics & behavior."
 
 @dataclass
 class Composite(Context):
