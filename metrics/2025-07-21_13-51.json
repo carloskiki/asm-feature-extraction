@@ -1,0 +1,26 @@
+[
+  {
+    "parameters": {
+      "binary": "putty",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 100,
+      "examples": 0,
+      "prompt": "tokens-2",
+      "model": "qwen-emb-0.6"
+    },
+    "results": {
+      "mrr": 0.6151566500650768,
+      "recall_at_1": 0.51,
+      "recall_at_10": 0.77,
+      "similarity_mean": {
+        "max": 0.8688166236877441,
+        "median": 0.6623293483257293,
+        "mean": 0.6563273869633673,
+        "min": 0.4525166615843773
+      }
+    },
+    "invalid-json": 0
+  }
+]

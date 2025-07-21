@@ -1,0 +1,26 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 0,
+      "prompt": "blank",
+      "model": "qwen-emb"
+    },
+    "results": {
+      "mrr": 0.729425166578676,
+      "recall_at_1": 0.645,
+      "recall_at_10": 0.828,
+      "similarity_mean": {
+        "max": 0.8448847259283065,
+        "median": 0.5968949544876814,
+        "mean": 0.5974587602476185,
+        "min": 0.380997477799654
+      }
+    },
+    "invalid-json": 0
+  }
+]
