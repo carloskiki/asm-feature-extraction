@@ -276,13 +276,7 @@ class GeminiRetrieval(Context):
             config=types.CreateCachedContentConfig(
                 display_name=f"prompt-{date}",  # used to identify the cache
                 system_instruction=system_prompt,
-                contents=[
-                    types.Content(
-                        role=obj["role"] if obj["role"] == "user" else "model",
-                        parts=[types.Part.from_text(text=obj["content"])],
-                    )
-                    for obj in prompt[1:-1]
-                ],
+                contents=[],
                 ttl=f"{time}s",
             ),
         )
