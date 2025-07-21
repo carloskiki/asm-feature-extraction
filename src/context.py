@@ -12,7 +12,7 @@ MODELS = {
     "qwen-3-4": "Qwen/Qwen3-4B",
     "qwen-emb": "Qwen/Qwen3-Embedding-4B",
     "qwen-emb-8": "Qwen/Qwen3-Embedding-8B",
-    "qwen-emb-0.6": "Qwen/Qwen3-Embedding-8B",
+    "qwen-emb-0.6": "Qwen/Qwen3-Embedding-0.6B",
     "gemma-3-4": "google/gemma-3-4b-it",
 }
 MAX_NEW_TOKENS = 512
