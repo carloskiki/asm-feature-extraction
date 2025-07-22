@@ -69,11 +69,19 @@ BCSD is the process of determining whether two fragments of binary code perform 
 These fragments are usually first disassembled, and are then compared for similarity. In practice,
 similarity detection is performed with one known fragment (either because it was analyzed before
 or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
-highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work.
+highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work. Known
+code fragments are typically collected in a database which is queried against for clone search.
 
-### How BCSD is used in real implementations
+Recent research uses deep learning to generate a vector embedding for each assembly function [refs].
+Generally, training a model to perform such task requires a large training dataset, and specialized
+hardware to perform a lot of computations. Once trained however, these methods can generate excellent results [ref].
+State of the art implementations are limited by their training data, and poorly generalize to out-of-domain tasks,
+such as code for a different architecture, or code compiled with a different compiler [1, 19]. Most methods also require
+a pre-processing step after disassembly, such as extracting the control flow graph [16, 17], or tokenizing the input
+assembly in a specific manner [14, 19].
 
-- TODO: How BCSD is used in industry
+- Siamese architecture / constrastive is bad for recall @ k (because only learns recall @ 1)
+- embeddings are bad for actual databases (ANN search vs. reverse indices).
 
 ### Problem Definition
 
