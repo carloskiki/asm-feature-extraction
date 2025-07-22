@@ -62,6 +62,7 @@ class GeminiRetrieval(Context):
         action = parser.add_subparsers(dest="action")
         action.add_parser("batch", description="Send batch file")
         action.add_parser("normal", description="Normal mode")
+        action.add_parser("no-cache", description="Don't use cache")
 
         parser.add_argument("data_path", type=str)
 
@@ -168,7 +169,10 @@ class GeminiRetrieval(Context):
         loader = DataLoader(
             dataset=dataset, batch_size=self.batch_size, collate_fn=lambda x: x
         )
-        cache = self.cache_system_prompt(client, model, 5 * self.pool_size)
+        if self.action != "no-cache":
+            cache = self.cache_system_prompt(client, model, 5 * self.pool_size)
+        else:
+            cache = None
 
         query_outputs = []
         target_outputs = []
@@ -199,34 +203,56 @@ class GeminiRetrieval(Context):
 
         return scores
 
-    def generate(self, batch, client: genai.Client, cache: types.CachedContent):
-
+    def generate(
+        self, batch, client: genai.Client, cache: Optional[types.CachedContent]
+    ):
         responses = []
         for fn in batch:
             # We could instead provide a schema for the model to follow and not parse. But we want to
             # imitate our local setup as much as possible.
 
+            fn_str = f"```assembly\n{'\n'.join(str(fn).splitlines()[:256])}\n```"
+
+            if cache is not None:
+                config = types.GenerateContentConfig(
+                    cached_content=cache.name,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    max_output_tokens=800,
+                )
+                contents = fn_str
+            else:
+                prompt = self.get_prompt("")
+                system_prompt = prompt[0]["content"]
+
+                config = types.GenerateContentConfig(
+                    system_instruction=system_prompt,
+                    thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    max_output_tokens=800,
+                )
+                contents = [
+                    types.Content(
+                        role=obj["role"] if obj["role"] == "user" else "model",
+                        parts=[types.Part.from_text(text=obj["content"])],
+                    )
+                    for obj in prompt[1:-1]
+                ]
+                contents.append(
+                    types.Content(
+                        role="user", parts=[types.Part.from_text(text=fn_str)]
+                    )
+                )
+
             for _ in range(3):
                 try:
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash",
-                        config=types.GenerateContentConfig(
-                            cached_content=cache.name,
-                            thinking_config=types.ThinkingConfig(thinking_budget=0),
-                            max_output_tokens=800,
-                        ),
-                        contents=f"```assembly\n{"\n".join(str(fn).splitlines()[:256])}\n```"
+                        model="gemini-2.5-flash", config=config, contents=contents
                     )
                 except errors.APIError:
                     time.sleep(60)
                     continue
                 break
 
-            responses.append(
-                parse_json(
-                    response.text
-                )
-            )
+            responses.append(parse_json(response.text))
 
         return responses
 
@@ -263,6 +289,7 @@ class GeminiRetrieval(Context):
         )
 
         import code
+
         code.interact(local=locals())
 
     def cache_system_prompt(
