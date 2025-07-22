@@ -136,17 +136,17 @@ class OpenAIRetrieval(Context):
 
         responses = []
         for fn in batch:
-            print(fn.name)
-
             # We could instead provide a schema for the model to follow and not parse. But we want to imitate
             # our local setup as much as possible.
             response = client.chat.completions.create(
-                messages=self.get_prompt(str(fn)),
+                messages=self.get_prompt('\n'.join(str(fn).splitlines()[:256])),
                 model="gpt-4.1-mini",
                 user="l1nna-lab",
             )
 
             import code
             code.interact(local=locals())
-        
+
+            responses.append(response.choices[0].message.content)
+
         return responses
