@@ -142,13 +142,81 @@ assembly function with the assembly encoder. The generated embeddings can be com
 calculate whether the assembly function is closely related or opposed to the category. This model requires
 pre-training and is architecture specific (x86_64 compiled with GCC).
 
-## Methodology
+## Method
 
-### Overview
+We use two distinct strategies to perform BCSD, and demonstrate that both methods target different aspects of the assembly fragment.
+Our best results are obtained by combining both methods.
 
-Our method of BCSD using LLMs combines two different strategies. The LLM is first queried in order to
-extract the human-interpretable high-level features of the assembly function. A vector embedding is also generated
-using the embedding model counter-part of the LLM.
+### Prompt
+
+The first method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
+the provided assembly code fragment. The assembly code fragment does not require preprocessing. As output, the LLM generates a JSON
+structure containing the extracted features.
+
+#### Framing and conditioning
+
+We use a prelude that contains general information about the task at hand, and the expected response.
+Recent commercial LLMs have the ability to generate responses following a specified JSON schema. We do not
+make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
+that do not benefit from this option.
+
+> You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative analysis. Your goal is to analyze an assembly routine from an **unspecified architecture and compiler** and provide its extracted high-level features, formatted as a JSON object.
+For the provided assembly routine, extract the following features and infer the algorithm. Your output **MUST** be a JSON object conforming to the structure
+defined by these features.
+
+#### Signature and data flow
+
+The first high-level feature category consists of analyzing the type signature of the provided assembly function.
+The following elements are considered:
+
+#### Core logic & Operations
+
+This section specifies how to determine the kind of operation that the assembly function performs.
+
+The information collected includes:
+
+- Indication of loops. This is determined by the presence of jump instructions that point back to a
+    previous instruction after some conditions have been checked.
+- Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
+    indices, or a series of conditional jumps.
+- Extensive use of indexed addressing modes.
+- Use of SIMD instructions and registers.
+- Number of distinct subroutine call targets.
+- Overall logical behavior. Possibilities include:
+  - Arithmetic operations
+  - Bitwise operations
+  - Data movement and memory access.
+  - Control flow and dispatching operations.
+  - Memory access operations.
+
+#### Notable constants
+
+This section identifies notable constants. These could be common scalar values used by a specific
+cryptographic algorithm, or the signature bytes used by a file format or protocol.
+
+#### Side effects
+
+The prompt also monitors the side effects that the assembly function has on the system. This includes:
+
+- Modification of input arguments.
+- Modification of global state.
+    This is detected when writes to absolute memory addresses or addresses resolved via global data segment pointers occur.
+- Memory allocation and deallocation.
+    Detected by the presence of calls to memory management functions like `malloc`, `free`, or similar.
+- Linear memory access patterns.
+    Determined by the presence of sequential indexed memory accesses inside loops or across multiple instructions.
+- System calls and software interrupts.
+    This is identified by the presence of specific instructions that trigger system calls or software interrupts.
+
+#### Final categorization
+
+The last section tries to assign a overall category to the assembly function, by basing it on the information
+collected in the analysis. The final categorization only weakly supports the similarity search because it does
+not have a large impact on the similarity score. Its purpose is to provide a concise overview for reviewers
+of the analysis, who might want to understand the function or verify its similarity with the target.
+Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
+wrapper/utility, file management, etc.
+. First,  
 
 To perform BCSD, our method queries an LLM with an assembly function in its context window to generate an
 analysis of the function. We compare two methods to obtain a successful assembly analysis.
