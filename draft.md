@@ -360,4 +360,3 @@ gains could be seen in assembly function analysis, at the cost of more output to
 
 - [Blanket execution: Dynamic similarity testing for program binaries and components](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele)
 - [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
-

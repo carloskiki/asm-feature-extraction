@@ -146,6 +146,7 @@ class OpenAIRetrieval(Context):
                 user="l1nna-lab",
             )
 
-            # TODO: inspect response payload
+            import code
+            code.interact(local=locals())
         
         return responses
