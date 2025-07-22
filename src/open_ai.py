@@ -83,7 +83,7 @@ class OpenAIRetrieval(Context):
                     "pool-size": self.pool_size,
                     "examples": self.examples,
                     "prompt": self.prompt,
-                    "model": "o4-mini",
+                    "model": "gpt-4.1-mini",
                 }
                 data = {
                     "parameters": parameters,
@@ -142,7 +142,7 @@ class OpenAIRetrieval(Context):
             # our local setup as much as possible.
             response = client.chat.completions.create(
                 messages=self.get_prompt(str(fn)),
-                model="o4-mini",
+                model="gpt-4.1-mini",
                 user="l1nna-lab",
             )
 
