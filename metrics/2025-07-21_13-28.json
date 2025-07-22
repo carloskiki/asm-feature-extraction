@@ -1,1 +1,44 @@
-[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 1, "platform": "gcc", "pool-size": 1000, "model": "clap"}, "results": {"mrr": 0.8666821087944317, "recall_at_1": 0.81, "recall_at_10": 0.944, "similarity_mean": {"max": 0.8420411406457424, "median": 0.03042227149318205, "mean": 0.04851444458024338, "min": -0.2236280483007431}}}, {"parameters": {"binary": "all", "optimization": 0, "target-optimization": 2, "platform": "gcc", "pool-size": 1000, "model": "clap"}, "results": {"mrr": 0.8103016744183544, "recall_at_1": 0.734, "recall_at_10": 0.909, "similarity_mean": {"max": 0.811195859849453, "median": 0.027560658133181277, "mean": 0.0466097654650464, "min": -0.2221357346624136}}}]
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.8666821087944317,
+      "recall_at_1": 0.81,
+      "recall_at_10": 0.944,
+      "similarity_mean": {
+        "max": 0.8420411406457424,
+        "median": 0.03042227149318205,
+        "mean": 0.04851444458024338,
+        "min": -0.2236280483007431
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "model": "clap"
+    },
+    "results": {
+      "mrr": 0.8103016744183544,
+      "recall_at_1": 0.734,
+      "recall_at_10": 0.909,
+      "similarity_mean": {
+        "max": 0.811195859849453,
+        "median": 0.027560658133181277,
+        "mean": 0.0466097654650464,
+        "min": -0.2221357346624136
+      }
+    }
+  }
+]

@@ -1,0 +1,1 @@
+[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 3, "platform": "gcc", "pool-size": 100, "examples": 0, "prompt": "a-logic", "model": "gemini-2.5-flash"}, "results": {"mrr": 0.6950288805325571, "recall_at_1": 0.6, "recall_at_10": 0.77, "similarity_mean": {"max": 0.6463241620308738, "median": 0.1898546176016287, "mean": 0.2014604702532139, "min": 0.0}}}]

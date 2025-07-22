@@ -293,17 +293,25 @@ class GeminiRetrieval(Context):
         code.interact(local=locals())
 
     def cache_system_prompt(
-        self, client: genai.Client, model: str, time: int
+        self, client: genai.Client, model: str, duration: int
     ) -> types.CachedContent:
         prompt = self.get_prompt("")
         system_prompt = prompt[0]["content"]
+        contents = [
+            types.Content(
+                role=obj["role"] if obj["role"] == "user" else "model",
+                parts=[types.Part.from_text(text=obj["content"])],
+            )
+            for obj in prompt[1:-1]
+        ]
+        print(contents)
 
         return client.caches.create(
             model=model,
             config=types.CreateCachedContentConfig(
                 display_name=f"prompt-{date}",  # used to identify the cache
                 system_instruction=system_prompt,
-                contents=[],
-                ttl=f"{time}s",
+                contents=contents,
+                ttl=f"{duration}s",
             ),
         )
