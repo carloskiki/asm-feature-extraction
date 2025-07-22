@@ -67,243 +67,198 @@ component, formatting, style, styling, insert
 \end{IEEEkeywords}
 
 \section{Introduction}
-Binary code similarity detection (BCSD) is becoming increasingly important as the rate of production and modularity of software grows.
-Modern software is almost never written from scratch and is increasingly reliant on external libraries. For reverse engineers,
-reducing the amount of repetitive assembly functions to analyze is important, as it allows them to be more efficient and focus on the
-custom parts of a binary. When libraries are statically linked to a binary, it is helpful to quickly identify which functions are part
-of common external libraries and which ones have never been seen before. Furthermore, if a vulnerability is found in a library,
-it is important to efficiently determine whether another binary or firmware is using the vulnerable library,
-so that its impact can be mitigated.
 
-This work presents a method to effectively find binary clones across binaries using large language models (LLM). The method
-is simpler and requires no training nor fine-tuning and matches state-of-the-art results. It has the
-unique advantage of generating human interpretable feature vectors instead of numerical values. Additionally,
+Modern software is increasingly reliant on external libraries.
+For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
+and mitigate vulnerability exposure [1, 2]. For reverse engineers, reducing the amount of repetitive assembly functions
+to analyze means being more productive, and allows them to focus on the custom parts of a binary.  Binary code similarity
+detection (BCSD) is a binary analysis task that tries to solve these problems, by determining whether two compiled
+code fragments behave in similar ways. This task is becoming increasingly important as the size, modularity and rate of
+production of software grows.  For instance, when libraries are statically linked to a binary, BCSD can help to
+quickly identify which functions are part of common external libraries and which ones have never been seen before.
+Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
+binary or firmware is using the vulnerable library.
+
+Early approaches to BCSD used human defined heuristics to extract a "feature vector" from a binary function. These heuristics
+could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
+by executing the function in an emulated environment. These methods were deterministic and had the benefit of producing
+human understandable feature vectors, but were often too simplistic or sometimes used computationally intractable alogrithms in
+the case of CFG analysis.
+
+More recently, machine learning (ML) based methods have shown to be better performing.
+These methods work by producing an embedding for a binary function using techniques coming from natural language processing.
+The generated embeddings are usually floating point tensors and serve as the "feature vector". These vectors are compared
+with each other by using metrics such as cosine similarity.
+
+Our work presents a method to effectively find binary clones across binaries using any pre-trained large language model (LLM).
+The method is simpler than other ML approaches, requires no training nor fine-tuning, and matches state-of-the-art results.
+It has the unique advantage of generating human interpretable feature vectors instead of numerical values. Additionally,
 it effectively scales with the performance and size of the LLM used, and thus benefits from the ample amount of research
-on large language models.
+on in this area.
 
 \subsection{Contributions}
 
-
-an elementary approach to BCSD purely based on the recent advancements in large language models (LLM) is developed.
+\begin{itemize}
+\item We provide an elementary approach to BCSD purely based on the recent advancements in large language models (LLM) that
+    is effective at cross-optimization, cross-architecture, and cross-obfuscation retrieval. This method requires no
+    pre-training, and generates human interpretable feature sets.
+\item We show that our approach scales with the performance and size of the LLM used, and benefits from new
+    methods such as "reasoning" models.  (This is great since significant investments & research goes to LLMs, blah blah)
+\item We conduct experiments to demonstrate the capability of our technique and show that it performs as well as other state-of-the-art
+    methods that require pre-training.
+\end{itemize}
 
 Instead of generating a numerical feature vector for a given assembly function, we generate a feature set containing
 human readable elements.
 
-TBD: how does this method compare to SOTA?
+\section{Background}
 
-Advantages:
+Security researchers and reverse engineers routinely obtain unknown or proprietary executables. Reverse engineers try
+to analyze these binaries to understand their underlying algorithms, while security researchers want to assess
+the risk associated with potential vulnerabilities within the executable. This process is usually conducted using
+a software reverse engineering platform such as Ghidra [ref] or IDA Pro [ref]. The main functions of these programs are to
+disassemble and decompile a provided binary, so that its content can be analyzed by humans. Disassembly is
+the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
+is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
-TBD: We show that this method scales with the capabilities of large language models. 
-    (This is great since significant investments \& research goes to LLMs, blah blah)
-- Scales very well with the capabilities of LLMs.
-- No pre-training, no fine tuning, works for any LLM out of the box.
+BCSD is the process of determining whether two fragments of binary code perform similar actions.
+These fragments are usually first disassembled, and are then compared for similarity. In practice,
+similarity detection is performed with one known fragment (either because it was analyzed before
+or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
+highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work.
 
-Humans can verify the feature set generated by our method.
-    (In an ideal world, we would not need human verification. Current methods are not perfect so human verif is still needed.
-     Our method eases this process and can more easily be debugged.)
+\section{Method}
 
+We use two distinct strategies to perform BCSD, and demonstrate that both methods target different aspects of the assembly fragment.
+Our best results are obtained by combining both methods.
 
-\section{Ease of Use}
+\subsection{Prompt}
 
-\subsection{Maintaining the Integrity of the Specifications}
+The first method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
+the provided assembly code fragment. The assembly code fragment does not require preprocessing. As output, the LLM generates a JSON
+structure containing the extracted features.
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+\subsubsection{Framing and Conditioning}
 
-\section{Prepare Your Paper Before Styling}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections \ref{AA}--\ref{SCM} below for more information on 
-proofreading, spelling and grammar.
+We use a prelude that contains general information about the task at hand, and the expected response.
+Recent commercial LLMs have the ability to generate responses following a specified JSON schema. We do not
+make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
+that do not benefit from this option.
 
-Keep your text and graphic files separate until after the text has been 
-formatted and styled. Do not number text heads---{\LaTeX} will do that 
-for you.
+> You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative analysis. Your goal is to analyze an assembly routine from an **unspecified architecture and compiler** and provide its extracted high-level features, formatted as a JSON object.
+For the provided assembly routine, extract the following features and infer the algorithm. Your output **MUST** be a JSON object conforming to the structure
+defined by these features.
 
-\subsection{Abbreviations and Acronyms}\label{AA}
-Define abbreviations and acronyms the first time they are used in the text, 
-even after they have been defined in the abstract. Abbreviations such as 
-IEEE, SI, MKS, CGS, ac, dc, and rms do not have to be defined. Do not use 
-abbreviations in the title or heads unless they are unavoidable.
+\subsubsection{Signature and Data Flow}
 
-\subsection{Units}
-\begin{itemize}
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
-\item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
-\end{itemize}
+The first high-level feature category consists of analyzing the type signature of the provided assembly function.
+The following elements are considered:
 
-\subsection{Equations}
-Number equations consecutively. To make your 
-equations more compact, you may use the solidus (~/~), the exp function, or 
-appropriate exponents. Italicize Roman symbols for quantities and variables, 
-but not Greek symbols. Use a long dash rather than a hyphen for a minus 
-sign. Punctuate equations with commas or periods when they are part of a 
-sentence, as in:
-\begin{equation}
-a+b=\gamma\label{eq}
-\end{equation}
+\subsubsection{Core Logic and Operations}
 
-Be sure that the 
-symbols in your equation have been defined before or immediately following 
-the equation. Use ``\eqref{eq}'', not ``Eq.~\eqref{eq}'' or ``equation \eqref{eq}'', except at 
-the beginning of a sentence: ``Equation \eqref{eq} is . . .''
+This section specifies how to determine the kind of operation that the assembly function performs.
 
-\subsection{\LaTeX-Specific Advice}
+The information collected includes:
 
-Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
-of ``hard'' references (e.g., \verb|(1)|). That will make it possible
-to combine sections, add equations, or change the order of figures or
-citations without having to go through the file line by line.
+- Indication of loops. This is determined by the presence of jump instructions that point back to a
+    previous instruction after some conditions have been checked.
+- Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
+    indices, or a series of conditional jumps.
+- Extensive use of indexed addressing modes.
+- Use of SIMD instructions and registers.
+- Number of distinct subroutine call targets.
+- Overall logical behavior. Possibilities include:
+  - Arithmetic operations
+  - Bitwise operations
+  - Data movement and memory access.
+  - Control flow and dispatching operations.
+  - Memory access operations.
 
-Please don't use the \verb|{eqnarray}| equation environment. Use
-\verb|{align}| or \verb|{IEEEeqnarray}| instead. The \verb|{eqnarray}|
-environment leaves unsightly spaces around relation symbols.
+\subsubsection{Notable Constants}
 
-Please note that the \verb|{subequations}| environment in {\LaTeX}
-will increment the main equation counter even when there are no
-equation numbers displayed. If you forget that, you might write an
-article in which the equation numbers skip from (17) to (20), causing
-the copy editors to wonder if you've discovered a new method of
-counting.
+This section identifies notable constants. These could be common scalar values used by a specific
+cryptographic algorithm, or the signature bytes used by a file format or protocol.
 
-{\BibTeX} does not work by magic. It doesn't get the bibliographic
-data from thin air but from .bib files. If you use {\BibTeX} to produce a
-bibliography you must send the .bib files. 
+\subsubsection{Side Effects}
 
-{\LaTeX} can't read your mind. If you assign the same label to a
-subsubsection and a table, you might find that Table I has been cross
-referenced as Table IV-B3. 
+The prompt also monitors the side effects that the assembly function has on the system. This includes:
 
-{\LaTeX} does not have precognitive abilities. If you put a
-\verb|\label| command before the command that updates the counter it's
-supposed to be using, the label will pick up the last counter to be
-cross referenced instead. In particular, a \verb|\label| command
-should not go before the caption of a figure or a table.
+- Modification of input arguments.
+- Modification of global state.
+    This is detected when writes to absolute memory addresses or addresses resolved via global data segment pointers occur.
+- Memory allocation and deallocation.
+    Detected by the presence of calls to memory management functions like `malloc`, `free`, or similar.
+- Linear memory access patterns.
+    Determined by the presence of sequential indexed memory accesses inside loops or across multiple instructions.
+- System calls and software interrupts.
+    This is identified by the presence of specific instructions that trigger system calls or software interrupts.
 
-Do not use \verb|\nonumber| inside the \verb|{array}| environment. It
-will not stop equation numbers inside \verb|{array}| (there won't be
-any anyway) and it might stop a wanted equation number in the
-surrounding equation.
+\subsubsection{Categorization}
 
-\subsection{Some Common Mistakes}\label{SCM}
-\begin{itemize}
-\item The word ``data'' is plural, not singular.
-\item The subscript for the permeability of vacuum $\mu_{0}$, and other common scientific constants, is zero with subscript formatting, not a lowercase letter ``o''.
-\item In American English, commas, semicolons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-\item A graph within a graph is an ``inset'', not an ``insert''. The word alternatively is preferred to the word ``alternately'' (unless you really mean something that alternates).
-\item Do not use the word ``essentially'' to mean ``approximately'' or ``effectively''.
-\item In your paper title, if the words ``that uses'' can accurately replace the word ``using'', capitalize the ``u''; if not, keep using lower-cased.
-\item Be aware of the different meanings of the homophones ``affect'' and ``effect'', ``complement'' and ``compliment'', ``discreet'' and ``discrete'', ``principal'' and ``principle''.
-\item Do not confuse ``imply'' and ``infer''.
-\item The prefix ``non'' is not a word; it should be joined to the word it modifies, usually without a hyphen.
-\item There is no period after the ``et'' in the Latin abbreviation ``et al.''.
-\item The abbreviation ``i.e.'' means ``that is'', and the abbreviation ``e.g.'' means ``for example''.
-\end{itemize}
-An excellent style manual for science writers is \cite{b7}.
+The last section tries to assign a overall category to the assembly function, by basing it on the information
+collected in the analysis. The final categorization only weakly supports the similarity search because it does
+not have a large impact on the similarity score. Its purpose is to provide a concise overview for reviewers
+of the analysis, who might want to understand the function or verify its similarity with the target.
+Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
+wrapper/utility, file management, etc.
 
-\subsection{Authors and Affiliations}
-\textbf{The class file is designed for, but not limited to, six authors.} A 
-minimum of one author is required for all conference articles. Author names 
-should be listed starting from left to right and then moving down to the 
-next line. This is the author sequence that will be used in future citations 
-and by indexing services. Names should not be listed in columns nor group by 
-affiliation. Please keep your affiliations as succinct as possible (for 
-example, do not differentiate among departments of the same organization).
+\section{Related Work}
 
-\subsection{Identify the Headings}
-Headings, or heads, are organizational devices that guide the reader through 
-your paper. There are two types: component heads and text heads.
+\subsection{Static Analysis}
 
-Component heads identify the different components of your paper and are not 
-topically subordinate to each other. Examples include Acknowledgments and 
-References and, for these, the correct style to use is ``Heading 5''. Use 
-``figure caption'' for your Figure captions, and ``table head'' for your 
-table title. Run-in heads, such as ``Abstract'', will require you to apply a 
-style (in this case, italic) in addition to the style provided by the drop 
-down menu to differentiate the head from the text.
+Traditional methods make use of static analysis to detect clone assembly routines. With these methods, a trade-off has
+to be made between the robustness to obfuscation and architecture differences, and the performance of the algorithm. [1]
+Control flow graph analysis and comparison [3, 4] is known to be robust to syntactic differences, but often involves computationally intractable
+problems. Other algorithms that use heuristics such as instruction frequency, longest-common-subsequence, or hashes [5, 6, 7] are more
+efficient, but tend to fixate on the syntactic elements and their ordering rather than the semantics.
 
-Text heads organize the topics on a relational, hierarchical basis. For 
-example, the paper title is the primary text head because all subsequent 
-material relates and elaborates on this one topic. If there are two or more 
-sub-topics, the next level head (uppercase Roman numerals) should be used 
-and, conversely, if there are not at least two sub-topics, then no subheads 
-should be introduced.
+\subsection{Dynamic Analysis}
 
-\subsection{Figures and Tables}
-\paragraph{Positioning Figures and Tables} Place figures and tables at the top and 
-bottom of columns. Avoid placing them in the middle of columns. Large 
-figures and tables may span across both columns. Figure captions should be 
-below the figures; table heads should appear above the tables. Insert 
-figures and tables after they are cited in the text. Use the abbreviation 
-``Fig.~\ref{fig}'', even at the beginning of a sentence.
+Dynamic analysis consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior. For BCSD
+this method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
+and solely analyzes its semantics. [2] As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
+and is hard to generalize across architectures and application binary interfaces [ref].
 
-\begin{table}[htbp]
-\caption{Table Type Styles}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
-\cline{2-4} 
-\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
-\hline
-copy& More table copy$^{\mathrm{a}}$& &  \\
-\hline
-\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-\end{tabular}
-\label{tab1}
-\end{center}
-\end{table}
+\subsection{Machine Learning Methods}
 
-\begin{figure}[htbp]
-\centerline{\includegraphics{fig1.png}}
-\caption{Example of a figure caption.}
-\label{fig}
-\end{figure}
+TODO: Missing specification of which is platform specific & requires pre-training
 
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words 
-rather than symbols or abbreviations when writing Figure axis labels to 
-avoid confusing the reader. As an example, write the quantity 
-``Magnetization'', or ``Magnetization, M'', not just ``M''. If including 
-units in the label, present them within parentheses. Do not label axes only 
-with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization 
-\{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
-quantities and units. For example, write ``Temperature (K)'', not 
-``Temperature/K''.
+The surge of interest and applications for machine learning in recent years has also affected BCSD.
+Most state-of-the-art methods use natural language processing (NLP) to achieve their results [refs].
+Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks [refs].
 
-\section*{Acknowledgment}
+Asm2Vec [17] is one of the first methods to use a NLP based approach to tackle the BCSD problem. It interprets an
+assembly function as a set of instruction sequences, where each instruction sequence is a possible execution path
+of the function. It samples these sequences by randomly traversing the CFG of the assembly function, and then
+uses a technique based on the PV-DM model [18] to generate an embedding for the assembly function. This solution
+is not cross architecture compatible and requires pre-training.
 
-The preferred spelling of the word ``acknowledgment'' in America is without 
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-acknowledgments in the unnumbered footnote on the first page.
+SAFE [11] uses a process similar to Asm2Vec. It first encodes each instruction of an assembly function into a vector,
+using the word2vec model [12]. Using a Self-Attentive Neural Network [13], SAFE then converts the sequence of instruction
+vectors from the assembly function into a single vector embedding for the function. Much like Asm2Vec, SAFE requires
+pre-training, but can perform cross architecture similarity detection.
 
-\section*{References}
+Order Matters [16] applies a BERT language reprensentation model [15] along with control flow graph analysis
+to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
+passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
+matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
+are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. 
 
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
+A more recent BCSD model, PalmTree [14], also bases its work on the BERT model [15].
+It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
+on three tasks. 1. As is common for BERT models, PalmTree is trained on masked language modeling. 2.
+PalmTree is trained on context window prediction, that is predicting whether two instructions are found
+in the same context window of an assembly function. 3. The model is also trained on Def-Use Prediction -
+predicting whether there is a definition-usage relation between both instructions.
 
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
+The model CLAP [19] uses the RoBERTa [20] base model, to perform assembly function encoding.
+It is adapted for assembly instruction tokenization, and directly generates an embedding for
+a whole assembly function. It is also accompanied with a text encoder (CLAP-text), so that classification can
+be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
+assembly function with the assembly encoder. The generated embeddings can be compared with cosine similarity to
+calculate whether the assembly function is closely related or opposed to the category. This model requires
+pre-training and is architecture specific (x86_64 compiled with GCC).
 
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
 \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.

@@ -1,7 +1,6 @@
 ## Intro
 
 Modern software is increasingly reliant on external libraries.
-
 For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
 and mitigate vulnerability exposure [1, 2]. For reverse engineers, reducing the amount of repetitive assembly functions
 to analyze means being more productive, and allows them to focus on the custom parts of a binary.  Binary code similarity
@@ -71,6 +70,10 @@ These fragments are usually first disassembled, and are then compared for simila
 similarity detection is performed with one known fragment (either because it was analyzed before
 or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
 highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work.
+
+### How BCSD is used in real implementations
+
+- TODO: How BCSD is used in industry
 
 ### Problem Definition
 
@@ -147,6 +150,10 @@ pre-training and is architecture specific (x86_64 compiled with GCC).
 We use two distinct strategies to perform BCSD, and demonstrate that both methods target different aspects of the assembly fragment.
 Our best results are obtained by combining both methods.
 
+- How was the prompt designed?
+- Why each section?
+- Why is our method better than embeddings?
+
 ### Prompt
 
 The first method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
@@ -217,6 +224,10 @@ of the analysis, who might want to understand the function or verify its similar
 Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
 wrapper/utility, file management, etc.
 . First,  
+
+### Examples
+
+TODO: Talk about the examples provided.
 
 To perform BCSD, our method queries an LLM with an assembly function in its context window to generate an
 analysis of the function. We compare two methods to obtain a successful assembly analysis.
