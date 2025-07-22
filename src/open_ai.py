@@ -144,6 +144,6 @@ class OpenAIRetrieval(Context):
                 user="l1nna-lab",
             )
 
-            responses.append(response.choices[0].message.content)
+            responses.append(parse_json(response.choices[0].message.content))
 
         return responses
