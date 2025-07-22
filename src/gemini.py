@@ -304,7 +304,6 @@ class GeminiRetrieval(Context):
             )
             for obj in prompt[1:-1]
         ]
-        print(contents)
 
         return client.caches.create(
             model=model,
