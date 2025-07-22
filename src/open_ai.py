@@ -144,9 +144,6 @@ class OpenAIRetrieval(Context):
                 user="l1nna-lab",
             )
 
-            import code
-            code.interact(local=locals())
-
             responses.append(response.choices[0].message.content)
 
         return responses
