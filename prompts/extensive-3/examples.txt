@@ -215,3 +215,164 @@ loc_A74FC:
   "inferred_category": "Data Processing/Transformation"
 }
 ```
+
+
+```assembly
+loc_40C860:
+    PUSH rbp
+    PUSH rbx
+    MOV rbp, rdi
+    MOV ebx, esi
+    SUB rsp, 18h
+    MOV rax, fs:28h
+    MOV [rsp+28h+var_20], rax
+    XOR eax, eax
+    TEST rdx, rdx
+    JZ loc_40C8B8
+loc_40C880:
+    MOV rdi, rdx
+    CALL _localtime
+    MOV esi, ebx
+    MOV rcx, rax
+    MOV edx, offset aHMS
+    MOV rdi, rbp
+    CALL _strftime
+    ADD rax, rbp
+    MOV rcx, [rsp+28h+var_20]
+    XOR rcx, fs:28h
+    JNZ loc_40C8C5
+loc_40C8AD:
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    RETN 
+loc_40C8B8:
+    MOV rdi, rsp
+    CALL _time
+    MOV rdx, rsp
+    JMP loc_40C880
+loc_40C8C5:
+    CALL ___stack_chk_fail
+```
+
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Integer",
+    "Pointer"
+  ],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": [
+    "SubroutineCall",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```json
+
+
+```assembly
+loc_44EA50:
+    PUSH rbp
+    PUSH rbx
+    MOV rbx, rdi
+    XOR edx, edx
+    MOV esi, 3
+    LEA rbp, [rbx+4]
+    SUB rsp, 18h
+    MOV qword ptr [rdi], 0
+    MOV qword ptr [rdi+8], 0
+    MOV qword ptr [rdi+10h], 0
+    MOV qword ptr [rdi+18h], 0
+    MOV dword ptr [rdi+20h], 0
+    MOV edi, 10h
+    MOV rax, fs:28h
+    MOV [rsp+28h+var_20], rax
+    XOR eax, eax
+    CALL sub_40B520
+    MOV edx, 10h
+    MOV edi, eax
+    MOV [rbx], eax
+    MOV [rbx+4], dx
+    MOV rsi, rbp
+    MOV edx, 0Ch
+    CALL sub_40B540
+    MOV edi, [rbx]
+    LEA rdx, [rsp+28h+len]
+    MOV rsi, rbp
+    MOV [rsp+28h+len], 0Ch
+    CALL _getsockname
+    XOR edi, edi
+    CALL _time
+    MOV [rbx+1Ch], eax
+    MOV rax, [rsp+28h+var_20]
+    XOR rax, fs:28h
+    JNZ loc_44EAF6
+loc_44EAEF:
+    ADD rsp, 18h
+    POP rbx
+    POP rbp
+    RETN 
+loc_44EAF6:
+    CALL ___stack_chk_fail
+```
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "SubroutineCall",
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": [
+    "0x18",
+    "0x8",
+    "0x10",
+    "0x20",
+    "0x3",
+    "0xC"
+  ],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 7,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": true,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "System/OS Interaction"
+}
+```
