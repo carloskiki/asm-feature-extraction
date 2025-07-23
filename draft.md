@@ -204,14 +204,14 @@ and their types, and also extract the return value type, if any.
 This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
 operation that the assembly function performs. We list some of the operations extracted here.
 
-Indication of loops. This is determined by the presence of jump instructions that point back to a
+- Indication of loops. This is determined by the presence of jump instructions that point back to a
     previous instruction after some conditions have been checked.
-Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
+- Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
     indices, or a series of conditional jumps.
-Extensive use of indexed addressing modes.
-Use of SIMD instructions and registers.
-Number of distinct subroutine call targets.
-Overall logical behavior. Possibilities include:
+- Extensive use of indexed addressing modes.
+- Use of SIMD instructions and registers.
+- Number of distinct subroutine call targets.
+- Overall logical behavior. Possibilities include:
   Arithmetic operations
   Bitwise operations
   Data movement and memory access.
@@ -243,7 +243,7 @@ of the analysis, who might want to understand the function or verify its similar
 Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
 wrapper/utility, file management, etc.
 
-### Examples
+#### Examples
 
 To achieve the best results with our method, we utilize few-shot prompting by providing hand crafted examples along with our prompt.
 In all of our evaluations, three examples are provided, and our ablation study confirms that adding more than three examples provides
@@ -251,31 +251,16 @@ little to no benefit. Our examples are selected from a diverse source of functio
 exemplify the space of possibilities in our evaluations.
 
 The prompt by itself is still very performant, and should be acceptable for most applications. A surpising effect of providing examples
-is that the prompt is no longer needed for analysis to be effective. Our results show that using enough examples with an empty system promt
-generates the same results as keeping the system prompt.
-
-To perform BCSD, our method queries an LLM with an assembly function in its context window to generate an
-analysis of the function. We compare two methods to obtain a successful assembly analysis.
-1. We use a system prompt that specifies the analysis to be performed.
-2. We use few-shot prompting and provide a few manually crafted user-assistant interactions as context and ommit the system
-    prompt entirely.
-
-For BCSD, we mandate that the generated response follows a specified JSON schema. These JSON responses can be compared
-to calculate a numerical index of similarity.
+is that the prompt is no longer needed for the analysis to be effective. Our results show that using enough examples with an empty system promt
+generates the same results as a standalone system prompt without examples.
 
 ### Comparison
 
-Machine learning based methods of BCSD typically generate a numerical vector embedding for each assembly function [refs], and then compare these vectors
-using numerical methods such as cosine similarity. This method is different, because it generates a JSON object instead of a vector. This has
-the unique advantage of being human interpretable, and thus easier to verify. For example, when matching a binary function against a database,
-one can base themself on the human readable LLM output to verify that the analysis was done correctly and to assess whether the matched function
-is indeed a clone.
-
-Since our generated analysis is not numerical, we use an alternative method to compare two assembly functions. We interpret the JSON structure
-as a tree, where booleans, numbers, and string elements are leaves, and non-empty lists and objects fields are nodes. We form a set containing all
-root-to-leaf paths, and use jaccard similarity (Intesection over union) to obtain a similarity measure.
-
-QUESTION: Do we need refs for cosine similarity & jaccard?
+ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
+methods such as cosine similarity.  Since our generated analysis is not numerical, we use an alternative
+method to compare two assembly functions.  We flatten the JSON structure into a dictionary, where booleans, numbers, and
+strings are the elements, and the concatenated path to those elements is the key.  Jaccard similarity (Intesection over union)
+is used to obtain a similarity measure.
 
 ### Dataset
 
@@ -289,11 +274,12 @@ Pairs of equivalent functions from the same platform but distinct optimization l
 evaluation, and pairs from the same optimization level but different platform were formed for cross
 platform evaluation.
 
+TODO: Table with function count.
+
 ### Model
 
-These local models are evaluated on our dataset.
-
-- Qwen2.5-Coder [ref] with sizes 0.5B to 7B
+We evaluate both local models of various sizes and commercially deployed models. Qwen2.5-Coder [ref] with sizes 0.5B to 7B
+is used to run most local evaluations as its small size fitted our GPU capacity. Gemma3
 - Qwen3 [ref] with sizes 0.6 to 4B
 - Gemma-3n [ref] with sizes 0.5B to 4B
 
