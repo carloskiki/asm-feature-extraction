@@ -178,19 +178,18 @@ and their types, and also extract the return value type, if any.
 This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
 operation that the assembly function performs. We list some of the operations extracted here.
 
-- Indication of loops. This is determined by the presence of jump instructions that point back to a
-    previous instruction after some conditions have been checked.
-- Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
-    indices, or a series of conditional jumps.
-- Extensive use of indexed addressing modes.
-- Use of SIMD instructions and registers.
-- Number of distinct subroutine call targets.
-- Overall logical behavior. Possibilities include:
-  Arithmetic operations
-  Bitwise operations
-  Data movement and memory access.
-  Control flow and dispatching operations.
-  Memory access operations.
+
+\begin{itemize}
+\item Indication of loops. This is determined by the presence of jump instructions that point back to a previous
+instruction after some conditions have been checked.
+\item Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
+indices, or a series of conditional jumps.
+\item Extensive use of indexed addressing modes.
+\item Use of SIMD instructions and registers.
+\item Number of distinct subroutine call targets.
+\item Overall logical behavior. Possibilities include: arithmetic operations, bitwise operations, data movement and memory access,
+and control flow and dispatching operations.
+\end{itemize}
 
 \subsubsection{Notable Constants}
 
