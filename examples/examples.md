@@ -216,9 +216,7 @@ loc_43BDF9:
   "number_of_distinct_subroutine_call_targets": 2,
   "use_indexed_addressing_modes": false,
   "presence_of_notable_integer_constants": [
-    "0x2",
     "0x39",
-    "0x0"
   ],
   "presence_of_notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 3,
@@ -264,9 +262,7 @@ loc_42343B:
   "number_of_distinct_subroutine_call_targets": 2,
   "use_indexed_addressing_modes": false,
   "presence_of_notable_integer_constants": [
-    "0x2",
     "0x39",
-    "0x4"
   ],
   "presence_of_notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 3,

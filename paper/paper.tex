@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{minted}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -49,6 +50,14 @@ component, formatting, style, styling, insert
 \end{IEEEkeywords}
 
 \section{Introduction}
+
+\begin{minted}[fontsize=\small, bgcolor=white, linenos]{diff}
+ fn main() {
+-    println!("hello, world!");
++    let x = 2;
++    println!("{x}");
+ }
+\end{minted}
 
 Modern software is increasingly reliant on external libraries.
 For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
