@@ -129,14 +129,34 @@ highly similar to the known one, it greatly simplifies the analysis task, and re
 
 \section{Method}
 
-We use two distinct strategies to perform BCSD, and demonstrate that both methods target different aspects of the assembly fragment.
-Our best results are obtained by combining both methods.
+Our method is designed to solve some of the pain points associated with state of the art deep learning models for BCSD.
+An important factor is that our method extracts human understandable features from an assembly function, instead
+of a vector embedding. This unique advantage allows immediate human verification when a match is detect by the similarity
+engine. A database of assembly functions and their interpretable features is more easily maintained, as defects can
+be patched by humans, rather than having to regenerate the whole database when the model is modified.
+
+By using any open-source or commercially available LLM, we entirely sidestep model training by leveraging the extenive
+and diverse datasets that LLMs are pre-trained on.  Our method can be tuned by modifying the instructions provided to
+the LLM, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
+The underlying LLM can also replaced seamlessly, meaning that our method scales with the performance improvements
+of LLMs - an area which is showing impressive growth and development.
+
+Another key advantage of our method also stems from its textual representation of the extracted feature set. As highlighted
+previously, vector embeddings are computationally expensive to match against in large databases. Textual search is much
+more scalable than nearest neighbor search, as is evident in modern search engines being able to filter through billions of documents
+in a fraction of a second.
+
 
 \subsection{Prompt}
 
 The first method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
 the provided assembly code fragment. The assembly code fragment does not require preprocessing. As output, the LLM generates a JSON
 structure containing the extracted features.
+
+TODO: 
+- What type of output do we expect (main different between prompts)?
+    - How do we solve repetition.
+    - How do we ensure a valid json output?
 
 \subsubsection{Framing and Conditioning}
 
@@ -145,20 +165,22 @@ Recent commercial LLMs have the ability to generate responses following a specif
 make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
 that do not benefit from this option.
 
-> You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative analysis. Your goal is to analyze an assembly routine from an **unspecified architecture and compiler** and provide its extracted high-level features, formatted as a JSON object.
-For the provided assembly routine, extract the following features and infer the algorithm. Your output **MUST** be a JSON object conforming to the structure
-defined by these features.
+> You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
+analysis. Your goal is to analyze an assembly routine from an **unspecified architecture and compiler** and provide its extracted
+high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
+algorithm. Your output **MUST** be a JSON object conforming to the structure defined by these features.
 
-\subsubsection{Signature and Data Flow}
+\subsubsection{Type Signature}
 
-The first high-level feature category consists of analyzing the type signature of the provided assembly function.
-The following elements are considered:
+The first feature category extracted is the type signature of the provided assembly function.
+We only make the distinction between two types: Integer and Pointer. Inferring more information than these two 
+primitive types has shown to be too complicated for current LLMs. We extract the number of input arguments
+and their types, and also extract the return value type, if any.
 
 \subsubsection{Core Logic and Operations}
 
-This section specifies how to determine the kind of operation that the assembly function performs.
-
-The information collected includes:
+This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
+operation that the assembly function performs. We list some of the operations extracted here.
 
 - Indication of loops. This is determined by the presence of jump instructions that point back to a
     previous instruction after some conditions have been checked.
@@ -168,30 +190,27 @@ The information collected includes:
 - Use of SIMD instructions and registers.
 - Number of distinct subroutine call targets.
 - Overall logical behavior. Possibilities include:
-  - Arithmetic operations
-  - Bitwise operations
-  - Data movement and memory access.
-  - Control flow and dispatching operations.
-  - Memory access operations.
+  Arithmetic operations
+  Bitwise operations
+  Data movement and memory access.
+  Control flow and dispatching operations.
+  Memory access operations.
 
 \subsubsection{Notable Constants}
 
-This section identifies notable constants. These could be common scalar values used by a specific
-cryptographic algorithm, or the signature bytes used by a file format or protocol.
+This section identifies notable integer and floating point constants.  These could be common scalar values used by
+a specific cryptographic algorithm, or the signature bytes used by a file format or protocol. We exclude small
+values are used as struct offsets, loop counters or stack pointer adjustments.
 
 \subsubsection{Side Effects}
 
-The prompt also monitors the side effects that the assembly function has on the system. This includes:
-
-- Modification of input arguments.
-- Modification of global state.
-    This is detected when writes to absolute memory addresses or addresses resolved via global data segment pointers occur.
-- Memory allocation and deallocation.
-    Detected by the presence of calls to memory management functions like `malloc`, `free`, or similar.
-- Linear memory access patterns.
-    Determined by the presence of sequential indexed memory accesses inside loops or across multiple instructions.
-- System calls and software interrupts.
-    This is identified by the presence of specific instructions that trigger system calls or software interrupts.
+The prompt also monitors the side effects that the assembly function has on the system.
+Modification of input arguments is identified when a pointer input is used to write to memory, and modification
+of global states is detected similarily, when writes to absolute memory addresses or addresses resolved via global
+data segment pointers occur. Memory allocation and deallocation is determined by the presence of calls to memory
+management functions like `malloc` or `free`. Linear memory access patterns are detected by the presence of sequential
+indexed memory accesses inside loops or across multiple instructions. Finally, system calls and software interrupts are
+identified by the presence of specific instructions that trigger them.
 
 \subsubsection{Categorization}
 
@@ -201,6 +220,86 @@ not have a large impact on the similarity score. Its purpose is to provide a con
 of the analysis, who might want to understand the function or verify its similarity with the target.
 Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
 wrapper/utility, file management, etc.
+
+\subsubsection{Examples}
+
+To achieve the best results with our method, we utilize few-shot prompting by providing hand crafted examples along with our prompt.
+In all of our evaluations, three examples are provided, and our ablation study confirms that adding more than three examples provides
+little to no benefit. Our examples are selected from a diverse source of functions, and are varied in size and architecture to
+exemplify the space of possibilities in our evaluations.
+
+The prompt by itself is still very performant, and should be acceptable for most applications. A surpising effect of providing examples
+is that the prompt is no longer needed for the analysis to be effective. Our results show that using enough examples with an empty system promt
+generates the same results as a standalone system prompt without examples.
+
+\subsection{Comparison}
+
+ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
+methods such as cosine similarity.  Since our generated analysis is not numerical, we use an alternative
+method to compare two assembly functions.  We flatten the JSON structure into a dictionary, where booleans, numbers, and
+strings are the elements, and the concatenated path to those elements is the key.  Jaccard similarity (Intesection over union)
+is used to obtain a similarity measure.
+
+\subsection{Dataset}
+
+The dataset is composed of 7 binaries: busybox, coreutils, curl, image-magick, openssl, putty, and sqlite3.
+All were compiled using gcc for the following platforms: x86\_64, x86\_32, arm, mips, powerpc.
+For each binary and platform, binary objects were generated for all optimization levels (O0 to O3),
+stripped of debug symbols. In total, this yeilds 140 different binaries to analyze.
+The binaries were dissassembled using IDA Pro, yielding \(383 658\) assembly functions.
+Functions consisting of less than 3 instructions were not included as part of the dataset.
+Pairs of equivalent functions from the same platform but distinct optimization level were made for cross optimization
+evaluation, and pairs from the same optimization level but different platform were formed for cross
+platform evaluation.
+
+TODO: Table with function count.
+
+\subsection{Model}
+
+We evaluate both local models of various sizes and commercially deployed models. Qwen2.5-Coder [ref] with sizes 0.5B to 7B
+is used to run most local evaluations as its small size fitted our GPU capacity.
+- Qwen3 [ref] with sizes 0.6 to 4B
+- Gemma-3n [ref] with sizes 0.5B to 4B
+
+Most evaluations and tests were run using Qwen2.5-Coder, and we use this model as a baseline.
+On all local models, the input context size was limited to 4096 tokens, and output tokens generation to 512.
+Large assembly functions that did not fit within the input tokens were truncated.
+
+For ablation study, the following commercial models were evaluated on our dataset.
+
+- OpenAI's GPT-4.1-mini [ref]
+- OpenAI's o4-mini [ref]
+- Google's gemini-2.5-flash-lite [ref]
+
+\section{Experiments}
+
+Our experiments are run on a virtual machine with 8 (CPU ID) cpu cores, 100 GB of RAM, and four NVIDIA Quadro RTX
+6000 GPUs each having  24GB of RAM. First, we compare our method against other state-of-the-art NLP based
+approaches to BCSD on our dataset. Second, we run ablation studies on our method, to determine how the size
+of the model, the number of examples provided, and the different sections of the prompt contribute to our results.
+Third, we show that embedding models derived from LLMs that are _not_ trained on BCSD are on par with BCSD specific
+embedding models. Finally, we show that the features extracted from our novel method are not properly represented
+in state-of-the-art embedding methods, and that by combining our method with an embedding model yield significantly
+better results that state of the art approaches.
+
+\subsection{Evaluation Method}
+
+The mean reciprocal rank (MRR) and first position recall (Recall@1) metrics are used for evaluation and comparison to other methods.
+A pool of assembly function pairs is used for evaluation, where both assembly fragments in a pair come from the same source function.
+For each pair, we compare the generated features for the first element of the pair with all second elements of the pairs contained
+in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the arm
+architecture with optimization level 3, and \(b_i\) is compiled for the mips architecture with optimization
+level 3. The features collected for the \(a_1\) is compared for similarity with the features of \(b_i\) for \(i \in [1, 10]\).
+A ranking is generated by ordering these comparisons from most to least similar. Recall@1 is successful
+if \(b_1\) is ranked first, and the reciprocal rank is \(\frac{1}{\text{rank}(b_1)}\).
+
+\subsection{Comparison with Baselines}
+
+Cross optimization retrieval results are presented in table [T1]. We use the MRR (mean recprocal rank) and Recall@1 metrics, which are used
+by other methods [refs]. Table [T2] contains the same metrics and baselines, but for cross platform retrieval.
+
+T1 desc: Evaluation of the methods with a pool size of 1000. All functions are compiled for the arm architecture using gcc with the
+optimization levels specified for each column. We use the gemini-2.5-flash model for the best trade-off between efficiency and performance.
 
 \section{Related Work}
 
