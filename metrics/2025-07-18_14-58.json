@@ -1,1 +1,25 @@
-[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 2, "platform": "gcc", "pool-size": 1000, "examples": 3, "prompt": "extensive-3", "model": "composite"}, "results": {"mrr": 0.8796054626366038, "recall_at_1": 0.843, "recall_at_10": 0.946, "similarity_mean": {"max": 0.7484726774044016, "median": 0.45336445922572, "mean": 0.4557346503850331, "min": 0.24754328380887478}}}]
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 2,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.8796054626366038,
+      "recall_at_1": 0.843,
+      "recall_at_10": 0.946,
+      "similarity_mean": {
+        "max": 0.7484726774044016,
+        "median": 0.45336445922572,
+        "mean": 0.4557346503850331,
+        "min": 0.24754328380887478
+      }
+    }
+  }
+]

@@ -54,11 +54,35 @@ component, formatting, style, styling, insert
 \definecolor{diffadd}{rgb}{0.9,1,0.9}
 \definecolor{diffremove}{rgb}{1,0.9,0.9}
 \begin{minted}[fontsize=\small, bgcolor=Beige, linenos, frame=lines, framesep=2mm]{diff}
- fn main() {
--    println!("hello, world!");
-+    let x = 2;
-+    println!("{x}");
- }
+ {
+   "input_parameter_count": 1,
+   "input_parameter_types": [
+     "Pointer"
+   ],
+-  "return_value_type": "None",
++  "return_value_type": "Integer",
+   "dominant_operation_categories": [
+     "ConditionalBranching",
+     "SubroutineCall"
+   ],
+   "loop_indicators": false,
+   "distinct_subroutine_call_targets": 2,
+   "use_indexed_addressing_modes": false,
+   "notable_integer_constants": [
+-    "0x39"
++    "0x39",
++    "0x4"
+   ],
+   "notable_floating_point_constants": [],
+   "count_of_distinct_immediate_values": 3,
+   "modifies_input_parameters": false,
+   "modifies_global_state": false,
+   "memory_allocation_deallocation": false,
+   "io_operations": false,
+   "block_memory_operations": false,
+-  "inferred_algorithm": "Undetermined"
++  "inferred_algorithm": "Initialization"
+}
 \end{minted}
 
 Modern software is increasingly reliant on external libraries.

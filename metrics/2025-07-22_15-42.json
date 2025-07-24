@@ -1,0 +1,48 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "platform": "arm",
+      "target-platform": "gcc",
+      "optimization": 2,
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.7357669264062083,
+      "recall_at_1": 0.671,
+      "recall_at_10": 0.858,
+      "similarity_mean": {
+        "max": 0.6663486328230404,
+        "median": 0.4317493175523674,
+        "mean": 0.43502410737479597,
+        "min": 0.26763152537501317
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "platform": "powerpc",
+      "target-platform": "gcc",
+      "optimization": 2,
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.7455025984909472,
+      "recall_at_1": 0.7,
+      "recall_at_10": 0.837,
+      "similarity_mean": {
+        "max": 0.6923145644945448,
+        "median": 0.4331463088658686,
+        "mean": 0.4365838534267872,
+        "min": 0.2667069207095225
+      }
+    }
+  }
+]

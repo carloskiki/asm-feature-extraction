@@ -1,1 +1,25 @@
-[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 1, "platform": "gcc", "pool-size": 1000, "examples": 3, "prompt": "extensive-3", "model": "composite"}, "results": {"mrr": 0.9327765749771344, "recall_at_1": 0.91, "recall_at_10": 0.971, "similarity_mean": {"max": 0.7755878432885491, "median": 0.4527312354886283, "mean": 0.45535804930495943, "min": 0.2613536266339437}}}]
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.9327765749771344,
+      "recall_at_1": 0.91,
+      "recall_at_10": 0.971,
+      "similarity_mean": {
+        "max": 0.7755878432885491,
+        "median": 0.4527312354886283,
+        "mean": 0.45535804930495943,
+        "min": 0.2613536266339437
+      }
+    }
+  }
+]

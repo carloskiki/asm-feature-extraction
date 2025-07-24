@@ -1,0 +1,7 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{ }fn main() \PYGZob{}
+\PYG{g+gd}{\PYGZhy{}    println!(\PYGZdq{}hello, world!\PYGZdq{});}
+\PYG{g+gi}{+    let x = 2;}
+\PYG{g+gi}{+    println!(\PYGZdq{}\PYGZob{}x\PYGZcb{}\PYGZdq{});}
+\PYG{+w}{ }\PYGZcb{}
+\end{MintedVerbatim}
