@@ -12,8 +12,7 @@
   "number_of_distinct_subroutine_call_targets": 2,
   "use_indexed_addressing_modes": false,
   "presence_of_notable_integer_constants": [
-    "0x2",
-    "0x39",
+    "0x39"
   ],
   "presence_of_notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 3,
