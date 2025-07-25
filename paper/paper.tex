@@ -92,7 +92,6 @@ component, formatting, style, styling, insert
 \centering
 \begin{minipage}[t]{0.48\linewidth}
 \centering
-\captionof{figure}{Version A}
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_42c1c0:
     push rbp
@@ -118,7 +117,6 @@ loc_42c1c0:
 \hfill
 \begin{minipage}[t]{0.48\linewidth}
 \centering
-\captionof{figure}{Version B}
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_41ac99:
     mov dword ptr [rdi], 67452301h
@@ -131,7 +129,8 @@ loc_41ac99:
     retn 
 \end{minted}
 \end{minipage}
-\vspace{-1em}
+\caption{Figure 1: Testing caption thing}
+
 \end{figure*}
 
 
