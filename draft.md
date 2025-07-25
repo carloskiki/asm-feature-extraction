@@ -43,6 +43,8 @@ benefits from the ample amount of research on in this area.
 
 ## Background
 
+### Binary Analysis
+
 Security researchers and reverse engineers are routinely tasked with the analysis of unknown or proprietary executables.
 Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
@@ -51,12 +53,27 @@ disassemble and decompile a provided binary, so that its content can be analyzed
 the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
+Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
+is lost [1]. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
+the program as efficient as possible - which often means removing as much as possible. The optimizers within the compiler
+only have a single rule: They must not makes changes to the observable behavior of the program. This is ofter refered
+to as the "as-if rule". As a result, compilers can remove, reorder, and inline significant parts of the code. Even worse,
+adverserial programs, such as malware or digital rights management software uses obfuscation techniques to resist
+having their code reverse engineered.
+
+### Binary code similarity detection
+
 BCSD is the task of determining whether two fragments of binary code perform similar actions.
 These fragments are usually first disassembled, and are then compared for similarity. In practice,
 similarity detection is performed with one known fragment (either because it was analyzed before
 or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
 highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work. Known
-code fragments are typically collected in a database which is queried against for clone search.
+code fragments are typically collected in a database which is queried against for clone search. For example,
+if a major vulnerability in a widely used, core open-source component is found, BCSD can be used to quickly
+assess if a binary contains the vulnerable code fragment. It can also be used for plagiarism detection, which
+could take the form of patent infringemnt, or for malware classification. Challenges in binary analysis are
+amplified in binary code similarity detection. Two code fragments that seem very different can still have
+the same observable behavior.
 
 Recent research uses deep learning to generate a vector embedding for each assembly function [11, 14, 16, 17, 19].
 Generally, training a model to perform such task requires a large training dataset, and highly performant GPUs
@@ -73,7 +90,11 @@ search [21, 22], but it may not always return the first match and thus skews sim
 
 ### Problem Definition
 
-We deem two assembly code fragements to be semantically identical if they were compiled from the same source code.
+We deem two assembly code fragements to be semantically identical if they have the same observable behavior on a system.
+This type of clone is generally referred to as "type four" clones [17, 26]. This type of clone excludes different algorithms that
+might happen to have the same output, such as breadth-first search vs. depth-first search. In research it is common
+to use the same code source code function compiled with different compilers or compilation options to create such
+type four clones.
 
 ## Related Work
 
@@ -397,6 +418,8 @@ gains could be seen in assembly function analysis, at the cost of more output to
 24. [Ghidra Software Reverse Engineering Framework](https://github.com/NationalSecurityAgency/ghidra)
 
 25. [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165)
+
+26. [BinClone: Detecting Code Clones in Malware](https://ieeexplore.ieee.org/document/6895418)
 
 - [Blanket execution: Dynamic similarity testing for program binaries and components](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele)
 - [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)

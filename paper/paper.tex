@@ -52,6 +52,7 @@ component, formatting, style, styling, insert
 
 \section{Introduction}
 
+% Diff of generated output from analysis
 \begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
  {
    "input_parameter_count": 1,
@@ -83,6 +84,32 @@ component, formatting, style, styling, insert
 +  "inferred_algorithm": "Initialization"
 }
 \end{minted}
+
+
+% Side by size assembly view
+\begin{figure}[!t]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+\captionof{figure}{Version A}
+\begin{minted}[fontsize=\footnotesize]{rust}
+fn main() {
+    println!("hello, world!");
+}
+\end{minted}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\captionof{figure}{Version B}
+\begin{minted}[fontsize=\footnotesize]{rust}
+fn main() {
+    let x = 2;
+    println!("{x}");
+}
+\end{minted}
+\end{minipage}
+\vspace{-1em}
+\end{figure}
+
 
 \begin{table*}[!t]
 \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|}
