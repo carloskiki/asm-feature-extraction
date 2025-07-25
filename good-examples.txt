@@ -929,33 +929,33 @@ loc_4118F8:
     RETN 
 ##### QUERY 19
 MD5Init
-loc_42C1C0:
-    PUSH rbp
-    MOV rbp, rsp
-    SUB rsp, 8
-    MOV [rbp+var_8], rdi
-    MOV rax, [rbp+var_8]
-    MOV rdi, rax
-    CALL sub_42B49A
-    MOV rax, [rbp+var_8]
-    MOV dword ptr [rax+50h], 0
-    MOV rax, [rbp+var_8]
-    MOV dword ptr [rax+58h], 0
-    MOV rax, [rbp+var_8]
-    MOV edx, [rax+58h]
-    MOV rax, [rbp+var_8]
-    MOV [rax+54h], edx
-    NOP 
-    LEAVE 
-    RETN 
+loc_42c1c0:
+    push rbp
+    mov rbp, rsp
+    sub rsp, 8
+    mov [rbp+var_8], rdi
+    mov rax, [rbp+var_8]
+    mov rdi, rax
+    call sub_42b49a
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+50h], 0
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+58h], 0
+    mov rax, [rbp+var_8]
+    mov edx, [rax+58h]
+    mov rax, [rbp+var_8]
+    mov [rax+54h], edx
+    nop 
+    leave 
+    retn 
 ##### TARGET 19
 MD5Init
-loc_41AC99:
-    MOV dword ptr [rdi], 67452301h
-    MOV dword ptr [rdi+4], 0EFCDAB89h
-    MOV dword ptr [rdi+8], 98BADCFEh
-    MOV dword ptr [rdi+0Ch], 10325476h
-    MOV dword ptr [rdi+50h], 0
-    MOV dword ptr [rdi+58h], 0
-    MOV dword ptr [rdi+54h], 0
-    RETN 
+loc_41ac99:
+    mov dword ptr [rdi], 67452301h
+    mov dword ptr [rdi+4], 0efcdab89h
+    mov dword ptr [rdi+8], 98badcfeh
+    mov dword ptr [rdi+0ch], 10325476h
+    mov dword ptr [rdi+50h], 0
+    mov dword ptr [rdi+58h], 0
+    mov dword ptr [rdi+54h], 0
+    retn 
