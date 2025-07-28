@@ -372,16 +372,18 @@ T2 desc: Evaluation of the baselines and our method on cross architecture retrie
 All functions are compiled with optimization level 2 using gcc with the architecture specified for each column.
 The same baselines and models are used as in the cross architecture evaluation.
 
+### Ablation on model size
+
+The results on our method show that there is a clear correlation between model size and BCSD retrieval performance. LLMs with less
+than 3B parameters don't seem to comprehend the task when they are not provided with any examples. When provided with examples, these
+small models will mimic the example provided without basing the output on the assembly function in the query. ...
+
 ### Ablation on examples
 
 By providing hand crafted exmaples to the large language model, we are able to increase the performance of the assembly function analysis.
 This follows the general observations behind few show prompting [25]. Providing a single example significantly increases the retrieval
 scores, but providing more than one provides very limited increases in scores, especially for larger models. For smaller models,
 Providing more examples increases the retrieval scores.
-
-### Ablation on model size
-
-Our results show that there is a clear correlation between model size and BCSD performance.
 
 ### Comparison of using different models
 
