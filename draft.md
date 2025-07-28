@@ -167,8 +167,11 @@ be patched by humans, rather than having to regenerate the whole database when t
 By using any open-source or commercially available LLM, we entirely sidestep model training by leveraging the extenive
 and diverse datasets that LLMs are pre-trained on.  Our method can be tuned by modifying the instructions provided to
 the LLM, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
-The underlying LLM can also replaced seamlessly, meaning that our method will continue to scale with the performance improvements
-of LLMs - an area which is showing impressive growth and development.
+The underlying LLM can also replaced seamlessly without invalidating the database, meaning that our method will continue
+to scale with the performance improvements of LLMs - an area which is showing impressive growth and development. Furthermore, if
+a section of the prompt was edited to modify the output feature set, the database can still be maintained without
+having to regenerate a new feature set. Default values or values derived from other fields in the feature set can be added
+as is standard with database migrations.
 
 Another key advantage of our method also stems from its textual representation of the extracted feature set. As highlighted
 previously, vector embeddings are computationally expensive to match against in large databases. Textual search is much
@@ -177,7 +180,7 @@ in a fraction of a second.
 
 ### Prompt
 
-Our method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
+The method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
 the provided assembly code fragment. The assembly code fragment does not require preprocessing. As output, the LLM generates a JSON
 structure containing the extracted features. We outline the prompt made up of multiple parts, each designed to
 extract specific semantic information from the assembly function. The full prompt is open-source and avaliable on Github.
@@ -344,22 +347,30 @@ and not one that was presented by the baselines, we believe this may be caused b
 As evident here, one of our method's advantage is that it requires no fine-tuning to acheive good results, and thus should generalize
 well to unseen settings. Qwen3-Embedding also generates impressive results, given that it was not trained for assembly clone detection.
 
-T1 desc: Evaluation of the methods with a pool size of 1000. All functions are compiled for the arm architecture using gcc with the
-optimization levels specified for each column. Our method uses the gemini-2.5-flash model for the best trade-off between efficiency
-and performance.
+T1 desc: Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
+All functions are compiled for the arm architecture using gcc with the optimization levels specified for each column.
+Our method uses the gemini-2.5-flash model for the best trade-off between efficiency and performance.
 
 ### Clone Search with Different Architectures
 
-Different CPU architectures have varying assembly code dialects. It is hard for BCSD methods that analyze assembly code to support
+Different CPU architectures have varying assembly code languages. It is hard for BCSD methods that analyze assembly code to support
 multiple architectures. These methods need to accurately represent two functions with completely different syntaxes but with identical
 semantics as being very similar in terms of their feature vector or embedding. Hence, methods that use CFG analysis have a better chance
 at supporting many architectures, since the structure of the CFG itself is architecture agnostic. However, the basic blocks that constitute
-this graph are still in assembly code, which does not fully resolve the issue.
+this graph are still in assembly code, which does not fully resolve the issue. Furthermore, there exists many different variants of each
+instruction set, because each new version of an architecture brings new instructions to understand and support. With deep learning methods,
+this means training or fine-tuning the model to understand this new language. Afterwards, all embeddings in a BCSD database need to
+be regenerated. Our method does not directly address this issue, but brings a significant improvement. It indirectly makes use of the vast
+amount of data used to train foundational LLMs. Since a LLM has extensively seen all of the mainstream CPU architectures and their dialects
+in its training data, it is able to grasp their meaning and extract features from them. If the model in use seems to poorly comprehend a
+specific architecture, it can be replaced with one that better performs the specific platform without invalidating the BCSD database.
 
-Our method does not directly address this issue, but brings a significant improvement. It indirectly makes use of the vast amount of data used
-to train foundational LLMs. Since the LLM has extensively seen all of the mainstream CPU architectures and their dialects in its training data,
-it is able to extract information from them
+Our method surpasses the baselines, but more work in this area is clearly still needed. The recall@1 metrics show that the best method
+is able to rank the the correct assembly fragment in first place only 42% of the time on average.
 
+T2 desc: Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
+All functions are compiled with optimization level 2 using gcc with the architecture specified for each column.
+The same baselines and models are used as in the cross architecture evaluation.
 
 ### Ablation on examples
 
