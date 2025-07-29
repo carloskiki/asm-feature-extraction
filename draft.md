@@ -349,7 +349,8 @@ well to unseen settings. Qwen3-Embedding also generates impressive results, give
 
 T1 desc: Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
 All functions are compiled for the arm architecture using gcc with the optimization levels specified for each column.
-Our method uses the gemini-2.5-flash model for the best trade-off between efficiency and performance.
+Our method uses the gemini-2.5-flash model for the best trade-off between efficiency and performance. Three examples are
+provided with our prompt.
 
 ### Clone Search with Different Architectures
 
@@ -370,13 +371,22 @@ is able to rank the the correct assembly fragment in first place only 42% of the
 
 T2 desc: Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
 All functions are compiled with optimization level 2 using gcc with the architecture specified for each column.
-The same baselines and models are used as in the cross architecture evaluation.
+The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt.
 
 ### Ablation on model size
 
-The results on our method show that there is a clear correlation between model size and BCSD retrieval performance. LLMs with less
-than 3B parameters don't seem to comprehend the task when they are not provided with any examples. When provided with examples, these
-small models will mimic the example provided without basing the output on the assembly function in the query. ...
+In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
+of our method on BCSD retrieval. This follows the scaling laws for neural language models presented in []
+
+From our observations, LLMs with less than 3B parameters do not seem to comprehend the analysis task when
+they are not provided with any examples. When provided with examples, these small models will mimic the examples provided without basing the
+output on the assembly function in the query. There is most likely a form of logarithmic increase in performance with respect to model size.
+The size of the Gemini 2.5 flash model is not disclosed at the time of writing, but we can expect the model to have around 200B parameters,
+based on sizes of the preivous Gemini model versions.
+
+FIG: MRR performance for cross optimization retrieval against the amount of parameters in the LLM. All assembly functions are compiled
+with gcc for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions.
+Three examples are provided with our prompt.
 
 ### Ablation on examples
 
@@ -436,41 +446,30 @@ gains could be seen in assembly function analysis, at the cost of more output to
 2. [Binary Code Similiarity Detection](https://ieeexplore.ieee.org/document/9678518)
 3. [Scalable Graph-based Bug Search for Firmware Images](https://dl.acm.org/doi/10.1145/2976749.2978370)
 4. [Graph-based comparison of Executable Objects](https://www.semanticscholar.org/paper/Graph-based-comparison-of-Executable-Objects-Dullien/7661d4110ef24dea74190f4af69bd206d6253db9)
-
 5. [Detecting Clones Across Microsoft .NET Programming Languages](https://ieeexplore.ieee.org/document/6385136)
 6. [Idea: Opcode-Sequence-Based Malware Detection](https://link.springer.com/chapter/10.1007/978-3-642-11747-3_3)
 7. [Binary Function Clustering Using Semantic Hashes](https://ieeexplore.ieee.org/document/6406693)
-
 8. [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)
 9. [Large Language Models are Zero-Shot Reasoners](https://arxiv.org/pdf/2205.11916)
 10. [THINKING LLMS: GENERAL INSTRUCTION FOLLOWING WITH THOUGHT GENERATION](https://arxiv.org/pdf/2410.10630)
-
 11. [SAFE: Self-Attentive Function Embeddings for Binary Similarity](https://arxiv.org/pdf/1811.05296)
 12. [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/pdf/1310.4546)
 13. [A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING](https://arxiv.org/pdf/1703.03130)
-
 14. [PalmTree: Learning an Assembly Language Model for Instruction Embedding](https://arxiv.org/pdf/2103.03809)
 15. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805)
-
 16. [Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection](https://cdn.aaai.org/ojs/5466/5466-13-8691-1-10-20200511.pdf)
-
 17. [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization](https://ieeexplore.ieee.org/document/8835340)
 18. [Distributed Representations of Sentences and Documents](https://arxiv.org/pdf/1405.4053)
-
 19. [CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision](https://dl.acm.org/doi/pdf/10.1145/3650212.3652145)
 20. [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692)
-
 21. [Approximate Nearest Neighbor Search in High Dimensions](https://arxiv.org/pdf/1806.09823)
 22. [Worst-case Performance of Popular Approximate Nearest Neighbor Search Implementations: Guarantees and Limitations](https://arxiv.org/abs/2310.19126)
-
 23. [IDA Pro A powerful disassembler, decompiler and a versatile debugger. In one tool.](https://hex-rays.com/ida-pro)
 24. [Ghidra Software Reverse Engineering Framework](https://github.com/NationalSecurityAgency/ghidra)
-
 25. [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165)
-
 26. [BinClone: Detecting Code Clones in Malware](https://ieeexplore.ieee.org/document/6895418)
-
 27. [Blanket execution: Dynamic similarity testing for program binaries and components](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele)
 28. [Kam1n0: MapReduce-based Assembly Clone Search for Reverse Engineering](https://dl.acm.org/doi/pdf/10.1145/2939672.2939719)
+29. [Scaling Laws for Neural Language Models](https://arxiv.org/pdf/2001.08361)
 
 - [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
