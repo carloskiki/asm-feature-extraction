@@ -280,10 +280,8 @@ class GeminiRetrieval(Context):
                     continue
                 break
 
-            import code
-            code.interact(local=locals())
-
-            responses.append(parse_json(response.text))
+            # responses.append(parse_json(response.text))
+            responses.append(response.parsed.model_dump())
 
         return responses
 
