@@ -376,7 +376,8 @@ The same baselines and models are used as in the cross architecture evaluation. 
 ### Ablation on model size
 
 In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
-of our method on BCSD retrieval. This follows the scaling laws for neural language models presented in []
+of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models [29], in that increasing
+the model size does significantly improve the results generated.
 
 From our observations, LLMs with less than 3B parameters do not seem to comprehend the analysis task when
 they are not provided with any examples. When provided with examples, these small models will mimic the examples provided without basing the

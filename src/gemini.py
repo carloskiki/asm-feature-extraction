@@ -280,6 +280,9 @@ class GeminiRetrieval(Context):
                     continue
                 break
 
+            import code
+            code.interact(local=locals())
+
             responses.append(parse_json(response.text))
 
         return responses
