@@ -1,0 +1,82 @@
+```assembly
+loc_A7490:
+    PUSH {R7,LR}
+    SUB SP, SP, #0x18
+    ADD R7, SP, #8
+    STR R0, [R7,#0x10+var_C]
+    STR R1, [R7,#0x10+var_10]
+    LDR R3, [R7,#0x10+var_10]
+    CMP R3, #0
+    BNE loc_A74BA
+loc_A74A0:
+    MOVS R3, #0x1F
+    STR R3, [SP,#0x18+var_18]
+    MOV R3, #0x2601EC
+    MOVS R2, #0x43
+    MOVS R1, #0xC6
+    MOVS R0, #0x14
+    BL sub_11E488
+    MOVS R3, #0
+    B loc_A74FC
+loc_A74BA:
+    MOVS R3, #1
+    STR R3, [SP,#0x18+var_18]
+    MOVS R3, #0
+    LDR R2, [R7,#0x10+var_10]
+    MOVS R1, #0
+    LDR R0, [R7,#0x10+var_C]
+    BL sub_C94C0
+    STR R0, [R7,#0x10+var_4]
+    LDR R3, [R7,#0x10+var_4]
+    CMP R3, #1
+    BEQ loc_A74EC
+loc_A74D2:
+    MOVS R3, #0x24
+    STR R3, [SP,#0x18+var_18]
+    MOV R3, #0x2601EC
+    LDR R2, [R7,#0x10+var_4]
+    MOVS R1, #0xC6
+    MOVS R0, #0x14
+    BL sub_11E488
+    MOVS R3, #0
+    B loc_A74FC
+loc_A74EC:
+    LDR R3, [R7,#0x10+var_C]
+    LDR.W R3, [R3,#0x378]
+    LDR R1, [R7,#0x10+var_10]
+    MOV R0, R3
+    BL sub_A7C04
+    MOV R3, R0
+loc_A74FC:
+    MOV R0, R3
+    ADDS R7, #0x10
+    MOV SP, R7
+    POP {R7,PC}
+```
+
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": ["Pointer", "Pointer"],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": ["ConditionalBranching", "SubroutineCall", "DataMovement"],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "use_of_indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "presence_of_simd_instructions": false,
+  "presence_of_notable_integer_constants": ["0x1f", "0x43", "0xc6", "0x14", "0x24", "0x2601ec", "0x378"],
+  "presence_of_notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 7,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "performs_memory_allocation_deallocation": false,
+  "performs_io_operations": false,
+  "performs_block_memory_operations": false,
+  "performs_linear_memory_accesses": false,
+  "performs_error_handling": true,
+  "number_of_software_interrupts_or_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
