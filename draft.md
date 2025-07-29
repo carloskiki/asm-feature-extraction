@@ -409,23 +409,34 @@ uses it them to understand the JSON schema required. In our evaluations we provi
 models do not have this capability of generating output based on a schema built-in.
 
 FIG: MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
-using gcc for the x86-64 architecture. A function pool size of 100 is used, with retrieval between optimization levels 0 and 3
-for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B
+using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3
+for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.
 
 ### Ablation on the prompt used
 
 To verify that each section of our prompt brings meaningful insight into the assembly function analysis task, we perform an ablation
 study by removing one section of the prompt while keeping others intact. We notice that all individual sections bring a positive
 outcome to the overall results, but some sections of the prompt have a larger impact than others. In particular, the categorization and
-notable constants sections have the most impacts. The categorization section causes an increase of almost 0.3 on the MRR metric,
-when evaluated on the the hardest cross optimization task. The notable constants sections brings an increase of almost 0.2 on the MRR for
-the same task. Together, both sections make up 66% of the MRR metric. This result is justified by the comparatively large range of
-accepted values for both features. For example, the list of notable constants has much more possible values and thus has more variability in
-the output compared to a set of booleans, such as those in the side effect prompt section.
+notable constants sections have the most impacts on cross optimization retrieval. The categorization section causes an increase of almost
+0.3 on the MRR metric, when evaluated on the the hardest cross optimization task. The notable constants sections brings an increase of
+almost 0.2 on the MRR for the same task. This result is justified by the comparatively large range of accepted values for both features.
+For example, the list of notable constants has much more possible values and thus has more variability in the output compared to a set
+of booleans, such as those in the side effect prompt section.
 
-A different picture is depicted when ablation on the prompt is performed on cross architecture retrieval instead.
+The story is slightly different when this ablation study is performed for cross architecture retrieval instead. As seen on [FIG],
+there is a smaller difference between the least and most influential prompt sections. The categorization and notable constants sections
+are significantly less impactful than they were for the cross optimization study, while the other three sections have a larger impact.
+For instance, the categorization section went from having an impact of 0.30 on the MRR to having an impact 0.22, while the logic
+section is notably more influential - going from 0.06 to 0.20 in MRR impact.
+
+FIG: MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at
+optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions
+compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
+show the MRR score for the prompt without any sections removed.
 
 ### Token usage of commercial models
+
+### Combined Method
 
 ### Comparison of using different models
 
