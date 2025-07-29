@@ -158,12 +158,10 @@ quickly identify which functions are part of common external libraries and which
 Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
 binary or firmware is using the vulnerable library.
 
-\parbox[width=\textwidth]{
-    \textbf{Proposition 2.1} \textit{Let $a$ and $b$ be positive integers with $a\leq b$ and let $p$ be a prime such that $p\not| ab$.
-    Assume that $a\in\{1,2\}$. Then there exists a $t\in\Z$ with $1\leq t\leq\sqrt{2ab}$ such that $p\cdot t\in D_\Z(\langle 1, a,
-    b, ab\rangle)$.}
-}\\
-
+\begin{minted}[fontsize=\small,breaklines]{text}
+You are an expert in binary analysis.
+Given a function in assembly, identify its purpose and summarize it...
+\end{minted}
 
 Early approaches to BCSD used human defined heuristics to extract a "feature vector" from a binary function. These heuristics
 could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime

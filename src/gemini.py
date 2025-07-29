@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
-from typing import Optional, Union
+from typing import Optional, Union, List
 from dataclasses import dataclass
+from pydantic import BaseModel
 import sys
 import random
 import time
@@ -21,6 +22,31 @@ from .metrics import (
 )
 
 date = datetime.now().strftime("%Y-%m-%d_%H-%M")
+
+class FunctionAnalysis(BaseModel):
+    input_parameter_count: int
+    input_parameter_types: List[str]
+    return_value_type: str
+    dominant_operation_categories: List[str]
+    loop_indicators: bool
+    number_of_distinct_subroutine_call_targets: int
+    use_of_indexed_addressing_modes: bool
+    jump_table_indicators: bool
+    presence_of_simd_instructions: bool
+    presence_of_notable_integer_constants: List[str]
+    presence_of_notable_floating_point_constants: List[float]
+    count_of_distinct_immediate_values: int
+    string_literal_presence: bool
+    likely_modifies_input_parameters: bool
+    likely_modifies_global_state: bool
+    likely_performs_memory_allocation_deallocation: bool
+    likely_performs_io_operations: bool
+    likely_performs_block_memory_operations: bool
+    likely_performs_linear_memory_accesses: bool
+    likely_performs_error_handling: bool
+    number_of_software_interrupts_system_calls: int
+    inferred_algorithm: str
+    inferred_category: str
 
 
 @dataclass
@@ -228,6 +254,8 @@ class GeminiRetrieval(Context):
                     system_instruction=system_prompt,
                     thinking_config=types.ThinkingConfig(thinking_budget=0),
                     max_output_tokens=800,
+                    response_mime_type="application/json",
+                    response_schema=FunctionAnalysis,
                 )
                 contents = [
                     types.Content(
