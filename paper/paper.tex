@@ -601,7 +601,7 @@ to perform BCSD. It uses BERT to learn the embeddings of instructions and basic 
 passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
 matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
 are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. This method
-supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86_64}
+supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
 and `arm` for cross platform retrieval.
 
 A more recent BCSD model, PalmTree [14], also bases its work on the BERT model [15].
@@ -619,7 +619,7 @@ a whole assembly function. It is also accompanied with a text encoder (CLAP-text
 be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
 assembly function with the assembly encoder. The generated embeddings can be compared with cosine similarity to
 calculate whether the assembly function is closely related or opposed to the category. This model requires
-training and is architecture specific (`x86_64` compiled with GCC).
+training and is architecture specific (\texttt{x86-64} compiled with \texttt{GCC}).
 
 \section{Conclusion}
 
