@@ -1,0 +1,329 @@
+@article{BCSDsurvey,
+  author         = {Ruan, Liting and Xu, Qizhen and Zhu, Shunzhi and Huang, Xujing and Lin, Xinyang},
+  title          = {A Survey of Binary Code Similarity Detection Techniques},
+  journal        = {Electronics},
+  volume         = {13},
+  year           = {2024},
+  number         = {9},
+  article-number = {1715},
+  url            = {https://www.mdpi.com/2079-9292/13/9/1715},
+  issn           = {2079-9292},
+  abstract       = {Binary Code Similarity Detection is a method that involves comparing two or more binary code segments to identify their similarities and differences. This technique plays a crucial role in areas such as software security, vulnerability detection, and software composition analysis. With the extensive use of binary code in software development and system optimization, binary code similarity detection has become an important area of research. Traditional methods of source code similarity detection face challenges when dealing with the unreadable and complex nature of binary code, necessitating specialized techniques and algorithms. This review compares and summarizes various techniques and methods of binary code similarity detection, highlighting their strengths and limitations in handling different characteristics of binary code. Additionally, the article suggests potential future research directions. As research and innovation in this technology continue to advance, binary code similarity detection is expected to play an increasingly significant role in fields like software security.},
+  doi            = {10.3390/electronics13091715}
+}
+
+@inproceedings{BCSD,
+  author    = {Liu, Zian},
+  booktitle = {2021 36th IEEE/ACM International Conference on Automated Software Engineering (ASE)},
+  title     = {Binary Code Similarity Detection},
+  year      = {2021},
+  volume    = {},
+  number    = {},
+  pages     = {1056-1060},
+  keywords  = {Prototypes;Binary codes;Writing;Explosions;Software engineering;Binary code;code analysis;symbolic execution},
+  doi       = {10.1109/ASE51524.2021.9678518}
+}
+
+@inproceedings{graph-bug-search,
+  author    = {Feng, Qian and Zhou, Rundong and Xu, Chengcheng and Cheng, Yao and Testa, Brian and Yin, Heng},
+  title     = {Scalable Graph-based Bug Search for Firmware Images},
+  year      = {2016},
+  isbn      = {9781450341394},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/2976749.2978370},
+  doi       = {10.1145/2976749.2978370},
+  abstract  = {Because of rampant security breaches in IoT devices, searching vulnerabilities in massive IoT ecosystems is more crucial than ever. Recent studies have demonstrated that control-flow graph (CFG) based bug search techniques can be effective and accurate in IoT devices across different architectures. However, these CFG-based bug search approaches are far from being scalable to handle an enormous amount of IoT devices in the wild, due to their expensive graph matching overhead. Inspired by rich experience in image and video search, we propose a new bug search scheme which addresses the scalability challenge in existing cross-platform bug search techniques and further improves search accuracy. Unlike existing techniques that directly conduct searches based upon raw features (CFGs) from the binary code, we convert the CFGs into high-level numeric feature vectors. Compared with the CFG feature, high-level numeric feature vectors are more robust to code variation across different architectures, and can easily achieve realtime search by using state-of-the-art hashing techniques. We have implemented a bug search engine, Genius, and compared it with state-of-art bug search approaches. Experimental results show that Genius outperforms baseline approaches for various query loads in terms of speed and accuracy. We also evaluated Genius on a real-world dataset of 33,045 devices which was collected from public sources and our system. The experiment showed that Genius can finish a search within 1 second on average when performed over 8,126 firmware images of 420,558,702 functions. By only looking at the top 50 candidates in the search result, we found 38 potentially vulnerable firmware images across 5 vendors, and confirmed 23 of them by our manual analysis. We also found that it took only 0.1 seconds on average to finish searching for all 154 vulnerabilities in two latest commercial firmware images from D-LINK. 103 of them are potentially vulnerable in these images, and 16 of them were confirmed.},
+  booktitle = {Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security},
+  pages     = {480–491},
+  numpages  = {12},
+  keywords  = {machine learning, graph encoding, firmware security},
+  location  = {Vienna, Austria},
+  series    = {CCS '16}
+}
+
+@inproceedings{BinDiff,
+  title  = {Graph-based comparison of Executable Objects},
+  author = {Thomas Dullien},
+  year   = {2005},
+  url    = {https://api.semanticscholar.org/CorpusID:2001486}
+}
+
+@inproceedings{clones.net,
+  author    = {Al-Omari, Farouq and Keivanloo, Iman and Roy, Chanchal K. and Rilling, Juergen},
+  booktitle = {2012 19th Working Conference on Reverse Engineering},
+  title     = {Detecting Clones Across Microsoft .NET Programming Languages},
+  year      = {2012},
+  volume    = {},
+  number    = {},
+  pages     = {405-414},
+  keywords  = {Cloning;Filtering;Computer languages;Software;Filtering algorithms;Noise;Context;cross-language clone detection;intermediate language;binary;multi-language;similarity component},
+  doi       = {10.1109/WCRE.2012.50}
+}
+
+@inproceedings{op-seq,
+  author    = {Santos, Igor and Brezo, Felix and Nieves, Javier and Penya, Yoseba K. and Sanz, Borja and Laorden, Carlos and Bringas, Pablo G.},
+  title     = {Idea: opcode-sequence-based malware detection},
+  year      = {2010},
+  isbn      = {3642117465},
+  publisher = {Springer-Verlag},
+  address   = {Berlin, Heidelberg},
+  url       = {https://doi.org/10.1007/978-3-642-11747-3_3},
+  doi       = {10.1007/978-3-642-11747-3_3},
+  abstract  = {Malware is every malicious code that has the potential to harm any computer or network. The amount of malware is increasing faster every year and poses a serious security threat. Hence, malware detection has become a critical topic in computer security. Currently, signature-based detection is the most extended method within commercial antivirus. Although this method is still used on most popular commercial computer antivirus software, it can only achieve detection once the virus has already caused damage and it is registered. Therefore, it fails to detect new variations of known malware. In this paper, we propose a new method to detect variants of known malware families. This method is based on the frequency of appearance of opcode sequences. Furthermore, we describe a method to mine the relevance of each opcode and, thereby, weigh each opcode sequence frequency. We show that this method provides an effective way to detect variants of known malware families.},
+  booktitle = {Proceedings of the Second International Conference on Engineering Secure Software and Systems},
+  pages     = {35–43},
+  numpages  = {9},
+  keywords  = {computer security, machine learning, malware detection},
+  location  = {Pisa, Italy},
+  series    = {ESSoS'10}
+}
+
+@inproceedings{sem-hash,
+  author    = {Jin, Wesley and Chaki, Sagar and Cohen, Cory and Gurfinkel, Arie and Havrilla, Jeffrey and Hines, Charles and Narasimhan, Priya},
+  booktitle = {2012 11th International Conference on Machine Learning and Applications},
+  title     = {Binary Function Clustering Using Semantic Hashes},
+  year      = {2012},
+  volume    = {1},
+  number    = {},
+  pages     = {386-391},
+  keywords  = {Semantics;Malware;Registers;Benchmark testing;Concrete;Feature extraction;Catalogs;semantic comparison;malware detection;clustering;reverse engineering;binary static analysis},
+  doi       = {10.1109/ICMLA.2012.70}
+}
+
+@misc{c-o-t,
+  title         = {Chain-of-Thought Prompting Elicits Reasoning in Large Language Models},
+  author        = {Jason Wei and Xuezhi Wang and Dale Schuurmans and Maarten Bosma and Brian Ichter and Fei Xia and Ed Chi and Quoc Le and Denny Zhou},
+  year          = {2023},
+  eprint        = {2201.11903},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2201.11903}
+}
+
+@misc{reasoning,
+  title         = {Large Language Models are Zero-Shot Reasoners},
+  author        = {Takeshi Kojima and Shixiang Shane Gu and Machel Reid and Yutaka Matsuo and Yusuke Iwasawa},
+  year          = {2023},
+  eprint        = {2205.11916},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2205.11916}
+}
+
+@misc{thinking-llm,
+  title         = {Thinking LLMs: General Instruction Following with Thought Generation},
+  author        = {Tianhao Wu and Janice Lan and Weizhe Yuan and Jiantao Jiao and Jason Weston and Sainbayar Sukhbaatar},
+  year          = {2024},
+  eprint        = {2410.10630},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2410.10630}
+}
+
+@misc{SAFE,
+  title         = {SAFE: Self-Attentive Function Embeddings for Binary Similarity},
+  author        = {Luca Massarelli and Giuseppe Antonio Di Luna and Fabio Petroni and Leonardo Querzoni and Roberto Baldoni},
+  year          = {2019},
+  eprint        = {1811.05296},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CR},
+  url           = {https://arxiv.org/abs/1811.05296}
+}
+
+@misc{word2vec,
+  title         = {Distributed Representations of Words and Phrases and their Compositionality},
+  author        = {Tomas Mikolov and Ilya Sutskever and Kai Chen and Greg Corrado and Jeffrey Dean},
+  year          = {2013},
+  eprint        = {1310.4546},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1310.4546}
+}
+
+@misc{SANN,
+  title         = {A Structured Self-attentive Sentence Embedding},
+  author        = {Zhouhan Lin and Minwei Feng and Cicero Nogueira dos Santos and Mo Yu and Bing Xiang and Bowen Zhou and Yoshua Bengio},
+  year          = {2017},
+  eprint        = {1703.03130},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1703.03130}
+}
+
+@inproceedings{PalmTree,
+  author    = {Li, Xuezixiang and Qu, Yu and Yin, Heng},
+  title     = {PalmTree: Learning an Assembly Language Model for Instruction Embedding},
+  year      = {2021},
+  isbn      = {9781450384544},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3460120.3484587},
+  doi       = {10.1145/3460120.3484587},
+  abstract  = {Deep learning has demonstrated its strengths in numerous binary analysis tasks, including function boundary detection, binary code search, function prototype inference, value set analysis, etc. When applying deep learning to binary analysis tasks, we need to decide what input should be fed into the neural network model. More specifically, we need to answer how to represent an instruction in a fixed-length vector. The idea of automatically learning instruction representations is intriguing, but the existing schemes fail to capture the unique characteristics of disassembly. These schemes ignore the complex intra-instruction structures and mainly rely on control flow in which the contextual information is noisy and can be influenced by compiler optimizations. In this paper, we propose to pre-train an assembly language model called PalmTree for generating general-purpose instruction embeddings by conducting self-supervised training on large-scale unlabeled binary corpora. PalmTree utilizes three pre-training tasks to capture various characteristics of assembly language. These training tasks overcome the problems in existing schemes, thus can help to generate high-quality representations. We conduct both intrinsic and extrinsic evaluations, and compare PalmTree with other instruction embedding schemes. PalmTree has the best performance for intrinsic metrics, and outperforms the other instruction embedding schemes for all downstream tasks.},
+  booktitle = {Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security},
+  pages     = {3236–3251},
+  numpages  = {16},
+  keywords  = {binary analysis, deep learning, language model, representation learning},
+  location  = {Virtual Event, Republic of Korea},
+  series    = {CCS '21}
+}
+
+@misc{BERT,
+  title         = {BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+  author        = {Jacob Devlin and Ming-Wei Chang and Kenton Lee and Kristina Toutanova},
+  year          = {2019},
+  eprint        = {1810.04805},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1810.04805}
+}
+
+@article{OrderMatters,
+  title        = {Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection},
+  volume       = {34},
+  url          = {https://ojs.aaai.org/index.php/AAAI/article/view/5466},
+  doi          = {10.1609/aaai.v34i01.5466},
+  abstractnote = {&lt;p&gt;Binary code similarity detection, whose goal is to detect similar binary functions without having access to the source code, is an essential task in computer security. Traditional methods usually use graph matching algorithms, which are slow and inaccurate. Recently, neural network-based approaches have made great achievements. A binary function is first represented as an control-flow graph (CFG) with manually selected block features, and then graph neural network (GNN) is adopted to compute the graph embedding. While these methods are effective and efficient, they could not capture enough semantic information of the binary code. In this paper we propose semantic-aware neural networks to extract the semantic information of the binary code. Specially, we use BERT to pre-train the binary code on one token-level task, one block-level task, and two graph-level tasks. Moreover, we find that the order of the CFG’s nodes is important for graph similarity detection, so we adopt convolutional neural network (CNN) on adjacency matrices to extract the order information. We conduct experiments on two tasks with four datasets. The results demonstrate that our method outperforms the state-of-art models.&lt;/p&gt;},
+  number       = {01},
+  journal      = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  author       = {Yu, Zeping and Cao, Rui and Tang, Qiyi and Nie, Sen and Huang, Junzhou and Wu, Shi},
+  year         = {2020},
+  month        = {Apr.},
+  pages        = {1145-1152}
+}
+
+@inproceedings{Asm2Vec,
+  author    = {Ding, Steven H. H. and Fung, Benjamin C. M. and Charland, Philippe},
+  booktitle = {2019 IEEE Symposium on Security and Privacy (SP)},
+  title     = {Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization},
+  year      = {2019},
+  volume    = {},
+  number    = {},
+  pages     = {472-489},
+  keywords  = {Cloning;Semantics;Search problems;Optimization;Software;Search engines;Syntactics;Binary-Code-Search;Vulnerability-Search;Static-Analysis;Representation-Learning},
+  doi       = {10.1109/SP.2019.00003}
+}
+
+@misc{PV-DM,
+  title         = {Distributed Representations of Sentences and Documents},
+  author        = {Quoc V. Le and Tomas Mikolov},
+  year          = {2014},
+  eprint        = {1405.4053},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1405.4053}
+}
+
+@inproceedings{CLAP,
+  author    = {Wang, Hao and Gao, Zeyu and Zhang, Chao and Sha, Zihan and Sun, Mingyang and Zhou, Yuchen and Zhu, Wenyu and Sun, Wenju and Qiu, Han and Xiao, Xi},
+  title     = {CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision},
+  year      = {2024},
+  isbn      = {9798400706127},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3650212.3652145},
+  doi       = {10.1145/3650212.3652145},
+  abstract  = {Binary code representation learning has shown significant performance in binary analysis tasks. But existing solutions often have poor transferability, particularly in few-shot and zero-shot scenarios where few or no training samples are available for the tasks. To address this problem, we present CLAP (Contrastive Language-Assembly Pre-training), which employs natural language supervision to learn better representations of binary code (i.e., assembly code) and get better transferability. At the core, our approach boosts superior transfer learning capabilities by effectively aligning binary code with their semantics explanations (in natural language), resulting a model able to generate better embeddings for binary code. To enable this alignment training, we then propose an efficient dataset engine that could automatically generate a large and diverse dataset comprising of binary code and corresponding natural language explanations. We have generated 195 million pairs of binary code and explanations and trained a prototype of CLAP. The evaluations of CLAP across various downstream tasks in binary analysis all demonstrate exceptional performance. Notably, without any task-specific training, CLAP is often competitive with a fully supervised baseline, showing excellent transferability.},
+  booktitle = {Proceedings of the 33rd ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  pages     = {503–515},
+  numpages  = {13},
+  keywords  = {Binary Analysis, Deep Learning, Representation Learning},
+  location  = {Vienna, Austria},
+  series    = {ISSTA 2024}
+}
+
+@misc{RoBERTa,
+  title         = {RoBERTa: A Robustly Optimized BERT Pretraining Approach},
+  author        = {Yinhan Liu and Myle Ott and Naman Goyal and Jingfei Du and Mandar Joshi and Danqi Chen and Omer Levy and Mike Lewis and Luke Zettlemoyer and Veselin Stoyanov},
+  year          = {2019},
+  eprint        = {1907.11692},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1907.11692}
+}
+
+@misc{ANN,
+  title         = {Approximate Nearest Neighbor Search in High Dimensions},
+  author        = {Alexandr Andoni and Piotr Indyk and Ilya Razenshteyn},
+  year          = {2018},
+  eprint        = {1806.09823},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.DS},
+  url           = {https://arxiv.org/abs/1806.09823}
+}
+
+@misc{ANN-limits,
+  title         = {Worst-case Performance of Popular Approximate Nearest Neighbor Search Implementations: Guarantees and Limitations},
+  author        = {Piotr Indyk and Haike Xu},
+  year          = {2023},
+  eprint        = {2310.19126},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.DS},
+  url           = {https://arxiv.org/abs/2310.19126}
+}
+
+@misc{few-shot,
+  title         = {Language Models are Few-Shot Learners},
+  author        = {Tom B. Brown and Benjamin Mann and Nick Ryder and Melanie Subbiah and Jared Kaplan and Prafulla Dhariwal and Arvind Neelakantan and Pranav Shyam and Girish Sastry and Amanda Askell and Sandhini Agarwal and Ariel Herbert-Voss and Gretchen Krueger and Tom Henighan and Rewon Child and Aditya Ramesh and Daniel M. Ziegler and Jeffrey Wu and Clemens Winter and Christopher Hesse and Mark Chen and Eric Sigler and Mateusz Litwin and Scott Gray and Benjamin Chess and Jack Clark and Christopher Berner and Sam McCandlish and Alec Radford and Ilya Sutskever and Dario Amodei},
+  year          = {2020},
+  eprint        = {2005.14165},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2005.14165}
+}
+
+@inproceedings{BinClone,
+  author    = {Farhadi, Mohammad Reza and Fung, Benjamin C.M. and Charland, Philippe and Debbabi, Mourad},
+  booktitle = {2014 Eighth International Conference on Software Security and Reliability (SERE)},
+  title     = {BinClone: Detecting Code Clones in Malware},
+  year      = {2014},
+  volume    = {},
+  number    = {},
+  pages     = {78-87},
+  keywords  = {Cloning;Assembly;Malware;Feature extraction;Vectors;Registers;Detectors;Assembly Code Clone Detection;Malware Analysis;Reverse Engineering;Binary Analysis},
+  doi       = {10.1109/SERE.2014.21}
+}
+
+@inproceedings{blanket-exec,
+  author    = {Egele, Manuel and Woo, Maverick and Chapman, Peter and Brumley, David},
+  title     = {Blanket execution: dynamic similarity testing for program binaries and components},
+  year      = {2014},
+  isbn      = {9781931971157},
+  publisher = {USENIX Association},
+  address   = {USA},
+  abstract  = {Matching function binaries--the process of identifying similar functions among binary executables--is a challenge that underlies many security applications such as malware analysis and patch-based exploit generation. Recent work tries to establish semantic similarity based on static analysis methods. Unfortunately, these methods do not perform well if the compared binaries are produced by different compiler toolchains or optimization levels. In this work, we propose blanket execution, a novel dynamic equivalence testing primitive that achieves complete coverage by overriding the intended program logic. Blanket execution collects the side effects of functions during execution under a controlled randomized environment. Two functions are deemed similar, if their corresponding side effects, as observed under the same environment, are similar too.We implement our blanket execution technique in a system called BLEX. We evaluate BLEX rigorously against the state of the art binary comparison tool BinDiff. When comparing optimized and un-optimized executables from the popular GNU coreutils package, BLEX outperforms BinDiff by up to 3.5 times in correctly identifying similar functions. BLEX also outperforms BinDiff if the binaries have been compiled by different compilers. Using the functionality in BLEX, we have also built a binary search engine that identifies similar functions across optimization boundaries. Averaged over all indexed functions, our search engine ranks the correct matches among the top ten results 77\% of the time.},
+  booktitle = {Proceedings of the 23rd USENIX Conference on Security Symposium},
+  pages     = {303–317},
+  numpages  = {15},
+  location  = {San Diego, CA},
+  series    = {SEC'14}
+}
+
+@inproceedings{Kam1n0,
+  author    = {Ding, Steven H.H. and Fung, Benjamin C.M. and Charland, Philippe},
+  title     = {Kam1n0: MapReduce-based Assembly Clone Search for Reverse Engineering},
+  year      = {2016},
+  isbn      = {9781450342322},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/2939672.2939719},
+  doi       = {10.1145/2939672.2939719},
+  abstract  = {Assembly code analysis is one of the critical processes for detecting and proving software plagiarism and software patent infringements when the source code is unavailable. It is also a common practice to discover exploits and vulnerabilities in existing software. However, it is a manually intensive and time-consuming process even for experienced reverse engineers. An effective and efficient assembly code clone search engine can greatly reduce the effort of this process, since it can identify the cloned parts that have been previously analyzed. The assembly code clone search problem belongs to the field of software engineering. However, it strongly depends on practical nearest neighbor search techniques in data mining and databases. By closely collaborating with reverse engineers and Defence Research and Development Canada (DRDC), we study the concerns and challenges that make existing assembly code clone approaches not practically applicable from the perspective of data mining. We propose a new variant of LSH scheme and incorporate it with graph matching to address these challenges. We implement an integrated assembly clone search engine called Kam1n0. It is the first clone search engine that can efficiently identify the given query assembly function's subgraph clones from a large assembly code repository. Kam1n0 is built upon the Apache Spark computation framework and Cassandra-like key-value distributed storage. A deployed demo system is publicly available. Extensive experimental results suggest that Kam1n0 is accurate, efficient, and scalable for handling large volume of assembly code.},
+  booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+  pages     = {461–470},
+  numpages  = {10},
+  keywords  = {assembly clone search, information retrieval, mining software repositorie},
+  location  = {San Francisco, California, USA},
+  series    = {KDD '16}
+}
+
+@misc{scaling-laws,
+  title         = {Scaling Laws for Neural Language Models},
+  author        = {Jared Kaplan and Sam McCandlish and Tom Henighan and Tom B. Brown and Benjamin Chess and Rewon Child and Scott Gray and Alec Radford and Jeffrey Wu and Dario Amodei},
+  year          = {2020},
+  eprint        = {2001.08361},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2001.08361}
+}
