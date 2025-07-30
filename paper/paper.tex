@@ -152,7 +152,7 @@ component, formatting, style, styling, insert
 
 Modern software is increasingly reliant on external libraries.
 For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
-and mitigate vulnerability exposure [1, 2]. For reverse engineers, reducing the amount of repetitive assembly functions
+and mitigate vulnerability exposure \cite{BCSD, BCSDsurvey}. For reverse engineers, reducing the amount of repetitive assembly functions
 to analyze means being more productive, and allows them to focus on the custom parts of a binary.  Binary code similarity
 detection (BCSD) is a binary analysis task that tries to solve these problems, by determining whether two compiled
 code fragments behave in similar ways. This task is becoming increasingly important as the size, modularity and rate of
@@ -200,13 +200,13 @@ benefits from the ample amount of research on in this area.
 Security researchers and reverse engineers are routinely tasked with the analysis of unknown or proprietary executables.
 Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
-a software reverse engineering platform such as Ghidra [24] or IDA Pro [23]. The main functions of these programs are to
+a software reverse engineering platform such as Ghidra [ref] or IDA Pro [ref]. The main functions of these programs are to
 disassemble and decompile a provided binary, so that its content can be analyzed by humans. Disassembly is
 the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
-is lost [1]. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
+is lost \cite{BCSDsurvey}. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
 the program as efficient as possible - which often means removing as much as possible. The optimizers within the compiler
 only have a single rule: They must not makes changes to the observable behavior of the program. This is ofter refered
 to as the "as-if rule". As a result, compilers can remove, reorder, and inline significant parts of the code. Even worse,
@@ -227,23 +227,23 @@ could take the form of patent infringemnt, or for malware classification. Challe
 amplified in binary code similarity detection. Two code fragments that seem very different can still have
 the same observable behavior.
 
-Recent research uses deep learning to generate a vector embedding for each assembly function [11, 14, 16, 17, 19].
+Recent research uses deep learning to generate a vector embedding for each assembly function \cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.
 Generally, training a model to perform such task requires a large training dataset, and highly performant GPUs
 to perform lots of computations. Once trained however, these methods can generate excellent results.
 State of the art implementations are limited by their training data, and poorly generalize to out-of-domain tasks,
-such as assembly code for a different architecture, or code compiled with a different compiler [1, 19]. Most methods also require
-a pre-processing step after disassembly, such as extracting the control flow graph [16, 17], or slightly modifying the input
-assembly in a specific manner [14, 19].
+such as assembly code for a different architecture, or code compiled with a different compiler \cite{BCSDsurvey,CLAP}. Most methods also require
+a pre-processing step after disassembly, such as extracting the control flow graph \cite{OrderMatters,Asm2Vec}, or slightly modifying the input
+assembly in a specific manner \cite{PalmTree,CLAP}.
 
 Production scale BCSD engines contain millions of assembly functions. With one vector embedding per function, nearest neighbor
 search takes a significant amount of time as the algorithm has to linearly compare the query with every function in the database.
 To alliviate this issue, approximate nearest neighbor search is used on large databases to reduce the time complexity of the
-search [21, 22], but it may not always return the first match and thus skews similarity scores.
+search \cite{ANN,ANN-limits}, but it may not always return the first match and thus skews similarity scores.
 
 \subsection{Problem definition}
 
 We deem two assembly code fragements to be semantically identical if they have the same observable behavior on a system.
-This type of clone is generally referred to as "type four" clones [17, 26]. This type of clone excludes different algorithms that
+This type of clone is generally referred to as "type four" clones \cite{Asm2Vec,BinClone}. This type of clone excludes different algorithms that
 might happen to have the same output, such as breadth-first search vs. depth-first search. In research, it is common
 to use the same code source code function compiled with different compilers or compilation options to create such
 type four clones.
@@ -473,7 +473,7 @@ The same baselines and models are used as in the cross architecture evaluation. 
 \subsection{Ablation on model size}
 
 In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
-of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models [29], in that increasing
+of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models \cite{scaling-laws}, in that increasing
 the model size does significantly improve the results generated.
 
 From our observations, LLMs with less than 3B parameters do not seem to comprehend the analysis task when
@@ -491,7 +491,7 @@ Three examples are provided with our prompt.
 \subsection{Ablation on examples}
 
 By providing hand crafted exmaples to the large language model, we are able to increase the performance of the assembly function analysis.
-This follows the general observations behind few show prompting [25]. Providing a single example significantly increases the retrieval
+This follows the general observations behind few show prompting \cite{few-shot}. Providing a single example significantly increases the retrieval
 scores, but providing more than one provides very limited increases in scores, especially for larger models. Interestingly, a smaller model
 such as Qwen 2.5 7B still sees marginal increase in MRR scores as the number of examples increases up to 3. This relates to our previous observation
 that small LLMs rely more on the provided examples than larger models. Another evidence of this is the number of invalid JSON outputs generated by
@@ -539,7 +539,7 @@ Our method has shown to be an excellent generalist on BCSD retrieval tasks. Neve
 function understanding and BCSD will undoubtedly out-perform our method on functions similar to the dataset they were trained on.
 Even if our method is more scalable, state of the art embedding learning models are still useful for specific tasks, such as supporting
 niche architectures or understanding similarity through obfuscated code. The state of the art embedding models are comparatively much smaller
-than our method. For instance the CLAP [19] model baseline is only 110M parameters, compared to the many billions required to perform our method.
+than our method. For instance the CLAP \cite{CLAP} model baseline is only 110M parameters, compared to the many billions required to perform our method.
 Once trained, small embedding models are much faster than LLM inference, but the cost of training such models is still very expensive.
 Their small size also means that these models can be run on CPU for small pool sizes.
 
@@ -569,17 +569,18 @@ model.
 \subsection{Static analysis}
 
 Traditional methods make use of static analysis to detect clone assembly routines. With these methods, a trade-off has
-to be made between the robustness to obfuscation and architecture differences, and the performance of the algorithm. [1]
-Control flow graph analysis and comparison [3, 4] is known to be robust to syntactic differences, but often involves computationally intractable
-problems. Other algorithms that use heuristics such as instruction frequency, longest-common-subsequence, or locality sensitive hashes
-[5, 6, 7] are less time consuming, but tend to fixate on the syntactic elements and their ordering rather than the semantics.
+to be made between the robustness to obfuscation and architecture differences, and the performance of the algorithm. \cite{BCSDsurvey}
+Control flow graph analysis and comparison \cite{BinDiff,graph-bug-search} is known to be robust to syntactic differences, but often
+involves computationally intractable problems. Other algorithms that use heuristics such as instruction frequency,
+longest-common-subsequence, or locality sensitive hashes \cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
+elements and their ordering rather than the semantics.
 
 \subsection{Dynamic analysis}
 
 Dynamic analysis consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior. For BCSD
 this method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
-and solely analyzes its semantics. [2] As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
-and is hard to generalize across architectures and application binary interfaces [27].
+and solely analyzes its semantics. \cite{BCSD} As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
+and is hard to generalize across architectures and application binary interfaces \cite{blanket-exec}.
 
 \subsection{Machine learning methods}
 
@@ -587,19 +588,19 @@ The surge of interest and applications for machine learning in recent years has 
 Most state-of-the-art methods use natural language processing (NLP) to achieve their results [refs].
 Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks [refs].
 
-Asm2Vec [17] is one of the first methods to use a NLP based approach to tackle the BCSD problem. It interprets an
+Asm2Vec \cite{Asm2Vec} is one of the first methods to use a NLP based approach to tackle the BCSD problem. It interprets an
 assembly function as a set of instruction sequences, where each instruction sequence is a possible execution path
 of the function. It samples these sequences by randomly traversing the CFG of the assembly function, and then
-uses a technique based on the PV-DM model [18] to generate an embedding for the assembly function. This solution
+uses a technique based on the PV-DM model \cite{PV-DM} to generate an embedding for the assembly function. This solution
 is not cross architecture compatible and requires pre-training.
 
-SAFE [11] uses a process similar to Asm2Vec. It first encodes each instruction of an assembly function into a vector,
-using the word2vec model [12]. Using a Self-Attentive Neural Network [13], SAFE then converts the sequence of instruction
+SAFE \cite{SAFE} uses a process similar to Asm2Vec. It first encodes each instruction of an assembly function into a vector,
+using the word2vec model \cite{word2vec}. Using a Self-Attentive Neural Network \cite{SANN}, SAFE then converts the sequence of instruction
 vectors from the assembly function into a single vector embedding for the function. Much like Asm2Vec, SAFE requires
 pre-training, but can perform cross architecture similarity detection. This method supports both cross optimization
 and cross architecture retrieval, but was only trained on the `AMD64` and `arm` platforms.
 
-Order Matters [16] applies a BERT language reprensentation model [15] along with control flow graph analysis
+Order Matters \cite{OrderMatters} applies a BERT language reprensentation model \cite{BERT} along with control flow graph analysis
 to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
 passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
 matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
@@ -607,7 +608,7 @@ are then combined using a multi-layer perceptron, obtaining the assembly functio
 supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
 and `arm` for cross platform retrieval.
 
-A more recent BCSD model, PalmTree [14], also bases its work on the BERT model [15].
+A more recent BCSD model, PalmTree \cite{PalmTree}, also bases its work on the BERT model \cite{BERT}.
 It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
 on three tasks. 1. As is common for BERT models, PalmTree is trained on masked language modeling. 2.
 PalmTree is trained on context window prediction, that is predicting whether two instructions are found
@@ -616,7 +617,7 @@ predicting whether there is a definition-usage relation between both instruction
 reference implementation is only trained on cross compiler similarity detection, but can be trained
 for other tasks.
 
-The model CLAP [19] uses the RoBERTa [20] base model, to perform assembly function encoding.
+The model CLAP \cite{CLAP} uses the RoBERTa \cite{RoBERTa} base model, to perform assembly function encoding.
 It is adapted for assembly instruction tokenization, and directly generates an embedding for
 a whole assembly function. It is also accompanied with a text encoder (CLAP-text), so that classification can
 be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
@@ -650,9 +651,9 @@ A few of these oportunities are outlined here.
 
 \subsubsection{Reasoning model}
 
-Newest state of the art LLMs are fine tuned to natively use chain of thought methods [8] before answering the query.
+Newest state of the art LLMs are fine tuned to natively use chain of thought methods \cite{c-o-t} before answering the query.
 These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
-higher quality responses [8, 9, 10]. It may be worth evaluating whether this style of model performs better than
+higher quality responses \cite{c-o-t,reasoning,thinking-llm}. It may be worth evaluating whether this style of model performs better than
 non reasoning models (as used in our research) on assembly function analysis.
 
 \subsubsection{Fine-tuning}
