@@ -170,7 +170,7 @@ the LLM, which is significantly simpler than having to retrain the model and reg
 The underlying LLM can also replaced seamlessly without invalidating the database, meaning that our method will continue
 to scale with the performance improvements of LLMs - an area which is showing impressive growth and development. Furthermore, if
 a section of the prompt was edited to modify the output feature set, the database can still be maintained without
-having to regenerate a new feature set. Default values or values derived from other fields in the feature set can be added
+having to regenerate a new feature set. Default values or values derived from other fields in the feature set can be added,
 as is standard with database migrations.
 
 Another key advantage of our method also stems from its textual representation of the extracted feature set. As highlighted
@@ -385,6 +385,8 @@ output on the assembly function in the query. There is most likely a form of log
 The size of the Gemini 2.5 flash model is not disclosed at the time of writing, but we can expect the model to have around 200B parameters,
 based on sizes of the preivous Gemini model versions.
 
+TODO: embedding model size ablation?
+
 FIG: MRR performance for cross optimization retrieval against the amount of parameters in the LLM. All assembly functions are compiled
 with gcc for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions.
 Three examples are provided with our prompt.
@@ -434,18 +436,48 @@ optimization levels 0 and 3, all functions are compiled for the x86-64 architect
 compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
 show the MRR score for the prompt without any sections removed.
 
-### Token usage of commercial models
+### Token usage
+
+Maybe?
 
 ### Combined Method
 
-### Comparison of using different models
+Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained specifically for assembly
+function understanding and BCSD will undoubtedly out-perform our method on functions similar to the dataset they were trained on.
+Even if our method is more scalable, state of the art embedding learning models are still useful for specific tasks, such as supporting
+niche architectures or understanding similarity through obfuscated code. The state of the art embedding models are comparatively much smaller
+than our method. For instance the CLAP [19] model baseline is only 110M parameters, compared to the many billions required to perform our method.
+Once trained, small embedding models are much faster than LLM inference, but the cost of training such models is still very expensive.
+Their small size also means that these models can be run on CPU for small pool sizes.
 
-- Ablation on the number of examples provided.
-- Ablation on the model size.
-- Ablation on the prompt used, examples of output.
-- Show results on commercial models
-- Token usage on commercial models
-- Combination with embedding models stuff
+To achieve a best of both world scenario, we experiment with combining the similarity scores from an embedding model and our prompting method.
+Our evaluation method consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
+using cosine similarity, and the analysis similiarity \(s_a\) is calculated using jaccard similarity. Both similarity scores are then combined
+with equal weight.
+\[
+    S = \frac{s_e + s_a}{2}
+\]
+
+To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
+As such, the combination still does not require any training or fine-tuning, and we show that of-the-shelf embedding models based on a LLM perform
+very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation (this can be done without
+having to train a new model). 
+
+TABLE: Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
+optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
+the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout.
+
+The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embeddings and analysis supplement
+each other, meaning that our analysis correctly extracts features from the assembly function that are not properly represented in the embeddings
+model.
+
+## Conclusion
+
+### Small discussion of our results
+
+### Limitations of our method
+
+### Future research
 
 ### Human interpretability
 
