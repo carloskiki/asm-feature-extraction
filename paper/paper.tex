@@ -161,17 +161,17 @@ quickly identify which functions are part of common external libraries and which
 Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
 binary or firmware is using the vulnerable library.
 
-Early approaches to BCSD used human defined heuristics to extract a "feature vector" from a binary function. These heuristics
+Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment. These heuristics
 could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
 by executing the function in an emulated environment. These methods were deterministic and had the benefit of producing
-human understandable feature vectors, but were often too simplistic or sometimes used computationally intractable alogrithms in
+human understandable feature vectors, but were often too simplistic or sometimes used computationally intractable alogrithms, in
 the case of CFG analysis.
 
 More recently, machine learning (ML) based methods have shown to be better performing.
-These methods work by producing an embedding for a binary function using techniques coming from natural language processing.
-The generated embeddings are usually floating point tensors and serve as the "feature vector". These vectors are compared
-with each other using metrics such as cosine similarity, and use approximate nearest neighbor search when filtering through
-large databases.
+These methods work by producing a floating point tensor embedding for a code fragment, often using techniques from
+natural language processing. The generated embeddings serve as the feature vector, which are compared
+with each other using metrics such as cosine similarity. when filtering through large databases, nearest neighbor search
+or an approximated variant is used to find the most similar code fragments.
 
 Our work presents a method to effectively find assembly fragment clones across binaries using any available pre-trained
 large language model (LLM). The method is simpler than other ML approaches, requires no training nor fine-tuning, and
@@ -179,10 +179,12 @@ matches state-of-the-art results. It has the advantage of generating human inter
 instead of numerical embeddings. Additionally, it effectively scales with the performance and size of the LLM used, and thus
 benefits from the ample amount of research on in this area.
 
+TODO: expand on how our method differs from and compares to others.
+
 \subsection{Contributions}
 
 \begin{itemize}
-\item We provide an elementary approach to BCSD purely based on the recent advancements in large language models (LLM) that
+\item We provide an elementary approach to BCSD purely based on the recent advancements in large language models that
     is effective at cross-optimization and cross-architecture retrieval. This method requires no pre-training, and
     generates human interpretable feature vectors.
 \item We show that our approach scales with the performance and size of the LLM used, and out performs state-of-the-art BCSD models
@@ -207,11 +209,11 @@ is the process of generating higher-level pseudo-code from the instructions base
 
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
 is lost ~\cite{BCSDsurvey}. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
-the program as efficient as possible - which often means removing as much as possible. The optimizers within the compiler
-only have a single rule: They must not makes changes to the observable behavior of the program. This is ofter refered
-to as the "as-if rule". As a result, compilers can remove, reorder, and inline significant parts of the code. Even worse,
-adverserial programs, such as malware or digital rights management software uses obfuscation techniques to resist
-having their code reverse engineered.
+the program as efficient as possible --- which often means removing as much as possible. The optimizers within the compiler
+only have a single rule: They must not make changes to the observable behavior of the program (often refered
+to as the ``as-if rule'' [ref]). As a result, compilers can remove, reorder, and inline significant parts of the code, making
+it difficult to understand its behavior. Even worse, adverserial programs such as malware or digital rights management software
+make use of obfuscation techniques to resist having their code reverse engineered.
 
 \subsection{Binary code similarity detection}
 
@@ -223,30 +225,36 @@ highly similar to the known one, it greatly simplifies the analysis task, and re
 code fragments are typically collected in a database which is queried against for clone search. For example,
 if a major vulnerability in a widely used, core open-source component is found, BCSD can be used to quickly
 assess if a binary contains the vulnerable code fragment. It can also be used for plagiarism detection, which
-could take the form of patent infringemnt, or for malware classification. Challenges in binary analysis are
-amplified in binary code similarity detection. Two code fragments that seem very different can still have
-the same observable behavior.
+could take the form of license or patent infringement, for software and malware classification ~\cite{op-seq}, or for 
+security patch analysis \cite{patch}. Challenges in binary analysis are amplified in binary code similarity detection,
+because two code fragments that seem very different can still have the same observable behavior.
 
 Recent research uses deep learning to generate a vector embedding for each assembly function ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.
-Generally, training a model to perform such task requires a large training dataset, and highly performant GPUs
-to perform lots of computations. Once trained however, these methods can generate excellent results.
+Generally, training a model to perform such task requires a large training dataset, and highly performant GPUs.
+Once trained however, these methods can generate excellent results.
 State of the art implementations are limited by their training data, and poorly generalize to out-of-domain tasks,
-such as assembly code for a different architecture, or code compiled with a different compiler ~\cite{BCSDsurvey,CLAP}. Most methods also require
-a pre-processing step after disassembly, such as extracting the control flow graph ~\cite{OrderMatters,Asm2Vec}, or slightly modifying the input
-assembly in a specific manner ~\cite{PalmTree,CLAP}.
+such as assembly code for a different architecture, or code compiled with a different compiler ~\cite{BCSDsurvey,CLAP}.
+Most methods also require a pre-processing step after disassembly, such as extracting the control flow graph
+~\cite{OrderMatters,Asm2Vec}, or slightly modifying the input assembly in a specific manner ~\cite{PalmTree,CLAP}.
 
 Production scale BCSD engines contain millions of assembly functions. With one vector embedding per function, nearest neighbor
-search takes a significant amount of time as the algorithm has to linearly compare the query with every function in the database.
-To alliviate this issue, approximate nearest neighbor search is used on large databases to reduce the time complexity of the
-search ~\cite{ANN,ANN-limits}, but it may not always return the first match and thus skews similarity scores.
+search takes a significant amount of time as the algorithm has to compare the query with every function in the database in linear
+time complexity. To alliviate this issue, approximate nearest neighbor search is used on large databases to reduce the time
+complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return the first match and thus skews similarity scores.
 
 \subsection{Problem definition}
 
-We deem two assembly code fragements to be semantically identical if they have the same observable behavior on a system.
-This type of clone is generally referred to as "type four" clones ~\cite{Asm2Vec,BinClone}. This type of clone excludes different algorithms that
-might happen to have the same output, such as breadth-first search vs. depth-first search. In research, it is common
-to use the same source code function compiled with different compilers or compilation options to create such
-type four clones.
+We deem two assembly code fragments to be semantically identical if they have the same observable behavior on a system.
+This type of clone is generally referred to as type 4 clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
+to detect. In research, it is common to use the same source code function compiled with different compilers or compilation
+options to create such type four clones. This type of clone excludes procedures that happen to have the same output but
+achieve it in different ways, such as the breadth-first search and depth-first search algorithms. Instead of generating a
+binary output as to whether two code fragments are equivalent, the feature vector generated for each assembly function are
+compared to generated a similarity index. This index is a value between 0 and 1 that represents the degree of similarity
+between the two code fragments. This more closely aligns with real world use cases where two pieces of code are highly similar
+but not identical, such as a vulnerable function and its patched version. 
+
+TODO: 
 
 \section{Method}
 
