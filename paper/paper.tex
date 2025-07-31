@@ -495,7 +495,7 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     \centering
     \begin{tabular}{l|cccc|cccc}
     \hline
-    \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                & \multicolumn{4}{c}{Recall @ 1}                         \\ \cline{2-9}
+    \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                               & \multicolumn{4}{c}{Recall @ 1}                         \\ \cline{2-9}
                            & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average \\ \hline
     SAFE                   & 0.239       & 0.187           & 0.196        & 0.207   & 0.063       & 0.063           & 0.063        & 0.063   \\
     PalmTree               & 0.037       & 0.036           & 0.018        & 0.030   & 0.031       & 0.013           & 0.007        & 0.017   \\
@@ -528,6 +528,12 @@ Our method surpasses the baselines, but more work in this area is clearly still 
 is able to rank the the correct assembly fragment in first place only \(42\%\) of the time on average.
 
 \subsection{Ablation on model size}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics{size-ablation.pdf}}
+\caption{Example of a figure caption.}
+\label{fig}
+\end{figure}
 
 In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
 of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models ~\cite{scaling-laws}, in that increasing
