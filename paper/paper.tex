@@ -153,6 +153,7 @@ loc_41ac99:
 \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for the 
     \texttt{x86\_64} architecture using optimization levels 0 and 3 respectively.
     Our method is able to identify the fragments as clones.}
+\label{asm-diff}
 \end{figure*}
 
 \subsection{Contributions}
@@ -453,7 +454,7 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 
 This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
 different optimization levels. The hardest retrieval task is between optimization levels 0 and 3 [T1], because there is a
-substantial difference between code compiled with \texttt{-O0} and code compiled with \texttt{-O3} [FIGURE of assembly fns]. At optimization level 0,
+substantial difference between code compiled with \texttt{-O0} and code compiled with \texttt{-O3} Figure ~\ref{asm-diff} \. At optimization level 0,
 functions perform a lot of unessecary actions, such as extensively moving data between registers and perform conditional evaluation
 of expressions that return a constant value. The generated code mostly is mostly left untouched by the optimizer.
 At optimization level 3, the compiler will inline simple functions into the body of the caller, meaning that jumps
