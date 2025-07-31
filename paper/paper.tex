@@ -65,56 +65,6 @@ component, formatting, style, styling, insert
 
 \section{Introduction}
 
-% 
-% 
-% % Side by size assembly view
-% \begin{figure*}[!t]
-% \centering
-% \begin{minipage}[t]{0.48\linewidth}
-% \centering
-% \begin{minted}[fontsize=\footnotesize]{nasm}
-% loc_42c1c0:
-%     push rbp
-%     mov rbp, rsp
-%     sub rsp, 8
-%     mov [rbp+var_8], rdi
-%     mov rax, [rbp+var_8]
-%     mov rdi, rax
-%     call sub_42b49a
-%     mov rax, [rbp+var_8]
-%     mov dword ptr [rax+50h], 0
-%     mov rax, [rbp+var_8]
-%     mov dword ptr [rax+58h], 0
-%     mov rax, [rbp+var_8]
-%     mov edx, [rax+58h]
-%     mov rax, [rbp+var_8]
-%     mov [rax+54h], edx
-%     nop 
-%     leave 
-%     retn 
-% \end{minted}
-% \end{minipage}
-% \hfill
-% \begin{minipage}[t]{0.48\linewidth}
-% \centering
-% \begin{minted}[fontsize=\footnotesize]{nasm}
-% loc_41ac99:
-%     mov dword ptr [rdi], 67452301h
-%     mov dword ptr [rdi+4], 0efcdab89h
-%     mov dword ptr [rdi+8], 98badcfeh
-%     mov dword ptr [rdi+0ch], 10325476h
-%     mov dword ptr [rdi+50h], 0
-%     mov dword ptr [rdi+58h], 0
-%     mov dword ptr [rdi+54h], 0
-%     retn 
-% \end{minted}
-% \end{minipage}
-% \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for the 
-%     \texttt{x86\_64} architecture using optimization levels 0 and 3 respectively.
-%     Our method is able to identify the fragments as clones.}
-% \end{figure*}
-% 
-% 
 % \begin{table*}[!t]
 % \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|}
 % {\multirow{2}{*}{Models}} & \multicolumn{6}{c|}{MRR}                        & \multicolumn{6}{c|}{Recall @ 1}                 \\ \cline{2-13}
@@ -157,6 +107,53 @@ instead of numerical embeddings. Additionally, it effectively scales with the pe
 benefits from the ample amount of research on in this area.
 
 TODO: expand on how our method differs from and compares to others.
+
+% Side by size assembly view
+\begin{figure*}[!t]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+\centering
+\begin{minted}[fontsize=\footnotesize]{nasm}
+loc_42c1c0:
+    push rbp
+    mov rbp, rsp
+    sub rsp, 8
+    mov [rbp+var_8], rdi
+    mov rax, [rbp+var_8]
+    mov rdi, rax
+    call sub_42b49a
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+50h], 0
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+58h], 0
+    mov rax, [rbp+var_8]
+    mov edx, [rax+58h]
+    mov rax, [rbp+var_8]
+    mov [rax+54h], edx
+    nop 
+    leave 
+    retn 
+\end{minted}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\centering
+\begin{minted}[fontsize=\footnotesize]{nasm}
+loc_41ac99:
+    mov dword ptr [rdi], 67452301h
+    mov dword ptr [rdi+4], 0efcdab89h
+    mov dword ptr [rdi+8], 98badcfeh
+    mov dword ptr [rdi+0ch], 10325476h
+    mov dword ptr [rdi+50h], 0
+    mov dword ptr [rdi+58h], 0
+    mov dword ptr [rdi+54h], 0
+    retn 
+\end{minted}
+\end{minipage}
+\caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for the 
+    \texttt{x86\_64} architecture using optimization levels 0 and 3 respectively.
+    Our method is able to identify the fragments as clones.}
+\end{figure*}
 
 \subsection{Contributions}
 
