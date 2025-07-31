@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.22)  24 JUL 2025 20:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  31 JUL 2025 11:44
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**paper.tex
+**paper
 (./paper.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
@@ -126,7 +126,53 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/underscore/underscore.sty
+Package: underscore 2006/09/13
+LaTeX Info: Redefining \_ on input line 42.
+)
+==> First Aid for underscore.sty applied!
+(/usr/local/texlive/2025/texmf-dist/tex/latex/firstaid/underscore-ltx.sty
+Package: underscore-ltx 2023/09/20 LaTeX firstaid to make underscore protected 
+
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+\caption@tempdima=\dimen172
+\captionmargin=\dimen173
+\caption@leftmargin=\dimen174
+\caption@rightmargin=\dimen175
+\caption@width=\dimen176
+\caption@indent=\dimen177
+\caption@parindent=\dimen178
+\caption@hangindent=\dimen179
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \footnotesize \bgroup \par \centering \@IEEEtabletopskipstrut {\norma
+lfont \footnotesize {#1.}\nobreakspace \scshape #2}\par \addvspace {0.5\baselin
+eskip }\egroup \@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \se
+tbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\nobreakspace #2}\ifdim \
+wd \@tempboxa >\hsize \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}
+\nobreakspace }\parbox [t]{\hsize }{\normalfont \footnotesize \noindent \unhbox
+ \@tempboxa #2}\else \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tem
+pboxa \hfil }\fi \fi  on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count290
+\c@continuedfloat=\count291
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2025/06/16 v2.17y AMS math features
 \@mathmargin=\skip52
 
@@ -136,24 +182,24 @@ Package: amstext 2024/11/17 v2.01 AMS text
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks18
-\ex@=\dimen172
+\@emptytoks=\toks19
+\ex@=\dimen180
 ))
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen173
+\pmbraise@=\dimen181
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count290
+\inf@bad=\count292
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count291
-\leftroot@=\count292
+\uproot@=\count293
+\leftroot@=\count294
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count293
-\DOTSCASE@=\count294
+\classnum@=\count295
+\DOTSCASE@=\count296
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
@@ -163,34 +209,34 @@ LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen174
+\big@size=\dimen182
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count295
+\macc@depth=\count297
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count296
+\c@MaxMatrixCols=\count298
 \dotsspace@=\muskip17
-\c@parentequation=\count297
-\dspbrk@lvl=\count298
-\tag@help=\toks19
-\row@=\count299
-\column@=\count300
-\maxfields@=\count301
-\andhelp@=\toks20
-\eqnshift@=\dimen175
-\alignsep@=\dimen176
-\tagshift@=\dimen177
-\tagwidth@=\dimen178
-\totwidth@=\dimen179
-\lineht@=\dimen180
-\@envbody=\toks21
+\c@parentequation=\count299
+\dspbrk@lvl=\count300
+\tag@help=\toks20
+\row@=\count301
+\column@=\count302
+\maxfields@=\count303
+\andhelp@=\toks21
+\eqnshift@=\dimen183
+\alignsep@=\dimen184
+\tagshift@=\dimen185
+\tagwidth@=\dimen186
+\totwidth@=\dimen187
+\lineht@=\dimen188
+\@envbody=\toks22
 \multlinegap=\skip53
 \multlinetaggap=\skip54
-\mathdisplay@stack=\toks22
+\mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2949.
 LaTeX Info: Redefining \] on input line 2950.
 )
@@ -211,14 +257,10 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks23
-)
-\c@ALC@unique=\count302
-\c@ALC@line=\count303
-\c@ALC@rem=\count304
-\c@ALC@depth=\count305
+\c@ALC@unique=\count304
+\c@ALC@line=\count305
+\c@ALC@rem=\count306
+\c@ALC@depth=\count307
 \ALC@tlm=\skip55
 \algorithmicindent=\skip56
 )
@@ -239,8 +281,8 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen181
-\Gin@req@width=\dimen182
+\Gin@req@height=\dimen189
+\Gin@req@width=\dimen190
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
@@ -287,7 +329,7 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 )))
 (/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count306
+\etb@tempcnta=\count308
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/fvextra/fvextra.sty
 Package: fvextra 2025/05/29 v1.13.2 fvextra - extensions and patches for fancyv
@@ -295,11 +337,11 @@ rb
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
-\FV@CodeLineNo=\count307
+\FV@CodeLineNo=\count309
 \FV@InFile=\read2
 \FV@TabBox=\box57
-\c@FancyVerbLine=\count308
-\FV@StepNumber=\count309
+\c@FancyVerbLine=\count310
+\FV@StepNumber=\count311
 \FV@OutFile=\write3
 )
 (/usr/local/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -322,48 +364,48 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 (/usr/local/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ))
-\linenopenalty=\count310
+\linenopenalty=\count312
 \output=\toks24
-\linenoprevgraf=\count311
-\linenumbersep=\dimen183
-\linenumberwidth=\dimen184
-\c@linenumber=\count312
-\c@pagewiselinenumber=\count313
-\c@LN@truepage=\count314
-\c@internallinenumber=\count315
-\c@internallinenumbers=\count316
-\quotelinenumbersep=\dimen185
-\bframerule=\dimen186
-\bframesep=\dimen187
+\linenoprevgraf=\count313
+\linenumbersep=\dimen191
+\linenumberwidth=\dimen192
+\c@linenumber=\count314
+\c@pagewiselinenumber=\count315
+\c@LN@truepage=\count316
+\c@internallinenumber=\count317
+\c@internallinenumbers=\count318
+\quotelinenumbersep=\dimen193
+\bframerule=\dimen194
+\bframesep=\dimen195
 \bframebox=\box58
-\@LN@amsmath@ams@eqpen=\count317
+\@LN@amsmath@ams@eqpen=\count319
 )
-\c@FancyVerbWriteLine=\count318
-\c@FancyVerbBufferLine=\count319
-\c@FV@TrueTabGroupLevel=\count320
-\c@FV@TrueTabCounter=\count321
+\c@FancyVerbWriteLine=\count320
+\c@FancyVerbBufferLine=\count321
+\c@FV@TrueTabGroupLevel=\count322
+\c@FV@TrueTabCounter=\count323
 \FV@TabBox@Group=\box59
 \FV@bgcolorstructbox=\box60
 \FV@TmpLength=\skip57
-\c@FV@HighlightLinesStart=\count322
-\c@FV@HighlightLinesStop=\count323
-\FV@LoopCount=\count324
+\c@FV@HighlightLinesStart=\count324
+\c@FV@HighlightLinesStop=\count325
+\FV@LoopCount=\count326
 \FV@NCharsBox=\box61
-\FV@BreakIndent=\dimen188
-\FV@BreakIndentNChars=\count325
-\FV@BreakSymbolSepLeft=\dimen189
-\FV@BreakSymbolSepLeftNChars=\count326
-\FV@BreakSymbolSepRight=\dimen190
-\FV@BreakSymbolSepRightNChars=\count327
-\FV@BreakSymbolIndentLeft=\dimen191
-\FV@BreakSymbolIndentLeftNChars=\count328
-\FV@BreakSymbolIndentRight=\dimen192
-\FV@BreakSymbolIndentRightNChars=\count329
-\c@FancyVerbLineBreakLast=\count330
+\FV@BreakIndent=\dimen196
+\FV@BreakIndentNChars=\count327
+\FV@BreakSymbolSepLeft=\dimen197
+\FV@BreakSymbolSepLeftNChars=\count328
+\FV@BreakSymbolSepRight=\dimen198
+\FV@BreakSymbolSepRightNChars=\count329
+\FV@BreakSymbolIndentLeft=\dimen199
+\FV@BreakSymbolIndentLeftNChars=\count330
+\FV@BreakSymbolIndentRight=\dimen256
+\FV@BreakSymbolIndentRightNChars=\count331
+\c@FancyVerbLineBreakLast=\count332
 \FV@LineBox=\box62
 \FV@LineIndentBox=\box63
-\c@FV@BreakBufferDepth=\count331
-\FV@LineWidth=\dimen193
+\c@FV@BreakBufferDepth=\count333
+\FV@LineWidth=\dimen257
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/latex2pydata/latex2pydata.sty
 Package: latex2pydata 2025/03/26 v0.6.0 latex2pydata - write data to file in Py
@@ -385,55 +427,65 @@ Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+Package shellesc Info: Restricted shell escape enabled on input line 77.
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count332
+\c@float@type=\count334
 \float@exts=\toks30
 \float@box=\box64
 \@float@everytoks=\toks31
 \@floatcapt=\box65
 )
-\c@minted@FancyVerbLineTemp=\count333
+\c@minted@FancyVerbLineTemp=\count335
 \@float@every@listing=\toks32
-\c@listing=\count334
+\c@listing=\count336
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip58
+\multirow@cntb=\count337
+\multirow@dima=\skip59
+\bigstrutjot=\dimen258
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count335
+\l__color_backend_stack_int=\count338
 )
 (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 -- Lines per column: 58 (exact).
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count336
-\scratchdimen=\dimen194
+\scratchcounter=\count339
+\scratchdimen=\dimen259
 \scratchbox=\box66
-\nofMPsegments=\count337
-\nofMParguments=\count338
+\nofMPsegments=\count340
+\nofMParguments=\count341
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count339
-\MPscratchDim=\dimen195
-\MPnumerator=\count340
-\makeMPintoPDFobject=\count341
+\MPscratchCnt=\count342
+\MPscratchDim=\dimen260
+\MPnumerator=\count343
+\makeMPintoPDFobject=\count344
 \everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -445,57 +497,35 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 4
-0.
+5.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 40.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 40
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 45
 .
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 43.
-
-\pydata@fh@0=\write4
-\openout4 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
-
-runsystem(latexminted config  --timestamp 20250724201226Z 7E3F660480AB1640DE802
-4C200B5A4D3)...executed.
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 48.
 
 
-(./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250724201226Z 7E3F660480AB1640
-DE8024C200B5A4D3)...executed.
 
+LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 18
+5.
 
-(./_minted/default.style.minted)
-\openout4 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-runsystem(latexminted highlight  --timestamp 20250724201226Z 7E3F660480AB1640DE
-8024C200B5A4D3)...executed.
-
-
-(./_minted/832997F8C90B633795019F887327CE0B.highlight.minted
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-.
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-))
-
-LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 11
-9.
 
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
@@ -508,14 +538,48 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 [2]
 
-
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
+36.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
 
 [3]
 
 
 
 [4]
+Underfull \hbox (badness 2478) in paragraph at lines 437--441
+[]\OT1/ptm/m/n/10.03749 The base-lines are SAFE, Or-der-Mat-ters, PalmTree,
+ []
 
+
+
+
+
+[5]
+
+
+
+[6]
+
+
+
+[7] (./paper.bbl
+
+
+Underfull \hbox (badness 3679) in paragraph at lines 118--121
+[]\OT1/ptm/m/n/8.03 T. Dul-lien, ``Graph-based com-par-i-son of ex-
+ []
+
+
+Underfull \hbox (badness 7099) in paragraph at lines 118--121
+\OT1/ptm/m/n/8.03 e-cutable ob-jects,'' 2005. [On-line]. Avail-able:
+ []
+
+
+
+[8])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -529,26 +593,32 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[5]
-\openout4 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted clean  --timestamp 20250724201226Z 7E3F660480AB1640DE8024
-C200B5A4D3)...executed.
+
+[9
+
+]
+runsystem(latexminted cleantemp  --timestamp 20250731114422Z 7E3F660480AB1640DE
+8024C200B5A4D3)...executed safely (allowed).
 
  (./paper.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 10021 strings out of 467816
- 214201 string characters out of 5432258
- 744008 words of memory out of 5000000
- 38496 multiletter control sequences out of 15000+600000
- 682124 words of font info for 154 fonts, out of 8000000 for 9000
+ 11188 strings out of 467816
+ 235857 string characters out of 5432258
+ 760140 words of memory out of 5000000
+ 39657 multiletter control sequences out of 15000+600000
+ 681046 words of font info for 153 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 85i,11n,93p,508b,652s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 85i,11n,93p,464b,345s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
 /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
@@ -561,10 +631,10 @@ texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/
 -dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on paper.pdf (5 pages, 152997 bytes).
+Output written on paper.pdf (9 pages, 174432 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,9 @@
+loc_41ac99:
+    mov dword ptr [rdi], 67452301h
+    mov dword ptr [rdi+4], 0efcdab89h
+    mov dword ptr [rdi+8], 98badcfeh
+    mov dword ptr [rdi+0ch], 10325476h
+    mov dword ptr [rdi+50h], 0
+    mov dword ptr [rdi+58h], 0
+    mov dword ptr [rdi+54h], 0
+    retn
