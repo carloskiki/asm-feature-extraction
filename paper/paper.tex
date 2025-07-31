@@ -65,38 +65,6 @@ component, formatting, style, styling, insert
 
 \section{Introduction}
 
-% % Diff of generated output from analysis
-% \begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
-%  {
-%    "input_parameter_count": 1,
-%    "input_parameter_types": [
-%      "Pointer"
-%    ],
-% -  "return_value_type": "None",
-% +  "return_value_type": "Integer",
-%    "dominant_operation_categories": [
-%      "ConditionalBranching",
-%      "SubroutineCall"
-%    ],
-%    "loop_indicators": false,
-%    "distinct_subroutine_call_targets": 2,
-%    "use_indexed_addressing_modes": false,
-%    "notable_integer_constants": [
-% -    "0x39"
-% +    "0x39",
-% +    "0x4"
-%    ],
-%    "notable_floating_point_constants": [],
-%    "count_of_distinct_immediate_values": 3,
-%    "modifies_input_parameters": false,
-%    "modifies_global_state": false,
-%    "memory_allocation_deallocation": false,
-%    "io_operations": false,
-%    "block_memory_operations": false,
-% -  "inferred_algorithm": "Undetermined"
-% +  "inferred_algorithm": "Initialization"
-% }
-% \end{minted}
 % 
 % 
 % % Side by size assembly view
@@ -263,7 +231,7 @@ compared to generate a similarity index. This index is a value between 0 and 1 t
 between the two code fragments. This more closely aligns with real world use cases where two pieces of code are highly similar
 but not identical, such as a vulnerable function and its patched version. 
 
-TODO: 
+TODO: more?
 
 \section{Method}
 
@@ -377,6 +345,39 @@ exemplify the space of possibilities in our evaluations.
 The prompt by itself is still very performant, and should be acceptable for most applications. A surpising effect of providing examples
 is that the prompt is no longer needed for the analysis to be effective. Our results show that using enough examples with an empty system promt
 generates the same results as a standalone system prompt without examples.
+
+% Diff of generated output from analysis
+\begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
+ {
+   "input_parameter_count": 1,
+   "input_parameter_types": [
+     "Pointer"
+   ],
+-  "return_value_type": "None",
++  "return_value_type": "Integer",
+   "dominant_operation_categories": [
+     "ConditionalBranching",
+     "SubroutineCall"
+   ],
+   "loop_indicators": false,
+   "distinct_subroutine_call_targets": 2,
+   "use_indexed_addressing_modes": false,
+   "notable_integer_constants": [
+-    "0x39"
++    "0x39",
++    "0x4"
+   ],
+   "notable_floating_point_constants": [],
+   "count_of_distinct_immediate_values": 3,
+   "modifies_input_parameters": false,
+   "modifies_global_state": false,
+   "memory_allocation_deallocation": false,
+   "io_operations": false,
+   "block_memory_operations": false,
+-  "inferred_algorithm": "Undetermined"
++  "inferred_algorithm": "Initialization"
+}
+\end{minted}
 
 \subsection{Comparison}
 
