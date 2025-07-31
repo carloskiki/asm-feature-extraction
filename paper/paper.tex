@@ -494,7 +494,7 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     \begin{table*}[!t]
     \centering
     \begin{tabular}{l|cccc|cccc}
-    \multirow{2}{*}{Model} & \multicolumn{4}{c}{MRR}                                & \multicolumn{4}{c}{Recall @ 1}                         \\
+    \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                & \multicolumn{4}{c}{Recall @ 1}                         \\
                            & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average \\ \hline
     SAFE                   & 0.239       & 0.187           & 0.196        & 0.207   & 0.063       & 0.063           & 0.063        & 0.063   \\
     PalmTree               & 0.037       & 0.036           & 0.018        & 0.030   & 0.031       & 0.013           & 0.007        & 0.017   \\
@@ -504,6 +504,10 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     Qwen 2.5 7B            & 0.263       & 0.201           & 0.202        & 0.222   & 0.165       & 0.108           & 0.110        & 0.128   \\
     Gemini 2.5 Flash       & 0.548       & 0.520           & 0.525        & 0.531   & 0.436       & 0.414           & 0.417        & 0.422   \\ \hline
     \end{tabular}
+    \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
+    All functions are compiled with optimization level 2 using \texttt{gcc} with the architecture specified for each column.
+    The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt.}
+    \label{x-arch}
     \end{table*}
 }
 
@@ -521,10 +525,6 @@ specific architecture, it can be replaced with one that better performs the spec
 
 Our method surpasses the baselines, but more work in this area is clearly still needed. The recall@1 metrics show that the best method
 is able to rank the the correct assembly fragment in first place only \(42\%\) of the time on average.
-
-T2 desc: Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
-All functions are compiled with optimization level 2 using \texttt{gcc} with the architecture specified for each column.
-The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt.
 
 \subsection{Ablation on model size}
 
