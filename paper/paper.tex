@@ -488,6 +488,21 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
 
 \subsection{Clone search with different architectures}
 
+\begin{table*}[!t]
+\centering
+\begin{tabular}{lcccccccc}
+\multirow{2}{*}{Model} & \multicolumn{4}{l}{MRR}                                & \multicolumn{4}{l}{Recall @ 1}                         \\
+                       & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average \\
+SAFE                   & 0.239       & 0.187           & 0.196        & 0.207   & 0.063       & 0.063           & 0.063        & 0.063   \\
+PalmTree               & 0.037       & 0.036           & 0.018        & 0.030   & 0.031       & 0.013           & 0.007        & 0.017   \\
+Asm2Vec                & 0.242       & 0.293           & 0.417        & 0.317   & 0.085       & 0.113           & 0.231        & 0.143   \\
+Order Matters          & 0.007       & 0.007           & 0.007        & 0.007   & 0.002       & 0.000           & 0.001        & 0.001   \\
+CLAP                   & 0.416       & 0.523           & 0.494        & 0.478   & 0.334       & 0.443           & 0.415        & 0.397   \\
+qwen-2.5-7             & 0.263       & 0.201           & 0.202        & 0.222   & 0.165       & 0.108           & 0.110        & 0.128   \\
+gemini-2.5-flash       & 0.548       & 0.520           & 0.525        & 0.531   & 0.436       & 0.414           & 0.417        & 0.422  
+\end{tabular}
+\end{table}
+
 Different CPU architectures have varying assembly code languages. It is hard for BCSD methods that analyze assembly code to support
 multiple architectures. These methods need to accurately represent two functions with completely different syntaxes but with identical
 semantics as being very similar in terms of their feature vector or embedding. Hence, methods that use CFG analysis have a better chance
