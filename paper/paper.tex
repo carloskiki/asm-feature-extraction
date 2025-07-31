@@ -299,12 +299,15 @@ selection. This is done in a loop until valid JSON is generated. In our experime
 for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
 valid JSON without retries.
 
-\colorbox{LightBlue}{\begin{minipage}
+{
+\fboxsep{0pt}
+\colorbox{LightBlue}{\begin{minipage}{\slwidth}
     You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
     analysis. Your goal is to analyze an assembly routine from an **unspecified architecture and compiler** and provide its extracted
     high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
     algorithm. Your output **MUST** be a JSON object conforming to the structure defined by these features.
 \end{minipage}}
+}
 
 \subsubsection{Type signature}
 
