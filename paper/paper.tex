@@ -65,18 +65,6 @@ component, formatting, style, styling, insert
 
 \section{Introduction}
 
-% \begin{table*}[!t]
-% \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|}
-% {\multirow{2}{*}{Models}} & \multicolumn{6}{c|}{MRR}                        & \multicolumn{6}{c|}{Recall @ 1}                 \\ \cline{2-13}
-% {}                        & O0-O1 & O0-O2 & O0-O3 & O1-O3 & O2-O3 & average & O0-O1 & O0-O2 & O0-O3 & O1-O3 & O2-O3 & average \\ \hline
-% {SAFE}                    & 0.189 & 0.2   & 0.189 & 0.218 & 0.171 & 0.193   & 0     & 0.063 & 0.063 & 0.063 & 0     & 0.037   \\
-% {PalmTree}                & 0.02  & 0.019 & 0.23  & 0.314 & 0.878 & 0.008   & 0.006 & 0.007 & 0.008 & 0.184 & 0.676 & 0.176   \\
-% {Asm2Vec}                 & 0.494 & 0.46  & 0.444 & 0.535 & 0.563 & 0.499   & 0.29  & 0.252 & 0.234 & 0.343 & 0.376 & 0.299   \\
-% {CLAP}                    & 0.244 & 0.221 & 0.214 & 0.55  & 0.781 & 0.402   & 0.187 & 0.176 & 0.168 & 0.455 & 0.707 & 0.338   \\ \hline
-% {Ours}                    & 0.739 & 0.672 & 0.568 & 0.7   & 0.816 & 0.699   & 0.646 & 0.579 & 0.485 & 0.618 & 0.758 & 0.617 
-% \end{tabular}
-% \end{table*}
-
 Modern software is increasingly reliant on external libraries.
 For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
 and mitigate vulnerability exposure ~\cite{BCSD, BCSDsurvey}. For reverse engineers, reducing the amount of repetitive assembly functions
@@ -452,16 +440,37 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 
 \subsection{Clone search with different optimization levels}
 
+\begin{table*}[!t]
+\normalsize
+\begin{tabular}{lcccccccccccc}
+\multirow{2}{*}{Model} & \multicolumn{6}{c}{MRR}                         & \multicolumn{6}{c}{Recall @ 1}                  \\
+                       & O0-O1 & O0-O2 & O0-O3 & O1-O3 & O2-O3 & average & O0-O1 & O0-O2 & O0-O3 & O1-O3 & O2-O3 & average \\
+Order Matters          & 0.006 & 0.008 & 0.006 & 0.006 & 0.006 & 0.0064  & 0.001 & 0.002 & 0.001 & 0     & 0.001 & 0.001   \\
+SAFE                   & 0.189 & 0.2   & 0.189 & 0.218 & 0.171 & 0.1934  & 0     & 0.063 & 0.063 & 0.063 & 0     & 0.0378  \\
+PalmTree               & 0.02  & 0.019 & 0.23  & 0.314 & 0.878 & 0.008   & 0.006 & 0.007 & 0.08  & 0.184 & 0.676 & 0.1906  \\
+Asm2Vec                & 0.494 & 0.46  & 0.444 & 0.535 & 0.563 & 0.4992  & 0.29  & 0.252 & 0.234 & 0.343 & 0.376 & 0.299   \\
+CLAP                   & 0.244 & 0.221 & 0.214 & 0.55  & 0.781 & 0.402   & 0.187 & 0.176 & 0.168 & 0.455 & 0.707 & 0.3386  \\
+qwen-2.5-7             & 0.471 & 0.412 & 0.343 & 0.456 & 0.608 & 0.458   & 0.342 & 0.301 & 0.234 & 0.345 & 0.488 & 0.342   \\
+gemini-2.5-flash       & 0.739 & 0.672 & 0.568 & 0.7   & 0.816 & 0.699   & 0.646 & 0.579 & 0.485 & 0.618 & 0.758 & 0.6172 
+\end{tabular}
+
+\caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
+All functions are compiled for the arm architecture using gcc with the optimization levels specified for each column.
+Three examples are provided with our prompt.}
+\label{x-opt}
+
+\end{table*}
+
 This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
-different optimization levels. The hardest retrieval task is between optimization levels 0 and 3 [T1], because there is a
-substantial difference between code compiled with \texttt{-O0} and code compiled with \texttt{-O3} Figure ~\ref{asm-diff}. At optimization level 0,
-functions perform a lot of unessecary actions, such as extensively moving data between registers and perform conditional evaluation
-of expressions that return a constant value. The generated code mostly is mostly left untouched by the optimizer.
-At optimization level 3, the compiler will inline simple functions into the body of the caller, meaning that jumps
-and calls to other places in the binary are replaced by the destination's instructions. Some loops are unrolled, so that each
-iteration of the loop is laid out sequentially instead of performing a conditional check and a jump to the loop's initial
-instruction. Also, instructions can be heavily reordered to achieve best performance, while keeping the observable
-behavior of the program untouched.
+different optimization levels. AS evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
+because there is a substantial difference between code compiled with \texttt{-O0} and code compiled with \texttt{-O3}
+Figure ~\ref{asm-diff}. At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
+data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
+mostly is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
+body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
+Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
+and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance, while
+keeping the observable behavior of the program untouched.
 
 The baselines are SAFE, OrderMatters, PalmTree, Asm2Vec, and CLAP. A summary of each of their architecture is provided in the Related
 Work section (TODO: link?). We also include Qwen3-Embedding 4B, an embedding model based on Qwen3 trained for general text embedding as baseline.
@@ -472,10 +481,6 @@ The baselines mostly perform worse than expected on this evaluation. As our own 
 rather than one that was presented by the baselines, we believe this may be caused by overfitting in the training process of these models.
 As evident here, one of our method's advantage is that it requires no fine-tuning to acheive good results, and thus should generalize
 well to unseen settings. Qwen3-Embedding 4B also generates impressive results, given that it was not trained for assembly clone detection.
-
-T1 desc: Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
-All functions are compiled for the arm architecture using gcc with the optimization levels specified for each column.
-Three examples are provided with our prompt.
 
 \subsection{Clone search with different architectures}
 
