@@ -223,4 +223,10 @@ S.~H. Ding, B.~C. Fung, and P.~Charland, ``Kam1n0: Mapreduce-based assembly
   \url{https://doi.org/10.1145/2939672.2939719}
 \BIBentrySTDinterwordspacing
 
+\bibitem{patch}
+Z.~Xu, B.~Chen, M.~Chandramohan, Y.~Liu, and F.~Song, ``Spain: Security patch
+  analysis for binaries towards understanding the pain and pills,'' in
+  \emph{2017 IEEE/ACM 39th International Conference on Software Engineering
+  (ICSE)}, 2017, pp. 462--472.
+
 \end{thebibliography}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  31 JUL 2025 11:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  31 JUL 2025 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -522,9 +522,9 @@ LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 48.
 
 
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 18
-5.
+7.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1418) has occurred while \output is active []
 
 
 
@@ -534,12 +534,16 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 ]
 
+LaTeX Warning: Citation `patch' on page 2 undefined on input line 229.
+
+
+
 
 
 [2]
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
-36.
+44.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -549,7 +553,7 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 
 
 [4]
-Underfull \hbox (badness 2478) in paragraph at lines 437--441
+Underfull \hbox (badness 2478) in paragraph at lines 445--449
 []\OT1/ptm/m/n/10.03749 The base-lines are SAFE, Or-der-Mat-ters, PalmTree,
  []
 
@@ -598,7 +602,7 @@ Before submitting the final camera ready copy, remember to:
 [9
 
 ]
-runsystem(latexminted cleantemp  --timestamp 20250731114504Z 7E3F660480AB1640DE
+runsystem(latexminted cleantemp  --timestamp 20250731132137Z 7E3F660480AB1640DE
 8024C200B5A4D3)...executed safely (allowed).
 
  (./paper.aux)
@@ -606,12 +610,19 @@ runsystem(latexminted cleantemp  --timestamp 20250731114504Z 7E3F660480AB1640DE
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 11188 strings out of 467816
- 235857 string characters out of 5432258
- 760140 words of memory out of 5000000
- 39657 multiletter control sequences out of 15000+600000
+ 11189 strings out of 467816
+ 235864 string characters out of 5432258
+ 759140 words of memory out of 5000000
+ 39658 multiletter control sequences out of 15000+600000
  681046 words of font info for 153 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  85i,11n,93p,464b,345s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -627,7 +638,7 @@ texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/
 -dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on paper.pdf (9 pages, 174429 bytes).
+Output written on paper.pdf (9 pages, 175759 bytes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream
