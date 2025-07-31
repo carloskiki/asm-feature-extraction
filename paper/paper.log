@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  31 JUL 2025 11:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  31 JUL 2025 11:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -598,7 +598,7 @@ Before submitting the final camera ready copy, remember to:
 [9
 
 ]
-runsystem(latexminted cleantemp  --timestamp 20250731114422Z 7E3F660480AB1640DE
+runsystem(latexminted cleantemp  --timestamp 20250731114504Z 7E3F660480AB1640DE
 8024C200B5A4D3)...executed safely (allowed).
 
  (./paper.aux)
@@ -606,10 +606,6 @@ runsystem(latexminted cleantemp  --timestamp 20250731114422Z 7E3F660480AB1640DE
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  11188 strings out of 467816
@@ -631,7 +627,7 @@ texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/
 -dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on paper.pdf (9 pages, 174432 bytes).
+Output written on paper.pdf (9 pages, 174429 bytes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream
