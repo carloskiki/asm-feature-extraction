@@ -633,7 +633,7 @@ having to train a new model).
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
 \begin{tabular}{l|c|c|c}
-\hline
+\Xhline{2\arrayrulewidth}
                 & Gemini 2.5 Flash & Qwen Embedding & Combined \\ \hline
 O0-O1           & 0.646            & 0.64           & 0.91     \\
 O0-O2           & 0.579            & 0.554          & 0.843    \\
@@ -642,7 +642,7 @@ O1-O3           & 0.618            & 0.64           & 0.855    \\
 O2-O3           & 0.758            & 0.783          & 0.921    \\
 arm-x86\_64     & 0.436            & 0.334          & 0.736    \\
 powerpc-x86\_64 & 0.414            & 0.443          & 0.746    \\
-mips-x86\_64    & 0.417            & 0.415          &          \\ \hline
+mips-x86\_64    & 0.417            & 0.415          & 0.729    \\ \Xhline{2\arrayrulewidth}
 \end{tabular}
 \caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
 optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
