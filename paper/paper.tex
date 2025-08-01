@@ -172,7 +172,7 @@ is the process of generating higher-level pseudo-code from the instructions base
 
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
 is lost ~\cite{BCSDsurvey}. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
-the program as efficient as possible --- which often means removing as much as possible. The optimizers within the compiler
+the program as efficient as possible---which often means removing as much as possible. The optimizers within the compiler
 only have a single rule: They must not make changes to the observable behavior of the program (often refered
 to as the ``as-if rule'' [ref]). As a result, compilers can remove, reorder, and inline significant parts of the code, making
 it difficult to understand its behavior. Even worse, adverserial programs such as malware or digital rights management software
@@ -231,7 +231,7 @@ By using any open-source or commercially available LLM, we entirely sidestep mod
 and diverse datasets that LLMs are pre-trained on.  Our method can be tuned by modifying the instructions provided to
 the LLM, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
 The underlying LLM can also replaced seamlessly without invalidating the database, meaning that our method will continue
-to scale with the performance improvements of LLMs --- an area which is showing impressive growth and development. Furthermore, if
+to scale with the performance improvements of LLMs---an area which is showing impressive growth and development. Furthermore, if
 a section of the prompt was edited to modify the output feature set, the database can still be maintained without
 having to regenerate an output for each item. Default values or values derived from other fields in the feature set can be added,
 as is standard with database migrations.
@@ -468,7 +468,7 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
 different optimization levels. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
 because there is a substantial difference between code compiled with \texttt{-O0} and code compiled with \texttt{-O3}
-Figure ~\ref{asm-diff}. At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
+(figure ~\ref{asm-diff}). At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
 data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
 mostly is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
 body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
@@ -601,7 +601,7 @@ The story is slightly different when this ablation study is performed for cross 
 there is a smaller difference between the least and most influential prompt sections. The categorization and notable constants sections
 are significantly less impactful than they were for the cross optimization study, while the other three sections have a larger impact.
 For instance, the categorization section went from having an impact of 0.30 on the MRR to having an impact 0.22, while the logic
-section is more influential --- going from 0.06 to 0.20 in MRR impact.
+section is more influential, going from 0.06 to 0.20 in MRR impact.
 
 TODO: Links to sections?
 
