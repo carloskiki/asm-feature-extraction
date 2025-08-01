@@ -532,7 +532,7 @@ is able to rank the the correct assembly fragment in first place only \(42\%\) o
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{size-ablation}}
 \caption{Example of a figure caption.}
-\label{fig}
+\label{size-abl}
 \end{figure}
 
 In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
@@ -553,7 +553,13 @@ Three examples are provided with our prompt.
 
 \subsection{Ablation on examples}
 
-By providing hand crafted exmaples to the large language model, we are able to increase the performance of the assembly function analysis.
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\linewidth]{examples-ablation}}
+\caption{Example of a figure caption.}
+\label{ex-abl}
+\end{figure}
+
+By providing hand crafted examples to the large language model, we are able to increase the performance of the assembly function analysis.
 This follows the general observations behind few show prompting ~\cite{few-shot}. Providing a single example significantly increases the retrieval
 scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model
 such as Qwen 2.5 7B still sees marginal increase in MRR scores as the number of examples increases up to 3. This relates to our previous observation
@@ -575,6 +581,12 @@ using gcc for the x86-64 architecture. A pool of 100 assembly functions is used,
 for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.
 
 \subsection{Ablation on the prompt used}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
+\caption{Example of a figure caption.}
+\label{prompt-abl}
+\end{figure}
 
 To verify that each section of our prompt brings meaningful insight into the assembly function analysis task, we perform an ablation
 study by removing one section of the prompt while keeping others intact. We notice that all individual sections bring a positive

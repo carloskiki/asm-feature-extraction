@@ -280,8 +280,7 @@ class GeminiRetrieval(Context):
                     continue
                 break
 
-            # responses.append(parse_json(response.text))
-            responses.append(response.parsed.model_dump())
+            responses.append(parse_json(response.text))
 
         return responses
 
