@@ -61,7 +61,7 @@ For the provided assembly routine, extract the following features and infer the 
     * *Heuristics:* Extensive conditional branching after subroutine calls to check return values (especially non-zero or negative values), specific error code comparisons, or calls to subroutines that appear to print error messages or log events. `false` otherwise.
 * **Number of Software Interrupts / System Calls (Integer):** The count of distinct instances where a software interrupt instruction (e.g., `INT`, `SYSCALL`, `SVC`, `TRAP`, `SYSENTER`) is used, or a pattern of instruction(s) that directly initiate a kernel-mode transition/system call. This counts the *invocation* of the mechanism, not necessarily the specific system call number if not immediately discernible.
 
-**VI. Inferred Categorization**
+**V. Inferred Categorization**
 
 * **Inferred Category (String):** A high-level functional category best describing the routine's primary purpose.
     * *Categories:*
@@ -76,13 +76,3 @@ For the provided assembly routine, extract the following features and infer the 
         * `"Interfacing/Wrapper"`: Acts as an interface, relaying calls or arguments with minimal internal logic.
         * `"Undetermined"`: If no confident category can be assigned.
     * *Inference:* Based on a holistic view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
-
-**VII. ATT&CK Technique (Optional)**
-
-* **ATT&CK Technique (String):** **[OPTIONAL]** The ATT&CK technique or sub-technique ID (e.g., `"T1059"`, `"T1059.001"`, `"T1562.001"`) that is **confidently** inferred from the function's behavior. This field should **only** be populated if there is a strong, unambiguous indication of a specific ATT&CK technique or sub-technique based on the observed assembly patterns. If no such confident inference can be made, **this field should be entirely omitted from the JSON output.**
-    * *Inference Heuristics (Examples - not exhaustive):*
-        * **T1059 Command and Scripting Interpreter:** Direct invocation of system calls/API patterns associated with executing commands (e.g., `CreateProcess`, `execve`).
-        * **T1083 File and Directory Discovery:** Patterns of iterating through file system structures, or calls to file enumeration functions.
-        * **T1560 Archive Collected Data:** Loops or calls with patterns suggestive of data compression.
-        * **T1027 Obfuscated Files or Information:** Use of certain anti-analysis techniques (e.g., direct API hashing, complex jump tables used for control flow flattening).
-        * **T1055 Process Injection:** Patterns of memory allocation, writing to foreign process memory, and creating/resuming remote threads.

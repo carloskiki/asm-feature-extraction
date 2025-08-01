@@ -75,7 +75,6 @@ loc_6D19B0:
   "performs_error_handling": true,
   "number_of_software_interrupts_or_system_calls": 2,
   "inferred_category": "System/OS Interaction",
-  "att&ck_technique": "T1059"
 }
 ```
 
