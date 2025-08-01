@@ -531,7 +531,9 @@ is able to rank the the correct assembly fragment in first place only \(42\%\) o
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{size-ablation}}
-\caption{Example of a figure caption.}
+\caption{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled
+with \texttt{gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions.
+Three examples are provided with our prompt.}
 \label{size-abl}
 \end{figure}
 
@@ -547,15 +549,13 @@ of magnitude more parameters, than our local models, and may use a mixture of ex
 
 TODO: embedding model size ablation?
 
-FIG: MRR performance for cross optimization retrieval against the amount of parameters in the LLM. All assembly functions are compiled
-with \texttt{gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions.
-Three examples are provided with our prompt.
-
 \subsection{Ablation on examples}
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{examples-ablation}}
-\caption{Example of a figure caption.}
+\caption{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
+using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3
+for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.}
 \label{ex-abl}
 \end{figure}
 
@@ -571,20 +571,20 @@ With our experimental configuration, providing 4 examples to Qwen 2.5 7B signifi
 the examples almost completely use the full context window that we provide to the LLM. As such, most query assembly functions are
 too large and thus truncated, which loses information about our query.
 
-The dotted line in [FIG] represents the MRR score obtained by providing no examples to Gemini 2.5 Flash, but providing a reference JSON
+The dotted line in figure ~\ref{ex-abl} represents the MRR score obtained by providing no examples to Gemini 2.5 Flash, but providing a reference JSON
 schema for the model to follow. The scores being equivalent shows that Gemini does not base itself on the provided examples, but only
 uses them to understand the JSON schema required. In all our other evaluations, we provide examples instead of a JSON schema because local
 models do not have the capability of generating output based on a schema built-in.
-
-FIG: MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
-using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3
-for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.
 
 \subsection{Ablation on the prompt used}
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
-\caption{Example of a figure caption.}
+\caption{
+MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at
+optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions
+compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
+show the MRR score for the prompt without any sections removed. A larger gap between the line and bar means the prompt section has more impact.}
 \label{prompt-abl}
 \end{figure}
 
@@ -604,11 +604,6 @@ For instance, the categorization section went from having an impact of 0.30 on t
 section is more influential --- going from 0.06 to 0.20 in MRR impact.
 
 TODO: Links to sections?
-
-FIG: MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at
-optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions
-compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
-show the MRR score for the prompt without any sections removed.
 
 \subsection{Combined Method}
 
@@ -633,9 +628,22 @@ As such, the combination still does not require any training or fine-tuning, as 
 very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation (this can be done without
 having to train a new model). 
 
-TABLE: Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
+\begin{table}[htbp]
+\begin{tabular}{lccc}
+                & Gemini 2.5 Flash & Qwen Embedding & Combined \\
+O0-O1           & 0.646            & 0.64           & 0.91     \\
+O0-O2           & 0.579            & 0.554          & 0.843    \\
+O0-O3           & 0.485            & 0.518          & 0.759    \\
+O1-O3           & 0.618            & 0.64           & 0.855    \\
+O2-O3           & 0.758            & 0.783          & 0.921    \\
+arm-x86\_64     & 0.436            & 0.334          & 0.736    \\
+powerpc-x86\_64 & 0.414            & 0.443          & 0.746    \\
+mips-x86\_64    & 0.417            & 0.415          &         
+\end{tabular}
+\caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
 optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
-the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout.
+the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout. Only Recall @ 1 scores are presented.}
+\end{table}
 
 The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embeddings and analysis supplement
 each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embeddings model.
