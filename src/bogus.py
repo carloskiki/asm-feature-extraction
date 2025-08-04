@@ -26,7 +26,7 @@ class Bogus(context.Context):
         fns = {}
 
         for (_, file) in dataset:
-            if file not in fns:
+            if file.binary not in fns:
                 fns[file.binary] = 1
             else:
                 fns[file.binary] += 1
