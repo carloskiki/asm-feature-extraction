@@ -237,6 +237,12 @@ search takes a significant amount of time as the algorithm has to compare the qu
 time complexity. To alliviate this issue, approximate nearest neighbor search is used on large databases to reduce the time
 complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return the first match and thus skews similarity scores.
 
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\linewidth]{BCSD-schematic}}
+\caption{TODO:}
+\label{size-abl}
+\end{figure}
+
 \subsection{Problem definition}
 
 We deem two assembly code fragments to be semantically identical if they have the same observable behavior on a system.
@@ -440,21 +446,21 @@ We evaluate both local models of various sizes and commercially deployed models.
 Qwen2.5-Coder ~\ref{qwen2} with sizes 0.5B to 7B is used to run most local evaluations as its small size fitted our GPU capacity and capabilities.
 We use this model to present our results. Qwen3 ~\ref{qwen3} with sizes 0.6B to 4B and Gemma-3n ~\ref{gemma3} with sizes 0.5B to 4B were also used on
 small scale experiments. On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
-was set to 512. Very large assembly functions that did not fit within the input tokens were truncated.
+was set to 512. Very large assembly functions that did not fit within the input tokens were truncated. The following commercially deployed
+models were also used.
 
-The following commercially deployed models were also used.
 \begin{itemize}
     \item GPT 4.1 mini ~\ref{gpt4}
     \item Gemini 2.5 Flash lite ~\ref{gemini2.5}
     \item Gemini 2.5 Flash ~\ref{gemini2.5}
 \end{itemize}
 
-Gemini 2.5 Flash is used to present our results. All models had very similar performance. We did not make use of the ``reasoning''
+Gemini 2.5 Flash ~\ref{gemini2.5} is used to present our results. All models had very similar performance. We did not make use of the ``reasoning''
 capabilities that some of these models provide to keep a predictable token usage rate, and to match the capabilities of the local models used.
 
 \section{Experiments}
 
-Our experiments are run on a virtual machine with 8 (CPU ID) cpu cores, 100 GB of RAM, and four NVIDIA Quadro RTX
+Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, 100 GB of RAM, and four NVIDIA Quadro RTX
 6000 GPUs each having  24GB of RAM. First, we compare our method against other state-of-the-art ML based
 approaches to BCSD on our dataset. Second, we run ablation studies on our method, to determine how the size
 of the model, the number of examples provided, and the different sections of the prompt contribute to our results.
@@ -476,7 +482,6 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 \[\frac{1}{\text{rank}(b_1)}\]
 
 \subsection{Clone search with different optimization levels}
-
 
 {
     \renewcommand{\arraystretch}{1.3}
