@@ -5,6 +5,7 @@ Doesn't do much, just to play around & try stuff
 from dataclasses import dataclass
 from argparse import ArgumentParser
 from . import context
+from .data_processing import LibDataset
 
 @dataclass
 class Bogus(context.Context):
@@ -21,4 +22,6 @@ class Bogus(context.Context):
         )
 
     def __call__(self):
-        pass
+        dataset = LibDataset("lib-data", True, None, None, "putty", 3, "gcc")
+        fn = next(f for (f, _) in dataset if f.name == "MD5Init")
+        print(fn)
