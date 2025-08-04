@@ -33,6 +33,22 @@ L.~Ruan, Q.~Xu, S.~Zhu, X.~Huang, and X.~Lin, ``A survey of binary code
   [Online]. Available: \url{https://www.mdpi.com/2079-9292/13/9/1715}
 \BIBentrySTDinterwordspacing
 
+\bibitem{op-seq}
+\BIBentryALTinterwordspacing
+I.~Santos, F.~Brezo, J.~Nieves, Y.~K. Penya, B.~Sanz, C.~Laorden, and P.~G.
+  Bringas, ``Idea: opcode-sequence-based malware detection,'' in
+  \emph{Proceedings of the Second International Conference on Engineering
+  Secure Software and Systems}, ser. ESSoS'10.\hskip 1em plus 0.5em minus
+  0.4em\relax Berlin, Heidelberg: Springer-Verlag, 2010, p. 35–43. [Online].
+  Available: \url{https://doi.org/10.1007/978-3-642-11747-3_3}
+\BIBentrySTDinterwordspacing
+
+\bibitem{patch}
+Z.~Xu, B.~Chen, M.~Chandramohan, Y.~Liu, and F.~Song, ``Spain: Security patch
+  analysis for binaries towards understanding the pain and pills,'' in
+  \emph{2017 IEEE/ACM 39th International Conference on Software Engineering
+  (ICSE)}, 2017, pp. 462--472.
+
 \bibitem{SAFE}
 \BIBentryALTinterwordspacing
 L.~Massarelli, G.~A.~D. Luna, F.~Petroni, L.~Querzoni, and R.~Baldoni, ``Safe:
@@ -134,16 +150,6 @@ F.~Al-Omari, I.~Keivanloo, C.~K. Roy, and J.~Rilling, ``Detecting clones across
   microsoft .net programming languages,'' in \emph{2012 19th Working Conference
   on Reverse Engineering}, 2012, pp. 405--414.
 
-\bibitem{op-seq}
-\BIBentryALTinterwordspacing
-I.~Santos, F.~Brezo, J.~Nieves, Y.~K. Penya, B.~Sanz, C.~Laorden, and P.~G.
-  Bringas, ``Idea: opcode-sequence-based malware detection,'' in
-  \emph{Proceedings of the Second International Conference on Engineering
-  Secure Software and Systems}, ser. ESSoS'10.\hskip 1em plus 0.5em minus
-  0.4em\relax Berlin, Heidelberg: Springer-Verlag, 2010, p. 35–43. [Online].
-  Available: \url{https://doi.org/10.1007/978-3-642-11747-3_3}
-\BIBentrySTDinterwordspacing
-
 \bibitem{sem-hash}
 W.~Jin, S.~Chaki, C.~Cohen, A.~Gurfinkel, J.~Havrilla, C.~Hines, and
   P.~Narasimhan, ``Binary function clustering using semantic hashes,'' in
@@ -222,11 +228,5 @@ S.~H. Ding, B.~C. Fung, and P.~Charland, ``Kam1n0: Mapreduce-based assembly
   Association for Computing Machinery, 2016, p. 461–470. [Online]. Available:
   \url{https://doi.org/10.1145/2939672.2939719}
 \BIBentrySTDinterwordspacing
-
-\bibitem{patch}
-Z.~Xu, B.~Chen, M.~Chandramohan, Y.~Liu, and F.~Song, ``Spain: Security patch
-  analysis for binaries towards understanding the pain and pills,'' in
-  \emph{2017 IEEE/ACM 39th International Conference on Software Engineering
-  (ICSE)}, 2017, pp. 462--472.
 
 \end{thebibliography}

@@ -1,0 +1,30 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": [
+        [
+          "arm",
+          "gcc"
+        ]
+      ],
+      "platform": "arm",
+      "target-platform": "gcc",
+      "pool-size": 100,
+      "examples": 0,
+      "prompt": "a-effects",
+      "model": "gemini-2.5-flash"
+    },
+    "results": {
+      "mrr": 0.6662000969136486,
+      "recall_at_1": 0.57,
+      "recall_at_10": 0.77,
+      "similarity_mean": {
+        "max": 0.5392507574185357,
+        "median": 0.2111939927588117,
+        "mean": 0.21529217917162918,
+        "min": 0.0
+      }
+    }
+  }
+]

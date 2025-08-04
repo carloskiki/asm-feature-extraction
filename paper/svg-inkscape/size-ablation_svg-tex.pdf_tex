@@ -1,0 +1,85 @@
+%% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'size-ablation_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1239.75bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.60072595)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{size-ablation_svg-tex.pdf}}%
+    \put(0.09640653,0.11736237){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.07747126,0.16212946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.1\end{tabular}}}}%
+    \put(0.07747126,0.20689655){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.2\end{tabular}}}}%
+    \put(0.07747126,0.25105868){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.3\end{tabular}}}}%
+    \put(0.07747126,0.29582577){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
+    \put(0.07747126,0.3399879){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.5\end{tabular}}}}%
+    \put(0.07747126,0.38475499){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    \put(0.07747126,0.42952208){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.7\end{tabular}}}}%
+    \put(0.07747126,0.47368421){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.8\end{tabular}}}}%
+    \put(0.07747126,0.5184513){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.9\end{tabular}}}}%
+    \put(0.09640653,0.56261343){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.12588022,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.22960678,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.33333333,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.43705989,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.54078645,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0.64451301,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+    \put(0.74823956,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}6\end{tabular}}}}%
+    \put(0.85196612,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}7\end{tabular}}}}%
+    \put(0.95569268,0.08529946){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}8\end{tabular}}}}%
+    \put(0.06192982,0.3200242){\color[rgb]{0.34901961,0.34901961,0.34901961}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MRR\end{tabular}}}}}%
+    \put(0.46739262,0.04355717){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Model size (B)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{size-ablation_svg-tex.pdf}}%
+    \put(0.73960073,0.19479734){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Qwen 2.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{size-ablation_svg-tex.pdf}}%
+    \put(0.73960073,0.14519056){\color[rgb]{0.34901961,0.34901961,0.34901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Gemini 2.5 Flash\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{size-ablation_svg-tex.pdf}}%
+  \end{picture}%
+\endgroup%

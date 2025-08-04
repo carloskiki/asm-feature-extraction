@@ -1,63 +1,102 @@
 ipex flag is deprecated, will be removed in Accelerate v1.10. From 2.7.0, PyTorch has all needed optimizations for Intel CPU and XPU.
-W0722 15:26:43.764000 7729 site-packages/torch/distributed/elastic/agent/server/api.py:719] Received 2 death signal, shutting down workers
-W0722 15:26:43.765000 7729 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 7858 closing signal SIGINT
-W0722 15:26:43.771000 7729 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 7859 closing signal SIGINT
+Reading dataset:   0%|          | 0/7 [00:00<?, ?it/s]Reading dataset:  14%|█▍        | 1/7 [00:05<00:32,  5.39s/it]Reading dataset:  29%|██▊       | 2/7 [00:11<00:28,  5.78s/it]Reading dataset:  43%|████▎     | 3/7 [00:13<00:16,  4.25s/it]W0801 12:27:43.814000 78841 site-packages/torch/distributed/elastic/agent/server/api.py:719] Received 2 death signal, shutting down workers
+W0801 12:27:43.815000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78970 closing signal SIGINT
+W0801 12:27:43.816000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78971 closing signal SIGINT
+W0801 12:27:43.817000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78972 closing signal SIGINT
+W0801 12:27:43.818000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78973 closing signal SIGINT
+Reading dataset:  43%|████▎     | 3/7 [00:27<00:37,  9.28s/it]
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/jovyan/project/feature-extractor/main.py", line 58, in <module>
+[rank0]:     main()
+[rank0]:     ~~~~^^
+[rank0]:   File "/home/jovyan/project/feature-extractor/main.py", line 54, in main
+[rank0]:     COMMANDS[subcommand](**vars(args))()
+[rank0]:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+[rank0]:   File "/home/jovyan/project/feature-extractor/src/composite.py", line 98, in __call__
+[rank0]:     dataset = PairsDataset(
+[rank0]:         self.data_path,
+[rank0]:     ...<7 lines>...
+[rank0]:         target_platform,
+[rank0]:     )
+[rank0]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 283, in __init__
+[rank0]:     target_functions = process(file_data.read())
+[rank0]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 152, in process
+[rank0]:     instructions.append(Instruction(address, mnemonic, operands))
+[rank0]:     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/jovyan/project/feature-extractor/main.py", line 58, in <module>
+[rank2]:     main()
+[rank2]:     ~~~~^^
+[rank2]:   File "/home/jovyan/project/feature-extractor/main.py", line 54, in main
+[rank2]:     COMMANDS[subcommand](**vars(args))()
+[rank2]:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+[rank2]:   File "/home/jovyan/project/feature-extractor/src/composite.py", line 98, in __call__
+[rank2]:     dataset = PairsDataset(
+[rank2]:         self.data_path,
+[rank2]:     ...<7 lines>...
+[rank2]:         target_platform,
+[rank2]:     )
+[rank2]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 283, in __init__
+[rank2]:     target_functions = process(file_data.read())
+[rank2]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 152, in process
+[rank2]:     instructions.append(Instruction(address, mnemonic, operands))
+[rank2]:     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: KeyboardInterrupt
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/jovyan/project/feature-extractor/main.py", line 58, in <module>
+[rank1]:     main()
+[rank1]:     ~~~~^^
+[rank1]:   File "/home/jovyan/project/feature-extractor/main.py", line 54, in main
+[rank1]:     COMMANDS[subcommand](**vars(args))()
+[rank1]:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+[rank1]:   File "/home/jovyan/project/feature-extractor/src/composite.py", line 98, in __call__
+[rank1]:     dataset = PairsDataset(
+[rank1]:         self.data_path,
+[rank1]:     ...<7 lines>...
+[rank1]:         target_platform,
+[rank1]:     )
+[rank1]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 283, in __init__
+[rank1]:     target_functions = process(file_data.read())
+[rank1]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 152, in process
+[rank1]:     instructions.append(Instruction(address, mnemonic, operands))
+[rank1]:     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: KeyboardInterrupt
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/jovyan/project/feature-extractor/main.py", line 58, in <module>
+[rank3]:     main()
+[rank3]:     ~~~~^^
+[rank3]:   File "/home/jovyan/project/feature-extractor/main.py", line 54, in main
+[rank3]:     COMMANDS[subcommand](**vars(args))()
+[rank3]:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+[rank3]:   File "/home/jovyan/project/feature-extractor/src/composite.py", line 98, in __call__
+[rank3]:     dataset = PairsDataset(
+[rank3]:         self.data_path,
+[rank3]:     ...<7 lines>...
+[rank3]:         target_platform,
+[rank3]:     )
+[rank3]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 283, in __init__
+[rank3]:     target_functions = process(file_data.read())
+[rank3]:   File "/home/jovyan/project/feature-extractor/src/data_processing.py", line 152, in process
+[rank3]:     instructions.append(Instruction(address, mnemonic, operands))
+[rank3]:     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: KeyboardInterrupt
+W0801 12:27:45.795000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78970 closing signal SIGTERM
+W0801 12:27:45.796000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78971 closing signal SIGTERM
+W0801 12:27:45.797000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78972 closing signal SIGTERM
+W0801 12:27:45.797000 78841 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 78973 closing signal SIGTERM
 Traceback (most recent call last):
-  File "/home/jovyan/project/feature-extractor/main.py", line 7, in <module>
-    from src.query import Query
-  File "/home/jovyan/project/feature-extractor/src/query.py", line 2, in <module>
-    from . import context
-  File "/home/jovyan/project/feature-extractor/src/context.py", line 4, in <module>
-    from transformers import AutoModelForCausalLM, AutoTokenizer
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/__init__.py", line 27, in <module>
-    from . import dependency_versions_check
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/dependency_versions_check.py", line 16, in <module>
-    from .utils.versions import require_version, require_version_core
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/__init__.py", line 24, in <module>
-    from .args_doc import (
-    ...<10 lines>...
-    )
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/args_doc.py", line 30, in <module>
-    from .generic import ModelOutput
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/generic.py", line 46, in <module>
-    import torch  # noqa: F401
-    ^^^^^^^^^^^^
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/__init__.py", line 48, in <module>
-    from torch._utils import (
-    ...<3 lines>...
-    )
-  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
-  File "<frozen importlib._bootstrap_external>", line 1118, in get_code
-  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
-KeyboardInterrupt
-Traceback (most recent call last):
-  File "/home/jovyan/project/feature-extractor/main.py", line 7, in <module>
-    from src.query import Query
-  File "/home/jovyan/project/feature-extractor/src/query.py", line 2, in <module>
-    from . import context
-  File "/home/jovyan/project/feature-extractor/src/context.py", line 4, in <module>
-    from transformers import AutoModelForCausalLM, AutoTokenizer
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/__init__.py", line 27, in <module>
-    from . import dependency_versions_check
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/dependency_versions_check.py", line 16, in <module>
-    from .utils.versions import require_version, require_version_core
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/__init__.py", line 24, in <module>
-    from .args_doc import (
-    ...<10 lines>...
-    )
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/args_doc.py", line 30, in <module>
-    from .generic import ModelOutput
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/transformers/utils/generic.py", line 46, in <module>
-    import torch  # noqa: F401
-    ^^^^^^^^^^^^
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/__init__.py", line 409, in <module>
-    from torch._C import *  # noqa: F403
-    ^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen importlib._bootstrap>", line 463, in _lock_unlock_module
-KeyboardInterrupt
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 78841 got signal: 2
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/home/jovyan/conda-envs/feature-extractor/bin/accelerate", line 8, in <module>
     sys.exit(main())
@@ -86,11 +125,24 @@ Traceback (most recent call last):
     result = agent.run()
   File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/metrics/api.py", line 138, in wrapper
     result = f(*args, **kwargs)
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
-    result = self._invoke_run(role)
-  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
-    time.sleep(monitor_interval)
-    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/api.py", line 720, in run
+    self._shutdown(e.sigval)
+    ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 372, in _shutdown
+    self._pcontext.close(death_sig)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 577, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 912, in _close
+    handler.proc.wait(time_to_wait)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/subprocess.py", line 1280, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/subprocess.py", line 2060, in _wait
+    time.sleep(delay)
+    ~~~~~~~~~~^^^^^^^
   File "/home/jovyan/conda-envs/feature-extractor/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
     raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
-torch.distributed.elastic.multiprocessing.api.SignalException: Process 7729 got signal: 2
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 78841 got signal: 2

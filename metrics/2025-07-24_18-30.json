@@ -1,1 +1,71 @@
-[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 3, "platform": "gcc", "pool-size": 1000, "examples": 3, "prompt": "extensive-3", "model": "composite"}, "results": {"mrr": 0.8004452261334299, "recall_at_1": 0.759, "recall_at_10": 0.883, "similarity_mean": {"max": 0.7386468951334678, "median": 0.4468677538992195, "mean": 0.44997396245211196, "min": 0.2741387722456225}}}]
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.8004452261334299,
+      "recall_at_1": 0.759,
+      "recall_at_10": 0.883,
+      "similarity_mean": {
+        "max": 0.7386468951334678,
+        "median": 0.4468677538992195,
+        "mean": 0.44997396245211196,
+        "min": 0.2741387722456225
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 1,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.8842014960140058,
+      "recall_at_1": 0.855,
+      "recall_at_10": 0.943,
+      "similarity_mean": {
+        "max": 0.7695529115579386,
+        "median": 0.4457510275490404,
+        "mean": 0.4491694099465212,
+        "min": 0.2723516539281251
+      }
+    }
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 1000,
+      "examples": 3,
+      "prompt": "extensive-3",
+      "model": "composite"
+    },
+    "results": {
+      "mrr": 0.9362464247318316,
+      "recall_at_1": 0.921,
+      "recall_at_10": 0.965,
+      "similarity_mean": {
+        "max": 0.8223895602217779,
+        "median": 0.4520592860434386,
+        "mean": 0.4543408423995623,
+        "min": 0.2717814166415773
+      }
+    }
+  }
+]

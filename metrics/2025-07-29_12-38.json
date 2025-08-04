@@ -1,0 +1,26 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 1,
+      "platform": "arm",
+      "pool-size": 100,
+      "examples": 1,
+      "prompt": "extensive-small",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.5018938674153881,
+      "recall_at_1": 0.39,
+      "recall_at_10": 0.67,
+      "similarity_mean": {
+        "max": 0.6251918763257664,
+        "median": 0.3368389618585947,
+        "mean": 0.33596550171401895,
+        "min": 0.0
+      }
+    },
+    "invalid-json": 1
+  }
+]

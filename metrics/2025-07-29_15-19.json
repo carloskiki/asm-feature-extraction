@@ -1,0 +1,1 @@
+[{"parameters": {"binary": "all", "optimization": 0, "target-optimization": 3, "platform": "gcc", "pool-size": 100, "examples": 0, "prompt": "extensive-2", "model": "gemini-2.5-flash"}, "results": {"mrr": 1.0, "recall_at_1": 0.01, "recall_at_10": 0.1, "similarity_mean": {"max": 1.0, "median": 1.0, "mean": 1.0, "min": 1.0}}}]
