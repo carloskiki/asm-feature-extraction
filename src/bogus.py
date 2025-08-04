@@ -25,11 +25,11 @@ class Bogus(context.Context):
         dataset = LibDataset("lib-data", True, None, None, None, None, None)
         fns = {}
 
-        for (fn, file) in dataset:
+        for (_, file) in dataset:
             if file not in fns:
-                fns[file] = 1
+                fns[file.binary] = 1
             else:
-                fns[file] += 1
+                fns[file.binary] += 1
 
         import code
         code.interact(local=locals())
