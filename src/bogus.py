@@ -22,6 +22,6 @@ class Bogus(context.Context):
         )
 
     def __call__(self):
-        dataset = LibDataset("lib-data", True, None, None, "putty", 3, "gcc")
+        dataset = LibDataset("lib-data", True, None, None, "putty", 1, "arm")
         fn = next(f for (f, _) in dataset if f.name == "MD5Init")
         print(fn)

@@ -131,15 +131,13 @@ loc_42c1c0:
 \begin{minipage}[t]{0.48\linewidth}
 \centering
 \begin{minted}[fontsize=\footnotesize]{nasm}
-loc_41ac99:
-    mov dword ptr [rdi], 67452301h
-    mov dword ptr [rdi+4], 0efcdab89h
-    mov dword ptr [rdi+8], 98badcfeh
-    mov dword ptr [rdi+0ch], 10325476h
-    mov dword ptr [rdi+50h], 0
-    mov dword ptr [rdi+58h], 0
-    mov dword ptr [rdi+54h], 0
-    retn 
+loc_4241F0:
+    MOVDQA xmm0, cs:xmmword_448750
+    MOV dword ptr [rdi+50h], 0
+    MOV dword ptr [rdi+58h], 0
+    MOVUPS xmmword ptr [rdi], xmm0
+    MOV dword ptr [rdi+54h], 0
+    RETN
 \end{minted}
 \end{minipage}
 \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for the 
