@@ -14,45 +14,45 @@ Database file #1: references.bib
 Warning--empty booktitle in BinDiff
 
 Done.
-You've used 28 entries,
+You've used 33 entries,
             4087 wiz_defined-function locations,
-            996 strings with 14280 characters,
-and the built_in function-call counts, 21203 in all, are:
-= -- 1547
-> -- 756
+            1016 strings with 14887 characters,
+and the built_in function-call counts, 23356 in all, are:
+= -- 1704
+> -- 816
 < -- 76
-+ -- 386
-- -- 168
-* -- 1025
-:= -- 3058
-add.period$ -- 62
-call.type$ -- 28
-change.case$ -- 28
++ -- 416
+- -- 183
+* -- 1111
+:= -- 3437
+add.period$ -- 72
+call.type$ -- 33
+change.case$ -- 33
 chr.to.int$ -- 174
-cite$ -- 29
-duplicate$ -- 1564
-empty$ -- 1795
-format.name$ -- 194
-if$ -- 4960
+cite$ -- 34
+duplicate$ -- 1739
+empty$ -- 1994
+format.name$ -- 210
+if$ -- 5436
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 361
-newline$ -- 149
-num.names$ -- 28
-pop$ -- 1016
+int.to.str$ -- 33
+missing$ -- 404
+newline$ -- 172
+num.names$ -- 33
+pop$ -- 1147
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1614
+skip$ -- 1773
 stack$ -- 0
-substring$ -- 524
-swap$ -- 1172
+substring$ -- 529
+swap$ -- 1273
 text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 28
+type$ -- 33
 warning$ -- 1
-while$ -- 57
-width$ -- 30
-write$ -- 319
+while$ -- 62
+width$ -- 35
+write$ -- 367
 (There was 1 warning)

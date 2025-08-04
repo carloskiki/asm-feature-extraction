@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  1 AUG 2025 14:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  4 AUG 2025 17:16
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -875,20 +875,20 @@ File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
 
 -- Lines per column: 58 (exact).
 Package caption Info: Begin \AtBeginDocument code.
@@ -925,38 +925,38 @@ Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@posthook=\toks50
 )
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 5
-5.
+8.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 55.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 55
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 58
 .
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 58.
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 61.
 
 
 
 \pydata@fh@0=\write5
 \openout5 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250801145831Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250804171613Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed.
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250801145831Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250804171613Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed.
 
 
@@ -968,9 +968,10 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ))
-(./_minted/0BB9285F2BBB4C967FEBC91DD2802B27.highlight.minted)
-LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 15
-1.
+(./_minted/73B3F74DFDA0169EF78BB4CA3B423614.highlight.minted)
+(./_minted/C1FE0B2AD42F0009D4CB630ECC5045D6.highlight.minted)
+LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 18
+2.
 
 Underfull \vbox (badness 1418) has occurred while \output is active []
 
@@ -981,9 +982,6 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -997,52 +995,75 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [4]
 
+LaTeX Warning: Reference `qwen2' on page 5 undefined on input line 440.
 
-Underfull \hbox (badness 2478) in paragraph at lines 480--484
+
+LaTeX Warning: Reference `qwen3' on page 5 undefined on input line 441.
+
+
+LaTeX Warning: Reference `gemma3' on page 5 undefined on input line 441.
+
+
+LaTeX Warning: Reference `gpt4' on page 5 undefined on input line 447.
+
+
+LaTeX Warning: Reference `gemini2.5' on page 5 undefined on input line 448.
+
+
+LaTeX Warning: Reference `gemini2.5' on page 5 undefined on input line 449.
+
+
+
+
+Underfull \hbox (badness 2478) in paragraph at lines 516--520
 []\OT1/ptm/m/n/10.03749 The base-lines are SAFE, Or-der-Mat-ters, PalmTree,
  []
 
 
 
 [5]
+
 <size-ablation.png, id=69, 362.007pt x 217.467pt>
 File: size-ablation.png Graphic file (type png)
 <use size-ablation.png>
-Package pdftex.def Info: size-ablation.png  used on input line 534.
+Package pdftex.def Info: size-ablation.png  used on input line 570.
 (pdftex.def)             Requested size: 243.91125pt x 146.52504pt.
-
-
 
 
 [6 <./size-ablation.png>]
 <examples-ablation.png, id=74, 349.086pt x 219.657pt>
 File: examples-ablation.png Graphic file (type png)
 <use examples-ablation.png>
-Package pdftex.def Info: examples-ablation.png  used on input line 556.
+Package pdftex.def Info: examples-ablation.png  used on input line 590.
 (pdftex.def)             Requested size: 243.91125pt x 153.47731pt.
 
 
 <prompt-ablation.png, id=76, 362.007pt x 217.467pt>
 File: prompt-ablation.png Graphic file (type png)
 <use prompt-ablation.png>
-Package pdftex.def Info: prompt-ablation.png  used on input line 583.
+Package pdftex.def Info: prompt-ablation.png  used on input line 617.
 (pdftex.def)             Requested size: 243.91125pt x 146.52504pt.
 
 
-[7 <./examples-ablation.png> <./prompt-ablation.png>]
-Overfull \hbox (9.12086pt too wide) in paragraph at lines 635--649
+[7 <./examples-ablation.png>]
+
+
+Overfull \hbox (9.12086pt too wide) in paragraph at lines 667--681
 [][] 
  []
 
 
 
+[8 <./prompt-ablation.png>]
 
 
-[8]
+Underfull \vbox (badness 3746) has occurred while \output is active []
 
-(./paper.bbl
 
-[9]
+
+[9] (./paper.bbl
+
+
 Underfull \hbox (badness 3679) in paragraph at lines 134--137
 []\OT1/ptm/m/n/8.03 T. Dul-lien, ``Graph-based com-par-i-son of ex-
  []
@@ -1054,7 +1075,7 @@ Underfull \hbox (badness 7099) in paragraph at lines 134--137
 
 
 
-)
+[10])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1068,20 +1089,28 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[10] (./paper.aux)
+
+
+[11
+
+] (./paper.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 28087 strings out of 467816
- 627280 string characters out of 5432258
- 1149850 words of memory out of 5000000
- 56233 multiletter control sequences out of 15000+600000
+ 28105 strings out of 467816
+ 627745 string characters out of 5432258
+ 1156434 words of memory out of 5000000
+ 56248 multiletter control sequences out of 15000+600000
  681513 words of font info for 158 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 95i,11n,101p,675b,843s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 95i,11n,101p,675b,865s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
 /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
@@ -1094,10 +1123,10 @@ texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/ti
 mes/utmri8a.pfb>
-Output written on paper.pdf (10 pages, 315181 bytes).
+Output written on paper.pdf (11 pages, 320282 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 147 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  172 words of extra memory for PDF output out of 10000 (max. 10000000)
 

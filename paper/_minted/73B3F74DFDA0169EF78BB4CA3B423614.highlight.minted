@@ -1,0 +1,27 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n+nl}{loc\PYGZus{}43EE04:}
+\PYG{+w}{    }\PYG{n+nf}{ADDIU}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mh}{0x20}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{var\PYGZus{}s4}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{var\PYGZus{}s0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{MOVE}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{MOVE}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}
+\PYG{+w}{    }\PYG{n+nf}{JAL}\PYG{+w}{ }\PYG{n+nv}{sub\PYGZus{}43D930}
+\PYG{+w}{    }\PYG{n+nf}{NOP}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{zero}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x50}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{zero}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x58}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x58}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{arg\PYGZus{}0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{SW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x54}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{v0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{NOP}
+\PYG{+w}{    }\PYG{n+nf}{MOVE}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{var\PYGZus{}s4}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{LW}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{fp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x18}\PYG{o}{+}\PYG{n+nv}{var\PYGZus{}s0}\PYG{p}{(}\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ADDIU}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nb}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mh}{0x20}
+\PYG{+w}{    }\PYG{n+nf}{JR}\PYG{+w}{ }\PYG{k+kc}{\PYGZdl{}}\PYG{n+nv}{ra}
+\PYG{+w}{    }\PYG{n+nf}{NOP}
+\end{MintedVerbatim}
