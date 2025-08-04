@@ -22,6 +22,14 @@ class Bogus(context.Context):
         )
 
     def __call__(self):
-        dataset = LibDataset("lib-data", True, None, None, "putty", 0, "mips")
-        fn = next(f for (f, _) in dataset if f.name == "MD5Init")
-        print(fn)
+        dataset = LibDataset("lib-data", True, None, None, None, None, None)
+        fns = {}
+
+        for (fn, file) in dataset:
+            if file not in fns:
+                fns[file] = 1
+            else:
+                fns[file] += 1
+
+        import code
+        code.interact(local=locals())
