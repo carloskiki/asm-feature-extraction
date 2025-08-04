@@ -103,7 +103,7 @@ TODO: expand on how our method differs from and compares to others.
 % Side by size assembly view
 \begin{figure*}[!t]
 \centering
-\begin{minipage}[t]{0.48\linewidth}
+\begin{minipage}[t]{0.32\linewidth}
 \centering
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_42c1c0:
@@ -128,7 +128,37 @@ loc_42c1c0:
 \end{minted}
 \end{minipage}
 \hfill
-\begin{minipage}[t]{0.48\linewidth}
+\begin{minipage}[t]{0.32\linewidth}
+\centering
+\begin{minted}[fontsize=\footnotesize]{nasm}
+loc_43EE04:
+    ADDIU $sp, -0x20
+    SW $ra, 0x18+var_s4($sp)
+    SW $fp, 0x18+var_s0($sp)
+    MOVE $fp, $sp
+    SW $a0, 0x18+arg_0($fp)
+    LW $v0, 0x18+arg_0($fp)
+    MOVE $a0, $v0
+    JAL sub_43D930
+    NOP 
+    LW $v0, 0x18+arg_0($fp)
+    SW $zero, 0x50($v0)
+    LW $v0, 0x18+arg_0($fp)
+    SW $zero, 0x58($v0)
+    LW $v0, 0x18+arg_0($fp)
+    LW $v1, 0x58($v0)
+    LW $v0, 0x18+arg_0($fp)
+    SW $v1, 0x54($v0)
+    NOP 
+    MOVE $sp, $fp
+    LW $ra, 0x18+var_s4($sp)
+    LW $fp, 0x18+var_s0($sp)
+    ADDIU $sp, 0x20
+    JR $ra
+    NOP 
+\end{minted}
+\end{minipage}
+\begin{minipage}[t]{0.32\linewidth}
 \centering
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_4241F0:
