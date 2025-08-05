@@ -108,7 +108,7 @@ TODO: expand on how our method differs from and compares to others.
 \begin{figure*}[!t]
 \centering
 \begin{minipage}[t]{0.32\linewidth}
-\centering
+\centerin
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_42c1c0:
     push rbp
@@ -442,7 +442,20 @@ Pairs of equivalent functions from the same platform but distinct optimization l
 evaluation, and pairs from the same optimization level but different platform were formed for cross
 platform evaluation.
 
-TODO: Table with function count.
+\begin{table}[htbp]
+\begin{tabular}{|l|c|}
+\hline
+Library      & Function count \\ \hline
+busybox      & 66706          \\
+coreutils    & 42545          \\
+curl         & 27198          \\
+image-magick & 69873          \\
+openssl      & 134359         \\
+putty        & 12655          \\
+sqlite3      & 30322          \\ \hline
+total        & 383658         \\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{Model}
 
