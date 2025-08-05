@@ -176,7 +176,7 @@ loc_4241F0:
 \end{minipage}
 \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for with different acrhictectures and optimization levels.
     on the left, compiled for \texttt{x86-64} with \texttt{-O0}, in the center, compiled for \texttt{mips} with \texttt{-O0}, and on the right,
-    compiled for \texttt{x86-64} with \texttt{-O3}.  Our method is able to identify the fragments as clones.}
+    compiled for \texttt{x86-64} with \texttt{-O3}.  Our method is able to identify the functions as clones.}
 \label{asm-diff}
 \end{figure*}
 
@@ -201,7 +201,7 @@ loc_4241F0:
 Security researchers and reverse engineers are routinely tasked with the analysis of unknown or proprietary executables.
 Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
-a software reverse engineering platform such as Ghidra [ref] or IDA Pro [ref]. The main functions of these programs are to
+a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these programs are to
 disassemble and decompile a provided binary, so that its content can be analyzed by humans. Disassembly is
 the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
@@ -209,8 +209,8 @@ is the process of generating higher-level pseudo-code from the instructions base
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
 is lost ~\cite{BCSDsurvey}. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
 the program as efficient as possible---which often means removing as much as possible. The optimizers within the compiler
-only have a single rule: They must not make changes to the observable behavior of the program (often refered
-to as the ``as-if rule'' [ref]). As a result, compilers can remove, reorder, and inline significant parts of the code, making
+only have a single rule: They must not make changes to the observable behavior of the program (often referred
+to as the ``as-if rule'' \cite{c++11}). As a result, compilers can remove, reorder, and inline significant parts of the code, making
 it difficult to understand its behavior. Even worse, adverserial programs such as malware or digital rights management software
 make use of obfuscation techniques to resist having their code reverse engineered.
 
@@ -252,15 +252,15 @@ complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return th
 We deem two assembly code fragments to be semantically identical if they have the same observable behavior on a system.
 This type of clone is generally referred to as type 4 clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
 to detect. In research, it is common to use the same source code function compiled with different compilers or compilation
-options to create such type four clones [ref]. This type of clone excludes procedures that happen to have the same output but
-achieve it in different ways, for example the breadth-first search and depth-first search algorithms. Instead of generating a
-binary output as to whether two code fragments are clones, the feature vector generated for each assembly function are
-compared to generate a similarity score. This value is between 0 and 1 and represents the degree of similarity
-between the two code fragments. This more closely aligns with real world use cases, where two pieces of code can be highly similar
-but not identical. For example, two different versions of a function from the same software deemed similar can
-help understand the nature of an executable, or a vulnerable function and its patched variant matched can help assess that
-a vulnerability was indeed fixed. That is, the goal is to assign the highest similarity score to type four clones, and
-lower similarity scores to functions that do not share semantic behavior.
+options to create such type four clones ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.  This type of clone excludes
+procedures that happen to have the same output but achieve it in different ways, for example the breadth-first search and
+depth-first search algorithms. Instead of generating a binary output as to whether two code fragments are clones, the feature
+vector generated for each assembly function are compared to generate a similarity score. This value is between 0 and 1 and
+represents the degree of similarity between the two code fragments. This more closely aligns with real world use cases, where
+two pieces of code can be highly similar but not identical. For example, two different versions of a function from the same
+software deemed similar can help understand the nature of an executable, or a vulnerable function and its patched variant matched
+can help assess that a vulnerability was indeed fixed. That is, the goal is to assign the highest similarity score to type four
+clones, and lower similarity scores to functions that do not share semantic behavior.
 
 \section{Method}
 
@@ -493,7 +493,7 @@ better results that state of the art approaches.
 \subsection{Evaluation method}
 
 The mean reciprocal rank (MRR) and first position recall (Recall@1) metrics are used for evaluation and comparison to other methods
-[refs].
+~\cite{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}.
 A pool of assembly function pairs is used for evaluation, where both assembly fragments in a pair come from the same source function.
 For each pair, we compare the generated features for the first element of the pair with all second elements of the pairs contained
 in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the arm
@@ -733,8 +733,8 @@ and is hard to generalize across architectures and application binary interfaces
 \subsection{Machine learning methods}
 
 The surge of interest and applications for machine learning in recent years has also affected BCSD.
-Most state-of-the-art methods use natural language processing (NLP) to achieve their results [refs].
-Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks [refs].
+Most state-of-the-art methods use natural language processing (NLP) to achieve their results.
+Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks ~\cite{CLAP,jtrans,UniASM}.
 
 Asm2Vec ~\cite{Asm2Vec} is one of the first methods to use a NLP based approach to tackle the BCSD problem. It interprets an
 assembly function as a set of instruction sequences, where each instruction sequence is a possible execution path

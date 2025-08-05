@@ -386,3 +386,96 @@
   primaryclass  = {cs.CL},
   url           = {https://arxiv.org/abs/2303.08774}
 }
+
+@software{ghidra,
+  author  = {National Security Agency},
+  title   = {Ghidra Software Reverse Engineering Framework},
+  url     = {https://github.com/NationalSecurityAgency/ghidra},
+  version = {11.4.1},
+  year    = {2025-07-31}
+}
+
+@software{ida,
+  author  = {hex-rays},
+  title   = {IDA Pro},
+  url     = {https://hex-rays.com/ida-pro},
+  version = {9.1},
+  year    = {2025-02-28}
+}
+
+@book{c++11,
+  author          = {{ISO}},
+  title           = {{ISO\slash IEC 14882:2011 Information technology ---
+                     Programming languages --- C++}},
+  publisher       = pub-ISO,
+  address         = pub-ISO:adr,
+  edition         = {Third},
+  day             = {1},
+  month           = sep,
+  year            = {2011},
+  bibdate         = {Mon Dec 19 11:12:12 2011},
+  bibsource       = {https://www.math.utah.edu/pub/tex/bib/isostd.bib;
+                     https://www.math.utah.edu/pub/tex/bib/mathcw.bib},
+  url             = {http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50372},
+  acknowledgement = ack-nhfb,
+  remark          = {Revises ISO/IEC 14882:2003.}
+}
+
+@inproceedings{code-not-lang,
+  author    = {Haojie He and Xingwei Lin and Ziang Weng and Ruijie Zhao and Shuitao Gan and Libo Chen and Yuede Ji and Jiashui Wang and Zhi Xue},
+  title     = {Code is not Natural Language: Unlock the Power of {Semantics-Oriented} Graph Representation for Binary Code Similarity Detection},
+  booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
+  year      = {2024},
+  isbn      = {978-1-939133-44-1},
+  address   = {Philadelphia, PA},
+  pages     = {1759--1776},
+  url       = {https://www.usenix.org/conference/usenixsecurity24/presentation/he-haojie},
+  publisher = {USENIX Association},
+  month     = aug
+}
+
+@inproceedings{deprio,
+  author    = {Jialai Wang and Chao Zhang and Longfei Chen and Yi Rong and Yuxiao Wu and Hao Wang and Wende Tan and Qi Li and Zongpeng Li},
+  title     = {Improving {ML-based} Binary Function Similarity Detection by Assessing and Deprioritizing Control Flow Graph Features},
+  booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
+  year      = {2024},
+  isbn      = {978-1-939133-44-1},
+  address   = {Philadelphia, PA},
+  pages     = {4265--4282},
+  url       = {https://www.usenix.org/conference/usenixsecurity24/presentation/wang-jialai},
+  publisher = {USENIX Association},
+  month     = aug
+}
+
+@inproceedings{jtrans,
+  author    = {Wang, Hao and Qu, Wenjie and Katz, Gilad and Zhu, Wenyu and Gao, Zeyu and Qiu, Han and Zhuge, Jianwei and Zhang, Chao},
+  title     = {jTrans: jump-aware transformer for binary code similarity detection},
+  year      = {2022},
+  isbn      = {9781450393799},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3533767.3534367},
+  doi       = {10.1145/3533767.3534367},
+  abstract  = {Binary code similarity detection (BCSD) has important applications in various fields such as vulnerabilities detection, software component analysis, and reverse engineering. Recent studies have shown that deep neural networks (DNNs) can comprehend instructions or control-flow graphs (CFG) of binary code and support BCSD. In this study, we propose a novel Transformer-based approach, namely jTrans, to learn representations of binary code. It is the first solution that embeds control flow information of binary code into Transformer-based language models, by using a novel jump-aware representation of the analyzed binaries and a newly-designed pre-training task. Additionally, we release to the community a newly-created large dataset of binaries, BinaryCorp, which is the most diverse to date. Evaluation results show that jTrans outperforms state-of-the-art (SOTA) approaches on this more challenging dataset by 30.5\% (i.e., from 32.0\% to 62.5\%). In a real-world task of known vulnerability searching, jTrans achieves a recall that is 2X higher than existing SOTA baselines.},
+  booktitle = {Proceedings of the 31st ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  pages     = {1–13},
+  numpages  = {13},
+  keywords  = {Similarity Detection, Neural Networks, Datasets, Binary Analysis},
+  location  = {Virtual, South Korea},
+  series    = {ISSTA 2022}
+}
+
+
+@article{UniASM,
+  title    = {UniASM: Binary code similarity detection without fine-tuning},
+  journal  = {Neurocomputing},
+  volume   = {630},
+  pages    = {129646},
+  year     = {2025},
+  issn     = {0925-2312},
+  doi      = {https://doi.org/10.1016/j.neucom.2025.129646},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0925231225003182},
+  author   = {Yeming Gu and Hui Shu and Fei Kang and Fan Hu},
+  keywords = {Similarity detection, Embedding, Binary code, Assembly language, Vulnerability},
+  abstract = {Binary code similarity detection (BCSD) is widely used in various binary analysis tasks such as vulnerability search, malware detection, clone detection, and patch analysis. Recent studies have shown that the learning-based binary code embedding models perform better than the traditional feature-based approaches. However, previous studies have not delved deeply into the key factors that affect model performance. In this paper, we design extensive ablation studies to explore these influencing factors. The experimental results have provided us with many new insights. We have made innovations in both code representation and model selection: we propose a novel rich-semantic function representation technique to ensure the model captures the intricate nuances of binary code, and we introduce the first UniLM-based binary code embedding model, named UniASM, which includes two newly designed training tasks to learn representations of binary functions. The experimental results show that UniASM outperforms the state-of-the-art (SOTA) approaches on the evaluation datasets. The average scores of Recall@1 on cross-compilers, cross-optimization-levels, and cross-obfuscations have improved by 12.7%, 8.5%, and 22.3%, respectively, compared to the best of the baseline methods. Besides, in the real-world task of known vulnerability search, UniASM outperforms all the current baselines.}
+}
