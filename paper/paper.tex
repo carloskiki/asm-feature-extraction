@@ -465,19 +465,19 @@ platform evaluation.
 \subsection{Model}
 
 We evaluate both local models of various sizes and commercially deployed models.
-Qwen2.5-Coder ~\ref{qwen2} with sizes 0.5B to 7B is used to run most local evaluations as its small size fitted our GPU capacity and capabilities.
-We use this model to present our results. Qwen3 ~\ref{qwen3} with sizes 0.6B to 4B and Gemma-3n ~\ref{gemma3} with sizes 0.5B to 4B were also used on
+Qwen2.5-Coder ~\cite{qwen2} with sizes 0.5B to 7B is used to run most local evaluations as its small size fitted our GPU capacity and capabilities.
+We use this model to present our results. Qwen3 ~\cite{qwen3} with sizes 0.6B to 4B and Gemma-3n ~\cite{gemma3} with sizes 0.5B to 4B were also used on
 small scale experiments. On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
 was set to 512. Very large assembly functions that did not fit within the input tokens were truncated. The following commercially deployed
 models were also used.
 
 \begin{itemize}
-    \item GPT 4.1 mini ~\ref{gpt4}
-    \item Gemini 2.5 Flash lite ~\ref{gemini2.5}
-    \item Gemini 2.5 Flash ~\ref{gemini2.5}
+    \item GPT 4.1 mini ~\cite{gpt4}
+    \item Gemini 2.5 Flash lite ~\cite{gemini2.5}
+    \item Gemini 2.5 Flash ~\cite{gemini2.5}
 \end{itemize}
 
-Gemini 2.5 Flash ~\ref{gemini2.5} is used to present our results. All models had very similar performance. We did not make use of the ``reasoning''
+Gemini 2.5 Flash ~\cite{gemini2.5} is used to present our results. All models had very similar performance. We did not make use of the ``reasoning''
 capabilities that some of these models provide to keep a predictable token usage rate, and to match the capabilities of the local models used.
 
 \section{Experiments}
