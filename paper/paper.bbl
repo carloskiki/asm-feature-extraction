@@ -111,6 +111,36 @@ M.~R. Farhadi, B.~C. Fung, P.~Charland, and M.~Debbabi, ``Binclone: Detecting
   code clones in malware,'' in \emph{2014 Eighth International Conference on
   Software Security and Reliability (SERE)}, 2014, pp. 78--87.
 
+\bibitem{qwen2}
+B.~Hui, J.~Yang, Z.~Cui, J.~Yang, D.~Liu, L.~Zhang, T.~Liu, J.~Zhang, B.~Yu,
+  K.~Dang \emph{et~al.}, ``Qwen2. 5-coder technical report,'' \emph{arXiv
+  preprint arXiv:2409.12186}, 2024.
+
+\bibitem{qwen3}
+\BIBentryALTinterwordspacing
+Q.~Team, ``Qwen3 technical report,'' 2025. [Online]. Available:
+  \url{https://arxiv.org/abs/2505.09388}
+\BIBentrySTDinterwordspacing
+
+\bibitem{gemma3}
+\BIBentryALTinterwordspacing
+G.~Team, ``Gemma 3 technical report,'' 2025. [Online]. Available:
+  \url{https://arxiv.org/abs/2503.19786}
+\BIBentrySTDinterwordspacing
+
+\bibitem{gpt4}
+\BIBentryALTinterwordspacing
+OpenAI, ``Gpt-4 technical report,'' 2024. [Online]. Available:
+  \url{https://arxiv.org/abs/2303.08774}
+\BIBentrySTDinterwordspacing
+
+\bibitem{gemini2.5}
+\BIBentryALTinterwordspacing
+G.~Team, ``Gemini 2.5: Pushing the frontier with advanced reasoning,
+  multimodality, long context, and next generation agentic capabilities,''
+  2025. [Online]. Available: \url{https://arxiv.org/abs/2507.06261}
+\BIBentrySTDinterwordspacing
+
 \bibitem{scaling-laws}
 \BIBentryALTinterwordspacing
 J.~Kaplan, S.~McCandlish, T.~Henighan, T.~B. Brown, B.~Chess, R.~Child,
@@ -227,36 +257,6 @@ S.~H. Ding, B.~C. Fung, and P.~Charland, ``Kam1n0: Mapreduce-based assembly
   KDD '16.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA:
   Association for Computing Machinery, 2016, p. 461–470. [Online]. Available:
   \url{https://doi.org/10.1145/2939672.2939719}
-\BIBentrySTDinterwordspacing
-
-\bibitem{qwen2}
-B.~Hui, J.~Yang, Z.~Cui, J.~Yang, D.~Liu, L.~Zhang, T.~Liu, J.~Zhang, B.~Yu,
-  K.~Dang \emph{et~al.}, ``Qwen2. 5-coder technical report,'' \emph{arXiv
-  preprint arXiv:2409.12186}, 2024.
-
-\bibitem{qwen3}
-\BIBentryALTinterwordspacing
-Q.~Team, ``Qwen3 technical report,'' 2025. [Online]. Available:
-  \url{https://arxiv.org/abs/2505.09388}
-\BIBentrySTDinterwordspacing
-
-\bibitem{gemma3}
-\BIBentryALTinterwordspacing
-G.~Team, ``Gemma 3 technical report,'' 2025. [Online]. Available:
-  \url{https://arxiv.org/abs/2503.19786}
-\BIBentrySTDinterwordspacing
-
-\bibitem{gemini2.5}
-\BIBentryALTinterwordspacing
-------, ``Gemini 2.5: Pushing the frontier with advanced reasoning,
-  multimodality, long context, and next generation agentic capabilities,''
-  2025. [Online]. Available: \url{https://arxiv.org/abs/2507.06261}
-\BIBentrySTDinterwordspacing
-
-\bibitem{gpt4}
-\BIBentryALTinterwordspacing
-OpenAI, ``Gpt-4 technical report,'' 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2303.08774}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}
