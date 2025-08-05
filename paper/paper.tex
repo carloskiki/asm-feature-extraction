@@ -17,16 +17,20 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
+
+% Define color having the following hex value 09555B
+\definecolor{highlight}{HTML}{09555B}
+
 \usepackage[most]{tcolorbox}
 \tcbset{
-  colback=white,            % white background for body
-  colframe=blue!30!green,      % teal/light blue border
-  coltitle=black,           % black title text
-  colbacktitle=white,       % white background for title
+  colback=white, colframe=highlight,    
+  coltitle=black, colbacktitle=white,
   boxrule=0.5pt, arc=2pt, outer arc=2pt,
   boxsep=1pt, left=2pt, right=2pt, top=2pt, bottom=2pt,
   fonttitle=\bfseries,
 }
+
+
 
 \begin{document}
 
@@ -301,7 +305,7 @@ selection. This is done in a loop until valid JSON is generated. In our experime
 for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
 valid JSON without retries.
 
-\begin{tcolorbox}
+\begin{tcolorbox}[title={Prompt preamble}]
 You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
 analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
 high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
