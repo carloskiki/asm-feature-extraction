@@ -442,22 +442,25 @@ Pairs of equivalent functions from the same platform but distinct optimization l
 evaluation, and pairs from the same optimization level but different platform were formed for cross
 platform evaluation.
 
-\begin{table}[htbp]
-\begin{tabular}{|l|c|}
-\hline
-Library      & Function count \\ \hline
-busybox      & 66706          \\
-coreutils    & 42545          \\
-curl         & 27198          \\
-image-magick & 69873          \\
-openssl      & 134359         \\
-putty        & 12655          \\
-sqlite3      & 30322          \\ \hline
-total        & 383658         \\ \hline
-\end{tabular}
-\caption{Number of functions coming from each open source library.}
-\end{table}
+{
+    \renewcommand{\arraystretch}{1.3}
 
+    \begin{table}[htbp]
+    \begin{tabular}{|l|c|}
+    \hline
+    \bf Library  & \bf Function count \\ \hline
+    busybox      & 66706              \\
+    coreutils    & 42545              \\
+    curl         & 27198              \\
+    image-magick & 69873              \\
+    openssl      & 134359             \\
+    putty        & 12655              \\
+    sqlite3      & 30322              \\ \hline
+    \bf Total    & 383658             \\ \hline
+    \end{tabular}
+    \caption{Number of functions coming from each open source library.}
+    \end{table}
+}
 \subsection{Model}
 
 We evaluate both local models of various sizes and commercially deployed models.
