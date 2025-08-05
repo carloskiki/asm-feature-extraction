@@ -815,6 +815,43 @@ small model such as Qwen 2.5 7B. We believe the distillation process could consi
 
 TODO: Agent stuff, what else?
 
+\section{Ethical Considerations}
+
+Stakeholders:
+
+The direct stakeholders in this research's outcomes include:
+\begin{itemize}
+\item Users of reverse engineering software and BCSD tools.
+\item Software developers trying to prevent their software from being reconstructed.
+\item LLM providers and developers.
+\end{itemize}
+
+From the standpoint of beneficence, we believe that our method risks having postive outcomes for reverse engineering software users and
+the LLM industry, but risks having a negative impact on developers trying to hinder reverse engineering of their binaries. As
+thouroughly discussed in this research, we believe our method improves BCSD on many aspects. This benefits users of such tools,
+and may increase the number of users of these tools. We also believe that our research benefits LLM providers and developers,
+because it presents yet another use of this technology, and thus risks increasing its usage. We assume an increase in usage
+is positive for developers of open source models, and that LLM providers may also gain more users. It may become harder for
+software developers to prevent reverse engineering of their software.
+
+Software providers and users are also risk being impacted, both positively and negatively. Improved reverse engineering
+capabilities allows for quicker identification of vulnerabilities in software. This can lead to security researchers
+discovering and patching vulnerabilities more rapidly, ultimately improving software security. On the other hand, it may
+also enable malicious actors to exploit these vulnerabilities before they are addressed. 
+
+To the best of our knowledge, the method and our research everyone involved directly or indirectly in this project.
+Our dataset makes use of free open source software. all licenses are respected.
+
+Ethical standpoints:
+- Utility.
+- Privacy.
+
+link: https://www.usenix.org/conference/usenixsecurity26/call-for-papers#ethics
+
+\section{Open Science}
+
+TODO: We provide our experimental repository: \textit{anon gh link}.
+ 
 \nocite{*}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
