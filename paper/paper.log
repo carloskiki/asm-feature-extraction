@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  5 AUG 2025 18:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  5 AUG 2025 18:34
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -952,11 +952,11 @@ LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 65.
 \pydata@fh@0=\write5
 \openout5 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250805182230Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250805183454Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed.
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250805182230Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250805183454Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed.
 
 
@@ -973,13 +973,6 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 18
 6.
 
-
-LaTeX Warning: Citation `ghidra' on page 1 undefined on input line 204.
-
-
-LaTeX Warning: Citation `ida' on page 1 undefined on input line 204.
-
-
 Underfull \vbox (badness 1418) has occurred while \output is active []
 
 
@@ -989,10 +982,6 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-
-LaTeX Warning: Citation `c++11' on page 2 undefined on input line 213.
-
-
 
 
 
@@ -1011,12 +1000,6 @@ Package pdftex.def Info: BCSD-schematic.png  used on input line 245.
 (./_minted/832997F8C90B633795019F887327CE0B.highlight.minted)
 
 [4]
-
-
-LaTeX Warning: Citation `deprio' on page 5 undefined on input line 496.
-
-
-LaTeX Warning: Citation `code-not-lang' on page 5 undefined on input line 496.
 
 
 
@@ -1060,13 +1043,6 @@ Overfull \hbox (9.12086pt too wide) in paragraph at lines 694--708
 
 [8 <./prompt-ablation.png>]
 
-LaTeX Warning: Citation `jtrans' on page 9 undefined on input line 737.
-
-
-LaTeX Warning: Citation `UniASM' on page 9 undefined on input line 737.
-
-
-
 
 
 [9]
@@ -1076,16 +1052,8 @@ LaTeX Warning: Citation `UniASM' on page 9 undefined on input line 737.
 [10]
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 164--167
-[]\OT1/ptm/m/n/8.03 T. Dul-lien, ``Graph-based com-par-i-son of ex-
- []
 
-
-Underfull \hbox (badness 7099) in paragraph at lines 164--167
-\OT1/ptm/m/n/8.03 e-cutable ob-jects,'' 2005. [On-line]. Avail-able:
- []
-
-)
+[11])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1099,21 +1067,21 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[11] (./paper.aux)
+
+
+[12
+
+] (./paper.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 28120 strings out of 467816
- 628063 string characters out of 5432258
- 1157433 words of memory out of 5000000
- 56263 multiletter control sequences out of 15000+600000
+ 28113 strings out of 467816
+ 627941 string characters out of 5432258
+ 1157431 words of memory out of 5000000
+ 56256 multiletter control sequences out of 15000+600000
  681513 words of font info for 158 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  95i,11n,101p,675b,865s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1129,10 +1097,10 @@ texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist
 /fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/ti
 mes/utmri8a.pfb>
-Output written on paper.pdf (11 pages, 382349 bytes).
+Output written on paper.pdf (12 pages, 383593 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 152 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  177 words of extra memory for PDF output out of 10000 (max. 10000000)
 
