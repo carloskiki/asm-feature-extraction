@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper2.aux
+The style file: plain.bst
+Database file #1: references.bib
+Warning--empty booktitle in BinDiff
+You've used 39 entries,
+            2118 wiz_defined-function locations,
+            701 strings with 11781 characters,
+and the built_in function-call counts, 16757 in all, are:
+= -- 1510
+> -- 1173
+< -- 15
++ -- 467
+- -- 426
+* -- 1186
+:= -- 2701
+add.period$ -- 106
+call.type$ -- 39
+change.case$ -- 328
+chr.to.int$ -- 0
+cite$ -- 40
+duplicate$ -- 570
+empty$ -- 1102
+format.name$ -- 426
+if$ -- 3542
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 21
+newline$ -- 179
+num.names$ -- 78
+pop$ -- 452
+preamble$ -- 1
+purify$ -- 290
+quote$ -- 0
+skip$ -- 534
+stack$ -- 0
+substring$ -- 602
+swap$ -- 220
+text.length$ -- 15
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 154
+warning$ -- 1
+while$ -- 105
+width$ -- 41
+write$ -- 394
+(There was 1 warning)
