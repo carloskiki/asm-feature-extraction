@@ -260,14 +260,6 @@ software deemed similar can help understand the nature of an executable, or a vu
 can help assess that a vulnerability was indeed fixed. That is, the goal is to assign the highest similarity score to type four
 clones, and lower similarity scores to functions that do not share semantic behavior.
 
-\subsection{Motivation}
-
-BCSD is a promising technology in the field of software reverse engineering. With an ideal binary similarity engine,
-the task of analyzing an unknown binary is reduced to analyzing the handful of code fragments that were genuinely developed
-or modified by the software provider. All functionality coming from shared libraries or known sources, which constitutes a
-large majority of modern software, would be effectively identified as such and would require no reverse engineering work.
-Current technology remains far from this scenario.
-
 \section{Method}
 
 Our method is designed to address some of the pain points of state-of-the-art deep learning models for BCSD.
