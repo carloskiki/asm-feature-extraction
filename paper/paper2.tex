@@ -505,8 +505,6 @@ platform evaluation.
 
 {
     \renewcommand{\arraystretch}{1.3}
-    \normalsize
-
     \begin{table}[tbp]
     \centering
     \begin{tabular}{|l|c|}
@@ -617,8 +615,6 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
 
 {
     \renewcommand{\arraystretch}{1.3}
-    \normalsize
-
     \begin{table*}[!t]
     \centering
     \resizebox{\linewidth}{!}{
@@ -734,12 +730,12 @@ section is more influential, going from 0.06 to 0.20 in MRR impact.
 \subsection{Combined Method}
 
 Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained specifically for assembly
-function understanding and BCSD can out-perform our method on functions similar to the dataset they were trained on.
-Even if our method is more scalable, state-of-the-art embedding learning models are still useful for specific tasks, such as supporting
-niche architectures or understanding similarity through obfuscated code. The state-of-the-art embedding models are comparatively much smaller
-than our method. For instance the CLAP ~\cite{CLAP} model baseline is only 110M parameters, compared to the many billions required to perform our method.
-Once trained, small embedding models are much faster than LLM inference, but the cost of training such models is still very expensive.
-Their small size also means that these models can be run on CPU for small pool sizes.
+function understanding and BCSD can out-perform our method in specific subdomains. Even if our method is more scalable, state-of-the-art
+embedding learning models are still useful for specific tasks, such as supporting niche architectures or understanding similarity through
+obfuscated code. The state-of-the-art embedding models are much smaller than our method in terms of parameter count.
+For instance the CLAP ~\cite{CLAP} model baseline is only 110M parameters, compared to the many billions required to perform our method.
+The cost of training such models is still very expensive, but once trained, they are much faster than LLM inference.
+Their small size also means that these models could be run on CPU for small pool sizes.
 
 To achieve a best of both world scenario, we experiment with combining the similarity scores from an embedding model and our prompting method.
 Our evaluation method consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
@@ -749,6 +745,8 @@ with equal weight.
     S = \frac{s_e + s_a}{2}
 \]
 
+In a real world scenario, This could mean using our method as a pre
+
 To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
 As such, the combination still does not require any training or fine-tuning, as we have shown that off-the-shelf embedding models based on a LLM perform
 very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation (this can be done without
@@ -756,8 +754,6 @@ having to train a new model).
 
 {
 \renewcommand{\arraystretch}{1.3}
-\normalsize
-
 \begin{table*}[tb]
 \centering
 \begin{tabular}{l|c|c|c}
@@ -900,6 +896,36 @@ acknowledging. Sorry.
 \appendix
 \section*{Ethical Considerations}
 \textbf{Within up to one page, explain the ethical considerations of your work. This appendix must have exactly this title, otherwise you will risk desk rejection. Carefully study the Ethics Guidelines before submitting your paper.}
+
+Stakeholders:
+
+The direct stakeholders in this research's outcomes include:
+\begin{itemize}
+\item Users of reverse engineering software and BCSD tools.
+\item Software developers trying to prevent their software from being reconstructed.
+\item LLM providers and developers.
+\end{itemize}
+
+
+We believe that our method risks having postive outcomes for reverse engineering software users and
+the LLM industry, but risks having a negative impact on developers trying to hinder reverse engineering of their binaries. As
+thouroughly discussed in this research, we believe our method improves BCSD on many aspects. This benefits users of such tools,
+and also benefits LLM providers and developers, because our work presents yet another use of their technology, and thus risks
+increasing its usage. An increase in usage is positive for developers of open source models, and LLM providers may also gain more users
+which is a positive consequence. It may become harder for software developers to prevent reverse engineering of their software.
+
+Software providers and users are also risk being impacted, both positively and negatively. Improved reverse engineering
+capabilities allows for quicker identification of vulnerabilities in software. This can lead to security researchers
+discovering and patching vulnerabilities more rapidly, ultimately improving software security. On the other hand, it may
+also enable malicious actors to exploit these vulnerabilities before they are addressed. 
+
+To the best of our knowledge, the method and our research everyone involved directly or indirectly in this project.
+Our dataset makes use of free open source software. all licenses are respected.
+
+Ethical standpoints:
+- Utility.
+- Privacy.
+
 % optional clearing of the page
 \cleardoublepage
 
