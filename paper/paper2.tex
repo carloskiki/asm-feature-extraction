@@ -411,7 +411,7 @@ It reports these as a list of booleans values which state whether or not the fun
 the associated side effect. Each side effect is associated with a heuristic that the language model
 should use to identify them.
 
-\begin{description}
+\begin{itemize}
     \item \textit{Modification of input arguments}. This is mainly identified when a input pointer is used as destination to a memory write.
     \item \textit{Modification of global state} is detected similarily, when writes to absolute memory addresses or addresses resolved via global
         data segment pointers occur.
@@ -420,7 +420,7 @@ should use to identify them.
     \item \textit{Linear memory access} patterns are detected by the presence of sequential indexed memory accesses inside loops or
         across multiple successive instructions.
     \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
-\end{description}
+\end{itemize}
 
 \subsubsection{Categorization}
 
