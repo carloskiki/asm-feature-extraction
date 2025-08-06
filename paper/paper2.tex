@@ -759,6 +759,7 @@ having to train a new model).
 \normalsize
 
 \begin{table}[htbp]
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|c|c|c}
 \Xhline{2\arrayrulewidth}
                 & Gemini 2.5 Flash & Qwen Embedding & Combined \\ \hline
@@ -771,6 +772,7 @@ arm-x86\_64     & 0.436            & 0.334          & 0.736    \\
 powerpc-x86\_64 & 0.414            & 0.443          & 0.746    \\
 mips-x86\_64    & 0.417            & 0.415          & 0.729    \\ \Xhline{2\arrayrulewidth}
 \end{tabular}
+}
 \caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
 optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
 the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout. Only Recall @ 1 scores are presented.}
