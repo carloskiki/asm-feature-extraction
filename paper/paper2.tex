@@ -621,6 +621,7 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
 
     \begin{table*}[!t]
     \centering
+    \resizebox{\linewidth}{!}{
     \begin{tabular}{l|cccc|cccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                 & \multicolumn{4}{c}{Recall @ 1}                           \\ \cline{2-9}
@@ -633,6 +634,7 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     Qwen 2.5 7B            & 0.263       & 0.201           & 0.202        & 0.222     & 0.165       & 0.108           & 0.110        & 0.128     \\
     Gemini 2.5 Flash       & \bf 0.548   & 0.520           & \bf 0.525    & \bf 0.531 & \bf 0.436   & 0.414           & \bf 0.417    & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
+    }
     \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
     All functions are compiled with optimization level 2 using \texttt{gcc} with the architecture specified for each column.
     The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt.}
