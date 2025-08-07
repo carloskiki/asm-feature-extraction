@@ -337,7 +337,7 @@ represents the degree of similarity between the two code fragments. This more cl
 two pieces of code can be highly similar but not identical. For example, two different versions of a function from the same
 software deemed similar can help understand the nature of an executable, or a vulnerable function and its patched variant matched
 can help assess that a vulnerability was indeed fixed. That is, the goal is to assign the highest similarity score to type four
-clones, and lower similarity scores to functions that do not share semantic behavior.
+clones, and lower similarity scores to functions that do not share semantic behavior. 
 
 \subsection{Motivation}
 
@@ -345,7 +345,10 @@ BCSD is a promising technology in the field of software reverse engineering. Wit
 the task of analyzing an unknown binary is reduced to analyzing the handful of code fragments that were genuinely developed
 or modified by the software provider. All functionality coming from shared libraries or known sources, which constitutes a
 large majority of modern software, would be effectively identified as such and would require no reverse engineering work.
-Current technology remains far from this scenario.
+Current technology remains far from this scenario. BCSD database maintenance is hard, because embeddings are invalidated
+every model update. Current methods still exhibit a large portion of false positives, which means that human verfification
+is required. Yet, these techniques give little to no insight as to why a similarity was detected between the assembly fragments.
+
 
 \section{Method}
 
@@ -365,7 +368,7 @@ having to regenerate an output for each item. Default values or values derived f
 as is standard with database migrations.
 
 Another key advantage of our method also stems from its textual representation of the extracted feature set. As highlighted
-previously, vector embeddings are computationally expensive to match against in large databases. Textual search is much
+previously, vector embeddings are computationally expensive to match against in large databases. Inverted index search is much
 more scalable than nearest neighbor search, as is evident in modern search engines being able to filter through billions of documents
 in a fraction of a second.
 
@@ -501,7 +504,7 @@ generates the same results as a standalone system prompt without examples.
 +  "inferred_algorithm": "Initialization"
 }
 \end{minted}
-\caption{TODO: Example of analysis output}
+\caption{Analysis of the \texttt{sha384_init} assembly function. Comparison between its compilation for \texttt{x86-64} and \texttt{arm}.  }
 \label{feature-diff}
 \end{minipage}
 \end{figure}
@@ -769,7 +772,9 @@ with equal weight.
     S = \frac{s_e + s_a}{2}
 \]
 
-TODO: Describe how combination could work in a real life scenario.
+In a real life scenario, combining both methods should be performed by using our textual representation as a pre-filter, and then calculating
+the embedding representation. As such, the scalability and maintainability of the underlying BCSD database is maintained, while allowing flexibility
+for the underlying BCSD model.
 
 To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
 As such, the combination still does not require any training or fine-tuning, as we have shown that off-the-shelf embedding models based on a LLM perform
@@ -949,9 +954,6 @@ Our dataset makes use of free open source software. all licenses are respected.
 Ethical standpoints:
 - Utility.
 - Privacy.
-
-% optional clearing of the page
-\cleardoublepage
 
 \section*{Open Science}
 
