@@ -127,8 +127,24 @@ Second Institution
 %-------------------------------------------------------------------------------
 \begin{abstract}
 %-------------------------------------------------------------------------------
-Your abstract text goes here. Just a few facts. Whet our appetites.
-Not more than 200 words, if possible, and preferably closer to 150.
+
+- Outline limitations of current solutions
+- Explain how we solve them
+- State results
+
+State-of-the-art binary code similarity detection methods are becoming accurate at detecting
+clones across compiler settings and architectures, but have limitations that
+prevent them from being widely used in reverse egineering processes. The necessity for these
+methods to be trained means they do not adapt to unseen settings. The embeddings they generate
+limit their scalability, and provide no insight to the user. We propose a new method that
+resolves these issues. Our solution does not require training, and generates a textual
+analysis rather than a floating point vector.
+This solves the scalability issues of existing methods, because our method utilises inverted
+index search which is orders of magnitude faster than nearest neighbor search.
+Most importantly, the textual representation is inherently human interpretable, making
+clone verification much easier. While alleviating these limitations, our method
+matches state-of-the-art BCSD models, and surpasses them on most benchmarks.
+
 \end{abstract}
 
 
@@ -938,7 +954,9 @@ Ethical standpoints:
 \cleardoublepage
 
 \section*{Open Science}
-\textbf{Within up to one page, this appendix must list all artifacts necessary to evaluate the contribution of the paper and make clear how the review committees can access each artifact. This appendix must have exactly this title, otherwise you will risk desk rejection. }
+
+The source code for all of our experiments is available on GitHub: \textit{link}.
+
 % optional clearing of the page
 \cleardoublepage
 \bibliographystyle{plain}
