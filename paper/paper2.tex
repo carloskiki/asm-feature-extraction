@@ -382,12 +382,9 @@ extract specific semantic information from the assembly function. The full promp
 \subsubsection{Framing and conditioning}
 
 We use a prelude that contains general information about the task at hand, and the expected response.
-Recent commercial LLMs have the ability to generate responses following a specified JSON schema. We do not
-make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
-that do not benefit from this option.
 
 Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
-evaluated (0.5B parameters) would sometimes repeat the same line of JSON until it ran out of context space, or generated invalid JSON.
+evaluated (0.5B parameters) would sometimes repeat the same line of output until it ran out of context space, or generated invalid JSON.
 To combat these artifacts, we run inference again when JSON parsing fails and increase the temperature of output token
 selection. This is done in a loop until valid JSON is generated. In our experiments, the maximal amount of trials required
 for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
@@ -429,7 +426,7 @@ and control flow and dispatching operations.
 
 This section identifies notable integer and floating point constants.  These could be common scalar values used by
 a specific cryptographic algorithm, or the signature bytes used by a file format or protocol. We exclude small
-values are used as struct offsets, loop counters or stack pointer adjustments.
+values that are used as offsets, loop counters or stack pointer adjustments.
 
 \subsubsection{Side effects}
 
@@ -462,12 +459,13 @@ wrapper/utility, file management, etc.
 
 To achieve the best results with our method, we utilize few-shot prompting by providing hand crafted examples along with our prompt.
 In all of our evaluations, three examples are provided, and our ablation study confirms that adding more than three examples provides
-little to no benefit. Our examples are selected from a diverse source of functions, and are varied in size and architecture to
-exemplify the space of possibilities in our evaluations.
+little to no benefit. Providing a single example or a JSON schema in the prompt is enough to achieve good results. We do not
+make use of a JSON schema because it is redundant information once examples are provided. Our examples are selected from a
+diverse source of functions, and are varied in size and architecture to exemplify the space of possibilities in our evaluations.
 
-The prompt by itself is still very performant, and should be acceptable for most applications. A surpising effect of providing examples
-is that the prompt is no longer needed for the analysis to be effective. Our results show that using enough examples with an empty system promt
-generates the same results as a standalone system prompt without examples.
+Recent commercial LLMs have the ability to generate responses following a provided JSON schema that is aside from the input prompt
+We do not make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
+that do not benefit from this option.
 
 \begin{figure}[ht]
 \centering
@@ -500,11 +498,13 @@ generates the same results as a standalone system prompt without examples.
    "memory_allocation_deallocation": false,
    "io_operations": false,
    "block_memory_operations": false,
+   "number_of_interrupts_system_calls": 0,
 -  "inferred_algorithm": "Undetermined"
 +  "inferred_algorithm": "Initialization"
 }
 \end{minted}
-\caption{Analysis of the \texttt{sha384\_init} assembly function. Comparison between its compilation for \texttt{x86-64} and \texttt{arm}.  }
+\caption{Analysis comparison of the \texttt{sha384\_init} assembly function. Comparison between the analyses of the function compiled 
+for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity score of \(0.9\).}
 \label{feature-diff}
 \end{minipage}
 \end{figure}
@@ -513,19 +513,18 @@ generates the same results as a standalone system prompt without examples.
 
 ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
 methods such as cosine similarity.  Since our generated analysis is not a numerical vector but rather structured text,
-we use an alternative method to compare two assembly functions. We flatten the JSON structure into a dictionary, where the
-concatenated path to a leaf element is the key for that element. Jaccard similarity (Intesection over union) is used to
-obtain a similarity score when comparing two such dictionaries. That is, the number of identical key value pairs is
-divided by the total number of key-value pairs, giving a value between \(0\) and \(1\).
+we use an alternative method to compare two assembly functions. We flatten the JSON structure into a set, where each
+element is the full path concatenated with the value of each element in the object. Jaccard similarity (Intesection over union)
+is used to obtain a similarity score when comparing two such dictionaries. That is, the number of identical fields in the JSON
+structure is divided by the total number of elements, giving a value between \(0\) and \(1\).
 
 \subsection{Dataset}
 
 The dataset is composed of 7 binaries: busybox, coreutils, curl, image-magick, openssl, putty, and sqlite3.
-All were compiled using gcc for the following platforms: x86-64, arm, mips, powerpc.
-For each binary and platform, binary objects were generated for all optimization levels (O0 to O3),
-stripped of debug symbols. In total, this yeilds 112 different binaries to analyze.
-The binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383\ 658\) assembly functions.
-Functions consisting of less than 3 instructions were not included as part of the dataset.
+All were compiled using gcc for the following platforms: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
+For each binary and platform, binary objects were generated for all optimization levels (\texttt{O0} to \texttt{O3}),
+stripped of debug symbols. The compiled binaries were dissassembled using IDA Pro and separated into individual functions,
+yielding \(383\ 658\) assembly functions. Functions consisting of less than 3 instructions were not included as part of the dataset.
 Pairs of equivalent functions from the same platform but distinct optimization level were made for cross optimization
 evaluation, and pairs from the same optimization level but different platform were formed for cross
 platform evaluation.
@@ -565,8 +564,8 @@ models were also used.
 \end{itemize}
 
 Gemini 2.5 Flash ~\cite{gemini2.5} is used to present our results. Gemini 2.5 Flash provided the best results while being cheaper than GPT 4.1 mini.
-We did not make use of the ``reasoning''
-capabilities that some of these models provide to keep a predictable token usage rate, and to match the capabilities of the local models used.
+We did not make use of the ``reasoning'' capabilities that some of these models provide to keep a predictable token usage rate, and to match the
+capabilities of the local models used.
 
 \section{Experiments}
 
@@ -713,11 +712,15 @@ for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.}
 
 By providing hand crafted examples to the large language model, we are able to increase the performance of the assembly function analysis.
 This follows the general observations behind few show prompting ~\cite{few-shot}. Providing a single example significantly increases the retrieval
-scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model
-such as Qwen 2.5 7B still sees marginal increase in MRR scores as the number of examples increases up to 3. This relates to our previous observation
+scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model such as Qwen 2.5 7B still sees
+marginal increase in MRR scores as the number of examples increases up to 3. This relates to our previous observation
 that small LLMs rely more on the provided examples than larger models. Another evidence of this is the number of invalid JSON outputs generated by
 Qwen 2.5 7B. When no examples are provided, approximately \(3\%\) of queries generate an invalid output. With only one example, no invalid
 outputs are generated, and the same applies when 2 or 3 examples are provided.
+
+Another interesting result is the fact that when providing enough examples, the system prompt has very little impact on the retrieval scores.
+This suggests that the examples themselves contain enough information for the model to perform the analysis, without being expained 
+exactly how.
 
 With our experimental configuration, providing 4 examples to Qwen 2.5 7B significantly decreases its MRR scores. That is because
 the examples almost completely use the full context window that we provide to the LLM. As such, most query assembly functions are
@@ -776,6 +779,8 @@ with equal weight.
 In a real life scenario, combining both methods should be performed by using our textual representation as a pre-filter, and then calculating
 the embedding representation. As such, the scalability and maintainability of the underlying BCSD database is maintained, while allowing flexibility
 for the underlying BCSD model.
+
+TODO: make this more precise
 
 To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
 As such, the combination still does not require any training or fine-tuning, as we have shown that off-the-shelf embedding models based on a LLM perform
