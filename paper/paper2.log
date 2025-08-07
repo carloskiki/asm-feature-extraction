@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  6 AUG 2025 18:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  6 AUG 2025 19:26
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1098,11 +1098,11 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \pydata@fh@0=\write6
 \openout6 = `_F3143FD707EB400E44AABCCBCBCCE6A1.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250806183907Z F3143FD707EB400E44AAB
+runsystem(latexminted config  --timestamp 20250806192645Z F3143FD707EB400E44AAB
 CCBCBCCE6A1)...executed.
 
 (./_F3143FD707EB400E44AABCCBCBCCE6A1.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250806183907Z F3143FD707EB400E
+runsystem(latexminted cleanconfig  --timestamp 20250806192645Z F3143FD707EB400E
 44AABCCBCBCCE6A1)...executed.
 
 
@@ -1151,22 +1151,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.354 
+l.355 
        <./BCSD-schematic.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 366.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 374.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 366.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 374.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 366.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 374.
 
 
 
 
 [4] (./_minted/832997F8C90B633795019F887327CE0B.highlight.minted)
-Underfull \vbox (badness 2951) has occurred while \output is active []
-
-
 
 
 
@@ -1175,41 +1172,32 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.533 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.533 
-      ]
+l.543     \item G
+                 PT 4.1 mini ~\cite{gpt4}]
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--608
+Underfull \hbox (badness 10000) in paragraph at lines 612--616
 []\T1/ptm/m/n/10 (+20) The base-lines are SAFE, Or-der-Mat-ters, PalmTree,
  []
 
 
+Underfull \vbox (badness 2617) has occurred while \output is active []
 
-[6]
-<size-ablation.png, id=285, 362.007pt x 217.467pt>
+
+
+[6
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.660 
+      ]
+
+<size-ablation.png, id=286, 362.007pt x 217.467pt>
 File: size-ablation.png Graphic file (type png)
 <use size-ablation.png>
-Package pdftex.def Info: size-ablation.png  used on input line 659.
+Package pdftex.def Info: size-ablation.png  used on input line 667.
 (pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-<examples-ablation.png, id=287, 349.086pt x 219.657pt>
-File: examples-ablation.png Graphic file (type png)
-<use examples-ablation.png>
-Package pdftex.def Info: examples-ablation.png  used on input line 679.
-(pdftex.def)             Requested size: 241.02039pt x 151.66069pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 
 [7
@@ -1217,19 +1205,25 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.684 \end{figure}
-                  
+l.683 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.684 \end{figure}
-                  ]
+l.683 
+      ]
+<examples-ablation.png, id=295, 349.086pt x 219.657pt>
+File: examples-ablation.png Graphic file (type png)
+<use examples-ablation.png>
+Package pdftex.def Info: examples-ablation.png  used on input line 687.
+(pdftex.def)             Requested size: 241.02039pt x 151.66069pt.
 
-<prompt-ablation.png, id=297, 362.007pt x 217.467pt>
+
+<prompt-ablation.png, id=298, 362.007pt x 217.467pt>
 File: prompt-ablation.png Graphic file (type png)
 <use prompt-ablation.png>
-Package pdftex.def Info: prompt-ablation.png  used on input line 706.
+Package pdftex.def Info: prompt-ablation.png  used on input line 714.
 (pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
 
 
@@ -1238,25 +1232,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.723 
+l.737 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.723 
-      
+l.737 
+       <./size-ablation.png> <./examples-ablation.png>]
+
+
+
+[9
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.723 
-       <./size-ablation.png> <./examples-ablation.png> <./prompt-ablation.png>]
-
-
-
-
-[9]
+l.811 
+       <./prompt-ablation.png>]
 
 
 
@@ -1265,11 +1258,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.851 
+l.859 
       ]
-Underfull \vbox (badness 1394) has occurred while \output is active []
-
-
 
 
 
@@ -1327,13 +1317,23 @@ Underfull \hbox (badness 3657) in paragraph at lines 187--194
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
-Package rerunfilecheck Info: File `paper2.out' has not changed.
-(rerunfilecheck)             Checksum: 221D81EA57C03DC8E2CE0D3FCA1F6E0D;4891.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `paper2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper2.out':
+(rerunfilecheck)             Before: 221D81EA57C03DC8E2CE0D3FCA1F6E0D;4891
+(rerunfilecheck)             After:  B12D11B8F077F9F211E7E3EBC5AE5524;4999.
  ) 
 Here is how much of TeX's memory you used:
- 34865 strings out of 467816
- 724527 string characters out of 5432258
- 1296131 words of memory out of 5000000
+ 34866 strings out of 467816
+ 724541 string characters out of 5432258
+ 1297131 words of memory out of 5000000
  62521 multiletter control sequences out of 15000+600000
  693478 words of font info for 302 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1346,10 +1346,10 @@ l/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on paper2.pdf (15 pages, 363396 bytes).
+Output written on paper2.pdf (15 pages, 363892 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
- 379 compressed objects within 4 object streams
- 103 named destinations out of 1000 (max. 500000)
+ 449 PDF objects out of 1000 (max. 8388607)
+ 380 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
  71105 words of extra memory for PDF output out of 74296 (max. 10000000)
 
