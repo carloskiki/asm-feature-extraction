@@ -555,7 +555,7 @@ We evaluate both local models of various sizes and commercially deployed models.
 Qwen2.5-Coder ~\cite{qwen2} with sizes 0.5B to 7B is used to run most local evaluations as its small size fitted our GPU capacity and capabilities.
 We use this model to present our results. Qwen3 ~\cite{qwen3} with sizes 0.6B to 4B and Gemma-3n ~\cite{gemma3} with sizes 0.5B to 4B were also used on
 small scale experiments. On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
-was set to 512. Very large assembly functions that did not fit within the input tokens were truncated. The following commercially deployed
+was set to 512. Very large assembly functions that did not fit within the input token limit were truncated. The following commercially deployed
 models were also used.
 
 \begin{itemize}
@@ -564,7 +564,8 @@ models were also used.
     \item Gemini 2.5 Flash ~\cite{gemini2.5}
 \end{itemize}
 
-Gemini 2.5 Flash ~\cite{gemini2.5} is used to present our results. All models had very similar performance. We did not make use of the ``reasoning''
+Gemini 2.5 Flash ~\cite{gemini2.5} is used to present our results. Gemini 2.5 Flash provided the best results while being cheaper than GPT 4.1 mini.
+We did not make use of the ``reasoning''
 capabilities that some of these models provide to keep a predictable token usage rate, and to match the capabilities of the local models used.
 
 \section{Experiments}
@@ -600,7 +601,7 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
     \begin{tabular}{l|cccccc|cccccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
-                           & O0-O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     & O0-O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     \\ \hline
+                           & \tt O0 -- \tt O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     & O0-O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     \\ \hline
     Order Matters          & 0.006     & 0.008     & 0.006     & 0.006     & 0.006     & 0.006       & 0.001     & 0.002     & 0.001     & 0.000     & 0.001     & 0.001       \\
     SAFE                   & 0.189     & 0.200     & 0.189     & 0.218     & 0.171     & 0.193       & 0.000     & 0.063     & 0.063     & 0.063     & 0.000     & 0.038       \\
     PalmTree               & 0.020     & 0.019     & 0.230     & 0.314     & \bf 0.878 & 0.292       & 0.006     & 0.007     & 0.080     & 0.184     & 0.676     & 0.191       \\
