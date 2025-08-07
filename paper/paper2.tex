@@ -794,14 +794,14 @@ having to train a new model).
 \begin{tabular}{l|c|c|c}
 \Xhline{2\arrayrulewidth}
                 & Gemini 2.5 Flash & Qwen Embedding & Combined  \\ \hline
-O0-O1           & 0.646            & 0.640          & \bf 0.910 \\
-O0-O2           & 0.579            & 0.554          & \bf 0.843 \\
-O0-O3           & 0.485            & 0.518          & \bf 0.759 \\
-O1-O3           & 0.618            & 0.640          & \bf 0.855 \\
-O2-O3           & 0.758            & 0.783          & \bf 0.921 \\
-arm-x86\_64     & 0.436            & 0.334          & \bf 0.736 \\
-powerpc-x86\_64 & 0.414            & 0.443          & \bf 0.746 \\
-mips-x86\_64    & 0.417            & 0.415          & \bf 0.729 \\ \Xhline{2\arrayrulewidth}
+\tt O0 -- O1           & 0.646            & 0.640          & \bf 0.910 \\
+\tt O0--O2           & 0.579            & 0.554          & \bf 0.843 \\
+\tt O0-O3           & 0.485            & 0.518          & \bf 0.759 \\
+\tt O1-O3           & 0.618            & 0.640          & \bf 0.855 \\
+\tt O2-O3           & 0.758            & 0.783          & \bf 0.921 \\
+\tt arm-x86\_64     & 0.436            & 0.334          & \bf 0.736 \\
+\tt powerpc-x86\_64 & 0.414            & 0.443          & \bf 0.746 \\
+\tt mips-x86\_64    & 0.417            & 0.415          & \bf 0.729 \\ \Xhline{2\arrayrulewidth}
 \end{tabular}
 \caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
 optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
@@ -913,7 +913,14 @@ model. Since there is no ground truth in text generation, the distillation proce
 to train the smaller model. As we have shown, a large model such as Gemini 2.5 Flash performs remarkably better than a
 small model such as Qwen 2.5 7B. We believe the distillation process could considerably reduce this gap.
 
-TODO: Agent stuff, what else?
+\subsection{Other integrations}
+
+Our work proves the competency of LLMs in understanding and analyzing assembly code. From this point, different approaches
+to incorporating LLMs into assembly analysis workflows can be considered. First, instead of using LLMs for feature extraction,
+they could be used to explain the similarity between two functions, once this similarity has been determined using an unexplainable
+method such as embeddings. Furthermore, it could be used as a decision maker as to whether the two code fragments are similar enough
+to be considered clones. Often times, the assembly function used as query is not even part of the BCSD database. The remarkable versatility
+of LLMs mean that they can also be
 
 %-------------------------------------------------------------------------------
 \section*{Acknowledgments}
