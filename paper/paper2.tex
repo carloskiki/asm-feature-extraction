@@ -601,14 +601,14 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
     \begin{tabular}{l|cccccc|cccccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
-                           & \tt O0 -- O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     & O0-O1     & O0-O2     & O0-O3     & O1-O3     & O2-O3     & average     \\ \hline
-    Order Matters          & 0.006     & 0.008     & 0.006     & 0.006     & 0.006     & 0.006       & 0.001     & 0.002     & 0.001     & 0.000     & 0.001     & 0.001       \\
-    SAFE                   & 0.189     & 0.200     & 0.189     & 0.218     & 0.171     & 0.193       & 0.000     & 0.063     & 0.063     & 0.063     & 0.000     & 0.038       \\
-    PalmTree               & 0.020     & 0.019     & 0.230     & 0.314     & \bf 0.878 & 0.292       & 0.006     & 0.007     & 0.080     & 0.184     & 0.676     & 0.191       \\
-    Asm2Vec                & 0.494     & 0.460     & 0.444     & 0.535     & 0.563     & 0.499       & 0.290     & 0.252     & 0.234     & 0.343     & 0.376     & 0.299       \\
-    CLAP                   & 0.244     & 0.221     & 0.214     & 0.550     & 0.781     & 0.402       & 0.187     & 0.176     & 0.168     & 0.455     & 0.707     & 0.339       \\ \hline
-    Qweni 2.5 7B           & 0.471     & 0.412     & 0.343     & 0.456     & 0.608     & 0.458       & 0.342     & 0.301     & 0.234     & 0.345     & 0.488     & 0.342       \\
-    Gemini 2.5 Flash       & \bf 0.739 & \bf 0.672 & \bf 0.568 & \bf 0.700 & 0.816     & \bf 0.699   & \bf 0.646 & \bf 0.579 & \bf 0.485 & \bf 0.618 & \bf 0.758 & \bf 0.617   \\ \Xhline{2\arrayrulewidth}
+                           & \tt O0 -- O1 & \tt O0 -- O2 & \tt O0 -- O3 & \tt O1 -- O3 & \tt O2 -- O3 & average     & \tt O0 -- O1 & \tt O0 -- O2 & \tt O0 -- O3 & \tt O1 -- O3 & \tt O2 -- O3 & average   \\ \hline
+    Order Matters          & 0.006        & 0.008        & 0.006        & 0.006        & 0.006        & 0.006       & 0.001        & 0.002        & 0.001        & 0.000        & 0.001        & 0.001     \\
+    SAFE                   & 0.189        & 0.200        & 0.189        & 0.218        & 0.171        & 0.193       & 0.000        & 0.063        & 0.063        & 0.063        & 0.000        & 0.038     \\
+    PalmTree               & 0.020        & 0.019        & 0.230        & 0.314        & \bf 0.878    & 0.292       & 0.006        & 0.007        & 0.080        & 0.184        & 0.676        & 0.191     \\
+    Asm2Vec                & 0.494        & 0.460        & 0.444        & 0.535        & 0.563        & 0.499       & 0.290        & 0.252        & 0.234        & 0.343        & 0.376        & 0.299     \\
+    CLAP                   & 0.244        & 0.221        & 0.214        & 0.550        & 0.781        & 0.402       & 0.187        & 0.176        & 0.168        & 0.455        & 0.707        & 0.339     \\ \hline
+    Qweni 2.5 7B           & 0.471        & 0.412        & 0.343        & 0.456        & 0.608        & 0.458       & 0.342        & 0.301        & 0.234        & 0.345        & 0.488        & 0.342     \\
+    Gemini 2.5 Flash       & \bf 0.739    & \bf 0.672    & \bf 0.568    & \bf 0.700    & 0.816        & \bf 0.699   & \bf 0.646    & \bf 0.579    & \bf 0.485    & \bf 0.618    & \bf 0.758    & \bf 0.617 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
     \caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
@@ -649,14 +649,14 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     \begin{tabular}{l|cccc|cccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                 & \multicolumn{4}{c}{Recall @ 1}                           \\ \cline{2-9}
-                           & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average   & arm-x86\_64 & powerpc-x86\_64 & mips-x86\_64 & average   \\ \hline
-    Order Matters          & 0.007       & 0.007           & 0.007        & 0.007     & 0.002       & 0.000           & 0.001        & 0.001     \\
-    SAFE                   & 0.239       & 0.187           & 0.196        & 0.207     & 0.063       & 0.063           & 0.063        & 0.063     \\
-    PalmTree               & 0.037       & 0.036           & 0.018        & 0.030     & 0.031       & 0.013           & 0.007        & 0.017     \\
-    Asm2Vec                & 0.242       & 0.293           & 0.417        & 0.317     & 0.085       & 0.113           & 0.231        & 0.143     \\
-    CLAP                   & 0.416       & \bf 0.523       & 0.494        & 0.478     & 0.334       & \bf 0.443       & 0.415        & 0.397     \\ \hline
-    Qwen 2.5 7B            & 0.263       & 0.201           & 0.202        & 0.222     & 0.165       & 0.108           & 0.110        & 0.128     \\
-    Gemini 2.5 Flash       & \bf 0.548   & 0.520           & \bf 0.525    & \bf 0.531 & \bf 0.436   & 0.414           & \bf 0.417    & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
+                           & \tt arm -- x86-64 & \tt powerpc -- x86-64 & \tt mips -- x86-64 & average   & \tt arm -- x86-64 & \tt powerpc -- x86-64 & \tt mips -- x86-64 & average   \\ \hline
+    Order Matters          & 0.007             & 0.007                 & 0.007              & 0.007     & 0.002             & 0.000                 & 0.001              & 0.001     \\
+    SAFE                   & 0.239             & 0.187                 & 0.196              & 0.207     & 0.063             & 0.063                 & 0.063              & 0.063     \\
+    PalmTree               & 0.037             & 0.036                 & 0.018              & 0.030     & 0.031             & 0.013                 & 0.007              & 0.017     \\
+    Asm2Vec                & 0.242             & 0.293                 & 0.417              & 0.317     & 0.085             & 0.113                 & 0.231              & 0.143     \\
+    CLAP                   & 0.416             & \bf 0.523             & 0.494              & 0.478     & 0.334             & \bf 0.443             & 0.415              & 0.397     \\ \hline
+    Qwen 2.5 7B            & 0.263             & 0.201                 & 0.202              & 0.222     & 0.165             & 0.108                 & 0.110              & 0.128     \\
+    Gemini 2.5 Flash       & \bf 0.548         & 0.520                 & \bf 0.525          & \bf 0.531 & \bf 0.436         & 0.414                 & \bf 0.417          & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
     \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
