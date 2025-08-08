@@ -46,10 +46,9 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6}Categorization}{5}{subsubsection.3.1.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.7}Examples}{5}{subsubsection.3.1.7}\protected@file@percent }
 \@LN@col{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Analysis of the \texttt  {sha384\_init} assembly function. Comparison between its compilation for \texttt  {x86-64} and \texttt  {arm}. }}{5}{figure.3}\protected@file@percent }
-\newlabel{feature-diff}{{3}{5}{Analysis of the \texttt {sha384\_init} assembly function. Comparison between its compilation for \texttt {x86-64} and \texttt {arm}}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Analysis comparison of the \texttt  {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt  {arm} (red) and \texttt  {x86-64} (green). This pair has a similarity score of \(0.9\).}}{5}{figure.3}\protected@file@percent }
+\newlabel{feature-diff}{{3}{5}{Analysis comparison of the \texttt {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt {arm} (red) and \texttt {x86-64} (green). This pair has a similarity score of \(0.9\)}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Comparison}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dataset}{5}{subsection.3.3}\protected@file@percent }
 \citation{qwen2}
 \citation{qwen3}
 \citation{gemma3}
@@ -60,6 +59,7 @@
 \citation{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}
 \@LN@col{1}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Number of functions coming from each open source library.}}{6}{table.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dataset}{6}{subsection.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Model}{6}{subsection.3.4}\protected@file@percent }
 \@LN@col{2}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{6}{section.4}\protected@file@percent }
@@ -72,28 +72,26 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Clone search with different architectures}{7}{subsection.4.3}\protected@file@percent }
 \@LN@col{2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Ablation on model size}{7}{subsection.4.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt  {gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions. Three examples are provided with our prompt.}}{7}{figure.4}\protected@file@percent }
-\newlabel{size-abl}{{4}{7}{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt {gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions. Three examples are provided with our prompt}{figure.4}{}}
 \citation{few-shot}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000. All functions are compiled with optimization level 2 using \texttt  {gcc} with the architecture specified for each column. The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt.}}{8}{table.3}\protected@file@percent }
 \newlabel{x-arch}{{3}{8}{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000. All functions are compiled with optimization level 2 using \texttt {gcc} with the architecture specified for each column. The same baselines and models are used as in the cross architecture evaluation. Three examples are provided with our prompt}{table.3}{}}
 \@LN@col{1}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt  {gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions. Three examples are provided with our prompt.}}{8}{figure.4}\protected@file@percent }
+\newlabel{size-abl}{{4}{8}{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt {gcc} for the arm architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions. Three examples are provided with our prompt}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Ablation on examples}{8}{subsection.4.5}\protected@file@percent }
 \@LN@col{2}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3 for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.}}{8}{figure.5}\protected@file@percent }
 \newlabel{ex-abl}{{5}{8}{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3 for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Ablation on the prompt used}{8}{subsection.4.6}\protected@file@percent }
 \citation{CLAP}
 \citation{BCSDsurvey}
 \citation{BinDiff,graph-bug-search}
 \citation{clones.net,op-seq,sem-hash}
 \@LN@col{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Ablation on the prompt used}{9}{subsection.4.6}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines show the MRR score for the prompt without any sections removed. A larger gap between the line and bar means the prompt section has more impact.}}{9}{figure.6}\protected@file@percent }
 \newlabel{prompt-abl}{{6}{9}{MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines show the MRR score for the prompt without any sections removed. A larger gap between the line and bar means the prompt section has more impact}{figure.6}{}}
 \@LN@col{2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Combined Method}{9}{subsection.4.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Related Work}{9}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Static analysis}{9}{subsection.5.1}\protected@file@percent }
 \citation{BCSD}
 \citation{blanket-exec}
 \citation{CLAP,jtrans,UniASM}
@@ -108,6 +106,8 @@
 \citation{BERT}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture, the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout. Only Recall @ 1 scores are presented.}}{10}{table.4}\protected@file@percent }
 \@LN@col{1}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Related Work}{10}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Static analysis}{10}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Dynamic analysis}{10}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Machine learning methods}{10}{subsection.5.3}\protected@file@percent }
 \@LN@col{2}
@@ -117,10 +117,13 @@
 \citation{c-o-t,reasoning,thinking-llm}
 \@LN@col{1}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{11}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Future research}{11}{subsection.6.1}\protected@file@percent }
 \@LN@col{2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Future research}{11}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Reasoning model}{11}{subsubsection.6.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Fine-tuning}{11}{subsubsection.6.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Other integrations}{11}{subsection.6.2}\protected@file@percent }
+\@LN@col{1}
+\@LN@col{2}
 \@LN@col{1}
 \@LN@col{2}
 \bibstyle{plain}
@@ -168,5 +171,5 @@
 \bibcite{OrderMatters}{39}
 \@LN@col{1}
 \@LN@col{2}
-\xdef \mintedoldcachechecksum{\detokenize{0F3D30C85F0E390DABF7DD2F63DEDD1B:5}}
-\gdef \@abspage@last{14}
+\xdef \mintedoldcachechecksum{\detokenize{DFED428BD851297F8B075444FF926738:5}}
+\gdef \@abspage@last{15}
