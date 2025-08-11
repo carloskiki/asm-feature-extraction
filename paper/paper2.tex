@@ -128,22 +128,19 @@ Second Institution
 \begin{abstract}
 %-------------------------------------------------------------------------------
 
-- Outline limitations of current solutions
-- Explain how we solve them
-- State results
-
 State-of-the-art binary code similarity detection methods are becoming accurate at detecting
 clones across compiler settings and architectures, but have limitations that
-prevent them from being widely used in reverse egineering processes. The necessity for these
-methods to be trained means they do not adapt to unseen settings. The embeddings they generate
-limit their scalability, and provide no insight to the user. We propose a new method that
-resolves these issues. Our solution does not require training, and generates a textual
-analysis rather than a floating point vector.
-This solves the scalability issues of existing methods, because our method utilises inverted
-index search which is orders of magnitude faster than nearest neighbor search.
+prevent them from being useful in reverse egineering processes. These methods generate
+a large floating point vector (an embedding) as a representation for a code fragment.
+The embedding provides no insight to the user, and limits the scalability of binary similarity
+databases. The necessity for these methods to be trained on a code fragment dataset
+means they do not adapt to unseen settings. We propose a new method that resolves these issues.
+Our solution does not require training, and generates a textual analysis rather than an embedding.
+This solves the scalability issues of existing methods, because ours allows for inverted
+index search, which is orders of magnitude faster than nearest neighbor search in high dimensions.
 Most importantly, the textual representation is inherently human interpretable, making
-clone verification much easier. While alleviating these limitations, our method
-matches state-of-the-art BCSD models, and surpasses them on most benchmarks.
+clone verification much easier. While alleviating these limitations, our method surpasses
+state-of-the-art binary code similarity models on most benchmarks. TODO: actual numbers
 
 \end{abstract}
 
@@ -151,37 +148,36 @@ matches state-of-the-art BCSD models, and surpasses them on most benchmarks.
 \section{Introduction}
 
 Modern software is increasingly reliant on external libraries.
-For security researchers, detecting whether a binary uses some vulnerable library function is crucial to assess
+For security researchers, detecting whether some executable uses a vulnerable library function is crucial to assess
 and mitigate vulnerability exposure ~\cite{BCSD, BCSDsurvey}. For reverse engineers, reducing the amount of repetitive assembly functions
 to analyze means being more productive, and allows them to focus on the custom parts of a binary.  Binary code similarity
 detection (BCSD) is a binary analysis task that tries to solve these problems, by determining whether two compiled
 code fragments behave in similar ways. This task is becoming increasingly important as the size, modularity and rate of
-production of software grows.  For instance, when libraries are statically linked to a binary, BCSD can help to
+production of software grows. For instance, when libraries are statically linked to a binary, BCSD can help to
 quickly identify which functions are part of common external libraries and which ones have never been seen before.
 Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
-binary or firmware is using the vulnerable library.
+binary or firmware is using that vulnerable library.
 
-Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment. These heuristics
+Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment [refs]. These heuristics
 could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
 by executing the function in an emulated environment. These methods were deterministic and had the benefit of producing
-human understandable feature vectors, but were often too simplistic or sometimes used computationally intractable alogrithms, in
+human understandable feature vectors, but were often too simplistic [refs] or sometimes used computationally intractable alogrithms [refs], in
 the case of CFG analysis.
 
-More recently, machine learning (ML) based methods have shown to be better performing.
-These methods work by producing a floating point tensor embedding for a code fragment, often using techniques from
+More recently, machine learning (ML) based methods have shown to be better performing [refs].
+These methods produce a floating point vector embedding for each code fragment, often using techniques from
 natural language processing. The generated embeddings serve as the feature vector, which are compared
-with each other using metrics such as cosine similarity. when filtering through large databases, nearest neighbor search
-or an approximated variant is used to find the most similar code fragments.
+with each other using vector distance metrics such as cosine similarity. when filtering through large databases,
+nearest neighbor search or an approximated variant is used to find the most similar code fragments.
 
-Our work presents a method to effectively find assembly fragment clones across binaries using any available pre-trained
+Our work presents a method to effectively find code fragment clones across binaries using any available pre-trained
 large language model (LLM). The method is simpler than other ML approaches, requires no training nor fine-tuning, and
-matches state-of-the-art results. It has the advantage of generating human interpretable feature vectors like earlier approaches,
+surpasses state-of-the-art results. It has the advantage of generating human interpretable feature vectors like earlier approaches,
 instead of numerical embeddings. Additionally, it effectively scales with the performance and size of the LLM used, and thus
 benefits from the ample amount of research on in this area.
 
 TODO: expand on how our method differs from and compares to others.
 
-% Side by size assembly view
 \begin{figure*}[!t]
 \centering
 \begin{minipage}[t]{0.32\linewidth}
@@ -265,8 +261,8 @@ loc_4241F0:
     generates human interpretable feature vectors.
 \item We show that our approach scales with the performance and size of the LLM used, and out performs state-of-the-art BCSD models
     both in versatility and raw metrics.
-\item We develop a method to combine our model we any pre-existing or future assembly function embedding model, and show that
-    this combination generates the best results.
+\item We develop a method to combine our model we any pre-existing or future code embedding model, and show that this combination can
+    generates outstanding results.
 \item We outline ideas for future research to improve the efficiency and performance of this method, and explain how this method
     could be implemented in production environments.
 \end{itemize}
@@ -600,7 +596,7 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
     \begin{tabular}{l|cccccc|cccccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
-                           & \tt O0 -- O1 & \tt O0 -- O2 & \tt O0 -- O3 & \tt O1 -- O3 & \tt O2 -- O3 & average     & \tt O0 -- O1 & \tt O0 -- O2 & \tt O0 -- O3 & \tt O1 -- O3 & \tt O2 -- O3 & average   \\ \hline
+                           & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average     & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average   \\ \hline
     Order Matters          & 0.006        & 0.008        & 0.006        & 0.006        & 0.006        & 0.006       & 0.001        & 0.002        & 0.001        & 0.000        & 0.001        & 0.001     \\
     SAFE                   & 0.189        & 0.200        & 0.189        & 0.218        & 0.171        & 0.193       & 0.000        & 0.063        & 0.063        & 0.063        & 0.000        & 0.038     \\
     PalmTree               & 0.020        & 0.019        & 0.230        & 0.314        & \bf 0.878    & 0.292       & 0.006        & 0.007        & 0.080        & 0.184        & 0.676        & 0.191     \\
@@ -648,14 +644,14 @@ well to unseen settings. Qwen3-Embedding 4B also generates impressive results, g
     \begin{tabular}{l|cccc|cccc}
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                 & \multicolumn{4}{c}{Recall @ 1}                           \\ \cline{2-9}
-                           & \tt arm -- x86-64 & \tt powerpc -- x86-64 & \tt mips -- x86-64 & average   & \tt arm -- x86-64 & \tt powerpc -- x86-64 & \tt mips -- x86-64 & average   \\ \hline
-    Order Matters          & 0.007             & 0.007                 & 0.007              & 0.007     & 0.002             & 0.000                 & 0.001              & 0.001     \\
-    SAFE                   & 0.239             & 0.187                 & 0.196              & 0.207     & 0.063             & 0.063                 & 0.063              & 0.063     \\
-    PalmTree               & 0.037             & 0.036                 & 0.018              & 0.030     & 0.031             & 0.013                 & 0.007              & 0.017     \\
-    Asm2Vec                & 0.242             & 0.293                 & 0.417              & 0.317     & 0.085             & 0.113                 & 0.231              & 0.143     \\
-    CLAP                   & 0.416             & \bf 0.523             & 0.494              & 0.478     & 0.334             & \bf 0.443             & 0.415              & 0.397     \\ \hline
-    Qwen 2.5 7B            & 0.263             & 0.201                 & 0.202              & 0.222     & 0.165             & 0.108                 & 0.110              & 0.128     \\
-    Gemini 2.5 Flash       & \bf 0.548         & 0.520                 & \bf 0.525          & \bf 0.531 & \bf 0.436         & 0.414                 & \bf 0.417          & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
+                           & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   \\ \hline
+    Order Matters          & 0.007           & 0.007               & 0.007            & 0.007     & 0.002           & 0.000               & 0.001            & 0.001     \\
+    SAFE                   & 0.239           & 0.187               & 0.196            & 0.207     & 0.063           & 0.063               & 0.063            & 0.063     \\
+    PalmTree               & 0.037           & 0.036               & 0.018            & 0.030     & 0.031           & 0.013               & 0.007            & 0.017     \\
+    Asm2Vec                & 0.242           & 0.293               & 0.417            & 0.317     & 0.085           & 0.113               & 0.231            & 0.143     \\
+    CLAP                   & 0.416           & \bf 0.523           & 0.494            & 0.478     & 0.334           & \bf 0.443           & 0.415            & 0.397     \\ \hline
+    Qwen 2.5 7B            & 0.263           & 0.201               & 0.202            & 0.222     & 0.165           & 0.108               & 0.110            & 0.128     \\
+    Gemini 2.5 Flash       & \bf 0.548       & 0.520               & \bf 0.525        & \bf 0.531 & \bf 0.436       & 0.414               & \bf 0.417        & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
     \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
@@ -785,7 +781,7 @@ TODO: make this more precise
 To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
 As such, the combination still does not require any training or fine-tuning, as we have shown that off-the-shelf embedding models based on a LLM perform
 very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation (this can be done without
-having to train a new model). 
+having to train the new model).
 
 {
 \renewcommand{\arraystretch}{1.3}
