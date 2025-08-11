@@ -516,7 +516,12 @@ structure is divided by the total number of elements, giving a value between \(0
 
 \subsection{Dataset}
 
-The dataset is composed of 7 binaries: busybox, coreutils, curl, image-magick, openssl, putty, and sqlite3.
+Our method is not trained, and so a dataset is only needed for evaluations. Hence, we selected a dataset that matches
+the testing set size of other methods.
+
+Our dataset is composed of 7 binaries: BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick
+~\cite{image-magick}, OpenSSL ~\cite{openssl}, PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All binaries are 
+free 
 All were compiled using gcc for the following platforms: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
 For each binary and platform, binary objects were generated for all optimization levels (\texttt{O0} to \texttt{O3}),
 stripped of debug symbols. The compiled binaries were dissassembled using IDA Pro and separated into individual functions,
@@ -529,17 +534,16 @@ platform evaluation.
     \renewcommand{\arraystretch}{1.3}
     \begin{table}[tbp]
     \centering
-    \begin{tabular}{|l|c|}
+    \begin{tabular}{|l|c|c|l|}
     \hline
-    \bf Library  & \bf Function count \\ \hline
-    busybox      & 66706              \\
-    coreutils    & 42545              \\
-    curl         & 27198              \\
-    image-magick & 69873              \\
-    openssl      & 134359             \\
-    putty        & 12655              \\
-    sqlite3      & 30322              \\ \hline
-    \bf Total    & 383658             \\ \hline
+    Library       & Function count & Averaged function length & Description \\ \hline
+    BusyBox       & 66706          & & A fairly complete environment for any small or embedded system. \\
+    GNU coreutils & 42545          & & The basic file, shell and text manipulation utilities of the GNU operating system. \\
+    curl          & 27198          & & A command line tool to transfer data with URLs \\
+    ImageMagick   & 69873          & & A software suite used for editing and manipulating digital images. \\
+    OpenSSL       & 134359         & & A toolkit for general-purpose cryptography and secure communication. \\
+    PuTTY         & 12655          & & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
+    SQLite        & 30322          & & A small SQL database engine. \\ \hline
     \end{tabular}
     \caption{Number of functions coming from each open source library.}
     \end{table}

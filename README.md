@@ -260,3 +260,6 @@ Overall model perform mostly the same, but they each have their qwirks.
 
 - Figure: how each prompt is interconnected - Which ones have which features.
 - Show token use for just the prompt - How this is bad for local models.
+
+# MISC
+hotcrp: https://sec26cycle1.usenix.hotcrp.com/
