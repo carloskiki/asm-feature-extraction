@@ -532,8 +532,9 @@ platform evaluation.
 
 {
     \renewcommand{\arraystretch}{1.3}
-    \begin{table}[tbp]
+    \begin{table*}[tbp]
     \centering
+    \resizebox{\linewidth}{!}{
     \begin{tabular}{|l|c|c|l|}
     \hline
     Library       & Function count & Averaged function length & Description \\ \hline
@@ -545,8 +546,9 @@ platform evaluation.
     PuTTY         & 12655          & & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
     SQLite        & 30322          & & A small SQL database engine. \\ \hline
     \end{tabular}
+    }
     \caption{Number of functions coming from each open source library.}
-    \end{table}
+    \end{table*}
 }
 \subsection{Model}
 
