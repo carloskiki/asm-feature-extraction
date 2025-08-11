@@ -90,7 +90,7 @@ class Context:
         Return the model
         """
         if accelerator:
-            device_map = {"": accelerator.process_index} 
+            device_map = {"": accelerator.process_index}
         else:
             device_map = "auto"
         if self.model.startswith("qwen-emb"):
@@ -124,7 +124,10 @@ class Context:
         prompt = self.get_prompt("")
         tokenizer = self.tokenizer
         tokens = tokenizer.apply_chat_template(
-            prompt, tokenize=True, add_generation_prompt=True
+            prompt,
+            tokenize=True,
+            add_generation_prompt=True,
+            enable_thinking=False,
         )
 
         return len(tokens)
