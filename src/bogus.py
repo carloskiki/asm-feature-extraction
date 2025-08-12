@@ -29,11 +29,11 @@ class Bogus(context.Context):
         for (fn, file) in dataset:
             if file.binary not in fn_count:
                 fn_count[file.binary] = 1
-                fn_length[file.binary] = instruction_count(fn)
+                fn_length[file.binary] = [instruction_count(fn)]
             else:
                 fn_count[file.binary] += 1
-                fn_length[file.binary] += instruction_count(fn)
-
+                fn_length[file.binary].push(instruction_count(fn))
+        
         import code
         code.interact(local=locals())
 
