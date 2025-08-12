@@ -515,21 +515,6 @@ is used to obtain a similarity score when comparing two such dictionaries. That 
 structure is divided by the total number of elements, giving a value between \(0\) and \(1\).
 
 \subsection{Dataset}
-
-Our method is not trained, and so a dataset is only needed for evaluations. Hence, we selected a dataset that matches
-the testing set size of other methods.
-
-Our dataset is composed of 7 binaries: BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick
-~\cite{image-magick}, OpenSSL ~\cite{openssl}, PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All binaries are 
-free 
-All were compiled using gcc for the following platforms: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
-For each binary and platform, binary objects were generated for all optimization levels (\texttt{O0} to \texttt{O3}),
-stripped of debug symbols. The compiled binaries were dissassembled using IDA Pro and separated into individual functions,
-yielding \(383\ 658\) assembly functions. Functions consisting of less than 3 instructions were not included as part of the dataset.
-Pairs of equivalent functions from the same platform but distinct optimization level were made for cross optimization
-evaluation, and pairs from the same optimization level but different platform were formed for cross
-platform evaluation.
-
 {
     \renewcommand{\arraystretch}{1.3}
     \begin{table*}[tbp]
@@ -550,6 +535,22 @@ platform evaluation.
     \caption{Number of functions coming from each open source library.}
     \end{table*}
 }
+
+Our method is not trained, and so a dataset is only needed for evaluations. Our dataset is composed of 7 open source binaries:
+BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
+PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allows their use in our evaluations. 
+
+All binaries were compiled using \texttt{gcc} for the following architectures: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
+For each architecture, executables were generated for all optimization levels (\texttt{O0} to \texttt{O3}), stripped of debug symbols.
+The compiled binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383\ 658\) assembly functions.
+Functions consisting of less than 3 instructions were not included as part of the dataset.
+
+Pairs of equivalent functions from the same platform but distinct optimization level were made for cross optimization
+evaluation, and pairs from the same optimization level but different platform were formed for cross
+platform evaluation. For example, the \texttt{MD5Init} functions in figure \ref{asm-diff} compiled with \texttt{-O0} (left) and
+\texttt{-O3} (right) for \texttt{x86-64} form a pair for cross optimization retrieval, whereas functions compiled \texttt{-O0} for \texttt{x86-64} (left)
+and \texttt{mips} (center) form a pair for cross architecture retrieval.
+
 \subsection{Model}
 
 We evaluate both local models of various sizes and commercially deployed models.
