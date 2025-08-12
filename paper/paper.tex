@@ -609,12 +609,14 @@ These were chosen mainly because of their low cost and availability.
 
 {
     \renewcommand{\arraystretch}{1.1}
+    \centering
     \begin{table}[h]
     \begin{tabular}{|l|ccc|} \hline
     Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
     Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
     GPT 4.1 Mini     & 0.662      & 0.811      & 0.755            \\ \hline
     \end{tabular}
+    \caption{TODO}
     \end{table}
 }
 
@@ -792,13 +794,12 @@ section is more influential, going from 0.06 to 0.20 in MRR impact.
 
 \subsection{Combined Method}
 
-Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained specifically for assembly
-function understanding and BCSD can out-perform our method in specific subdomains. Even if our method is more scalable, state-of-the-art
-embedding learning models are still useful for specific tasks, such as supporting niche architectures or understanding similarity through
-obfuscated code. The state-of-the-art embedding models are much smaller than our method in terms of parameter count.
-For instance the CLAP ~\cite{CLAP} model baseline is only 110M parameters, compared to the many billions required to perform our method.
+Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained for assembly function understanding
+and BCSD remain benefitial in specific subdomains, such as supporting niche architectures or understanding similarity through
+specific obfuscation methods. The state-of-the-art embedding models are much smaller than our method in terms of parameter count.
+For instance, the CLAP ~\cite{CLAP} model baseline is only 110M parameters, compared to the many billions required to perform our method.
 The cost of training such models is still very expensive, but once trained, they are much faster than LLM inference.
-Their small size also means that these models could be run on CPU for small pool sizes.
+Their small size also potentially allows for CPU execution on small workloads.
 
 To achieve a best of both world scenario, we experiment with combining the similarity scores from an embedding model and our prompting method.
 Our evaluation method consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
@@ -808,16 +809,17 @@ with equal weight.
     S = \frac{s_e + s_a}{2}
 \]
 
-In a real life scenario, combining both methods should be performed by using our textual representation as a pre-filter, and then calculating
-the embedding representation. As such, the scalability and maintainability of the underlying BCSD database is maintained, while allowing flexibility
-for the underlying BCSD model.
+In a real life scenario, combining both methods could be performed by using our textual representation as a pre-filter, and then calculating
+the embedding representation. As such, the scalability and maintainability of the underlying BCSD database is maintained, while allowing a flexible
+choice of embedding based BCSD model. That is, an inverted index database is maintained for the pre-filter query. Once this query is completed, the
+top-\(k\) results can be refined using an embedding model, by calculating the embeddings only for those \(k\) candidates. With this approach,
+the decision to use an embedding model, and which one to use, can be made dynamically.
 
-TODO: make this more precise
 
-To provide a method that keeps some of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
-As such, the combination still does not require any training or fine-tuning, as we have shown that off-the-shelf embedding models based on a LLM perform
-very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation (this can be done without
-having to train the new model).
+To provide a method that all of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
+As such, the combination still does not require any training or fine-tuning. As shown in table ~\ref{composite}, off-the-shelf embedding models
+based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation
+(the training phase is performed by the open source model developers).
 
 {
 \renewcommand{\arraystretch}{1.1}
@@ -838,6 +840,7 @@ having to train the new model).
 \caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
 optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
 the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout. Only Recall @ 1 scores are presented.}
+\label{composite}
 \end{table*}
 }
 
