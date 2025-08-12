@@ -601,9 +601,8 @@ baselines. For the local model selection, many factors were considered. We requi
 (3) have many size variants applicable to the aformentioned criteria, and (4) maximize the metrics we evaluate. For the commercial model selection,
 we require that the model is (1) affordable, (2) has a simple API that allows prompt caching, and (3) that has the best results on our evaluations.
 
-For the local model, three options were considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B, Qwen3 ~\cite{qwen3} with
-sizes 0.6B, 1.7B, and 4B, and Gemma 3 ~\cite{gemma3} with sizes 1B and 4B. We did not consider mixture of experts models because of the 
-specificity of our workload. Qwen2.5 Coder is the model that best matches our first three criterias for local model selection. Small scale
+For the local model, three options were considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B, Gemma 3 ~\cite{gemma3} with sizes 1B and 4B, and  Qwen3 ~\cite{qwen3} with size 4B. We did not consider mixture of experts models because of the specificity of our workload.
+Qwen2.5 Coder is the model that best matches our first three criterias for local model selection. Small scale
 experiments were performed to determine whether Gemma 3 and Qwen3 had significant advantages over Qwen2.5, since they were more recent.
 
  On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
