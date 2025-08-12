@@ -506,7 +506,7 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
 \end{figure}
 
 \subsection{Comparison}
-% Artificially place table before for now
+% Artificially place table here for now
 {
 
     \renewcommand{\arraystretch}{1.1}
@@ -585,17 +585,17 @@ available and open source, small enough to fit in most modern GPUs when quantize
 24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used.
 {
-\renewcommand{\arraystretch}{1.1}
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|ccc|} \hline
-Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
-Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
-Qwen3 4B         & 0.550      & 0.850      & 0.564            \\
-Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
-\end{tabular}
-\caption{TODO}
-\end{table}
+    \renewcommand{\arraystretch}{1.1}
+    \begin{table}[h]
+    \centering
+    \begin{tabular}{|l|ccc|} \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
+    Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
+    Qwen3 4B         & 0.550      & 0.850      & 0.564            \\
+    Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
+    \end{tabular}
+    \caption{TODO}
+    \end{table}
 }
 
 In all experiments on local models, the input context size is limited to 4096 tokens, and the maximum output tokens to generate is set to 512.
@@ -607,7 +607,16 @@ and is more stable than these new models.
 For the commercial model selection, we preselected GPT 4.1 Mini \cite{gpt4}, Gemini 2.5 Flash \cite{gemini2.5}, and Gemini 2.5 Flash Lite \cite{gemini2.5}.
 These were chosen mainly because of their low cost and availability.
 
-TODO: Results table.
+{
+    \renewcommand{\arraystretch}{1.1}
+    \begin{table}[h]
+    \begin{tabular}{|l|ccc|} \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
+    Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
+    GPT 4.1 Mini     & 0.662      & 0.811      & 0.755            \\ \hline
+    \end{tabular}
+    \end{table}
+}
 
 Functions are truncated to a maximum length of 128 instructions, to have a similar context window to local models.
 We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's 10 seconds
