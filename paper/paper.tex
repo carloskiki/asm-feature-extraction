@@ -516,7 +516,6 @@ structure is divided by the total number of elements, giving a value between \(0
 
 \subsection{Dataset}
 {
-    \renewcommand{\arraystretch}{1.3}
     \begin{table*}[t]
     \centering
     \resizebox{\linewidth}{!}{
@@ -551,25 +550,6 @@ platform evaluation. For example, the \texttt{MD5Init} functions in figure \ref{
 \texttt{-O3} (right) for \texttt{x86-64} form a pair for cross optimization retrieval, whereas functions compiled \texttt{-O0} for \texttt{x86-64} (left)
 and \texttt{mips} (center) form a pair for cross architecture retrieval.
 
-\subsection{Model}
-
-We evaluate both local models of various sizes and commercially deployed models.
-Qwen2.5-Coder ~\cite{qwen2} with sizes 0.5B to 7B is used to run most local evaluations as its small size fitted our GPU capacity and capabilities.
-We use this model to present our results. Qwen3 ~\cite{qwen3} with sizes 0.6B to 4B and Gemma-3n ~\cite{gemma3} with sizes 0.5B to 4B were also used on
-small scale experiments. On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
-was set to 512. Very large assembly functions that did not fit within the input token limit were truncated. The following commercially deployed
-models were also used.
-
-\begin{itemize}
-    \item GPT 4.1 mini ~\cite{gpt4}
-    \item Gemini 2.5 Flash lite ~\cite{gemini2.5}
-    \item Gemini 2.5 Flash ~\cite{gemini2.5}
-\end{itemize}
-
-Gemini 2.5 Flash ~\cite{gemini2.5} is used to present our results. Gemini 2.5 Flash provided the best results while being cheaper than GPT 4.1 mini.
-We did not make use of the ``reasoning'' capabilities that some of these models provide to keep a predictable token usage rate, and to match the
-capabilities of the local models used.
-
 \section{Experiments}
 
 Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, 100 GB of RAM, and four NVIDIA Quadro RTX
@@ -602,10 +582,17 @@ available and open source, small enough to fit in most modern GPUs when quantize
 24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used.
 
-TODO: Results table.
+\begin{table}[]
+\begin{tabular}{|l|ccc|} \hline
+Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
+Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
+Qwen3 4B         & 0.550      & 0.850      & 0.564            \\
+Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
+\end{tabular}
+\end{table}
 
-On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate was set to 512.
-Very large assembly functions that did not fit within the input tokens were truncated. The more recent Qwen3 and Gemma 3
+In all experiments on local models, the input context size is limited to 4096 tokens, and the maximum output tokens to generate is set to 512.
+Very large assembly functions that do not fit within the input tokens are truncated. The more recent Qwen3 and Gemma 3
 models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being around \(40\%\)
 smaller. However, we selected Qwen2.5 Coder for the remaining experiments because it provides many small sizes for our ablation study,
 and is more stable than these new models.
@@ -615,8 +602,9 @@ These were chosen mainly because of their low cost and availability.
 
 TODO: Results table.
 
+Functions are truncated to a maximum length of 128 instructions, to have a similar context window to local models.
 We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's 10 seconds
-latency per request, Gemini was able to handle almost 1 request per second, making evaluations easier.
+latency per request, Gemini is able to handle almost 1 request per second, making evaluations our evaluations much faster.
 
 \subsection{Clone search with different optimization levels}
 
@@ -656,8 +644,8 @@ Some loops are unrolled, so that each iteration of the loop is laid out sequenti
 and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance, while
 keeping the observable behavior of the program untouched.
 
-The baselines are SAFE, OrderMatters, PalmTree, Asm2Vec, and CLAP. A summary of each of their architecture is provided in the Related
-Work \ref{related-work} section. We also include Qwen3-Embedding 4B, an embedding model based on Qwen3 trained for general text embedding as baseline.
+The baselines are SAFE, OrderMatters, PalmTree, Asm2Vec, and CLAP. A summary of each of their architecture is provided in the section \ref{related-work}.
+We also include Qwen3-Embedding 4B, an embedding model based on Qwen3 trained for general text embedding as baseline.
 We present the results of our method evaluated on both a local model, Qwen2.5-Coder 7B Parameters, and a commercially deployed model,
 Gemini 2.5 Flash.
 
