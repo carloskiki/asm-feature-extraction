@@ -516,9 +516,9 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
     Library       & Function count & Median function length & Description                                                          \\ \hline
     BusyBox       & 66706          & 32                     & A fairly complete unix utility set for any small or embedded system. \\
     GNU coreutils & 42545          & 31                     & The basic utilities of the GNU operating system.                     \\
-    curl          & 27198          & 14                     & A command line tool to transfer data with URLs.                      \\
-    ImageMagick   & 69873          & 55                     & A software suite used for editing and manipulating digital images.   \\
-    OpenSSL       & 134359         & 29                     & A toolkit for general-purpose cryptography and secure communication. \\
+    curl          & 27198          & 14                     & Command line tool to transfer data with URLs.                        \\
+    ImageMagick   & 69873          & 55                     & Software suite used for editing and manipulating digital images.     \\
+    OpenSSL       & 134359         & 29                     & Toolkit for general-purpose cryptography and secure communication.   \\
     PuTTY         & 12655          & 26                     & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
     SQLite        & 30322          & 40                     & A small SQL database engine.                                         \\ \hline
     \end{tabular}
@@ -582,8 +582,8 @@ Gemma 3 ~\cite{gemma3} with sizes 1B and 4B; and  Qwen3 4B ~\cite{qwen3}. We pre
 available and open source, small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
 24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used.
-
-\begin{table}[H]
+{
+\begin{table}[h]
 \centering
 \begin{tabular}{|l|ccc|} \hline
 Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
@@ -593,6 +593,7 @@ Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
 \end{tabular}
 \caption{TODO}
 \end{table}
+}
 
 In all experiments on local models, the input context size is limited to 4096 tokens, and the maximum output tokens to generate is set to 512.
 Very large assembly functions that do not fit within the input tokens are truncated. The more recent Qwen3 and Gemma 3
