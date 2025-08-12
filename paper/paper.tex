@@ -596,17 +596,17 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 \subsection{LLM Selection}
 
 Before evaluating our method against the baselines, we compare different LLMs available to select our backbone for the remaining experiments.
-For the local model, three options were considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B,
+For the local model, three options are considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B,
 Gemma 3 ~\cite{gemma3} with sizes 1B and 4B, and  Qwen3 4B ~\cite{qwen3}. We preselected these models because they are freely
 available and open source, small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
 24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
-workload is likely to result in only a subset of expert being heavily used. 
+workload is likely to result in only a subset of expert being heavily used.
 
 TODO: Results table.
 
 On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate was set to 512.
-Very large assembly functions that did not fit within the input tokens were truncated. Clearly, the more recent Qwen3 and Gemma 3
-models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being more than \(40\%\)
+Very large assembly functions that did not fit within the input tokens were truncated. The more recent Qwen3 and Gemma 3
+models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being around \(40\%\)
 smaller. However, we selected Qwen2.5 Coder for the remaining experiments because it provides many small sizes for our ablation study,
 and is more stable than these new models.
 
@@ -615,7 +615,7 @@ These were chosen mainly because of their low cost and availability.
 
 TODO: Results table.
 
-We selected Gemini 2.5 Flash because it was the best performing model and offered the best infrastructure. Compared to GPT 4.1 Mini's 10 seconds
+We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's 10 seconds
 latency per request, Gemini was able to handle almost 1 request per second, making evaluations easier.
 
 \subsection{Clone search with different optimization levels}
@@ -629,13 +629,13 @@ latency per request, Gemini was able to handle almost 1 request per second, maki
     \Xhline{2\arrayrulewidth}
     \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
                            & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average     & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average   \\ \hline
-    Order Matters          & 0.006        & 0.008        & 0.006        & 0.006        & 0.006        & 0.006       & 0.001        & 0.002        & 0.001        & 0.000        & 0.001        & 0.001     \\
-    SAFE                   & 0.189        & 0.200        & 0.189        & 0.218        & 0.171        & 0.193       & 0.000        & 0.063        & 0.063        & 0.063        & 0.000        & 0.038     \\
-    PalmTree               & 0.020        & 0.019        & 0.230        & 0.314        & \bf 0.878    & 0.292       & 0.006        & 0.007        & 0.080        & 0.184        & 0.676        & 0.191     \\
-    Asm2Vec                & 0.494        & 0.460        & 0.444        & 0.535        & 0.563        & 0.499       & 0.290        & 0.252        & 0.234        & 0.343        & 0.376        & 0.299     \\
-    CLAP                   & 0.244        & 0.221        & 0.214        & 0.550        & 0.781        & 0.402       & 0.187        & 0.176        & 0.168        & 0.455        & 0.707        & 0.339     \\ \hline
-    Qweni 2.5 7B           & 0.471        & 0.412        & 0.343        & 0.456        & 0.608        & 0.458       & 0.342        & 0.301        & 0.234        & 0.345        & 0.488        & 0.342     \\
-    Gemini 2.5 Flash       & \bf 0.739    & \bf 0.672    & \bf 0.568    & \bf 0.700    & 0.816        & \bf 0.699   & \bf 0.646    & \bf 0.579    & \bf 0.485    & \bf 0.618    & \bf 0.758    & \bf 0.617 \\ \Xhline{2\arrayrulewidth}
+    Order Matters          & 0.006      & 0.008      & 0.006      & 0.006      & 0.006      & 0.006       & 0.001      & 0.002      & 0.001      & 0.000      & 0.001      & 0.001     \\
+    SAFE                   & 0.189      & 0.200      & 0.189      & 0.218      & 0.171      & 0.193       & 0.000      & 0.063      & 0.063      & 0.063      & 0.000      & 0.038     \\
+    PalmTree               & 0.020      & 0.019      & 0.230      & 0.314      & \bf 0.878  & 0.292       & 0.006      & 0.007      & 0.080      & 0.184      & 0.676      & 0.191     \\
+    Asm2Vec                & 0.494      & 0.460      & 0.444      & 0.535      & 0.563      & 0.499       & 0.290      & 0.252      & 0.234      & 0.343      & 0.376      & 0.299     \\
+    CLAP                   & 0.244      & 0.221      & 0.214      & 0.550      & 0.781      & 0.402       & 0.187      & 0.176      & 0.168      & 0.455      & 0.707      & 0.339     \\ \hline
+    Qweni 2.5 7B           & 0.471      & 0.412      & 0.343      & 0.456      & 0.608      & 0.458       & 0.342      & 0.301      & 0.234      & 0.345      & 0.488      & 0.342     \\
+    Gemini 2.5 Flash       & \bf 0.739  & \bf 0.672  & \bf 0.568  & \bf 0.700  & 0.816      & \bf 0.699   & \bf 0.646  & \bf 0.579  & \bf 0.485  & \bf 0.618  & \bf 0.758  & \bf 0.617 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
     \caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
@@ -657,7 +657,7 @@ and a jump to the loop's initial instruction. Also, instructions can be heavily 
 keeping the observable behavior of the program untouched.
 
 The baselines are SAFE, OrderMatters, PalmTree, Asm2Vec, and CLAP. A summary of each of their architecture is provided in the Related
-Work section. We also include Qwen3-Embedding 4B, an embedding model based on Qwen3 trained for general text embedding as baseline.
+Work \ref{related-work} section. We also include Qwen3-Embedding 4B, an embedding model based on Qwen3 trained for general text embedding as baseline.
 We present the results of our method evaluated on both a local model, Qwen2.5-Coder 7B Parameters, and a commercially deployed model,
 Gemini 2.5 Flash.
 
@@ -841,6 +841,7 @@ The combined method significantly surpasses both the embedding and analysis meth
 each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embeddings model.
 
 \section{Related Work}
+\label{related-work}
 
 \subsection{Static analysis}
 
@@ -975,7 +976,6 @@ The direct stakeholders in this research's outcomes include:
 \item Software developers trying to prevent their software from being reconstructed.
 \item LLM providers and developers.
 \end{itemize}
-
 
 We believe that our method risks having postive outcomes for reverse engineering software users and
 the LLM industry, but risks having a negative impact on developers trying to hinder reverse engineering of their binaries. As
