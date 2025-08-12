@@ -9,7 +9,7 @@ MODELS = {
     "qwen-2.5-3": "Qwen/Qwen2.5-Coder-3B-Instruct",
     "qwen-2.5-1.5": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
     "qwen-2.5-0.5": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
-    "qwen-3-4": "Qwen3-4B-Instruct-2507",
+    "qwen-3-4": "Qwen/Qwen3-4B-Instruct-2507",
     "qwen-emb": "Qwen/Qwen3-Embedding-4B",
     "qwen-emb-8": "Qwen/Qwen3-Embedding-8B",
     "qwen-emb-0.6": "Qwen/Qwen3-Embedding-0.6B",
