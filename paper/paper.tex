@@ -522,14 +522,14 @@ structure is divided by the total number of elements, giving a value between \(0
     \resizebox{\linewidth}{!}{
     \begin{tabular}{|l|c|c|l|}
     \hline
-    Library       & Function count & Average function length & Description                                                          \\ \hline
-    BusyBox       & 66706          & 85.4                    & A fairly complete unix utility set for any small or embedded system. \\
-    GNU coreutils & 42545          & 118.3                   & The basic utilities of the GNU operating system.                     \\
-    curl          & 27198          & 78.1                    & A command line tool to transfer data with URLs.                      \\
-    ImageMagick   & 69873          & 228.4                   & A software suite used for editing and manipulating digital images.   \\
-    OpenSSL       & 134359         & 86.6                    & A toolkit for general-purpose cryptography and secure communication. \\
-    PuTTY         & 12655          & 84.9                    & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
-    SQLite        & 30322          & 115.4                   & A small SQL database engine.                                         \\ \hline
+    Library       & Function count & Median function length & Description                                                          \\ \hline
+    BusyBox       & 66706          & 32                     & A fairly complete unix utility set for any small or embedded system. \\
+    GNU coreutils & 42545          & 31                     & The basic utilities of the GNU operating system.                     \\
+    curl          & 27198          & 14                     & A command line tool to transfer data with URLs.                      \\
+    ImageMagick   & 69873          & 55                     & A software suite used for editing and manipulating digital images.   \\
+    OpenSSL       & 134359         & 29                     & A toolkit for general-purpose cryptography and secure communication. \\
+    PuTTY         & 12655          & 26                     & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
+    SQLite        & 30322          & 40                     & A small SQL database engine.                                         \\ \hline
     \end{tabular}
     }
     \caption{Dataset details}
@@ -595,19 +595,28 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 
 \subsection{LLM Selection}
 
-Before evaluating our method against other baselines, we compare different LLMs available to select the best fit for comparison with other
-baselines. For the local model selection, many factors were considered. We require the model to (1) be freely available and open source,
-(2) be small enough to fit on most modern GPUs if quantized, and small enough to fit within our GPU having 24GB of VRAM unquantized.
-(3) have many size variants applicable to the aformentioned criteria, and (4) maximize the metrics we evaluate. For the commercial model selection,
-we require that the model is (1) affordable, (2) has a simple API that allows prompt caching, and (3) that has the best results on our evaluations.
+Before evaluating our method against the baselines, we compare different LLMs available to select our backbone for the remaining experiments.
+For the local model, three options were considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B,
+Gemma 3 ~\cite{gemma3} with sizes 1B and 4B, and  Qwen3 4B ~\cite{qwen3}. We preselected these models because they are freely
+available and open source, small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
+24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
+workload is likely to result in only a subset of expert being heavily used. 
 
-For the local model, three options were considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B, Gemma 3 ~\cite{gemma3} with sizes 1B and 4B, and  Qwen3 ~\cite{qwen3} with size 4B. We did not consider mixture of experts models because of the specificity of our workload.
-Qwen2.5 Coder is the model that best matches our first three criterias for local model selection. Small scale
-experiments were performed to determine whether Gemma 3 and Qwen3 had significant advantages over Qwen2.5, since they were more recent.
+TODO: Results table.
 
- On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate
-was set to 512. Very large assembly functions that did not fit within the input tokens were truncated. The following commercially deployed
-models were also used.
+On all local models, the input context size was limited to 4096 tokens, and the maximum output tokens to generate was set to 512.
+Very large assembly functions that did not fit within the input tokens were truncated. Clearly, the more recent Qwen3 and Gemma 3
+models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being more than \(40\%\)
+smaller. However, we selected Qwen2.5 Coder for the remaining experiments because it provides many small sizes for our ablation study,
+and is more stable than these new models.
+
+For the commercial model selection, we preselected GPT 4.1 Mini \cite{gpt4}, Gemini 2.5 Flash \cite{gemini2.5}, and Gemini 2.5 Flash Lite \cite{gemini2.5}.
+These were chosen mainly because of their low cost and availability.
+
+TODO: Results table.
+
+We selected Gemini 2.5 Flash because it was the best performing model and offered the best infrastructure. Compared to GPT 4.1 Mini's 10 seconds
+latency per request, Gemini was able to handle almost 1 request per second, making evaluations easier.
 
 \subsection{Clone search with different optimization levels}
 
