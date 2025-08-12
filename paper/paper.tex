@@ -506,15 +506,7 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
 \end{figure}
 
 \subsection{Comparison}
-
-ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
-methods such as cosine similarity.  Since our generated analysis is not a numerical vector but rather structured text,
-we use an alternative method to compare two assembly functions. We flatten the JSON structure into a set, where each
-element is the full path concatenated with the value of each element in the object. Jaccard similarity (Intesection over union)
-is used to obtain a similarity score when comparing two such dictionaries. That is, the number of identical fields in the JSON
-structure is divided by the total number of elements, giving a value between \(0\) and \(1\).
-
-\subsection{Dataset}
+% Artificially place table before for now
 {
     \begin{table*}[t]
     \centering
@@ -534,6 +526,15 @@ structure is divided by the total number of elements, giving a value between \(0
     \caption{Dataset details}
     \end{table*}
 }
+
+ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
+methods such as cosine similarity.  Since our generated analysis is not a numerical vector but rather structured text,
+we use an alternative method to compare two assembly functions. We flatten the JSON structure into a set, where each
+element is the full path concatenated with the value of each element in the object. Jaccard similarity (Intesection over union)
+is used to obtain a similarity score when comparing two such dictionaries. That is, the number of identical fields in the JSON
+structure is divided by the total number of elements, giving a value between \(0\) and \(1\).
+
+\subsection{Dataset}
 
 Our method is not trained, and so a dataset is only needed for evaluations. Our dataset is composed of 7 open source binaries:
 BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
