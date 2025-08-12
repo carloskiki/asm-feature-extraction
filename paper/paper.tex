@@ -583,12 +583,14 @@ available and open source, small enough to fit in most modern GPUs when quantize
 workload is likely to result in only a subset of expert being heavily used.
 
 \begin{table}[]
+\centering
 \begin{tabular}{|l|ccc|} \hline
 Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
 Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
 Qwen3 4B         & 0.550      & 0.850      & 0.564            \\
 Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
 \end{tabular}
+\caption{TODO}
 \end{table}
 
 In all experiments on local models, the input context size is limited to 4096 tokens, and the maximum output tokens to generate is set to 512.
