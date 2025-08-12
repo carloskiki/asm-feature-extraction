@@ -759,10 +759,10 @@ models do not have the capability of generating output based on a schema built-i
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
 \caption{
-MRR performance for the prompt with one of the sections removed. Cross optimization retrieval is done between fragments at
-optimization levels 0 and 3, all functions are compiled for the x86-64 architecture. Cross architecture retrieval is done between functions
-compiled for arm and x86-64, all are compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
-show the MRR score for the prompt without any sections removed. A larger gap between the line and bar means the prompt section has more impact.}
+MRR performance with one section removed from the prompt. Cross optimization retrieval is done between fragments at
+optimization levels 0 and 3, with all functions compiled for the x86-64 architecture. Cross architecture retrieval is done between functions
+compiled for arm and \texttt{x86-64}, all compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
+show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact.}
 \label{prompt-abl}
 \end{figure}
 
@@ -997,7 +997,7 @@ The source code for all of our experiments is available on GitHub: \textit{link}
 
 % optional clearing of the page
 \cleardoublepage
-\bibliographystyle{plain}
+\bibliographystyle{plainurl}
 \bibliography{references}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
