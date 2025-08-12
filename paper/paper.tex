@@ -591,8 +591,8 @@ workload is likely to result in only a subset of expert being heavily used.
     \begin{tabular}{|l|ccc|} \hline
     Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
     Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
-    Qwen3 4B         & 0.550      & 0.850      & 0.564            \\
-    Gemma 3 4B       & 0.571      & 0.839      & 0.594            \\ \hline
+    Qwen3 4B         & 0.550      & \bf 0.850  & 0.564            \\
+    Gemma 3 4B       & \bf 0.571  & 0.839      & \bf 0.594        \\ \hline
     \end{tabular}
     \caption{TODO}
     \end{table}
@@ -801,7 +801,7 @@ For instance, the CLAP ~\cite{CLAP} model baseline is only 110M parameters, comp
 The cost of training such models is still very expensive, but once trained, they are much faster than LLM inference.
 Their small size also potentially allows for CPU execution on small workloads.
 
-To achieve a best of both world scenario, we experiment with combining the similarity scores from an embedding model and our prompting method.
+To achieve the best of both worlds, we experiment with combining the similarity scores from an embedding model and our prompting method.
 Our evaluation method consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
 using cosine similarity, and the analysis similiarity \(s_a\) is calculated using jaccard similarity. Both similarity scores are then combined
 with equal weight.
@@ -816,8 +816,8 @@ top-\(k\) results can be refined using an embedding model, by calculating the em
 the decision to use an embedding model, and which one to use, can be made dynamically.
 
 
-To provide a method that all of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
-As such, the combination still does not require any training or fine-tuning. As shown in table ~\ref{composite}, off-the-shelf embedding models
+To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
+As such, the combination still does not require any training nor fine-tuning. As shown in table ~\ref{composite}, off-the-shelf embedding models
 based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation
 (the training phase is performed by the open source model developers).
 
@@ -844,8 +844,8 @@ the binaries are compiled with optimization level 2. A pool of 1000 assembly fun
 \end{table*}
 }
 
-The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embeddings and analysis supplement
-each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embeddings model.
+The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embedding and analysis supplement
+each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embedding model.
 
 \section{Related Work}
 \label{related-work}
