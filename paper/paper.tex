@@ -576,8 +576,8 @@ if \(b_1\) is found to be the most similar function, and the reciprocal rank met
 \subsection{LLM Selection}
 
 Before evaluating our method against the baselines, we compare different LLMs available to select our backbone for the remaining experiments.
-For the local model, three options are considered. Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B,
-Gemma 3 ~\cite{gemma3} with sizes 1B and 4B, and  Qwen3 4B ~\cite{qwen3}. We preselected these models because they are freely
+For the local model, three options are considered: Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B;
+Gemma 3 ~\cite{gemma3} with sizes 1B and 4B; and  Qwen3 4B ~\cite{qwen3}. We preselected these models because they are freely
 available and open source, small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
 24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used.
