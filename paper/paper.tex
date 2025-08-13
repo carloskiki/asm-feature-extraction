@@ -57,7 +57,7 @@
 \usepackage{graphicx}
 \usepackage{makecell}
 \usepackage{textcomp}
-\usepackage[svgnames]{xcolor}
+\usepackage[svgnames, table]{xcolor}
 \usepackage{minted}
 \usepackage{multirow}
 
@@ -275,7 +275,7 @@ Security researchers and reverse engineers are routinely tasked with the analysi
 Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
 a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these programs are to
-disassemble and decompile a provided binary, so that its content can be analyzed by humans. Disassembly is
+disassemble and decompile the provided machine code, so that its content can be analyzed by humans. Disassembly is
 the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
@@ -508,7 +508,6 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
 \subsection{Comparison}
 % Artificially place table here for now
 {
-
     \renewcommand{\arraystretch}{1.1}
     \begin{table*}[t]
     \centering
@@ -525,7 +524,7 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
     SQLite        & 30322          & 40                     & A small SQL database engine.                                         \\ \hline
     \end{tabular}
     }
-    \caption{Dataset details}
+    \caption{Dataset details.}
     \end{table*}
 }
 
@@ -538,14 +537,15 @@ structure is divided by the total number of elements, giving a value between \(0
 
 \subsection{Dataset}
 
-Our method is not trained, and so a dataset is only needed for evaluations. Our dataset is composed of 7 open source binaries:
+The dataset used is made of a diverse set of executables, so that it represents the diversity found in real world software.
+Our method is not trained, and so our dataset is only needed for evaluations. it is composed of 7 open source binaries:
 BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
 PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allows their use in our evaluations. 
 
 All binaries were compiled using \texttt{gcc} for the following architectures: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
 For each architecture, executables were generated for all optimization levels (\texttt{O0} to \texttt{O3}), stripped of debug symbols.
 The compiled binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383\ 658\) assembly functions.
-Functions consisting of less than 3 instructions were not included as part of the dataset.
+Functions consisting of less than 3 instructions were not included as part of the dataset, because of their triviality.
 
 Pairs of equivalent functions from the same platform but distinct optimization level were made for cross optimization
 evaluation, and pairs from the same optimization level but different platform were formed for cross
