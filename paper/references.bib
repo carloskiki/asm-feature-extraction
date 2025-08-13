@@ -551,3 +551,59 @@
   publisher = {USENIX Association},
   month     = aug
 }
+
+@inproceedings{llm4decompile,
+  title     = {{LLM}4{D}ecompile: Decompiling Binary Code with Large Language Models},
+  author    = {Tan, Hanzhuo  and
+               Luo, Qi  and
+               Li, Jing  and
+               Zhang, Yuqun},
+  editor    = {Al-Onaizan, Yaser  and
+               Bansal, Mohit  and
+               Chen, Yun-Nung},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
+  year      = {2024},
+  address   = {Miami, Florida, USA},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://aclanthology.org/2024.emnlp-main.203/},
+  doi       = {10.18653/v1/2024.emnlp-main.203},
+  pages     = {3473--3487},
+  abstract  = {Decompilation aims to convert binary code to high-level source code, but traditional tools like Ghidra often produce results that are difficult to read and execute. Motivated by the advancements in Large Language Models (LLMs), we propose LLM4Decompile, the first and largest open-source LLM series (1.3B to 33B) trained to decompile binary code. We optimize the LLM training process and introduce the LLM4Decompile-End models to decompile binary directly. The resulting models significantly outperform GPT-4o and Ghidra on the HumanEval and ExeBench benchmarks by over 100{\%} in terms of re-executability rate. Additionally, we improve the standard refinement approach to fine-tune the LLM4Decompile-Ref models, enabling them to effectively refine the decompiled code from Ghidra and achieve a further 16.2{\%} improvement over the LLM4Decompile-End. LLM4Decompile demonstrates the potential of LLMs to revolutionize binary code decompilation, delivering remarkable improvements in readability and executability while complementing conventional tools for optimal results.}
+}
+
+@inproceedings{source-analysis,
+  author    = {Chongzhou Fang and Ning Miao and Shaurya Srivastav and Jialin Liu and Ruoyu Zhang and Ruijie Fang and Asmita and Ryan Tsang and Najmeh Nazari and Han Wang and Houman Homayoun},
+  title     = {Large Language Models for Code Analysis: Do {LLMs} Really Do Their Job?},
+  booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
+  year      = {2024},
+  isbn      = {978-1-939133-44-1},
+  address   = {Philadelphia, PA},
+  pages     = {829--846},
+  url       = {https://www.usenix.org/conference/usenixsecurity24/presentation/fang},
+  publisher = {USENIX Association},
+  month     = aug
+}
+
+@misc{funcVul,
+  title         = {FuncVul: An Effective Function Level Vulnerability Detection Model using LLM and Code Chunk},
+  author        = {Sajal Halder and Muhammad Ejaz Ahmed and Seyit Camtepe},
+  year          = {2025},
+  eprint        = {2506.19453},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2506.19453}
+}
+
+@inproceedings{llm-fuzz,
+  author    = {Asmita and Yaroslav Oliinyk and Michael Scott and Ryan Tsang and Chongzhou Fang and Houman Homayoun},
+  title     = {Fuzzing {BusyBox}: Leveraging {LLM} and Crash Reuse for Embedded Bug Unearthing},
+  booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
+  year      = {2024},
+  isbn      = {978-1-939133-44-1},
+  address   = {Philadelphia, PA},
+  pages     = {883--900},
+  url       = {https://www.usenix.org/conference/usenixsecurity24/presentation/asmita},
+  publisher = {USENIX Association},
+  month     = aug
+}
