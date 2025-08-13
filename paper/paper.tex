@@ -530,7 +530,7 @@ structure is divided by the total number of elements, giving a value between \(0
 
 \subsection{Dataset}
 
-The dataset used is made of a diverse set of executables, so that it represents the diversity found in real world software.
+The dataset used is made of a varied set of executables, so that it represents the diversity found in real world software.
 Our method is not trained, and so our dataset is only needed for evaluations. it is composed of 7 open source binaries:
 BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
 PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allows their use in our evaluations. 
@@ -605,8 +605,8 @@ These were chosen mainly because of their low cost and availability.
 
 {
     \renewcommand{\arraystretch}{1.1}
-    \centering
     \begin{table}[h]
+    \centering
     \begin{tabular}{|l|ccc|} \hline
     Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
     Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
