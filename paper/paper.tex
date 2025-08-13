@@ -1025,7 +1025,10 @@ is also made public. TODO: ref
 
 \appendix
 
-\begin{tcolorbox*}[title={Full Prompt}]
+\begin{figure*}
+\centering
+\fbox{
+    \begin{minipage}{0.95\textwidth}
 You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
 analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
 high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
@@ -1096,7 +1099,9 @@ algorithm. Your output \textbf{MUST} be a JSON object conforming to the structur
         * `"Interfacing/Wrapper"`: Acts as an interface, relaying calls or arguments with minimal internal logic.
         * `"Undetermined"`: If no confident category can be assigned.
     * *Inference:* Based on a holistic view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
-\end{tcolorbox*}
+    \end{minipage}
+}
+\end{figure*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
