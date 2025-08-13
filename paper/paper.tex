@@ -1034,7 +1034,7 @@ analysis. Your goal is to analyze an assembly routine from an unspecified archit
 high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
 algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
 
-\textbf{I. Basic Signature & Data Flow}
+\textbf{I. Basic Signature \& Data Flow}
 
 \begin{itemize}
 \item \textbf{Input Parameter Count (Integer):} The number of distinct conceptual inputs the function likely takes. Infer based on typical argument passing mechanisms (e.g., values moved into frequently-used registers at the start of the function, or stack manipulations that reserve space for arguments).
@@ -1047,7 +1047,7 @@ algorithm. Your output \textbf{MUST} be a JSON object conforming to the structur
 \end{itemize}
 
 
-\textbf{II. Core Logic & Operations}
+\textbf{II. Core Logic}
 
 \begin{itemize}
 \item \textbf{Dominant Operation Categories (Array of Strings):} Identify the top few (up to 3) dominant types of operations performed by observing instruction mnemonics and their common effects. For example, if control flow (jumps/branches) is a primary characteristic of the routine, ensure the relevant category (e.g., "ConditionalBranching") is included among the dominant ones.
@@ -1059,7 +1059,7 @@ algorithm. Your output \textbf{MUST} be a JSON object conforming to the structur
 \item \textbf{Presence of SIMD Instructions (Boolean):} \texttt{true} if instructions commonly associated with Single Instruction, Multiple Data (SIMD) operations are observed (e.g., instructions operating on wide registers, packed data, or vector operations like \texttt{ADDPS}, \texttt{XORPS}, \texttt{MOVAPS}, \texttt{VMOVUPS}, etc., even if specific mnemonics are architecture-dependent, the pattern of data movement and parallel operations can be inferred). \texttt{false} otherwise.
 \end{itemize}
 
-\textbf{III. Constants & "Magic Numbers"}
+\textbf{III. Constants}
 
 \begin{itemize}
 \item \textbf{Presence of Notable Integer Constants (Array of Hexadecimal Strings):} A list of up to 15 UNIQUE integer literals (immediate values) used in operations, represented as hexadecimal strings (e.g., "0x5B8", "0x23"). \textit{Exclude values that are:} \texttt{0x0}, \texttt{0x1}, \texttt{0xFFFFFFFF}, common loop counters/increments/decrements, or standard stack adjustments (e.g., small multiples of \texttt{0x4}, \texttt{0x8}, \texttt{0x10} for stack pointer manipulation). Prioritize larger, less common, or clearly patterned constants, and those used in bitwise operations or memory addressing with unusual offsets. The list should contain only distinct values.
@@ -1068,7 +1068,7 @@ algorithm. Your output \textbf{MUST} be a JSON object conforming to the structur
 \item \textbf{String Literal Presence (Boolean):} \texttt{true} if identifiable string literals are referenced or used within the function (e.g., for I/O, error messages, or comparisons). This can be inferred by moves of apparent string addresses into registers/stack, followed by calls to I/O or string manipulation routines. \texttt{false} otherwise.
 \end{itemize}
 
-\textbf{IV. Side Effects & Interactions}
+\textbf{IV. Side Effects}
 
 \begin{itemize}
 \item \textbf{Modifies Input Parameters (Boolean):} \texttt{true} if there are instructions writing to memory addresses derived from what are inferred as input parameters (e.g., \texttt{[inferred_input_pointer + offset] = value}). \texttt{false} otherwise.
