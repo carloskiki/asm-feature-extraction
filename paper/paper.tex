@@ -123,19 +123,20 @@ Second Institution
 \begin{abstract}
 %-------------------------------------------------------------------------------
 
-Machine Learning based binary code similarity detection methods are becoming accurate at detecting
+Binary code similarity detection methods are becoming accurate at detecting
 clones across compiler settings and architectures, but have limitations that
 prevent them from being useful in reverse egineering processes. These methods generate
 a large floating point vector (an embedding) as a representation for a code fragment.
 The embedding provides no insight to the user, and limits the scalability of binary similarity
 databases. The necessity for these methods to be trained on a code fragment dataset
-means they do not adapt to unseen settings. We propose a new method that resolves these issues.
+means they often do not adapt to unseen settings. We propose a new method that resolves these issues.
 Our solution does not require training, and generates a textual analysis rather than an embedding.
 This solves the scalability issues of existing methods, because ours allows for inverted
 index search, which is orders of magnitude faster than nearest neighbor search in high dimensions.
 Most importantly, the textual representation is inherently human interpretable, making
-clone verification much easier. While alleviating these limitations, our method surpasses
-state-of-the-art binary code similarity models on most benchmarks. TODO: actual numbers
+clone verification much easier. While alleviating these limitations, our method achieves \(42\%\) and \(62\%\)
+on first position recall in cross architecture and cross optimization similarity detection respectively,
+compared to \(39\%\) and \(34\%\) achieved by the best state-of-the-art method.
 
 \end{abstract}
 
