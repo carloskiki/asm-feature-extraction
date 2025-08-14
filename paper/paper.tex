@@ -62,7 +62,6 @@
 \usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{caption}
-\usepackage{nameref}
 
 % inlined bib file
 \usepackage{filecontents}
@@ -319,12 +318,12 @@ complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return th
 \subsection{Problem definition}
 
 We deem two assembly code fragments to be semantically identical if they have the same observable behavior on a system.
-This type of clone is generally referred to as type 4 clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
+This type of clone is generally referred to as type four clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
 to detect. In research, it is common to use the same source code function compiled with different compilers or compilation
 options to create such type four clones ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.  This type of clone excludes
 procedures that happen to have the same output but achieve it in different ways, for example the breadth-first search and
 depth-first search algorithms. Instead of generating a binary output as to whether two code fragments are clones, the feature
-vector generated for each assembly function are compared to generate a similarity score. This value is between 0 and 1 and
+vector generated for each assembly function are compared to generate a similarity score. This value is between \(0\) and \(1\) and
 represents the degree of similarity between the two code fragments. This more closely aligns with real world use cases, where
 two pieces of code can be highly similar but not identical. For example, two different versions of a function from the same
 software deemed similar can help understand the nature of an executable, or a vulnerable function and its patched variant matched
@@ -534,25 +533,25 @@ structure is divided by the total number of elements, giving a value between \(0
 \subsection{Dataset}
 
 The dataset used is made of a varied set of executables, so that it represents the diversity found in real world software.
-Our method is not trained, and so our dataset is only needed for evaluations. it is composed of 7 open source binaries:
+Our method is not trained, and so our dataset is only needed for evaluations. it is composed of seven open source binaries:
 BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
 PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allows their use in our evaluations. 
 
 All binaries were compiled using \texttt{gcc} for the following architectures: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
 For each architecture, executables were generated for all optimization levels (\texttt{O0} to \texttt{O3}), stripped of debug symbols.
-The compiled binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383\ 658\) assembly functions.
-Functions consisting of less than 3 instructions were not included as part of the dataset, because of their triviality.
+The compiled binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383,658\) assembly functions.
+Functions consisting of less than three instructions were not included as part of the dataset, because of their triviality.
 
 Pairs of equivalent functions from the same platform but distinct optimization levels are made for cross optimization
 evaluation, and pairs from the same optimization level but different platforms are made for cross
-platform evaluation. For example, the \texttt{MD5Init} functions in \nameref{asm-diff} compiled with \texttt{-O0} (left) and
+platform evaluation. For example, the \texttt{MD5Init} functions in \ref{asm-diff} compiled with \texttt{-O0} (left) and
 \texttt{-O3} (right) for \texttt{x86-64} form a pair for cross optimization retrieval, whereas functions compiled with \texttt{-O0}
 for \texttt{x86-64} (left) and \texttt{mips} (center) form a pair for cross architecture retrieval.
 
 \section{Experiments}
 
-Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, 100 GB of RAM, and 2 NVIDIA Quadro RTX
-6000 GPUs each having  24GB of RAM. First, we select the LLM best suited for our subsequent experiments. Second, we compare our
+Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, \(100\) GB of RAM, and two NVIDIA Quadro RTX
+6000 GPUs each having  \(24\) GB of RAM. First, we select the LLM best suited for our subsequent experiments. Second, we compare our
 method against other state-of-the-art ML based approaches to BCSD on our dataset. Third, we perform ablation studies on our method,
 to determine how the size of the model, the number of examples provided, and the different sections of the prompt contribute to our results.
 Finally, we demonstrate that the features extracted from our novel method are not properly represented in state-of-the-art embedding methods,
@@ -564,9 +563,9 @@ The mean reciprocal rank (MRR) and first position recall (Recall@1) metrics are 
 ~\cite{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}.
 A pool of assembly function pairs is used for evaluation, where both assembly fragments in a pair come from the same source function.
 For each pair, we compare the generated features for the first element of the pair with all second elements of the pairs contained
-in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the arm
-architecture with optimization level 3, and \(b_i\) is compiled for the mips architecture with optimization
-level 3. The features generated for function \(a_1\) is compared for similarity with the features of \(b_i\) for \(i \in [1, 10]\).
+in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the \texttt{arm}
+architecture with optimization level \(3\), and \(b_i\) is compiled for the \texttt{mips} architecture with the same optimization
+level. The features generated for function \(a_1\) is compared for similarity with the features of \(b_i\) for \(i \in [1, 10]\).
 A ranking is generated by ordering these comparisons from most to least similar. Recall@1 is successful
 if \(b_1\) is found to be the most similar function, and the reciprocal rank metric is calculated with \ref{mrr}.
 \begin{equation} \label{mrr}
@@ -578,17 +577,17 @@ MRR metric is calculated by averaging the reciprocal rank of each pair.
 \subsection{LLM Selection}
 
 Before evaluating our method against the baselines, we compare different LLMs available to select our backbone for the remaining experiments.
-For the local model, three options are considered: Qwen2.5 Coder ~\cite{qwen2} with sizes 0.5B, 1.5B, 3B, and 7B;
-Gemma 3 ~\cite{gemma3} with sizes 1B and 4B; and  Qwen3 4B ~\cite{qwen3}. We preselected these models because they are open source,
+For the local model, three options are considered: Qwen2.5 Coder ~\cite{qwen2} with sizes \(0.5\)B, \(1.5\)B, \(3\)B, and \(7\)B;
+Gemma 3 ~\cite{gemma3} with sizes \(1\)B and \(4\)B; and  Qwen3 \(4\)B ~\cite{qwen3}. We preselected these models because they are open source,
 small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
-24GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
+\(24\) GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used.
 {
     \renewcommand{\arraystretch}{1.1}
     \begin{table}[h]
     \centering
     \begin{tabular}{|l|ccc|} \hline
-    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
     Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
     Qwen3 4B         & 0.550      & \bf 0.850  & 0.564            \\
     Gemma 3 4B       & \bf 0.571  & 0.839      & \bf 0.594        \\ \hline
@@ -597,7 +596,7 @@ workload is likely to result in only a subset of expert being heavily used.
     \end{table}
 }
 
-In all experiments on local models, the input context size is limited to 4096 tokens, and the maximum output tokens to generate is set to 512.
+In all experiments on local models, the input context size is limited to \(4096\) tokens, and the maximum output tokens to generate is set to \(512\).
 Very large assembly functions that do not fit within the input tokens are truncated. The more recent Qwen3 and Gemma 3
 models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being around \(40\%\)
 smaller. However, we selected Qwen2.5 Coder for the remaining experiments because it provides many small sizes for our ablation study,
@@ -610,7 +609,7 @@ These were chosen mainly because of their low cost and availability.
     \begin{table}[h]
     \centering
     \begin{tabular}{|l|ccc|} \hline
-    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86\_64 \\ \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
     Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
     GPT 4.1 Mini     & 0.662      & 0.811      & 0.755            \\ \hline
     \end{tabular}
@@ -618,9 +617,9 @@ These were chosen mainly because of their low cost and availability.
     \end{table}
 }
 
-To provide a similar environment to local models, functions are truncated to a maximum length of 128 instructions.
-We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's 10 seconds
-latency per request, Gemini is able to handle almost 1 request per second, making it easier to iterate on our evaluations.
+To provide a similar environment to local models, functions are truncated to a maximum length of \(128\) instructions.
+We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's \(10\) seconds
+latency per request, Gemini is almost able to handle a request every second, making it easier to iterate on our evaluations.
 
 \subsection{Clone search with different optimization levels}
 
@@ -642,8 +641,8 @@ latency per request, Gemini is able to handle almost 1 request per second, makin
     Gemini 2.5 Flash       & \bf 0.739  & \bf 0.672  & \bf 0.568  & \bf 0.700  & 0.816      & \bf 0.699   & \bf 0.646  & \bf 0.579  & \bf 0.485  & \bf 0.618  & \bf 0.758  & \bf 0.617 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
-    \caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of 1000.
-    All functions are compiled for the arm architecture using gcc with the optimization levels specified for each column.
+    \caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of \(1000\).
+    All functions are compiled for the \texttt{arm} architecture using gcc with the optimization levels specified for each column.
     Three examples are provided with our prompt.}
     \label{x-opt}
     \end{table*}
@@ -677,8 +676,8 @@ A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the 
 It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
 on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
 It is also trained on context window prediction, that is, predicting whether two instructions are found
-in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction ---
-predicting whether there is a definition-usage relation between two instructions. This method supports
+in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction---predicting
+whether there is a definition-usage relation between two instructions. This method supports
 both cross architecture and cross optimization tasks, although its reference implementation is only
 trained on cross compiler similarity detection.
 
@@ -692,11 +691,11 @@ for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it sup
 them.
 
 We present the results of our method evaluated on both the local model, Qwen2.5-Coder 7B Parameters, and the commercially deployed model,
-Gemini 2.5 Flash. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
+Gemini 2.5 Flash. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels \(0\) and \(3\),
 highlighting the substantial difference between unoptimized and maximally optimized code (see figure ~\ref{asm-diff}).
-At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
+At optimization level \(0\), functions perform a lot of unessecary actions, such as extensively moving
 data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
-is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
+is mostly left untouched by the optimizer. At optimization level \(3\), the compiler will inline simple functions into the
 body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
 Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
 and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
@@ -728,8 +727,8 @@ meaning our method generalizes well to unseen settings.
     Gemini 2.5 Flash       & \bf 0.548       & 0.520               & \bf 0.525        & \bf 0.531 & \bf 0.436       & 0.414               & \bf 0.417        & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
     \end{tabular}
     }
-    \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of 1000.
-    All functions are compiled with optimization level 2 using \texttt{gcc} for the architectures specified in each column.
+    \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\).
+    All functions are compiled with optimization level \(2\) using \texttt{gcc} for the architectures specified in each column.
     Three examples are provided with our prompt.}
     \label{x-arch}
     \end{table*}
@@ -755,7 +754,7 @@ is able to rank the the correct assembly fragment in first place only \(42\%\) o
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{size-ablation}}
 \caption{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled
-with \texttt{gcc} for the \texttt{arm} architecture. Retrieval is performed between optimization levels 0 and 1 with a pool of 1000 assembly functions.
+with \texttt{gcc} for the \texttt{arm} architecture. Retrieval is performed between optimization levels \(0\) and \(1\) with a pool of \(1000\) assembly functions.
 Three examples are provided with our prompt.}
 \label{size-abl}
 \end{figure}
@@ -764,7 +763,7 @@ In this experiment, we vary the LLM size to determine the correlation between th
 of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models ~\cite{scaling-laws}, in that increasing
 the model size does significantly improve the results generated.
 
-From our observations, LLMs with less than 3B parameters do not seem to comprehend the analysis task when
+From our observations, LLMs with less than \(3\)B parameters do not seem to comprehend the analysis task when
 they are not provided with any examples. When provided with examples, these small models will mimic the examples provided without basing the
 output on the assembly function in the query. We can clearly see a form of sub-linear increase in performance with respect to model size.
 The Gemini 2.5 Flash model architecture is not disclosed at the time of writing, but we can expect the model to have an order
@@ -775,25 +774,25 @@ of magnitude more parameters, than our local models, and may use a mixture of ex
 \begin{figure}[]
 \centerline{\includegraphics[width=\linewidth]{examples-ablation}}
 \caption{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
-using gcc for the x86-64 architecture. A pool of 100 assembly functions is used, with retrieval between optimization levels 0 and 3
-for Gemini 2.5 Flash, and 0 and 1 for Qwen 2.5 7B.}
+using gcc for the \texttt{x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\)
+for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B.}
 \label{ex-abl}
 \end{figure}
 
 By providing hand crafted examples to the large language model, we are able to increase the performance of the assembly function analysis.
 This follows the general observations behind few show prompting ~\cite{few-shot}. Providing a single example significantly increases the retrieval
-scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model such as Qwen 2.5 7B still sees
-marginal increase in MRR scores as the number of examples increases up to 3. This relates to our previous observation
+scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model such as Qwen 2.5 \(7\)B still sees
+marginal increase in MRR scores as the number of examples increases up to three. This relates to our previous observation
 that small LLMs rely more on the provided examples than larger models. Another evidence of this is the number of invalid JSON outputs generated by
-Qwen 2.5 7B. When no examples are provided, approximately \(3\%\) of queries generate an invalid output. With only one example, no invalid
-outputs are generated, and the same applies when 2 or 3 examples are provided.
+Qwen 2.5 \(7\)B. When no examples are provided, approximately \(3\%\) of queries generate an invalid output. With only one example, no invalid
+outputs are generated, and the same applies when two or three examples are provided.
 
 Another interesting result is the fact that when providing enough examples, the system prompt has very little impact on the retrieval scores.
 This is depicted by the green data points in figure \ref{ex-abl}, where only examples are provided with an empty string as the system prompt.
 This suggests that the examples themselves contain enough information for the model to perform the analysis, without being expained 
 exactly how.
 
-With our experimental configuration, providing 4 examples to Qwen 2.5 7B significantly decreases its MRR scores. That is because
+With our experimental configuration, providing four examples to Qwen 2.5 \(7\)B significantly decreases its MRR scores. That is because
 the examples almost completely use the full context window that we provide to the LLM. As such, most query assembly functions are
 too large and thus truncated, which loses information about our query.
 
@@ -808,8 +807,8 @@ models do not have the capability of generating output based on a schema built-i
 \centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
 \caption{
 MRR performance with one section removed from the prompt. Cross optimization retrieval is done between fragments at
-optimization levels 0 and 3, with all functions compiled for the \texttt{x86-64} architecture. Cross architecture retrieval is done between functions
-compiled for \texttt{arm} and \texttt{x86-64}, all compiled using optimization level 2. Both tasks are done with a pool size of 100. The dotted lines
+optimization levels \(0\) and \(3\), with all functions compiled for the \texttt{x86-64} architecture. Cross architecture retrieval is done between functions
+compiled for \texttt{arm} and \texttt{x86-64}, all compiled using optimization level \(2\). Both tasks are done with a pool size of \(100\). The dotted lines
 show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact on the results.}
 \label{prompt-abl}
 \end{figure}
@@ -818,23 +817,23 @@ To verify that each section of our prompt brings meaningful insight into the ass
 study by removing one section of the prompt while keeping others intact. We notice that all individual sections bring a positive
 outcome to the overall results, but some sections of the prompt have a larger impact than others. In particular, the categorization and
 notable constants sections have the most impacts on cross optimization retrieval. The categorization section causes an increase of almost
-0.3 on the MRR metric, when evaluated on the the hardest cross optimization task. The notable constants sections brings an increase of
-almost 0.2 on the MRR for the same task. This result is justified by the comparatively large range of accepted values for both features.
+\(0.30\) on the MRR metric, when evaluated on the the hardest cross optimization task. The notable constants sections brings an increase of
+almost \(0.20\) on the MRR for the same task. This result is justified by the comparatively large range of accepted values for both features.
 For example, the list of notable constants has many more possible values and thus has more variability in the output compared to a set
 of booleans, such as those in the side effects prompt section.
 
 The story is slightly different when this ablation study is performed for cross architecture retrieval. As seen on figure ~\ref{prompt-abl},
 there is a smaller difference between the least and most influential prompt sections. The categorization and notable constants sections
 are significantly less impactful than they were for the cross optimization study, while the other three sections have a larger impact.
-For instance, the categorization section went from having an impact of 0.30 on the MRR to having an impact 0.22, while the logic
-section is more influential, going from 0.06 to 0.20 in MRR impact.
+For instance, the categorization section went from having an impact of \(0.30\) on the MRR to having an impact \(0.22\), while the logic
+section is more influential, going from \(0.06\) to \(0.20\) in MRR impact.
 
 \subsection{Combined Method}
 
 Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained for assembly function understanding
 and BCSD remain benefitial in specific subdomains, such as supporting niche architectures or understanding similarity through
 specific obfuscation methods. The state-of-the-art embedding models are much smaller than our method in terms of parameter count.
-For instance, the CLAP ~\cite{CLAP} model baseline is only 110M parameters, compared to the billions required to perform our method.
+For instance, the CLAP ~\cite{CLAP} model baseline is only \(110\)M parameters, compared to the billions required to perform our method.
 Their small size potentially allows for CPU execution on small workloads. The cost of training such models is still very expensive,
 but once trained, they are much faster than LLM inference.
 
@@ -852,7 +851,7 @@ choice of embedding based BCSD model. That is, an inverted index database is mai
 top-\(k\) results can be refined using an embedding model, by calculating the embeddings only for those \(k\) candidates. With this approach,
 the decision to use an embedding model, and which one to use, can be made dynamically.
 
-To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding 4B as the embedding model for this experiment.
+To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding \(4\)B as the embedding model for this experiment.
 As such, the combination still does not require any training nor fine-tuning. As shown in table ~\ref{composite}, off-the-shelf embedding models
 based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation
 (the training phase is performed by the open source model developers).
@@ -874,8 +873,8 @@ based on a LLM perform very well. Furthermore, using a generic embedding model m
 \tt mips -- x86-64     & 0.417            & 0.415          & \bf 0.729 \\ \Xhline{2\arrayrulewidth}
 \end{tabular}
 \caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
-optimization and cross architecture settings. For cross optimization, the binaries are compiled for the arm architecture, for cross architecture,
-the binaries are compiled with optimization level 2. A pool of 1000 assembly functions is used throughout. Only Recall @ 1 scores are presented.}
+optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt{arm} architecture, for cross architecture,
+the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented.}
 \label{composite}
 \end{table*}
 }
@@ -920,7 +919,7 @@ method makes use of massive models compared to previous methods. A powerful set 
 feature sets for a large pool or database. This favors centralised databases with large amounts of assembly fragments over
 locally maintained databases with hundreds or thousands of functions. Otherwise, a commercially deployed LLM can be used at a
 cost, but concerns surrounding data privacy can legitimately be raised. Another potential limitation is the size of the feature
-set extracted during assembly analysis. As shown, our prompt performs very well with pool sizes of 1000 assembly functions,
+set extracted during assembly analysis. As shown, our prompt performs very well with pool sizes of \(1000\) assembly functions,
 however, this may not be the case when comparing millions of feature sets, as is the case in production databases.
 
 We remain hopeful that our method can bring significant improvements to the current landscape of BCSD, since it resolves
@@ -1025,7 +1024,7 @@ is also made public. TODO: ref
 
 \section{Full Prompt}
 
-The full system prompt used to ask the LLM for assembly function analysis is provided below in \nameref{full-prompt}. It is also available as
+The full system prompt used to ask the LLM for assembly function analysis is provided below in \ref{full-prompt}. It is also available as
 part of our artifact along with many other experimental prompts used in early iterations of the method.
 
 \onecolumn
