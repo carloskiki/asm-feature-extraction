@@ -1022,7 +1022,7 @@ is also made public. TODO: ref
 \appendix
 
 \onecolumn
-\begin{tcolorbox}[breakable]
+\begin{tcolorbox}[breakable, enhanced]
     You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
     analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
     high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
@@ -1081,8 +1081,9 @@ is also made public. TODO: ref
 \textbf{V. Inferred Categorization}
 
 \textbf{Inferred Category (String):} A high-level functional category best describing the routine's primary purpose.
+
 \textit{Categories:}
-\begin{itemize}
+\begin{itemize}[noitemsep]
         \item \texttt{"System/OS Interaction"}: Primarily deals with operating system services (e.g., system calls, direct I/O, resource management).
         \item \texttt{"Memory Management"}: Focuses on allocating, deallocating, or manipulating large memory blocks (e.g., heap operations, block copies/fills).
         \item \texttt{"Data Processing/Transformation"}: Performs significant arithmetic, bitwise, or structural data manipulations.
