@@ -674,19 +674,19 @@ A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the 
 It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
 on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
 It is also trained on context window prediction, that is, predicting whether two instructions are found
-in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction ---
-predicting whether there is a definition-usage relation between two instructions. This method's
-reference implementation is only trained on cross compiler similarity detection, but could be trained
-for other tasks.
+in the same context window of an assembly function. (3) Finally, the model is trained on def-use Prediction ---
+predicting whether there is a definition-usage relation between two instructions. This method supports
+both cross architecture and cross optimization tasks, although its reference implementation is only
+trained on cross compiler similarity detection.
 
-The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model to perform assembly function encoding.
+The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model to perform assembly function embedding.
 It is adapted for assembly instruction tokenization, and directly generates an embedding for
-a whole assembly function. It is also accompanied with a text encoder (CLAP-text), so that classification can
-be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
-assembly function with the assembly encoder. The generated embeddings can be compared with cosine similarity to
-calculate whether the assembly function is closely related or opposed to the embedded category. This model requires
-training and was only trained for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it can support other
-architectures.
+a whole assembly function. It is also comes with a text embedding model, CLAP-text, so that classification can
+be performed using human readable classes. Categories or labels are embedded with the text model, and the
+assembly function with the assembly embedding model. The generated embeddings can be compared with cosine similarity to
+calculate whether the assembly function is closely related or opposed to the embedded category. This model was only trained
+for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it supports other architectures and could be trained on
+them.
 
 We present the results of our method evaluated on both the local model, Qwen2.5-Coder 7B Parameters, and the commercially deployed model,
 Gemini 2.5 Flash. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
@@ -702,7 +702,8 @@ hardware, while keeping the observable behavior of the program untouched.
 The baselines mostly perform worse than expected on this evaluation. As our own dataset is used
 rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
 as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
-fine-tuning to acheive good results, and thus should generalize well to unseen settings.
+specific training other than the pre-traning process performed by open source model developers. It readily acheives good results,
+meaning our method generalizes well to unseen settings.
 
 \subsection{Clone search with different architectures}
 
