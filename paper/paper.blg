@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: plainurl.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+Warning--empty booktitle in BinDiff
+You've used 51 entries,
+            2943 wiz_defined-function locations,
+            967 strings with 16975 characters,
+and the built_in function-call counts, 29312 in all, are:
+= -- 3002
+> -- 1511
+< -- 19
++ -- 580
+- -- 525
+* -- 1841
+:= -- 4092
+add.period$ -- 187
+call.type$ -- 51
+change.case$ -- 412
+chr.to.int$ -- 0
+cite$ -- 52
+duplicate$ -- 798
+empty$ -- 2482
+format.name$ -- 525
+if$ -- 7453
+int.to.chr$ -- 0
+int.to.str$ -- 51
+missing$ -- 25
+newline$ -- 280
+num.names$ -- 104
+pop$ -- 838
+preamble$ -- 1
+purify$ -- 362
+quote$ -- 0
+skip$ -- 1866
+stack$ -- 0
+substring$ -- 838
+swap$ -- 338
+text.length$ -- 51
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 202
+warning$ -- 1
+while$ -- 142
+width$ -- 53
+write$ -- 630
+(There was 1 warning)
