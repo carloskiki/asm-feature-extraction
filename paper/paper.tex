@@ -602,7 +602,6 @@ and is more stable than these new models.
 
 For the commercial model selection, we preselected GPT 4.1 Mini \cite{gpt4} and Gemini 2.5 Flash \cite{gemini2.5}.
 These were chosen mainly because of their low cost and availability.
-
 {
     \renewcommand{\arraystretch}{1.1}
     \begin{table}[h]
@@ -658,7 +657,45 @@ Some loops are unrolled, so that each iteration of the loop is laid out sequenti
 and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
 hardware, while keeping the observable behavior of the program untouched.
 
-The baselines are SAFE, OrderMatters, PalmTree, Asm2Vec, and CLAP. A summary of each of their architecture is provided in the section \ref{related-work}.
+The baselines are OrderMatters, SAFE, PalmTree, Asm2Vec, and CLAP.
+Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation model ~\cite{BERT} along with two control flow graph embedding models
+to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
+passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
+matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
+are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. This method
+supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
+and `arm` for cross platform retrieval.
+
+SAFE ~\cite{SAFE} It first encodes each instruction of an assembly function into a vector,
+using the word2vec model ~\cite{word2vec}. Using a Self-Attentive Neural Network ~\cite{SANN}, SAFE then converts the sequence of instruction
+vectors from the assembly function into a single vector embedding for the function. Much like Asm2Vec, SAFE requires
+pre-training, but can perform cross architecture similarity detection. However, it was only trained on the `AMD64`
+and `arm` architectures.
+
+Asm2Vec ~\cite{Asm2Vec} inspired the SAFE model. is one of the first methods to use a NLP based approach to tackle
+the BCSD problem. It interprets an assembly function as a set of instruction sequences, where each instruction sequence
+is a possible execution path of the function. It samples these sequences by randomly traversing the CFG of the assembly
+function, and then uses a technique based on the PV-DM model ~\cite{PV-DM} to generate an embedding for the assembly function.
+This solution is not cross architecture compatible and requires pre-training.
+
+A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the BERT model ~\cite{BERT}.
+It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
+on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
+It is also trained on context window prediction, that is, predicting whether two instructions are found
+in the same context window of an assembly function. (3) Finally, the model is trained on Def-Use Prediction -
+predicting whether there is a definition-usage relation between two instructions. This method's
+reference implementation is only trained on cross compiler similarity detection, but could be trained
+for other tasks.
+
+The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model to perform assembly function encoding.
+It is adapted for assembly instruction tokenization, and directly generates an embedding for
+a whole assembly function. It is also accompanied with a text encoder (CLAP-text), so that classification can
+be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
+assembly function with the assembly encoder. The generated embeddings can be compared with cosine similarity to
+calculate whether the assembly function is closely related or opposed to the embedded category. This model requires
+training and was only trained for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it can support other
+architectures.
+
 We present the results of our method evaluated on both the local model, Qwen2.5-Coder 7B Parameters, and the commercially deployed model,
 Gemini 2.5 Flash.
 
@@ -870,49 +907,6 @@ representation of an assembly function. Fang et al. ~\cite{source-analysis} meas
 with a focus on obfuscated source code. Their results match our findings, that LLMs are efficient at code analysis, except in cases
 of advanced obfuscation techniques. LLM based fuzzing is another area that has recently gained interest. For instance,
 Asmita et al. ~\cite{llm-fuzz} use a LLM to generate the initial seed of a fuzzing pipeline on the BusyBox ~\cite{busybox} executable.
-
-\subsection{Machine learning methods}
-
-The surge of interest and applications for machine learning in recent years has also affected BCSD.
-Most state-of-the-art methods use natural language processing (NLP) to achieve their results.
-Notably, recent machine learning approaches try to incorporate the transformer architecture into BCSD tasks ~\cite{CLAP,jtrans,UniASM}.
-
-Asm2Vec ~\cite{Asm2Vec} is one of the first methods to use a NLP based approach to tackle the BCSD problem. It interprets an
-assembly function as a set of instruction sequences, where each instruction sequence is a possible execution path
-of the function. It samples these sequences by randomly traversing the CFG of the assembly function, and then
-uses a technique based on the PV-DM model ~\cite{PV-DM} to generate an embedding for the assembly function. This solution
-is not cross architecture compatible and requires pre-training.
-
-SAFE ~\cite{SAFE} uses a process similar to Asm2Vec. It first encodes each instruction of an assembly function into a vector,
-using the word2vec model ~\cite{word2vec}. Using a Self-Attentive Neural Network ~\cite{SANN}, SAFE then converts the sequence of instruction
-vectors from the assembly function into a single vector embedding for the function. Much like Asm2Vec, SAFE requires
-pre-training, but can perform cross architecture similarity detection. This method supports both cross optimization
-and cross architecture retrieval, but was only trained on the `AMD64` and `arm` platforms.
-
-Order Matters ~\cite{OrderMatters} applies a BERT language reprensentation model ~\cite{BERT} along with control flow graph analysis
-to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
-passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
-matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
-are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. This method
-supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
-and `arm` for cross platform retrieval.
-
-A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the BERT model ~\cite{BERT}.
-It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
-on three tasks. 1. As is common for BERT models, PalmTree is trained on masked language modeling. 2.
-PalmTree is trained on context window prediction, that is predicting whether two instructions are found
-in the same context window of an assembly function. 3. The model is also trained on Def-Use Prediction -
-predicting whether there is a definition-usage relation between both instructions. This method's
-reference implementation is only trained on cross compiler similarity detection, but can be trained
-for other tasks.
-
-The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model, to perform assembly function encoding.
-It is adapted for assembly instruction tokenization, and directly generates an embedding for
-a whole assembly function. It is also accompanied with a text encoder (CLAP-text), so that classification can
-be performed using human readable classes. Categories or labels are encoded with the text encoder, and the
-assembly function with the assembly encoder. The generated embeddings can be compared with cosine similarity to
-calculate whether the assembly function is closely related or opposed to the category. This model requires
-training and is architecture specific (\texttt{x86-64} compiled with \texttt{gcc}).
 
 \section{Conclusion}
 
