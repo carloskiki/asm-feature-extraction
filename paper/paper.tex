@@ -647,16 +647,7 @@ latency per request, Gemini is able to handle almost 1 request per second, makin
 }
 
 This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
-different optimization levels. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
-highlighting the substantial difference between unoptimized and maximally optimized code (see figure ~\ref{asm-diff}).
-At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
-data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
-is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
-body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
-Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
-and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
-hardware, while keeping the observable behavior of the program untouched.
-
+different optimization levels. We first present the baselines and then show our results.
 
 \noindent \textbf{Baselines.} Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation
 model ~\cite{BERT} along with two control flow graph embedding models
@@ -698,12 +689,20 @@ training and was only trained for the \texttt{x86-64} architecture compiled with
 architectures.
 
 We present the results of our method evaluated on both the local model, Qwen2.5-Coder 7B Parameters, and the commercially deployed model,
-Gemini 2.5 Flash.
+Gemini 2.5 Flash. As evident in Table ~\ref{x-opt}, the hardest retrieval task is between optimization levels 0 and 3,
+highlighting the substantial difference between unoptimized and maximally optimized code (see figure ~\ref{asm-diff}).
+At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
+data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
+is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
+body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
+Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
+and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
+hardware, while keeping the observable behavior of the program untouched.
 
 The baselines mostly perform worse than expected on this evaluation. As our own dataset is used
 rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
-as also observed by Marcelli et al. \cite{cisco}. As evident here, one of our method's advantage is that it requires no fine-tuning
-to acheive good results, and thus should generalize well to unseen settings.
+as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
+fine-tuning to acheive good results, and thus should generalize well to unseen settings.
 
 \subsection{Clone search with different architectures}
 
