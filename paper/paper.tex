@@ -652,29 +652,29 @@ different optimization levels. We first present the baselines and then show our 
 \noindent \textbf{Baselines.} Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation
 model ~\cite{BERT} along with two control flow graph embedding models
 to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
-passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
+passes the CFG through a graph neural network to obtain a graph semantics embedding, and sends the adjacency
 matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
 are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. This method
 supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
-and `arm` for cross platform retrieval.
+and \texttt{arm} for cross architecture retrieval.
 
 SAFE ~\cite{SAFE} first encodes each instruction of an assembly function into a vector,
 using the word2vec model ~\cite{word2vec}. Using a Self-Attentive Neural Network ~\cite{SANN}, SAFE then converts the sequence of instruction
-vectors from the assembly function into a single vector embedding for the function. Much like Asm2Vec, SAFE requires
-pre-training, but can perform cross architecture similarity detection. However, it was only trained on the `AMD64`
-and `arm` architectures.
+vectors from the assembly function into a single vector embedding for the function. Like all other baslines, SAFE requires
+pre-training, and can perform cross architecture similarity detection. However, it was only trained on the \texttt{AMD64}
+and \texttt{arm} architectures.
 
-Asm2Vec ~\cite{Asm2Vec} inspired the SAFE model. is one of the first methods to use a NLP based approach to tackle
+Asm2Vec ~\cite{Asm2Vec} inspired the SAFE model. It is one of the first methods to use a NLP based approach to tackle
 the BCSD problem. It interprets an assembly function as a set of instruction sequences, where each instruction sequence
 is a possible execution path of the function. It samples these sequences by randomly traversing the CFG of the assembly
-function, and then uses a technique based on the PV-DM model ~\cite{PV-DM} to generate an embedding for the assembly function.
-This solution is not cross architecture compatible and requires pre-training.
+function, and then uses a technique based on the PV-DM architecture ~\cite{PV-DM} (an extension of word2vec that embeds entire documents)
+to generate an embedding for the assembly function.
 
 A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the BERT model ~\cite{BERT}.
 It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
 on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
 It is also trained on context window prediction, that is, predicting whether two instructions are found
-in the same context window of an assembly function. (3) Finally, the model is trained on Def-Use Prediction -
+in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction ---
 predicting whether there is a definition-usage relation between two instructions. This method's
 reference implementation is only trained on cross compiler similarity detection, but could be trained
 for other tasks.
