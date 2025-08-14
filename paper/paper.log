@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  14 AUG 2025 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  14 AUG 2025 19:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1132,15 +1132,22 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 137.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 137.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 137.
+
 
 \pydata@fh@0=\write6
 \openout6 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250814160722Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250814195427Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed safely (allowed).
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250814160722Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250814195427Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed safely (allowed).
 
 
@@ -1154,7 +1161,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (./_minted/73B3F74DFDA0169EF78BB4CA3B423614.highlight.minted)
 (./_minted/C1FE0B2AD42F0009D4CB630ECC5045D6.highlight.minted)
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-54.
+55.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
@@ -1175,14 +1182,8 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 <BCSD-schematic.png, id=233, 1025.8325pt x 965.6075pt>
 File: BCSD-schematic.png Graphic file (type png)
 <use BCSD-schematic.png>
-Package pdftex.def Info: BCSD-schematic.png  used on input line 313.
+Package pdftex.def Info: BCSD-schematic.png  used on input line 314.
 (pdftex.def)             Requested size: 241.02039pt x 226.85886pt.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 326.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 326.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 326.
 
 
 
@@ -1207,28 +1208,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 <size-ablation.png, id=335, 376.68pt x 217.467pt>
 File: size-ablation.png Graphic file (type png)
 <use size-ablation.png>
-Package pdftex.def Info: size-ablation.png  used on input line 755.
+Package pdftex.def Info: size-ablation.png  used on input line 759.
 (pdftex.def)             Requested size: 241.02039pt x 139.14851pt.
 
 
 [8]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 774.
+               Default added (so using `tbp') on input line 778.
 
-<examples-ablation.png, id=345, 383.469pt x 219.657pt>
+<examples-ablation.png, id=344, 383.469pt x 219.657pt>
 File: examples-ablation.png Graphic file (type png)
 <use examples-ablation.png>
-Package pdftex.def Info: examples-ablation.png  used on input line 775.
+Package pdftex.def Info: examples-ablation.png  used on input line 779.
 (pdftex.def)             Requested size: 241.02039pt x 138.06288pt.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \vbox (badness 1681) has occurred while \output is active []
 
 
 
@@ -1236,7 +1240,7 @@ Underfull \vbox (badness 1681) has occurred while \output is active []
 <prompt-ablation.png, id=359, 362.007pt x 217.467pt>
 File: prompt-ablation.png Graphic file (type png)
 <use prompt-ablation.png>
-Package pdftex.def Info: prompt-ablation.png  used on input line 807.
+Package pdftex.def Info: prompt-ablation.png  used on input line 811.
 (pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
 
 
@@ -1245,12 +1249,10 @@ Package pdftex.def Info: prompt-ablation.png  used on input line 807.
 [10 <./prompt-ablation.png>]
 
 
-Underfull \vbox (badness 1675) has occurred while \output is active []
-
-
 
 [11]
-Underfull \vbox (badness 1838) has occurred while \output is active []
+
+LaTeX Warning: Citation `distillation' on page 12 undefined on input line 953.
 
 
 
@@ -1498,12 +1500,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 
 Package caption Warning: \setcaptiontype
-(caption)                outside box or environment on input line 1096.
+(caption)                outside box or environment on input line 1107.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1096.
+(caption)                particular \caption on input line 1107.
 See the caption package documentation for explanation.
 
 
@@ -1513,14 +1515,18 @@ See the caption package documentation for explanation.
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: B6B31E1BDB90F1B694C174A5EE6F3374;5337.
+(rerunfilecheck)             Checksum: 124C4EF999B302E0C2985E30535F4A40;5342.
  ) 
 Here is how much of TeX's memory you used:
- 36713 strings out of 467816
- 758859 string characters out of 5432258
- 1322099 words of memory out of 5000000
- 64300 multiletter control sequences out of 15000+600000
+ 36714 strings out of 467816
+ 758873 string characters out of 5432258
+ 1321385 words of memory out of 5000000
+ 64301 multiletter control sequences out of 15000+600000
  695169 words of font info for 324 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  95i,12n,117p,998b,1017s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1532,10 +1538,10 @@ l/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (18 pages, 412044 bytes).
+Output written on paper.pdf (18 pages, 413795 bytes).
 PDF statistics:
- 609 PDF objects out of 1000 (max. 8388607)
- 535 compressed objects within 6 object streams
+ 610 PDF objects out of 1000 (max. 8388607)
+ 536 compressed objects within 6 object streams
  125 named destinations out of 1000 (max. 500000)
  71129 words of extra memory for PDF output out of 74296 (max. 10000000)
 
