@@ -60,6 +60,7 @@
 \usepackage[svgnames, table]{xcolor}
 \usepackage{minted}
 \usepackage{multirow}
+\usepackage{enumitem}
 
 % inlined bib file
 \usepackage{filecontents}
@@ -674,7 +675,7 @@ A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the 
 It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
 on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
 It is also trained on context window prediction, that is, predicting whether two instructions are found
-in the same context window of an assembly function. (3) Finally, the model is trained on def-use Prediction ---
+in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction ---
 predicting whether there is a definition-usage relation between two instructions. This method supports
 both cross architecture and cross optimization tasks, although its reference implementation is only
 trained on cross compiler similarity detection.
@@ -949,6 +950,10 @@ model. Since there is no ground truth in text generation, the distillation proce
 to train the smaller model. As we have shown, a large model such as Gemini 2.5 Flash performs remarkably better than a
 small model such as Qwen 2.5 7B. We believe the distillation process could considerably reduce this gap.
 
+\subsubsection{Output Format}
+
+TODO: 
+
 \subsubsection{Other integrations}
 
 Our work proves the competency of LLMs in understanding and analyzing assembly code. From this point, different approaches
@@ -1011,87 +1016,85 @@ of our method is publicly available. This constitutes the full implementation of
 any open source model, and the implementation for commercial LLM providers. The dataset used throughout this research
 is also made public. TODO: ref
 
-% optional clearing of the page
-\cleardoublepage
 \bibliographystyle{plainurl}
 \bibliography{references}
 
 \appendix
 
-% \onecolumn
-% \begin{tcolorbox}[breakable, enhanced]
-%     You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
-%     analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
-%     high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
-%     algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
-% 
-%     \textbf{I. Basic Signature \& Data Flow}
-%         
-%     \begin{itemize}
-%     \item \textbf{Input Parameter Count (Integer):} The number of distinct conceptual inputs the function likely takes. Infer based on typical argument passing mechanisms (e.g., values moved into frequently-used registers at the start of the function, or stack manipulations that reserve space for arguments).
-%     \item \textbf{Input Parameter Types (Array of Strings):} A list of abstract data type categories representing the inputs.
-%         \textit{Categories:} \texttt{"Integer"}, \texttt{"Pointer"}, \texttt{"Boolean"}, \texttt{"FloatingPoint"}, \texttt{"String"}, \texttt{"Struct/Object"}, \texttt{"Collection"}.
-%         \textit{Inference:} Based on how the inferred parameters are used (e.g., dereferenced, used in arithmetic, compared, passed to subroutines).
-%     \item \textbf{Return Value Type (String):} The abstract data type of the value returned, if any.
-%         \textit{Categories:} \texttt{"Integer"}, \texttt{"Pointer"}, \texttt{"Boolean"}, \texttt{"FloatingPoint"}, \texttt{"String"}, \texttt{"Struct/Object"}, \texttt{"None"}, \texttt{"Unknown"}.
-%         \textit{Inference:} Based on the value in the register or stack location typically used for return values before a `return` instruction.
-%     \end{itemize}
-%     
-%     
-%     \textbf{II. Core Logic}
-%     
-%     \begin{itemize}
-%     \item \textbf{Dominant Operation Categories (Array of Strings):} Identify the top few (up to 3) dominant types of operations performed by observing instruction mnemonics and their common effects. For example, if control flow (jumps/branches) is a primary characteristic of the routine, ensure the relevant category (e.g., \texttt{"ConditionalBranching"}) is included among the dominant ones.
-%     \item \textit{Categories:} \texttt{"Arithmetic"} (add, subtract, multiply, divide, increment, decrement), \texttt{"Bitwise"} (AND, OR, XOR, NOT, shifts, rotates), \texttt{"DataMovement"} (copying data between registers/memory), \texttt{"ConditionalBranching"} (transfer control based on flags/conditions), \texttt{"SubroutineCall"} (transfer control to another routine), \texttt{"MemoryAccess"} (reading/writing to memory locations).
-%     \item \textbf{Loop Indicators (Boolean):} \texttt{true} if common patterns indicating loops are observed (e.g., a conditional branch instruction targeting an earlier instruction's address, or a recognized architectural loop instruction). \texttt{false} otherwise.
-%     \item \textbf{Number of Distinct Subroutine Call Targets (Integer):} Count of unique target addresses/offsets of instructions that transfer control to another subroutine.
-%     \item \textbf{Use of Indexed Addressing Modes (Boolean):} \texttt{true} if instructions appear to access memory using a base address combined with an offset derived from another register (like \texttt{[base\_reg + index\_reg * scale + displacement]}) or similar complex memory addressing. \texttt{false} otherwise.
-%     \item \textbf{Jump Table Indicators (Boolean):} \texttt{true} if patterns suggesting a jump table are observed (e.g., an indirect jump based on a calculated index, a series of compare-and-jump instructions followed by a default branch). \texttt{false} otherwise.
-%     \item \textbf{Presence of SIMD Instructions (Boolean):} \texttt{true} if instructions commonly associated with Single Instruction, Multiple Data (SIMD) operations are observed (e.g., instructions operating on wide registers, packed data, or vector operations like \texttt{ADDPS}, \texttt{XORPS}, \texttt{MOVAPS}, \texttt{VMOVUPS}, etc., even if specific mnemonics are architecture-dependent, the pattern of data movement and parallel operations can be inferred). \texttt{false} otherwise.
-%     \end{itemize}
-%  
-%     \textbf{III. Constants}
-% 
-%     \begin{itemize}
-%     \item \textbf{Presence of Notable Integer Constants (Array of Hexadecimal Strings):} A list of up to 15 UNIQUE integer literals (immediate values) used in operations, represented as hexadecimal strings (e.g., \texttt{"0x5B8"}, \texttt{"0x23"}). \textit{Exclude values that are:} \texttt{0x0}, \texttt{0x1}, \texttt{0xFFFFFFFF}, common loop counters/increments/decrements, or standard stack adjustments (e.g., small multiples of \texttt{0x4}, \texttt{0x8}, \texttt{0x10} for stack pointer manipulation). Prioritize larger, less common, or clearly patterned constants, and those used in bitwise operations or memory addressing with unusual offsets. The list should contain only distinct values.
-%     \textit{Magic Numbers Heuristic:} Look for integer constants that are: large or unusual values (e.g., \texttt{"0x04C11DB7"}, \texttt{"0xDEADBEEF"}), significant bitmasks or flags (e.g., \texttt{"0xFFFF0000"}, \texttt{"0xFF"}), rare array sizes, buffer sizes, or offsets, or values often associated with specific algorithms (e.g., CRC polynomials, cryptographic constants, network protocol values, file format magic bytes).
-%     \item \textbf{Count of Distinct Immediate Values (Integer):} Total count of unique immediate (literal) values used directly in instructions. Exclude very common small values (0, 1, -1) if they primarily serve basic arithmetic/comparison.
-%     \item \textbf{String Literal Presence (Boolean):} \texttt{true} if identifiable string literals are referenced or used within the function (e.g., for I/O, error messages, or comparisons). This can be inferred by moves of apparent string addresses into registers/stack, followed by calls to I/O or string manipulation routines. \texttt{false} otherwise.
-%     \end{itemize}
-% 
-% \textbf{IV. Side Effects}
-% 
-% \begin{itemize}
-% \item \textbf{Modifies Input Parameters (Boolean):} \texttt{true} if there are instructions writing to memory addresses derived from what are inferred as input parameters (e.g., \texttt{[inferred\_input\_pointer + offset] = value}). \texttt{false} otherwise.
-% \item \textbf{Modifies Global State (Boolean):} \texttt{true} if there are instructions writing to fixed, non-stack-relative memory addresses that are not derived from input parameters. \texttt{false} otherwise. (Look for writes to absolute memory addresses or addresses resolved via global data segment pointers if discernible).
-% \item \textbf{Performs Memory Allocation/Deallocation (Boolean):} \texttt{true} if common patterns associated with dynamic memory management are observed.
-%    \textit{Heuristics:} A subroutine call where the return value is immediately used as a base pointer for subsequent data storage, or specific constant arguments (e.g., a size) are passed to a subroutine call in a pattern consistent with allocation.
-% \item \textbf{Performs I/O Operations (Boolean):} \texttt{true} if common patterns associated with I/O (e.g., console output, file operations) are observed.
-%    \textit{Heuristics:} A subroutine call that takes a pointer to a string literal as an argument, or calls that take small integer values (potentially file descriptors) and buffer pointers as arguments.
-% \item \textbf{Performs Block Memory Operations (Boolean):} \texttt{true} if patterns indicative of copying or setting large blocks of memory are observed (e.g., a loop with data movement instructions and indexed addressing, or calls to known block operation subroutines). \texttt{false} otherwise.
-% \item \textbf{Performs Linear Memory Accesses (Boolean):} \texttt{true} if there are observed patterns of memory access where a base address is consistently incremented or decremented, suggesting iteration over a contiguous block of memory (e.g., a loop accessing \texttt{[base + 0]}, \texttt{[base + 4]}, \texttt{[base + 8]}). This implies reading or writing. \texttt{false} otherwise.
-% \item \textbf{Performs Error Handling (Boolean):} \texttt{true} if common patterns associated with error handling are observed.
-%    \textit{Heuristics:} Extensive conditional branching after subroutine calls to check return values (especially non-zero or negative values), specific error code comparisons, or calls to subroutines that appear to print error messages or log events. \texttt{false} otherwise.
-% \item \textbf{Number of Software Interrupts / System Calls (Integer):} The count of distinct instances where a software interrupt instruction (e.g., \texttt{INT}, \texttt{SYSCALL}, \texttt{SVC}, \texttt{TRAP}, \texttt{SYSENTER}) is used, or a pattern of instruction(s) that directly initiate a kernel-mode transition/system call. This counts the invocation of the mechanism, not necessarily the specific system call number if not immediately discernible.
-% \end{itemize}
-% 
-% \textbf{V. Inferred Categorization}
-% 
-% \textbf{Inferred Category (String):} A high-level functional category best describing the routine's primary purpose.
-%     * *Categories:*
-%         * `"System/OS Interaction"`: Primarily deals with operating system services (e.g., system calls, direct I/O, resource management).
-%         * `"Memory Management"`: Focuses on allocating, deallocating, or manipulating large memory blocks (e.g., heap operations, block copies/fills).
-%         * `"Data Processing/Transformation"`: Performs significant arithmetic, bitwise, or structural data manipulations.
-%         * `"Control Flow/Dispatch"`: Main purpose is to direct execution flow, often via complex branching or jump tables.
-%         * `"Initialization/Setup"`: Prepares data structures, global variables, or sets up environments.
-%         * `"Error/Exception Handling"`: Manages and responds to errors or exceptional conditions.
-%         * `"Utility/Helper"`: Generic, reusable tasks (e.g., string manipulation, simple math not part of a larger algorithm).
-%         * `"Cryptographic/Hashing"`: Involved in encryption, decryption, or hashing (e.g., specific bitwise ops, known constants).
-%         * `"Interfacing/Wrapper"`: Acts as an interface, relaying calls or arguments with minimal internal logic.
-%         * `"Undetermined"`: If no confident category can be assigned.
-%     * *Inference:* Based on a holistic view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
-% \end{tcolorbox}
-% \twocolumn
+\onecolumn
+\begin{tcolorbox}[breakable, enhanced]
+    You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
+    analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
+    high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
+    algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
+
+    \textbf{I. Basic Signature \& Data Flow}
+        
+    \begin{enumerate}[itemsep=0cm,parsep=0.5cm]
+    \item \textbf{Input Parameter Count (Integer):} The number of distinct conceptual inputs the function likely takes. Infer based on typical argument passing mechanisms (e.g., values moved into frequently-used registers at the start of the function, or stack manipulations that reserve space for arguments).
+    \item \textbf{Input Parameter Types (Array of Strings):} A list of abstract data type categories representing the inputs.
+        \textit{Categories:} \texttt{"Integer"}, \texttt{"Pointer"}, \texttt{"Boolean"}, \texttt{"FloatingPoint"}, \texttt{"String"}, \texttt{"Struct/Object"}, \texttt{"Collection"}.
+        \textit{Inference:} Based on how the inferred parameters are used (e.g., dereferenced, used in arithmetic, compared, passed to subroutines).
+    \item \textbf{Return Value Type (String):} The abstract data type of the value returned, if any.
+        \textit{Categories:} \texttt{"Integer"}, \texttt{"Pointer"}, \texttt{"Boolean"}, \texttt{"FloatingPoint"}, \texttt{"String"}, \texttt{"Struct/Object"}, \texttt{"None"}, \texttt{"Unknown"}.
+        \textit{Inference:} Based on the value in the register or stack location typically used for return values before a `return` instruction.
+    \end{enumerate}
+    
+    
+    \textbf{II. Core Logic}
+    
+    \begin{enumerate}[itemsep=0cm,parsep=0.5cm]
+    \item \textbf{Dominant Operation Categories (Array of Strings):} Identify the top few (up to 3) dominant types of operations performed by observing instruction mnemonics and their common effects. For example, if control flow (jumps/branches) is a primary characteristic of the routine, ensure the relevant category (e.g., \texttt{"ConditionalBranching"}) is included among the dominant ones.
+    \item \textit{Categories:} \texttt{"Arithmetic"} (add, subtract, multiply, divide, increment, decrement), \texttt{"Bitwise"} (AND, OR, XOR, NOT, shifts, rotates), \texttt{"DataMovement"} (copying data between registers/memory), \texttt{"ConditionalBranching"} (transfer control based on flags/conditions), \texttt{"SubroutineCall"} (transfer control to another routine), \texttt{"MemoryAccess"} (reading/writing to memory locations).
+    \item \textbf{Loop Indicators (Boolean):} \texttt{true} if common patterns indicating loops are observed (e.g., a conditional branch instruction targeting an earlier instruction's address, or a recognized architectural loop instruction). \texttt{false} otherwise.
+    \item \textbf{Number of Distinct Subroutine Call Targets (Integer):} Count of unique target addresses/offsets of instructions that transfer control to another subroutine.
+    \item \textbf{Use of Indexed Addressing Modes (Boolean):} \texttt{true} if instructions appear to access memory using a base address combined with an offset derived from another register (like \texttt{[base\_reg + index\_reg * scale + displacement]}) or similar complex memory addressing. \texttt{false} otherwise.
+    \item \textbf{Jump Table Indicators (Boolean):} \texttt{true} if patterns suggesting a jump table are observed (e.g., an indirect jump based on a calculated index, a series of compare-and-jump instructions followed by a default branch). \texttt{false} otherwise.
+    \item \textbf{Presence of SIMD Instructions (Boolean):} \texttt{true} if instructions commonly associated with Single Instruction, Multiple Data (SIMD) operations are observed (e.g., instructions operating on wide registers, packed data, or vector operations like \texttt{ADDPS}, \texttt{XORPS}, \texttt{MOVAPS}, \texttt{VMOVUPS}, etc., even if specific mnemonics are architecture-dependent, the pattern of data movement and parallel operations can be inferred). \texttt{false} otherwise.
+    \end{enumerate}
+ 
+    \textbf{III. Constants}
+
+    \begin{enumerate}[itemsep=0cm,parsep=0.5cm]
+    \item \textbf{Presence of Notable Integer Constants (Array of Hexadecimal Strings):} A list of up to 15 UNIQUE integer literals (immediate values) used in operations, represented as hexadecimal strings (e.g., \texttt{"0x5B8"}, \texttt{"0x23"}). \textit{Exclude values that are:} \texttt{0x0}, \texttt{0x1}, \texttt{0xFFFFFFFF}, common loop counters/increments/decrements, or standard stack adjustments (e.g., small multiples of \texttt{0x4}, \texttt{0x8}, \texttt{0x10} for stack pointer manipulation). Prioritize larger, less common, or clearly patterned constants, and those used in bitwise operations or memory addressing with unusual offsets. The list should contain only distinct values.
+    \textit{Magic Numbers Heuristic:} Look for integer constants that are: large or unusual values (e.g., \texttt{"0x04C11DB7"}, \texttt{"0xDEADBEEF"}), significant bitmasks or flags (e.g., \texttt{"0xFFFF0000"}, \texttt{"0xFF"}), rare array sizes, buffer sizes, or offsets, or values often associated with specific algorithms (e.g., CRC polynomials, cryptographic constants, network protocol values, file format magic bytes).
+    \item \textbf{Count of Distinct Immediate Values (Integer):} Total count of unique immediate (literal) values used directly in instructions. Exclude very common small values (0, 1, -1) if they primarily serve basic arithmetic/comparison.
+    \item \textbf{String Literal Presence (Boolean):} \texttt{true} if identifiable string literals are referenced or used within the function (e.g., for I/O, error messages, or comparisons). This can be inferred by moves of apparent string addresses into registers/stack, followed by calls to I/O or string manipulation routines. \texttt{false} otherwise.
+    \end{enumerate}
+
+\textbf{IV. Side Effects}
+
+\begin{enumerate}[itemsep=0cm,parsep=0.5cm]
+\item \textbf{Modifies Input Parameters (Boolean):} \texttt{true} if there are instructions writing to memory addresses derived from what are inferred as input parameters (e.g., \texttt{[inferred\_input\_pointer + offset] = value}). \texttt{false} otherwise.
+\item \textbf{Modifies Global State (Boolean):} \texttt{true} if there are instructions writing to fixed, non-stack-relative memory addresses that are not derived from input parameters. \texttt{false} otherwise. (Look for writes to absolute memory addresses or addresses resolved via global data segment pointers if discernible).
+\item \textbf{Performs Memory Allocation/Deallocation (Boolean):} \texttt{true} if common patterns associated with dynamic memory management are observed.
+   \textit{Heuristics:} A subroutine call where the return value is immediately used as a base pointer for subsequent data storage, or specific constant arguments (e.g., a size) are passed to a subroutine call in a pattern consistent with allocation.
+\item \textbf{Performs I/O Operations (Boolean):} \texttt{true} if common patterns associated with I/O (e.g., console output, file operations) are observed.
+   \textit{Heuristics:} A subroutine call that takes a pointer to a string literal as an argument, or calls that take small integer values (potentially file descriptors) and buffer pointers as arguments.
+\item \textbf{Performs Block Memory Operations (Boolean):} \texttt{true} if patterns indicative of copying or setting large blocks of memory are observed (e.g., a loop with data movement instructions and indexed addressing, or calls to known block operation subroutines). \texttt{false} otherwise.
+\item \textbf{Performs Linear Memory Accesses (Boolean):} \texttt{true} if there are observed patterns of memory access where a base address is consistently incremented or decremented, suggesting iteration over a contiguous block of memory (e.g., a loop accessing \texttt{[base + 0]}, \texttt{[base + 4]}, \texttt{[base + 8]}). This implies reading or writing. \texttt{false} otherwise.
+\item \textbf{Performs Error Handling (Boolean):} \texttt{true} if common patterns associated with error handling are observed.
+   \textit{Heuristics:} Extensive conditional branching after subroutine calls to check return values (especially non-zero or negative values), specific error code comparisons, or calls to subroutines that appear to print error messages or log events. \texttt{false} otherwise.
+\item \textbf{Number of Software Interrupts / System Calls (Integer):} The count of distinct instances where a software interrupt instruction (e.g., \texttt{INT}, \texttt{SYSCALL}, \texttt{SVC}, \texttt{TRAP}, \texttt{SYSENTER}) is used, or a pattern of instruction(s) that directly initiate a kernel-mode transition/system call. This counts the invocation of the mechanism, not necessarily the specific system call number if not immediately discernible.
+\end{enumerate}
+
+\textbf{V. Inferred Categorization}
+
+\textbf{Inferred Category (String):} A high-level functional category best describing the routine's primary purpose.
+    * *Categories:*
+        * `"System/OS Interaction"`: Primarily deals with operating system services (e.g., system calls, direct I/O, resource management).
+        * `"Memory Management"`: Focuses on allocating, deallocating, or manipulating large memory blocks (e.g., heap operations, block copies/fills).
+        * `"Data Processing/Transformation"`: Performs significant arithmetic, bitwise, or structural data manipulations.
+        * `"Control Flow/Dispatch"`: Main purpose is to direct execution flow, often via complex branching or jump tables.
+        * `"Initialization/Setup"`: Prepares data structures, global variables, or sets up environments.
+        * `"Error/Exception Handling"`: Manages and responds to errors or exceptional conditions.
+        * `"Utility/Helper"`: Generic, reusable tasks (e.g., string manipulation, simple math not part of a larger algorithm).
+        * `"Cryptographic/Hashing"`: Involved in encryption, decryption, or hashing (e.g., specific bitwise ops, known constants).
+        * `"Interfacing/Wrapper"`: Acts as an interface, relaying calls or arguments with minimal internal logic.
+        * `"Undetermined"`: If no confident category can be assigned.
+    * *Inference:* Based on a holistic view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
+\end{tcolorbox}
+\twocolumn
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
