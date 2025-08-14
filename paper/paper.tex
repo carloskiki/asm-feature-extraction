@@ -435,7 +435,7 @@ should use to identify them.
     \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
 \end{itemize}
 
-\subsubsection{Categorization}
+\subsubsection*{Categorization}
 
 The last section tries to assign a overall category to the assembly function, by basing it on the information
 collected in the analysis. The final categorization only weakly supports the similarity search because it does
@@ -651,14 +651,15 @@ different optimization levels. As evident in Table ~\ref{x-opt}, the hardest ret
 highlighting the substantial difference between unoptimized and maximally optimized code (see figure ~\ref{asm-diff}).
 At optimization level 0, functions perform a lot of unessecary actions, such as extensively moving
 data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
-mostly is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
+is mostly left untouched by the optimizer. At optimization level 3, the compiler will inline simple functions into the
 body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
 Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
 and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
 hardware, while keeping the observable behavior of the program untouched.
 
-The baselines are OrderMatters, SAFE, PalmTree, Asm2Vec, and CLAP.
-Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation model ~\cite{BERT} along with two control flow graph embedding models
+
+\textbf{Baselines.} Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation model ~\cite{BERT}
+along with two control flow graph embedding models
 to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
 passes the CFG through a graph neural network to obtain a graph semantic embedding, and sends the adjacency
 matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
