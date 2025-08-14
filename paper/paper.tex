@@ -922,38 +922,45 @@ cost, but concerns surrounding data privacy can legitimately be raised. Another 
 set extracted during assembly analysis. As shown, our prompt performs very well with pool sizes of \(1000\) assembly functions,
 however, this may not be the case when comparing millions of feature sets, as is the case in production databases.
 
-We remain hopeful that our method can bring significant improvements to the current landscape of BCSD, since it resolves
+We remain confident that our method brings significant improvements to the current landscape of BCSD, by resolving
 many of the previously acknowledged limitations. Our method does not require any form of training, and can be performed with any LLM
 available. It also offers a distinct advantage over the current state-of-the-art, because the feature vectors generated are human
-interpretable. This makes the method easily tunable by human experts, the similarity scores are much more easily verifiable, and
-cases of incorrect similarity detection can be explained using the generated feature set. Furthermore this method can be scaled to
+interpretable. This makes the method easily tunable by human experts. The similarity scores are much more easily verifiable, and
+cases of incorrect similarity detection can be explained using the generated feature set. Furthermore, this method can be scaled to
 databases containing millions of assembly functions compared to embedding models, since inverted index search has a lower time
-complexity than nearest neighbor search or its approximated versions.
+complexity than nearest neighbor search, and remains accurate compared to approximated nearest neighbor search methods.
 
 \subsection{Future research}
 
 Our results open avenues for further investigation in LLM based BCSD, and more broadly in LLM assisted reverse engineering.
 A few of these oportunities are outlined here.
 
-\subsubsection{Reasoning model}
+\subsubsection{Reasoning models}
 
-Newest state of the art LLMs are fine tuned to natively use chain of thought methods ~\cite{c-o-t} before answering the query.
+State-of-the-art LLMs are fine tuned to natively use chain of thought methods ~\cite{c-o-t} before answering the query.
 These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
 higher quality responses ~\cite{c-o-t,reasoning,thinking-llm}. It may be worth evaluating whether this style of model performs better than
 non reasoning models (as used in our research) on assembly function analysis.
 
 \subsubsection{Fine-tuning}
 
-As stated, our method does not require fine-tuning, and was not evaluated on fine-tuned model. Developing a fine-tuning step
+As stated, our method does not require fine-tuning, and was not evaluated on fine-tuned performance. Developing a fine-tuning step
 for assembly code understanding and analysis may prove to be efficient and bring significant improvements to our method.
-An example of such technique would be distillation. With distillation, a LLM is used to fine-tune a much smaller language
-model. Since there is no ground truth in text generation, the distillation process uses the LLM output as ground truth
+An example of such technique would be distillation ~\cite{distillation}. With distillation, a large model is used to train or fine-tune a
+much smaller model. For example in our experiments, Gemini 2.5 Flash could have been used to fine tune the small Qwen2.5-Coder models.
+Since there is no ground truth in text generation, the distillation process uses the large model's output as ground truth
 to train the smaller model. As we have shown, a large model such as Gemini 2.5 Flash performs remarkably better than a
-small model such as Qwen 2.5 7B. We believe the distillation process could considerably reduce this gap.
+small model such as Qwen2.5 7B at assembly understanding. We believe the distillation process could considerably reduce this gap.
 
 \subsubsection{Output Format}
 
-TODO: 
+Our method uses the JSON output format so that the output generated is comparable with others and a similarity metrics can be deduced.
+This format was chosen because it is ubiquitous and its syntax is straightforward to produce for LLMs, and easily understandable for humans.
+However, finding the best trade-off between output interpretability, compute requirements, and similarity detection capabilities remains
+an open problem. One possibility is to loosen the restrictions on the output format and use a sentence similarity method to determine
+the similarity between function analyses. On the contrary, another possibility is to use the analysis cabapilities at a smaller scale,
+for example analyzing single basic blocks and combining these analyses into a more comprehensive structure for a whole assembly function.
+In any case, more experimentation is required to find optimal balance.
 
 \subsubsection{Other integrations}
 
