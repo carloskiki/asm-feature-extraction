@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  14 AUG 2025 19:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  15 AUG 2025 14:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1143,11 +1143,11 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 \pydata@fh@0=\write6
 \openout6 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250814195427Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250815143659Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed safely (allowed).
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250814195427Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250815143659Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed safely (allowed).
 
 
@@ -1179,31 +1179,41 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 [2]
-<BCSD-schematic.png, id=233, 1025.8325pt x 965.6075pt>
+<BCSD-schematic.png, id=233, 3175.865pt x 1445.4pt>
 File: BCSD-schematic.png Graphic file (type png)
 <use BCSD-schematic.png>
 Package pdftex.def Info: BCSD-schematic.png  used on input line 314.
-(pdftex.def)             Requested size: 241.02039pt x 226.85886pt.
+(pdftex.def)             Requested size: 505.89pt x 230.23213pt.
 
+
+
+
+[3]
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[3 <./BCSD-schematic.png>]
-
-
-
-[4]
+[4 <./BCSD-schematic.png>]
 
 (./_minted/FACE5AE00C07C717C395FB29DB8B68A9.highlight.minted)
 
 [5]
 
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 
 [6]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 
@@ -1212,14 +1222,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-<size-ablation.png, id=335, 376.68pt x 217.467pt>
+
+
+[8]
+<size-ablation.png, id=342, 376.68pt x 217.467pt>
 File: size-ablation.png Graphic file (type png)
 <use size-ablation.png>
 Package pdftex.def Info: size-ablation.png  used on input line 759.
 (pdftex.def)             Requested size: 241.02039pt x 139.14851pt.
 
 
-[8]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 778.
@@ -1234,10 +1246,8 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-
-
 [9 <./size-ablation.png> <./examples-ablation.png>]
-<prompt-ablation.png, id=359, 362.007pt x 217.467pt>
+<prompt-ablation.png, id=358, 362.007pt x 217.467pt>
 File: prompt-ablation.png Graphic file (type png)
 <use prompt-ablation.png>
 Package pdftex.def Info: prompt-ablation.png  used on input line 811.
@@ -1258,7 +1268,13 @@ LaTeX Warning: Citation `distillation' on page 12 undefined on input line 953.
 
 
 
-[12] (./paper.bbl
+[12]
+
+
+
+[13
+
+] (./paper.bbl
 
 
 Underfull \hbox (badness 1360) in paragraph at lines 23--31
@@ -1283,7 +1299,7 @@ Underfull \hbox (badness 2020) in paragraph at lines 55--60
 
 
 
-[13
+[14
 
 ]
 Underfull \hbox (badness 2142) in paragraph at lines 77--81
@@ -1370,7 +1386,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 168--175
 
 
 
-[14]
+[15]
 Underfull \hbox (badness 1354) in paragraph at lines 223--228
 []\T1/ptm/m/n/10 (+20) Yinhan Liu, Myle Ott, Na-man Goyal, Jingfei Du,
  []
@@ -1450,7 +1466,7 @@ Underfull \hbox (badness 3657) in paragraph at lines 333--342
 
 
 
-[15]
+[16]
 Underfull \hbox (badness 2134) in paragraph at lines 389--397
 \T1/ptm/m/n/10 (+20) Huang, and Shi Wu.  Or-der mat-ters: Semantic-
  []
@@ -1488,14 +1504,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 389--397
 
 
 
-[16
+[17
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[17
+[18
 
 ]
 
@@ -1510,7 +1526,7 @@ See the caption package documentation for explanation.
 
 
 
-[18] (./paper.aux)
+[19] (./paper.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
@@ -1523,9 +1539,9 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 124C4EF999B302E0C2985E30535F4A40;5342.
  ) 
 Here is how much of TeX's memory you used:
- 36714 strings out of 467816
- 758873 string characters out of 5432258
- 1321385 words of memory out of 5000000
+ 36715 strings out of 467816
+ 758880 string characters out of 5432258
+ 1323022 words of memory out of 5000000
  64301 multiletter control sequences out of 15000+600000
  695169 words of font info for 324 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1538,10 +1554,10 @@ l/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (18 pages, 413795 bytes).
+Output written on paper.pdf (19 pages, 564492 bytes).
 PDF statistics:
- 610 PDF objects out of 1000 (max. 8388607)
- 536 compressed objects within 6 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 615 PDF objects out of 1000 (max. 8388607)
+ 540 compressed objects within 6 object streams
+ 126 named destinations out of 1000 (max. 500000)
  71129 words of extra memory for PDF output out of 74296 (max. 10000000)
 
