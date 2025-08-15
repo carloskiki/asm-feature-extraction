@@ -272,7 +272,7 @@ Reverse engineers try to analyze the binary to understand its underlying algorit
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
 a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these programs are to
 disassemble and decompile the provided machine code, so that its content can be analyzed by humans. Disassembly is
-the process of retrieving the human-readable assembly instructions from the binary executable, whereas decompilation
+the process of retrieving the human-readable assembly instructions from the binary executable (TODO: Explain that ASM is semi human readable), whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
@@ -625,6 +625,9 @@ To provide a similar environment to local models, functions are truncated to a m
 We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's \(10\) seconds
 latency per request, Gemini is almost able to handle a request every second, making it easier to iterate on our evaluations.
 
+TODO: Maybe add boxes that summarize the results we have.
+TODO: Underscore the stability of our method compared to baselines (meaning it generalizes etc.).
+
 \subsection{Clone search with different optimization levels}
 
 {
@@ -886,6 +889,8 @@ the binaries are compiled with optimization level \(2\). A pool of 1000 assembly
 The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embedding and analysis supplement
 each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embedding model.
 
+TODO: Discussion on the performance of our method etc (timing of queries for local and commercial models).
+
 \section{Related Work}
 \label{related-work}
 
@@ -1028,6 +1033,7 @@ of our method is publicly available. This constitutes the full implementation of
 any open source model, and the implementation for commercial LLM providers. The dataset used throughout this research
 is also made public. TODO: ref
 
+TODO: add url to every single entry.
 \bibliographystyle{plainurl}
 \bibliography{references}
 
@@ -1104,7 +1110,7 @@ part of our artifact along with many other experimental prompts used in early it
 \end{itemize}
 \textit{Inference:} Based on a general view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
 \end{tcolorbox}
-\captionof{figure}{\label{full-prompt} test}
+\captionof{figure}{\label{full-prompt} Full system instructions provided to the LLM for each analysis.}
 
 
 \twocolumn
