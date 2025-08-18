@@ -454,14 +454,15 @@ initialization, error handling, wrapper/utility, file management, etc.
 
 \subsubsection{Examples}
 
-To achieve the best results with our method, we utilize few-shot prompting by providing hand crafted examples along with our prompt.
-In all of our evaluations, three examples are provided, and our ablation study confirms that adding more than three examples provides
+To achieve the best results with our method, we utilize few-shot prompting ~\cite{few-shot} by providing
+a few assembly functions and a hand crafted analyses of the function along with our prompt.
+In our evaluations against the baselines, three examples are provided, and our ablation study confirms that adding more than three examples provides
 little to no benefit. Providing a single example or a JSON schema in the prompt is enough to achieve good results. We do not
-make use of a JSON schema because it is redundant information once examples are provided. Our examples are selected from a
+provide a JSON schema because it is redundant information when examples are included. Our examples are selected from a
 diverse source of functions, and are varied in size and architecture to exemplify the space of possibilities in our evaluations.
 
-Recent commercial LLMs have the ability to generate responses following a provided JSON schema that is aside from the input prompt
-We do not make use of this capability when evaluating commercial models so that the results can be compared to local LLMs,
+Recent commercial LLMs have the ability to generate responses following a provided JSON schema that is aside from the input prompt.
+We do not make use of this capability when evaluating commercial models so that the results can be compared to local LLMs
 that do not benefit from this option.
 
 \begin{figure}[ht]
