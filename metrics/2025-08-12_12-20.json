@@ -1,0 +1,50 @@
+[
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 0,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 100,
+      "examples": 3,
+      "prompt": "extensive-small",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.5577468301200568,
+      "recall_at_1": 0.47,
+      "recall_at_10": 0.74,
+      "similarity_mean": {
+        "max": 0.5968466742135619,
+        "median": 0.3252306995742652,
+        "mean": 0.33093632876118884,
+        "min": 0.1726259065564311
+      }
+    },
+    "invalid-json": 0
+  },
+  {
+    "parameters": {
+      "binary": "all",
+      "optimization": 2,
+      "target-optimization": 3,
+      "platform": "gcc",
+      "pool-size": 100,
+      "examples": 3,
+      "prompt": "extensive-small",
+      "model": "qwen-2.5-7"
+    },
+    "results": {
+      "mrr": 0.7252339271788456,
+      "recall_at_1": 0.65,
+      "recall_at_10": 0.85,
+      "similarity_mean": {
+        "max": 0.6958862407835573,
+        "median": 0.33883035444702286,
+        "mean": 0.34656614101317834,
+        "min": 0.17482645633616375
+      }
+    },
+    "invalid-json": 0
+  }
+]

@@ -101,21 +101,24 @@
 \date{}
 
 % make title bold and 14 pt font (Latex default is non-bold, 16 pt)
-\title{\Large \bf Formatting Submissions for USENIX Security 2026:\\
-  An (Incomplete) Example}
+\title{\Large \bf Reasoning Like a Reverse Engineer: Language-Model as Feature Extraction for Binary Similarity }
 
 %for single author (just remove % characters)
 \author{
-{\rm Your N.\ Here}\\
-Your Institution
-\and
-{\rm Second Name}\\
-Second Institution
-% copy the following lines to add more authors
+{\rm Anonymous submission}
+} 
+
+% \author{
+% {\rm Your N.\ Here}\\
+% Your Institution
 % \and
-% {\rm Name}\\
-%Name Institution
-} % end author
+% {\rm Second Name}\\
+% Second Institution
+% % copy the following lines to add more authors
+% % \and
+% % {\rm Name}\\
+% %Name Institution
+% } % end author
 
 \maketitle
 
@@ -123,20 +126,27 @@ Second Institution
 \begin{abstract}
 %-------------------------------------------------------------------------------
 
-Binary code similarity detection methods are becoming accurate at detecting
-clones across compiler settings and architectures, but have limitations that
-prevent them from being useful in reverse engineering processes. These methods generate
-a large floating point vector (an embedding) as a representation for a code fragment.
-The embedding provides no insight to the user, and limits the scalability of binary similarity
-databases. The necessity for these methods to be trained on a code fragment dataset
-means they often do not adapt to unseen settings. We propose a new method that resolves these issues.
-Our solution does not require training, and generates a textual analysis rather than an embedding.
-This solves the scalability issues of existing methods, because ours allows for inverted
-index search, which is orders of magnitude faster than nearest neighbor search in high dimensions.
-Most importantly, the textual representation is inherently human interpretable, making
-clone verification much easier. While alleviating these limitations, our method achieves \(42\%\) and \(62\%\)
-on first position recall in cross architecture and cross optimization similarity detection respectively,
-compared to \(39\%\) and \(34\%\) achieved by the best state-of-the-art method.
+% Binary code similarity detection methods are becoming accurate at detecting
+% clones across compiler settings and architectures, but have limitations that
+% prevent them from being useful in reverse engineering processes. These methods generate
+% a large floating point vector (an embedding) as a representation for a code fragment.
+% The embedding provides no insight to the user, and limits the scalability of binary similarity
+% databases. The necessity for these methods to be trained on a code fragment dataset
+% means they often do not adapt to unseen settings. We propose a new method that resolves these issues.
+% Our solution does not require training, and generates a textual analysis rather than an embedding.
+% This solves the scalability issues of existing methods, because ours allows for inverted
+% index search, which is orders of magnitude faster than nearest neighbor search in high dimensions.
+% Most importantly, the textual representation is inherently human interpretable, making
+% clone verification much easier. While alleviating these limitations, our method achieves \(42\%\) and \(62\%\)
+% on first position recall in cross architecture and cross optimization similarity detection respectively,
+% compared to \(39\%\) and \(34\%\) achieved by the best state-of-the-art method.
+
+
+% usually 1st paragraph covers background, motivation, and gaps.
+Binary code similarity detection is a core task in reverse engineering, supporting malware analysis and vulnerability discovery by identifying semantically similar code across diverse settings. Modern methods have progressed from manually engineered features to vector representations. Hand-crafted statistics (e.g., operation ratios) are interpretable but shallow and fail to generalize. Embedding-based methods overcome this by learning robust cross-setting representations, but they are opaque black-box vectors that hinder verification. They also face a scalability–accuracy trade-off, since high-dimensional nearest-neighbor search requires approximations that reduce precision. Current approaches thus force a compromise between interpretability, generalizability, and scalability.
+
+% how the method addresses the gaps and the supporting evidence. 
+We bridge these gaps using a language–model–based agent to generate structured analyses of assembly code, with features such as input/output types, control-flow structures, subroutine calls, memory usage, notable values, and inferred algorithmic intent. Unlike hand-crafted features, they are richer, adaptive, and program-specific—akin to a reverse engineering analysis highlighting the unique characteristics of each fragment. Unlike embeddings, they are human-readable, maintainable, and directly searchable with inverted or relational indexes. Without any matching training, our method achieves 42\% and 62\% recall@1 in cross-architecture and cross-optimization tasks—comparable to embedding methods with training (39\% and 34\%). Combined with embeddings, it outperforms the state of the art, demonstrating that accuracy, scalability, and interpretability can coexist.
 
 \end{abstract}
 
