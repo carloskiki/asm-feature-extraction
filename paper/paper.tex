@@ -452,10 +452,10 @@ is identified, but also to provide a concise overview for analysts who may wish 
 the function or verify its similarity with the target. Categories include: cryptographic, data processing, control flow and dispatch,
 initialization, error handling, wrapper/utility, file management, etc.
 
-\subsubsection{Examples}
+\subsection{Examples}
 
 To achieve the best results with our method, we utilize few-shot prompting ~\cite{few-shot} by providing
-a few assembly functions and a hand crafted analyses of the function along with our prompt.
+a few assembly functions and a hand crafted analyses of each function along with our prompt.
 In our evaluations against the baselines, three examples are provided, and our ablation study confirms that adding more than three examples provides
 little to no benefit. Providing a single example or a JSON schema in the prompt is enough to achieve good results. We do not
 provide a JSON schema because it is redundant information when examples are included. Our examples are selected from a
@@ -533,24 +533,24 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
 ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
 methods such as cosine similarity.  Since our generated analysis is not a numerical vector but rather structured text,
 we use an alternative method to compare two assembly functions. We flatten the JSON structure into a set, where each
-element is the full path concatenated with the value of each element in the object. Jaccard similarity (Intesection over union)
-is used to obtain a similarity score when comparing two such sets. That is, the number of identical fields in the JSON
-structure is divided by the total number of elements, giving a value between \(0\) and \(1\) which we use as the similarity score.
+element is the full path concatenated with the value of each field in the object. Jaccard similarity (Intesection over union)
+is used to obtain a similarity score when comparing two such sets. That is, the number of identical key-value pairs in the JSON
+structure is divided by the total number of key-value pairs, giving a value between \(0\) and \(1\) which we use as the similarity score.
 
 \subsection{Dataset}
 
 The dataset used is made of a varied set of executables, so that it represents the diversity found in real world software.
-Our method is not trained, and so our dataset is only needed for evaluations. it is composed of seven open source binaries:
-BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick ~\cite{image-magick}, OpenSSL ~\cite{openssl},
-PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allows their use in our evaluations. 
+Our method is not trained, and so our dataset is only needed for evaluations. It is composed of seven open source binaries:
+BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick~\cite{image-magick}, OpenSSL ~\cite{openssl},
+PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allow their use in our evaluations. 
 
 All binaries were compiled using \texttt{gcc} for the following architectures: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
 For each architecture, executables were generated for all optimization levels (\texttt{O0} to \texttt{O3}), stripped of debug symbols.
 The compiled binaries were dissassembled using IDA Pro and separated into individual functions, yielding \(383,658\) assembly functions.
 Functions consisting of less than three instructions were not included as part of the dataset, because of their triviality.
 
-Pairs of equivalent functions from the same platform but distinct optimization levels are made for cross optimization
-evaluation, and pairs from the same optimization level but different platforms are made for cross
+Pairs of equivalent functions from the same platform but distinct optimization levels were made for cross optimization
+evaluation, and pairs from the same optimization level but different platforms were made for cross
 platform evaluation. For example, the \texttt{MD5Init} functions in \autoref{asm-diff} compiled with \texttt{-O0} (left) and
 \texttt{-O3} (right) for \texttt{x86-64} form a pair for cross optimization retrieval, whereas functions compiled with \texttt{-O0}
 for \texttt{x86-64} (left) and \texttt{mips} (center) form a pair for cross architecture retrieval.
@@ -558,11 +558,13 @@ for \texttt{x86-64} (left) and \texttt{mips} (center) form a pair for cross arch
 \section{Experiments}
 
 Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, \(100\) GB of RAM, and two NVIDIA Quadro RTX
-6000 GPUs each having  \(24\) GB of RAM. First, we select the LLM best suited for our subsequent experiments. Second, we compare our
-method against other state-of-the-art ML based approaches to BCSD on our dataset. Third, we perform ablation studies on our method,
+6000 GPUs each having  \(24\) GB of RAM.
+
+The following experiments are performed: First, we select the LLM best suited for our subsequent evaluations. Second, we compare our
+method against other state-of-the-art ML based approaches for BCSD on our dataset. Third, we perform ablation studies on our method,
 to determine how the size of the model, the number of examples provided, and the different sections of the prompt contribute to our results.
 Finally, we demonstrate that the features extracted from our novel method are not properly represented in state-of-the-art embedding methods,
-and that by combining our method with an embedding model yields significantly better results that state of the art approaches.
+and that by combining our method with any generic embedding model yields significantly better results that state of the art approaches.
 
 \subsection{Evaluation method}
 
@@ -572,7 +574,7 @@ A pool of assembly function pairs is used for evaluation, where both assembly fr
 For each pair, we compare the generated features for the first element of the pair with all second elements of the pairs contained
 in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the \texttt{arm}
 architecture with optimization level \(3\), and \(b_i\) is compiled for the \texttt{mips} architecture with the same optimization
-level. The features generated for function \(a_1\) is compared for similarity with the features of \(b_i\) for \(i \in [1, 10]\).
+level. The feature set generated for function \(a_1\) is compared for similarity with the features of each \(b_i\) for \(i \in [1, 10]\).
 A ranking is generated by ordering these comparisons from most to least similar. Recall@1 is successful
 if \(b_1\) is found to be the most similar function, and the reciprocal rank metric is calculated with \autoref{mrr}.
 \begin{equation} \label{mrr}
@@ -583,11 +585,11 @@ MRR metric is calculated by averaging the reciprocal rank of each pair.
 
 \subsection{LLM Selection}
 
-Before evaluating our method against the baselines, we compare different LLMs available to select our backbone for the remaining experiments.
+Before evaluating our method against the baselines, we compare different LLMs available to select our backbones for the remaining experiments.
 For the local model, three options are considered: Qwen2.5 Coder ~\cite{qwen2} with sizes \(0.5\)B, \(1.5\)B, \(3\)B, and \(7\)B;
 Gemma 3 ~\cite{gemma3} with sizes \(1\)B and \(4\)B; and  Qwen3 \(4\)B ~\cite{qwen3}. We preselected these models because they are open source,
-small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with
-\(24\) GB of VRAM unquantized. We did not consider mixture-of-experts models because they are much larger, and the specificity of our
+small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with \(24\) GB of VRAM unquantized. We did not
+consider mixture-of-experts models because they are much larger, and the specificity of our
 workload is likely to result in only a subset of expert being heavily used. We selected a small set of tasks that are representative
 of the extensive experiments conducted against the baselines. There are two cross optimization evaluations, and one cross architecture 
 evaluation.
@@ -601,7 +603,7 @@ evaluation.
     Qwen3 4B         & 0.550      & \bf 0.850  & 0.564            \\
     Gemma 3 4B       & \bf 0.571  & 0.839      & \bf 0.594        \\ \hline
     \end{tabular}
-    \caption{Results of the selected evalutations for local model selection, using a pool size of \(100\).}
+    \caption{MRR eesults of the selected evalutations for local model selection, using a pool size of \(100\).}
     \end{table}
 }
 
@@ -623,7 +625,7 @@ the model to use for the remaining evaluations.
     Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
     GPT 4.1 Mini     & 0.662      & 0.811      & 0.755            \\ \hline
     \end{tabular}
-    \caption{Results of the selected evalutations for commercial model selection, using a pool size of \(100\).}
+    \caption{MRR results of the selected evaluations for commercial model selection, using a pool size of \(100\).}
     \end{table}
 }
 
@@ -661,7 +663,9 @@ latency per request, Gemini is almost able to handle a request every second, mak
 This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
 different optimization levels. We first present the baselines and then show our results.
 
-\noindent \textbf{Baselines.} Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation
+\noindent \textbf{Baselines.} There are five baselines, presented in the same order as in ~\autoref{x-arch}.
+
+Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation
 model ~\cite{BERT} along with two control flow graph embedding models
 to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
 passes the CFG through a graph neural network to obtain a graph semantics embedding, and sends the adjacency
@@ -693,15 +697,17 @@ trained on cross compiler similarity detection.
 
 The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model to perform assembly function embedding.
 It is adapted for assembly instruction tokenization, and directly generates an embedding for
-a whole assembly function. It is also comes with a text embedding model, CLAP-text, so that classification can
-be performed using human readable classes. Categories or labels are embedded with the text model, and the
+a whole assembly function. It also comes with a text embedding model, so that classification can
+be performed using human readable classes. The class to match for is embedded with the text model, and the
 assembly function with the assembly embedding model. The generated embeddings can be compared with cosine similarity to
 calculate whether the assembly function is closely related or opposed to the embedded category. This model was only trained
 for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it supports other architectures and could be trained on
 them.
 
-We present the results of our method evaluated on both the local model, Qwen2.5-Coder 7B Parameters, and the commercially deployed model,
-Gemini 2.5 Flash. As evident in \autoref{x-opt}, the hardest retrieval task is between optimization levels \(0\) and \(3\),
+
+\noindent \textbf{Results.} We present the results of the baselines and our method evaluated on both the
+largest local model, Qwen2.5-Coder 7B, and the commercially deployed model, Gemini 2.5 Flash.
+As evident in \autoref{x-opt}, the hardest retrieval task is between optimization levels \(0\) and \(3\),
 highlighting the substantial difference between unoptimized and maximally optimized code (see \autoref{asm-diff}).
 At optimization level \(0\), functions perform a lot of unessecary actions, such as extensively moving
 data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
@@ -714,9 +720,9 @@ hardware, while keeping the observable behavior of the program untouched.
 The baselines mostly perform worse than expected on this evaluation. As our own dataset is used
 rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
 as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
-specific training other than the pre-traning process performed by open source model developers. It readily achieves good results,
+specific training other than the pre-traning process performed by the model developers. It readily achieves good results,
 meaning our method generalizes well to unseen settings. The stability of our method is also remarkable. It consisently
-performs well, compared to other methods that perform excellently on some tasks, but poorly on others.
+performs well, compared to some of the baselines that perform excellently on some tasks, but poorly on others.
 
 \subsection{Clone search with different architectures}
 
@@ -747,18 +753,18 @@ performs well, compared to other methods that perform excellently on some tasks,
 
 Different CPU architectures have varying assembly code languages. It is hard for BCSD methods that analyze assembly code to support
 multiple architectures. These methods need to accurately represent two functions with completely different syntaxes but with identical
-semantics as being very similar in terms of their feature vector or embedding. Hence, methods that use CFG analysis have a better chance
+semantics as being very similar in terms of their feature set or embedding. Hence, methods that use CFG analysis have a better chance
 at supporting many architectures, since the structure of the CFG itself is architecture agnostic. However, the basic blocks that constitute
 this graph are still in assembly code, which does not fully resolve the issue. Furthermore, there exists many different variants of each
 instruction set, because each new version of an architecture brings new instructions to understand and support. With deep learning methods,
 this requires training or fine-tuning the model to understand a new language variant every time. Afterwards, all embeddings in a BCSD database need to
-be regenerated. Our method does not directly address this issue, but brings a significant improvement. It indirectly makes use of the vast
+be regenerated. Our method does not directly address this issue, but brings a significant improvement. It indirectly benefits from the vast
 amount of data used to train foundational LLMs. Since a LLM has extensively seen all of the mainstream CPU architectures and their dialects
 in its training data, it is able to grasp their meaning and extract features from them. Also, if the model in use seems to poorly comprehend a
 specific architecture, it can be replaced with one that better performs the specific platform without invalidating the BCSD database.
 
-Our method surpasses the baselines, but more work in this area is clearly still required. The recall@1 metrics show that the our method
-is able to rank the the correct assembly fragment in first place only \(42\%\) of the time on average.
+Our method slightly surpasses the baselines, but more work in this area is clearly still required. The recall@1 metrics show that the our
+method is able to rank the the correct assembly fragment in first place only \(42\%\) of the time on average.
 
 \subsection{Ablation on model size}
 
@@ -778,7 +784,7 @@ From our observations, LLMs with less than \(3\)B parameters do not seem to comp
 they are not provided with any examples. When provided with examples, these small models will mimic the examples provided without basing the
 output on the assembly function in the query. We can clearly see a form of sub-linear increase in performance with respect to model size.
 The Gemini 2.5 Flash model architecture is not disclosed at the time of writing, but we can expect the model to have an order
-of magnitude more parameters, than our local models, and may use a mixture of expert architecture, based on disclosed previous Gemini model versions.
+of magnitude more parameters than the local models, and may use a mixture-of-experts architecture, based on previous Gemini model architectures.
 
 \subsection{Ablation on examples}
 
@@ -804,20 +810,20 @@ This suggests that the examples themselves contain enough information for the mo
 exactly how.
 
 With our experimental configuration, providing four examples to Qwen 2.5 \(7\)B significantly decreases its MRR scores. That is because
-the examples almost completely use the full context window that we provide to the LLM. As such, most query assembly functions are
-too large and thus truncated, which loses information about our query.
+the examples almost completely use the full context window that we provide to the language model. As such, most assembly functions are
+too large to fit in the remaining tokens and are thus truncated, which loses information about our query.
 
 The dotted line in \autoref{ex-abl} represents the MRR score obtained by providing no examples to Gemini 2.5 Flash, but providing a reference JSON
-schema for the model to follow. The scores being equivalent shows that Gemini does not base itself on the provided examples, but only
-uses them to understand the JSON schema required. In all our other evaluations, we provide examples instead of a JSON schema because local
-models do not have the capability of generating output based on a schema built-in.
+schema for the model to follow using the built-in capabilities of the API. The scores being very similar shows that Gemini does not base itself on the
+provided examples, but only uses them to understand the JSON schema required. In all our other evaluations, we provide examples instead of a JSON
+schema because local models do not have the capability of generating output based on a schema built-in.
 
 \subsection{Ablation on the prompt used}
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
 \caption{
-MRR performance with one section removed from the prompt. Cross optimization retrieval is done between fragments at
+MRR performance with one section removed from the prompt, using Gemini 2.5 Flash. Cross optimization retrieval is done between fragments at
 optimization levels \(0\) and \(3\), with all functions compiled for the \texttt{x86-64} architecture. Cross architecture retrieval is done between functions
 compiled for \texttt{arm} and \texttt{x86-64}, all compiled using optimization level \(2\). Both tasks are done with a pool size of \(100\). The dotted lines
 show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact on the results.}
@@ -913,15 +919,17 @@ and is hard to generalize across architectures and application binary interfaces
 
 \subsection{LLM based software analysis}
 
-Researchers have found many related applications of Large language models to binary and software analysis.
+Researchers have found many related applications of language models to binary and software analysis.
 For vulnerability detection, FuncVul ~\cite{funcVul} is a GraphCodeBERT model fine-tuned to detect whether a provided
-source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function in a generic maner,
-erasing variable and function names. The LLM is also used in their method to predict the lines on which the vulnerability is found.
+source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function
+using generic variable and function names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.
 LLM4Decompile ~\cite{llm4decompile} tries to utilise LLMs for decompilation. An open source LLM is fine-tuned to learn the source code
-representation of an assembly function. Fang et al. ~\cite{source-analysis} measure the competency of LLMs for source code analysis,
-with a focus on obfuscated source code. Their results match our findings, that LLMs are efficient at code analysis, except in cases
-of advanced obfuscation techniques. LLM based fuzzing is another area that has recently gained interest. For instance,
-Asmita et al. ~\cite{llm-fuzz} use a LLM to generate the initial seed of a fuzzing pipeline on the BusyBox ~\cite{busybox} executable.
+representation of an assembly function, and they then evaluate this model on its decompilation capabilities. Fang et al. ~\cite{source-analysis}
+measure the competency of LLMs for source code analysis, with a focus on obfuscated source code.
+Their results match our findings, that LLMs are efficient at code analysis, but they
+also demonstrate that language models still struggle when faced with cases of advanced obfuscation techniques.
+LLM based fuzzing is another area that has recently gained interest. For instance, Asmita et al. ~\cite{llm-fuzz} use a LLM to
+generate the initial seed of a fuzzing pipeline on the BusyBox ~\cite{busybox} executable.
 
 \section{Conclusion}
 
