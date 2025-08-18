@@ -209,42 +209,42 @@ loc_42c1c0:
 \centering
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_43EE04:
-    ADDIU $sp, -0x20
-    SW $ra, 0x18+var_s4($sp)
-    SW $fp, 0x18+var_s0($sp)
-    MOVE $fp, $sp
-    SW $a0, 0x18+arg_0($fp)
-    LW $v0, 0x18+arg_0($fp)
-    MOVE $a0, $v0
-    JAL sub_43D930
-    NOP 
-    LW $v0, 0x18+arg_0($fp)
-    SW $zero, 0x50($v0)
-    LW $v0, 0x18+arg_0($fp)
-    SW $zero, 0x58($v0)
-    LW $v0, 0x18+arg_0($fp)
-    LW $v1, 0x58($v0)
-    LW $v0, 0x18+arg_0($fp)
-    SW $v1, 0x54($v0)
-    NOP 
-    MOVE $sp, $fp
-    LW $ra, 0x18+var_s4($sp)
-    LW $fp, 0x18+var_s0($sp)
-    ADDIU $sp, 0x20
-    JR $ra
-    NOP 
+    addiu $sp, -0x20
+    sw $ra, 0x18+var_s4($sp)
+    sw $fp, 0x18+var_s0($sp)
+    move $fp, $sp
+    sw $a0, 0x18+arg_0($fp)
+    lw $v0, 0x18+arg_0($fp)
+    move $a0, $v0
+    jal sub_43D930
+    nop 
+    lw $v0, 0x18+arg_0($fp)
+    sw $zero, 0x50($v0)
+    lw $v0, 0x18+arg_0($fp)
+    sw $zero, 0x58($v0)
+    lw $v0, 0x18+arg_0($fp)
+    lw $v1, 0x58($v0)
+    lw $v0, 0x18+arg_0($fp)
+    sw $v1, 0x54($v0)
+    nop 
+    move $sp, $fp
+    lw $ra, 0x18+var_s4($sp)
+    lw $fp, 0x18+var_s0($sp)
+    addiu $sp, 0x20
+    jr $ra
+    nop 
 \end{minted}
 \end{minipage}
 \begin{minipage}[t]{0.32\linewidth}
 \centering
 \begin{minted}[fontsize=\footnotesize]{nasm}
 loc_4241F0:
-    MOVDQA xmm0, cs:xmmword_448750
-    MOV dword ptr [rdi+50h], 0
-    MOV dword ptr [rdi+58h], 0
-    MOVUPS xmmword ptr [rdi], xmm0
-    MOV dword ptr [rdi+54h], 0
-    RETN
+    movdqa xmm0, cs:xmmword_448750
+    mov dword ptr [rdi+50h], 0
+    mov dword ptr [rdi+58h], 0
+    movups xmmword ptr [rdi], xmm0
+    mov dword ptr [rdi+54h], 0
+    retn
 \end{minted}
 \end{minipage}
 \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with \texttt{gcc} for with different acrhictectures and optimization levels.
@@ -274,7 +274,7 @@ loc_4241F0:
 Security researchers and reverse engineers are routinely tasked with the analysis of unknown or proprietary executables.
 Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
-a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these programs are to
+a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these platforms are to
 disassemble and decompile the provided machine code, so that its content can be analyzed by humans. Disassembly is
 the process of retrieving the assembly instructions (human-readable machine code) from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
@@ -284,7 +284,7 @@ is lost ~\cite{BCSDsurvey}. Variables, data structures, functions, and comments 
 the program as efficient as possible---which often means removing as much as possible. The optimizers within the compiler
 only have a single rule: They must not make changes to the observable behavior of the program (often referred
 to as the ``as-if rule'' \cite{c++11}). As a result, compilers can remove, reorder, and inline significant parts of the code, making
-it difficult to understand its behavior. Even worse, adverserial programs such as malware or digital rights management software
+it difficult to understand the code's behavior. Even worse, adverserial programs such as malware or digital rights management software
 make use of obfuscation techniques to resist having their code reverse engineered.
 
 \subsection{Binary code similarity detection}
@@ -292,10 +292,10 @@ make use of obfuscation techniques to resist having their code reverse engineere
 BCSD is the task of determining whether two fragments of binary code perform similar actions.
 These fragments are usually first disassembled, and are then compared for similarity. In practice,
 similarity detection is performed with one known fragment (either because it was analyzed before
-or because its source code is known), and one unknown fragment. If the unknown piece of code is deemed
-highly similar to the known one, it greatly simplifies the analysis task, and reduces duplicate work. Known
-code fragments are typically collected in a database which is queried against for clone search. For example,
-if a major vulnerability in a widely used, core open-source component is found, BCSD can be used to quickly
+or because its source code is known), and one unknown fragment. Known code fragments are typically collected in a
+database which is queried against for clone search. If the unknown piece of code is deemed
+highly similar to the known one, the analysis task becomes significantly simpler and duplicate work is minimized. For example,
+if a vulnerability in a widely used open-source component is found, BCSD can be used to quickly
 assess if a binary contains the vulnerable code fragment. It can also be used for plagiarism detection, which
 could take the form of license or patent infringement, for software and malware classification ~\cite{op-seq}, or for 
 security patch analysis \cite{patch}. Challenges in binary analysis are amplified in binary code similarity detection,
@@ -311,8 +311,9 @@ Most methods also require a pre-processing step after disassembly, such as extra
 
 Production scale BCSD engines contain millions of assembly functions. With one vector embedding per function, nearest neighbor
 search takes a significant amount of time as the algorithm has to compare the query with every function in the database in linear
-time complexity. To alliviate this issue, approximate nearest neighbor search is used on large databases to reduce the time
-complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return the first match and thus skews similarity scores.
+time complexity. To alleviate this issue, approximate nearest neighbor search is used on large databases to reduce the time
+complexity of the search ~\cite{ANN,ANN-limits}, but it comes at the cost of not always returning the first match, and thus
+skews similarity scores.
 
 \begin{figure*}
 \centerline{\includegraphics[width=\linewidth]{BCSD-schematic}}
@@ -322,8 +323,8 @@ complexity of the search ~\cite{ANN,ANN-limits}, but it may not always return th
 
 \subsection{Problem definition}
 
-We deem two assembly code fragments to be semantically identical if they have the same observable behavior on a system.
-This type of clone is generally referred to as type four clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
+We deem two assembly code fragments to be semantically identical if they have the same observable behavior.
+This category of clones is generally referred to as type four clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
 to detect. In research, it is common to use the same source code function compiled with different compilers or compilation
 options to create such type four clones ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.  This type of clone excludes
 procedures that happen to have the same output but achieve it in different ways, for example the breadth-first search and
