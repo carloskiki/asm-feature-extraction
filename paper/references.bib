@@ -286,18 +286,16 @@
 }
 
 @inproceedings{blanket-exec,
-  author    = {Egele, Manuel and Woo, Maverick and Chapman, Peter and Brumley, David},
-  title     = {Blanket execution: dynamic similarity testing for program binaries and components},
+  author    = {Manuel Egele and Maverick Woo and Peter Chapman and David Brumley},
+  title     = {Blanket Execution: Dynamic Similarity Testing for Program Binaries and Components},
+  booktitle = {23rd USENIX Security Symposium (USENIX Security 14)},
   year      = {2014},
-  isbn      = {9781931971157},
+  isbn      = {978-1-931971-15-7},
+  address   = {San Diego, CA},
+  pages     = {303-317},
+  url       = {https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele},
   publisher = {USENIX Association},
-  address   = {USA},
-  abstract  = {Matching function binaries--the process of identifying similar functions among binary executables--is a challenge that underlies many security applications such as malware analysis and patch-based exploit generation. Recent work tries to establish semantic similarity based on static analysis methods. Unfortunately, these methods do not perform well if the compared binaries are produced by different compiler toolchains or optimization levels. In this work, we propose blanket execution, a novel dynamic equivalence testing primitive that achieves complete coverage by overriding the intended program logic. Blanket execution collects the side effects of functions during execution under a controlled randomized environment. Two functions are deemed similar, if their corresponding side effects, as observed under the same environment, are similar too.We implement our blanket execution technique in a system called BLEX. We evaluate BLEX rigorously against the state of the art binary comparison tool BinDiff. When comparing optimized and un-optimized executables from the popular GNU coreutils package, BLEX outperforms BinDiff by up to 3.5 times in correctly identifying similar functions. BLEX also outperforms BinDiff if the binaries have been compiled by different compilers. Using the functionality in BLEX, we have also built a binary search engine that identifies similar functions across optimization boundaries. Averaged over all indexed functions, our search engine ranks the correct matches among the top ten results 77\% of the time.},
-  booktitle = {Proceedings of the 23rd USENIX Conference on Security Symposium},
-  pages     = {303–317},
-  numpages  = {15},
-  location  = {San Diego, CA},
-  series    = {SEC'14}
+  month     = aug
 }
 
 @inproceedings{Kam1n0,
@@ -340,11 +338,14 @@
   doi       = {10.1109/ICSE.2017.49}
 }
 
-@article{qwen2,
-  title   = {Qwen2. 5-Coder Technical Report},
-  author  = {Hui, Binyuan and Yang, Jian and Cui, Zeyu and Yang, Jiaxi and Liu, Dayiheng and Zhang, Lei and Liu, Tianyu and Zhang, Jiajun and Yu, Bowen and Dang, Kai and others},
-  journal = {arXiv preprint arXiv:2409.12186},
-  year    = {2024}
+@misc{qwen2,
+  title         = {Qwen2.5-Coder Technical Report},
+  author        = {Binyuan Hui and Jian Yang and Zeyu Cui and Jiaxi Yang and Dayiheng Liu and Lei Zhang and Tianyu Liu and Jiajun Zhang and Bowen Yu and Keming Lu and Kai Dang and Yang Fan and Yichang Zhang and An Yang and Rui Men and Fei Huang and Bo Zheng and Yibo Miao and Shanghaoran Quan and Yunlong Feng and Xingzhang Ren and Xuancheng Ren and Jingren Zhou and Junyang Lin},
+  year          = {2024},
+  eprint        = {2409.12186},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2409.12186}
 }
 
 @misc{qwen3,

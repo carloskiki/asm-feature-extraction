@@ -1,106 +1,7 @@
-# Extract human readable information by querying an LLM
-
-## Assumptions
-
-- There is no bad actor trying to mangle or obfuscate the generated assembly.
-- Assembly will be similar except for the presence of dbg symbols &| the optimization level &| the architecture used.
-
-
-## Questions
-
-- How do we handle short and long functions?
-- How to prompt properly
-- How to parallel stuff better
-
-## Datasets
-### Libraries
-
-Contains  assembly functions
-
-- Some functions have 0 blocks, so we skip them.
-- Some functions are too long for the context window of most llms (e.g., 100k tokens), we could truncate them or skip them or sliding window.
-
-### Binary Corp Issues
-
-- The data does not contain the address of each instruction, and it is not split into blocks (so we don't know where jmp instructions lead to).
-
-- For the lack of addresses, we could use relative addresses with 0 as the first instruction, but we would need to know size of each instruction
-    (arm has a standard 8 bytes instruction size, but I know x86_64 is variable length, and I don't know about others).
-- There is nothing we can do for the lack of labels, because even if the jump instruction is something like `jmp loc_8EA3`,
-    We don't have the address of the instruction so we can't match the HEX value to an address.
-
-## Pipeline
-
-Data -> Query -> Structured JSON
-
-Either generate sources from pool, or generate pool for each source.
-
-### Retrieval
-
-Generate new pool for all sources, OR generate one pool and run on all elements in the pool.
-
-
-## Papers
-
-
-### Meta Analysis
-
-- [A Survey of Binary Code Similarity Detection Techniques](https://www.mdpi.com/2079-9292/13/9/1715)
-- [Binary Code Similarity Detection: State and Future](https://ieeexplore.ieee.org/document/10490019)
-
-### Static Analysis
-
-- [Graph-based comparison of executable objects (english version)](https://www.semanticscholar.org/paper/Graph-based-comparison-of-Executable-Objects-Dullien/7661d4110ef24dea74190f4af69bd206d6253db9)
-- [A New Method of Software Clone Detection Based on Binary Instruction Structure Analysis](https://ieeexplore.ieee.org/document/6478318)
-
-### Deep Learning Based
-
-NLP:
-
-- [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization](https://ieeexplore.ieee.org/document/8835340)
-
-Jump aware transformer architecture:
-
-- [jTrans: jump-aware transformer for binary code similarity detection](https://dl.acm.org/doi/pdf/10.1145/3533767.3534367)
-
-Builds on jTrans:
-
-- [CLAP: Learning Transferable Binary Code Representations with Natural Language Supervision](https://dl.acm.org/doi/pdf/10.1145/3650212.3652145)
-
-Transformer based architecture:
-
-- [UniASM: Binary code similarity detection without fine-tuning](https://arxiv.org/abs/2211.01144)
-- [Cross-Architecture Binary Code Similarity Detection Based on Hybrid Neural Networks](https://ieeexplore.ieee.org/document/11020079)
-
-### Dynamic Analysis
-
-- [Binary Function Clustering Using Semantic Hashes](https://ieeexplore.ieee.org/document/6406693)
-- [BinSim: Trace-based Semantic Binary Diffing via System Call Sliced Segment Equivalence Checking](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-ming.pdf)
-
-### Java Bytecode similarity
-
-Oldest first
-
-- [A Plagiarism Detection Technique for Java Program Using Bytecode Analysis](https://ieeexplore.ieee.org/document/4682179)
-- [Java bytecode clone detection via relaxation on code fingerprint and Semantic Web reasoning](https://ieeexplore.ieee.org/document/6227864)
-- [SeByte: A semantic clone detection tool for intermediate languages](https://ieeexplore.ieee.org/document/6240495)
-
-### IR Based Similarity
-
-- [Detecting Clones Across Microsoft .NET Programming Languages](https://ieeexplore.ieee.org/document/6385136)
-
-### Input reparing
-
-- [BinAug: Enhancing Binary Similarity Analysis with Low-Cost Input Repairing](https://dl.acm.org/doi/pdf/10.1145/3597503.3623328)
-
-### Bad 
-
-- [CrossDeep: A Hybrid Approach For Cross Version Binary Code Similarity Detection](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10892660)
-
 # Data Schema
 
 ## `bin` field
-```json
+```jsonc
 {
   "name": "D:\\data-bk\\optimization-cross-arch\\l-openssl-openssl\\openssl-gcc32-g-O0.bin.tmp\\openssl-gcc32-g-O0.bin",
   "base": 134512640,
@@ -132,7 +33,7 @@ Oldest first
 
 ## `blocks` field
 A list of blocks, where each block is:
-```json
+```jsonc
 {
   "addr_start": 134513128,
   "addr_end": 134513153,
@@ -149,7 +50,7 @@ A list of blocks, where each block is:
 
 ### `ins` element
 
-```json
+```jsonc
 {
   "ea": 134513132, // Effective Address
   "mne": "CALL", // Mnemonic
@@ -168,7 +69,7 @@ A list of blocks, where each block is:
 
 ## `comments` field
 
-```json
+```jsonc
 {
   "author": "ida",
   "category": 3,
@@ -181,7 +82,7 @@ A list of blocks, where each block is:
 
 ## `functions` field
 
-```json
+```jsonc
 {
   "name": "sub_80B3F27",
   "description": "",
@@ -219,47 +120,4 @@ file.
 # Misc
 
 Computer name: vsi-wpch-frame
-
-# Results Masta Plan
-
-Our project is good, but we need to be very thorough and systematic in our result analysis.
-
-## 1. Show that we match or are better than state of the art
-
-- 1 table for x-optimization
-- 1 table for x-architecture
-
-## 2. Show that our human interpretable output is a benefit
-
-Analogy with ML based techniques downside - letting the model decide some absract feature of which to extract.
-Hard to guide the model into choosing a set of feature that we humans know will be effective in comparison. 
-([refs] to meta analysis that shows how Control flow graphs are not good and that models fixate on function prelude)
-Has the benefits of being easily guidable and modifiable by humans, just like static analysis [refs].
-
-- Figure example of an LLM answer & Comparison between answers (Using diff style view).
-- Figure showing the different categories of feature we extract from the assembly function.
-
-## 3. Ablation on which model was used
-
-- Graph Show the lack of difference between local models used when same size.
-
-- Show how commercial models greatly surpass local models.
-- Metrics on the token use of commercial models
-
-## 4. Ablation study on Model Size
-
-- Graph showing the curve of performance vs. model size.
-- Example of output from a smaller model - show overfitting of provided examples + what happens when
-  doesn't generate JSON output? + repeating.
-- Graph: number of invalid JSON outputs for each model size (Qwen 2.5).
-- Graph: Qwirks of another model (e.g., Gemma with metric).
-
-Overall model perform mostly the same, but they each have their qwirks.
-
-## 5. Ablation on the Prompt used
-
-- Figure: how each prompt is interconnected - Which ones have which features.
-- Show token use for just the prompt - How this is bad for local models.
-
-# MISC
 hotcrp: https://sec26cycle1.usenix.hotcrp.com/

@@ -142,7 +142,7 @@
 Binary code similarity detection is a core task in reverse engineering, supporting malware analysis and vulnerability discovery by identifying semantically similar code across diverse settings. Modern methods have progressed from manually engineered features to vector representations. Hand-crafted statistics (e.g., operation ratios) are interpretable but shallow and fail to generalize. Embedding-based methods overcome this by learning robust cross-setting representations, but they are opaque black-box vectors that hinder verification. They also face a scalability–accuracy trade-off, since high-dimensional nearest-neighbor search requires approximations that reduce precision. Current approaches thus force a compromise between interpretability, generalizability, and scalability.
 
 % how the method addresses the gaps and the supporting evidence. 
-We bridge these gaps using a language–model–based agent to generate structured analyses of assembly code, with features such as input/output types, control-flow structures, subroutine calls, memory usage, notable values, and inferred algorithmic intent. Unlike hand-crafted features, they are richer, adaptive, and program-specific—akin to a reverse engineering analysis highlighting the unique characteristics of each fragment. Unlike embeddings, they are human-readable, maintainable, and directly searchable with inverted or relational indexes. Without any matching training, our method achieves 42\% and 62\% recall@1 in cross-architecture and cross-optimization tasks—comparable to embedding methods with training (39\% and 34\%). Combined with embeddings, it outperforms the state of the art, demonstrating that accuracy, scalability, and interpretability can coexist.
+We bridge these gaps using a language-model-based agent to generate structured analyses of assembly code, with features such as input/output types, control-flow structures, subroutine calls, memory usage, notable values, and inferred algorithmic intent. Unlike hand-crafted features, they are richer, adaptive, and program-specific—akin to a reverse engineering analysis highlighting the unique characteristics of each fragment. Unlike embeddings, they are human-readable, maintainable, and directly searchable with inverted or relational indexes. Without any matching training, our method achieves 42\% and 62\% recall@1 in cross-architecture and cross-optimization tasks—comparable to embedding methods with training (39\% and 34\%). Combined with embeddings, it outperforms the state of the art, demonstrating that accuracy, scalability, and interpretability can coexist.
 
 \end{abstract}
 
@@ -177,8 +177,6 @@ large language model (LLM). The method is simpler than other ML approaches, requ
 surpasses state-of-the-art results. It has the advantage of generating human interpretable feature vectors like earlier approaches,
 instead of numerical embeddings. Additionally, it effectively scales with the performance and size of the LLM used, and thus
 benefits from the ample amount of research on in this area.
-
-TODO: expand on how our method differs from and compares to others.
 
 \begin{figure*}[!t]
 \centering
@@ -717,8 +715,9 @@ hardware, while keeping the observable behavior of the program untouched.
 The baselines mostly perform worse than expected on this evaluation. As our own dataset is used
 rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
 as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
-specific training other than the pre-traning process performed by open source model developers. It readily acheives good results,
-meaning our method generalizes well to unseen settings.
+specific training other than the pre-traning process performed by open source model developers. It readily achieves good results,
+meaning our method generalizes well to unseen settings. The stability of our method is also remarkable. It consisently
+performs well, compared to other methods that perform excellently on some tasks, but poorly on others.
 
 \subsection{Clone search with different architectures}
 
