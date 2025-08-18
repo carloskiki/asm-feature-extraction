@@ -440,18 +440,17 @@ should use to identify them.
         data segment pointers occur.
     \item \textit{Memory management} is determined by the presence of calls to memory allocation and deallocation
         functions like \texttt{malloc} or \texttt{free}.
-    \item \textit{Input/Output handling} patterns are detected through characteristic file descriptor management behaviors, including system calls for opening, closing, reading, and writing, as well as instruction sequences implementing buffering mechanisms.
+    \item \textit{Input/Output handling} patterns are detected through characteristic file descriptor management behaviors, including system calls for opening, closing, reading, and writing, as well as instruction sequences implementing buffer mechanisms.
     \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
 \end{itemize}
 
 \subsubsection{Categorization}
 
-The last section tries to assign a overall category to the assembly function, by basing it on the information
-collected in the analysis. The final categorization only weakly supports the similarity search because it does
-not have a large impact on the similarity score. Its purpose is to provide a concise overview for reviewers
-of the analysis, who might want to understand the function or verify its similarity with the target.
-Categories include: cryptographic, data processing, control flow and dispatch, initialization, error handling,
-wrapper/utility, file management, etc.
+The last section tries to assign an overall category to the assembly function, based on the information collected during the analysis.
+Its purpose is not only to increase the similarity scores when a decisive category
+is identified, but also to provide a concise overview for analysts who may wish to understand
+the function or verify its similarity with the target. Categories include: cryptographic, data processing, control flow and dispatch,
+initialization, error handling, wrapper/utility, file management, etc.
 
 \subsubsection{Examples}
 
