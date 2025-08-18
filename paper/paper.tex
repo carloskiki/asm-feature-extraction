@@ -249,7 +249,7 @@ loc_4241F0:
 \end{minipage}
 \caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with \texttt{gcc} for with different acrhictectures and optimization levels.
     on the left, compiled for \texttt{x86-64} with \texttt{-O0}, in the center, compiled for \texttt{mips} with \texttt{-O0}, and on the right,
-    compiled for \texttt{x86-64} with \texttt{-O3}.  Our method is able to identify the functions as clones.}
+    compiled for \texttt{x86-64} with \texttt{-O3}.  Our method is able to identify these functions as clones.}
 \label{asm-diff}
 \end{figure*}
 
@@ -326,13 +326,11 @@ skews similarity scores.
 We deem two assembly code fragments to be semantically identical if they have the same observable behavior.
 This category of clones is generally referred to as type four clones ~\cite{Asm2Vec,BinClone}, and is considered the most difficult
 to detect. In research, it is common to use the same source code function compiled with different compilers or compilation
-options to create such type four clones ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.  This type of clone excludes
-procedures that happen to have the same output but achieve it in different ways, for example the breadth-first search and
-depth-first search algorithms. Instead of generating a binary output as to whether two code fragments are clones, the feature
-vector generated for each assembly function are compared to generate a similarity score. This value is between \(0\) and \(1\) and
-represents the degree of similarity between the two code fragments. This more closely aligns with real world use cases, where
-two pieces of code can be highly similar but not identical. For example, two different versions of a function from the same
-software deemed similar can help understand the nature of an executable, or a vulnerable function and its patched variant matched
+settings to create such type four clones ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}. Instead of generating a binary output as
+to whether two code fragments are clones, the feature vector generated for each assembly function are compared to generate a similarity score.
+This value is between \(0\) and \(1\) and represents the degree of similarity between the two code fragments. This more closely aligns with
+real world use cases, where two pieces of code can be highly similar but not identical. For example, two different versions of a function
+from the same library deemed similar can help understand the nature of an executable, or a vulnerable function and its patched variant matched
 can help assess that a vulnerability was indeed fixed. That is, the goal is to assign the highest similarity score to type four
 clones, and lower similarity scores to functions that do not share semantic behavior. 
 
@@ -343,9 +341,8 @@ the task of analyzing an unknown binary is reduced to analyzing the handful of c
 or modified by the software provider. All functionality coming from shared libraries or known sources, which constitutes a
 large majority of modern software, would be effectively identified as such and would require no reverse engineering work.
 Current technology remains far from this scenario. BCSD database maintenance is hard, because embeddings are invalidated
-every model update. Current methods still exhibit a large portion of false positives, which means that human verfification
+every model update. Current methods still exhibit a large portion of false positives, which means that human verification
 is required. Yet, these techniques give little to no insight as to why a similarity was detected between the assembly fragments.
-
 
 \section{Method}
 
@@ -355,10 +352,10 @@ of a vector embedding. This unique advantage allows immediate human verification
 engine. A database of assembly functions and their interpretable features is more easily maintained, as defects can
 be patched by humans, rather than having to regenerate the whole database when the model is modified.
 
-By using any open-source or commercially available LLM, we entirely sidestep model training by leveraging the extenive
-and diverse datasets that LLMs are pre-trained on.  Our method can be tuned by modifying the instructions provided to
+By using any open-source or commercially available LLM, we entirely sidestep model training by leveraging the extensive
+and diverse datasets that LLMs are pre-trained on. Our method can be tuned by modifying the instructions provided to
 the LLM, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
-The underlying LLM can also replaced seamlessly without invalidating the database, meaning that our method will continue
+The underlying LLM can also be replaced seamlessly without invalidating the database, meaning that our method will continue
 to scale with the performance improvements of LLMs---an area which is showing impressive growth and development. Furthermore, if
 a section of the prompt was edited to modify the output feature set, the database can still be maintained without
 having to regenerate an output for each item. Default values or values derived from other fields in the feature set can be added,
@@ -372,13 +369,14 @@ in a fraction of a second.
 \subsection{Prompt}
 
 The method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
-the provided assembly code fragment. The assembly code fragment does not require preprocessing. As output, the LLM generates a JSON
-structure containing the extracted features. We outline the prompt made up of multiple parts, each designed to
-extract specific semantic information from the assembly function. The full prompt is open-source and avaliable on Github.
+the provided assembly code fragment. As output, the LLM generates a JSON structure containing the extracted features.
+Compared to other methods, the assembly code fragment used in the query does not require any preprocessing.
+We outline the prompt made up of multiple parts, each designed to extract specific semantic information from the
+assembly function. The full prompt is avaliable as part of the published artifacts on GitHub [TODO].
 
 \subsubsection{Framing and conditioning}
 
-We use a prelude that contains general information about the task at hand, and the expected response.
+We use a prelude (\autoref{prompt-preamble}) that contains general information about the task at hand, and the expected response.
 
 Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
 evaluated (0.5B parameters) would sometimes repeat the same line of output until it ran out of context space, or generated invalid JSON.
@@ -387,35 +385,39 @@ selection. This is done in a loop until valid JSON is generated. In our experime
 for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
 valid JSON without retries.
 
+\begin{figure}
+\centering
 \begin{tcolorbox}[enhanced]
 You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
-analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
+analysis. Your goal is to analyze an assembly function from an unspecified architecture and compiler and provide its extracted
 high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
 algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
 \end{tcolorbox}
+\caption{Preamble to the analysis task description}
+\label{prompt-preamble}
+\end{figure}
 
 \subsubsection{Type signature}
 
 The first feature category extracted is the type signature of the provided assembly function.
-We only make the distinction between two types: Integer and Pointer. Inferring more information than these two 
+We only make the distinction between two types: \texttt{Integer} and \texttt{Pointer}. Inferring more information than these two 
 primitive types has shown to be too complicated for current LLMs. We extract the number of input arguments
 and their types, and also extract the return value type, if any.
 
 \subsubsection{Logic and operations}
 
 This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
-operation that the assembly function performs. We list some of the operations extracted here.
-
+operation that the assembly function performs. We list some of the features extracted here.
 
 \begin{itemize}
-\item Indication of loops. This is determined by the presence of jump instructions that point back to a previous
+\item Indication of loops: This is determined by the presence of jump instructions that point back to a previous
 instruction after some conditions have been checked.
-\item Indication of jump tables. Evaluated by patterns suggesting calculated jump addresses based on
+\item Indication of jump tables: Evaluated by patterns suggesting calculated jump addresses based on
 indices, or a series of conditional jumps.
 \item Extensive use of indexed addressing modes.
 \item Use of SIMD instructions and registers.
 \item Number of distinct subroutine call targets.
-\item Overall logical behavior. Possibilities include: arithmetic operations, bitwise operations, data movement and memory access,
+\item The overall logical behavior of the function. Possibilities include: arithmetic operations, bitwise operations, data movement and memory access,
 and control flow and dispatching operations.
 \end{itemize}
 
@@ -428,7 +430,7 @@ values that are used as offsets, loop counters or stack pointer adjustments.
 \subsubsection{Side effects}
 
 The prompt also monitors the side effects that the assembly function has on the system.
-It reports these as a list of booleans values which state whether or not the function has
+It reports these as a set of booleans values which state whether or not the function has
 the associated side effect. Each side effect is associated with a heuristic that the language model
 should use to identify them.
 
@@ -438,8 +440,7 @@ should use to identify them.
         data segment pointers occur.
     \item \textit{Memory management} is determined by the presence of calls to memory allocation and deallocation
         functions like \texttt{malloc} or \texttt{free}.
-    \item \textit{Linear memory access} patterns are detected by the presence of sequential indexed memory accesses inside loops or
-        across multiple successive instructions.
+    \item \textit{Input/Output handling} patterns are detected through characteristic file descriptor management behaviors, including system calls for opening, closing, reading, and writing, as well as instruction sequences implementing buffering mechanisms.
     \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
 \end{itemize}
 
