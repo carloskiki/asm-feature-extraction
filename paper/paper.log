@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  18 AUG 2025 12:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  18 AUG 2025 20:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1143,12 +1143,12 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 \pydata@fh@0=\write6
 \openout6 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250818123256Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250818200527Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed safely (allowed).
 
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250818123256Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250818200527Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed safely (allowed).
 
 
@@ -1159,26 +1159,26 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 )
-(./_minted/73B3F74DFDA0169EF78BB4CA3B423614.highlight.minted)
-(./_minted/C1FE0B2AD42F0009D4CB630ECC5045D6.highlight.minted)
+(./_minted/A53548786BC2B8CAE880DCA65385FC80.highlight.minted)
+(./_minted/82BE876EB6F2CF1DCB754382EB4DF850.highlight.minted)
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-61.
+59.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
-<BCSD-schematic.png, id=221, 3175.865pt x 1445.4pt>
+<BCSD-schematic.png, id=240, 3175.865pt x 1445.4pt>
 File: BCSD-schematic.png Graphic file (type png)
 <use BCSD-schematic.png>
-Package pdftex.def Info: BCSD-schematic.png  used on input line 320.
+Package pdftex.def Info: BCSD-schematic.png  used on input line 319.
 (pdftex.def)             Requested size: 505.89pt x 230.23213pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 333.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 331.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 333.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 331.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 333.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 331.
 
 
 [2]
@@ -1186,9 +1186,6 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 
 
 [3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1205,47 +1202,54 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [6]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 1270) has occurred while \output is active []
+
+
+
 
 
 [7]
-Underfull \vbox (badness 4242) has occurred while \output is active []
+Underfull \vbox (badness 1789) has occurred while \output is active []
 
 
 
-
-
-[8]
-<size-ablation.png, id=342, 376.68pt x 217.467pt>
-File: size-ablation.png Graphic file (type png)
-<use size-ablation.png>
-Package pdftex.def Info: size-ablation.png  used on input line 768.
-(pdftex.def)             Requested size: 241.02039pt x 139.14851pt.
-
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 787.
-
-<examples-ablation.png, id=344, 383.469pt x 219.657pt>
-File: examples-ablation.png Graphic file (type png)
-<use examples-ablation.png>
-Package pdftex.def Info: examples-ablation.png  used on input line 788.
-(pdftex.def)             Requested size: 241.02039pt x 138.06288pt.
-
-
-[9 <./size-ablation.png>]
-<prompt-ablation.png, id=357, 362.007pt x 217.467pt>
-File: prompt-ablation.png Graphic file (type png)
-<use prompt-ablation.png>
-Package pdftex.def Info: prompt-ablation.png  used on input line 820.
-(pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
+[8]
+<size-ablation.png, id=361, 376.68pt x 217.467pt>
+File: size-ablation.png Graphic file (type png)
+<use size-ablation.png>
+Package pdftex.def Info: size-ablation.png  used on input line 772.
+(pdftex.def)             Requested size: 241.02039pt x 139.14851pt.
 
-Underfull \vbox (badness 5832) has occurred while \output is active []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 791.
+
+<examples-ablation.png, id=363, 383.469pt x 219.657pt>
+File: examples-ablation.png Graphic file (type png)
+<use examples-ablation.png>
+Package pdftex.def Info: examples-ablation.png  used on input line 792.
+(pdftex.def)             Requested size: 241.02039pt x 138.06288pt.
+
+
+[9 <./size-ablation.png>]
+<prompt-ablation.png, id=375, 362.007pt x 217.467pt>
+File: prompt-ablation.png Graphic file (type png)
+<use prompt-ablation.png>
+Package pdftex.def Info: prompt-ablation.png  used on input line 824.
+(pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 
@@ -1254,22 +1258,17 @@ Underfull \vbox (badness 5832) has occurred while \output is active []
 
 
 [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-
-LaTeX Warning: Citation `distillation' on page 12 undefined on input line 964.
 
 
 
 [12]
+Underfull \vbox (badness 1264) has occurred while \output is active []
 
 
 
-[13
 
-] (./paper.bbl
+
+[13] (./paper.bbl
 
 
 Underfull \hbox (badness 1360) in paragraph at lines 23--31
@@ -1283,12 +1282,12 @@ Underfull \hbox (badness 3219) in paragraph at lines 33--43
  []
 
 
-Underfull \hbox (badness 1983) in paragraph at lines 55--60
+Underfull \hbox (badness 1983) in paragraph at lines 64--69
 []\T1/ptm/m/n/10 (+20) Jacob De-vlin, Ming-Wei Chang, Ken-ton Lee, and
  []
 
 
-Underfull \hbox (badness 2020) in paragraph at lines 55--60
+Underfull \hbox (badness 2020) in paragraph at lines 64--69
 \T1/ptm/m/n/10 (+20) rec-tional trans-form-ers for lan-guage un-der-stand-ing,
  []
 
@@ -1297,200 +1296,183 @@ Underfull \hbox (badness 2020) in paragraph at lines 55--60
 [14
 
 ]
-Underfull \hbox (badness 2142) in paragraph at lines 77--81
+Underfull \hbox (badness 2142) in paragraph at lines 86--90
 \T1/ptm/m/n/10 (+20) e-cutable ob-jects.  2005.  URL: [][]$\T1/pcr/m/n/10 https
  : / / api .
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 90--98
+Underfull \hbox (badness 2343) in paragraph at lines 92--99
+\T1/ptm/m/it/10 (+20) rity 14)\T1/ptm/m/n/10 (+20) , pages 303--317, San Diego,
+ CA, Au-gust
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--99
+\T1/pcr/m/n/10 usenix . org / conference / usenixsecurity14 /
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 101--109
 \T1/ptm/m/n/10 (+20) Na-jmeh Nazari, Han Wang, and Houman Homay-
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 100--107
+Underfull \hbox (badness 2452) in paragraph at lines 111--118
 []\T1/ptm/m/n/10 (+20) Mohammad Reza Farhadi, Ben-jamin C.M. Fung,
  []
 
 
-Underfull \hbox (badness 6047) in paragraph at lines 118--125
-[]\T1/ptm/m/n/10 (+20) Yeming Gu, Hui Shu, Fei Kang, and Fan Hu.
- []
-
-
-Underfull \hbox (badness 5548) in paragraph at lines 118--125
-\T1/ptm/m/n/10 (+20) Uni-asm: Bi-nary code sim-i-lar-ity de-tec-tion with-
- []
-
-
-Underfull \hbox (badness 7256) in paragraph at lines 118--125
-\T1/ptm/m/n/10 (+20) out fine-tuning.  \T1/ptm/m/it/10 (+20) Neu-ro-com-put-ing
-\T1/ptm/m/n/10 (+20) , 630:129646,
- []
-
-
-Underfull \hbox (badness 1014) in paragraph at lines 118--125
-\T1/ptm/m/n/10 (+20) 2025.  URL: [][]$\T1/pcr/m/n/10 https : / / www . scienced
-irect . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 118--125
-\T1/pcr/m/n/10 science / article / pii / S0925231225003182$[][]\T1/ptm/m/n/10 (
-+20) ,
- []
-
-
-Underfull \hbox (badness 2057) in paragraph at lines 127--132
+Underfull \hbox (badness 2057) in paragraph at lines 129--134
 []\T1/ptm/m/n/10 (+20) Sajal Halder, Muham-mad Ejaz Ahmed, and Seyit
  []
 
 
 
 
-Underfull \hbox (badness 2521) in paragraph at lines 161--166
+Underfull \hbox (badness 2521) in paragraph at lines 166--171
 []\T1/ptm/m/n/10 (+20) Piotr In-dyk and Haike Xu.  Worst-case per-for-
  []
 
 
-Underfull \hbox (badness 5548) in paragraph at lines 161--166
+Underfull \hbox (badness 5548) in paragraph at lines 166--171
 \T1/ptm/m/n/10 (+20) mance of pop-u-lar ap-prox-i-mate near-est neigh-bor
  []
 
 
-Underfull \hbox (badness 5711) in paragraph at lines 168--175
+Underfull \hbox (badness 5711) in paragraph at lines 173--180
 []\T1/ptm/m/n/10 (+20) ISO.  \T1/ptm/m/it/10 (+20) ISO/IEC 14882:2011 In-for-ma
 -tion tech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--175
+Underfull \hbox (badness 10000) in paragraph at lines 173--180
 \T1/ptm/m/it/10 (+20) nol-ogy --- Pro-gram-ming lan-guages --- C++\T1/ptm/m/n/1
 0 (+20) .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--175
+Underfull \hbox (badness 10000) in paragraph at lines 173--180
 \T1/ptm/m/n/10 (+20) In-ter-na-tional Or-ga-ni-za-tion for Stan-dard-iza-tion,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--175
+Underfull \hbox (badness 10000) in paragraph at lines 173--180
 \T1/pcr/m/n/10 / / www . iso . org / iso / iso _ catalogue / catalogue _
  []
 
 
 
 [15]
-Underfull \hbox (badness 1354) in paragraph at lines 223--228
+Underfull \hbox (badness 1354) in paragraph at lines 228--233
 []\T1/ptm/m/n/10 (+20) Yinhan Liu, Myle Ott, Na-man Goyal, Jingfei Du,
  []
 
 
-Underfull \hbox (badness 6047) in paragraph at lines 223--228
+Underfull \hbox (badness 6047) in paragraph at lines 228--233
 \T1/ptm/m/n/10 (+20) A ro-bustly op-ti-mized bert pre-train-ing ap-proach,
  []
 
 
-Underfull \hbox (badness 3302) in paragraph at lines 268--274
+Underfull \hbox (badness 3302) in paragraph at lines 273--279
 \T1/ptm/m/n/10 (+20) i-lar-ity de-tec-tion tech-niques.  \T1/ptm/m/it/10 (+20) 
 Elec-tron-ics\T1/ptm/m/n/10 (+20) , 13(9),
  []
 
 
-Underfull \hbox (badness 1668) in paragraph at lines 276--284
+
+
+Underfull \hbox (badness 1668) in paragraph at lines 281--289
 \T1/ptm/m/n/10 (+20) Penya, Borja Sanz, Car-los Laor-den, and Pablo G.
  []
 
 
-
-
-Underfull \hbox (badness 2680) in paragraph at lines 292--302
+Underfull \hbox (badness 2680) in paragraph at lines 297--307
 \T1/ptm/m/n/10 (+20) LLM4Decompile: De-com-pil-ing bi-nary code with
  []
 
 
-Underfull \hbox (badness 2443) in paragraph at lines 292--302
+Underfull \hbox (badness 2443) in paragraph at lines 297--307
 \T1/ptm/m/n/10 (+20) Bansal, and Yun-Nung Chen, ed-i-tors, \T1/ptm/m/it/10 (+20
 ) Pro-ceed-ings
  []
 
 
-Underfull \hbox (badness 6236) in paragraph at lines 292--302
+Underfull \hbox (badness 6236) in paragraph at lines 297--307
 \T1/ptm/m/it/10 (+20) Nat-u-ral Lan-guage Pro-cess-ing\T1/ptm/m/n/10 (+20) , pa
 ges 3473--3487,
  []
 
 
-Underfull \hbox (badness 8132) in paragraph at lines 292--302
+Underfull \hbox (badness 8132) in paragraph at lines 297--307
 \T1/ptm/m/n/10 (+20) Mi-ami, Florida, USA, Novem-ber 2024. As-so-ci-a-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--302
+Underfull \hbox (badness 10000) in paragraph at lines 297--307
 \T1/pcr/m/n/10 / / aclanthology . org / 2024 . emnlp-[]main . 203/$[][]\T1/ptm/
 m/n/10 (+20) ,
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 316--320
+Underfull \hbox (badness 1097) in paragraph at lines 321--325
 []\T1/ptm/m/n/10 (+20) Google Team.  Gemma 3 tech-ni-cal re-port, 2025.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--320
+Underfull \hbox (badness 10000) in paragraph at lines 321--325
 \T1/ptm/m/n/10 (+20) URL: [][]$\T1/pcr/m/n/10 https : / / arxiv . org / abs / 2
 503 . 19786$[][]\T1/ptm/m/n/10 (+20) ,
  []
 
 
-Underfull \hbox (badness 6961) in paragraph at lines 322--326
+Underfull \hbox (badness 6961) in paragraph at lines 327--331
 []\T1/ptm/m/n/10 (+20) Qwen Team.  Qwen3 tech-ni-cal re-port, 2025.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--326
+Underfull \hbox (badness 10000) in paragraph at lines 327--331
 \T1/ptm/m/n/10 (+20) URL: [][]$\T1/pcr/m/n/10 https : / / arxiv . org / abs / 2
 505 . 09388$[][]\T1/ptm/m/n/10 (+20) ,
  []
 
 
-Underfull \hbox (badness 3657) in paragraph at lines 333--342
+Underfull \hbox (badness 3657) in paragraph at lines 338--347
 []\T1/ptm/m/n/10 (+20) Hao Wang, Zeyu Gao, Chao Zhang, Zi-han Sha,
  []
 
 
 
 [16]
-Underfull \hbox (badness 2134) in paragraph at lines 389--397
+Underfull \hbox (badness 2134) in paragraph at lines 384--392
 \T1/ptm/m/n/10 (+20) Huang, and Shi Wu.  Or-der mat-ters: Semantic-
  []
 
 
-Underfull \hbox (badness 5274) in paragraph at lines 389--397
+Underfull \hbox (badness 5274) in paragraph at lines 384--392
 \T1/ptm/m/n/10 (+20) aware neu-ral net-works for bi-nary code sim-i-lar-
  []
 
 
-Underfull \hbox (badness 3713) in paragraph at lines 389--397
+Underfull \hbox (badness 3713) in paragraph at lines 384--392
 \T1/ptm/m/n/10 (+20) ity de-tec-tion.  \T1/ptm/m/it/10 (+20) Pro-ceed-ings of t
 he AAAI Con-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--397
+Underfull \hbox (badness 10000) in paragraph at lines 384--392
 \T1/ptm/m/it/10 (+20) fer-ence on Ar-ti-fi-cial In-tel-li-gence\T1/ptm/m/n/10 (
 +20) , 34(01):1145--
  []
 
 
-Underfull \hbox (badness 6658) in paragraph at lines 389--397
+Underfull \hbox (badness 6658) in paragraph at lines 384--392
 \T1/ptm/m/n/10 (+20) 1152, Apr. 2020.  URL: [][]$\T1/pcr/m/n/10 https : / / ojs
  . aaai .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--397
+Underfull \hbox (badness 10000) in paragraph at lines 384--392
 \T1/pcr/m/n/10 org / index . php / AAAI / article / view / 5466$[][]\T1/ptm/m/n
 /10 (+20) ,
  []
@@ -1511,12 +1493,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 
 Package caption Warning: \setcaptiontype
-(caption)                outside box or environment on input line 1119.
+(caption)                outside box or environment on input line 1123.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1119.
+(caption)                particular \caption on input line 1123.
 See the caption package documentation for explanation.
 
 
@@ -1528,34 +1510,41 @@ L3 programming layer <2025-07-19>
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 124C4EF999B302E0C2985E30535F4A40;5342.
+
+Package rerunfilecheck Warning: File `paper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper.out':
+(rerunfilecheck)             Before: 124C4EF999B302E0C2985E30535F4A40;5342
+(rerunfilecheck)             After:  E393C82A8B308319534B16EACFE5817F;5332.
  ) 
 Here is how much of TeX's memory you used:
- 36709 strings out of 467816
- 758817 string characters out of 5432258
- 1324838 words of memory out of 5000000
- 64300 multiletter control sequences out of 15000+600000
- 693801 words of font info for 321 fonts, out of 8000000 for 9000
+ 36705 strings out of 467816
+ 758800 string characters out of 5432258
+ 1319674 words of memory out of 5000000
+ 64298 multiletter control sequences out of 15000+600000
+ 693576 words of font info for 319 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  95i,12n,117p,998b,1017s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
-usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/loca
-l/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
-e/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/tex
-mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (19 pages, 564992 bytes).
+
+pdfTeX warning (dest): name{subsubsection.3.1.7} has been referenced but does n
+ot exist, replaced by a fixed one
+
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/
+texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/
+2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf
+-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/font
+s/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (19 pages, 565744 bytes).
 PDF statistics:
- 615 PDF objects out of 1000 (max. 8388607)
- 540 compressed objects within 6 object streams
- 126 named destinations out of 1000 (max. 500000)
+ 634 PDF objects out of 1000 (max. 8388607)
+ 559 compressed objects within 6 object streams
+ 127 named destinations out of 1000 (max. 500000)
  69081 words of extra memory for PDF output out of 74296 (max. 10000000)
 

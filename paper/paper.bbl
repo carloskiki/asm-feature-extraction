@@ -41,6 +41,15 @@ Tom~B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan,
 \newblock URL: \url{https://arxiv.org/abs/2005.14165}, \href
   {https://arxiv.org/abs/2005.14165} {\path{arXiv:2005.14165}}.
 
+\bibitem{distillation}
+Cristian Buciluundefined, Rich Caruana, and Alexandru Niculescu-Mizil.
+\newblock Model compression.
+\newblock In {\em Proceedings of the 12th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '06, page 535–541, New York,
+  NY, USA, 2006. Association for Computing Machinery.
+\newblock \href {https://doi.org/10.1145/1150402.1150464}
+  {\path{doi:10.1145/1150402.1150464}}.
+
 \bibitem{openssl}
 Mark Cox, Ralf Engelschall, Stephen Henson, Ben Laurie, and Paul Sutton.
 \newblock Openssl, 2025-08-05.
@@ -81,10 +90,12 @@ Thomas Dullien.
 
 \bibitem{blanket-exec}
 Manuel Egele, Maverick Woo, Peter Chapman, and David Brumley.
-\newblock Blanket execution: dynamic similarity testing for program binaries
+\newblock Blanket execution: Dynamic similarity testing for program binaries
   and components.
-\newblock In {\em Proceedings of the 23rd USENIX Conference on Security
-  Symposium}, SEC'14, page 303–317, USA, 2014. USENIX Association.
+\newblock In {\em 23rd USENIX Security Symposium (USENIX Security 14)}, pages
+  303--317, San Diego, CA, August 2014. USENIX Association.
+\newblock URL:
+  \url{https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/egele}.
 
 \bibitem{source-analysis}
 Chongzhou Fang, Ning Miao, Shaurya Srivastav, Jialin Liu, Ruoyu Zhang, Ruijie
@@ -113,15 +124,6 @@ Qian Feng, Rundong Zhou, Chengcheng Xu, Yao Cheng, Brian Testa, and Heng Yin.
   Association for Computing Machinery.
 \newblock \href {https://doi.org/10.1145/2976749.2978370}
   {\path{doi:10.1145/2976749.2978370}}.
-
-\bibitem{UniASM}
-Yeming Gu, Hui Shu, Fei Kang, and Fan Hu.
-\newblock Uniasm: Binary code similarity detection without fine-tuning.
-\newblock {\em Neurocomputing}, 630:129646, 2025.
-\newblock URL:
-  \url{https://www.sciencedirect.com/science/article/pii/S0925231225003182},
-  \href {https://doi.org/10.1016/j.neucom.2025.129646}
-  {\path{doi:10.1016/j.neucom.2025.129646}}.
 
 \bibitem{funcVul}
 Sajal Halder, Muhammad~Ejaz Ahmed, and Seyit Camtepe.
@@ -153,9 +155,12 @@ D.~Richard Hipp.
 
 \bibitem{qwen2}
 Binyuan Hui, Jian Yang, Zeyu Cui, Jiaxi Yang, Dayiheng Liu, Lei Zhang, Tianyu
-  Liu, Jiajun Zhang, Bowen Yu, Kai Dang, et~al.
-\newblock Qwen2. 5-coder technical report.
-\newblock {\em arXiv preprint arXiv:2409.12186}, 2024.
+  Liu, Jiajun Zhang, Bowen Yu, Keming Lu, Kai Dang, Yang Fan, Yichang Zhang,
+  An~Yang, Rui Men, Fei Huang, Bo~Zheng, Yibo Miao, Shanghaoran Quan, Yunlong
+  Feng, Xingzhang Ren, Xuancheng Ren, Jingren Zhou, and Junyang Lin.
+\newblock Qwen2.5-coder technical report, 2024.
+\newblock URL: \url{https://arxiv.org/abs/2409.12186}, \href
+  {https://arxiv.org/abs/2409.12186} {\path{arXiv:2409.12186}}.
 
 \bibitem{ANN-limits}
 Piotr Indyk and Haike Xu.
@@ -339,16 +344,6 @@ Hao Wang, Zeyu Gao, Chao Zhang, Zihan Sha, Mingyang Sun, Yuchen Zhou, Wenyu
   USA, 2024. Association for Computing Machinery.
 \newblock \href {https://doi.org/10.1145/3650212.3652145}
   {\path{doi:10.1145/3650212.3652145}}.
-
-\bibitem{jtrans}
-Hao Wang, Wenjie Qu, Gilad Katz, Wenyu Zhu, Zeyu Gao, Han Qiu, Jianwei Zhuge,
-  and Chao Zhang.
-\newblock jtrans: jump-aware transformer for binary code similarity detection.
-\newblock In {\em Proceedings of the 31st ACM SIGSOFT International Symposium
-  on Software Testing and Analysis}, ISSTA 2022, page 1–13, New York, NY,
-  USA, 2022. Association for Computing Machinery.
-\newblock \href {https://doi.org/10.1145/3533767.3534367}
-  {\path{doi:10.1145/3533767.3534367}}.
 
 \bibitem{deprio}
 Jialai Wang, Chao Zhang, Longfei Chen, Yi~Rong, Yuxiao Wu, Hao Wang, Wende Tan,
