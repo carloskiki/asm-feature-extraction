@@ -160,13 +160,13 @@ quickly identify which functions are part of common external libraries and which
 Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
 binary or firmware is using that vulnerable library.
 
-Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment [refs]. These heuristics
-could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
+Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment \cite{op-seq, BinDiff, clones.net}.
+These heuristics could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
 by executing the function in an emulated environment. These methods were deterministic and had the benefit of producing
-human understandable feature vectors, but were often too simplistic [refs] or sometimes used computationally intractable alogrithms [refs], in
+human understandable feature vectors, but were often too simplistic \cite{op-seq} or sometimes used computationally intractable alogrithms \cite{BinDiff}, in
 the case of CFG analysis.
 
-More recently, machine learning (ML) based methods have shown to be better performing [refs].
+More recently, machine learning (ML) based methods have shown to be better performing ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}.
 These methods produce a floating point vector embedding for each code fragment, often using techniques from
 natural language processing. The generated embeddings serve as the feature vector, which are compared
 with each other using vector distance metrics such as cosine similarity. when filtering through large databases,
@@ -247,7 +247,7 @@ loc_4241F0:
     RETN
 \end{minted}
 \end{minipage}
-\caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with gcc for with different acrhictectures and optimization levels.
+\caption{The \texttt{MD5Init} function from \texttt{putty}, compiled with \texttt{gcc} for with different acrhictectures and optimization levels.
     on the left, compiled for \texttt{x86-64} with \texttt{-O0}, in the center, compiled for \texttt{mips} with \texttt{-O0}, and on the right,
     compiled for \texttt{x86-64} with \texttt{-O3}.  Our method is able to identify the functions as clones.}
 \label{asm-diff}
@@ -276,7 +276,7 @@ Reverse engineers try to analyze the binary to understand its underlying algorit
 the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
 a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these programs are to
 disassemble and decompile the provided machine code, so that its content can be analyzed by humans. Disassembly is
-the process of retrieving the human-readable assembly instructions from the binary executable (TODO: Explain that ASM is semi human readable), whereas decompilation
+the process of retrieving the assembly instructions (human-readable machine code) from the binary executable, whereas decompilation
 is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
 
 Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
@@ -629,9 +629,6 @@ To provide a similar environment to local models, functions are truncated to a m
 We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's \(10\) seconds
 latency per request, Gemini is almost able to handle a request every second, making it easier to iterate on our evaluations.
 
-TODO: Maybe add boxes that summarize the results we have.
-TODO: Underscore the stability of our method compared to baselines (meaning it generalizes etc.).
-
 \subsection{Clone search with different optimization levels}
 
 {
@@ -897,7 +894,6 @@ each other, meaning that our analysis extracts features from the assembly functi
 TODO: Discussion on the performance of our method etc (timing of queries for local and commercial models).
 
 \section{Related Work}
-\label{related-work}
 
 \subsection{Early BCSD methods}
 
@@ -1038,7 +1034,6 @@ of our method is publicly available. This constitutes the full implementation of
 any open source model, and the implementation for commercial LLM providers. The dataset used throughout this research
 is also made public. TODO: ref
 
-TODO: add url to every single entry.
 \bibliographystyle{plainurl}
 \bibliography{references}
 
