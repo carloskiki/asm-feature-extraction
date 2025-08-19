@@ -847,15 +847,15 @@ section is more influential, going from \(0.06\) to \(0.20\) in MRR impact.
 
 \subsection{Combined Method}
 
-Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained for assembly function understanding
-and BCSD remain benefitial in specific subdomains, such as supporting niche architectures or understanding similarity through
-specific obfuscation methods. The state-of-the-art embedding models are much smaller than our method in terms of parameter count.
+Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained for assembly function embedding
+remain beneficial in specific subdomains, such as supporting niche architectures or understanding similarity through
+specific obfuscation methods. State-of-the-art embedding models are much smaller than our method in terms of parameter count.
 For instance, the CLAP ~\cite{CLAP} model baseline is only \(110\)M parameters, compared to the billions required to perform our method.
 Their small size potentially allows for CPU execution on small workloads. The cost of training such models is still very expensive,
 but once trained, they are much faster than LLM inference.
 
 To achieve the best of both worlds, we experiment with combining the similarity scores from an embedding model and our prompting method.
-Our evaluation method consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
+Our evaluation consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
 using cosine similarity, and the analysis similiarity \(s_a\) is calculated using jaccard similarity. Both similarity scores are then combined
 with equal weight.
 \[
@@ -868,10 +868,10 @@ choice of embedding based BCSD model. That is, an inverted index database is mai
 top-\(k\) results can be refined using an embedding model, by calculating the embeddings only for those \(k\) candidates. With this approach,
 the decision to use an embedding model, and which one to use, can be made dynamically.
 
-To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding \(4\)B as the embedding model for this experiment.
+To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding \(4\)B ~\cite{qwen3} as the embedding model for this experiment.
 As such, the combination still does not require any training nor fine-tuning. As shown in \autoref{composite}, off-the-shelf embedding models
-based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation
-(the training phase is performed by the open source model developers).
+based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation, since
+the training phase is performed by the open source model developers.
 
 {
 \renewcommand{\arraystretch}{1.1}
@@ -899,8 +899,6 @@ the binaries are compiled with optimization level \(2\). A pool of 1000 assembly
 The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embedding and analysis supplement
 each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embedding model.
 
-TODO: Discussion on the performance of our method etc (timing of queries for local and commercial models).
-
 \section{Related Work}
 
 \subsection{Early BCSD methods}
@@ -909,7 +907,7 @@ TODO: Discussion on the performance of our method etc (timing of queries for loc
 to be made between the robustness to obfuscation and architecture differences, and the performance of the algorithm. ~\cite{BCSDsurvey}
 Control flow graph analysis and comparison ~\cite{BinDiff,graph-bug-search} is known to be robust to syntactic differences, but often
 involves computationally intractable problems. Other algorithms that use heuristics such as instruction frequency,
-longest-common-subsequence, or locality sensitive hashes ~\cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
+longest common subsequence, or locality sensitive hashes ~\cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
 elements and their ordering rather than the semantics.
 
 \textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
