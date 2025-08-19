@@ -138,11 +138,28 @@
 % compared to \(39\%\) and \(34\%\) achieved by the best state-of-the-art method.
 
 
-% usually 1st paragraph covers background, motivation, and gaps.
-Binary code similarity detection is a core task in reverse engineering, supporting malware analysis and vulnerability discovery by identifying semantically similar code across diverse settings. Modern methods have progressed from manually engineered features to vector representations. Hand-crafted statistics (e.g., operation ratios) are interpretable but shallow and fail to generalize. Embedding-based methods overcome this by learning robust cross-setting representations, but they are opaque black-box vectors that hinder verification. They also face a scalability–accuracy trade-off, since high-dimensional nearest-neighbor search requires approximations that reduce precision. Current approaches thus force a compromise between interpretability, generalizability, and scalability.
-
-% how the method addresses the gaps and the supporting evidence. 
-We bridge these gaps using a language-model-based agent to generate structured analyses of assembly code, with features such as input/output types, control-flow structures, subroutine calls, memory usage, notable values, and inferred algorithmic intent. Unlike hand-crafted features, they are richer, adaptive, and program-specific—akin to a reverse engineering analysis highlighting the unique characteristics of each fragment. Unlike embeddings, they are human-readable, maintainable, and directly searchable with inverted or relational indexes. Without any matching training, our method achieves 42\% and 62\% recall@1 in cross-architecture and cross-optimization tasks—comparable to embedding methods with training (39\% and 34\%). Combined with embeddings, it outperforms the state of the art, demonstrating that accuracy, scalability, and interpretability can coexist.
+Binary code similarity detection is a core task in reverse engineering. It
+supports malware analysis and vulnerability discovery by identifying
+semantically similar code in different contexts. Modern methods have progressed
+from manually engineered features to vector representations. Hand-crafted
+statistics (e.g., operation ratios) are interpretable, but shallow and fail to
+generalize. Embedding-based methods overcome this by learning robust
+cross-setting representations, but these representations are opaque vectors that
+prevent verification. They also face a scalability--accuracy trade-off, since
+high-dimensional nearest-neighbor search requires approximations that reduce
+precision. Current approaches thus force a compromise between interpretability,
+generalizability, and scalability.
+ 
+We bridge these gaps using a language model-based agent to generate structured
+analyses of assembly code, with features such as input/output types, side
+effects, notable constants, and algorithmic intent. Unlike hand-crafted
+features, they are richer and adaptive. Unlike embeddings, they are
+human-readable, maintainable, and directly searchable with inverted or
+relational indexes. Without any matching training, our method respectively
+achieves 42\% and 62\% for recall@1 in cross-architecture and cross-optimization
+tasks, comparable to embedding methods with training (39\% and 34\%). Combined
+with embeddings, it significantly outperforms the state of the art,
+demonstrating that accuracy, scalability, and interpretability can coexist.
 
 \end{abstract}
 
