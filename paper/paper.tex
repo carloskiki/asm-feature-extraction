@@ -178,7 +178,7 @@ surpasses state-of-the-art results. It has the advantage of generating human int
 instead of numerical embeddings. Additionally, it effectively scales with the performance and size of the LLM used, and thus
 benefits from the ample amount of research on in this area.
 
-\begin{figure*}[!t]
+\begin{figure*}
 \centering
 \begin{minipage}[t]{0.32\linewidth}
 \centering
@@ -465,7 +465,7 @@ Recent commercial LLMs have the ability to generate responses following a provid
 We do not make use of this capability when evaluating commercial models so that the results can be compared to local LLMs
 that do not benefit from this option.
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
 \begin{minipage}{0.95\linewidth}
 % Diff of generated output from analysis
@@ -511,7 +511,7 @@ for \texttt{arm} (red) and \texttt{x86-64} (green). This pair has a similarity s
 % Artificially place table here for now
 {
     \renewcommand{\arraystretch}{1.1}
-    \begin{table*}[t]
+    \begin{table*}
     \centering
     \resizebox{\linewidth}{!}{
     \begin{tabular}{|l|c|c|l|}
@@ -595,7 +595,7 @@ of the extensive experiments conducted against the baselines. There are two cros
 evaluation.
 {
     \renewcommand{\arraystretch}{1.1}
-    \begin{table}[h]
+    \begin{table}
     \centering
     \begin{tabular}{|l|ccc|} \hline
     Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
@@ -618,7 +618,7 @@ These were chosen mainly because of their low cost and availability. The same su
 the model to use for the remaining evaluations.
 {
     \renewcommand{\arraystretch}{1.1}
-    \begin{table}[h]
+    \begin{table}
     \centering
     \begin{tabular}{|l|ccc|} \hline
     Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
@@ -637,7 +637,7 @@ latency per request, Gemini is almost able to handle a request every second, mak
 
 {
     \renewcommand{\arraystretch}{1.3}
-    \begin{table*}[t]
+    \begin{table*}
     \centering
     \resizebox{\linewidth}{!}{
     \begin{tabular}{l|cccccc|cccccc}
@@ -728,7 +728,7 @@ performs well, compared to some of the baselines that perform excellently on som
 
 {
     \renewcommand{\arraystretch}{1.3}
-    \begin{table*}[!t]
+    \begin{table*}
     \centering
     \resizebox{\linewidth}{!}{
     \begin{tabular}{l|cccc|cccc}
@@ -768,7 +768,7 @@ method is able to rank the the correct assembly fragment in first place only \(4
 
 \subsection{Ablation on model size}
 
-\begin{figure}[htbp]
+\begin{figure}
 \centerline{\includegraphics[width=\linewidth]{size-ablation}}
 \caption{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled
 with \texttt{gcc} for the \texttt{arm} architecture. Retrieval is performed between optimization levels \(0\) and \(1\) with a pool of \(1000\) assembly functions.
@@ -788,7 +788,7 @@ of magnitude more parameters than the local models, and may use a mixture-of-exp
 
 \subsection{Ablation on examples}
 
-\begin{figure}[]
+\begin{figure}
 \centerline{\includegraphics[width=\linewidth]{examples-ablation}}
 \caption{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
 using gcc for the \texttt{x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\)
@@ -820,7 +820,7 @@ schema because local models do not have the capability of generating output base
 
 \subsection{Ablation on the prompt used}
 
-\begin{figure}[htbp]
+\begin{figure}
 \centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
 \caption{
 MRR performance with one section removed from the prompt, using Gemini 2.5 Flash. Cross optimization retrieval is done between fragments at
@@ -875,7 +875,7 @@ the training phase is performed by the open source model developers.
 
 {
 \renewcommand{\arraystretch}{1.1}
-\begin{table*}[tb]
+\begin{table*}
 \centering
 \begin{tabular}{l|c|c|c}
 \Xhline{2\arrayrulewidth}
