@@ -16,6 +16,14 @@
 \citation{c++11}
 \citation{op-seq}
 \citation{patch}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The \texttt  {MD5Init} function from \texttt  {putty}, compiled with \texttt  {gcc} for with different acrhictectures and optimization levels. on the left, compiled for \texttt  {x86-64} with \texttt  {-O0}, in the center, compiled for \texttt  {mips} with \texttt  {-O0}, and on the right, compiled for \texttt  {x86-64} with \texttt  {-O3}. Our method is able to identify these functions as clones.}}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{asm-diff}{{1}{2}{The \texttt {MD5Init} function from \texttt {putty}, compiled with \texttt {gcc} for with different acrhictectures and optimization levels. on the left, compiled for \texttt {x86-64} with \texttt {-O0}, in the center, compiled for \texttt {mips} with \texttt {-O0}, and on the right, compiled for \texttt {x86-64} with \texttt {-O3}. Our method is able to identify these functions as clones}{figure.caption.1}{}}
+\@LN@col{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Contributions}{2}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Binary analysis}{2}{subsection.2.1}\protected@file@percent }
+\@LN@col{2}
 \citation{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}
 \citation{BCSDsurvey,CLAP}
 \citation{OrderMatters,Asm2Vec}
@@ -24,18 +32,10 @@
 \citation{Asm2Vec,BinClone}
 \citation{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Contributions}{2}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Binary analysis}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Binary code similarity detection}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Problem definition}{3}{subsection.2.3}\protected@file@percent }
 \@LN@col{2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Binary code similarity detection}{2}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Problem definition}{2}{subsection.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The \texttt  {MD5Init} function from \texttt  {putty}, compiled with \texttt  {gcc} for with different acrhictectures and optimization levels. on the left, compiled for \texttt  {x86-64} with \texttt  {-O0}, in the center, compiled for \texttt  {mips} with \texttt  {-O0}, and on the right, compiled for \texttt  {x86-64} with \texttt  {-O3}. Our method is able to identify these functions as clones.}}{3}{figure.caption.1}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{asm-diff}{{1}{3}{The \texttt {MD5Init} function from \texttt {putty}, compiled with \texttt {gcc} for with different acrhictectures and optimization levels. on the left, compiled for \texttt {x86-64} with \texttt {-O0}, in the center, compiled for \texttt {mips} with \texttt {-O0}, and on the right, compiled for \texttt {x86-64} with \texttt {-O3}. Our method is able to identify these functions as clones}{figure.caption.1}{}}
-\@LN@col{1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Motivation}{3}{subsection.2.4}\protected@file@percent }
-\@LN@col{2}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Method}{3}{section.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Workflow of our method (bottom) compared to embedding based BCSD (top).}}{4}{figure.caption.2}\protected@file@percent }
 \newlabel{BCSD-workflow}{{2}{4}{Workflow of our method (bottom) compared to embedding based BCSD (top)}{figure.caption.2}{}}
@@ -62,24 +62,23 @@
 \citation{openssl}
 \citation{putty}
 \citation{sqlite}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Dataset details.}}{6}{table.caption.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Analysis comparison of the \texttt  {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt  {arm} (red) and \texttt  {x86-64} (green). This pair has a similarity score of \(0.9\).}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{feature-diff}{{4}{6}{Analysis comparison of the \texttt {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt {arm} (red) and \texttt {x86-64} (green). This pair has a similarity score of \(0.9\)}{figure.caption.4}{}}
+\@LN@col{2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Dataset}{6}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{6}{section.4}\protected@file@percent }
 \citation{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}
 \citation{qwen2}
 \citation{gemma3}
 \citation{qwen3}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Dataset details.}}{6}{table.caption.5}\protected@file@percent }
-\@LN@col{1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Dataset}{6}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{6}{section.4}\protected@file@percent }
-\@LN@col{2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation method}{6}{subsection.4.1}\protected@file@percent }
-\newlabel{mrr}{{1}{6}{Evaluation method}{equation.1}{}}
 \citation{gpt4}
 \citation{gemini2.5}
 \citation{OrderMatters}
 \citation{BERT}
 \@LN@col{1}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Analysis comparison of the \texttt  {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt  {arm} (red) and \texttt  {x86-64} (green). This pair has a similarity score of \(0.9\).}}{7}{figure.caption.4}\protected@file@percent }
-\newlabel{feature-diff}{{4}{7}{Analysis comparison of the \texttt {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt {arm} (red) and \texttt {x86-64} (green). This pair has a similarity score of \(0.9\)}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation method}{7}{subsection.4.1}\protected@file@percent }
+\newlabel{mrr}{{1}{7}{Evaluation method}{equation.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LLM Selection}{7}{subsection.4.2}\protected@file@percent }
 \@LN@col{2}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces MRR eesults of the selected evalutations for local model selection, using a pool size of \(100\).}}{7}{table.caption.6}\protected@file@percent }
@@ -113,9 +112,12 @@
 \@LN@col{1}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the \texttt  {x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\) for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B.}}{10}{figure.caption.11}\protected@file@percent }
 \newlabel{ex-abl}{{6}{10}{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the \texttt {x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\) for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B}{figure.caption.11}{}}
+\@LN@col{2}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  MRR performance with one section removed from the prompt, using Gemini 2.5 Flash. Cross optimization retrieval is done between fragments at optimization levels \(0\) and \(3\), with all functions compiled for the \texttt  {x86-64} architecture. Cross architecture retrieval is done between functions compiled for \texttt  {arm} and \texttt  {x86-64}, all compiled using optimization level \(2\). Both tasks are done with a pool size of \(100\). The dotted lines show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact on the results.}}{10}{figure.caption.12}\protected@file@percent }
 \newlabel{prompt-abl}{{7}{10}{MRR performance with one section removed from the prompt, using Gemini 2.5 Flash. Cross optimization retrieval is done between fragments at optimization levels \(0\) and \(3\), with all functions compiled for the \texttt {x86-64} architecture. Cross architecture retrieval is done between functions compiled for \texttt {arm} and \texttt {x86-64}, all compiled using optimization level \(2\). Both tasks are done with a pool size of \(100\). The dotted lines show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact on the results}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Ablation on the prompt used}{10}{subsection.4.7}\protected@file@percent }
 \citation{CLAP}
+\citation{qwen3}
 \citation{BCSDsurvey}
 \citation{BinDiff,graph-bug-search}
 \citation{clones.net,op-seq,sem-hash}
@@ -127,25 +129,24 @@
 \citation{llm-fuzz}
 \citation{busybox}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Ablation on the prompt used}{11}{subsection.4.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Combined Method}{11}{subsection.4.8}\protected@file@percent }
 \@LN@col{2}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Related Work}{11}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Early BCSD methods}{11}{subsection.5.1}\protected@file@percent }
-\citation{c-o-t}
-\citation{c-o-t,reasoning,thinking-llm}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}LLM based software analysis}{11}{subsection.5.2}\protected@file@percent }
 \citation{distillation}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt  {arm} architecture, for cross architecture, the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented.}}{12}{table.caption.13}\protected@file@percent }
 \newlabel{composite}{{6}{12}{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt {arm} architecture, for cross architecture, the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented}{table.caption.13}{}}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}LLM based software analysis}{12}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}\protected@file@percent }
 \@LN@col{2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Future research}{12}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Reasoning models}{12}{subsubsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Fine-tuning}{12}{subsubsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Output Format}{12}{subsubsection.6.1.2}\protected@file@percent }
+\citation{c-o-t}
+\citation{c-o-t,reasoning,thinking-llm}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Fine-tuning}{13}{subsubsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Output Format}{13}{subsubsection.6.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Reasoning models}{13}{subsubsection.6.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.4}Other integrations}{13}{subsubsection.6.1.4}\protected@file@percent }
 \@LN@col{2}
 \bibstyle{plainurl}
@@ -159,11 +160,11 @@
 \bibcite{openssl}{7}
 \bibcite{image-magick}{8}
 \bibcite{BERT}{9}
-\@LN@col{1}
-\@LN@col{2}
 \bibcite{coreutils}{10}
 \bibcite{Asm2Vec}{11}
 \bibcite{BinDiff}{12}
+\@LN@col{1}
+\@LN@col{2}
 \bibcite{blanket-exec}{13}
 \bibcite{source-analysis}{14}
 \bibcite{BinClone}{15}
@@ -179,10 +180,10 @@
 \bibcite{scaling-laws}{25}
 \bibcite{reasoning}{26}
 \bibcite{PV-DM}{27}
-\@LN@col{1}
-\@LN@col{2}
 \bibcite{PalmTree}{28}
 \bibcite{SANN}{29}
+\@LN@col{1}
+\@LN@col{2}
 \bibcite{RoBERTa}{30}
 \bibcite{BCSD}{31}
 \bibcite{cisco}{32}
@@ -200,16 +201,13 @@
 \bibcite{busybox}{44}
 \bibcite{CLAP}{45}
 \bibcite{deprio}{46}
-\@LN@col{1}
-\@LN@col{2}
 \bibcite{c-o-t}{47}
 \bibcite{thinking-llm}{48}
+\@LN@col{1}
+\@LN@col{2}
 \bibcite{patch}{49}
 \bibcite{OrderMatters}{50}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Full Prompt}{17}{appendix.A}\protected@file@percent }
 \@LN@col{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Full system instructions provided to the LLM for each analysis.}}{19}{figure.8}\protected@file@percent }
-\newlabel{full-prompt}{{8}{19}{Full system instructions provided to the LLM for each analysis}{figure.8}{}}
 \xdef \mintedoldcachechecksum{\detokenize{2F6B8AFF157D024E6F82D57695336DDE:5}}
-\gdef \@abspage@last{19}
+\gdef \@abspage@last{17}
