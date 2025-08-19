@@ -645,7 +645,7 @@ latency per request, Gemini is almost able to handle a request every second, mak
     \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
                            & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average     & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average   \\ \hline
     Order Matters          & 0.006      & 0.008      & 0.006      & 0.006      & 0.006      & 0.006       & 0.001      & 0.002      & 0.001      & 0.000      & 0.001      & 0.001     \\
-    SAFE                   & 0.189      & 0.200      & 0.189      & 0.218      & 0.171      & 0.193       & 0.000      & 0.063      & 0.063      & 0.063      & 0.000      & 0.038     \\
+    SAFE                   & 0.189      & 0.200      & 0.189      & 0.218      & 0.171      & 0.193       & 0.059      & 0.063      & 0.057      & 0.068      & 0.051      & 0.060     \\
     PalmTree               & 0.020      & 0.019      & 0.230      & 0.314      & \bf 0.878  & 0.292       & 0.006      & 0.007      & 0.080      & 0.184      & 0.676      & 0.191     \\
     Asm2Vec                & 0.494      & 0.460      & 0.444      & 0.535      & 0.563      & 0.499       & 0.290      & 0.252      & 0.234      & 0.343      & 0.376      & 0.299     \\
     CLAP                   & 0.244      & 0.221      & 0.214      & 0.550      & 0.781      & 0.402       & 0.187      & 0.176      & 0.168      & 0.455      & 0.707      & 0.339     \\ \hline
@@ -736,7 +736,7 @@ performs well, compared to some of the baselines that perform excellently on som
     \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                 & \multicolumn{4}{c}{Recall @ 1}                           \\ \cline{2-9}
                            & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   \\ \hline
     Order Matters          & 0.007           & 0.007               & 0.007            & 0.007     & 0.002           & 0.000               & 0.001            & 0.001     \\
-    SAFE                   & 0.239           & 0.187               & 0.196            & 0.207     & 0.063           & 0.063               & 0.063            & 0.063     \\
+    SAFE                   & 0.239           & 0.187               & 0.196            & 0.207     & 0.081           & 0.059               & 0.064            & 0.068     \\
     PalmTree               & 0.037           & 0.036               & 0.018            & 0.030     & 0.031           & 0.013               & 0.007            & 0.017     \\
     Asm2Vec                & 0.242           & 0.293               & 0.417            & 0.317     & 0.085           & 0.113               & 0.231            & 0.143     \\
     CLAP                   & 0.416           & \bf 0.523           & 0.494            & 0.478     & 0.334           & \bf 0.443           & 0.415            & 0.397     \\ \hline
@@ -920,9 +920,9 @@ and is hard to generalize across architectures and application binary interfaces
 Researchers have found many related applications of language models to binary and software analysis.
 For vulnerability detection, FuncVul ~\cite{funcVul} is a GraphCodeBERT model fine-tuned to detect whether a provided
 source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function
-using generic variable and function names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.
-LLM4Decompile ~\cite{llm4decompile} tries to utilise LLMs for decompilation. An open source LLM is fine-tuned to learn the source code
-representation of an assembly function, and they then evaluate this model on its decompilation capabilities. Fang et al. ~\cite{source-analysis}
+using generic function and variable names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.
+LLM4Decompile ~\cite{llm4decompile} tries to utilize LLMs for decompilation. An open source LLM is fine-tuned to learn the source code
+representation of an assembly function, and the model is then evaluated on its decompilation capabilities. Fang et al. ~\cite{source-analysis}
 measure the competency of LLMs for source code analysis, with a focus on obfuscated source code.
 Their results match our findings, that LLMs are efficient at code analysis, but they
 also demonstrate that language models still struggle when faced with cases of advanced obfuscation techniques.
@@ -931,7 +931,7 @@ generate the initial seed of a fuzzing pipeline on the BusyBox ~\cite{busybox} e
 
 \section{Conclusion}
 
-Our method for BCSD introduces a shift in perspective compared to previous state-of-the-art BCSD embedding models. However,
+Our method for BCSD is a shift in perspective compared to previous state-of-the-art BCSD embedding models. However,
 this new approach maintains some of the known limitations and also brings new limitations. Most importantly, this
 method makes use of massive models compared to previous methods. A powerful set of GPUs is required when generating
 feature sets for a large pool or database. This favors centralised databases with large amounts of assembly fragments over
@@ -953,13 +953,6 @@ complexity than nearest neighbor search, and remains accurate compared to approx
 Our results open avenues for further investigation in LLM based BCSD, and more broadly in LLM assisted reverse engineering.
 A few of these oportunities are outlined here.
 
-\subsubsection{Reasoning models}
-
-State-of-the-art LLMs are fine tuned to natively use chain of thought methods ~\cite{c-o-t} before answering the query.
-These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
-higher quality responses ~\cite{c-o-t,reasoning,thinking-llm}. It may be worth evaluating whether this style of model performs better than
-non reasoning models (as used in our research) on assembly function analysis.
-
 \subsubsection{Fine-tuning}
 
 As stated, our method does not require fine-tuning, and was not evaluated on fine-tuned performance. Developing a fine-tuning step
@@ -972,13 +965,20 @@ small model such as Qwen2.5 7B at assembly understanding. We believe the distill
 
 \subsubsection{Output Format}
 
-Our method uses the JSON output format so that the output generated is comparable with others and a similarity metrics can be deduced.
+Our method uses the JSON output format so that the output generated is easily comparable and a similarity metrics can be deduced.
 This format was chosen because it is ubiquitous and its syntax is straightforward to produce for LLMs, and easily understandable for humans.
 However, finding the best trade-off between output interpretability, compute requirements, and similarity detection capabilities remains
 an open problem. One possibility is to loosen the restrictions on the output format and use a sentence similarity method to determine
-the similarity between function analyses. On the contrary, another possibility is to use the analysis cabapilities at a smaller scale,
+the similarity between function analyses. On the contrary, another possibility is to use the analysis capabilities at a smaller scale,
 for example analyzing single basic blocks and combining these analyses into a more comprehensive structure for a whole assembly function.
 In any case, more experimentation is required to find optimal balance.
+
+\subsubsection{Reasoning models}
+
+A recent class of LLMs are fine tuned to natively use chain of thought inference ~\cite{c-o-t} before answering the query.
+These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
+higher quality responses ~\cite{c-o-t,reasoning,thinking-llm} on hard problems. It may be worth evaluating whether this style
+of inference performs better than non reasoning models (as used in our research) on assembly function analysis.
 
 \subsubsection{Other integrations}
 
