@@ -28,7 +28,7 @@ fig = go.Figure(
 )
 fig.update_layout(
     legend=dict(
-        font=dict(size=16),
+        font=dict(size=24),
         x=0.98,
         y=0.02,
         xanchor='right',
@@ -42,8 +42,8 @@ fig.update_layout(
     yaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True)
 )
 fig.update_layout(
-    xaxis=dict(title=dict(text='Model Size (B parameters)', font=dict(size = 20))),
-    yaxis=dict(title=dict(text='MRR', font=dict(size = 20))),
+    xaxis=dict(title=dict(text='Model Size (B parameters)', font=dict(size = 32))),
+    yaxis=dict(title=dict(text='MRR', font=dict(size = 32))),
 )
 fig.update_layout(
     title=None,
