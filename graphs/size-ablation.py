@@ -27,6 +27,25 @@ fig = go.Figure(
     ]
 )
 fig.update_layout(
+    legend=dict(
+        font=dict(size=16),
+        x=0.98,
+        y=0.02,
+        xanchor='right',
+        yanchor='bottom',
+        bgcolor='rgba(255,255,255,0.7)'
+    )
+)
+# Add a full contour (box) around the plot area
+fig.update_layout(
+    xaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True),
+    yaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True)
+)
+fig.update_layout(
+    xaxis=dict(title=dict(text='Model Size (B parameters)', font=dict(size = 20))),
+    yaxis=dict(title=dict(text='MRR', font=dict(size = 20))),
+)
+fig.update_layout(
     title=None,
     legend=dict(
         x=0.98,
@@ -39,8 +58,6 @@ fig.update_layout(
 fig.update_xaxes(range=[0, 8])
 fig.update_yaxes(range=[0, 1])
 fig.update_layout(
-    xaxis_title='Model Size (B parameters)',
-    yaxis_title='MRR',
     template='plotly_white'
 )
 fig.write_image(output_path, scale=3, width=1200, height=800)
