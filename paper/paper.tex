@@ -394,13 +394,6 @@ assembly function. The full prompt is avaliable as part of the published artifac
 \noindent \textbf{Framing and conditioning.}
 We use a prelude (\autoref{prompt-preamble}) that contains general information about the task at hand, and the expected response.
 
-Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
-evaluated (0.5B parameters) would sometimes repeat the same line of output until it ran out of context space, or generated invalid JSON.
-To combat these artifacts, we run inference again when JSON parsing fails and increase the temperature of output token
-selection. This is done in a loop until valid JSON is generated. In our experiments, the maximal amount of trials required
-for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
-valid JSON without retries.
-
 \begin{figure}
 \centering
 \begin{tcolorbox}[enhanced]
@@ -430,7 +423,7 @@ instruction after some conditions have been checked.
 indices, or a series of conditional jumps.
 \item Extensive use of indexed addressing modes.
 \item Use of SIMD instructions and registers.
-\item Number of distinct subroutine call targets.
+\item Number of distinct subroutine call targets.pertinence
 \item The overall logical behavior of the function. Possibilities include: arithmetic operations, bitwise operations, data movement and memory access,
 and control flow and dispatching operations.
 \end{itemize}
@@ -463,10 +456,22 @@ is identified, but also to provide a concise overview for analysts who may wish 
 the function or verify its similarity with the target. Categories include: cryptographic, data processing, control flow and dispatch,
 initialization, error handling, wrapper/utility, file management, etc.
 
-\subsection{Examples}
+\subsection{Generation Techniques}
 
-To achieve the best results with our method, we utilize few-shot prompting ~\cite{few-shot} by providing
-a few assembly functions and a hand crafted analyses of each function along with our prompt.
+We make use of a few techniques to ensure that the generated output constitutes valid JSON, and that we maximize the relevance
+of the generated output.
+
+It is known that model size is one of the biggest factor in model performance, and this is especially true for language model 
+nference ~\cite{scaling-laws}. 
+Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
+evaluated (0.5B parameters) would sometimes repeat the same line of output until it ran out of context space, or generated invalid JSON.
+To minimize these edge cases, we inference is repeated when JSON parsing fails and the temperature of output token selection is increased.
+This is performed in a loop until valid JSON is generated. In our experiments, the maximal amount of trials required
+for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
+valid JSON without retries.
+
+To achieve the best results with our method, we also utilize few-shot prompting ~\cite{few-shot} by providing
+a few assembly functions accompanied by hand crafted example analyses along with our prompt.
 In our evaluations against the baselines, three examples are provided, and our ablation study confirms that adding more than three examples provides
 little to no benefit. Providing a single example or a JSON schema in the prompt is enough to achieve good results. We do not
 provide a JSON schema because it is redundant information when examples are included. Our examples are selected from a
@@ -728,7 +733,7 @@ Some loops are unrolled, so that each iteration of the loop is laid out sequenti
 and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
 hardware, while keeping the observable behavior of the program untouched.
 
-The baselines mostly perform worse than expected on this evaluation. As our own dataset is used
+For the most part, the baselines perform worse than expected on the evaluations. As our own dataset is used
 rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
 as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
 specific training other than the pre-traning process performed by the model developers. It readily achieves good results,
