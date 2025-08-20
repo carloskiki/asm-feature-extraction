@@ -487,14 +487,14 @@ that do not benefit from this option.
 \centering
 \begin{minipage}{0.95\linewidth}
 % Diff of generated output from analysis
-\begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
+\begin{minted}[fontsize=\small, frame=lines, framesep=2mm, escapeinside=||]{diff}
  {
-   \tikzmark{boxstart} "input_parameter_count": 1,
+   | \tikzmark{boxstart} |"input_parameter_count": 1,
    "input_parameter_types": [
      "Pointer"
    ],
 -  "return_value_type": "None",
-+  "return_value_type": "Integer", \tikzmark{boxend}
++  "return_value_type": "Integer",| \tikzmark{boxend} |
    "dominant_operation_categories": [
      "ConditionalBranching",
      "SubroutineCall"
