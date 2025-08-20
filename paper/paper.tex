@@ -625,9 +625,12 @@ evaluation.
 
 In all experiments on local models, the input context size is limited to \(4096\) tokens, and the maximum output tokens to generate is set to \(512\).
 Very large assembly functions that do not fit within the input tokens are truncated. The more recent Qwen3 and Gemma 3
-models perform better for their size than Qwen2.5. They match or surpass Qwen2.5 Coder in most metrics while being around \(40\%\)
-smaller. However, we selected Qwen2.5 Coder for the remaining experiments because it provides many small sizes for our ablation study,
-and is more stable than these new models.
+models perform better for their size than Qwen2.5 Coder. They match or surpass it in most metrics while being around \(40\%\)
+smaller. The three models perform inference in a similar timeframe. On one of our GPUs, Qwen2.5 7B takes 10 seconds on average to
+generate an analysis for one assembly function. For smaller models such as Qwen2.5 0.5B and 1.5B, inference is faster since multiple queries
+can be batched on the same GPU (because of lower memory consumption). In all of our experiments, we parallelize analysis generation across our four GPUs.
+In practice however, queries are usually performed for a single assembly function, so a single GPU is needed. We selected Qwen2.5 Coder for the
+remaining experiments because it provides many small sizes for our ablation study, and is more stable than the newer Gemma 3 and Qwen3 models.
 
 For the commercial model, we preselected GPT 4.1 Mini \cite{gpt4} and Gemini 2.5 Flash \cite{gemini2.5}.
 These were chosen mainly because of their low cost and availability. The same subset of evaluations as for local models is performed to determine
