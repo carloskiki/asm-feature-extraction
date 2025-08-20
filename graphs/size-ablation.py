@@ -9,19 +9,19 @@ output_path = __file__.replace('.py', '.png')
 fig = go.Figure(
     data=[
         go.Scatter(
-            x=model_size,
-            y=mrr,
-            mode='lines+markers',
-            marker=dict(size=8),
-            line=dict(width=2),
-            name='MRR'
-        ),
-        go.Scatter(
             x=[0, 8],
             y=[h_line, h_line],
             mode='lines',
             line=dict(color='red', width=2, dash='dot'),
             name='Gemini 2.5 Flash'
+        ),
+        go.Scatter(
+            x=model_size,
+            y=mrr,
+            mode='lines+markers',
+            marker=dict(size=8),
+            line=dict(width=2, color='blue'),
+            name='Qwen2.5 Coder 7B'
         )
     ]
 )
@@ -51,12 +51,11 @@ fig.update_layout(
         y=0.02,
         xanchor='right',
         yanchor='bottom',
-        bgcolor='rgba(255,255,255,0.7)'
+        bgcolor='rgba(255,255,255,0.7)',
+        bordercolor='black',
+        borderwidth=1
     )
 )
 fig.update_xaxes(range=[0, 8])
 fig.update_yaxes(range=[0, 1])
-fig.update_layout(
-    template='plotly_white'
-)
 fig.write_image(output_path, scale=3, width=1200, height=800)
