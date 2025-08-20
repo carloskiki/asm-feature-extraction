@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  19 AUG 2025 17:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.7.29)  20 AUG 2025 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1136,11 +1136,11 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \pydata@fh@0=\write6
 \openout6 = `_7E3F660480AB1640DE8024C200B5A4D3.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250819175412Z 7E3F660480AB1640DE802
+runsystem(latexminted config  --timestamp 20250820132029Z 7E3F660480AB1640DE802
 4C200B5A4D3)...executed safely (allowed).
 
 (./_7E3F660480AB1640DE8024C200B5A4D3.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250819175412Z 7E3F660480AB1640
+runsystem(latexminted cleanconfig  --timestamp 20250820132029Z 7E3F660480AB1640
 DE8024C200B5A4D3)...executed safely (allowed).
 
 
@@ -1172,7 +1172,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [2]
-<BCSD-schematic.png, id=246, 3175.865pt x 1445.4pt>
+<BCSD-schematic.png, id=222, 3175.865pt x 1445.4pt>
 File: BCSD-schematic.png Graphic file (type png)
 <use BCSD-schematic.png>
 Package pdftex.def Info: BCSD-schematic.png  used on input line 336.
@@ -1190,15 +1190,15 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 [3]
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [4 <./BCSD-schematic.png>]
 
 (./_minted/FACE5AE00C07C717C395FB29DB8B68A9.highlight.minted)
 
 [5]
+
+
+Underfull \vbox (badness 2293) has occurred while \output is active []
 
 
 
@@ -1212,34 +1212,31 @@ Underfull \vbox (badness 4242) has occurred while \output is active []
 
 
 
-Underfull \vbox (badness 4242) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [8]
-<size-ablation.png, id=355, 376.68pt x 217.467pt>
+<size-ablation.png, id=333, 428.364pt x 217.467pt>
 File: size-ablation.png Graphic file (type png)
 <use size-ablation.png>
-Package pdftex.def Info: size-ablation.png  used on input line 789.
-(pdftex.def)             Requested size: 241.02039pt x 139.14851pt.
+Package pdftex.def Info: size-ablation.png  used on input line 788.
+(pdftex.def)             Requested size: 241.02039pt x 122.35805pt.
 
 
-<examples-ablation.png, id=357, 383.469pt x 219.657pt>
+<examples-ablation.png, id=335, 383.469pt x 219.657pt>
 File: examples-ablation.png Graphic file (type png)
 <use examples-ablation.png>
-Package pdftex.def Info: examples-ablation.png  used on input line 809.
+Package pdftex.def Info: examples-ablation.png  used on input line 808.
 (pdftex.def)             Requested size: 241.02039pt x 138.06288pt.
 
 
 [9 <./size-ablation.png>]
-Underfull \vbox (badness 1681) has occurred while \output is active []
 
-
-
-<prompt-ablation.png, id=370, 362.007pt x 217.467pt>
+<prompt-ablation.png, id=346, 362.007pt x 217.467pt>
 File: prompt-ablation.png Graphic file (type png)
 <use prompt-ablation.png>
-Package pdftex.def Info: prompt-ablation.png  used on input line 841.
+Package pdftex.def Info: prompt-ablation.png  used on input line 840.
 (pdftex.def)             Requested size: 241.02039pt x 144.78958pt.
 
 
@@ -1248,6 +1245,12 @@ Package pdftex.def Info: prompt-ablation.png  used on input line 841.
 
 
 [11]
+Underfull \vbox (badness 6775) has occurred while \output is active []
+
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -1477,15 +1480,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 384--392
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
-Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 5959B532B7DCC448D367A1A8360465A7;5229.
+
+
+Package rerunfilecheck Warning: File `paper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper.out':
+(rerunfilecheck)             Before: 6000E35D63BA6F56CBA64C678BFBE59C;4295
+(rerunfilecheck)             After:  9F1F39E15C88F410AA708E506E071C35;4363.
  ) 
 Here is how much of TeX's memory you used:
- 36649 strings out of 467816
- 758048 string characters out of 5432258
- 1325922 words of memory out of 5000000
- 64283 multiletter control sequences out of 15000+600000
- 691758 words of font info for 295 fonts, out of 8000000 for 9000
+ 36643 strings out of 467816
+ 757859 string characters out of 5432258
+ 1331269 words of memory out of 5000000
+ 64277 multiletter control sequences out of 15000+600000
+ 692012 words of font info for 299 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  95i,12n,117p,998b,993s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
@@ -1496,10 +1506,10 @@ l/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (17 pages, 552814 bytes).
+Output written on paper.pdf (17 pages, 556577 bytes).
 PDF statistics:
- 618 PDF objects out of 1000 (max. 8388607)
- 545 compressed objects within 6 object streams
- 122 named destinations out of 1000 (max. 500000)
- 69073 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 594 PDF objects out of 1000 (max. 8388607)
+ 521 compressed objects within 6 object streams
+ 116 named destinations out of 1000 (max. 500000)
+ 69025 words of extra memory for PDF output out of 74296 (max. 10000000)
 

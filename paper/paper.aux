@@ -41,20 +41,11 @@
 \newlabel{BCSD-workflow}{{2}{4}{Workflow of our method (bottom) compared to embedding based BCSD (top)}{figure.caption.2}{}}
 \@LN@col{1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Prompt}{4}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Framing and conditioning}{4}{subsubsection.3.1.1}\protected@file@percent }
 \@LN@col{2}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Preamble to the analysis task description}}{4}{figure.caption.3}\protected@file@percent }
 \newlabel{prompt-preamble}{{3}{4}{Preamble to the analysis task description}{figure.caption.3}{}}
+\citation{scaling-laws}
 \citation{few-shot}
-\@LN@col{1}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Type signature}{5}{subsubsection.3.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Logic and operations}{5}{subsubsection.3.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.4}Notable constants}{5}{subsubsection.3.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.5}Side effects}{5}{subsubsection.3.1.5}\protected@file@percent }
-\@LN@col{2}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6}Categorization}{5}{subsubsection.3.1.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Examples}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Comparison}{5}{subsection.3.3}\protected@file@percent }
 \citation{busybox}
 \citation{coreutils}
 \citation{curl}
@@ -62,13 +53,17 @@
 \citation{openssl}
 \citation{putty}
 \citation{sqlite}
+\@LN@col{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Generation Techniques}{5}{subsection.3.2}\protected@file@percent }
+\@LN@col{2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Comparison}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Dataset}{5}{subsection.3.4}\protected@file@percent }
+\citation{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Dataset details.}}{6}{table.caption.5}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Analysis comparison of the \texttt  {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt  {arm} (red) and \texttt  {x86-64} (green). This pair has a similarity score of \(0.9\).}}{6}{figure.caption.4}\protected@file@percent }
 \newlabel{feature-diff}{{4}{6}{Analysis comparison of the \texttt {sha384\_init} assembly function. Comparison between the analyses of the function compiled for \texttt {arm} (red) and \texttt {x86-64} (green). This pair has a similarity score of \(0.9\)}{figure.caption.4}{}}
 \@LN@col{2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Dataset}{6}{subsection.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{6}{section.4}\protected@file@percent }
-\citation{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}
 \citation{qwen2}
 \citation{gemma3}
 \citation{qwen3}
@@ -76,17 +71,17 @@
 \citation{gemini2.5}
 \citation{OrderMatters}
 \citation{BERT}
+\citation{SAFE}
+\citation{word2vec}
+\citation{SANN}
 \@LN@col{1}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces MRR eesults of the selected evalutations for local model selection, using a pool size of \(100\).}}{7}{table.caption.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation method}{7}{subsection.4.1}\protected@file@percent }
 \newlabel{mrr}{{1}{7}{Evaluation method}{equation.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LLM Selection}{7}{subsection.4.2}\protected@file@percent }
 \@LN@col{2}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces MRR eesults of the selected evalutations for local model selection, using a pool size of \(100\).}}{7}{table.caption.6}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces MRR results of the selected evaluations for commercial model selection, using a pool size of \(100\).}}{7}{table.caption.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Clone search with different optimization levels}{7}{subsection.4.3}\protected@file@percent }
-\citation{SAFE}
-\citation{word2vec}
-\citation{SANN}
 \citation{Asm2Vec}
 \citation{PV-DM}
 \citation{PalmTree}
@@ -100,6 +95,8 @@
 \@LN@col{2}
 \citation{scaling-laws}
 \citation{few-shot}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\). All functions are compiled with optimization level \(2\) using \texttt  {gcc} for the architectures specified in each column. Three examples are provided with our prompt.}}{9}{table.caption.9}\protected@file@percent }
+\newlabel{x-arch}{{5}{9}{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\). All functions are compiled with optimization level \(2\) using \texttt {gcc} for the architectures specified in each column. Three examples are provided with our prompt}{table.caption.9}{}}
 \@LN@col{1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Clone search with different architectures}{9}{subsection.4.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Ablation on model size}{9}{subsection.4.5}\protected@file@percent }
@@ -107,8 +104,6 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt  {gcc} for the \texttt  {arm} architecture. Retrieval is performed between optimization levels \(0\) and \(1\) with a pool of \(1000\) assembly functions. Three examples are provided with our prompt.}}{9}{figure.caption.10}\protected@file@percent }
 \newlabel{size-abl}{{5}{9}{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled with \texttt {gcc} for the \texttt {arm} architecture. Retrieval is performed between optimization levels \(0\) and \(1\) with a pool of \(1000\) assembly functions. Three examples are provided with our prompt}{figure.caption.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Ablation on examples}{9}{subsection.4.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\). All functions are compiled with optimization level \(2\) using \texttt  {gcc} for the architectures specified in each column. Three examples are provided with our prompt.}}{10}{table.caption.9}\protected@file@percent }
-\newlabel{x-arch}{{5}{10}{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\). All functions are compiled with optimization level \(2\) using \texttt {gcc} for the architectures specified in each column. Three examples are provided with our prompt}{table.caption.9}{}}
 \@LN@col{1}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the \texttt  {x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\) for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B.}}{10}{figure.caption.11}\protected@file@percent }
 \newlabel{ex-abl}{{6}{10}{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled using gcc for the \texttt {x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\) for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B}{figure.caption.11}{}}
@@ -134,17 +129,17 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5}Related Work}{11}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Early BCSD methods}{11}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}LLM based software analysis}{11}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{11}{section.6}\protected@file@percent }
 \citation{distillation}
+\citation{c-o-t}
+\citation{c-o-t,reasoning,thinking-llm}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt  {arm} architecture, for cross architecture, the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented.}}{12}{table.caption.13}\protected@file@percent }
 \newlabel{composite}{{6}{12}{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt {arm} architecture, for cross architecture, the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented}{table.caption.13}{}}
 \@LN@col{1}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}\protected@file@percent }
-\@LN@col{2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Future research}{12}{subsection.6.1}\protected@file@percent }
+\@LN@col{2}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Fine-tuning}{12}{subsubsection.6.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Output Format}{12}{subsubsection.6.1.2}\protected@file@percent }
-\citation{c-o-t}
-\citation{c-o-t,reasoning,thinking-llm}
 \@LN@col{1}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Reasoning models}{13}{subsubsection.6.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.4}Other integrations}{13}{subsubsection.6.1.4}\protected@file@percent }
