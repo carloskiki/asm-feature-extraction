@@ -329,8 +329,8 @@ Most methods also require a pre-processing step after disassembly, such as extra
 Production scale BCSD engines contain millions of assembly functions. With one vector embedding per function, nearest neighbor
 search takes a significant amount of time as the algorithm has to compare the query with every function in the database in linear
 time complexity. To alleviate this issue, approximate nearest neighbor search is used on large databases to reduce the time
-complexity of the search ~\cite{ANN,ANN-limits}, but it comes at the cost of not always returning the first match, and thus
-skews similarity scores.
+complexity of the search ~\cite{ANN,ANN-limits}. This comes at the cost of not always correctly identifying the best match, and thus
+misrepresents the similarity scores.
 
 \begin{figure*}
 \centerline{\includegraphics[width=\linewidth]{BCSD-schematic}}
@@ -369,16 +369,16 @@ of a vector embedding. This unique advantage allows immediate human verification
 engine. A database of assembly functions and their interpretable features is more easily maintained, as defects can
 be patched by humans, rather than having to regenerate the whole database when the model is modified.
 
-By using any open-source or commercially available LLM, we entirely sidestep model training by leveraging the extensive
-and diverse datasets that LLMs are pre-trained on. Our method can be tuned by modifying the instructions provided to
-the LLM, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
-The underlying LLM can also be replaced seamlessly without invalidating the database, meaning that our method will continue
+By using any open-source or commercially available LLM, we entirely sidestep model training and leverage the extensive
+and diverse dataset that LLMs are pre-trained on. Our method can be tuned by modifying the instructions provided to
+the language model, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
+The underlying LLM can also be replaced without invalidating the database, meaning that our method continues
 to scale with the performance improvements of LLMs---an area which is showing impressive growth and development. Furthermore, if
-a section of the prompt was edited to modify the output feature set, the database can still be maintained without
+the prompt was edited in a way that alters the output feature set, the database can be maintained without
 having to regenerate an output for each item. Default values or values derived from other fields in the feature set can be added,
 as is standard with database migrations.
 
-Another key advantage of our method also stems from its textual representation of the extracted feature set. As highlighted
+Another key advantage of our method also stems from the textual representation of the extracted feature set. As highlighted
 previously, vector embeddings are computationally expensive to match against in large databases. Inverted index search is much
 more scalable than nearest neighbor search, as is evident in modern search engines being able to filter through billions of documents
 in a fraction of a second.
@@ -389,10 +389,9 @@ The method consists of querying a large language model with a prompt crafted to 
 the provided assembly code fragment. As output, the LLM generates a JSON structure containing the extracted features.
 Compared to other methods, the assembly code fragment used in the query does not require any preprocessing.
 We outline the prompt made up of multiple parts, each designed to extract specific semantic information from the
-assembly function. The full prompt is avaliable as part of the published artifacts on GitHub [TODO].
+assembly function. The full prompt is avaliable as part of the published artifacts [TODO].
 
-\subsubsection{Framing and conditioning}
-
+\noindent \textbf{Framing and conditioning.}
 We use a prelude (\autoref{prompt-preamble}) that contains general information about the task at hand, and the expected response.
 
 Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
@@ -414,15 +413,13 @@ algorithm. Your output \textbf{MUST} be a JSON object conforming to the structur
 \label{prompt-preamble}
 \end{figure}
 
-\subsubsection{Type signature}
-
+\noindent \textbf{Type signature.}
 The first feature category extracted is the type signature of the provided assembly function.
 We only make the distinction between two types: \texttt{Integer} and \texttt{Pointer}. Inferring more information than these two 
 primitive types has shown to be too complicated for current LLMs. We extract the number of input arguments
 and their types, and also extract the return value type, if any.
 
-\subsubsection{Logic and operations}
-
+\noindent \textbf{Logic and operations.}
 This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
 operation that the assembly function performs. We list some of the features extracted here.
 
@@ -438,14 +435,12 @@ indices, or a series of conditional jumps.
 and control flow and dispatching operations.
 \end{itemize}
 
-\subsubsection{Notable constants}
-
+\noindent \textbf{Notable constants.}
 This section identifies notable integer and floating point constants.  These could be common scalar values used by
 a specific cryptographic algorithm, or the signature bytes used by a file format or protocol. We exclude small
 values that are used as offsets, loop counters or stack pointer adjustments.
 
-\subsubsection{Side effects}
-
+\noindent \textbf{Side effects.}
 The prompt also monitors the side effects that the assembly function has on the system.
 It reports these as a set of booleans values which state whether or not the function has
 the associated side effect. Each side effect is associated with a heuristic that the language model
@@ -461,8 +456,7 @@ should use to identify them.
     \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
 \end{itemize}
 
-\subsubsection{Categorization}
-
+\noindent \textbf{Categorization.}
 The last section tries to assign an overall category to the assembly function, based on the information collected during the analysis.
 Its purpose is not only to increase the similarity scores when a decisive category
 is identified, but also to provide a concise overview for analysts who may wish to understand
