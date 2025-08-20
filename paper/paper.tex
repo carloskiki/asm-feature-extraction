@@ -62,9 +62,6 @@
 \usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{caption}
-\usepackage{tikz}
-\usetikzlibrary{tikzmark}
-\usetikzlibrary{calc}
 
 % inlined bib file
 \usepackage{filecontents}
@@ -487,14 +484,14 @@ that do not benefit from this option.
 \centering
 \begin{minipage}{0.95\linewidth}
 % Diff of generated output from analysis
-\begin{minted}[fontsize=\small, frame=lines, framesep=2mm, escapeinside=||]{diff}
+\begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
  {
-   | \tikzmark{boxstart} |"input_parameter_count": 1,
+   "input_parameter_count": 1,
    "input_parameter_types": [
      "Pointer"
    ],
 -  "return_value_type": "None",
-+  "return_value_type": "Integer",| \tikzmark{boxend} |
++  "return_value_type": "Integer",
    "dominant_operation_categories": [
      "ConditionalBranching",
      "SubroutineCall"
@@ -519,11 +516,6 @@ that do not benefit from this option.
 +  "inferred_algorithm": "Initialization"
 }
 \end{minted}
-
-\begin{tikzpicture}[remember picture,overlay]
-  \draw[black,thick,rounded corners]
-    ($(pic cs:boxstart)+(0,0.8ex)$) rectangle ($(pic cs:boxend)+(0,-0.8ex)$);
-\end{tikzpicture}
 
 \caption{Analysis comparison of the \texttt{sha384\_init} assembly function. Comparison between the analyses of the function compiled 
 for \texttt{arm} (red) and \texttt{x86-64} (green), with identical values in black. This pair has a similarity score of \(0.9\).}
