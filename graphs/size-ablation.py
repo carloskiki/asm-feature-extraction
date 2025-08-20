@@ -1,5 +1,4 @@
 import plotly.graph_objs as go
-import plotly.io as pio
 
 model_size = [0.5, 1.5, 3, 7]
 mrr = [0.187, 0.183, 0.31, 0.471]
@@ -42,8 +41,8 @@ fig.update_layout(
     yaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True)
 )
 fig.update_layout(
-    xaxis=dict(title=dict(text='Model Size (B parameters)', font=dict(size = 32))),
-    yaxis=dict(title=dict(text='MRR', font=dict(size = 32))),
+    xaxis=dict(title=dict(text='Model Size (B parameters)', font=dict(size = 32)), tickfont=dict(size = 20)),
+    yaxis=dict(title=dict(text='MRR', font=dict(size = 32)), tickfont=dict(size = 20)),
 )
 fig.update_layout(
     title=None,
