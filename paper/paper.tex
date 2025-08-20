@@ -163,7 +163,6 @@ demonstrating that accuracy, scalability, and interpretability can coexist.
 
 \end{abstract}
 
-
 \section{Introduction}
 
 Modern software is increasingly reliant on external libraries.
@@ -193,7 +192,7 @@ Our work presents a method to effectively find code fragment clones across binar
 large language model (LLM). The method is simpler than other ML approaches, requires no training nor fine-tuning, and
 surpasses state-of-the-art results. It has the advantage of generating human interpretable feature vectors like earlier approaches,
 instead of numerical embeddings. Additionally, it effectively scales with the performance and size of the LLM used, and thus
-benefits from the ample amount of research on in this area.
+benefits from the ample amount of research in this area.
 
 \begin{figure*}
 \centering
@@ -487,12 +486,12 @@ that do not benefit from this option.
 % Diff of generated output from analysis
 \begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
  {
-   "input_parameter_count": 1,
+   \tikzmark{boxstart} "input_parameter_count": 1,
    "input_parameter_types": [
      "Pointer"
    ],
 -  "return_value_type": "None",
-+  "return_value_type": "Integer",
++  "return_value_type": "Integer", \tikzmark{boxend}
    "dominant_operation_categories": [
      "ConditionalBranching",
      "SubroutineCall"
@@ -517,6 +516,12 @@ that do not benefit from this option.
 +  "inferred_algorithm": "Initialization"
 }
 \end{minted}
+
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[black,thick,rounded corners]
+    ($(pic cs:boxstart)+(0,0.8ex)$) rectangle ($(pic cs:boxend)+(0,-0.8ex)$);
+\end{tikzpicture}
+
 \caption{Analysis comparison of the \texttt{sha384\_init} assembly function. Comparison between the analyses of the function compiled 
 for \texttt{arm} (red) and \texttt{x86-64} (green), with identical values in black. This pair has a similarity score of \(0.9\).}
 \label{feature-diff}
