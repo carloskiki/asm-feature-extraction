@@ -1,8 +1,8 @@
+import plotly.graph_objects as go
+
 cross_opt = [0.739, 0.694, 0.675, 0.542, 0.711, 0.447]
 cross_arch = [0.745, 0.624, 0.537, 0.579, 0.666, 0.523]
 categories = ["default", "signature", "logic", "constants", "effects", "category"]
-
-import plotly.graph_objects as go
 
 fig = go.Figure()
 
