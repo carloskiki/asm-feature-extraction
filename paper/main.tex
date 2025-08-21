@@ -1047,14 +1047,28 @@ involves computationally intractable problems. Other algorithms that use heurist
 longest common subsequence, or locality sensitive hashes ~\cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
 elements and their ordering rather than the semantics.
 
-\textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
+\noindent \textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
 This method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
 and solely analyzes its semantics. ~\cite{BCSD} As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
 and is hard to generalize across architectures and application binary interfaces ~\cite{blanket-exec}.
 
+\subsection{Other code matching approaches}
+
+\noindent \textbf{Code Representations.} Our research focuses on methods of binary similarity that use the assembly
+code (and possibly the control flow graph) retrieved from the binary to perform similarity detection. However, other
+approaches exist that use an alternate representation language, so that binaries compiled for all architectures are
+extracted into the same representation language. Some methods turn to the well known LLVM-IR ~\cite{llvmir1, llvmir2, llvmir3}
+as representation language, and others prefer the VEX intermediate representation ~\cite{VexIR2Vec, Zeek}.
+
+\noindent \textbf{Full Program Similarity.} An alternate approach to binary matching is to compare whole binaries, instead
+of their individual functions. This type of method constructs a fingerprint for the whole binary as compared to having one embedding
+per function. This approach is primarily used for malware identification \cite{malware-id, malware-id2, malware-id3, malware-id4},
+but also for identifying known vulnerabilities \cite{precise-static-vuln, firmware-vuln}.
+
 \subsection{LLM based software analysis}
 
 Researchers have found many related applications of language models to binary and software analysis.
+We give a sparse overview of the progress that has been made in this area of research.
 For vulnerability detection, FuncVul ~\cite{funcVul} is a GraphCodeBERT model fine-tuned to detect whether a provided
 source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function
 using generic function and variable names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.
@@ -1091,8 +1105,7 @@ complexity than nearest neighbor search, and remains accurate compared to approx
 Our results open avenues for further investigation in LLM based BCSD, and more broadly in LLM assisted reverse engineering.
 A few of these oportunities are outlined here.
 
-\subsubsection{Fine-tuning}
-
+\noindent \textbf{Fine Tuning.}
 As stated, our method does not require fine-tuning, and was not evaluated on fine-tuned performance. Developing a fine-tuning step
 for assembly code understanding and analysis may prove to be efficient and bring significant improvements to our method.
 An example of such technique would be distillation ~\cite{distillation}. With distillation, a large model is used to train or fine-tune a
@@ -1101,8 +1114,7 @@ Since there is no ground truth in text generation, the distillation process uses
 to train the smaller model. As we have shown, a large model such as Gemini 2.5 Flash performs remarkably better than a
 small model such as Qwen2.5 7B at assembly understanding. We believe the distillation process could considerably reduce this gap.
 
-\subsubsection{Output Format}
-
+\noindent \textbf{Output Format.}
 Our method uses the JSON output format so that the output generated is easily comparable and a similarity metrics can be deduced.
 This format was chosen because it is ubiquitous and its syntax is straightforward to produce for LLMs, and easily understandable for humans.
 However, finding the best trade-off between output interpretability, compute requirements, and similarity detection capabilities remains
@@ -1111,15 +1123,13 @@ the similarity between function analyses. On the contrary, another possibility i
 for example analyzing single basic blocks and combining these analyses into a more comprehensive structure for a whole assembly function.
 In any case, more experimentation is required to find optimal balance.
 
-\subsubsection{Reasoning models}
-
+\noindent \textbf{Chains of thoughts.}
 A recent class of LLMs are fine tuned to natively use chain of thought inference ~\cite{c-o-t} before answering the query.
-These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
-higher quality responses ~\cite{c-o-t,reasoning,thinking-llm} on hard problems. It may be worth evaluating whether this style
-of inference performs better than non reasoning models (as used in our research) on assembly function analysis.
+These models are known as ``thinking'' models, and it has been shown that this method of inference produces more accurate
+responses ~\cite{c-o-t,reasoning,thinking-llm} on hard problems. It may be worth evaluating whether this style
+of inference performs better than non chain-of-thought prompting (as used in our research) for assembly function analysis.
 
-\subsubsection{Other integrations}
-
+\noindent \textbf{Other Integrations.}
 Our work proves the competency of LLMs in understanding and analyzing assembly code. From this point, different approaches
 to incorporating LLMs into assembly analysis workflows can be considered. First, instead of using LLMs for feature extraction,
 they could be used to explain the similarity between two functions, once this similarity has been determined using an unexplainable
