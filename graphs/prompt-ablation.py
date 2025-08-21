@@ -63,8 +63,8 @@ fig.update_layout(
     legend=dict(
         font=dict(size=24),
         orientation="h", 
-        yanchor="top", 
-        y=-0.15, 
+        yanchor="bottom", 
+        y=1.02, 
         xanchor="center", 
         x=0.5
     )
