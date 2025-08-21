@@ -9,45 +9,45 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: references.bib
 Warning--empty booktitle in BinDiff
-You've used 50 entries,
+You've used 61 entries,
             2943 wiz_defined-function locations,
-            960 strings with 16927 characters,
-and the built_in function-call counts, 29100 in all, are:
-= -- 2969
-> -- 1525
-< -- 19
-+ -- 585
-- -- 533
-* -- 1854
-:= -- 4065
-add.period$ -- 184
-call.type$ -- 50
-change.case$ -- 414
+            1042 strings with 20082 characters,
+and the built_in function-call counts, 36189 in all, are:
+= -- 3741
+> -- 1831
+< -- 28
++ -- 700
+- -- 637
+* -- 2300
+:= -- 5023
+add.period$ -- 232
+call.type$ -- 61
+change.case$ -- 499
 chr.to.int$ -- 0
-cite$ -- 51
-duplicate$ -- 782
-empty$ -- 2455
-format.name$ -- 533
-if$ -- 7380
+cite$ -- 62
+duplicate$ -- 1009
+empty$ -- 3032
+format.name$ -- 637
+if$ -- 9198
 int.to.chr$ -- 0
-int.to.str$ -- 50
-missing$ -- 23
-newline$ -- 275
-num.names$ -- 102
-pop$ -- 842
+int.to.str$ -- 61
+missing$ -- 33
+newline$ -- 341
+num.names$ -- 124
+pop$ -- 989
 preamble$ -- 1
-purify$ -- 365
+purify$ -- 439
 quote$ -- 0
-skip$ -- 1827
+skip$ -- 2311
 stack$ -- 0
-substring$ -- 827
-swap$ -- 333
-text.length$ -- 47
+substring$ -- 1116
+swap$ -- 456
+text.length$ -- 74
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 198
+type$ -- 242
 warning$ -- 1
-while$ -- 140
-width$ -- 52
-write$ -- 618
+while$ -- 176
+width$ -- 63
+write$ -- 772
 (There was 1 warning)

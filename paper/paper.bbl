@@ -60,6 +60,14 @@ John Cristy.
 \newblock Mastering digital image alchemy, 2025-07-13.
 \newblock URL: \url{https://imagemagick.org/}.
 
+\bibitem{precise-static-vuln}
+Yaniv David, Nimrod Partush, and Eran Yahav.
+\newblock Firmup: Precise static detection of common vulnerabilities in
+  firmware.
+\newblock {\em SIGPLAN Not.}, 53(2):392–404, March 2018.
+\newblock \href {https://doi.org/10.1145/3296957.3177157}
+  {\path{doi:10.1145/3296957.3177157}}.
+
 \bibitem{BERT}
 Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
 \newblock Bert: Pre-training of deep bidirectional transformers for language
@@ -116,6 +124,16 @@ Mohammad~Reza Farhadi, Benjamin~C.M. Fung, Philippe Charland, and Mourad
 \newblock \href {https://doi.org/10.1109/SERE.2014.21}
   {\path{doi:10.1109/SERE.2014.21}}.
 
+\bibitem{llvmir3}
+Qian Feng, Minghua Wang, Mu~Zhang, Rundong Zhou, Andrew Henderson, and Heng
+  Yin.
+\newblock Extracting conditional formulas for cross-platform bug search.
+\newblock In {\em Proceedings of the 2017 ACM on Asia Conference on Computer
+  and Communications Security}, ASIA CCS '17, page 346–359, New York, NY,
+  USA, 2017. Association for Computing Machinery.
+\newblock \href {https://doi.org/10.1145/3052973.3052995}
+  {\path{doi:10.1145/3052973.3052995}}.
+
 \bibitem{graph-bug-search}
 Qian Feng, Rundong Zhou, Chengcheng Xu, Yao Cheng, Brian Testa, and Heng Yin.
 \newblock Scalable graph-based bug search for firmware images.
@@ -124,6 +142,14 @@ Qian Feng, Rundong Zhou, Chengcheng Xu, Yao Cheng, Brian Testa, and Heng Yin.
   Association for Computing Machinery.
 \newblock \href {https://doi.org/10.1145/2976749.2978370}
   {\path{doi:10.1145/2976749.2978370}}.
+
+\bibitem{llvmir1}
+Yi~Gui, Yao Wan, Hongyu Zhang, Huifang Huang, Yulei Sui, Guandong Xu, Zhiyuan
+  Shao, and Hai Jin.
+\newblock Cross-language binary-source code matching with intermediate
+  representations, 2022.
+\newblock URL: \url{https://arxiv.org/abs/2201.07420}, \href
+  {https://arxiv.org/abs/2201.07420} {\path{arXiv:2201.07420}}.
 
 \bibitem{funcVul}
 Sajal Halder, Muhammad~Ejaz Ahmed, and Seyit Camtepe.
@@ -178,6 +204,14 @@ Piotr Indyk and Haike Xu.
 \newblock URL:
   \url{http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50372}.
 
+\bibitem{malware-id}
+Steven Jilcott.
+\newblock Scalable malware forensics using phylogenetic analysis.
+\newblock In {\em 2015 IEEE International Symposium on Technologies for
+  Homeland Security (HST)}, pages 1--6, 2015.
+\newblock \href {https://doi.org/10.1109/THS.2015.7225311}
+  {\path{doi:10.1109/THS.2015.7225311}}.
+
 \bibitem{sem-hash}
 Wesley Jin, Sagar Chaki, Cory Cohen, Arie Gurfinkel, Jeffrey Havrilla, Charles
   Hines, and Priya Narasimhan.
@@ -206,6 +240,15 @@ Quoc~V. Le and Tomas Mikolov.
 \newblock Distributed representations of sentences and documents, 2014.
 \newblock URL: \url{https://arxiv.org/abs/1405.4053}, \href
   {https://arxiv.org/abs/1405.4053} {\path{arXiv:1405.4053}}.
+
+\bibitem{firmware-vuln}
+Qiang Li, Dawei Tan, Xin Ge, Haining Wang, Zhi Li, and Jiqiang Liu.
+\newblock Understanding security risks of embedded devices through fine-grained
+  firmware fingerprinting.
+\newblock {\em IEEE Transactions on Dependable and Secure Computing},
+  19(6):4099--4112, 2022.
+\newblock \href {https://doi.org/10.1109/TDSC.2021.3119970}
+  {\path{doi:10.1109/TDSC.2021.3119970}}.
 
 \bibitem{PalmTree}
 Xuezixiang Li, Yu~Qu, and Heng Yin.
@@ -269,6 +312,25 @@ OpenAI.
 \newblock URL: \url{https://arxiv.org/abs/2303.08774}, \href
   {https://arxiv.org/abs/2303.08774} {\path{arXiv:2303.08774}}.
 
+\bibitem{malware-id2}
+Panpan Qi, Zhaoqi Zhang, Wei Wang, and Chang Yao.
+\newblock Malware detection by exploiting deep learning over binary programs.
+\newblock In {\em 2020 25th International Conference on Pattern Recognition
+  (ICPR)}, pages 9068--9075, 2021.
+\newblock \href {https://doi.org/10.1109/ICPR48806.2021.9412227}
+  {\path{doi:10.1109/ICPR48806.2021.9412227}}.
+
+\bibitem{malware-id4}
+Edward Raff, Jon Barker, Jared Sylvester, Robert Brandon, Bryan Catanzaro, and
+  Charles~K. Nicholas.
+\newblock Malware detection by eating a whole {EXE}.
+\newblock In {\em The Workshops of the The Thirty-Second {AAAI} Conference on
+  Artificial Intelligence, New Orleans, Louisiana, USA, February 2-7, 2018},
+  volume {WS-18} of {\em {AAAI} Technical Report}, pages 268--276. {AAAI}
+  Press, 2018.
+\newblock URL:
+  \url{https://aaai.org/ocs/index.php/WS/AAAIW18/paper/view/16422}.
+
 \bibitem{BCSDsurvey}
 Liting Ruan, Qizhen Xu, Shunzhi Zhu, Xujing Huang, and Xinyang Lin.
 \newblock A survey of binary code similarity detection techniques.
@@ -286,6 +348,15 @@ Igor Santos, Felix Brezo, Javier Nieves, Yoseba~K. Penya, Borja Sanz, Carlos
   Heidelberg, 2010. Springer-Verlag.
 \newblock \href {https://doi.org/10.1007/978-3-642-11747-3_3}
   {\path{doi:10.1007/978-3-642-11747-3_3}}.
+
+\bibitem{Zeek}
+Noam Shalev and Nimrod Partush.
+\newblock Binary similarity detection using machine learning.
+\newblock In {\em Proceedings of the 13th Workshop on Programming Languages and
+  Analysis for Security}, PLAS '18, page 42–47, New York, NY, USA, 2018.
+  Association for Computing Machinery.
+\newblock \href {https://doi.org/10.1145/3264820.3264821}
+  {\path{doi:10.1145/3264820.3264821}}.
 
 \bibitem{curl}
 Daniel Stenberg.
@@ -329,6 +400,16 @@ Qwen Team.
 \newblock URL: \url{https://arxiv.org/abs/2505.09388}, \href
   {https://arxiv.org/abs/2505.09388} {\path{arXiv:2505.09388}}.
 
+\bibitem{VexIR2Vec}
+S.~VenkataKeerthy, Soumya Banerjee, Sayan Dey, Yashas Andaluri, Raghul PS,
+  Subrahmanyam Kalyanasundaram, Fernando Magno Quint\~{a}o Pereira, and
+  Ramakrishna Upadrasta.
+\newblock Vexir2vec: An architecture-neutral embedding framework for binary
+  similarity.
+\newblock {\em ACM Trans. Softw. Eng. Methodol.}, March 2025.
+\newblock Just Accepted.
+\newblock \href {https://doi.org/10.1145/3721481} {\path{doi:10.1145/3721481}}.
+
 \bibitem{busybox}
 Denys Vlasenko, Bernhard Reutner-Fischer, and Rob Landley.
 \newblock Busybox, 2024-09-27.
@@ -363,6 +444,16 @@ Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia,
 \newblock URL: \url{https://arxiv.org/abs/2201.11903}, \href
   {https://arxiv.org/abs/2201.11903} {\path{arXiv:2201.11903}}.
 
+\bibitem{malware-id3}
+Cangshuai Wu, Jiangyong Shi, Yuexiang Yang, and Wenhua Li.
+\newblock Enhancing machine learning based malware detection model by
+  reinforcement learning.
+\newblock In {\em Proceedings of the 8th International Conference on
+  Communication and Network Security}, ICCNS '18, page 74–78, New York, NY,
+  USA, 2018. Association for Computing Machinery.
+\newblock \href {https://doi.org/10.1145/3290480.3290494}
+  {\path{doi:10.1145/3290480.3290494}}.
+
 \bibitem{thinking-llm}
 Tianhao Wu, Janice Lan, Weizhe Yuan, Jiantao Jiao, Jason Weston, and Sainbayar
   Sukhbaatar.
@@ -389,5 +480,15 @@ Zeping Yu, Rui Cao, Qiyi Tang, Sen Nie, Junzhou Huang, and Shi Wu.
 \newblock URL: \url{https://ojs.aaai.org/index.php/AAAI/article/view/5466},
   \href {https://doi.org/10.1609/aaai.v34i01.5466}
   {\path{doi:10.1609/aaai.v34i01.5466}}.
+
+\bibitem{llvmir2}
+Zhongtang Zhang, Shengli Liu, Qichao Yang, and Shichen Guo.
+\newblock Semantic understanding of source and binary code based on natural
+  language processing.
+\newblock In {\em 2021 IEEE 4th Advanced Information Management, Communicates,
+  Electronic and Automation Control Conference (IMCEC)}, volume~4, pages
+  2010--2016, 2021.
+\newblock \href {https://doi.org/10.1109/IMCEC51613.2021.9482032}
+  {\path{doi:10.1109/IMCEC51613.2021.9482032}}.
 
 \end{thebibliography}
