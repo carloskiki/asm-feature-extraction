@@ -176,6 +176,8 @@ quickly identify which functions are part of common external libraries and which
 Furthermore, if a vulnerability is found in a library, BCSD can be used to efficiently determine whether a proprietary
 binary or firmware is using that vulnerable library.
 
+TODO: Explain why the problem is so hard.
+
 Early approaches to BCSD used human defined heuristics to extract a ``feature vector'' from a binary code fragment \cite{op-seq, BinDiff, clones.net}.
 These heuristics could be calculated by statically examining the functions and its control flow graph (CFG), or could be measured at runtime
 by executing the function in an emulated environment. These methods were deterministic and had the benefit of producing
@@ -273,13 +275,13 @@ loc_4241F0:
 
 \begin{itemize}
 \item We provide an elementary approach to BCSD purely based on the recent advancements in large language models that
-    is effective at cross-optimization and cross-architecture retrieval. This method requires no pre-training, and
-    generates human interpretable feature vectors.
+    is effective at cross-optimization and cross-architecture retrieval. This method requires no training other than
+    the pre-training step already completed by LLM developers, and generates human interpretable feature vectors.
 \item We show that our approach scales with the performance and size of the LLM used, and out performs state-of-the-art BCSD models
-    both in versatility and raw metrics.
+    both in versatility and raw metrics. We also present 
 \item We develop a method to combine our model we any pre-existing or future code embedding model, and show that this combination can
-    generates outstanding results.
-\item We outline ideas for future research to improve the efficiency and performance of this method, and explain how this method
+    generates outstanding results, significantly outperforming state of the art embedding models.
+\item We outline ideas for future research to improve the efficiency and performance of this method, and explain how it
     could be implemented in production environments.
 \end{itemize}
 
@@ -929,14 +931,28 @@ involves computationally intractable problems. Other algorithms that use heurist
 longest common subsequence, or locality sensitive hashes ~\cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
 elements and their ordering rather than the semantics.
 
-\textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
+\noindent \textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
 This method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
 and solely analyzes its semantics. ~\cite{BCSD} As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
 and is hard to generalize across architectures and application binary interfaces ~\cite{blanket-exec}.
 
+\subsection{Other code matching approaches}
+
+\noindent \textbf{Code Representations.} Our research focuses on methods of binary similarity that use the assembly
+code (and possibly the control flow graph) retrieved from the binary to perform similarity detection. However, other
+approaches exist that use an alternate representation language, so that binaries compiled for all architectures are
+extracted into the same representation language. Some methods turn to the well known LLVM-IR ~\cite{llvmir1, llvmir2, llvmir3}
+as representation language, and others prefer the VEX intermediate representation ~\cite{VexIR2Vec, Zeek}.
+
+\noindent \textbf{Full Program Similarity.} An alternate approach to binary matching is to compare whole binaries, instead
+of their individual functions. This type of method constructs a fingerprint for the whole binary as compared to having one embedding
+per function. This approach is primarily used for malware identification \cite{malware-id, malware-id2, malware-id3, malware-id4},
+but also for identifying known vulnerabilities \cite{precise-static-vuln, firmware-vuln}.
+
 \subsection{LLM based software analysis}
 
 Researchers have found many related applications of language models to binary and software analysis.
+We give a sparse overview of the progress that has been made in this area of research.
 For vulnerability detection, FuncVul ~\cite{funcVul} is a GraphCodeBERT model fine-tuned to detect whether a provided
 source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function
 using generic function and variable names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.

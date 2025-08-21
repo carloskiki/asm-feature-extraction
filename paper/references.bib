@@ -626,3 +626,172 @@
   location  = {Philadelphia, PA, USA},
   series    = {KDD '06}
 }
+
+@article{VexIR2Vec,
+  author    = {VenkataKeerthy, S. and Banerjee, Soumya and Dey, Sayan and Andaluri, Yashas and PS, Raghul and Kalyanasundaram, Subrahmanyam and Pereira, Fernando Magno Quint\~{a}o and Upadrasta, Ramakrishna},
+  title     = {VexIR2Vec: An Architecture-Neutral Embedding Framework for Binary Similarity},
+  year      = {2025},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  issn      = {1049-331X},
+  url       = {https://doi.org/10.1145/3721481},
+  doi       = {10.1145/3721481},
+  abstract  = {Binary similarity involves determining whether two binary programs exhibit similar functionality with applications in vulnerability detection, malware analysis, and copyright detection. However, variations in compiler settings, target architectures, and deliberate code obfuscations significantly complicate the similarity measurement by effectively altering the syntax, semantics, and structure of the underlying binary. To address these challenges, we propose VexIR2Vec, a robust, architecture-neutral approach based on VEX-IR to solve binary similarity tasks. VexIR2Vec consists of three key components: a peephole extractor, a normalization engine (VexINE), and an embedding model (VexNet). The process to build program embeddings starts with the extraction of sequences of basic blocks, or peepholes, from control-flow graphs via random walks, capturing structural information. These generated peepholes are then normalized using VexINE, which applies compiler-inspired transformations to reduce architectural and compiler-induced variations. Embeddings of peepholes are generated using representation learning techniques, avoiding Out-Of-Vocabulary (OOV) issues. These embeddings are then fine-tuned with VexNet, a feed-forward Siamese network that maps functions into a high dimensional space for diffing and searching tasks in an application-independent manner.We evaluate VexIR2Vec against five baselines — BinDiff, DeepBinDiff, SAFE, BinFinder, and histograms of opcodes — on a dataset comprising  (2.7M)  functions and  (15.5K)  binaries from  (7)  projects compiled across  (12)  compilers targeting x86 and ARM architectures. The experiments span four adversarial settings — cross-optimization, cross-compilation, cross-architecture, and obfuscations — that are typically exploited by malware and vulnerabilities. In diffing experiments, VexIR2Vec outperforms the nearest baseline in these four scenarios by  (40\%) ,  (18\%) ,  (21\%) , and  (60\%) , respectively. In the searching experiment, VexIR2Vec achieves a mean average precision of  (0.76) , the nearest baseline, by  (46\%) . Our framework is highly scalable and is built as a lightweight, multi-threaded, parallel library using only open-source tools. VexIR2Vec is  (approx 3.1) – (3.5times) faster than the closest baselines and orders-of-magnitude faster than other tools.},
+  note      = {Just Accepted},
+  journal   = {ACM Trans. Softw. Eng. Methodol.},
+  month     = mar,
+  keywords  = {Binary Similarity, Program Embedding, Representation Learning}
+}
+
+@misc{llvmir1,
+  title         = {Cross-Language Binary-Source Code Matching with Intermediate Representations},
+  author        = {Yi Gui and Yao Wan and Hongyu Zhang and Huifang Huang and Yulei Sui and Guandong Xu and Zhiyuan Shao and Hai Jin},
+  year          = {2022},
+  eprint        = {2201.07420},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.SE},
+  url           = {https://arxiv.org/abs/2201.07420}
+}
+
+@inproceedings{llvmir2,
+  author    = {Zhang, Zhongtang and Liu, Shengli and Yang, Qichao and Guo, Shichen},
+  booktitle = {2021 IEEE 4th Advanced Information Management, Communicates, Electronic and Automation Control Conference (IMCEC)},
+  title     = {Semantic Understanding of Source and Binary Code based on Natural Language Processing},
+  year      = {2021},
+  volume    = {4},
+  number    = {},
+  pages     = {2010-2016},
+  keywords  = {Training;Semantics;Process control;Binary codes;Transforms;Syntactics;Natural language processing;Source code;binary code;LLVM IR;semantic understanding;natural language processing},
+  doi       = {10.1109/IMCEC51613.2021.9482032}
+}
+
+@inproceedings{llvmir3,
+  author    = {Feng, Qian and Wang, Minghua and Zhang, Mu and Zhou, Rundong and Henderson, Andrew and Yin, Heng},
+  title     = {Extracting Conditional Formulas for Cross-Platform Bug Search},
+  year      = {2017},
+  isbn      = {9781450349444},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3052973.3052995},
+  doi       = {10.1145/3052973.3052995},
+  abstract  = {With the recent increase in security breaches in embedded systems and IoT devices, it becomes increasingly important to search for vulnerabilities directly in binary executables in a cross-platform setting. However, very little has been explored in this domain. The existing efforts are prone to producing considerable false positives, and their results cannot provide explainable evidence for human analysts to eliminate these false positives. In this paper, we propose to extract conditional formulas as higher-level semantic features from the raw binary code to conduct the code search. A conditional formula explicitly captures two cardinal factors of a bug: 1) erroneous data dependencies and 2) missing or invalid condition checks. As a result, binary code search on conditional formulas produces significantly higher accuracy and provide meaningful evidence for human analysts to further examine the search results. We have implemented a prototype, XMATCH, and evaluated it using well-known software, including OpenSSL and BusyBox. Experimental results have shown that XMATCH outperforms the existing bug search techniques in terms of accuracy. Moreover, by evaluating 5 recent vulnerabilities, XMATCH provides clear evidence for human analysts to determine if a matched candidate is indeed vulnerable or has been patched.},
+  booktitle = {Proceedings of the 2017 ACM on Asia Conference on Computer and Communications Security},
+  pages     = {346–359},
+  numpages  = {14},
+  keywords  = {binary analysis, firmware security, vulnerability search},
+  location  = {Abu Dhabi, United Arab Emirates},
+  series    = {ASIA CCS '17}
+}
+
+@inproceedings{zeek,
+  author    = {Shalev, Noam and Partush, Nimrod},
+  title     = {Binary Similarity Detection Using Machine Learning},
+  year      = {2018},
+  isbn      = {9781450359931},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3264820.3264821},
+  doi       = {10.1145/3264820.3264821},
+  abstract  = {Finding similar procedures in stripped binaries has various use cases in the domains of cyber security and intellectual property. Previous works have attended this problem and came up with approaches that either trade throughput for accuracy or address a more relaxed problem.In this paper, we present a cross-compiler-and-architecture approach for detecting similarity between binary procedures, which achieves both high accuracy and peerless throughput. For this purpose, we employ machine learning alongside similarity by composition: we decompose the code into smaller comparable fragments, transform these fragments to vectors, and build machine learning-based predictors for detecting similarity between vectors that originate from similar procedures.We implement our approach in a tool called Zeek and evaluate it by searching similarities in open source projects that we crawl from the world-wide-web. Our results show that we perform 250X faster than state-of-the-art tools without harming accuracy.},
+  booktitle = {Proceedings of the 13th Workshop on Programming Languages and Analysis for Security},
+  pages     = {42–47},
+  numpages  = {6},
+  keywords  = {binary similarity, proc2vec},
+  location  = {Toronto, Canada},
+  series    = {PLAS '18}
+}
+
+@inproceedings{malware-id,
+  author    = {Jilcott, Steven},
+  booktitle = {2015 IEEE International Symposium on Technologies for Homeland Security (HST)},
+  title     = {Scalable malware forensics using phylogenetic analysis},
+  year      = {2015},
+  volume    = {},
+  number    = {},
+  pages     = {1-6},
+  keywords  = {Phylogeny;Acceleration;Irrigation;Pipelines;formatting;style;styling;insert},
+  doi       = {10.1109/THS.2015.7225311}
+}
+
+@inproceedings{malware-id2,
+  author    = {Qi, Panpan and Zhang, Zhaoqi and Wang, Wei and Yao, Chang},
+  booktitle = {2020 25th International Conference on Pattern Recognition (ICPR)},
+  title     = {Malware Detection by Exploiting Deep Learning over Binary Programs},
+  year      = {2021},
+  volume    = {},
+  number    = {},
+  pages     = {9068-9075},
+  keywords  = {Deep learning;Analytical models;Computer hacking;Feature extraction;Malware;Data models;Pattern recognition},
+  doi       = {10.1109/ICPR48806.2021.9412227}
+}
+
+@inproceedings{malware-id3,
+  author    = {Wu, Cangshuai and Shi, Jiangyong and Yang, Yuexiang and Li, Wenhua},
+  title     = {Enhancing Machine Learning Based Malware Detection Model by Reinforcement Learning},
+  year      = {2018},
+  isbn      = {9781450365673},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3290480.3290494},
+  doi       = {10.1145/3290480.3290494},
+  abstract  = {Malware detection is getting more and more attention due to the rapid growth of new malware. As a result, machine learning (ML) has become a popular way to detect malware variants. However, machine learning models can also be cheated. Through reinforcement learning (RL), we can generate new malware samples which can bypass the detection of machine learning. In this paper, a RL model on malware generation named gym-plus is designed. Gym-plus is built based on gym-malware with some improvements. As a result, the probability of evading machine learning based static PE malware detection models is increased by 30\%. Based on these newly generated samples, we retrain our detecting model to detect unknown threats. In our test, the detection accuracy of malware increased from 15.75\% to 93.5\%.},
+  booktitle = {Proceedings of the 8th International Conference on Communication and Network Security},
+  pages     = {74–78},
+  numpages  = {5},
+  keywords  = {static analysis, reinforcement learning, malware evasion, machine learning},
+  location  = {Qingdao, China},
+  series    = {ICCNS '18}
+}
+
+@inproceedings{malware-id4,
+  author    = {Edward Raff and
+               Jon Barker and
+               Jared Sylvester and
+               Robert Brandon and
+               Bryan Catanzaro and
+               Charles K. Nicholas},
+  title     = {Malware Detection by Eating a Whole {EXE}},
+  booktitle = {The Workshops of the The Thirty-Second {AAAI} Conference on Artificial
+               Intelligence, New Orleans, Louisiana, USA, February 2-7, 2018},
+  series    = {{AAAI} Technical Report},
+  volume    = {{WS-18}},
+  pages     = {268--276},
+  publisher = {{AAAI} Press},
+  year      = {2018},
+  url       = {https://aaai.org/ocs/index.php/WS/AAAIW18/paper/view/16422},
+  timestamp = {Mon, 04 Sep 2023 16:57:01 +0200},
+  biburl    = {https://dblp.org/rec/conf/aaai/RaffBSBCN18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{precise-static-vuln,
+  author     = {David, Yaniv and Partush, Nimrod and Yahav, Eran},
+  title      = {FirmUp: Precise Static Detection of Common Vulnerabilities in Firmware},
+  year       = {2018},
+  issue_date = {February 2018},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {53},
+  number     = {2},
+  issn       = {0362-1340},
+  url        = {https://doi.org/10.1145/3296957.3177157},
+  doi        = {10.1145/3296957.3177157},
+  abstract   = {We present a static, precise, and scalable technique for finding CVEs (Common Vulnerabilities and Exposures) in stripped firmware images. Our technique is able to efficiently find vulnerabilities in real-world firmware with high accuracy. Given a vulnerable procedure in an executable binary and a firmware image containing multiple stripped binaries, our goal is to detect possible occurrences of the vulnerable procedure in the firmware image. Due to the variety of architectures and unique tool chains used by vendors, as well as the highly customized nature of firmware, identifying procedures in stripped firmware is extremely challenging. Vulnerability detection requires not only pairwise similarity between procedures but also information about the relationships between procedures in the surrounding executable. This observation serves as the foundation for a novel technique that establishes a partial correspondence between procedures in the two binaries. We implemented our technique in a tool called FirmUp and performed an extensive evaluation over 40 million procedures, over 4 different prevalent architectures, crawled from public vendor firmware images. We discovered 373 vulnerabilities affecting publicly available firmware, 147 of them in the latest available firmware version for the device. A thorough comparison of FirmUp to previous methods shows that it accurately and effectively finds vulnerabilities in firmware, while outperforming the detection rate of the state of the art by 45\% on average.},
+  journal    = {SIGPLAN Not.},
+  month      = mar,
+  pages      = {392–404},
+  numpages   = {13},
+  keywords   = {partial equivalence, static binary analysis, statistical similarity, verification-aided similarity}
+}
+
+@article{firmware-vuln,
+  author   = {Li, Qiang and Tan, Dawei and Ge, Xin and Wang, Haining and Li, Zhi and Liu, Jiqiang},
+  journal  = {IEEE Transactions on Dependable and Secure Computing},
+  title    = {Understanding Security Risks of Embedded Devices Through Fine-Grained Firmware Fingerprinting},
+  year     = {2022},
+  volume   = {19},
+  number   = {6},
+  pages    = {4099-4112},
+  keywords = {Security;Internet;Microprogramming;Blogs;Performance evaluation;Fingerprint recognition;Software;Firmware;fingerprinting;embedded device;vulnerability},
+  doi      = {10.1109/TDSC.2021.3119970}
+}
