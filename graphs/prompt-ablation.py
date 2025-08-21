@@ -70,4 +70,10 @@ fig.update_layout(
     )
 )
 
+# Add a full contour (box) around the plot area
+fig.update_layout(
+    xaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True),
+    yaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True)
+)
+
 fig.write_image("prompt-ablation.png", scale=3, width=1200, height=800)
