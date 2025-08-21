@@ -1,0 +1,1257 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for USENIX papers.
+%
+% History:
+%
+% - TEMPLATE for Usenix papers, specifically to meet requirements of
+%   USENIX '05. originally a template for producing IEEE-format
+%   articles using LaTeX. written by Matthew Ward, CS Department,
+%   Worcester Polytechnic Institute. adapted by David Beazley for his
+%   excellent SWIG paper in Proceedings, Tcl 96. turned into a
+%   smartass generic template by De Clarke, with thanks to both the
+%   above pioneers. Use at your own risk. Complaints to /dev/null.
+%   Make it two column with no page numbering, default is 10 point.
+%
+% - Munged by Fred Douglis <douglis@research.att.com> 10/97 to
+%   separate the .sty file from the LaTeX source template, so that
+%   people can more easily include the .sty file into an existing
+%   document. Also changed to more closely follow the style guidelines
+%   as represented by the Word sample file.
+%
+% - Note that since 2010, USENIX does not require endnotes. If you
+%   want foot of page notes, don't include the endnotes package in the
+%   usepackage command, below.
+% - This version uses the latex2e styles, not the very ancient 2.09
+%   stuff.
+%
+% - Updated July 2018: Text block size changed from 6.5" to 7"
+%
+% - Updated Dec 2018 for ATC'19:
+%
+%   * Revised text to pass HotCRP's auto-formatting check, with
+%     hotcrp.settings.submission_form.body_font_size=10pt, and
+%     hotcrp.settings.submission_form.line_height=12pt
+%
+%   * Switched from \endnote-s to \footnote-s to match Usenix's policy.
+%
+%   * \section* => \begin{abstract} ... \end{abstract}
+%
+%   * Make template self-contained in terms of bibtex entires, to allow
+%     this file to be compiled. (And changing refs style to 'plain'.)
+%
+%   * Make template self-contained in terms of figures, to
+%     allow this file to be compiled. 
+%
+%   * Added packages for hyperref, embedding fonts, and improving
+%     appearance.
+%   
+%   * Removed outdated text.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix}
+
+% to be able to draw some self-contained figs
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{textcomp}
+\usepackage[svgnames, table]{xcolor}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% inlined bib file
+\usepackage{filecontents}
+
+\newcommand{\squishlist}{
+  \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}      \setlength{\parsep}{0pt}
+      \setlength{\topsep}{0pt}       \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1em} \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+\newcommand{\squishlisttwo}{
+  \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}    \setlength{\parsep}{0pt}
+      \setlength{\topsep}{0pt}     \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{2em} \setlength{\labelwidth}{1.5em}
+      \setlength{\labelsep}{0.5em} } }
+\newcommand{\squishlistend}{
+    \end{list}  }
+
+
+\usepackage[most]{tcolorbox}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,shadows.blur,shapes.misc}
+
+% Colors
+\definecolor{good}{HTML}{2E7D32}   % green
+\definecolor{bad}{HTML}{C62828}    % red
+\definecolor{neutral}{HTML}{1565C0} % blue
+
+% TikZ styles
+\tikzset{
+  panel/.style={rounded corners=4pt, draw=black!60, fill=black!3, inner sep=6pt, blur shadow},
+  title/.style={font=\bfseries, align=center, text=black},
+  codebox/.style={draw=black!40, fill=white, rounded corners=3pt, inner sep=5pt, align=left, font=\ttfamily\scriptsize},
+}
+
+% Inline text macros
+\newcommand{\goodline}[1]{\textcolor{good}{\checkmark\ #1}}
+\newcommand{\badline}[1]{\textcolor{bad}{\(\times\)\ #1}}
+\newcommand{\neutline}[1]{\textcolor{neutral}{#1}}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------------------------
+
+%don't want date printed
+\date{}
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\title{\Large \bf Reasoning Like a Reverse Engineer: Language-Model as Feature Extraction for Binary Similarity }
+
+%for single author (just remove % characters)
+\author{
+{\rm Anonymous submission}
+} 
+
+% \author{
+% {\rm Your N.\ Here}\\
+% Your Institution
+% \and
+% {\rm Second Name}\\
+% Second Institution
+% % copy the following lines to add more authors
+% % \and
+% % {\rm Name}\\
+% %Name Institution
+% } % end author
+
+\maketitle
+
+%-------------------------------------------------------------------------------
+\begin{abstract}
+%-------------------------------------------------------------------------------
+
+% Binary code similarity detection methods are becoming accurate at detecting
+% clones across compiler settings and architectures, but have limitations that
+% prevent them from being useful in reverse engineering processes. These methods generate
+% a large floating point vector (an embedding) as a representation for a code fragment.
+% The embedding provides no insight to the user, and limits the scalability of binary similarity
+% databases. The necessity for these methods to be trained on a code fragment dataset
+% means they often do not adapt to unseen settings. We propose a new method that resolves these issues.
+% Our solution does not require training, and generates a textual analysis rather than an embedding.
+% This solves the scalability issues of existing methods, because ours allows for inverted
+% index search, which is orders of magnitude faster than nearest neighbor search in high dimensions.
+% Most importantly, the textual representation is inherently human interpretable, making
+% clone verification much easier. While alleviating these limitations, our method achieves \(42\%\) and \(62\%\)
+% on first position recall in cross architecture and cross optimization similarity detection respectively,
+% compared to \(39\%\) and \(34\%\) achieved by the best state-of-the-art method.
+
+
+Binary code similarity detection is a core task in reverse engineering. It
+supports malware analysis and vulnerability discovery by identifying
+semantically similar code in different contexts. Modern methods have progressed
+from manually engineered features to vector representations. Hand-crafted
+statistics (e.g., operation ratios) are interpretable, but shallow and fail to
+generalize. Embedding-based methods overcome this by learning robust
+cross-setting representations, but these representations are opaque vectors that
+prevent rapid verification. They also face a scalability--accuracy trade-off, since
+high-dimensional nearest-neighbor search requires approximations that reduce
+precision. Current approaches thus force a compromise between interpretability,
+generalizability, and scalability.
+ 
+We bridge these gaps using a language model-based agent to generate structured
+analyses of assembly code, with features such as input/output types, side
+effects, notable constants, and algorithmic intent. Unlike hand-crafted
+features, they are richer and adaptive. Unlike embeddings, they are
+human-readable, maintainable, and directly searchable with inverted or
+relational indexes. Without any matching training, our method respectively
+achieves 42\% and 62\% for recall@1 in cross-architecture and cross-optimization
+tasks, comparable to embedding methods with training (39\% and 34\%). Combined
+with embeddings, it significantly outperforms the state of the art,
+demonstrating that accuracy, scalability, and interpretability can coexist.
+
+\end{abstract}
+
+
+
+\begin{figure*}[t]
+\centering
+% (optional) shrink everything inside the figure a bit:
+\begingroup\scriptsize
+\begin{tikzpicture}[node distance=10mm]
+
+% Panel 1: Handcrafted
+\node[panel, minimum width=0.22\linewidth] (p1) {
+  \begin{minipage}{0.26\linewidth}
+  \centering
+  {\small \tikz{\node[title]{Handcrafted Features};}}\\[2pt]
+  \tikz{\node[codebox, text width=\linewidth-8pt]{
+    \#basic\_blocks,\ \#edges\\
+    opcode\_n\_grams,\ ratio(arith, branch)\\
+    callgraph\_degree\\
+    CFG\_edit\_distance
+  };}\\[4pt]
+  \begin{flushleft}
+    \neutline{Functions have the same set of features.} \\
+    \textbf{Pros}\\
+    \goodline{Interpretable}\\[2pt]
+    \textbf{Cons}\\
+    \badline{Shallow statistics (miss semantics)}\\
+    \badline{CFG matching may be intractable}
+  \end{flushleft}
+  \end{minipage}
+};
+
+% Panel 2: Embeddings
+\node[panel, right=12mm of p1, minimum width=0.22\linewidth] (p2) {
+  \begin{minipage}{0.26\linewidth}
+  \centering
+  {\small \tikz{\node[title]{Embeddings \\ (Representation Learning)};}}\\[2pt]
+  \tikz{\node[codebox, text width=\linewidth-8pt]{
+    \{0.12,\,-1.44,\,\dots,\,0.89\}\\
+    dim = 512/1024
+  };}\\[4pt]
+  \begin{flushleft}
+    \neutline{Functions represented by fixed-size vectors.} \\
+    \textbf{Pros}\\
+    \goodline{Strong cross-opt/arch matching}\\[2pt]
+    \textbf{Cons}\\
+    \badline{L1: Opaque (not interpretable)}\\
+    \badline{L2: approximated search index $\Rightarrow$ accuracy and efficiency trade-off}\\
+    \badline{L3: Requires training \& retraining}
+  \end{flushleft}
+  \end{minipage}
+};
+
+% Panel 3: Our LLM Features
+\node[panel, right=16mm of p2, minimum width=0.22\linewidth] (p3) {
+  \begin{minipage}{0.26\linewidth}
+  \centering
+  {\small \tikz{\node[title]{Our LLM Generated Features};}}\\[2pt]
+  \tikz{\node[codebox, text width=\linewidth-8pt]{
+    "in\_params": 1,\newline
+    \ \ "ret\_type": "Integer",\newline
+    \ \ "ops": ["Branch","Call"],\newline
+    \ \ "loop": true,\newline
+    \ \ "consts": ["0x39","0x4"],\newline
+    \ \ "algo": "Initialization"\newline
+    \ \ "modifies\_global\_state": "false"\newline
+    \ \ ... 
+  };}\\[4pt]
+  \begin{flushleft}
+    \neutline{Function exhibit varying features/signatures.} \\
+    \textbf{Pros}\\
+    \goodline{Addresses L1: human-interpretable}\\
+    \goodline{Addresses L2: exact search via text indexes}\\
+    \goodline{Addresses L3: training-free, adaptable}\\
+  \end{flushleft}
+  \end{minipage}
+};
+
+% Evolution arrows with two-line, smaller labels
+\draw[->, thick] (p1.east) -- node[above, yshift=1pt, align=center]{\scriptsize\itshape Deeper\\Matching} (p2.west);
+\draw[->, thick] (p2.east) -- node[above, yshift=1pt, align=center]{\scriptsize\itshape Interpretability\\\& Scalability} (p3.west);
+
+\end{tikzpicture}
+\endgroup
+\caption{Motivation: evolution of features in BCSD. \textbf{Left:} Handcrafted statistics are interpretable but shallow and sometimes intractable (CFG). \textbf{Middle:} Deep embeddings improve matching but suffer from L1--L3 (interpretability, scalability--accuracy, training dependency). \textbf{Right:} Our LLM-generated structured features are interpretable, searchable via inverted/relational indexes, and training-free, addressing L1--L3 while improving practicality.}
+\label{fig:motivation-bcsd}
+\end{figure*}
+
+
+
+
+
+\section{Introduction}
+
+Modern software development heavily relies on external libraries.
+For security researchers, detecting whether an executable invokes vulnerable library functions is critical for assessing and mitigating exposure~\cite{BCSD, BCSDsurvey}. For reverse engineers, reducing redundant assembly functions accelerates analysis and enables focus on the unique logic of a binary. Binary Code Similarity Detection (BCSD) provides a means to address these needs by identifying whether two compiled code fragments exhibit similar behavior. Its importance is amplified by the growing size, modularity, and production rate of modern software, which make manual inspection infeasible. Beyond vulnerability assessment, BCSD also plays a role in malware analysis, software supply-chain auditing, and firmware security, where statically linked libraries are common and reused components can be difficult to track [cite ERS0-Cycone]. For instance, when a vulnerability is discovered in a library, BCSD enables efficient identification of affected binaries or firmware, supporting both defensive security and large-scale reverse engineering.
+
+Early approaches to BCSD used human-defined heuristics to extract a “feature vector” from a binary code fragment~\cite{op-seq, BinDiff, clones.net}. These heuristics could be derived statically by examining a function and its control-flow graph (CFG)—for example, by measuring the number of basic blocks, the ratio of arithmetic to control-flow instructions, or the sequence of opcodes—or dynamically by executing the function in an emulator to capture instruction counts, memory access patterns, or system call traces [cite Kam1n0]. Such methods were deterministic and had the advantage of producing human-understandable feature vectors, but they suffered key limitations. Purely statistical descriptors were often too simplistic to capture deep semantic similarity~\cite{op-seq}, while more sophisticated CFG-based comparisons sometimes required computationally intractable algorithms such as subgraph isomorphism or graph-edit distance~\cite{BinDiff}, which limited their scalability.
+
+More recently, machine learning (ML)–based approaches have demonstrated superior performance in binary code similarity detection ~\cite{SAFE,PalmTree,OrderMatters,Asm2Vec,CLAP}. Inspired by natural language processing, these methods map each code fragment into a high-dimensional floating-point embedding that captures its structural and semantic patterns. Similarity is then computed with vector distance metrics such as cosine similarity, and large-scale retrieval relies on (approximate) nearest-neighbor search. These models have shown strong generalization across compilers, optimizations, and architectures.
+However, embedding-based approaches suffer from three key limitations:
+
+
+\squishlist
+\item 
+\textbf{(L1) Lack of interpretability and maintainability.}
+The embeddings are opaque vectors with no intuitive meaning. Analysts cannot easily understand why two fragments match, making clone verification difficult and limiting their usefulness in reverse engineering workflows.
+
+\item 
+\textbf{(L2) Scalability–accuracy trade-off.}
+Embeddings are large high-dimensional vectors, and searching at scale requires approximate nearest-neighbor indexing. While this improves efficiency, it sacrifices precision, whereas exact search is prohibitively slow—forcing a compromise between scalability and accuracy.
+
+\item 
+\textbf{(L3) Dependency on training data.}
+These models must be trained on large datasets of code fragments, and their effectiveness is constrained by the coverage of the training data (e.g., architectures, compilers, optimization levels). As a result, they often fail to generalize to unseen settings or proprietary instruction sets without costly retraining.
+\squishlistend
+
+Our work presents a method to detect code fragment clones across binaries using pre-trained large language models (LLMs), without any training or fine-tuning. Instead of opaque embeddings, our approach generates \textit{structured, human-interpretable feature vectors} (e.g., input/output types, loop structures, high-level behaviors, inferred algorithms), directly addressing \textbf{L1 (lack of interpretability)} by allowing analysts to understand why two fragments match. Because these features are represented as text, they can be indexed and queried using inverted or relational databases, avoiding high-dimensional nearest-neighbor search and thereby overcoming \textbf{L2 (scalability--accuracy trade-off)}. Moreover, by relying on the general reasoning ability of modern LLMs rather than curated training datasets, our method naturally generalizes to \textbf{unseen compilers, optimizations, and architectures}, addressing \textbf{L3 (dependency on training data)}. In this way, our method combines the transparency of early heuristic approaches with the robustness of modern ML, while also surpassing state-of-the-art results (see Figure~\ref{fig:motivation-bcsd}). Our contributions are:  
+\squishlist
+    \item A training-free BCSD method using large language models that produces \textit{human-interpretable features} and works across optimizations and architectures.  
+    \item Demonstration that performance scales with LLM size, outperforming state-of-the-art models in both accuracy and versatility.  
+    \item A hybrid framework that combines our features with embedding-based models, achieving superior results.  
+    \item Discussion of efficiency improvements and deployment considerations for large-scale use.  
+\squishlistend
+The paper is organized as follows: Section~\ref{sec:method} presents our LLM-based feature extraction pipeline; Section~\ref{sec:exp} details the experimental setup and results; Section~\ref{sec:related} reviews related work; and Section~\ref{sec:conclusion} summarizes our contributions and limitations.
+
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[t]{0.45\linewidth}   % left column
+  \begin{subfigure}[t]{\linewidth}
+    \begin{minted}[fontsize=\scriptsize,baselinestretch=0.9]{nasm}
+; x86-64 O0
+    push rbp
+    mov rbp, rsp
+    sub rsp, 8
+    mov [rbp+var_8], rdi
+    mov rax, [rbp+var_8]
+    mov rdi, rax
+    call sub_42b49a
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+50h], 0
+    mov rax, [rbp+var_8]
+    mov dword ptr [rax+58h], 0
+    mov rax, [rbp+var_8]
+    mov edx, [rax+58h]
+    mov rax, [rbp+var_8]
+    mov [rax+54h], edx
+    \end{minted}
+    % \caption{x86-64, -O0}
+  \end{subfigure}
+  \vspace{0.5em} % adjust gap between top and bottom boxes
+
+  \begin{subfigure}[t]{\linewidth}
+    \begin{minted}[fontsize=\scriptsize,baselinestretch=0.9]{nasm}
+; x86-64 O3
+    movdqa xmm0, cs:xmmword_448750
+    mov dword ptr [rdi+50h], 0
+    mov dword ptr [rdi+58h], 0
+    movups xmmword ptr [rdi], xmm0
+    mov dword ptr [rdi+54h], 0
+    \end{minted}
+    % \caption{x86-64, -O3}
+  \end{subfigure}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.5\linewidth}   % right column
+  \begin{subfigure}[t]{\linewidth}
+    \begin{minted}[fontsize=\scriptsize,baselinestretch=0.9]{nasm}
+; MIPS O0
+    addiu $sp, -0x20
+    sw $ra, 0x18+var_s4($sp)
+    sw $fp, 0x18+var_s0($sp)
+    move $fp, $sp
+    sw $a0, 0x18+arg_0($fp)
+    lw $v0, 0x18+arg_0($fp)
+    move $a0, $v0
+    jal sub_43D930
+    nop 
+    lw $v0, 0x18+arg_0($fp)
+    sw $zero, 0x50($v0)
+    lw $v0, 0x18+arg_0($fp)
+    sw $zero, 0x58($v0)
+    lw $v0, 0x18+arg_0($fp)
+    lw $v1, 0x58($v0)
+    lw $v0, 0x18+arg_0($fp)
+    sw $v1, 0x54($v0)
+    nop 
+    move $sp, $fp
+    lw $ra, 0x18+var_s4($sp)
+    lw $fp, 0x18+var_s0($sp)
+    addiu $sp, 0x20
+    jr $ra
+    \end{minted}
+    % \caption{MIPS, -O0}
+  \end{subfigure}
+\end{minipage}
+
+\caption{Exampe \texttt{MD5Init} function compiled under different architectures
+and optimization levels. Our method identifies them as clones.}
+\label{asm-diff}
+\end{figure}
+
+
+\section{From Embedding-Based BCSD to LLM-Based Feature Extraction}
+\label{sec:method}
+
+Security researchers and reverse engineers are routinely tasked with the analysis of unknown or proprietary executables.
+Reverse engineers try to analyze the binary to understand its underlying algorithms, while security researchers want to assess
+the risk associated with potential vulnerabilities found within the executable. This process is usually conducted using
+a software reverse engineering platform such as Ghidra ~\cite{ghidra} or IDA Pro ~\cite{ida}. The main functions of these platforms are to
+disassemble and decompile the provided machine code, so that its content can be analyzed by humans. Disassembly is
+the process of retrieving the assembly instructions (human-readable machine code) from the binary executable, whereas decompilation
+is the process of generating higher-level pseudo-code from the instructions based on common patterns and heuristics.
+
+Binary analysis is a hard task because once a program is compiled, most of the information contained in its source code
+is lost ~\cite{BCSDsurvey}. Variables, data structures, functions, and comments are removed, because the compiler's task is to make
+the program as efficient as possible---which often means removing as much as possible. The optimizers within the compiler
+only have a single rule: They must not make changes to the observable behavior of the program (often referred
+to as the ``as-if rule'' \cite{c++11}). As a result, compilers can remove, reorder, and inline significant parts of the code, making
+it difficult to understand the code's behavior. Even worse, adverserial programs such as malware or digital rights management software
+make use of obfuscation techniques to resist having their code reverse engineered.
+
+BCSD is the task of determining whether two fragments of binary code perform similar actions.
+These fragments are usually first disassembled, and are then compared for similarity. In practice,
+similarity detection is performed with one known fragment (either because it was analyzed before
+or because its source code is known), and one unknown fragment. Known code fragments are typically collected in a
+database which is queried against for clone search. If the unknown piece of code is deemed
+highly similar to the known one, the analysis task becomes significantly simpler and duplicate work is minimized. For example,
+if a vulnerability in a widely used open-source component is found, BCSD can be used to quickly
+assess if a binary contains the vulnerable code fragment. It can also be used for plagiarism detection, which
+could take the form of license or patent infringement, for software and malware classification ~\cite{op-seq}, or for 
+security patch analysis \cite{patch}. 
+
+
+\subsection{General BCSD Pipeline}
+
+
+Binary code similarity detection (BCSD) is typically organized as a multi-stage pipeline:
+
+\begin{enumerate}
+    \item \textbf{Disassembly.} The binary executable is first disassembled into assembly code, using tools such as IDA Pro~\cite{ida} or Ghidra~\cite{ghidra}. In some cases, this step is extended with decompilation to recover higher-level pseudo-code.
+
+    \item \textbf{Preprocessing.} Many approaches transform the raw disassembly into an intermediate representation (IR), extract the control-flow graph (CFG), or apply normalization steps (e.g., operand abstraction or instruction reordering). These transformations aim to reduce syntactic variance caused by compilers or obfuscators.
+
+    \item \textbf{Vectorization.} Each assembly function is mapped to a feature vector $\Phi(f)$ that captures its semantics. Different approaches instantiate $\Phi$ in different ways: earlier systems relied on manually engineered features, whereas recent work uses deep neural embeddings.
+
+    \item \textbf{Indexing and Search.} Known functions are stored in a database of feature vectors. Given a query function $f_q$, its vector $\Phi(f_q)$ is compared against the database (e.g., via cosine similarity or nearest-neighbor search) to identify similar code fragments.
+\end{enumerate}
+
+This structured pipeline provides a practical way to organize large-scale clone search. However, challenges in binary analysis are amplified in BCSD, since two code fragments that look very different syntactically can still share the same observable behavior.
+
+\subsection{The Vectorization Problem}
+
+The central challenge in BCSD lies in the \emph{vectorization step}. Given a function $f$ represented as a sequence of assembly instructions, the goal is to define a mapping
+\[
+    \Phi : f \mapsto \mathbf{v} \in \mathbb{R}^d
+\]
+that produces a vector $\mathbf{v}$ which preserves the semantics of $f$.  
+In other words, two functions $f_1$ and $f_2$ that are semantically equivalent (e.g., compiled with different compilers, optimization levels, or instruction sets) should be mapped to vectors that are closer in the embedding space than unrelated functions:
+\[
+    f_1 \equiv f_2 \;\;\Rightarrow\;\; \text{sim}(\Phi(f_1), \Phi(f_2)) > \text{sim}(\Phi(f_1), \Phi(f_3)) \quad \forall f_3 \not\equiv f_1.
+\]
+Here, $\text{sim}(\cdot,\cdot)$ denotes a similarity measure such as cosine similarity.  
+In practice, BCSD systems rarely evaluate based on absolute thresholds, but rather by the ranking quality of known matches (e.g., top-$k$ accuracy or mean average precision).
+
+This requirement makes vectorization the key bottleneck in BCSD:
+\begin{itemize}
+    \item \textbf{Feature design.} Early approaches used manually engineered heuristics (e.g., opcode histograms or CFG metrics), which were interpretable but too simplistic to capture semantics robustly.
+    \item \textbf{Learning-based embeddings.} Here, an \emph{embedding} refers to a fixed-length vector representation of a function, typically produced by a neural network, that places semantically similar functions close together in the vector space. Recent work uses neural networks to learn $\Phi$, producing high-dimensional embeddings that yield better accuracy. However, these embeddings are opaque, tightly coupled to the training data, and computationally expensive to use at scale.
+\end{itemize}
+
+Thus, the vectorization problem is not only about finding a function-to-vector mapping, but also about balancing interpretability, generalization, and efficiency.
+
+
+
+\subsection{Limitations of Embedding Vectorization}
+
+In the introduction, we highlighted three central limitations (L1–L3) of embedding-based approaches. We now elaborate on these challenges, as they frame the design space for our method.
+
+\textbf{L1: Limited Generalization.}  
+Existing embedding-based BCSD models are trained on specific corpora of binaries, often covering only a narrow range of architectures, compilers, and optimization settings. In practice, however, reverse engineers must analyze binaries compiled under diverse conditions, often with toolchains and optimization heuristics unseen during training. As a result, these models exhibit poor cross-domain generalization.  
+By contrast, human reverse engineers are able to recognize equivalence between functions across compilers or platforms because they rely on general knowledge of instruction semantics and common code generation patterns. Embedding-based methods lack this higher-level reasoning, and thus fail to transfer their knowledge effectively when faced with out-of-distribution inputs.
+
+\textbf{L2: Lack of Interpretability.}  
+The feature vectors produced by deep learning models are high-dimensional and opaque. When two fragments are judged to be similar, the embedding offers no explanation of what instructions, structures, or semantic properties led to that conclusion. This makes it difficult for analysts to validate results or to trust the system in high-stakes settings such as vulnerability detection. In contrast, traditional heuristic-based BCSD methods generated explicit features such as opcode sequences or control-flow structures, which—while less powerful—at least provided human-understandable reasoning. The black-box nature of embeddings therefore limits their usefulness in workflows where analyst oversight is essential.
+
+\textbf{L3: Scalability of Nearest-Neighbor Search.}  
+In production-scale environments, BCSD databases may contain millions of disassembled functions. Each query requires finding the most similar embeddings among these millions of candidates. A naïve search compares the query vector to every database vector, resulting in linear time complexity that becomes prohibitively expensive at scale. To address this, approximate nearest-neighbor (ANN) algorithms are commonly used, which index vectors in specialized data structures (e.g., graphs, trees, or hashing schemes) to accelerate search. However, ANN introduces approximation errors: the true nearest neighbor may be missed, or spurious neighbors may be returned, leading to degraded accuracy. Thus, practitioners face a fundamental trade-off between search efficiency and similarity accuracy.
+
+Taken together, these limitations motivate a different design point: a method that leverages broad reverse engineering knowledge (mitigating L1), produces human-interpretable features (addressing L2), and avoids reliance on approximate vector search (reducing L3). Our approach, based on large language model (LLM) feature extraction, is explicitly constructed around these principles.
+
+\subsection{Our Approach: LLM-Based Feature Extraction}
+
+\begin{figure*}
+\centerline{\includegraphics[width=\linewidth]{BCSD-schematic}}
+\caption{Workflow of our method (bottom) compared to embedding based BCSD (top).}
+\label{BCSD-workflow}
+\end{figure*}
+
+
+Our method is designed to address some of the pain points of state-of-the-art deep learning models for BCSD.
+An important factor is that our method extracts human understandable features from an assembly function, instead
+of a vector embedding. This unique advantage allows immediate human verification when a match is detected by the similarity
+engine. A database of assembly functions and their interpretable features is more easily maintained, as defects can
+be patched by humans, rather than having to regenerate the whole database when the model is modified.
+
+By using any open-source or commercially available LLM, we entirely sidestep model training and leverage the extensive
+and diverse dataset that LLMs are pre-trained on. Our method can be tuned by modifying the instructions provided to
+the language model, which is significantly simpler than having to retrain the model and regenerate embeddings for the whole database.
+The underlying LLM can also be replaced without invalidating the database, meaning that our method continues
+to scale with the performance improvements of LLMs---an area which is showing impressive growth and development. Furthermore, if
+the prompt was edited in a way that alters the output feature set, the database can be maintained without
+having to regenerate an output for each item. Default values or values derived from other fields in the feature set can be added,
+as is standard with database migrations.
+
+Another key advantage of our method also stems from the textual representation of the extracted feature set. As highlighted
+previously, vector embeddings are computationally expensive to match against in large databases. Inverted index search is much
+more scalable than nearest neighbor search, as is evident in modern search engines being able to filter through billions of documents
+in a fraction of a second.
+
+\subsection{Feature Extraction Prompt}
+
+The method consists of querying a large language model with a prompt crafted to extract the high-level behavioral features of
+the provided assembly code fragment. As output, the LLM generates a JSON structure containing the extracted features.
+Compared to other methods, the assembly code fragment used in the query does not require any preprocessing.
+We outline the prompt made up of multiple parts, each designed to extract specific semantic information from the
+assembly function. The full prompt is avaliable as part of the published artifacts~\footnote{Anonymous link to the repository.}.
+
+\noindent \textbf{Framing and conditioning.}
+We use a prelude (\autoref{prompt-preamble}) that contains general information about the task at hand, and the expected response.
+
+\begin{figure}
+\centering
+\begin{tcolorbox}[enhanced]
+You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
+analysis. Your goal is to analyze an assembly function from an unspecified architecture and compiler and provide its extracted
+high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
+algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
+\end{tcolorbox}
+\caption{Preamble to the analysis task description}
+\label{prompt-preamble}
+\end{figure}
+
+\noindent \textbf{Type signature.}
+The first feature category extracted is the type signature of the provided assembly function.
+We only make the distinction between two types: \texttt{Integer} and \texttt{Pointer}. Inferring more information than these two 
+primitive types has shown to be too complicated for current LLMs. We extract the number of input arguments
+and their types, and also extract the return value type, if any.
+
+\noindent \textbf{Logic and operations.}
+This section specifies what to extract from the function in terms of its logical behavior, and how to determine the kind of
+operation that the assembly function performs. We list some of the features extracted here.
+
+\begin{itemize}
+\item Indication of loops: This is determined by the presence of jump instructions that point back to a previous
+instruction after some conditions have been checked.
+\item Indication of jump tables: Evaluated by patterns suggesting calculated jump addresses based on
+indices, or a series of conditional jumps.
+\item Extensive use of indexed addressing modes.
+\item Use of SIMD instructions and registers.
+\item Number of distinct subroutine call targets.pertinence
+\item The overall logical behavior of the function. Possibilities include: arithmetic operations, bitwise operations, data movement and memory access,
+and control flow and dispatching operations.
+\end{itemize}
+
+\noindent \textbf{Notable constants.}
+This section identifies notable integer and floating point constants.  These could be common scalar values used by
+a specific cryptographic algorithm, or the signature bytes used by a file format or protocol. We exclude small
+values that are used as offsets, loop counters or stack pointer adjustments.
+
+\noindent \textbf{Side effects.}
+The prompt also monitors the side effects that the assembly function has on the system.
+It reports these as a set of booleans values which state whether or not the function has
+the associated side effect. Each side effect is associated with a heuristic that the language model
+should use to identify them.
+
+\begin{itemize}
+    \item \textit{Modification of input arguments}. This is mainly identified when a input pointer is used as destination to a memory write.
+    \item \textit{Modification of global state} is detected similarily, when writes to absolute memory addresses or addresses resolved via global
+        data segment pointers occur.
+    \item \textit{Memory management} is determined by the presence of calls to memory allocation and deallocation
+        functions like \texttt{malloc} or \texttt{free}.
+    \item \textit{Input/Output handling} patterns are detected through characteristic file descriptor management behaviors, including system calls for opening, closing, reading, and writing, as well as instruction sequences implementing buffer mechanisms.
+    \item \textit{System calls and software interrupts} are identified by the presence of the specific instructions that trigger them.
+\end{itemize}
+
+\noindent \textbf{Categorization.}
+The last section tries to assign an overall category to the assembly function, based on the information collected during the analysis.
+Its purpose is not only to increase the similarity scores when a decisive category
+is identified, but also to provide a concise overview for analysts who may wish to understand
+the function or verify its similarity with the target. Categories include: cryptographic, data processing, control flow and dispatch,
+initialization, error handling, wrapper/utility, file management, etc.
+
+\subsection{Generation Techniques}
+
+We make use of a few techniques to ensure that the generated output constitutes valid JSON, and that we maximize the relevance
+of the generated output.
+
+It is known that model size is one of the biggest factor in model performance, and this is especially true for language model 
+nference ~\cite{scaling-laws}. 
+Local LLMs, especially the smallest models, will sometimes generate nonsensical output. In our early experiments, the smallest local model
+evaluated (0.5B parameters) would sometimes repeat the same line of output until it ran out of context space, or generated invalid JSON.
+To minimize these edge cases, we inference is repeated when JSON parsing fails and the temperature of output token selection is increased.
+This is performed in a loop until valid JSON is generated. In our experiments, the maximal amount of trials required
+for any query to generate valid json was three, but \(95\%\) of the generated responses from the smallest model would constitute
+valid JSON without retries.
+
+To achieve the best results with our method, we also utilize few-shot prompting ~\cite{few-shot} by providing
+a few assembly functions accompanied by hand crafted example analyses along with our prompt.
+In our evaluations against the baselines, three examples are provided, and our ablation study confirms that adding more than three examples provides
+little to no benefit. Providing a single example or a JSON schema in the prompt is enough to achieve good results. We do not
+provide a JSON schema because it is redundant information when examples are included. Our examples are selected from a
+diverse source of functions, and are varied in size and architecture to exemplify the space of possibilities in our evaluations.
+
+Recent commercial LLMs have the ability to generate responses following a provided JSON schema that is aside from the input prompt.
+We do not make use of this capability when evaluating commercial models so that the results can be compared to local LLMs
+that do not benefit from this option.
+
+\begin{figure}
+\centering
+\begin{minipage}{0.95\linewidth}
+% Diff of generated output from analysis
+\begin{minted}[fontsize=\small, frame=lines, framesep=2mm]{diff}
+ {
+   "input_parameter_count": 1,
+   "input_parameter_types": [
+     "Pointer"
+   ],
+-  "return_value_type": "None",
++  "return_value_type": "Integer",
+   "dominant_operation_categories": [
+     "ConditionalBranching",
+     "SubroutineCall"
+   ],
+   "loop_indicators": false,
+   "distinct_subroutine_call_targets": 2,
+   "use_indexed_addressing_modes": false,
+   "notable_integer_constants": [
+-    "0x39"
++    "0x39",
++    "0x4"
+   ],
+   "notable_floating_point_constants": [],
+   "count_of_distinct_immediate_values": 3,
+   "modifies_input_parameters": false,
+   "modifies_global_state": false,
+   "memory_allocation_deallocation": false,
+   "io_operations": false,
+   "block_memory_operations": false,
+   "number_of_interrupts_system_calls": 0,
+-  "inferred_algorithm": "Undetermined"
++  "inferred_algorithm": "Initialization"
+}
+\end{minted}
+\caption{Analysis comparison of the \texttt{sha384\_init} assembly function. Comparison between the analyses of the function compiled 
+for \texttt{arm} (red) and \texttt{x86-64} (green), with identical values in black. This pair has a similarity score of \(0.9\).}
+\label{feature-diff}
+\end{minipage}
+\end{figure}
+
+\subsection{Comparison}
+% Artificially place table here for now
+{
+    \renewcommand{\arraystretch}{1.1}
+    \begin{table*}
+    \centering
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{|l|c|c|l|}
+    \hline
+    Library       & Function count & Median function length & Description                                                          \\ \hline
+    BusyBox       & 66706          & 32                     & A fairly complete unix utility set for any small or embedded system. \\
+    GNU coreutils & 42545          & 31                     & The basic utilities of the GNU operating system.                     \\
+    curl          & 27198          & 14                     & Command line tool to transfer data with URLs.                        \\
+    ImageMagick   & 69873          & 55                     & Software suite used for editing and manipulating digital images.     \\
+    OpenSSL       & 134359         & 29                     & Toolkit for general-purpose cryptography and secure communication.   \\
+    PuTTY         & 12655          & 26                     & An implementation of SSH and Telnet for Windows and Unix platforms.  \\
+    SQLite        & 30322          & 40                     & A small SQL database engine.                                         \\ \hline
+    \end{tabular}
+    }
+    \caption{Dataset details.}
+    \end{table*}
+}
+
+ML based methods that generate an embedding for each assembly function generally compare these vectors using numerical
+methods such as cosine similarity.  Since our generated analysis is not a numerical vector but rather structured text,
+we use an alternative method to compare two assembly functions. We flatten the JSON structure into a set, where each
+element is the full path concatenated with the value of each field in the object. Jaccard similarity (Intesection over union)
+is used to obtain a similarity score when comparing two such sets. That is, the number of identical key-value pairs in the JSON
+structure is divided by the total number of key-value pairs, giving a value between \(0\) and \(1\) which we use as the similarity score.
+
+\subsection{Dataset}
+
+The dataset used is made of a varied set of executables, so as to be representative of the diversity found in real world software.
+Our method is not trained, and so our dataset is only needed for evaluations. It is composed of seven open source binaries:
+BusyBox ~\cite{busybox}, GNU coreutils ~\cite{coreutils}, curl ~\cite{curl}, ImageMagick~\cite{image-magick}, OpenSSL ~\cite{openssl},
+PuTTY ~\cite{putty}, and SQLite ~\cite{sqlite}. All have permissive licenses that allow their use in our evaluations. 
+
+All binaries were compiled using \texttt{gcc} for the following architectures: \texttt{x86-64}, \texttt{arm}, \texttt{mips}, \texttt{powerpc}.
+For each architecture, executables were generated for all optimization levels (\texttt{O0} to \texttt{O3}), stripped of debug symbols.
+The compiled binaries were dissassembled using IDA Pro ~\cite{ida} and separated into individual functions, yielding \(383,658\) assembly functions.
+Functions consisting of less than three instructions were not included as part of the dataset, because of their triviality.
+
+Pairs of equivalent functions from the same platform but distinct optimization levels were made for cross optimization
+evaluation, and pairs from the same optimization level but different platforms were made for cross
+platform evaluation. For example, the \texttt{MD5Init} functions in \autoref{asm-diff} compiled with \texttt{-O0} (top-left) and
+\texttt{-O3} (bottom-left) for \texttt{x86-64} form a pair for cross optimization retrieval, whereas functions compiled with \texttt{-O0}
+for \texttt{x86-64} (top-left) and \texttt{mips} (right) form a pair for cross architecture retrieval.
+
+\section{Experiments}
+\label{sec:exp}
+
+Our experiments are run on a virtual machine with 8 Intel Xeon Gold 5218 cpu cores, \(100\) GB of RAM, and two NVIDIA Quadro RTX
+6000 GPUs each having  \(24\) GB of RAM.
+
+The following experiments are performed: First, we select the LLM best suited for our subsequent evaluations. Second, we compare our
+method against other state-of-the-art ML based approaches for BCSD on our dataset. Third, we perform ablation studies on our method,
+to determine how the size of the model, the number of examples provided, and the different sections of the prompt contribute to our results.
+Finally, we demonstrate that the features extracted from our novel method are not properly represented in state-of-the-art embedding methods,
+and that by combining our method with any generic embedding model yields significantly better results that state of the art approaches.
+
+\subsection{Evaluation method}
+
+The mean reciprocal rank (MRR) and first position recall (Recall@1) metrics are used for evaluation and comparison to other methods
+~\cite{deprio,code-not-lang,Asm2Vec,CLAP,SAFE}.
+A pool of assembly function pairs is used for evaluation, where both assembly fragments in a pair come from the same source function.
+For each pair, we compare the generated features for the first element of the pair with all second elements of the pairs contained
+in the pool.  For example, consider a pool of ten pairs \((a_i, b_i)\) for \(i \in [1, 10]\), where \(a_i\) is compiled for the \texttt{arm}
+architecture with optimization level \(3\), and \(b_i\) is compiled for the \texttt{mips} architecture with the same optimization
+level. The feature set generated for function \(a_1\) is compared for similarity with the features of each \(b_i\) for \(i \in [1, 10]\).
+A ranking is generated by ordering these comparisons from most to least similar. Recall@1 is successful
+if \(b_1\) is found to be the most similar function, and the reciprocal rank metric is calculated with \autoref{mrr}.
+\begin{equation} \label{mrr}
+\frac{1}{\text{rank}(b_1)}
+\end{equation}
+\noindent The Recall@1 metric is calculated by dividing the number of successful recalls by the total number of pairs, and the
+MRR metric is calculated by averaging the reciprocal rank of each pair.
+
+\subsection{LLM Selection}
+
+Before evaluating our method against the baselines, we compare different LLMs available to select our backbones for the remaining experiments.
+For the local model, three options are considered: Qwen2.5 Coder ~\cite{qwen2} with sizes \(0.5\)B, \(1.5\)B, \(3\)B, and \(7\)B;
+Gemma 3 ~\cite{gemma3} with sizes \(1\)B and \(4\)B; and  Qwen3 \(4\)B ~\cite{qwen3}. We preselected these models because they are open source,
+small enough to fit in most modern GPUs when quantized, and small enough to fit within our GPU with \(24\) GB of VRAM unquantized. We did not
+consider mixture-of-experts models because they are much larger, and the specificity of our
+workload is likely to result in only a subset of expert being heavily used. We selected a small set of tasks that are representative
+of the extensive experiments conducted against the baselines. There are two cross optimization evaluations, and one cross architecture 
+evaluation.
+{
+    \renewcommand{\arraystretch}{1.1}
+    \begin{table}
+    \centering
+    \begin{tabular}{|l|ccc|} \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
+    Qwen2.5 Coder 7B & 0.558      & 0.725      & 0.498            \\
+    Qwen3 4B         & 0.550      & \bf 0.850  & 0.564            \\
+    Gemma 3 4B       & \bf 0.571  & 0.839      & \bf 0.594        \\ \hline
+    \end{tabular}
+    \caption{MRR eesults of the selected evalutations for local model selection, using a pool size of \(100\).}
+    \end{table}
+}
+
+In all experiments on local models, the input context size is limited to \(4096\) tokens, and the maximum output tokens to generate is set to \(512\).
+Very large assembly functions that do not fit within the input tokens are truncated. The more recent Qwen3 and Gemma 3
+models perform better for their size than Qwen2.5 Coder. They match or surpass it in most metrics while being around \(40\%\)
+smaller. The three models perform inference in a similar timeframe. On one of our GPUs, Qwen2.5 7B takes 10 seconds on average to
+generate an analysis for one assembly function. For smaller models such as Qwen2.5 0.5B and 1.5B, inference is faster since multiple queries
+can be batched on the same GPU (because of lower memory consumption). In all of our experiments, we parallelize analysis generation across our four GPUs.
+In practice however, queries are usually performed for a single assembly function, so a single GPU is needed. We selected Qwen2.5 Coder for the
+remaining experiments because it provides many small sizes for our ablation study, and is more stable than the newer Gemma 3 and Qwen3 models.
+
+For the commercial model, we preselected GPT 4.1 Mini \cite{gpt4} and Gemini 2.5 Flash \cite{gemini2.5}.
+These were chosen mainly because of their low cost and availability. The same subset of evaluations as for local models is performed to determine
+the model to use for the remaining evaluations.
+{
+    \renewcommand{\arraystretch}{1.1}
+    \begin{table}
+    \centering
+    \begin{tabular}{|l|ccc|} \hline
+    Model            & \tt O0--O3 & \tt O2--O3 & \tt arm--x86-64 \\ \hline
+    Gemini 2.5 Flash & \bf 0.674  & \bf 0.865  & \bf 0.766        \\
+    GPT 4.1 Mini     & 0.662      & 0.811      & 0.755            \\ \hline
+    \end{tabular}
+    \caption{MRR results of the selected evaluations for commercial model selection, using a pool size of \(100\).}
+    \end{table}
+}
+
+To provide a similar environment to local models, functions are truncated to a maximum length of \(128\) instructions.
+We selected Gemini 2.5 Flash because it performs best and offers a better infrastructure. Compared to GPT 4.1 Mini's \(10\) seconds
+latency per request, Gemini is almost able to handle a request every second, making it easier to iterate on our evaluations.
+
+\subsection{Clone search with different optimization levels}
+
+{
+    \renewcommand{\arraystretch}{1.3}
+    \begin{table*}
+    \centering
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{l|cccccc|cccccc}
+    \hline
+    \hline
+    \multirow{2}{*}{Model} & \multicolumn{6}{c|}{MRR}                                  & \multicolumn{6}{c}{Recall @ 1}                                                        \\ \cline{2-13}
+                           & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average     & \tt O0--O1 & \tt O0--O2 & \tt O0--O3 & \tt O1--O3 & \tt O2--O3 & average   \\ \hline
+    Order Matters          & 0.006      & 0.008      & 0.006      & 0.006      & 0.006      & 0.006       & 0.001      & 0.002      & 0.001      & 0.000      & 0.001      & 0.001     \\
+    SAFE                   & 0.189      & 0.200      & 0.189      & 0.218      & 0.171      & 0.193       & 0.059      & 0.063      & 0.057      & 0.068      & 0.051      & 0.060     \\
+    PalmTree               & 0.020      & 0.019      & 0.230      & 0.314      & \bf 0.878  & 0.292       & 0.006      & 0.007      & 0.080      & 0.184      & 0.676      & 0.191     \\
+    Asm2Vec                & 0.494      & 0.460      & 0.444      & 0.535      & 0.563      & 0.499       & 0.290      & 0.252      & 0.234      & 0.343      & 0.376      & 0.299     \\
+    CLAP                   & 0.244      & 0.221      & 0.214      & 0.550      & 0.781      & 0.402       & 0.187      & 0.176      & 0.168      & 0.455      & 0.707      & 0.339     \\ \hline
+    Qweni 2.5 7B           & 0.471      & 0.412      & 0.343      & 0.456      & 0.608      & 0.458       & 0.342      & 0.301      & 0.234      & 0.345      & 0.488      & 0.342     \\
+    Gemini 2.5 Flash       & \bf 0.739  & \bf 0.672  & \bf 0.568  & \bf 0.700  & 0.816      & \bf 0.699   & \bf 0.646  & \bf 0.579  & \bf 0.485  & \bf 0.618  & \bf 0.758  & \bf 0.617 \\ \Xhline{2\arrayrulewidth}
+    \end{tabular}
+    }
+    \caption{Evaluation of the baselines and our method on cross optimization retrieval with a pool size of \(1000\).
+    All functions are compiled for the \texttt{arm} architecture using gcc with the optimization levels specified for each column.
+    Three examples are provided with our prompt.}
+    \label{x-opt}
+    \end{table*}
+}
+
+This experiment benchmarks the capability of the baselines and our method for detection of similar code fragments across
+different optimization levels. We first present the baselines and then show our results.
+
+\noindent \textbf{Baselines.} There are five baselines, presented in the same order as in ~\autoref{x-arch}.
+
+Order Matters ~\cite{OrderMatters} combines a BERT language reprensentation
+model ~\cite{BERT} along with two control flow graph embedding models
+to perform BCSD. It uses BERT to learn the embeddings of instructions and basic blocks from the function,
+passes the CFG through a graph neural network to obtain a graph semantics embedding, and sends the adjacency
+matrix of the CFG through a convolutional neural network to compute a graph order embedding. These embeddings
+are then combined using a multi-layer perceptron, obtaining the assembly function's embedding. This method
+supports cross architecture and cross platform tasks, although its implementation is only trained on \texttt{x86-64}
+and \texttt{arm} for cross architecture retrieval.
+
+SAFE ~\cite{SAFE} first encodes each instruction of an assembly function into a vector,
+using the word2vec model ~\cite{word2vec}. Using a Self-Attentive Neural Network ~\cite{SANN}, SAFE then converts the sequence of instruction
+vectors from the assembly function into a single vector embedding for the function. Like all other baslines, SAFE requires
+pre-training, and can perform cross architecture similarity detection. However, it was only trained on the \texttt{AMD64}
+and \texttt{arm} architectures.
+
+Asm2Vec ~\cite{Asm2Vec} inspired the SAFE model. It is one of the first methods to use a NLP based approach to tackle
+the BCSD problem. It interprets an assembly function as a set of instruction sequences, where each instruction sequence
+is a possible execution path of the function. It samples these sequences by randomly traversing the CFG of the assembly
+function, and then uses a technique based on the PV-DM architecture ~\cite{PV-DM} (an extension of word2vec that embeds entire documents)
+to generate an embedding for the assembly function.
+
+A more recent BCSD model, PalmTree ~\cite{PalmTree}, also bases its work on the BERT model ~\cite{BERT}.
+It considers each instruction as a sentence, and decomposes it into basic tokens. The model is trained
+on three tasks. (1) As is common for BERT models, PalmTree is trained on masked language modeling. (2)
+It is also trained on context window prediction, that is, predicting whether two instructions are found
+in the same context window of an assembly function. (3) Finally, the model is trained on def-use prediction---predicting
+whether there is a definition-usage relation between two instructions. This method supports
+both cross architecture and cross optimization tasks, although its reference implementation is only
+trained on cross compiler similarity detection.
+
+The model CLAP ~\cite{CLAP} uses the RoBERTa ~\cite{RoBERTa} base model to perform assembly function embedding.
+It is adapted for assembly instruction tokenization, and directly generates an embedding for
+a whole assembly function. It also comes with a text embedding model, so that classification can
+be performed using human readable classes. The class to match for is embedded with the text model, and the
+assembly function with the assembly embedding model. The generated embeddings can be compared with cosine similarity to
+calculate whether the assembly function is closely related or opposed to the embedded category. This model was only trained
+for the \texttt{x86-64} architecture compiled with \texttt{gcc}, although it supports other architectures and could be trained on
+them.
+
+
+\noindent \textbf{Results.} We present the results of the baselines and our method evaluated on both the
+largest local model, Qwen2.5-Coder 7B, and the commercially deployed model, Gemini 2.5 Flash.
+As evident in \autoref{x-opt}, the hardest retrieval task is between optimization levels \(0\) and \(3\),
+highlighting the substantial difference between unoptimized and maximally optimized code (see \autoref{asm-diff}).
+At optimization level \(0\), functions perform a lot of unessecary actions, such as extensively moving
+data between registers and perform conditional evaluation of expressions that return a constant value. The generated code
+is mostly left untouched by the optimizer. At optimization level \(3\), the compiler will inline simple functions into the
+body of the caller, meaning that jumps and calls to other places in the binary are replaced by the destination's instructions.
+Some loops are unrolled, so that each iteration of the loop is laid out sequentially instead of performing a conditional check
+and a jump to the loop's initial instruction. Also, instructions can be heavily reordered to achieve best performance for the targeted
+hardware, while keeping the observable behavior of the program untouched.
+
+For the most part, the baselines perform worse than expected on the evaluations. As our own dataset is used
+rather than the one each baseline is pre-trained on, overfitting in the training process may be the cause of this poor performance,
+as also observed by Marcelli et al. \cite{cisco}. Compared to the baselines, one of our method's advantage is that it requires no
+specific training other than the pre-traning process performed by the model developers. It readily achieves good results,
+meaning our method generalizes well to unseen settings. The stability of our method is also remarkable. It consisently
+performs well, compared to some of the baselines that perform excellently on some tasks, but poorly on others.
+
+\subsection{Clone search with different architectures}
+
+{
+    \renewcommand{\arraystretch}{1.3}
+    \begin{table*}
+    \centering
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{l|cccc|cccc}
+    \Xhline{2\arrayrulewidth}
+    \multirow{2}{*}{Model} & \multicolumn{4}{c|}{MRR}                                 & \multicolumn{4}{c}{Recall @ 1}                           \\ \cline{2-9}
+                           & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   & \tt arm--x86-64 & \tt powerpc--x86-64 & \tt mips--x86-64 & average   \\ \hline
+    Order Matters          & 0.007           & 0.007               & 0.007            & 0.007     & 0.002           & 0.000               & 0.001            & 0.001     \\
+    SAFE                   & 0.239           & 0.187               & 0.196            & 0.207     & 0.081           & 0.059               & 0.064            & 0.068     \\
+    PalmTree               & 0.037           & 0.036               & 0.018            & 0.030     & 0.031           & 0.013               & 0.007            & 0.017     \\
+    Asm2Vec                & 0.242           & 0.293               & 0.417            & 0.317     & 0.085           & 0.113               & 0.231            & 0.143     \\
+    CLAP                   & 0.416           & \bf 0.523           & 0.494            & 0.478     & 0.334           & \bf 0.443           & 0.415            & 0.397     \\ \hline
+    Qwen 2.5 7B            & 0.263           & 0.201               & 0.202            & 0.222     & 0.165           & 0.108               & 0.110            & 0.128     \\
+    Gemini 2.5 Flash       & \bf 0.548       & 0.520               & \bf 0.525        & \bf 0.531 & \bf 0.436       & 0.414               & \bf 0.417        & \bf 0.422 \\ \Xhline{2\arrayrulewidth}
+    \end{tabular}
+    }
+    \caption{Evaluation of the baselines and our method on cross architecture retrieval with a pool size of \(1000\).
+    All functions are compiled with optimization level \(2\) using \texttt{gcc} for the architectures specified in each column.
+    Three examples are provided with our prompt.}
+    \label{x-arch}
+    \end{table*}
+}
+
+Different CPU architectures have varying assembly code languages. It is hard for BCSD methods that analyze assembly code to support
+multiple architectures. These methods need to accurately represent two functions with completely different syntaxes but with identical
+semantics as being very similar in terms of their feature set or embedding. Hence, methods that use CFG analysis have a better chance
+at supporting many architectures, since the structure of the CFG itself is architecture agnostic. However, the basic blocks that constitute
+this graph are still in assembly code, which does not fully resolve the issue. Furthermore, there exists many different variants of each
+instruction set, because each new version of an architecture brings new instructions to understand and support. With deep learning methods,
+this requires training or fine-tuning the model to understand a new language variant every time. Afterwards, all embeddings in a BCSD database need to
+be regenerated. Our method does not directly address this issue, but brings a significant improvement. It indirectly benefits from the vast
+amount of data used to train foundational LLMs. Since a LLM has extensively seen all of the mainstream CPU architectures and their dialects
+in its training data, it is able to grasp their meaning and extract features from them. Also, if the model in use seems to poorly comprehend a
+specific architecture, it can be replaced with one that better performs the specific platform without invalidating the BCSD database.
+
+Our method slightly surpasses the baselines, but more work in this area is clearly still required. The recall@1 metrics show that the our
+method is able to rank the the correct assembly fragment in first place only \(42\%\) of the time on average.
+
+\subsection{Ablation on model size}
+
+\begin{figure}
+\centerline{\includegraphics[width=\linewidth]{size-ablation}}
+\caption{MRR performance for cross optimization retrieval against the number of parameters in the LLM. All assembly functions are compiled
+with \texttt{gcc} for the \texttt{arm} architecture. Retrieval is performed between optimization levels \(0\) and \(1\) with a pool of \(1000\) assembly functions.
+Three examples are provided with our prompt.}
+\label{size-abl}
+\end{figure}
+
+In this experiment, we vary the LLM size to determine the correlation between the number of parameters in the LLM and the performance
+of our method on BCSD retrieval. Our results generally follow the scaling laws for neural language models ~\cite{scaling-laws}, in that increasing
+the model size does significantly improve the results generated.
+
+From our observations, LLMs with less than \(3\)B parameters do not seem to comprehend the analysis task when
+they are not provided with any examples. When provided with examples, these small models will mimic the examples provided without basing the
+output on the assembly function in the query. We can clearly see a form of sub-linear increase in performance with respect to model size.
+The Gemini 2.5 Flash model architecture is not disclosed at the time of writing, but we can expect the model to have an order
+of magnitude more parameters than the local models, and may use a mixture-of-experts architecture, based on previous Gemini model architectures.
+
+\subsection{Ablation on examples}
+
+\begin{figure}
+\centerline{\includegraphics[width=\linewidth]{examples-ablation}}
+\caption{MRR performance for cross optimization retrieval against the number of examples provided in the prompt. Functions are compiled
+using gcc for the \texttt{x86-64} architecture. A pool of \(100\) assembly functions is used, with retrieval between optimization levels \(0\) and \(3\)
+for Gemini 2.5 Flash, and \(0\) and \(1\) for Qwen 2.5 \(7\)B.}
+\label{ex-abl}
+\end{figure}
+
+By providing hand crafted examples to the large language model, we are able to increase the performance of the assembly function analysis.
+This follows the general observations behind few show prompting ~\cite{few-shot}. Providing a single example significantly increases the retrieval
+scores, but providing more than one provides very limited increases in scores. Interestingly, a smaller model such as Qwen 2.5 \(7\)B still sees
+marginal increase in MRR scores as the number of examples increases up to three. This relates to our previous observation
+that small LLMs rely more on the provided examples than larger models. Another evidence of this is the number of invalid JSON outputs generated by
+Qwen 2.5 \(7\)B. When no examples are provided, approximately \(3\%\) of queries generate an invalid output. With only one example, no invalid
+outputs are generated, and the same applies when two or three examples are provided.
+
+Another interesting result is the fact that when providing enough examples, the system prompt has very little impact on the retrieval scores.
+This is depicted by the green data points in \autoref{ex-abl}, where only examples are provided with an empty string as the system prompt.
+This suggests that the examples themselves contain enough information for the model to perform the analysis, without being expained 
+exactly how.
+
+With our experimental configuration, providing four examples to Qwen 2.5 \(7\)B significantly decreases its MRR scores. That is because
+the examples almost completely use the full context window that we provide to the language model. As such, most assembly functions are
+too large to fit in the remaining tokens and are thus truncated, which loses information about our query.
+
+The dotted line in \autoref{ex-abl} represents the MRR score obtained by providing no examples to Gemini 2.5 Flash, but providing a reference JSON
+schema for the model to follow using the built-in capabilities of the API. The scores being very similar shows that Gemini does not base itself on the
+provided examples, but only uses them to understand the JSON schema required. In all our other evaluations, we provide examples instead of a JSON
+schema because local models do not have the capability of generating output based on a schema built-in.
+
+\subsection{Ablation on the prompt used}
+
+\begin{figure}
+\centerline{\includegraphics[width=\linewidth]{prompt-ablation}}
+\caption{
+MRR performance with one section removed from the prompt, using Gemini 2.5 Flash. Cross optimization retrieval is done between fragments at
+optimization levels \(0\) and \(3\), with all functions compiled for the \texttt{x86-64} architecture. Cross architecture retrieval is done between functions
+compiled for \texttt{arm} and \texttt{x86-64}, all compiled using optimization level \(2\). Both tasks are done with a pool size of \(100\). The dotted lines
+show the MRR score for the prompt without any sections removed. A smaller bar means the prompt section has more impact on the results.}
+\label{prompt-abl}
+\end{figure}
+
+To verify that each section of our prompt brings meaningful insight into the assembly function analysis task, we perform an ablation
+study by removing one section of the prompt while keeping others intact. We notice that all individual sections bring a positive
+outcome to the overall results, but some sections of the prompt have a larger impact than others. In particular, the categorization and
+notable constants sections have the most impacts on cross optimization retrieval. The categorization section causes an increase of almost
+\(0.30\) on the MRR metric, when evaluated on the the hardest cross optimization task. The notable constants sections brings an increase of
+almost \(0.20\) on the MRR for the same task. This result is justified by the comparatively large range of accepted values for both features.
+For example, the list of notable constants has many more possible values and thus has more variability in the output compared to a set
+of booleans, such as those in the side effects prompt section.
+
+The story is slightly different when this ablation study is performed for cross architecture retrieval. As seen on \autoref{prompt-abl},
+there is a smaller difference between the least and most influential prompt sections. The categorization and notable constants sections
+are significantly less impactful than they were for the cross optimization study, while the other three sections have a larger impact.
+For instance, the categorization section went from having an impact of \(0.30\) on the MRR to having an impact \(0.22\), while the logic
+section is more influential, going from \(0.06\) to \(0.20\) in MRR impact.
+
+\subsection{Combined Method}
+
+Our method has shown to be an excellent generalist on BCSD retrieval tasks. Nevertheless, models trained for assembly function embedding
+remain beneficial in specific subdomains, such as supporting niche architectures or understanding similarity through
+specific obfuscation methods. State-of-the-art embedding models are much smaller than our method in terms of parameter count.
+For instance, the CLAP ~\cite{CLAP} model baseline is only \(110\)M parameters, compared to the billions required to perform our method.
+Their small size potentially allows for CPU execution on small workloads. The cost of training such models is still very expensive,
+but once trained, they are much faster than LLM inference.
+
+To achieve the best of both worlds, we experiment with combining the similarity scores from an embedding model and our prompting method.
+Our evaluation consists of generating both an embedding and a LLM analysis for each function. The embedding similarity \(s_e\) is calculated
+using cosine similarity, and the analysis similiarity \(s_a\) is calculated using jaccard similarity. Both similarity scores are then combined
+with equal weight.
+\[
+    S = \frac{s_e + s_a}{2}
+\]
+
+In a real life scenario, combining both methods could be performed by using our textual representation as a pre-filter, and then calculating
+the embedding representation. As such, the scalability and maintainability of the underlying BCSD database is maintained, while allowing a flexible
+choice of embedding based BCSD model. That is, an inverted index database is maintained for the pre-filter query. Once this query is completed, the
+top-\(k\) results can be refined using an embedding model, by calculating the embeddings only for those \(k\) candidates. With this approach,
+the decision to use an embedding model, and which one to use, can be made dynamically.
+
+To provide a method that keeps all of the advantages of our presented work, we use Qwen3-Embedding \(4\)B ~\cite{qwen3} as the embedding model for this experiment.
+As such, the combination still does not require any training nor fine-tuning. As shown in \autoref{composite}, off-the-shelf embedding models
+based on a LLM perform very well. Furthermore, using a generic embedding model means that it can inexpensively be replaced by a new generation, since
+the training phase is performed by the open source model developers.
+
+{
+\renewcommand{\arraystretch}{1.1}
+\begin{table*}
+\centering
+\begin{tabular}{l|c|c|c}
+\Xhline{2\arrayrulewidth}
+                       & Gemini 2.5 Flash & Qwen Embedding & Combined  \\ \hline
+\tt O0 -- O1           & 0.646            & 0.640          & \bf 0.910 \\
+\tt O0 -- O2           & 0.579            & 0.554          & \bf 0.843 \\
+\tt O0 -- O3           & 0.485            & 0.518          & \bf 0.759 \\
+\tt O1 -- O3           & 0.618            & 0.640          & \bf 0.855 \\
+\tt O2 -- O3           & 0.758            & 0.783          & \bf 0.921 \\
+\tt arm -- x86-64      & 0.436            & 0.334          & \bf 0.736 \\
+\tt powerpc -- x86-64  & 0.414            & 0.443          & \bf 0.746 \\
+\tt mips -- x86-64     & 0.417            & 0.415          & \bf 0.729 \\ \Xhline{2\arrayrulewidth}
+\end{tabular}
+\caption{Comparison between Qwen3-Embedding 4B, Gemini 2.5 Flash, and the combination of both. The retrieval task is performed on both cross
+optimization and cross architecture settings. For cross optimization, the binaries are compiled for the \texttt{arm} architecture, for cross architecture,
+the binaries are compiled with optimization level \(2\). A pool of 1000 assembly functions is used throughout. Only Recall@1 scores are presented.}
+\label{composite}
+\end{table*}
+}
+
+The combined method significantly surpasses both the embedding and analysis methods alone. Seen differently, the embedding and analysis supplement
+each other, meaning that our analysis extracts features from the assembly function that are not properly represented in the embedding model.
+
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Early BCSD methods}
+
+\textbf{Static analysis.} Traditional methods make use of static analysis to detect clone assembly routines. With these methods, a trade-off has
+to be made between the robustness to obfuscation and architecture differences, and the performance of the algorithm. ~\cite{BCSDsurvey}
+Control flow graph analysis and comparison ~\cite{BinDiff,graph-bug-search} is known to be robust to syntactic differences, but often
+involves computationally intractable problems. Other algorithms that use heuristics such as instruction frequency,
+longest common subsequence, or locality sensitive hashes ~\cite{clones.net,op-seq,sem-hash} are less time consuming, but tend to fixate on the syntactic
+elements and their ordering rather than the semantics.
+
+\textbf{Dynamic analysis.} This method family consists of analyzing the features of a binary or code fragment by monitoring its runtime behavior.
+This method is compute intensive and requires a cross-platform emulator, but completely sidesteps the syntactic aspects of binary code
+and solely analyzes its semantics. ~\cite{BCSD} As such, this method is highly resilient to obfuscations, but requires a sandboxed environment
+and is hard to generalize across architectures and application binary interfaces ~\cite{blanket-exec}.
+
+\subsection{LLM based software analysis}
+
+Researchers have found many related applications of language models to binary and software analysis.
+For vulnerability detection, FuncVul ~\cite{funcVul} is a GraphCodeBERT model fine-tuned to detect whether a provided
+source function is vulnerable. The dataset generation process makes use of a LLM to rewrite each function
+using generic function and variable names. The LLM is also used in their method to predict the lines of code on which the vulnerability is found.
+LLM4Decompile ~\cite{llm4decompile} tries to utilize LLMs for decompilation. An open source LLM is fine-tuned to learn the source code
+representation of an assembly function, and the model is then evaluated on its decompilation capabilities. Fang et al. ~\cite{source-analysis}
+measure the competency of LLMs for source code analysis, with a focus on obfuscated source code.
+Their results match our findings, that LLMs are efficient at code analysis, but they
+also demonstrate that language models still struggle when faced with cases of advanced obfuscation techniques.
+LLM based fuzzing is another area that has recently gained interest. For instance, Asmita et al. ~\cite{llm-fuzz} use a LLM to
+generate the initial seed of a fuzzing pipeline on the BusyBox ~\cite{busybox} executable.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Our method for BCSD is a shift in perspective compared to previous state-of-the-art BCSD embedding models. However,
+this new approach maintains some of the known limitations and also brings new limitations. Most importantly, this
+method makes use of massive models compared to previous methods. A powerful set of GPUs is required when generating
+feature sets for a large pool or database. This favors centralised databases with large amounts of assembly fragments over
+locally maintained databases with hundreds or thousands of functions. Otherwise, a commercially deployed LLM can be used at a
+cost, but concerns surrounding data privacy can legitimately be raised. Another potential limitation is the size of the feature
+set extracted during assembly analysis. As shown, our prompt performs very well with pool sizes of \(1000\) assembly functions,
+however, this may not be the case when comparing millions of feature sets, as is the case in production databases.
+
+We remain confident that our method brings significant improvements to the current landscape of BCSD, by resolving
+many of the previously acknowledged limitations. Our method does not require any form of training, and can be performed with any LLM
+available. It also offers a distinct advantage over the current state-of-the-art, because the feature vectors generated are human
+interpretable. This makes the method easily tunable by human experts. The similarity scores are much more easily verifiable, and
+cases of incorrect similarity detection can be explained using the generated feature set. Furthermore, this method can be scaled to
+databases containing millions of assembly functions compared to embedding models, since inverted index search has a lower time
+complexity than nearest neighbor search, and remains accurate compared to approximated nearest neighbor search methods.
+
+\subsection{Future research}
+
+Our results open avenues for further investigation in LLM based BCSD, and more broadly in LLM assisted reverse engineering.
+A few of these oportunities are outlined here.
+
+\subsubsection{Fine-tuning}
+
+As stated, our method does not require fine-tuning, and was not evaluated on fine-tuned performance. Developing a fine-tuning step
+for assembly code understanding and analysis may prove to be efficient and bring significant improvements to our method.
+An example of such technique would be distillation ~\cite{distillation}. With distillation, a large model is used to train or fine-tune a
+much smaller model. For example in our experiments, Gemini 2.5 Flash could have been used to fine tune the small Qwen2.5-Coder models.
+Since there is no ground truth in text generation, the distillation process uses the large model's output as ground truth
+to train the smaller model. As we have shown, a large model such as Gemini 2.5 Flash performs remarkably better than a
+small model such as Qwen2.5 7B at assembly understanding. We believe the distillation process could considerably reduce this gap.
+
+\subsubsection{Output Format}
+
+Our method uses the JSON output format so that the output generated is easily comparable and a similarity metrics can be deduced.
+This format was chosen because it is ubiquitous and its syntax is straightforward to produce for LLMs, and easily understandable for humans.
+However, finding the best trade-off between output interpretability, compute requirements, and similarity detection capabilities remains
+an open problem. One possibility is to loosen the restrictions on the output format and use a sentence similarity method to determine
+the similarity between function analyses. On the contrary, another possibility is to use the analysis capabilities at a smaller scale,
+for example analyzing single basic blocks and combining these analyses into a more comprehensive structure for a whole assembly function.
+In any case, more experimentation is required to find optimal balance.
+
+\subsubsection{Reasoning models}
+
+A recent class of LLMs are fine tuned to natively use chain of thought inference ~\cite{c-o-t} before answering the query.
+These models are known as reasoning models, and it has been shown that this method of inference produces more accurate and
+higher quality responses ~\cite{c-o-t,reasoning,thinking-llm} on hard problems. It may be worth evaluating whether this style
+of inference performs better than non reasoning models (as used in our research) on assembly function analysis.
+
+\subsubsection{Other integrations}
+
+Our work proves the competency of LLMs in understanding and analyzing assembly code. From this point, different approaches
+to incorporating LLMs into assembly analysis workflows can be considered. First, instead of using LLMs for feature extraction,
+they could be used to explain the similarity between two functions, once this similarity has been determined using an unexplainable
+method such as embeddings. Furthermore, it could be used as a decision maker as to whether the two code fragments are similar enough
+to be considered clones. Often times, the assembly function used as query is not even part of the BCSD database. The remarkable versatility
+of LLMs underscores the need for further research to determine where they can effectively support the reverse engineering workflow and where
+their utility remains limited.
+
+%-------------------------------------------------------------------------------
+\section*{Acknowledgments}
+%-------------------------------------------------------------------------------
+
+The USENIX latex style is old and very tired, which is why
+there's no \textbackslash{}acks command for you to use when
+acknowledging. Sorry.
+
+\textbf{Do not include any acknowledgements in your submission which may deanonymize you (e.g., because of specific affiliations or grants you acknowledge)}
+
+%-------------------------------------------------------------------------------
+% optional clearing of the page
+\cleardoublepage
+\appendix
+\section*{Ethical Considerations}
+
+An analysis of our research is performed under the four ethical principles suggested.
+
+\textbf{Respect for persons.} Our research is not conducted on human subjects, but we recognize that our research may be used by attackers to ease
+their reverse engineering efforts and detect vulnerabilities that could be exploited on human subjects.  However, it is widely understood that
+developing software as closed-source is not a valid security measure. Software providers must not rely on the complexity of reverse engineering to
+secure their software. The security model of software providers is out of our control, and thus respect for persons is not a concern.
+
+\noindent \textbf{Beneficience.} The objective of our work is to ease reverse engineering to enhance and ensure the security of software. We
+use open source components wherever possible, such as our dataset and the local language models. This approach enables us to publicly release
+all artifacts used in our research, which allows for reproducibility and new research to directly build on our results.
+
+\noindent \textbf{Justice.} To the best of our knowledge, our reseach did not involve the unfair treatment of entities, groups, or individuals
+and thus justice is not a concern.
+
+\noindent \textbf{Respect for Law and Public Interest.} All research steps performed are legal. All licenses of the software used in our research were
+respected. We believe it is in the public's best interest to freely have access to our research, as it may increase the productivity of security researchers.
+
+\section*{Open Science}
+
+Consistent with the USENIX Security open science policy, the repository used for experimentation
+of our method is publicly available [TODO]. This constitutes the full implementation of our methods that can be reproduced on
+any open source model, and the implementation for commercial LLM providers. The dataset used throughout this research
+is also available at that same repository [TODO].
+
+\bibliographystyle{plainurl}
+\bibliography{references}
+
+% \appendix
+
+% \section{Full Prompt}
+
+% The full system prompt used to ask the LLM for assembly function analysis is provided below in \autoref{full-prompt}. It is also available as
+% part of our artifact along with many other experimental prompts used in early iterations of the method.
+
+% \onecolumn
+% \begin{tcolorbox}[breakable, enhanced]
+    % You are an expert assembly code analyst, specializing in high-level semantic description and feature extraction for comparative
+    % analysis. Your goal is to analyze an assembly routine from an unspecified architecture and compiler and provide its extracted
+    % high-level features, formatted as a JSON object. For the provided assembly routine, extract the following features and infer the
+    % algorithm. Your output \textbf{MUST} be a JSON object conforming to the structure defined by these features.
+
+    % \textbf{I. Basic Signature \& Data Flow}
+    % \begin{itemize}[noitemsep, topsep=1pt]
+    % \item \textbf{Input Parameter Count (Integer):} The number of distinct conceptual inputs the function likely takes. Infer based on typical argument passing mechanisms (e.g., values moved into frequently-used registers at the start of the function, or stack manipulations that reserve space for arguments).
+    % \item \textbf{Input Parameter Types (Array of Strings):} A list of abstract data type categories representing the inputs.
+        % \textit{Categories:} \texttt{"Integer"} or \texttt{"Pointer"}.
+        % \textit{Inference:} Based on how the inferred parameters are used (e.g., dereferenced, used in arithmetic, compared, passed to subroutines).
+    % \item \textbf{Return Value Type (String):} The abstract data type of the value returned, if any.
+        % \textit{Categories:} \texttt{"Integer"}, \texttt{"Pointer"}.
+        % \textit{Inference:} Based on the value in the register or stack location typically used for return values before a \texttt{return} instruction.
+    % \end{itemize}
+    % \textbf{II. Core Logic}
+    % \begin{itemize}[noitemsep, topsep=1pt]
+    % \item \textbf{Dominant Operation Categories (Array of Strings):} Identify the top few (up to 3) dominant types of operations performed by observing instruction mnemonics and their common effects. For example, if control flow (jumps/branches) is a primary characteristic of the routine, ensure the relevant category (e.g., \texttt{"ConditionalBranching"}) is included among the dominant ones. \textit{Categories:} \texttt{"Arithmetic"} (add, subtract, multiply, divide, increment, decrement), \texttt{"Bitwise"} (AND, OR, XOR, NOT, shifts, rotates), \texttt{"DataMovement"} (copying data between registers/memory), \texttt{"ConditionalBranching"} (transfer control based on flags/conditions), \texttt{"SubroutineCall"} (transfer control to another routine), \texttt{"MemoryAccess"} (reading/writing to memory locations).
+    % \item \textbf{Loop Indicators (Boolean):} \texttt{true} if common patterns indicating loops are observed (e.g., a conditional branch instruction targeting an earlier instruction's address, or a recognized architectural loop instruction). \texttt{false} otherwise.
+    % \item \textbf{Number of Distinct Subroutine Call Targets (Integer):} Count of unique subroutines that are called.
+    % \item \textbf{Use of Indexed Addressing Modes (Boolean):} \texttt{true} if instructions appear to access memory using a base address combined with an offset derived from another register (like \texttt{[base\_reg + index\_reg * scale + displacement]}) or similar complex memory addressing. \texttt{false} otherwise.
+    % \item \textbf{Jump Table Indicators (Boolean):} \texttt{true} if patterns suggesting a jump table are observed (e.g., an indirect jump based on a calculated index, a series of compare-and-jump instructions followed by a default branch). \texttt{false} otherwise.
+    % \item \textbf{Presence of SIMD Instructions (Boolean):} \texttt{true} if instructions commonly associated with Single Instruction, Multiple Data (SIMD) operations are observed (e.g., instructions operating on wide registers, packed data, or vector operations like \texttt{ADDPS}, \texttt{XORPS}, \texttt{MOVAPS}, \texttt{VMOVUPS}, etc., even if specific mnemonics are architecture-dependent, the pattern of data movement and parallel operations can be inferred). \texttt{false} otherwise.
+    % \end{itemize}
+    % \textbf{III. Constants}
+    % \begin{itemize}[noitemsep, topsep=1pt]
+    % \item \textbf{Presence of Notable Integer Constants (Array of Hexadecimal Strings):} A list of up to 15 UNIQUE integer literals (immediate values) used in operations, represented as hexadecimal strings (e.g., \texttt{"0x5B8"}, \texttt{"0x23"}). \textit{Exclude values that are:} \texttt{0x0}, \texttt{0x1}, \texttt{0xFFFFFFFF}, common loop counters/increments/decrements, or standard stack adjustments (e.g., small multiples of \texttt{0x4}, \texttt{0x8}, \texttt{0x10} for stack pointer manipulation). Prioritize larger, less common, or clearly patterned constants, and those used in bitwise operations or memory addressing with unusual offsets. The list should contain only distinct values.
+    % \textit{Magic Numbers Heuristic:} Look for integer constants that are: large or unusual values (e.g., \texttt{"0x04C11DB7"}, \texttt{"0xDEADBEEF"}), significant bitmasks or flags (e.g., \texttt{"0xFFFF0000"}, \texttt{"0xFF"}), rare array sizes, buffer sizes, or offsets, or values often associated with specific algorithms (e.g., CRC polynomials, cryptographic constants, network protocol values, file format magic bytes).
+    % \item \textbf{Count of Distinct Immediate Values (Integer):} Total count of unique immediate (literal) values used directly in instructions. Exclude very common small values (0, 1, -1) if they primarily serve basic arithmetic/comparison.
+    % \item \textbf{String Literal Presence (Boolean):} \texttt{true} if identifiable string literals are referenced or used within the function (e.g., for I/O, error messages, or comparisons). This can be inferred by moves of apparent string addresses into registers/stack, followed by calls to I/O or string manipulation routines. \texttt{false} otherwise.
+    % \end{itemize}
+% \textbf{IV. Side Effects}
+% \begin{itemize}[noitemsep, topsep=1pt]
+% \item \textbf{Modifies Input Parameters (Boolean):} \texttt{true} if there are instructions writing to memory addresses derived from what are inferred as input parameters (e.g., \texttt{[inferred\_input\_pointer + offset] = value}). \texttt{false} otherwise.
+% \item \textbf{Modifies Global State (Boolean):} \texttt{true} if there are instructions writing to fixed, non-stack-relative memory addresses that are not derived from input parameters. \texttt{false} otherwise. (Look for writes to absolute memory addresses or addresses resolved via global data segment pointers).
+% \item \textbf{Performs Memory Allocation/Deallocation (Boolean):} \texttt{true} if common patterns associated with dynamic memory management are observed.
+   % \textit{Heuristics:} A subroutine call where the return value is immediately used as a base pointer for subsequent data storage, or specific constant arguments (e.g., a size) are passed to a subroutine call in a pattern consistent with allocation.
+% \item \textbf{Performs I/O Operations (Boolean):} \texttt{true} if common patterns associated with I/O (e.g., console output, file operations) are observed.
+   % \textit{Heuristics:} A subroutine call that takes a pointer to a string literal as an argument, or calls that take small integer values (potentially file descriptors) and buffer pointers as arguments.
+% \item \textbf{Performs Block Memory Operations (Boolean):} \texttt{true} if patterns of copying or setting large blocks of memory are observed (e.g., a loop with data movement instructions and indexed addressing, or calls to known block operation subroutines). \texttt{false} otherwise.
+% \item \textbf{Performs Linear Memory Accesses (Boolean):} \texttt{true} if there are observed patterns of memory access where a base address is consistently incremented or decremented, suggesting iteration over a contiguous block of memory (e.g., a loop accessing \texttt{[base + 0]}, \texttt{[base + 4]}, \texttt{[base + 8]}). This implies reading or writing. \texttt{false} otherwise.
+% \item \textbf{Performs Error Handling (Boolean):} \texttt{true} if common patterns associated with error handling are observed.
+   % \textit{Heuristics:} Extensive conditional branching after subroutine calls to check return values (especially non-zero or negative values), specific error code comparisons, or calls to subroutines that appear to print error messages or log events. \texttt{false} otherwise.
+% \item \textbf{Number of Software Interrupts / System Calls (Integer):} The count of distinct instances where a software interrupt instruction (e.g., \texttt{INT}, \texttt{SYSCALL}, \texttt{SVC}, \texttt{TRAP}, \texttt{SYSENTER}) is used, or a pattern of instruction(s) that directly initiate a kernel-mode transition/system call. This counts the invocation of the mechanism, not the specific system call number.
+% \end{itemize}
+% \textbf{V. Inferred Categorization}
+
+% \textbf{Inferred Category (String):} A high-level functional category best describing the routine's primary purpose.
+
+% \textit{Categories:}
+% \begin{itemize}[noitemsep, topsep=1pt]
+        % \item \texttt{"System/OS Interaction"}: Primarily deals with operating system services (e.g., system calls, direct I/O, resource management).
+        % \item \texttt{"Memory Management"}: Focuses on allocating, deallocating, or manipulating large memory blocks (e.g., heap operations, block copies/fills).
+        % \item \texttt{"Data Processing/Transformation"}: Performs significant arithmetic, bitwise, or structural data manipulations.
+        % \item \texttt{"Control Flow/Dispatch"}: Main purpose is to direct execution flow, often via complex branching or jump tables.
+        % \item \texttt{"Initialization/Setup"}: Prepares data structures, global variables, or sets up environments.
+        % \item \texttt{"Error/Exception Handling"}: Manages and responds to errors or exceptional conditions.
+        % \item \texttt{"Utility/Helper"}: Generic, reusable tasks (e.g., string manipulation, simple math not part of a larger algorithm).
+        % \item \texttt{"Cryptographic/Hashing"}: Involved in encryption, decryption, or hashing (e.g., specific bitwise ops, known constants).
+        % \item \texttt{"Interfacing/Wrapper"}: Acts as an interface, relaying calls or arguments with minimal internal logic.
+        % \item \texttt{"Undetermined"}: If no confident category can be assigned.
+% \end{itemize}
+% \textit{Inference:} Based on a general view of all extracted features, particularly dominant operations, constants, call patterns, and side effects.
+% \end{tcolorbox}
+% \captionof{figure}{\label{full-prompt} Full system instructions provided to the LLM for each analysis.}
+
+
+% \twocolumn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%  LocalWords:  endnotes includegraphics fread ptr nobj noindent
+%%  LocalWords:  pdflatex acks
