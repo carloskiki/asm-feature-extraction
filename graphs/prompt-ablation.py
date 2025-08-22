@@ -79,4 +79,4 @@ fig.update_layout(
     yaxis=dict(showline=True, linewidth=2, linecolor='black', mirror=True)
 )
 
-fig.write_image("prompt-ablation.png", scale=3, width=1200, height=800)
+fig.write_image("graphs/prompt-ablation.png", scale=3, width=1200, height=800)
