@@ -60,13 +60,16 @@ fig.update_layout(
     yaxis_title='MRR',
     yaxis=dict(range=[0, 1]),
     font=dict(size=32),
+)
+
+fig.update_layout(
     legend=dict(
-        font=dict(size=24),
+        font=dict(size=32),
         orientation="h", 
         yanchor="bottom", 
         y=1.02, 
         xanchor="center", 
-        x=0.5
+        x=0.5,
     )
 )
 
