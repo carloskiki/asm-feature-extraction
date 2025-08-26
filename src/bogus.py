@@ -22,7 +22,7 @@ class Bogus(context.Context):
         )
 
     def __call__(self):
-        dataset = LibDataset("lib-data", True, None, None, None, None, None)
+        dataset = LibDataset("data", True, None, None, None, None, None)
         fn_count = {}
         fn_length = {}
 
