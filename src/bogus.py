@@ -22,20 +22,9 @@ class Bogus(context.Context):
         )
 
     def __call__(self):
-        dataset = LibDataset("lib-data", True, None, None, None, None, None)
-        fn_count = {}
-        fn_length = {}
-
-        for (fn, file) in dataset:
-            if file.binary not in fn_count:
-                fn_count[file.binary] = 1
-                fn_length[file.binary] = [instruction_count(fn)]
-            else:
-                fn_count[file.binary] += 1
-                fn_length[file.binary].append(instruction_count(fn))
+        dataset = LibDataset("lib-data", True, None, None, "openssl", None, "gcc")
         
-        import code
-        code.interact(local=locals())
-
-def instruction_count(fn: Function) -> int:
-    return sum(len(block.instructions) for block in fn.blocks)
+        for (fn, _) in dataset:
+            if fn.name.lower() == "sha384_init":
+                print("*******")
+                print(fn)
