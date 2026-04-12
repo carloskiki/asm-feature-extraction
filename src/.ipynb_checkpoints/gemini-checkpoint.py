@@ -201,7 +201,6 @@ class GeminiRetrieval(Context):
         else:
             cache = None
 
-        function_names = []
         stored_queries = []
         query_outputs = []
         stored_targets = []
@@ -215,7 +214,6 @@ class GeminiRetrieval(Context):
             # Tokenize the prompts for the batch
             (queries, targets) = zip(*batch)
 
-            function_names.extend(q.name for q in queries)
             stored_queries.extend(str(q) for q in queries)
             query_outputs.extend(self.generate(queries, client, cache))
             stored_targets.extend(str(t) for t in targets)
@@ -225,7 +223,6 @@ class GeminiRetrieval(Context):
             time.sleep(max(0, interval - elapsed))
 
         archive = {
-            "function_names": function_names,
             "queries": stored_queries,
             "query_outputs": query_outputs,
             "targets": stored_targets,

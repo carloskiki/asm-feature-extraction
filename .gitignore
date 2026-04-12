@@ -1,3 +1,5 @@
 **/__pycache__/
 full-dataset.pickle
 .env
+/venv
+annotate.py

@@ -130,5 +130,5 @@ fig.update_layout(
     )
 )
 
-fig.update_layout(template="plotly_white", margin=dict(t=20))
+fig.update_layout(template="plotly_white" margin=dict(t=20))
 fig.write_image("examples-ablation.pdf", scale=2, width=1200, height=800)

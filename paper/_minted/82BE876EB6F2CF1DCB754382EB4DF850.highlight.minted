@@ -1,9 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{n+nl}{loc\PYGZus{}4241F0:}
-\PYG{+w}{    }\PYG{n+nf}{movdqa}\PYG{+w}{ }\PYG{n+nb}{xmm0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nb}{cs}\PYG{p}{:}\PYG{n+nv}{xmmword\PYGZus{}448750}
-\PYG{+w}{    }\PYG{n+nf}{mov}\PYG{+w}{ }\PYG{k+kt}{dword}\PYG{+w}{ }\PYG{n+nv}{ptr}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nb}{rdi}\PYG{o}{+}\PYG{l+m+mh}{50h}\PYG{p}{],}\PYG{+w}{ }\PYG{l+m+mi}{0}
-\PYG{+w}{    }\PYG{n+nf}{mov}\PYG{+w}{ }\PYG{k+kt}{dword}\PYG{+w}{ }\PYG{n+nv}{ptr}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nb}{rdi}\PYG{o}{+}\PYG{l+m+mh}{58h}\PYG{p}{],}\PYG{+w}{ }\PYG{l+m+mi}{0}
-\PYG{+w}{    }\PYG{n+nf}{movups}\PYG{+w}{ }\PYG{n+nv}{xmmword}\PYG{+w}{ }\PYG{n+nv}{ptr}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nb}{rdi}\PYG{p}{],}\PYG{+w}{ }\PYG{n+nb}{xmm0}
-\PYG{+w}{    }\PYG{n+nf}{mov}\PYG{+w}{ }\PYG{k+kt}{dword}\PYG{+w}{ }\PYG{n+nv}{ptr}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nb}{rdi}\PYG{o}{+}\PYG{l+m+mh}{54h}\PYG{p}{],}\PYG{+w}{ }\PYG{l+m+mi}{0}
-\PYG{+w}{    }\PYG{n+nf}{retn}
-\end{MintedVerbatim}

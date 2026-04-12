@@ -1,6 +1,24 @@
-# Data Schema
+# Interpretable feature extraction from assembly code
+
+All experiments and tools used for our research.
+
+## Modules
+- [`data`](./data/): The dataset used in our research.
+- [`metrics`](./metrics/): Retrieved results from our experiments.
+- [`graphs`](./graphs/): Graph generation code for the paper.
+- [`prompts`](./prompts/): Prompts along with provided examples used for the experiments.
+- [`src`](./src/): Source code for our experimentation tool and some of the reproductions of baselines.
+    All can be invoked through `main.py`.
+
+# Dataset Schema
+
+Each `merged.asm.json` file contains the disassembly output from IDA on the specified binary. the files are "merged"
+because they contain the body of the assembly functions stripped of debug symbols, while keeping the original function
+names for matching and debugging purposes.
 
 ## `bin` field
+
+This is of little utility for our purposes. It contains metadata about the binary:
 ```jsonc
 {
   "name": "D:\\data-bk\\optimization-cross-arch\\l-openssl-openssl\\openssl-gcc32-g-O0.bin.tmp\\openssl-gcc32-g-O0.bin",
@@ -25,14 +43,14 @@
   },
   "disassembled_at": "2021-04-09T22:44:15.361078",
   "functions_count": 9462,
-  "strings": [], // List of strings contained in the binary (presumably obtained by running `strings` on the binary)
+  "strings": [], // List of strings contained in the binary
   "seg": [], // The segments contained in the binary
   "sha256": "8d51289b5a4a59a57774c7522db700d76130c02d1929eddc638f77ec14f56dd0"
 }
 ```
 
 ## `blocks` field
-A list of blocks, where each block is:
+The list of basic blocks:
 ```jsonc
 {
   "addr_start": 134513128,
@@ -50,6 +68,7 @@ A list of blocks, where each block is:
 
 ### `ins` element
 
+A single instruction:
 ```jsonc
 {
   "ea": 134513132, // Effective Address
@@ -57,7 +76,7 @@ A list of blocks, where each block is:
   "oprs": [ // Operands
     "sub_8048820"
   ],
-  "oprs_tp": [ // Operands "tp"
+  "oprs_tp": [ // Operands type
     7
   ],
   "dr": [], // Data referenced addresses
@@ -68,6 +87,7 @@ A list of blocks, where each block is:
 ```
 
 ## `comments` field
+Added comments to the disassembly. Not useful for us.
 
 ```jsonc
 {
@@ -81,6 +101,7 @@ A list of blocks, where each block is:
 ```
 
 ## `functions` field
+The list of functions:
 
 ```jsonc
 {
@@ -90,34 +111,9 @@ A list of blocks, where each block is:
   "addr_end": 134954946,
   "calls": [],
   "tags": [],
-  "bbs_len": 15 // The number of blocks that this function contain
+  "bbs_len": 15 // The number of blocks that this function contains
 }
 ```
 
-It seems like the blocks are ordered by function e.g:
-```
-  ___f0___ _f1__ ___f2___
-[ b0 b1 b2 b3 b4 b5 b6 b7 ]
-```
-
 ## `functions_src` field
-
-Array of function sources, empty for our case
-
-## `.merged.asm.json` file
-
-The structure is the same as te `.asm.json` file. The function names are
-human readable and likely come from debug symbols.
-
-## `.unstrip.asm.json` file
-
-Same as `.asm.json`, but contains much more comments & contains function names.
-I suspect that the merged version is the merge between `unstrip` and the regular file, where
-the function name from the `unstrip` file is used for the dissassembled output of the regular
-file.
-
-
-# Misc
-
-Computer name: vsi-wpch-frame
-hotcrp: https://sec26cycle1.usenix.hotcrp.com/
+Array of function sources. Empty for our purposes.
