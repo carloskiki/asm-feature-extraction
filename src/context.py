@@ -1,6 +1,7 @@
 from pathlib import Path
 from functools import cached_property
 from dataclasses import dataclass
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from sentence_transformers import SentenceTransformer
 
@@ -89,10 +90,19 @@ class Context:
         """
         Return the model
         """
-        if accelerator:
-            device_map = {"": accelerator.process_index}
-        else:
-            device_map = "auto"
+        device_map = "auto"
+        if accelerator and torch.cuda.is_available():
+            local_rank = accelerator.local_process_index
+            visible_gpus = torch.cuda.device_count()
+            if local_rank >= visible_gpus:
+                raise RuntimeError(
+                    "Invalid local CUDA rank for this process. "
+                    f"local_rank={local_rank}, visible_gpus={visible_gpus}. "
+                    "Your accelerate launch is spawning more workers than visible GPUs. "
+                    "Reduce --num_processes or set CUDA_VISIBLE_DEVICES accordingly."
+                )
+            device_map = {"": local_rank}
+
         if self.model.startswith("qwen-emb"):
             return SentenceTransformer(
                 MODELS[self.model],
