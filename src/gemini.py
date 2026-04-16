@@ -11,7 +11,7 @@ from google.genai import types, errors
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from .context import Context
-from .parsing import platform_parser, optimization_parser
+from .parsing import platform_parser, optimization_parser, obfuscation_parser
 from .data_processing import BINARIES, PairsDataset
 from .metrics import (
     save_metrics,
@@ -61,6 +61,9 @@ class GeminiRetrieval(Context):
     optimization: Union[
         int, list[tuple[int, int]], None
     ]  # Run for a specific optimization, or run on all pairs, or run on all optimizations if None.
+    obfuscation: Union[
+        str, list[tuple[str, str]], None
+    ]  # Run for a specific obfuscation, or run on obfuscation pairs.
     batch_size: int  # Number of batches processed at once
     data_path: str  # Path containing the dataset
     request_per_minute: int  # Maximum number of requests per minute to run
@@ -84,6 +87,7 @@ class GeminiRetrieval(Context):
         parser.add_argument("--binary", type=str, choices=BINARIES.keys())
         parser.add_argument("--platform", type=platform_parser)
         parser.add_argument("--optimization", type=optimization_parser)
+        parser.add_argument("--obfuscation", type=obfuscation_parser)
         parser.add_argument("--save-metrics", action="store_true")
 
         action = parser.add_subparsers(dest="action")
@@ -103,16 +107,21 @@ class GeminiRetrieval(Context):
             platform = None if isinstance(self.platform, list) else self.platform
 
             for query_optimization, target_optimization in self.optimization:
+                obfuscation = (
+                    None if isinstance(self.obfuscation, list) else self.obfuscation
+                )
                 dataset = PairsDataset(
-                    self.data_path,
-                    True,
-                    self.pool_size,
-                    self.seed,
-                    self.binary,
-                    query_optimization,
-                    platform,
-                    target_optimization,
-                    None,
+                    path=self.data_path,
+                    main_process=True,
+                    pool_size=self.pool_size,
+                    seed=self.seed,
+                    binary=self.binary,
+                    optimization=query_optimization,
+                    platform=platform,
+                    optimization_diff=target_optimization,
+                    platform_diff=None,
+                    obfuscation=obfuscation,
+                    obfuscation_diff=None,
                 )
                 if self.action == "batch":
                     self.batch_send(dataset, client)
@@ -128,6 +137,10 @@ class GeminiRetrieval(Context):
                     "platform": "all"
                     if self.platform is None or isinstance(self.platform, list)
                     else self.platform,
+                    "obfuscation": "all"
+                    if self.obfuscation is None
+                    or isinstance(self.obfuscation, list)
+                    else self.obfuscation,
                     "pool-size": self.pool_size,
                     "examples": self.examples,
                     "prompt": self.prompt,
@@ -148,18 +161,23 @@ class GeminiRetrieval(Context):
             optimization = (
                 None if isinstance(self.optimization, list) else self.optimization
             )
+            obfuscation = (
+                None if isinstance(self.obfuscation, list) else self.obfuscation
+            )
 
             for query_platform, target_platform in self.platform:
                 dataset = PairsDataset(
-                    self.data_path,
-                    True,
-                    self.pool_size,
-                    self.seed,
-                    self.binary,
-                    optimization,
-                    query_platform,
-                    None,
-                    target_platform,
+                    path=self.data_path,
+                    main_process=True,
+                    pool_size=self.pool_size,
+                    seed=self.seed,
+                    binary=self.binary,
+                    optimization=optimization,
+                    platform=query_platform,
+                    optimization_diff=None,
+                    platform_diff=target_platform,
+                    obfuscation=obfuscation,
+                    obfuscation_diff=None,
                 )
                 if self.action == "batch":
                     self.batch_send(dataset, client)
@@ -173,6 +191,64 @@ class GeminiRetrieval(Context):
                     "optimization": self.platform,
                     "platform": query_platform,
                     "target-platform": target_platform,
+                    "obfuscation": "all"
+                    if self.obfuscation is None
+                    or isinstance(self.obfuscation, list)
+                    else self.obfuscation,
+                    "pool-size": self.pool_size,
+                    "examples": self.examples,
+                    "prompt": self.prompt,
+                    "model": "gemini-2.5-flash",
+                }
+                data = {
+                    "parameters": parameters,
+                    "results": raw_metrics,
+                }
+
+                metrics.append(data)
+                if self.save_metrics:
+                    save_metrics(metrics, date)
+
+                print(metrics[-1])
+
+        if isinstance(self.obfuscation, list):
+            platform = None if isinstance(self.platform, list) else self.platform
+            optimization = (
+                None if isinstance(self.optimization, list) else self.optimization
+            )
+
+            for query_obfuscation, target_obfuscation in self.obfuscation:
+                dataset = PairsDataset(
+                    path=self.data_path,
+                    main_process=True,
+                    pool_size=self.pool_size,
+                    seed=self.seed,
+                    binary=self.binary,
+                    optimization=optimization,
+                    platform=platform,
+                    optimization_diff=None,
+                    platform_diff=None,
+                    obfuscation=query_obfuscation,
+                    obfuscation_diff=target_obfuscation,
+                )
+
+                if self.action == "batch":
+                    self.batch_send(dataset, client)
+                    continue
+
+                scores = self.generate_scores(dataset, client)
+                raw_metrics = test_retrieval(scores)
+                parameters = {
+                    "binary": self.binary or "all",
+                    "obfuscation": query_obfuscation,
+                    "target-obfuscation": target_obfuscation,
+                    "platform": "all"
+                    if self.platform is None or isinstance(self.platform, list)
+                    else self.platform,
+                    "optimization": "all"
+                    if self.optimization is None
+                    or isinstance(self.optimization, list)
+                    else self.optimization,
                     "pool-size": self.pool_size,
                     "examples": self.examples,
                     "prompt": self.prompt,

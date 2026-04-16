@@ -31,3 +31,14 @@ def optimization_parser(s):
             "Expected an int or comma-separated int:int pairs"
         ) from e
 
+
+def obfuscation_parser(s):
+    # If input looks like query:target,query:target,...
+    if ":" in s:
+        try:
+            return [tuple(p.split(":", 1)) for p in s.split(",")]
+        except ValueError as e:
+            raise ArgumentTypeError("Malformed query:target pair.") from e
+
+    return s
+
