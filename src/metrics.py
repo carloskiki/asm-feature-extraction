@@ -1,6 +1,7 @@
 from typing import Optional
 from pathlib import Path
 import json
+import re
 from statistics import median, mean
 import numpy as np
 
@@ -140,21 +141,49 @@ def flatten_to_strings(obj, parent_key="", sep="."):
 
 def parse_json(s: str) -> Optional[object]:
     """
-    Parse the generated json, and 
+    Parse generated output and recover the first valid JSON value.
+
+    The model may wrap JSON in markdown code fences or include prose before
+    and after the JSON payload.
     """
 
-    s = s.strip()  # Remove surrounding whitespace
-    # _, _, s = s.partition("```json") # Remove up to and including the opening "```json"
-    # s = s.removesuffix("```")
-    # s = s.strip()  # Remove any remaining whitespace or newlines
+    text = s.strip()
+    decoder = json.JSONDecoder()
 
-    try:
-        parsed = json.loads(s)
+    def try_decode(candidate: str) -> Optional[object]:
+        candidate = candidate.strip()
+        if not candidate:
+            return None
+
+        try:
+            # Accept trailing text after a valid JSON payload.
+            parsed, _ = decoder.raw_decode(candidate)
+            return parsed
+        except json.JSONDecodeError:
+            return None
+
+    # 1) Fast path: pure JSON.
+    parsed = try_decode(text)
+    if parsed is not None:
         return parsed
-    except json.JSONDecodeError:
-        with open("invalid-json.txt", "a", encoding="utf-8") as file:
-            file.write("#####\n")
-            file.write(s)
-            file.write("\n")
 
-        return None
+    # 2) Prefer JSON found inside markdown code fences.
+    fence_pattern = re.compile(r"```(?:json)?\s*([\s\S]*?)```", re.IGNORECASE)
+    for match in fence_pattern.finditer(text):
+        parsed = try_decode(match.group(1))
+        if parsed is not None:
+            return parsed
+
+    # 3) Fallback: scan for embedded JSON object/array starts anywhere in text.
+    for i, ch in enumerate(text):
+        if ch in "[{":
+            parsed = try_decode(text[i:])
+            if parsed is not None:
+                return parsed
+
+    with open("invalid-json.txt", "a", encoding="utf-8") as file:
+        file.write("#####\n")
+        file.write(text)
+        file.write("\n")
+
+    return None
