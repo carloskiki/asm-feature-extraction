@@ -1,0 +1,821 @@
+#####
+```json
+{
+  "input_parameter_count": 5,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "SubroutineCall"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x40"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1000",
+    "0x3FE",
+    "0x40",
+    "0x3F",
+    "0xFFFFFFFFFFFFFFFF"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 6,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x40h"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "MemoryAccess",
+    "Arithmetic"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1000000000000000h",
+    "0xFFFFFFFFFFFFFFFEh",
+    "0x40h",
+    "0x3Fh",
+    "0xFFFFFFFFh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 5,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "SubroutineCall"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 6,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "MemoryAccess",
+    "Arithmetic"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 41,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "8"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x9EDDDF34",
+    "0x9EDDDF33",
+    "0x88FEF71D",
+    "0x6CAFACA8",
+    "0xA0FE9D38",
+    "0xA0FE9D39",
+    "0xF99263AC",
+    "0xFD9187CA",
+    "0x5DE4061",
+    "0xFD9187CB",
+    "0x6522F84",
+    "0x5DE4062",
+    "0x72E8CEC",
+    "0x1265C1FB",
+    "0x238F7080",
+    "0x1265C1FC",
+    "0x31FF854F",
+    "0x238F7081",
+    "0x3E19F95D",
+    "0x31FF8550",
+    "0x465DB128",
+    "0x3E19F95E",
+    "0x4BBA0249",
+    "0x465DB129",
+    "0x4E7EE5D6"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 24,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": [
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Void",
+  "dominant_operation_categories": [
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1E5B10"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+The provided assembly snippet does not complete at the end, which makes it challenging to fully analyze. Nevertheless, I will attempt to analyze what is given and provide a JSON output accordingly.
+
+Here’s a possible analysis based on the given assembly:
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "MemoryAccess"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x9EDDDF34",
+    "0x9EDDDF33",
+    "0x88FEF71D",
+    "0x6CAFACA8",
+    "0xA0FE9D38",
+    "0xF99263ACh",
+    "0xFD9187CAh",
+    "0x5DE4061h",
+    "0xFD9187CBh",
+    "0x6522F84h",
+    "0x5DE4062h",
+    "0x72E8CECh",
+    "0x1265C1FBh",
+    "0x238F7080h",
+    "0x1265C1FCh",
+    "0x31FF854Fh",
+    "0x238F7081h",
+    "0x3E19F95Dh",
+    "0x31FF8550h",
+    "0x465DB128h",
+    "0x3E19F95Eh",
+    "0x4BBA0249h",
+    "0x4E7EE5D6h"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 24,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations":
+#####
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": [
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Comparison",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0FFFFFFFFh",
+    "1",
+    "0FFFFFFFFFFFFFFFFh",
+    "8"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "SubroutineCall"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x150",
+    "0x20",
+    "0x8",
+    "0x1",
+    "0x2",
+    "0x38",
+    "0x40",
+    "0x70",
+    "0xF0",
+    "0x78",
+    "0x80"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 11,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": [
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Comparison",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1",
+    "0xFFFFFFFF"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "SubroutineCall",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x150",
+    "20h",
+    "0x8",
+    "0x7Fh",
+    "0x30",
+    "1"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 7,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Memory Management"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x6488BFE4",
+    "0x9C992875",
+    "0x81C4F720",
+    "0xAD98CBD1",
+    "0x9C992876",
+    "0x6A90A885",
+    "0x6488BFE3",
+    "0x56427ED3",
+    "0x0B3B70BE",
+    "0x58A0C35",
+    "0xFF5095D7",
+    "0xFA7D1D50",
+    "0xF2AB0672",
+    "0xE4B1F2D8",
+    "0xD6476DB0",
+    "0xBD90E894",
+    "0xAD98CBD2",
+    "0xB01A570D",
+    "0xB41C0FB8",
+    "0xBD90E895",
+    "0xB61A570E",
+    "0xB81C0FB9",
+    "0xBE90E896",
+    "0xC01C0FBA",
+    "0xC21C0FCB",
+    "0xC41C0FCC",
+    "0xC61C0FCD",
+    "0xC81C0FCE",
+    "0xCA1C0FCF",
+    "0xCC1C0FD0",
+    "0xCE1C0FD1",
+    "0xD01C0FD2",
+    "0xD21C0FD3",
+    "0xD41C0FD4",
+    "0xD6
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "38263465h",
+    "7F09767Ah",
+    "7EA4F93Dh",
+    "7D0A3935h",
+    "7A5B4E60h",
+    "7946D61Bh",
+    "77D1303Ah",
+    "76F8B38Bh",
+    "758EE6F8h",
+    "72F2723Eh",
+    "7234DEE1h",
+    "710CA881h",
+    "6F64DDE0h",
+    "80E3956Ah",
+    "80DD0A3Bh",
+    "8301B419h",
+    "80E3956Bh",
+    "832B58B4h",
+    "8301B41Ah",
+    "86A87387h",
+    "832B58B5h",
+    "8C60C3D1h",
+    "86A87388h",
+    "8E3C81ADh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 27,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Integer",
+    "Integer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x6488BFE4",
+    "0x9C992875",
+    "-0x40",
+    "0xD415A2B",
+    "0x5422D37A"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "Loop"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "40h",
+    "8",
+    "0FFFFFFFFFFFFFFFFh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```

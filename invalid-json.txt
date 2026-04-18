@@ -1,1219 +1,83 @@
 #####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
-
-#####
+```json
 {
-  "input_parameter_count": 2,
+  "input_parameter_count": 5,
   "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
     "Pointer",
     "Pointer"
   ],
-  "return_value_type": "Integer",
+  "return_value_type": "Pointer",
   "dominant_operation_categories": [
     "DataMovement",
-    "ConditionalBranching",
+    "Arithmetic",
     "SubroutineCall"
   ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x15A0",
-    "0x14",
-    "0xAFF18",
-    "0x15B4",
-    "0x1598",
-    "0xC",
-    "0x32",
-    "0x2000",
-    "0x22",
-    "0x27",
-    "0x5C",
-    "0x12",
-    "0x9C",
-    "0x61",
-    "0xC0000000",
-    "0x62",
-    "0x73",
-    "0x4A64",
-    "0x40000000",
-    "0x4",
-    "0x1544",
-    "0x152C",
-    "0x5E730",
-    "0xAFF20",
-    "0x17E8",
-    "0x5DFA4",
-    "0x4A40",
-    "0x4A48"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x40"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to parse or validate input based on character properties and specific string patterns. It initializes stack space, saves registers, and then enters a loop. Inside the loop, it uses `__ctype_b_loc` to determine character types, specifically looking for non-graphic characters. There are multiple conditional branches that suggest it's checking for delimiters or specific character sequences. It stores addresses or offsets in a stack-based array. After the main parsing loop, it performs comparisons against string literals ('a', 'b', 's') using `strncmp` and executes different branches based on the results. One branch includes a call to `__fprintf_chk`, indicating output operations. Another branch involves a call to `sub_5E730` which might be a custom string/data processing function. Error handling is indicated by multiple conditional jumps after checks and different execution paths.",
-  "inferred_category": "
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Integer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "DataMovement",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 12,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xEB8",
-    "0xE78",
-    "0x1",
-    "0x3",
-    "0x4",
-    "0x5",
-    "0x6",
-    "0x9",
-    "0x7",
-    "0x8",
-    "0xB",
-    "0xC",
-    "0xD",
-    "0x78D280",
-    "0x78D290",
-    "0x78D278",
-    "0xA",
-    "0xFFFF",
-    "0xEAC",
-    "0x50",
-    "0x2",
-    "0x1A",
-    "0xE48",
-    "0xE00",
-    "0x7",
-    "0x1F",
-    "0x40",
-    "0xE88",
-    "0x13"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 35,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to implement a complex protocol handler or state machine. It initializes several state variables and then enters a loop. Inside the loop, it dispatches based on the value of 'eax' to different handling branches, suggesting different message types or states. These branches perform data movements, make calls to various subroutines (likely parsing or processing functions), and update state variables. Some branches involve memory manipulation, string comparisons, and potential I/O operations (file descriptor operations like '_write', '_close', 'aProcSysNetIpv4' hints at network interaction). There's extensive use of global or static variables (e.g., 'cs:pmatch', 'cs:ptr', 'cs:buf.c_iflag', 'cs:buf.c_cc'). Error handling is present with checks for return values and conditional branching on test results. The routine has a structured approach with setup, a main processing loop (implied by backward jumps), and multiple exit points, including one for error conditions.",
-  "inferred_category": "Control Flow/Dispatch"
-#####
+```json
 {
   "input_parameter_count": 1,
   "input_parameter_types": [
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "SubroutineCall",
-    "DataMovement",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x111B78",
-    "0x48",
-    "0x50",
-    "0xC",
-    "0x111B90",
-    "0x5",
-    "0x9974",
-    "0xC",
-    "0x1233C0",
-    "0x1",
-    "0x1BA4",
-    "0x11",
-    "0xE0",
-    "0x368C",
-    "0xF",
-    "0xF3584",
-    "0x108C",
-    "0xD",
-    "0x10C4",
-    "0x10F4",
-    "0xF368C",
-    "0x11D0",
-    "0x1204",
-    "0x1238",
-    "0x9A20",
-    "0x9A50",
-    "0x13EC",
-    "0xF3694",
-    "0x8",
-    "0x4",
-    "0x9884",
-    "0x9D50",
-    "0x9D68",
-    "0x9D90",
-    "0x3",
-    "0x9DA0",
-    "0x9DEC",
-    "0x9E0C",
-    "0xEF210",
-    "0x9ED8",
-    "0xC9884",
-    "0x9DA4"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "Parses command-line arguments, retrieves localized strings (dcgettext), prints usage/error messages to standard output/error using printf and fputs_unlocked, potentially handles locale settings via setlocale, and compares strings with strcmp/strncmp. It includes a loop for processing arguments and branches based on string comparisons and locale setting success. The routine terminates the program
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Integer",
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 11,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x112430",
-    "0x8",
-    "0x1D1",
-    "0x818",
-    "0x810",
-    "0x7F8",
-    "0x1F1",
-    "0x10",
-    "0x56A",
-    "0x2DC",
-    "0xD9BDC",
-    "0x2",
-    "0x800",
-    "0x111B90",
-    "0x18",
-    "0x14",
-    "0xD",
-    "0x4C",
-    "0x20",
-    "0x5",
-    "0x9C38",
-    "0xD9BDE",
-    "0xD",
-    "0x804",
-    "0x808",
-    "0x34",
-    "0xA",
-    "0x9BC4",
-    "0x1B90",
-    "0x28E",
-    "0x9BD8",
-    "0x814",
-    "0x4240",
-    "0xF4000",
-    "0x240",
-    "0x9BE0",
-    "0x9BFC",
-    "0x9C18",
-    "0x112448",
-    "0xF210",
-    "0x9C5C"
-  ],
-  "presence_of_notable_floating_point_constants": [
-    1000000000.0,
-    0.0
-  ],
-  "count_of_distinct_immediate_values": 50,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be involved in logging or reporting, potentially for debugging or system monitoring. It reads various state values, performs comparisons, and conditionally calls several `snprintf_chk`, `fprintf_chk`, `dcgettext`, and `dcngettext` functions, suggesting it constructs
-#####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "SubroutineCall",
-    "DataMovement",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x111B78",
-    "0x48",
-    "0x50",
-    "0xC",
-    "0x111B90",
-    "0x5",
-    "0x9974",
-    "0xC",
-    "0x1233C0",
-    "0x1",
-    "0x1BA4",
-    "0x11",
-    "0xA0",
-    "0x3570",
-    "0xF",
-    "0xF3468",
-    "0x108C",
-    "0xD",
-    "0x10C4",
-    "0x10F4",
-    "0x11D0",
-    "0x1204",
-    "0x1238",
-    "0x9A20",
-    "0x9A50",
-    "0x13EC",
-    "0xF3578",
-    "0x8",
-    "0x987C",
-    "0x4",
-    "0x9D50",
-    "0x9D68",
-    "0x9D90",
-    "0x3",
-    "0x9DA0",
-    "0x9DEC",
-    "0x9E0C",
-    "0xEF210",
-    "0x9ED8",
-    "0xC987C",
-    "0x9DA4"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be an error or usage message display and locale handling function. It checks an input parameter (R0) for a zero value. If R0 is zero, it prints a detailed usage message, including several lines of text likely retrieved via `dcgettext` calls, formatted by `__printf_chk`, and written to a file handle using `fputs_unlocked`. It also performs block
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
     "Pointer"
   ],
   "return_value_type": "Integer",
   "dominant_operation_categories": [
     "DataMovement",
-    "SubroutineCall",
+    "Arithmetic",
     "ConditionalBranching"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xAA260",
-    "0x24",
-    "0x7AA4",
-    "0x5",
-    "0x48",
-    "0x2C",
-    "0x38",
-    "0xD46C",
-    "0x8",
-    "0x94440",
-    "0x4",
-    "0x448C",
-    "0x7",
-    "0x9",
-    "0x3",
-    "0x320",
-    "0x2",
-    "0xDF",
-    "0x2F",
-    "0x451C",
-    "0xBC",
-    "0x14",
-    "0x1515",
-    "0x94430",
-    "0x18",
-    "0x22744",
-    "0x4430",
-    "0x1517",
-    "0x1C",
-    "0x151E",
-    "0xFF",
-    "0x256E4",
-    "0x852C",
-    "0x1522",
-    "0x1523",
-    "0x23D",
-    "0xFC",
-    "0x10",
-    "0x1532",
-    "0x1533",
-    "0x153A",
-    "0x153B",
-    "0x28",
-    "0xA",
-    "0x30",
-    "0x10000",
-    "0xDC",
-    "0x151A",
-    "0x1B"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1000",
+    "0x3FE",
+    "0x40",
+    "0x3F",
+    "0xFFFFFFFFFFFFFFFF"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 51,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to parse and process a string or
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xAA260",
-    "0x304",
-    "0x328",
-    "0x2E4",
-    "0x2DC",
-    "0x2C",
-    "0x66",
-    "0x23A",
-    "0xD0",
-    "0x15C",
-    "0xFF",
-    "0x2D8",
-    "0x1",
-    "0x5",
-    "0xFFFFFFFF",
-    "0x1D"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 44,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to perform complex validation or processing based on several input parameters and internal state. It starts by setting up a stack frame and saving registers, then retrieves various values from memory using pointer arithmetic and constant offsets, suggesting access to a structured object or global configuration. It calls `strlen` on one of the inputs, indicating string manipulation or validation. Multiple conditional branches based on comparisons with constants and return values of subroutines (e.g., `sub_26338`, `sub_22180`, `sub_2B328`, `sub_36F4C`, `sub_37470`, `sub_44FDC`, `sub_370FC`) suggest a multi-stage decision-making process. The presence of `__stack_chk_fail` indicates stack canary protection. The routine checks various conditions and, depending on the outcome, makes further subroutine calls, often passing string literal addresses (e.g., `0x969D4`, `0x969F4`, `0x90ABC`, `0x68DC`, `0x68AC`, `0x96930`, `0x96968`, `0x9694C`, `0x6994`, `0x96A48`, `0x96A34`, `0x96A1C`, `
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 5,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xAA260",
-    "0xE4",
-    "0x108",
-    "0xE8",
-    "0xD4",
-    "0xD0",
-    "0x20",
-    "0xE4",
-    "0xEC",
-    "0x2C",
-    "0xE0",
-    "0x840C",
-    "0x8",
-    "0x9",
-    "0xCC",
-    "0x8324",
-    "0x2C9",
-    "0x98",
-    "0x75A4",
-    "0xBD",
-    "0x1",
-    "0x2",
-    "0xC",
-    "0x3768",
-    "0x18",
-    "0x98348",
-    "0x2F5",
-    "0x74",
-    "0x4",
-    "0x9843C",
-    "0xBC",
-    "0x30D",
-    "0x5C",
-    "0x22",
-    "0xA3",
-    "0x98340",
-    "0xF8",
-    "0xFC",
-    "0x100",
-    "0x108",
-    "0x104",
-    "0x344",
-    "0x14",
-    "0x984F0",
-    "0x34C",
-    "0x1C",
-    "0x98500",
-    "0x356"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 51,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 6,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "Complex data processing with multiple conditional branches and loops, likely involving string or buffer manipulation and external function calls for validation or further processing. Error handling paths are present after several subroutine calls
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 13,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xA260",
-    "0xA",
-    "0x4AC",
-    "0x4C",
-    "0x70",
-    "0x58",
-    "0x4C",
-    "0x48",
-    "0x38",
-    "0x2C",
-    "0x401C",
-    "0x4000",
-    "0xC",
-    "0x40",
-    "0x198",
-    "0x24E",
-    "0x92710",
-    "0xD7",
-    "0x11C",
-    "0x926C4",
-    "0x273C",
-    "0x9",
-    "0x1004",
-    "0x26C4",
-    "0xE9",
-    "0xF0",
-    "0x9914",
-    "0x5",
-    "0x990C",
-    "0xA0",
-    "0x23E",
-    "0x3A",
-    "0x9852C",
-    "0x92738",
-    "0x2744",
-    "0x2758",
-    "0x852C",
-    "0x926F0",
-    "0x9276C",
-    "0x44",
-    "0x27C",
-    "0x64",
-    "0x2A2C",
-    "0x68",
-    "0x6C",
-    "0x11E",
-    "0x11F",
-    "0x2778",
-    "0x3C28",
-    "0x4A00",
-    "0x40",
-    "0x4004",
-    "0x34",
-    "0x5C",
-    "0x870"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Pointer",
-    "Integer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 10,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x6B8",
-    "0x28",
-    "0xB8",
-    "0x40",
-    "0x98",
-    "0x94",
-    "0x54",
-    "0x4024",
-    "0x2",
-    "0x4",
-    "0x258",
-    "0x68",
-    "0x36A",
-    "0x70",
-    "0xA4",
-    "0x50",
-    "0x60",
-    "0xB0",
-    "0x48",
-    "0x88",
-    "0x1C8",
-    "0xD7",
-    "0x1",
-    "0xE9",
-    "0x178",
-    "0xE",
-    "0x9",
-    "0xD8",
-    "0x80",
-    "0x35A",
-    "0x3A",
-    "0x18",
-    "0x90",
-    "0x78",
-    "0x3B8",
-    "0xC8",
-    "0x11E",
-    "0x11F",
-    "0x4000",
-    "0x4010",
-    "0x51",
-    "0x4004",
-    "0x4018"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be involved in establishing and managing an HTTP/HTTPS connection, potentially through a proxy. It checks existing connection states, retrieves host and proxy information, and then attempts to connect using various parameters. Error handling is present at multiple stages of the connection process. It involves multiple sub-calls for network operations, string manipulation, and potentially logging or error reporting. There's a loop that seems to iterate through some internal data structure, possibly related to
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer",
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x2968",
-    "0x37",
-    "0xE4",
-    "0x118",
-    "0xF8",
-    "0xFC",
-    "0xF0",
-    "0x10C",
-    "0x3C",
-    "0x98",
-    "0x18",
-    "0x1C",
-    "0x108",
-    "0x114",
-    "0x2C0",
-    "0x2D0",
-    "0x248",
-    "0x14",
-    "0x8",
-    "0x20",
-    "0xEC",
-    "0xD8",
-    "0xB0",
-    "0xC8",
-    "0xC0",
-    "0xB8",
-    "0x2C",
-    "0x34",
-    "0xE8",
-    "0xA8",
-    "0x38",
-    "0x4",
-    "0x40",
-    "0xA0",
-    "0x44",
-    "0xD0",
-    "0x88",
-    "0x70",
-    "0x68",
-    "0x60",
-    "0x58",
-    "0x90",
-    "0x50",
-    "0x48",
-    "0x78",
-    "0x104",
-    "0xA7A",
-    "0xFFFFFFFF",
-    "0xC"
-  ],
-  "presence_of_notable_floating_point_constants": [
-    0.0,
-    65535.0
-  ],
-  "count_of_distinct_immediate_values": 44,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine performs a complex data processing operation involving multiple loops and conditional branches. It initializes several variables and structures, then enters a loop. Inside the loop, it performs calculations
-#####
+```json
 {
   "input_parameter_count": 3,
   "input_parameter_types": [
@@ -1221,254 +85,423 @@
     "Pointer",
     "Pointer"
   ],
-  "return_value_type": "None",
+  "return_value_type": "Integer",
   "dominant_operation_categories": [
     "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
+    "Arithmetic",
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x40h"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "DataProcessing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "MemoryAccess",
+    "Arithmetic"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0xF8",
-    "0x28",
-    "0x128",
-    "0x40",
-    "0x108",
-    "0xF8",
-    "0x98",
-    "0x20",
-    "0x120",
-    "0x28",
-    "0x340",
-    "0x4",
-    "0x298",
-    "0xE8",
-    "0xF4",
-    "0x30",
-    "0xE0",
-    "0x360",
-    "0x8",
-    "0x34",
-    "0xD0",
-    "0x18",
-    "0xC8",
-    "0x28",
-    "0xC0",
-    "0xB8",
-    "0x11",
-    "0x38",
-    "0x44",
-    "0xF0",
-    "0xB0",
-    "0x4",
-    "0xA8",
-    "0x54",
-    "0x58",
-    "0xD8",
-    "0x88",
-    "0x94",
-    "0x80",
-    "0x70",
-    "0x68",
-    "0x60",
-    "0x58",
-    "0x90",
-    "0x50",
-    "0x48",
-    "0x78",
-    "0x10",
-    "0x18",
-    "0xFFFF",
-    "0xFFFFFFFFFFFFFFFF",
-    "0x118",
-    "0x300",
-    "0x7346E0"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1000000000000000h",
+    "0xFFFFFFFFFFFFFFFEh",
+    "0x40h",
+    "0x3Fh",
+    "0xFFFFFFFFh"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 50,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to iterate through two data structures (likely arrays of objects/struct
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
+```json
 {
-  "input_parameter_count": 2,
+  "input_parameter_count": 5,
   "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
     "Pointer",
     "Pointer"
   ],
   "return_value_type": "Integer",
   "dominant_operation_categories": [
-    "FloatingPoint",
     "DataMovement",
+    "Arithmetic",
     "SubroutineCall"
   ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x1C",
-    "0x80",
-    "0x70",
-    "0x78",
-    "0x336C",
-    "0xADAB",
-    "0xABAC",
-    "0x3350",
-    "0x18",
-    "0x280",
-    "0x2D8",
-    "0x1C",
-    "0x74",
-    "0x6C",
-    "0x3",
-    "0x378",
-    "0x80",
-    "0x7C",
-    "0x2D0",
-    "0x2C0",
-    "0x2BC",
-    "0x8",
-    "0x20",
-    "0x2",
-    "0x40",
-    "0x14",
-    "0x28",
-    "0x30",
-    "0x38",
-    "0x4",
-    "0x6",
-    "0x10",
-    "0x44",
-    "0x58",
-    "0x34",
-    "0x48",
-    "0x2E0",
-    "0x2E8",
-    "0x340",
-    "0x2A58",
-    "0x34",
-    "0x43B8",
-    "0x89A",
-    "0x8000",
-    "0x5944",
-    "0x35",
-    "0x898",
-    "0x95C0",
-    "0x25",
-    "0x897"
-  ],
-  "presence_of_notable_floating_point_constants": [
-    3.0,
-    0.0,
-    0.0000152590219,
-    1.0,
-    2.32837749e-10
-  ],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
+```json
 {
-  "input_parameter_count": 4,
+  "input_parameter_count": 6,
   "input_parameter_types": [
     "Pointer",
     "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "MemoryAccess",
+    "Arithmetic"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 41,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "8"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x9EDDDF34",
+    "0x9EDDDF33",
+    "0x88FEF71D",
+    "0x6CAFACA8",
+    "0xA0FE9D38",
+    "0xA0FE9D39",
+    "0xF99263AC",
+    "0xFD9187CA",
+    "0x5DE4061",
+    "0xFD9187CB",
+    "0x6522F84",
+    "0x5DE4062",
+    "0x72E8CEC",
+    "0x1265C1FB",
+    "0x238F7080",
+    "0x1265C1FC",
+    "0x31FF854F",
+    "0x238F7081",
+    "0x3E19F95D",
+    "0x31FF8550",
+    "0x465DB128",
+    "0x3E19F95E",
+    "0x4BBA0249",
+    "0x465DB129",
+    "0x4E7EE5D6"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 24,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": [
+    "MemoryAccess"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 0,
+  "input_parameter_types": [],
+  "return_value_type": "Void",
+  "dominant_operation_categories": [
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1E5B10"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 1,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Utility/Helper"
+}
+```
+#####
+The provided assembly snippet does not complete at the end, which makes it challenging to fully analyze. Nevertheless, I will attempt to analyze what is given and provide a JSON output accordingly.
+
+Here’s a possible analysis based on the given assembly:
+
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "MemoryAccess"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x9EDDDF34",
+    "0x9EDDDF33",
+    "0x88FEF71D",
+    "0x6CAFACA8",
+    "0xA0FE9D38",
+    "0xF99263ACh",
+    "0xFD9187CAh",
+    "0x5DE4061h",
+    "0xFD9187CBh",
+    "0x6522F84h",
+    "0x5DE4062h",
+    "0x72E8CECh",
+    "0x1265C1FBh",
+    "0x238F7080h",
+    "0x1265C1FCh",
+    "0x31FF854Fh",
+    "0x238F7081h",
+    "0x3E19F95Dh",
+    "0x31FF8550h",
+    "0x465DB128h",
+    "0x3E19F95Eh",
+    "0x4BBA0249h",
+    "0x4E7EE5D6h"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 24,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations":
+#####
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": [
     "Pointer",
     "Integer"
   ],
   "return_value_type": "Integer",
   "dominant_operation_categories": [
     "DataMovement",
-    "SubroutineCall",
+    "Comparison",
     "ConditionalBranching"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 5,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x2968",
-    "0x37",
-    "0xDC",
-    "0x138",
-    "0xE0",
-    "0xD8",
-    "0xDC",
-    "0xD4",
-    "0xE8",
-    "0x64",
-    "0x336C",
-    "0xADAB",
-    "0xABAC",
-    "0x3350",
-    "0x390",
-    "0xABACADAB",
-    "0x10",
-    "0x7",
-    "0x4",
-    "0xE4",
-    "0xCC",
-    "0x2",
-    "0x14",
-    "0xF",
-    "0x84A2",
-    "0x3",
-    "0x20",
-    "0x1",
-    "0x18",
-    "0xF0",
-    "0x10C",
-    "0x10",
-    "0x8",
-    "0x98",
-    "0xFC",
-    "0xD0",
-    "0xF4",
-    "0xEC",
-    "0x104",
-    "0x40",
-    "0xC8",
-    "0x400"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0FFFFFFFFh",
+    "1",
+    "0FFFFFFFFFFFFFFFFh",
+    "8"
   ],
-  "presence_of_notable_floating_point_constants": [
-    -1.0,
-    1.0e-10
-  ],
-  "count_of_distinct_immediate_values": 45,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be involved in complex data processing, possibly iterating through a collection of objects or structures. It performs several checks on input pointers and their contents, including comparisons with 'magic numbers' which might indicate specific object types or states. It performs memory allocation (sub_26BA0, sub_26B8C) and deallocation (sub_27134), suggesting dynamic memory management. A significant portion
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
+```json
 {
-  "input_parameter_count": 2,
+  "input_parameter_count": 3,
   "input_parameter_types": [
+    "Pointer",
     "Pointer",
     "Pointer"
   ],
@@ -1479,952 +512,1075 @@
     "SubroutineCall"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 5,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x68",
-    "0x98",
-    "0x58",
-    "0xABABACADB",
-    "0x3450",
-    "0x3418",
-    "0x18",
-    "0x2E8",
-    "0x370",
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x150",
     "0x20",
-    "0x28",
-    "0x40",
-    "0x50",
-    "0x78",
-    "0x70",
-    "0x68",
-    "0x60",
-    "0x48",
-    "0x80",
-    "0x98",
-    "0x360",
-    "0x33C",
-    "0x40",
     "0x8",
-    "0x54",
-    "0x18",
-    "0x28",
-    "0x38",
-    "0x340",
-    "0x4",
-    "0x58",
-    "0x30",
-    "0x378",
-    "0x44",
-    "0x48",
-    "0x8000000000000000",
-    "0x3F8",
-    "0x83B44E",
-    "0x89A",
-    "0x8000"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to process image or signal data, likely performing a transformation or analysis. It involves extensive floating-point arithmetic, including conversions from integers to doubles, multiplications, subtractions, additions, divisions, and maximum operations, often on packed data types (suggesting SIMD usage). It iterates over data (loop indicators present) and accesses memory using indexed addressing modes, possibly iterating through pixel data or samples. The routine checks several conditions, including input validity, and seems to
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 9,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x1048",
-    "0x1078",
-    "0x40",
-    "0x28",
-    "0xABACADAB",
-    "0x1088",
-    "0x1030",
-    "0x1028",
-    "0x736049",
-    "0x1242",
-    "0x100000",
-    "0x1050",
-    "0x10",
-    "0x4",
-    "0x8",
-    "0x20",
-    "0x1018",
-    "0x1008",
-    "0x1010",
-    "0x105C",
-    "0x419670",
-    "0x73A241",
-    "0x7508FC",
     "0x1",
-    "0x1070",
-    "0x214",
-    "0x1252",
-    "0x136",
-    "0x1259",
-    "0x190",
-    "0x1292"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 41,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex image processing or manipulation function. It performs initial validation checks on an input structure (presumably an image object), using magic numbers `0xABACADAB` as integrity checks. It then proceeds to conditionally call various subroutines based on flags or values within the object, indicating different processing paths. There are multiple calls to `sub_6FC3C0` and `sub_6FC500` with string literals like \"NoimageOperato\", \"Clinoimageoper\", \"MagickwandOper\", suggesting logging or error reporting related to image operations. Multiple calls to `sub_419670` with
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Integer",
-    "Integer",
-    "Integer",
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "Bitwise",
-    "Arithmetic"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 0,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x124",
-    "0xBF8C",
-    "0x24",
-    "0x148",
-    "0xC0",
-    "0xFFFFFFFF",
-    "0xB4",
-    "0xC8",
+    "0x2",
+    "0x38",
     "0x40",
-    "0xAC",
-    "0xB8",
-    "0x2C",
-    "0x10",
-    "0xC",
-    "0x8",
-    "0x4",
-    "0xD0",
-    "0x3C",
-    "0x6C",
-    "0x118",
-    "0xE8",
-    "0xA8",
-    "0xA4",
-    "0xA0",
-    "0x9C",
-    "0x98",
-    "0x94",
-    "0x2C",
-    "0x28",
-    "0x24",
-    "0x20",
-    "0x1C",
-    "0x18",
-    "0x114",
-    "0x110",
-    "0x10C",
-    "0x108",
-    "0x104",
-    "0x100",
-    "0xFC",
-    "0xF8",
-    "0xF4",
-    "0xE4",
-    "0xE0",
+    "0x70",
     "0xF0",
     "0x78",
-    "0x74",
-    "0xEC",
-    "0x70",
-    "0xDC",
-    "0xD8",
-    "0x58",
-    "0x54",
-    "0x3C",
-    "0x68",
-    "0x44",
-    "0x138",
-    "0x144",
-    "0x128",
-    "0x140",
-    "0x4C",
-    "0x40",
-    "0x38",
-    "0x148",
-    "0x5C",
-    "0x48",
-    "0x34",
-    "0x64",
-    "0x60",
-    "0x30",
-    "0x12C",
-    "0x50",
-    "0x13C",
-    "0x124",
-    "0xD4",
-    "0x134",
-    "0x11C",
-    "0x
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer"
+    "0x80"
   ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 9,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x38",
-    "0x20",
-    "0x28",
-    "0x68",
-    "0x40",
-    "0x18",
-    "0x8",
-    "0x60",
-    "0x17",
-    "0x18",
-    "0xF",
-    "0x200000",
-    "0xAC",
-    "0xB8",
-    "0xB0",
-    "0xD",
-    "0x4",
-    "0x5A",
-    "0x48",
-    "0x4C",
-    "0xE",
-    "0x98",
-    "0x9"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 25,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 11,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a complex validation or processing function, potentially dealing with object or structure attributes. It performs initial checks on an input structure (rdi+20h, r13+18h). A significant part of the logic involves a loop that iterates over some data (rbp+8) and calls sub_4E6480, suggesting parsing or lookup. Several conditional branches lead to different processing paths, including further subroutine calls (e.g., sub_58BF70, sub_58E060, sub_4A7290, sub_4A77D0, sub_4A6820). It stores various values into offsets of the input structure (r12+0ACh, r12+0B8h, r12+0B0h). There are multiple error-handling paths and a final integrity check using fs:28h. The presence of numerous conditional jumps, multiple subroutine calls, and memory manipulations based on input values suggests a data-driven processing or validation logic. It interacts with an 'object' at r12 and its methods (qword ptr [r12+38h]) and attributes (r12+98h).",
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "Bitwise",
-    "Arithmetic"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 0,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x138",
-    "0x28",
-    "0x168",
-    "0xD0",
-    "0xD8",
-    "0x7",
-    "0x40",
-    "0xC8",
-    "0x8",
-    "0x10",
-    "0xB8",
-    "0x18",
-    "0xA8",
-    "0x20",
-    "0x98",
-    "0xE0",
-    "0x138",
-    "0xE8",
-    "0x130",
-    "0x4",
-    "0x12C",
-    "0x3C",
-    "0x128",
-    "0x38",
-    "0xC",
-    "0x124",
-    "0x34",
-    "0x120",
-    "0x30",
-    "0x11C",
-    "0x2C",
-    "0x118",
-    "0x28",
-    "0x114",
-    "0x24",
-    "0x110",
-    "0x20",
-    "0x10C",
-    "0x1C",
-    "0x108",
-    "0x18",
-    "0x104",
-    "0x14",
-    "0x100",
-    "0x10",
-    "0xFC",
-    "0xF8",
-    "0xF4",
-    "0x20",
-    "0x158",
-    "0x144",
-    "0x168",
-    "0x13C",
-    "0xF0",
-    "0x7",
-    "0x9",
-    "0xD",
-    "0xE",
-    "0x140"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 74,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": false,
-  "
-#####
+```json
 {
   "input_parameter_count": 2,
   "input_parameter_types": [
-    "Struct/Object",
-    "Pointer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "Bitwise",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 4,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x6190",
-    "0x124",
-    "0x5",
-    "0xC8",
-    "0xC0",
-    "0xCC",
-    "0x148",
-    "0x144",
-    "0x1D",
-    "0x6F",
-    "0xC4",
-    "0x3",
-    "0xF0",
-    "0x70",
-    "0x2C",
-    "0xD0",
-    "0x134",
-    "0x138",
-    "0x130",
-    "0x80",
-    "0x13C",
-    "0x40",
-    "0x45",
-    "0x8",
-    "0x44",
-    "0x39",
-    "0x38",
-    "0x10",
-    "0x3F",
-    "0x3E",
-    "0x3B",
-    "0x3A",
-    "0x4",
-    "0x12C",
-    "0x7F",
-    "0xA9",
-    "0xAC",
-    "0xA5",
-    "0xAA",
-    "0xA8",
-    "0xA6",
-    "0xA7",
-    "0xA1",
-    "0x9D",
-    "0xA4",
-    "0xAB",
-    "0xA3",
-    "0xA2",
-    "0xA0",
-    "0x9F",
-    "0x9E",
-    "0xC",
-    "0xB",
-    "0xF",
-    "0xA",
-    "0xD",
-    "0xE",
-    "0x13",
-    "0x17",
-    "0x11",
-    "0x12",
-    "0x14",
-    "0x15",
-    "0x16",
-    "0x18",
-    "0x1C",
-    "0x1F",
-    "0x19",
-    "0x1A",
-    "0x20",
-    "0x24",
-    "0x23",
-    "0x27",
-    "0x21",
-    "0x22",
-    "0x25",
-    "0x26",
-    "0x28",
-    "0x2C",
-    "0x2B",
-    "0x2F",
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Struct/Object",
     "Pointer",
     "Integer"
   ],
-  "return_value_type": "None",
+  "return_value_type": "Integer",
   "dominant_operation_categories": [
+    "Comparison",
     "DataMovement",
-    "MemoryAccess",
     "ConditionalBranching"
   ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x50",
-    "0x78",
-    "0x30",
-    "0x5C",
-    "0x58",
-    "0x54",
-    "0x3F",
-    "0x14",
-    "0x40",
-    "0x78",
-    "0x74",
-    "0x70",
-    "0x6C",
-    "0x68",
-    "0x64",
-    "0x60"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 44,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a core block processing function, likely part of a larger algorithm such as a cryptographic hash function or a data compression/checksumming routine. It takes a context structure, a data buffer, and a size as input. It updates internal state variables within the context structure, which includes managing an internal buffer (`[rdi+5Ch]`, `[rdi+58h]`, `[rdi+54h]`).\n\nThe function exhibits several key characteristics:\n1.  **Buffer Management:** It conditionally processes input data based on a current buffer size (`[rbx+54h]`) relative to a block size (0x3F or 0x40 bytes, indicated by constant comparisons). If the input data is small enough to fit the internal buffer, it appends it. If not, it processes full blocks.\n2.  **Byte Swapping:** A significant part of the routine involves loading 32-bit words from an input structure (offset `0x14` to `0x50`) and performing `BSWAP` (byte swap) operations before storing them onto the stack. This is a strong indicator of handling data in a specific endianness, common in cryptographic algorithms or network protocols where data representation needs to be canonicalized.\n3.  **Block Processing Loop:** The `loc_4364D0` loop, followed by a call to `sub_435CE0` (likely a
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "Bitwise",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 5,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x56190",
-    "0x8C",
-    "0xB0",
-    "0x2C",
-    "0x40",
-    "0x36",
-    "0x3",
-    "0x68",
-    "0x64",
-    "0x8",
-    "0xC",
-    "0x60",
-    "0x10",
-    "0x5C",
-    "0x14",
-    "0x58",
-    "0x18",
-    "0x54",
-    "0x1C",
-    "0x50",
-    "0x20",
-    "0xAE85",
-    "0x6A09",
-    "0xBB67",
-    "0xF372",
-    "0x3C6E",
-    "0xF53A",
-    "0xA54F",
-    "0x527F",
-    "0x510E",
-    "0x688C",
-    "0x9B05",
-    "0xD9AB",
-    "0x1F83",
-    "0xCD19",
-    "0x5BE0",
-    "0x6C",
-    "0x70",
-    "0x74",
-    "0x78",
-    "0x7C",
-    "0x80",
-    "0x84",
-    "0x88",
-    "0xCC",
-    "0xD4",
-    "0xD0",
-    "0xAC",
-    "0x30",
-    "0x24",
-    "0x28",
-    "0x2C",
-    "0x34",
-    "0x38",
-    "0x3C",
-    "0xA8",
-    "0xA4",
-    "0xA0",
-    "0x40",
-    "0x44",
-    "0x94",
-    "0x90",
-    "0x4C",
-    "0x50",
-    "0x54",
-    "0x7C",
-    "0x48",
-    "0x74",
-    "0x70",
-    "0x88",
-    "0x84",
-    "0x80",
-    "0x78",
-    "0x5C",
-    "0x194E4",
-    "0x4C"
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "Bitwise",
-    "SubroutineCall"
-  ],
   "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x98",
-    "0xA8",
-    "0x20",
-    "0x3636363636363636",
-    "0x68",
-    "0x58",
-    "0x48",
-    "0x40",
-    "0x38",
-    "0x30",
-    "0x10",
-    "0x6A09E667",
-    "0xBB67AE85",
-    "0x28",
-    "0x3C6EF372",
-    "0xA54FF53A",
-    "0x510E527F",
-    "0x9B05688C",
-    "0x1F83D9AB",
-    "0x1C",
-    "0x5BE0CD19",
-    "0x60",
-    "0x64",
-    "0x68",
-    "0x40",
-    "0x20",
-    "0x88",
-    "0x84",
-    "0x94",
-    "0x80",
-    "0x38",
-    "0x40",
-    "0x48",
-    "0x50",
-    "0x58",
-    "0xA8",
-    "0xA4",
-    "0xA0",
-    "0x9C",
-    "0x8C",
-    "0x90",
-    "0x7C",
-    "0x78",
-    "0x98",
-    "0x74",
-    "0x70",
-    "0x6C",
-    "0x5C5C5C5C5C5C5C5C",
-    "0x6C",
-    "0x70",
-    "0x74",
-    "0x78",
-    "0x7C",
-    "0x80",
-    "0x84",
-    "0x88",
-    "0xCC",
-    "0xD4",
-    "0xD0"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1",
+    "0xFFFFFFFF"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 50,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation":
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Pointer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 4,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x9",
-    "0x4",
-    "0x30",
-    "0x4C",
-    "0x10",
-    "0xC",
-    "0x8",
-    "0x14",
-    "0x20",
-    "0x1C",
-    "0x18",
-    "0x24",
-    "0x2C",
-    "0x28",
-    "0x34",
-    "0x40",
-    "0x3C",
-    "0x38",
-    "0x44",
-    "0x4D",
-    "0x54",
-    "0x39649",
-    "0xA",
-    "0xFF000000",
-    "0xFF"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 28,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be involved in managing or initializing a complex data structure (likely an object or context) based on an input pointer (R1). It checks various flags/fields within the structure (e.g., at offset 0x9, 0x4C, 0xC) and conditionally branches. A significant part of the routine involves writing multiple zero or one values to numerous offsets within a structure (0x10, 0xC, 0x8, 0x14, 0x20, etc.), suggesting a form of initialization or state reset. It also contains calls to subroutines (sub_2796C, sub_352F4, sub_278CC, sub_272E0) which might perform further setup or resource acquisition. There's a conditional allocation-like pattern (sub_352F4 with a size argument and return value stored). The routine exhibits error handling or specific state checking through multiple conditional branches based on loaded values. The loop-like behavior (loc_35826 jumping back to loc_357C0) further indicates state management or traversal. The use of bit
+  "inferred_category": "Data Processing/Transformation"
+}
+```
 #####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 2,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xC",
-    "0x74",
-    "0x98",
-    "0x64",
-    "0x48",
-    "0x10",
-    "0x4",
-    "0x78",
-    "0x70",
-    "0x8",
-    "0x30",
-    "0x2C",
-    "0x14",
-    "0x20",
-    "0x980",
-    "0x1F",
-    "0x80",
-    "0x6",
-    "0x1C",
-    "0x4",
-    "0x24",
-    "0x3C",
-    "0x30",
-    "0x21",
-    "0x9D",
-    "0x26",
-    "0x9E",
-    "0x77",
-    "0x12",
-    "0x28",
-    "0x400",
-    "0x30",
-    "0xFFFFFFFF",
-    "0x84",
-    "0x88",
-    "0x8C",
-    "0x90"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to iterate through a data structure, likely a list or array, performing conditional checks and calculations on its elements. It involves extensive memory access with various offsets and possibly an allocation or initialization of a new data structure (sub_352F4). There are multiple conditional branches and a loop (`loc_563C0` and `loc_564AA`) that process elements based on specific byte and word values. It seems to be processing some kind of object or structure based on its fields and updating several of them. Some constants and operations might hint at bit manipulation or flag checking. The presence of `MUL.W` and `ADD.W` with offsets suggests calculation of memory addresses within structured data. The routine appears to modify data pointed to by the input
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Struct/Object",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "Arithmetic"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 2,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x18",
-    "0x8",
-    "0x68",
-    "0x28",
-    "0x98",
-    "0x40",
-    "0x88",
-    "0x10",
-    "0x90",
-    "0x7",
-    "0x4",
-    "0x14",
-    "0x20",
-    "0x44",
-    "0x6",
-    "0x1C",
-    "0x30",
-    "0xF67F",
-    "0x60",
-    "0x68",
-    "0x70",
-    "0x78",
-    "0x80",
-    "0x10",
-    "0x3",
-    "0x2",
-    "0x9",
-    "0x378",
-    "0x40",
-    "0x24",
-    "0x9D",
-    "0x9E",
-    "0x77"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 25,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be involved in parsing or processing a complex data structure. It performs initial setup by saving registers, adjusting the stack, and loading several fields from the input `r15` (likely a struct/object) into local registers. It accesses a Thread Local Storage (TLS) value (fs:28h). The routine then enters a loop (`loc_453E18` to `loc_453E60`) that iterates through a memory region, comparing specific fields ([rax+1Ch], [rax+30h]) with values derived from the input structure ([rbp+44h]). It performs bitwise operations ([r8d, 0FFFFF67Fh]) and checks for specific conditions to continue or exit the loop, potentially counting matches. Another loop (`loc_453E6F` to `loc_45
-#####
+```json
 {
   "input_parameter_count": 4,
   "input_parameter_types": [
-    "Integer",
-    "Integer",
-    "Integer",
-    "Integer"
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
   ],
   "return_value_type": "None",
   "dominant_operation_categories": [
+    "Arithmetic",
     "DataMovement",
     "SubroutineCall",
     "ConditionalBranching"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 3,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x11FD64",
-    "0x1BC",
-    "0x11FD60",
-    "0xF740",
-    "0x11",
-    "0x1D0",
-    "0x1C8",
-    "0x1C4",
-    "0x20",
-    "0x1C",
-    "0x1C0",
-    "0x24",
-    "0x11F7D4",
-    "0x11F8C0",
-    "0xC",
-    "0x11F740",
-    "0x11F8A0",
-    "0x4",
-    "0x1CC",
-    "0x10",
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x150",
+    "20h",
     "0x8",
-    "0xFFFFFFFF",
-    "0x9C",
-    "0x2"
+    "0x7Fh",
+    "0x30",
+    "1"
   ],
-  "presence_of_notable_floating_point_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 7,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Memory Management"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x6488BFE4",
+    "0x9C992875",
+    "0x81C4F720",
+    "0xAD98CBD1",
+    "0x9C992876",
+    "0x6A90A885",
+    "0x6488BFE3",
+    "0x56427ED3",
+    "0x0B3B70BE",
+    "0x58A0C35",
+    "0xFF5095D7",
+    "0xFA7D1D50",
+    "0xF2AB0672",
+    "0xE4B1F2D8",
+    "0xD6476DB0",
+    "0xBD90E894",
+    "0xAD98CBD2",
+    "0xB01A570D",
+    "0xB41C0FB8",
+    "0xBD90E895",
+    "0xB61A570E",
+    "0xB81C0FB9",
+    "0xBE90E896",
+    "0xC01C0FBA",
+    "0xC21C0FCB",
+    "0xC41C0FCC",
+    "0xC61C0FCD",
+    "0xC81C0FCE",
+    "0xCA1C0FCF",
+    "0xCC1C0FD0",
+    "0xCE1C0FD1",
+    "0xD01C0FD2",
+    "0xD21C0FD3",
+    "0xD41C0FD4",
+    "0xD6
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "38263465h",
+    "7F09767Ah",
+    "7EA4F93Dh",
+    "7D0A3935h",
+    "7A5B4E60h",
+    "7946D61Bh",
+    "77D1303Ah",
+    "76F8B38Bh",
+    "758EE6F8h",
+    "72F2723Eh",
+    "7234DEE1h",
+    "710CA881h",
+    "6F64DDE0h",
+    "80E3956Ah",
+    "80DD0A3Bh",
+    "8301B419h",
+    "80E3956Bh",
+    "832B58B4h",
+    "8301B41Ah",
+    "86A87387h",
+    "832B58B5h",
+    "8C60C3D1h",
+    "86A87388h",
+    "8E3C81ADh"
+  ],
+  "notable_floating_point_constants": [],
   "count_of_distinct_immediate_values": 27,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a complex control flow mechanism, likely managing execution contexts or a form of exception handling. It uses `_setjmp` for non-local jumps, indicating a mechanism to save and restore program state. There are multiple global memory accesses and modifications, particularly around addresses 0x11FD60, 0x11FD64, 0x11F7D4, and 0x11F740. It manipulates counters and pointers in these global locations. Error handling is evident through conditional branches and calls to `__stack_chk_fail`. Memory is dynamically allocated and deallocated (via `free`), and there are block memory operations (using `STM`/`LDM`) and linear memory accesses. The loop structure is associated with memory deallocation (a common pattern for clearing a list of allocated blocks). The routine saves and restores a large stack frame, suggesting it preserves a significant amount of context. The routine initializes and manipulates a jump buffer, potentially to handle specific program events or errors by restoring a previous execution state.",
+  "inferred_category
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Integer",
+    "Integer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x6488BFE4",
+    "0x9C992875",
+    "-0x40",
+    "0xD415A2B",
+    "0x5422D37A"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 5,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "Loop"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "40h",
+    "8",
+    "0FFFFFFFFFFFFFFFFh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+It seems that the assembly code you have provided is quite long and complex, and there is only a partial snippet visible at the end. However, let's focus on extracting relevant features up until where we can see.
+
+### **Analysis and Extraction:**
+
+**I. Basic Signature & Data Flow**
+* **Number of Input Parameters**: 
+  * The parameters are stored in registers like `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9`. There appear to be a total of 3 parameters being stored across multiple registers.
+  
+* **Input Parameter Types**: 
+  * Since no specific types are mentioned explicitly, we will assume they could be pointers given typical calling conventions in x86-64 architecture where parameters are passed through registers like `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9`.
+
+* **Return Value Type**: 
+  * It appears that the function returns a register `eax`, which indicates it might be returning an integer type based on typical x86-64 conventions.
+
+**II. Core Logic & Operations**
+* **Dominant Operation Category**: 
+  * Arithmetic (specifically subtraction operations)
+  
+* **Loop Indicators**: 
+  * Not observed directly due to lack of full context
+  
+* **Number of Distinct Subroutine Call Targets**: 
+  * Based on how often `JMP $+5` is used, which likely points to subroutine call targets, we would estimate several potential targets, possibly more than 3.
+  
+* **Indexed Addressing Modes**: 
+  * No obvious indexed addressing modes evident from this snippet
+
+* **Jump Table Indicators**: 
+  * Potential since there are many repeated operations, which may be a jump table mechanism
+  
+* **SIMD Instructions**: 
+  * No observed use
+
+**III. Constants & "Magic Numbers"**
+* **Notable Integer Constants**: 
+  * Values such as `0x7F09767Ah`, `-0x7490`, and `0x38263465h`
+  
+* **Notable Floating Point Constants**: 
+  * None evident
+  
+* **Count of Distinct Immediate Values**: 
+  * Numerous different constants used
+  
+* **String Literal Presence**: 
+  * No explicit references
+
+**IV. Side Effects & Interactions**
+* **Modifies Input Parameters**: 
+  * Possible due to modifications to certain registers 
+  
+* **Mod
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "Loop"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0xFFFFFFFFFFFFFFFFh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "Looping"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "-0xA",
+    "0x1"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 5,
+  "input_parameter_types": [
+    "Pointer",
+    "Integer",
+    "Pointer",
+    "Integer",
+    "Pointer"
+  ],
+  "return_value_type": "None",
+  "dominant_operation_categories": [
+    "MemoryAccess",
+    "Arithmetic",
+    "SubroutineCall"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x8",
+    "0x8"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 5,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x80CD082B",
+    "0x734B7510",
+    "0x59A342EA",
+    "0x8E79FCD3",
+    "0x8E79FCD4",
+    "0x29A0262A",
+    "0x2184992F",
+    "0x112C60B0",
+    "0xA17C0635",
+    "0x9E7B44FF",
+    "0xACFAA2C4",
+    "0xA17C0636",
+    "0xE024F97E",
+    "0xACFAA2C5",
+    "0xE024F97F",
+    "0xEE438F18",
+    "0xEEA9BB82",
+    "0x112C60B1",
+    "0x21849930",
+    "0x29A0262B",
+    "0x59A342EB",
+    "0x734B7511"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 22,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 0,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 5,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Integer",
+    "Pointer"
+  ],
+  "return_value_type": "Pointer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "DataMovement",
+    "SubroutineCall",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0xFFFFFFFE"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": true,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 1,
+  "input_parameter_types": [
+    "Pointer"
+  ],
+  "return_value_type": "Unknown",
+  "dominant_operation_categories": [
+    "Bitwise",
+    "DataMovement",
+    "SubroutineCall"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": true,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0xA0",
+    "0x82B",
+    "0x734B7510",
+    "0x59A342EA",
+    "0x8E79FCD3",
+    "0x9E7B44FE",
+    "0x29A0262A",
+    "0x2184992F",
+    "0x112C60B0",
+    "0x0A17C0635",
+    "0x0ACFAA2C4",
+    "0x0ACFAA2C5",
+    "0x0E024F97E",
+    "0x0E024F97F",
+    "0x0EE438F18",
+    "0x0EEA9BB82",
+    "0x112C60B1",
+    "0x21849930",
+    "0x29A0262B",
+    "0x59A342EB",
+    "0x734B7511"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 27,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "SubroutineCall",
+    "Arithmetic"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 4,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x10F0",
+    "0x80",
+    "0x70",
+    "0x60",
+    "0x8",
+    "0x78",
+    "0x90",
+    "0x88",
+    "0x2",
+    "0x94",
+    "0xA8",
+    "0xB8",
+    "0x3F",
+    "0x1D",
+    "0x1",
+    "0x40",
+    "0x30",
+    "0x48",
+    "0xD0",
+    "0xA0",
+    "0xC8",
+    "0xD8"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 28,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": false,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "SubroutineCall"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x70",
+    "0x8",
+    "0x3",
+    "0x10"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 4,
+  "string_literal_presence": false,
+  "modifies_input_parameters": true,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": true,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Integer",
+    "Integer"
+  ],
+  "return_value_type": "Boolean",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "MemoryAccess"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 2,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0F0h",
+    "1Dh"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 3,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 4,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "70h",
+    "-2h"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 2,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false,
+  "linear_memory_accesses": true,
+  "error_handling": false,
+  "number_of_software_interrupts_system_calls": 0,
+  "inferred_category": "Data Processing/Transformation"
+}
+```
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x260",
+    "0x85465FF7",
+    "0x274CCDEC",
+    "0x7DF07E1B",
+    "0x7C387138",
+    "0x7AE4476F",
+    "0x77333A02",
+    "0x5F82DADA",
+    "0x5E7D2486",
+    "0x58B083C0",
+    "0x433209E3",
+    "0x3FC00593",
+    "0x3579CABF",
+    "0x2E803BE8",
+    "0x2C97169D",
+    "0x274CCDEB",
+    "0x23BDEF61",
+    "0x86190C18",
+    "0x85465FF8",
+    "0x880616D8",
+    "0x86190C19",
+    "0x8F1AD31B",
+    "0x880616D9",
+    "0x90EFFE89",
+    "0x8F1AD31C",
+    "0x9781BB76"
+  ],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 31,
+  "string_literal_presence": false,
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
+  "block_memory_operations": false
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "ConditionalBranching",
+    "DataMovement"
+  ],
+  "loop_indicators": false,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x152A2C21",
+    "0x7AE3332A",
+    "0x6C8FC787",
+    "0x653F4792",
+    "0x3C045C4A",
+    "0x1B8DB39B",
+    "0x152A2C20",
+    "0xDA2CACCD",
+    "0xDC1CBAEE",
+    "0xD618884F",
+    "0x887E33CD",
+    "0x8A539003",
+    "0xC2B4FF9F",
+    "0xD6188850",
+    "0xDC1CBAEF",
+    "0xDA2CACE",
+    "0x887E33CE",
+    "0x8A539002",
+    "0xC2B4FF9E",
+    "0x0C2B4FF9F",
+    "0xD6188850",
+    "0xDC1CBAEF",
+    "0xDA2CACE",
+    "0x887E33CE",
+    "0x8A539002",
+    "0xC2B4FF9E",
+    "0x0C2B4FF9F",
+    "0xD6188850",
+    "0xDC1CBAEF",
+    "0xDA2CACE",
+    "0x887E33CE",
+    "0x8A539002",
+    "0xC2B4FF9E",
+    "0x0C2B4FF9F",
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Arithmetic",
+    "Conditionals",
+    "DataMovement"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x57490",
+    "0x260",
+    "0x18",
+    "0x20",
+    "0x28",
+    "0x0",
+    "0x1",
+    "0x274CCDECh",
+    "0x85465FF7",
+    "0x80A5FDF4",
+    "0x7DF07E1B",
+    "0x7C387138",
+    "0x7AE4476F",
+    "0x77333A02",
+    "0x5F82DAD Ah",
+    "0x5E7D2486",
+    "0x58B083C0",
+    "0x433209E3",
+    "0x3FC00593",
+    "0x3579CABF",
+    "0x2E803BE8",
+    "0x2C97169D",
+    "0x274CCDEB",
+    "0x23BDEF61",
+    "0x86190C18",
+    "0x27465FF8",
+    "0x23BC7768",
+    "0x86190C19",
+    "0x8F1AD31B",
+    "0x23B67790",
+    "0x8F1AD31C",
+    "0x90EFFE89",
+    "0x23B81BB7",
+    "0x9781BB76"
+  ],
+  "notable_floating_point
+#####
+```json
+{
+  "input_parameter_count": 3,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer",
+    "Integer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "Bitwise",
+    "DataMovement",
+    "ConditionalBranching"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x1AE596",
+    "0x7AC870",
+    "0x29",
+    "-0x7490",
+    "0x1031",
+    "0x30",
+    "0x14",
+    "0x10",
+    "0x30",
+    "0x2C",
+    "0x28",
+    "0x4",
+    "0xC",
+    "0x8",
+    "0x6C8FC787",
+    "0x653F4792",
+    "0x3C045C4A",
+    "0x1B8DB39B",
+    "0x152A2C20",
+    "0x0DA2CACD",
+    "0x0DC1CBAE",
+    "0x0D618884",
+    "0x887E33CD",
+    "0x8A539003",
+    "0x0C2B4FF9F",
+    "0xD6188850",
+    "0xDC1CBAEF",
+    "0xDA2CACE",
+    "0x0D6188850",
+    "0xDC1CBAE",
+    "0xDA2CACEh",
+    "0x152A2C21",
+    "0x1B8DB39C",
+    "0x3C045C4B",
+    "0x653F4793",
+    "0x6C8FC788",
+    "0x7AE3332B",
+    "0x00"
+  ],
+  "not
 #####
 ```json
 {
@@ -2435,794 +1591,113 @@
   ],
   "return_value_type": "Integer",
   "dominant_operation_categories": [
-    "SubroutineCall",
-    "ConditionalBranching",
-    "DataMovement"
+    "DataMovement",
+    "Arithmetic",
+    "ConditionalBranching"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 4,
+  "number_of_distinct_subroutine_call_targets": 1,
   "indexed_addressing_modes": false,
   "jump_table_indicators": false,
   "simd_instructions": false,
   "notable_integer_constants": [
-    "0xFD3C",
-    "0x11",
-    "0xF6C0C",
-    "0x32",
+    "0x40",
+    "0x8",
     "0x10",
-    "0x4E20",
-    "0xE2DC",
-    "0x10"
+    "0x18",
+    "0x20",
+    "0x28",
+    "0x30",
+    "0x34",
+    "0x38",
+    "0x3C",
+    "0x40",
+    "0x44",
+    "0x48",
+    "0x4C",
+    "0x50",
+    "0x54",
+    "0x58",
+    "0x5C",
+    "0x60",
+    "0x64",
+    "0x68",
+    "0x6C",
+    "0x70",
+    "0x74",
+    "0x78",
+    "0x7C",
+    "0x80",
+    "0x84",
+    "0x88",
+    "0x8C",
+    "0x90",
+    "0x94",
+    "0x98",
+    "0x9C",
+    "0xA0",
+    "0xA4",
+    "0xA8",
+    "0xAC",
+    "0xB0",
+    "0xB4",
+    "0xB8",
+    "0xBC",
+    "0xC0",
+    "0xC4",
+    "0xC8",
+    "0xCC",
+    "0xD0",
+    "0xD4",
+    "0xD8",
+    "0xDC",
+    "0xE0",
+    "0xE4",
+    "0xE8",
+    "0xEC",
+    "0xF0",
+    "0xF4",
+    "0xF8",
+    "0xFC"
   ],
   "notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 10,
+  "count_of_dist
+#####
+```json
+{
+  "input_parameter_count": 2,
+  "input_parameter_types": [
+    "Pointer",
+    "Pointer"
+  ],
+  "return_value_type": "Integer",
+  "dominant_operation_categories": [
+    "DataMovement",
+    "Comparison",
+    "Addition"
+  ],
+  "loop_indicators": true,
+  "number_of_distinct_subroutine_call_targets": 1,
+  "indexed_addressing_modes": true,
+  "jump_table_indicators": false,
+  "simd_instructions": false,
+  "notable_integer_constants": [],
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 12,
   "string_literal_presence": false,
   "modifies_input_parameters": true,
   "modifies_global_state": false,
   "memory_allocation_deallocation": false,
-  "io_operations": true,
-  "block_memory_operations": false,
+  "io_operations": false,
+  "block_memory_operations": true,
   "linear_memory_accesses": true,
-  "error_handling": true,
+  "error_handling": false,
   "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a retry mechanism for opening a file or resource, potentially with a dynamic delay. It takes two pointer inputs, likely a path/identifier and perhaps flags or a buffer. It attempts to open a resource (via `__open64_2`) repeatedly if the initial attempt fails or returns a specific error code (0x10). A counter (`R4`) decrements, and between retries, it calls `usleep` for a delay. There's also a path where it checks a global/static flag (`R9`) and potentially processes it using `strlen` if the initial condition (`R6` being zero) is met, suggesting an alternative branch for error handling or configuration setup related to a path/string.",
-  "inferred_category": "System/OS Interaction"
+  "inferred_category": "Data Processing/Transformation"
 }
 ```
 #####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "SubroutineCall",
-    "DataMovement",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x111B78",
-    "0x48",
-    "0x50",
-    "0xC",
-    "0x111B90",
-    "0x5",
-    "0x9974",
-    "0xC",
-    "0x1233C0",
-    "0x1",
-    "0x1BA4",
-    "0x11",
-    "0xE5134",
-    "0x4C",
-    "0x50",
-    "0x547C",
-    "0xE",
-    "0xA4E4",
-    "0x5680",
-    "0x5840",
-    "0x5A38",
-    "0x9A20",
-    "0x9A50",
-    "0x5DC0",
-    "0xD",
-    "0x5EA0",
-    "0x5B74",
-    "0xCF880",
-    "0x8",
-    "0xC4E0",
-    "0x9D50",
-    "0x9D68",
-    "0x9D90",
-    "0x9DA0",
-    "0x3",
-    "0x9DEC",
-    "0x9E0C",
-    "0xEF210",
-    "0x9ED8",
-    "0xDC4E0",
-    "0x9DA4"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 51,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be an error handling or usage information display function. It checks an input parameter (R0) and if it's non-zero, it prints an error message to stderr (via __fprintf_chk and dcgettext) and then exits. If the input is zero, it proceeds to print extensive usage information, likely to stdout (via __printf_chk and fputs
-#####
-{
-  "input_parameter_count": 0,
-  "input_parameter_types": [],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x112300",
-    "0x1FFF",
-    "0xC",
-    "0x1123AC",
-    "0x2000",
-    "0x1800",
-    "0x7F8",
-    "0x7",
-    "0x1FE0",
-    "0x30",
-    "0xB0",
-    "0x1",
-    "0x24",
-    "0x10",
-    "0x8",
-    "0x20",
-    "0x18",
-    "0x4",
-    "0x28",
-    "0x1C",
-    "0x1123BC",
-    "0xA",
-    "0x290",
-    "0x28C",
-    "0x50",
-    "0x1123C0",
-    "0x1123B8",
-    "0x2C"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 30,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to manage a data structure, possibly a linked list or an array of structures. It initializes several memory locations, potentially setting up pointers or counters. There's a primary loop ('loc_352BA' to 'loc_352E0' and related jumps) that processes data based on some conditions and likely involves searching for a specific byte value ('0xA') within a block of memory using `memchr`. Based on the search result, it allocates new memory blocks ('sub_BEEE0'), manipulates pointers within the data structure, and updates counters. Error handling is indicated by multiple conditional branches leading to different execution paths. It also interacts with global state (`dword_1123AC`, `byte_1123BC`, `dword_1123C0`, `dword_1123B8`). The `memcpy` call suggests block memory operations, and repeated additions to memory addresses in a loop suggest linear memory accesses. The routine also performs memory deallocation (`free`).",
-  "inferred
-#####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x1FFF",
-    "0x18",
-    "0x743DB0",
-    "0x1800",
-    "0x800",
-    "0x2000",
-    "0x48",
-    "0x28",
-    "0x743DA8",
-    "0x38",
-    "0x30",
-    "0x20",
-    "0x8",
-    "0x40",
-    "0x18",
-    "0x10",
-    "0x743D98",
-    "0xA",
-    "0x50",
-    "0x520",
-    "0x518",
-    "0x42C79B",
-    "0x743DC0"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 24,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to manage a memory pool or a list of memory blocks. It initializes or retrieves a global size limit (0x1FFFh), performs memory allocations (sub_4DCC10) for structures of size 0x48 and 0x520 bytes. It iterates through allocated memory, possibly searching for a specific byte (0xA) using _memchr. It manipulates pointers within these structures (offsets like 0x8, 0x10, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x518) and updates global state (cs:qword_743DA8, cs:byte_743D98, cs:qword_743DB0, cs:qword_743DC0). It also includes logic for freeing memory blocks (_free) under certain conditions. The presence of conditions like 'CMP rax, 1FFFh', 'CMP r13, 1FFFh', 'CMP rdx, 50h', and
-#####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Integer"
-  ],
-  "return_value_type": "None",
-  "dominant_operation_categories": [
-    "SubroutineCall",
-    "DataMovement",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x111B78",
-    "0x40",
-    "0x48",
-    "0xC",
-    "0x111B90",
-    "0x5",
-    "0x9974",
-    "0xC",
-    "0x1233C0",
-    "0x1",
-    "0x1BA4",
-    "0x11",
-    "0xA024",
-    "0xA058",
-    "0xA0A0",
-    "0xA0E8",
-    "0xE933C",
-    "0x4",
-    "0xC9F1C",
-    "0x9A20",
-    "0x9A50",
-    "0xA128",
-    "0x8",
-    "0x9748",
-    "0x9D50",
-    "0x9D68",
-    "0x9D90",
-    "0x3",
-    "0x9DA0",
-    "0x9DEC",
-    "0x9E0C",
-    "0xEF210",
-    "0x9ED8",
-    "0xC9748",
-    "0x9DA4"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be an error or help message display and locale setup handler. It first checks an input parameter (R0) to determine if it's an error condition (R0 != 0) or a request for help/usage information (R0 == 0). If it's an error, it prints an error message using `__fprintf_chk` and then calls `exit`. If R0 is zero, it proceeds to print extensive usage and option information, likely retrieving localized strings via `dcgettext`. It also performs locale-related operations using `setlocale` and checks environment variables or configuration using `strcmp` and `strncmp
-#####
-{
-  "input_parameter_count": 5,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer",
-    "Integer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "Arithmetic"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0xFE0",
-    "0xFD8",
-    "0xFA0",
-    "0x320",
-    "0x9",
-    "0x2A4",
-    "0xFC0",
-    "0xFC4",
-    "0x97B64",
-    "0xFBC",
-    "0x25",
-    "0x1",
-    "0xFB4",
-    "0x34",
-    "0x334E",
-    "0xA",
-    "0x2A",
-    "0x145",
-    "0x1F",
-    "0x18",
-    "0xDA0",
-    "0x4",
-    "0x4000",
-    "0x2",
-    "0x8",
-    "0x10",
-    "0x10000",
-    "0xC",
-    "0x31",
-    "0x6",
-    "0x22",
-    "0x8000",
-    "0xFFFFFFFF",
-    "0x2000",
-    "0x198",
-    "0x19C",
-    "0x194",
-    "0x190",
-    "0x18C",
-    "0x188",
-    "0x184",
-    "0x180",
-    "0x339C",
-    "0x33C2",
-    "0x2",
-    "0x2D",
-    "0x2B",
-    "0x20",
-    "0x23",
-    "0x144",
-    "0x10"
-  ],
-  "presence_of_notable_floating_point_constants": [
-    10.0
-  ],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm":
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Integer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 4,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": true,
-  "presence_of_notable_integer_constants": [
-    "0x15F8",
-    "0x15E8",
-    "0x1A8",
-    "0x15F0",
-    "0x15D8",
-    "0x188",
-    "0x15D0",
-    "0x15E0",
-    "0x44",
-    "0x15B8",
-    "0x25",
-    "0xFFFFFFFF",
-    "0x1",
-    "0x15C8",
-    "0x40",
-    "0x28",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0x15F8",
-    "0
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Struct/Object",
-    "Struct/Object"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x6A0",
-    "0xA8",
-    "0x40",
-    "0x80",
-    "0x78",
-    "0xFFFFFFFF",
-    "0xC0",
-    "0x88",
-    "0x1B4",
-    "0x15",
-    "0x2A",
-    "0x50B0",
-    "0x4",
-    "0x369",
-    "0x4A",
-    "0x6C",
-    "0x64",
-    "0xA8",
-    "0x90",
-    "0x68",
-    "0x48",
-    "0x1A8",
-    "0x3B0",
-    "0x51",
-    "0xE0",
-    "0xE8",
-    "0x140",
-    "0x398",
-    "0x68",
-    "0x120",
-    "0x80",
-    "0x30",
-    "0x748",
-    "0x1A0",
-    "0x1D0",
-    "0x1B8",
-    "0xC88",
-    "0x1D8",
-    "0x188",
-    "0x1E8",
-    "0x218",
-    "0x40003",
-    "0x4000",
-    "0x78C",
-    "0x56A",
-    "0x4D10"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 51,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a complex data processing or state management function, likely part of a larger object or system. It performs multiple checks on flags and values within input structures (r15 and r14), leading to different execution paths. There are numerous memory accesses,
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "DataMovement",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x2A",
-    "0x3F",
-    "0x5C",
-    "0x5B",
-    "0x1",
-    "0x11",
-    "0x5D",
-    "0x2D",
-    "0x1C",
-    "0x2",
-    "0x144",
-    "0x140",
-    "0x8",
-    "0x98D0",
-    "0x9",
-    "0x98E0",
-    "0x98D8",
-    "0x98F0",
-    "0x98E8",
-    "0x12C",
-    "0x130",
-    "0x998F8",
-    "0x128",
-    "0x4",
-    "0x134",
-    "0x138",
-    "0x144",
-    "0x119",
-    "0x16",
-    "0x17",
-    "0x8"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a character or string matching function, possibly a wildcard matcher or a regular expression component. It iterates through characters, comparing them against various control characters ('*', '?', '\\', '[', ']') and performing different actions based on matches. It uses a jump table for dispatching control flow based on an index (likely an internal state or character type). The calls to `__ctype_b_loc` suggest character property checks (e.g., is_alpha, is_digit). It appears to be processing two input strings/buffers (R5 and R9 seem to be pointers to these). There's extensive conditional logic and branching, including recursive calls (implied by `BL sub_5666C` and subsequent checks). The routine has complex state management indicated by numerous local stack variables and registers being used to hold intermediate states and character values. It seems to
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "DataMovement",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 2,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x2A",
-    "0x3F",
-    "0x5C",
-    "0x5B",
-    "0x40",
-    "0x5D",
-    "0x178",
-    "0x172",
-    "0x171",
-    "0x173",
-    "0x4",
-    "0x4AFB58",
-    "0x158",
-    "0x2",
-    "0x148",
-    "0x21",
-    "0x5E",
-    "0x200",
-    "0x800",
-    "0x100"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 24,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to implement a pattern matching or string comparison algorithm, potentially for wildcard matching (like glob patterns) or regular expressions. It heavily relies on character-by-character comparison, conditional branching based on specific 'magic' characters (0x2A='*', 0x3F='?', 0x5C='\\', 0x5B='[', 0x5D=']', 0x2D='-'), and character type checks (via ___ctype_b_loc). The presence of a jump table (`jpt_469D7E`) further suggests complex state transitions typical of parsing or pattern matching. It iteratively processes an input string (referenced by `rbx`) against a pattern string (referenced by `r13`), maintaining state in stack variables. It handles character escaping (0x5C '\\'), character sets/ranges (0x5B '[' and 0x5D ']'). The routine also checks for special conditions (like 0x2A '*' followed by another '*', or 0x3F '?'). Error handling is suggested by various branches leading to `loc_469D19` which then branches to `loc_46A6AE` if a stack canary check fails, or to cleanup and return. The nested structure with a jump table suggests a sophisticated
-#####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x372968",
-    "0xC",
-    "0x20",
-    "0x1C",
-    "0x336C",
-    "0xADAB",
-    "0xABAC",
-    "0x3348",
-    "0x20",
-    "0x38",
-    "0xAC",
-    "0x10",
-    "0x18",
-    "0xB0",
-    "0x1F",
-    "0x378",
-    "0x1F4C",
-    "0x1F84",
-    "0x33",
-    "0x1094",
-    "0x1F60",
-    "0x1093",
-    "0x5944",
-    "0x35",
-    "0xFC9",
-    "0x95C0",
-    "0x25",
-    "0xFC8"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 29,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a read function, possibly from a stream or blob, performing various checks and conditional logic based on a value read from a specific memory offset (0x38) within a structure pointed to by an input. It uses several `_IO_getc` calls, suggesting character-by-character input. It includes extensive error handling with `__assert_fail` calls, using multiple string literals (e.g., \"aReadblobstream\", \"aReadblobmsbsho\") as part of assertion messages. The routine also involves stack protection (`__stack_chk_fail`) and manipulations of input data. The logic flow suggests processing different data types or states based on the value at offset 0x38, handling cases like 0, 7, 3, 8, and other values, potentially performing bit shifts and memory updates. There's also a comparison with a magic value `0xABAC336C` that might indicate a specific data format or header
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Integer",
-    "Pointer",
-    "Integer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "DataMovement",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x34",
-    "0x58",
-    "0x34",
-    "0x40000000",
-    "0x2C",
-    "0x1048",
-    "0xADAB",
-    "0xABAC",
-    "0x1018",
-    "0x1038",
-    "0x1040",
-    "0x44",
-    "0x34DBEC",
-    "0x103C",
-    "0x34DBFC",
-    "0x1028",
-    "0x10",
-    "0x9",
-    "0x83C8",
-    "0xC",
-    "0x48",
-    "0x576C",
-    "0x38",
-    "0x40",
-    "0x3C",
-    "0x100",
-    "0x16",
-    "0x4",
-    "0x8",
-    "0x18",
-    "0x17",
-    "0x13",
-    "0x2C6",
-    "0x4C",
-    "0xDA54",
-    "0x58",
-    "0x50",
-    "0x1AC",
-    "0x54",
-    "0x8398",
-    "0x1BF",
-    "0x30",
-    "0x5290",
-    "0x26",
-    "0x1B8"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 49,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to implement a command processing or event dispatch loop. It takes several parameters, likely including a context object, an index or count, and a pointer to an array of command/event structures. It iterates through elements, performing checks on
-#####
+```json
 {
   "input_parameter_count": 3,
   "input_parameter_types": [
@@ -3232,553 +1707,54 @@
   ],
   "return_value_type": "Integer",
   "dominant_operation_categories": [
-    "DataMovement",
+    "Arithmetic",
     "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x38",
-    "0x68",
-    "0x48",
-    "0x4C",
-    "0x8",
-    "0xABACADAB",
-    "0x1088",
-    "0x1078",
-    "0x1028",
-    "0x1068",
-    "0x1070",
-    "0x849792",
-    "0x1048",
-    "0x8000",
-    "0x5C",
-    "0xFFFFFFFF",
-    "0x58",
-    "0x10",
-    "0x50",
-    "0x1000",
-    "0x100",
-    "0x1049",
-    "0x2",
-    "0x40",
-    "0x1",
-    "0x80",
-    "0x1A",
-    "0x2C6",
-    "0x1AC",
-    "0x1BF"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 32,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a command processing or argument parsing function, likely for an object or data structure (referenced by rdi/rbx). It iterates through a collection of arguments/commands (based on esi, ecx, rdx, r14, rbp, r15, r13 and their indexed access). It performs checks on these arguments, validates flags/types within the object (e.g., [rdi+1088h], [rbx+1048h], [rbx+1049h]), and dispatches to various subroutines based on these checks. Several string literals for error messages (e.g., \"MagickwandMagi\", \"Unrecognizedop\", \"Missingargumen\", \"Processcommand\") and a call to a `sub_6FC500` suggest robust error
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x5C",
-    "0x80",
-    "0x50",
-    "0x3DA0",
-    "0x1D",
-    "0x2565C4",
-    "0x3C",
-    "0xFFFFFFFF",
-    "0x44",
-    "0x1B0888",
-    "0x8B4",
-    "0x1B",
-    "0x1B08E4",
-    "0x65C4",
-    "0x25",
-    "0x1B091C",
-    "0x1B0938",
-    "0x1B0960",
-    "0x1B0994",
-    "0x30",
-    "0x6C",
-    "0x58",
-    "0x70",
-    "0x5C",
-    "0x74",
-    "0x60",
-    "0x78",
-    "0x64",
-    "0x7C",
-    "0x68",
-    "0x80",
-    "0x34",
-    "0x38",
-    "0x3C",
-    "0x40",
-    "0x4C",
-    "0x44",
-    "0x48",
-    "0x50",
-    "0x54"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine performs a series of conditional checks and subroutine calls. It initializes several registers with input parameters and constants. It calls `sub_92114` and based on its return value, either calls `sub_C28B8` with a global pointer and a magic number or proceeds to more complex checks. Subsequent branches involve calls to `sub_E4098`, `sub_8C8
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x9C",
-    "0x25BC08",
-    "0x18",
-    "0xC",
-    "0x84",
-    "0x38",
-    "0x2C",
-    "0x28",
-    "0x4",
-    "0xA80",
-    "0x227704",
-    "0x1E",
-    "0x10",
-    "0xB4",
-    "0x9C",
-    "0x90",
-    "0x98",
-    "0x94",
-    "0x28",
-    "0xDC",
-    "0xC4",
-    "0x1C",
-    "0x40",
-    "0x80",
-    "0x1",
-    "0x2",
-    "0x16",
-    "0x14",
-    "0xC9",
-    "0xCA",
-    "0x69",
-    "0xB",
-    "0xA",
-    "0x227718",
-    "0x7",
-    "0x1F",
-    "0x20",
-    "0x30",
-    "0x40",
-    "0x5C",
-    "0x48",
-    "0x4C",
-    "0x44",
-    "0x54",
-    "0x3C",
-    "0x34"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex data processing or validation function. It involves extensive conditional branching based on various input parameters and loaded values, suggesting multiple execution paths. There are comparisons against zero and other constants, and a loop-like structure (backward branches) for what seems to be iterating or searching through data structures. It stores and retrieves values from the stack extensively
-#####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "SubroutineCall",
     "DataMovement"
   ],
   "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 9,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xC",
-    "0x8",
-    "0x10",
-    "0x14",
-    "0x18",
-    "0x1C",
-    "0x259F20",
-    "0xAF9D",
-    "0xA6",
-    "0x75",
-    "0x20",
-    "0x2C",
-    "0x41",
-    "0x200E8C",
-    "0x200EAC",
-    "0x97",
-    "0x6A",
-    "0x200EB0",
-    "0xA0",
-    "0x74",
-    "0xAF8D",
-    "0xAF95",
-    "0x5"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x10D0",
+    "0x4",
+    "0xF0E5421B",
+    "0x84915444",
+    "0x8028EB87",
+    "0x8F0C4E17",
+    "0x84915445",
+    "0x95E5631C",
+    "0x8F0C4E18",
+    "0xA204FA25",
+    "0x95E5631D",
+    "0xA7AD5823",
+    "0xA204FA26",
+    "0xB80CE93B",
+    "0xA7AD5824",
+    "0xBB553EB8",
+    "0xB80CE93C",
+    "0xBE089CB1",
+    "0xBB553EB9",
+    "0x5D7CA4EB",
+    "0x5AE34874",
+    "0x544F11FC",
+    "0x10C4FEC8",
+    "0x0F0E5421A",
+    "0xE5EC53DA",
+    "0xE1F6663E",
+    "0x0BE089CB2",
+    "0xBF08B65F"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 25,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 29,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a validation or processing function that iterates through a data structure pointed to by R0. It performs multiple checks on fields within this structure (at offsets 0, 8, 10h, 14h, 18h, 1Ch). It calls `sub_A4EF8` repeatedly, possibly for character/byte validation or parsing. Based on the conditional branches and repeated calls to `sub_BE318` with varying constants, it seems to handle different states or conditions, some of which lead to error reporting or logging. There's also a block of code involving `sub_10B488`, `sub_10B450`, `sub_10B460`, `sub_D4388`, `sub_D429C`, and `sub_D4758` which might be related to resource management, object interaction, or further data processing based on global/static state (e.g., dword_259F24, dword_259F2C). The use of `CLZ.W` (Count Leading Zeros) suggests bit manipulation or potentially size/length calculation.",
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_deallocation": false,
+  "io_operations": false,
 #####
-{
-  "input_parameter_count": 1,
-  "input_parameter_types": [
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "SubroutineCall",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 8,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x3",
-    "0x10",
-    "0x20",
-    "0x28",
-    "0x30",
-    "0x38",
-    "0x9BD744",
-    "0x9BD740",
-    "0xA6",
-    "0x41",
-    "0x75",
-    "0x2C",
-    "0x4",
-    "0x70B307",
-    "0x97",
-    "0x6A",
-    "0xA0",
-    "0x74",
-    "0x9BD748",
-    "0x9BD738"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 25,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": true,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to validate or process a structure pointed to by RDI. It performs several checks on member offsets (0x10, 0x20, 0x28, 0x30, 0x38) of the input structure. It then enters a loop that iterates over bytes of a value derived from the input (likely a string or byte array pointed to by RBX, which is initialized from [RDI]). Inside the loop, it performs checks on individual bytes using 'sub_4E6480' and 'sub_4003E0'. If certain conditions are met, it calls a logging/error reporting function 'sub_50BF00' and exits.  After the loop, it checks a global flag (dword_9BD740) and conditionally calls 'sub_5795D0' and 'sub_5795E0'. It also involves 'sub_531F30', 'sub_531DE0', and 'sub_532520' which suggest object creation/management or specific data processing, possibly related to cryptographic store interactions given the string literals. The routine includes multiple early exit points with different return values, indicating error handling or different success paths.",
-  "inferred_category": "
-#####
-{
-  "input_parameter_count": 8,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Integer",
-    "Integer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": true,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xAFF18",
-    "0xC0",
-    "0x74",
-    "0x8",
-    "0x8C",
-    "0x5C",
-    "0x2C",
-    "0x88",
-    "0x60",
-    "0x9C",
-    "0xA0",
-    "0x54",
-    "0x24",
-    "0x2A",
-    "0x20",
-    "0x94",
-    "0x98",
-    "0x37",
-    "0x14",
-    "0x32",
-    "0x7C",
-    "0x9A408",
-    "0x28",
-    "0x4",
-    "0xC",
-    "0xA",
-    "0x5",
-    "0x7C",
-    "0x15",
-    "0x513",
-    "0x36",
-    "0xC0",
-    "0xFFFFFFFF",
-    "0x88",
-    "0x58",
-    "0x14",
-    "0x12",
-    "0x4B",
-    "0x4C",
-    "0x6EA0C",
-    "0x45",
-    "0xB045C",
-    "0x18",
-    "0x60",
-    "0x90",
-    "0x2000",
-    "0x815D",
-    "0x38",
-    "0x10",
-    "0xD"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex handler or dispatcher, possibly related to object or event
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 7,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x20",
-    "0x28",
-    "0x30",
-    "0x18",
-    "0x70",
-    "0x30",
-    "0x2E",
-    "0x20",
-    "0x4",
-    "0x447B00",
-    "0xFDB8",
-    "0xB",
-    "0x50",
-    "0x24",
-    "0x26",
-    "0x4",
-    "0x21",
-    "0x118",
-    "0x10",
-    "0x8",
-    "0x9",
-    "0x34",
-    "0x2",
-    "0x58",
-    "0x48",
-    "0x2C",
-    "0x11",
-    "0x80",
-    "0xFB",
-    "0x10"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 31,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": true,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": false,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to manage or validate some form of database or data structure entry. It takes three parameters, likely pointers and an integer. It performs initial checks on the input, possibly for null values or specific flags. There are multiple conditional branches leading to different execution paths, suggesting various validation or processing steps. A key operation involves calling sub_465860, which seems to be a validation or access function, and its return value dictates further flow. It interacts with fields at specific offsets (e.g., 0x18, 0x70, 0x50) within the input structures. The use of BSWAP suggests byte order manipulation for integers. Error handling is present through jumps to specific error-related code paths and calls to an error reporting function (sub_447B00) with string literals like 'Database Corrup'. There's also a memset call indicating block memory manipulation. It might be registering or unregistering an item, or updating
-#####
-{
-  "input_parameter_count": 8,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer",
-    "Integer",
-    "Integer",
-    "Integer",
-    "Integer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "MemoryAccess"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 5,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xE8",
-    "0x10",
-    "0xC0",
-    "0xB8",
-    "0xB4",
-    "0x104",
-    "0xE8",
-    "0x108",
-    "0x90",
-    "0x100",
-    "0x9D",
-    "0xAD",
-    "0x40",
-    "0xD8",
-    "0x46",
-    "0x40",
-    "0x20",
-    "0xF0",
-    "0x110",
-    "0x63",
-    "0x28",
-    "0x5E",
-    "0xCC",
-    "0x1",
-    "0xF8",
-    "0xE0",
-    "0xA",
-    "0x5",
-    "0x8",
-    "0x2",
-    "0x4",
-    "0x4B",
-    "0xA0",
-    "0x21",
-    "0x0",
-    "0x55",
-    "0x513",
-    "0x36",
-    "0xB8",
-    "0x18",
-    "0x68",
-    "0x16",
-    "0x4C",
-    "0x2D"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be iterating through a data structure, likely an array or linked list, based on the loop and indexed/offset memory accesses. It performs checks against various constant values and conditional branching to different code paths based on those checks and the results of subroutine calls. Some operations involve setting flags or status bits in memory locations. It seems to be processing configuration or status information, potentially based on a provided context or
-#####
+```json
 {
   "input_parameter_count": 3,
   "input_parameter_types": [
@@ -3789,338 +1765,45 @@
   "return_value_type": "Integer",
   "dominant_operation_categories": [
     "DataMovement",
-    "SubroutineCall",
     "ConditionalBranching"
   ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0xAFF18",
-    "0x18",
-    "0x2C",
-    "0x28",
-    "0xC",
-    "0x50",
-    "0x14",
-    "0x10",
-    "0x1",
-    "0x1B",
-    "0x8",
-    "0x34",
-    "0x2C",
-    "0x32",
-    "0x40",
-    "0x38",
-    "0x6E",
-    "0xFFFFFFFB",
-    "0x6A",
-    "0x25",
-    "0x13",
-    "0x58",
-    "0x3C",
-    "0x30",
-    "0x44",
-    "0x48",
-    "0x4C",
-    "0x7E",
-    "0x7",
-    "0x88",
-    "0x45",
-    "0x11",
-    "0x23",
-    "0x12",
-    "0x36",
-    "0x7A",
-    "0x21",
-    "0x7F",
-    "0x3"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": true,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex data processing or object method. It initializes stack frame, saves registers, loads and stores values from multiple pointer-based inputs, and performs several conditional checks and branches. There's a clear loop pattern (`loc_7057E` to `loc_7058A`) iterating based on a loaded value (`R6`). It makes several calls to subroutines, passing various input parameters and intermediate results. Memory accesses are frequent, involving base registers with offsets and indexed scaling. Error handling is indicated by multiple conditional branches (e.g., `CBZ`, `BNE`) after subroutine calls or value comparisons, often
-#####
-{
-  "input_parameter_count": 2,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "SubroutineCall",
-    "ConditionalBranching"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 6,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x38",
-    "0x34",
-    "0x30",
-    "0x28",
-    "0x68",
-    "0x40",
-    "0x18",
-    "0x5C",
-    "0x2",
-    "0x20",
-    "0x8",
-    "0x1",
-    "0x1B",
-    "0x50",
-    "0x4C",
-    "0x58",
-    "0x60",
-    "0x5E",
-    "0x6E",
-    "0xFFFFFFFB",
-    "0x6A",
-    "0x25",
-    "0x1F",
-    "0x18C",
-    "0x78",
-    "0x44",
-    "0x7E",
-    "0x7",
-    "0xB8",
-    "0x55",
-    "0x6E3DA0",
-    "0x6B",
-    "0x11",
-    "0x23",
-    "0x7A",
-    "0xFFFFFFFF",
-    "0x21",
-    "0x7F",
-    "0x10",
-    "0x3"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 43,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex object or structure manipulation function. It takes two pointers as input, likely an object instance (`rdi` -> `r13`) and a data source/configuration (`rsi` -> `rbp`). It performs several checks, including a loop (`loc_47C500`) that iterates through a structure, possibly searching for a match based on a value from `rcx`. Based on `sub_451600` and `sub_43F6E0` calls, there are conditional branches for error handling or different execution paths. It accesses and modifies multiple fields
-#####
-{
-  "input_parameter_count": 4,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 3,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x4C",
-    "0x70",
-    "0x54",
-    "0x58",
-    "0xC",
-    "0x38",
-    "0x50",
-    "0x5C",
-    "0x48",
-    "0x3C",
-    "0x30",
-    "0x1",
-    "0x1C",
-    "0x1F",
-    "0x4C",
-    "0x2C",
-    "0x10",
-    "0x3",
-    "0x9",
-    "0xFD",
-    "0xD",
-    "0x2",
-    "0x12",
-    "0x4",
-    "0x18",
-    "0x14",
-    "0x7",
-    "0x63",
-    "0x58",
-    "0x45",
-    "0x88",
-    "0xFFFFFFFF",
-    "0x3B",
-    "0x40",
-    "0x44",
-    "0x4D",
-    "0x4E"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 39,
-  "string_literal_presence": false,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine performs a complex data processing and manipulation algorithm, potentially involving object or structure traversal and updates. It initializes several local variables from input parameters and stack arguments. It contains multiple conditional branches and a loop. Based on constants like 0x14, 0x18, 0x45, 0x58, and operations involving offsets, it likely processes structured data. There's a section with `MLA.W` and `LDRH/STRH` operations in a loop, suggesting array or list processing. Error handling is indicated by multiple conditional checks and different execution paths based on values. The routine also involves bit manipulation with `CLZ.W` and `LSLS`.",
-  "inferred_category
-#####
-{
-  "input_parameter_count": 3,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Integer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "ConditionalBranching",
-    "DataMovement",
-    "SubroutineCall"
-  ],
   "loop_indicators": false,
-  "number_of_distinct_subroutine_call_targets": 9,
-  "use_of_indexed_addressing_modes": true,
+  "number_of_distinct_subroutine_call_targets": 0,
+  "indexed_addressing_modes": false,
   "jump_table_indicators": true,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x28",
-    "0x10",
-    "0x58",
-    "0x40",
-    "0x4C",
-    "0x48",
-    "0x4A",
-    "0x47",
-    "0x13",
-    "0x46",
-    "0x18",
-    "0x10",
-    "0x4",
-    "0x52",
-    "0x4D",
-    "0x20"
+  "simd_instructions": false,
+  "notable_integer_constants": [
+    "0x0D0h",
+    "0xF0E5421Bh",
+    "0x84915444h",
+    "0x8028EB87h",
+    "0x8F0C4E17h",
+    "0x84915445h",
+    "0x95E5631Ch",
+    "0x8F0C4E18h",
+    "0xA204FA25h",
+    "0x95E5631Dh",
+    "0xA7AD5823h",
+    "0xA204FA26h",
+    "0xB80CE93Bh",
+    "0xA7AD5824h",
+    "0xBB553EB8h",
+    "0xB80CE93Ch",
+    "0xBE089CB1h",
+    "0xBB553EB9h",
+    "0x5D7CA4EBh",
+    "0x5AE34874h",
+    "0x544F11FCh",
+    "0x10C4FEC8h",
+    "0x0F0E5421Ah",
+    "0xE5EC53DAh",
+    "0xE1F6663Eh",
+    "0x0BE089CB2h",
+    "0xBF08B65Fh"
   ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 25,
+  "notable_floating_point_constants": [],
+  "count_of_distinct_immediate_values": 28,
   "string_literal_presence": false,
-  "likely_modifies_input_parameters": false,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": false,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "This routine appears to be a recursive parser or interpreter, processing an input buffer based on byte-level commands. It uses a series of conditional branches (CMP and JZ/JNZ/JA/JNB) to dispatch control flow based on the value of a byte read from the input stream. This suggests a form of switch-like behavior, potentially implemented as a jump table or a cascaded if-else structure. It handles various commands including 'J' (0x4A), 'G' (0x47), 'S' (0x52), 'M' (0x4D), 'N' (0x4E), 'P' (0x50), 'F' (0x46), 'R' (0x52), 'H' (0x48), 'I' (0x49), and 'T' (0x13), among others. Some of these branches lead to recursive calls to 'sub_47B7E0' itself, indicating a tree-like or recursive descent parsing structure. It interacts with several helper subroutines (e.g., 'sub_43F4D0', 'sub_47BBB0', 'sub_47A990', 'sub_43FB10', 'sub_4177D0', 'sub_41CE20', 'sub_47AC50', 'sub_458790',
-#####
-{
-  "input_parameter_count": 5,
-  "input_parameter_types": [
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer",
-    "Pointer"
-  ],
-  "return_value_type": "Integer",
-  "dominant_operation_categories": [
-    "DataMovement",
-    "ConditionalBranching",
-    "SubroutineCall"
-  ],
-  "loop_indicators": true,
-  "number_of_distinct_subroutine_call_targets": 4,
-  "use_of_indexed_addressing_modes": true,
-  "jump_table_indicators": false,
-  "presence_of_simd_instructions": false,
-  "presence_of_notable_integer_constants": [
-    "0x15",
-    "0x68",
-    "0x10",
-    "0x98",
-    "0x90",
-    "0x68",
-    "0x8",
-    "0x70",
-    "0x80",
-    "0x14",
-    "0x88",
-    "0x50",
-    "0x44",
-    "0x60",
-    "0x58",
-    "0x54",
-    "0x74",
-    "0x20",
-    "0x1",
-    "0x38",
-    "0x18",
-    "0x3",
-    "0x9",
-    "0xD",
-    "0x63",
-    "0x4C",
-    "0x2",
-    "0x68",
-    "0x40",
-    "0x4",
-    "0x6E3DA0",
-    "0x55",
-    "0x8",
-    "0x3B",
-    "0xB8",
-    "0x74",
-    "0x2E",
-    "0x5C",
-    "0x3C",
-    "0x4D",
-    "0xFFFFFFFD",
-    "0xFFFFFFFF",
-    "0x80",
-    "0x16",
-    "0x20",
-    "0x40"
-  ],
-  "presence_of_notable_floating_point_constants": [],
-  "count_of_distinct_immediate_values": 45,
-  "string_literal_presence": true,
-  "likely_modifies_input_parameters": true,
-  "likely_modifies_global_state": false,
-  "likely_performs_memory_allocation_deallocation": false,
-  "likely_performs_io_operations": false,
-  "likely_performs_block_memory_operations": true,
-  "likely_performs_linear_memory_accesses": true,
-  "likely_performs_error_handling": true,
-  "number_of_software_interrupts_system_calls": 0,
-  "inferred_algorithm": "The routine appears to be a complex data processing or serialization/deserialization function. It takes multiple pointer arguments, likely representing different data structures or buffers. There's significant stack frame setup, saving and restoring registers, indicating a larger function. It performs numerous data movements and conditional branches, suggesting control flow driven by input data values. It reads and writes to
+  "modifies_input_parameters": false,
+  "modifies_global_state": false,
+  "memory_allocation_de
