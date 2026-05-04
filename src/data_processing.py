@@ -241,7 +241,7 @@ class LibDataset(Dataset):
         normalized_obfuscation = normalize_obfuscation(obfuscation)
         self.files = []
 
-        if is_obfuscation_binary(binary):
+        if is_obfuscation_binary(binary) or (binary is None and normalized_obfuscation is not None):
             if optimization is not None:
                 raise ValueError("--optimization is not supported for obfuscation binaries")
             if platform is not None and platform != "clang":
@@ -249,8 +249,10 @@ class LibDataset(Dataset):
             if normalized_obfuscation is not None and normalized_obfuscation not in OBFUSCATIONS:
                 raise ValueError(f"Unknown obfuscation '{normalized_obfuscation}'")
 
-            for obf in OBFUSCATIONS.keys() if normalized_obfuscation is None else [normalized_obfuscation]:
-                self.files.append(FileId(path, binary, "clang", 0, obf))
+            binaries = [binary] if binary is not None else list(OBFUSCATED_BINARIES)
+            for b in binaries:
+                for obf in OBFUSCATIONS.keys() if normalized_obfuscation is None else [normalized_obfuscation]:
+                    self.files.append(FileId(path, b, "clang", 0, obf))
         else:
             if normalized_obfuscation is not None:
                 raise ValueError("--obfuscation is only supported with obfuscation binaries")
@@ -325,7 +327,10 @@ class PairsDataset(Dataset):
         normalized_obfuscation = normalize_obfuscation(obfuscation)
         normalized_obfuscation_diff = normalize_obfuscation(obfuscation_diff)
 
-        if is_obfuscation_binary(binary):
+        if is_obfuscation_binary(binary) or (
+            binary is None
+            and (normalized_obfuscation is not None or normalized_obfuscation_diff is not None)
+        ):
             if (
                 platform is not None
                 or platform_diff is not None
@@ -358,32 +363,38 @@ class PairsDataset(Dataset):
         ):
             raise ValueError("Conflict between query and target sets")
 
-        if not is_obfuscation_binary(binary) and (
+        is_obf_mode = is_obfuscation_binary(binary) or (
+            binary is None
+            and (normalized_obfuscation is not None or normalized_obfuscation_diff is not None)
+        )
+        if not is_obf_mode and (
             normalized_obfuscation is not None or normalized_obfuscation_diff is not None
         ):
             raise ValueError("--obfuscation is only supported with obfuscation binaries")
 
         self.files: list[tuple[FileId, FileId]] = []
-        if is_obfuscation_binary(binary):
+        if is_obf_mode:
             query_obfuscations = (
                 [normalized_obfuscation]
                 if normalized_obfuscation is not None
                 else list(OBFUSCATIONS.keys())
             )
 
-            for query_obfuscation in query_obfuscations:
-                target_obfuscation = (
-                    query_obfuscation
-                    if normalized_obfuscation_diff is None
-                    else normalized_obfuscation_diff
-                )
-
-                self.files.append(
-                    (
-                        FileId(path, binary, "clang", 0, query_obfuscation),
-                        FileId(path, binary, "clang", 0, target_obfuscation),
+            binaries = [binary] if binary is not None else list(OBFUSCATED_BINARIES)
+            for b in binaries:
+                for query_obfuscation in query_obfuscations:
+                    target_obfuscation = (
+                        query_obfuscation
+                        if normalized_obfuscation_diff is None
+                        else normalized_obfuscation_diff
                     )
-                )
+
+                    self.files.append(
+                        (
+                            FileId(path, b, "clang", 0, query_obfuscation),
+                            FileId(path, b, "clang", 0, target_obfuscation),
+                        )
+                    )
         else:
             binaries = (
                 [b for b in BINARIES.keys() if b not in OBFUSCATED_BINARIES]
