@@ -1,1 +1,0 @@
-[{"parameters": {"binary": "libgmp", "obfuscation": "none", "target-obfuscation": "fla", "platform": "all", "optimization": "all", "pool-size": 10, "examples": 1, "prompt": "extensive-small", "model": "qwen-2.5-7"}, "results": {"mrr": 1.0, "recall_at_1": 0.1, "recall_at_10": 1.0, "similarity_mean": {"max": 1.0, "median": 1.0, "mean": 1.0, "min": 1.0}}, "invalid-json": 10}]
